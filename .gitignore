@@ -1,0 +1,7 @@
+.vagrant
+.venv
+node_modules
+
+*.log
+
+generated
