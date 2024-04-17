@@ -22,6 +22,12 @@ Vagrant.configure("2") do |config|
     node.vm.network "private_network", ip: "192.168.56.11"
   end
 
+
+  config.vm.define "vm-3" do |node|
+    node.vm.box = "ubuntu/bionic64"
+    node.vm.network "private_network", ip: "192.168.56.12"
+  end
+
   # config.vm.define "vm-3" do |db|
   #   db.vm.box = "ubuntu/bionic64"
   #   config.vm.network "private_network", ip: "192.168.56.12"
