@@ -1,0 +1,87 @@
+services:
+  collections:
+    build: collections
+    ports:
+      - "8001:8080"
+    volumes:
+      - ./collections/config:/data/collectory/config
+      - ./collections/taxa:/data/collectory/taxa
+
+  species:
+    build: species
+    ports:
+      - "8002:8080"
+    volumes:
+      - ./species/config:/data/specieslist-webapp/config/
+
+  # images:
+  #   build: images
+  #   ports:
+  #     - "8003:8080"
+  #   volumes:
+  #     - ./images/config:/data/imageslist-webapp/config/
+
+  regions:
+    build: regions
+    ports:
+      - "8005:8080"
+    volumes:
+      - ./regions/config:/data/regions/config/
+
+  # spatial:
+  #   build: spatial
+  #   ports:
+  #     - "8006:8080"
+  #   volumes:
+  #     - ./spatial/config:/data/spatiallist-webapp/config/
+
+  cas:
+    build: cas
+    ports:
+      - "9000:80"
+    volumes:
+      - ./cas/config:/etc/cas/config
+    environment:
+      ALA_PASSWORD_PROPERTIES: /etc/cas/config/pwe.properties
+    networks:
+      default:
+        aliases: 
+          - auth.la-flanders.org
+
+
+
+  # postgres:
+  #   image: postgres:14-alpine
+  #   ports:
+  #     - 5432:5432
+  #   volumes:
+  #     - ./db-init:/docker-entrypoint-initdb.d
+  #   environment:
+  #     - POSTGRES_PASSWORD=my-super-secret-password
+  #     - POSTGRES_USER=postgres
+  #     - POSTGRES_DB=postgres
+
+  mysql:
+    image: mysql
+    # NOTE: use of "mysql_native_password" is not recommended: https://dev.mysql.com/doc/refman/8.0/en/upgrading-from-previous-series.html#upgrade-caching-sha2-password
+    # (this is just an example, not intended to be a production configuration)
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    ports:
+      - 3306:3306
+    volumes:
+      - ./db-init:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_ROOT_PASSWORD: my-super-secret-password
+
+  mongodb:
+    image: mongo
+    restart: always
+    volumes:
+      - ./db-init/mongo:/docker-entrypoint-initdb.d
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: my-super-secret-password
+
+networks:
+  default:

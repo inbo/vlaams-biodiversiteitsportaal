@@ -1,0 +1,178 @@
+info:
+  description: ALA CAS Configuration
+server:
+  port: 80
+  session:
+    timeout: 86400  # seconds, 24 hours
+  ssl:
+    enabled: false
+    key-store: 
+jndi:
+  hikari:
+    jdbccas:
+      # driverClass: com.mysql.jdbc.Driver
+      url: jdbc:mysql://mysql:3306/cas?serverTimezone=Europe/Brussels&zeroDateTimeBehavior=convertToNull&logger=Slf4JLogger&gatherPerfMetrics=true&logSlowQueries=true&characterEncoding=UTF-8&nullCatalogMeansCurrent=true&nullNamePatternMatchesAll=true&noAccessToProcedureBodies=true&useSSL=False
+      user: cas
+      password: my-super-secret-password
+      dataSourceProperties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+
+  # dataSourceName: java:comp/env/jdbccas
+
+logging:
+  config: "file:/data/cas/config/log4j2.xml"
+
+cas:
+  server:
+    name: http://auth.la-flanders.org
+    prefix: ${cas.server.name}/cas
+  host:
+    name: auth.la-flanders.org
+  adminPagesSecurity:
+    ip: .*
+    actuatorEndpointsEnabled: true
+  http-web-request:
+    cors:
+      enabled: true
+      allow-origins:
+      - http://spatial.la-flanders.org
+  jdbc:
+    showSql: false
+  audit:
+    mongo:
+      sslEnabled: false
+      clientUri: mongodb://audit:my-super-secret-password@mongodb:27017/cas-audit-repository?retryWrites=true&ssl=false
+      host: mongodb
+      port: 27017
+      replicaSet: 
+      databaseName: cas-audit-repository
+      authenticationDatabaseName: 
+      userId: audit
+      password: my-super-secret-password
+      timeout: PT10S
+  authn:
+    throttle:
+      failure:
+        range-seconds: 30
+        threshold: 3
+    pac4j:
+      typedIdUsed: true
+      cookie:
+        crypto:
+          signing:
+            key: 
+          encryption:
+            key: 
+    oidc:
+      issuer: ${cas.server.name}/cas/oidc
+      jwksFile: file:/data/cas/keystore.jwks
+  monitor:
+    endpoints:
+      enabled: true
+    jdbc:
+      validationQuery: /* ping */ SELECT 1
+      dataSourceName: java:comp/env/jdbccas
+  serviceRegistry:
+    initFromJson: true
+    mongo:
+      sslEnabled: false
+      clientUri: mongodb://services:my-super-secret-password@mongodb:27017/cas-service-registry?retryWrites=true&ssl=false
+      host: mongodb
+      port: 27017
+      replicaSet: 
+      collection: services
+      databaseName: cas-service-registry
+      authenticationDatabaseName: 
+      userId: services
+      password: my-super-secret-password
+      timeout: PT10S
+  ticket:
+    registry:
+      cleaner:
+        schedule:
+          enabled: true
+      mongo:
+        sslEnabled: false
+        clientUri: mongodb://tickets:my-super-secret-password@mongodb:27017/cas-ticket-registry?retryWrites=true&ssl=false
+        host: mongodb
+        port: 27017
+        replicaSet: 
+        databaseName: cas-ticket-registry
+        authenticationDatabaseName: 
+        userId: tickets
+        password: my-super-secret-password
+        timeout: PT15S
+    st:
+      timeToKillInSeconds: 15
+  tgc:
+    crypto:
+      enabled: false
+  webflow:
+    crypto:
+      signing:
+        key: 
+      encryption:
+        key: 
+
+ala:
+  userDetailsBaseUrl: http://auth.la-flanders.org/userdetails/
+  cookie:
+    domain: .la-flanders.org
+    secure: false
+    httpOnly: true
+    maxAge: -1
+    name: ALA-Auth
+    path: /
+  userCreator:
+    userCreatePassword: wormishmensurablearchitecture
+    enableUserSurvey: false
+    jdbc:
+      dataSourceName: java:comp/env/jdbccas
+      enableUpdateLastLoginTime: true
+      enableRequestExtraAttributes: true
+      enableUpdateLegacyPasswords: true
+  skin:
+    baseUrl: http://la-flanders.org
+    termsUrl: 
+    uiVersion: 3
+    headerFooterUrl: http://branding.la-flanders.org/
+    favIconBaseUrl: http://la-flanders.org/favicon/
+    bieBaseUrl: http://species.la-flanders.org
+    bieSearchPath: /search
+    userDetailsUrl: http://auth.la-flanders.org/userdetails/
+    orgShortName: LA Flanders
+    orgLongName: Living Atlas of Flanders
+    orgNameKey: ala
+
+# Enable these for Spring Boot actuator (required for Spring Boot Admin client)
+
+endpoints:
+  enabled: true
+security:
+  user:
+    name: admin
+    password: secret
+    role:
+      - ACTUATOR
+  basic:
+    enabled: true
+    authorizeMode: role
+    realm: ALA CAS
+    path:
+      - /status/**
+management:
+  security:
+    enabled: true
+    roles: ACTUATOR
+
+spring:
+  session:
+    store-type: none
+
+  flyway:
+    baselineOnMigrate: false # Create DB from scratch
+    url: jdbc:mysql://mysql:3306/cas?serverTimezone=Europe/Brussels&zeroDateTimeBehavior=convertToNull&logger=Slf4JLogger&gatherPerfMetrics=true&logSlowQueries=true&characterEncoding=UTF-8&nullCatalogMeansCurrent=true&nullNamePatternMatchesAll=true&noAccessToProcedureBodies=true&useSSL=False
+    user: cas
+    password: my-super-secret-password
