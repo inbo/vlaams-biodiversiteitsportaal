@@ -6,6 +6,9 @@ services:
     volumes:
       - ./collections/config:/data/collectory/config
       - ./collections/taxa:/data/collectory/taxa
+    depends_on:
+      - mysql
+      - cas
 
   species:
     build: species
@@ -13,13 +16,16 @@ services:
       - "8002:8080"
     volumes:
       - ./species/config:/data/specieslist-webapp/config/
+    depends_on:
+      - mysql
+      - cas
 
-  # images:
-  #   build: images
-  #   ports:
-  #     - "8003:8080"
-  #   volumes:
-  #     - ./images/config:/data/imageslist-webapp/config/
+  biocache:
+    build: biocache
+    ports:
+      - "8003:8080"
+    volumes:
+      - ./biocache/config:/data/biocache/config/
 
   regions:
     build: regions
@@ -27,61 +33,139 @@ services:
       - "8005:8080"
     volumes:
       - ./regions/config:/data/regions/config/
+    depends_on:
+      - mysql
+      - cas
+      - spatial
 
-  # spatial:
-  #   build: spatial
-  #   ports:
-  #     - "8006:8080"
-  #   volumes:
-  #     - ./spatial/config:/data/spatiallist-webapp/config/
+  spatial:
+    build: spatial
+    ports:
+      - "8006:8080"
+    volumes:
+      - ./spatial/config:/data/spatial-service/config/
+      - spatial-data:/data/spatial-data
+    depends_on:
+      - postgis
 
   cas:
     build: cas
     ports:
-      - "9000:80"
+      - "9000:9000"
     volumes:
       - ./cas/config:/etc/cas/config
+      - ./cas/config:/data/cas/config
     environment:
       ALA_PASSWORD_PROPERTIES: /etc/cas/config/pwe.properties
-    networks:
-      default:
-        aliases: 
-          - auth.la-flanders.org
+    depends_on:
+      - mysql
+      - mongodb
+
+  postgis:
+    image: postgis/postgis:16-3.4-alpine
+    ports:
+      - 5432:5432
+    volumes:
+      - ./db-init/postgis:/docker-entrypoint-initdb.d
+    environment:
+      - POSTGRES_PASSWORD=my-super-secret-password
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
 
 
+  geoserver:
+    # image: kartoza/geoserver:2.23.2
+    build:
+      context: ./spatial/geoserver
+    volumes:
+      #geoserver data folder
+      # - ./spatial/geoserver/geoserver-files:/data/geoserver-files/
+      #Spatials service data folder. If they are both in the same machine, some layers are not needed to be uploaded.
+      - spatial-data:/data/spatial-data
+    ports:
+      - "8079:8080"
+    environment:
+      JAVA_OPTS: -Xmx2g -Xms128m -Xss512k -Djava.awt.headless=true
+      #Geoserver
+      GEOSERVER_ADMIN_USER: admin
+      GEOSERVER_ADMIN_PASSWORD: geoserver
+      #If you want to create a user/password
+      #NEW_USER: true
+      USERNAME: admin
+      PASS: my-super-secret-password
+      #Geoserver internal server url. It is used to run a local script to init geoserver
+      GEOSERVER_URL: http://localhost:8080/geoserver
 
-  # postgres:
-  #   image: postgres:14-alpine
-  #   ports:
-  #     - 5432:5432
-  #   volumes:
-  #     - ./db-init:/docker-entrypoint-initdb.d
-  #   environment:
-  #     - POSTGRES_PASSWORD=my-super-secret-password
-  #     - POSTGRES_USER=postgres
-  #     - POSTGRES_DB=postgres
+      GEOSERVER_DATA_DIR: /data/geoserver_data_dir
+      GEOWEBCACHE_CACHE_DIR: /data/geoserver_data_dir/gwc
+      GEOSERVER_LOG_LOCATION: /data/geoserver_data_dir/logs/geoserver.log
+      FOOTPRINTS_DATA_DIR: /data/geoserver_data_dir/footprints_dir
+      RELINQUISH_LOG4J_CONTROL: true
+      ENABLE_JSONP: true
+      MAX_FILTER_RULES: 20
+      OPTIMIZE_LINE_WIDTH: false
 
   mysql:
     image: mysql
     # NOTE: use of "mysql_native_password" is not recommended: https://dev.mysql.com/doc/refman/8.0/en/upgrading-from-previous-series.html#upgrade-caching-sha2-password
     # (this is just an example, not intended to be a production configuration)
-    command: --default-authentication-plugin=mysql_native_password
-    restart: always
+    # command: --default-authentication-plugin=mysql_native_password
     ports:
       - 3306:3306
     volumes:
-      - ./db-init:/docker-entrypoint-initdb.d
+      - ./db-init/mysql:/docker-entrypoint-initdb.d
     environment:
       MYSQL_ROOT_PASSWORD: my-super-secret-password
 
   mongodb:
     image: mongo
-    restart: always
     volumes:
       - ./db-init/mongo:/docker-entrypoint-initdb.d
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: my-super-secret-password
 
+
+  cassandradb:
+    image: cassandra
+
+  solr:
+    image: solr
+    ports:
+    - "8983:8983"
+    networks:
+      default:
+        aliases: 
+          - index.la-flanders.org
+
+  nginx:
+    image: nginx
+    volumes:
+    - ./nginx/conf.d:/etc/nginx/conf.d
+    - ../generated/la-flanders-branding/public:/srv/branding.la-flanders.org/www/
+    ports:
+    - "80:80"
+    environment:
+      NGINX_HOST: la-flanders.org
+      NGINX_PORT: 80
+    networks:
+      default:
+        aliases: 
+          - auth.la-flanders.org
+          - branding.la-flanders.org
+          - collections.la-flanders.org
+          - images.la-flanders.org
+          - lists.la-flanders.org
+          - logger.la-flanders.org
+          - records-ws.la-flanders.org
+          - records.la-flanders.org
+          - regions.la-flanders.org
+          - spatial.la-flanders.org
+          - species-ws.la-flanders.org
+          - species.la-flanders.org
+
 networks:
   default:
+
+volumes:
+  spatial-data: 

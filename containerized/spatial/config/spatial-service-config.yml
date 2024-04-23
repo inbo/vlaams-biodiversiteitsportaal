@@ -1,0 +1,30 @@
+grails.serverURL: http://spatial.la-flanders.org/ws
+#grails.server.context: /ws
+
+google:
+    apikey: "xxxxxxxxxxxx"
+
+api_key: xxxxxxxxxxxxx
+spatialHubUrl: http://spatial.la-flanders.org/
+
+geoserver:
+    url: 'http://geoserver/geoserver'
+    username: 'admin'
+    password: 'my-super-secret-password'
+
+dataSource:
+    url: 'jdbc:postgresql://postgis:5432/layersdb'
+    username: postgres
+    password: my-super-secret-password
+
+batch_sampling_passwords: ""
+
+# au.org.ala.spatial.process config
+spatialService.url: "http://spatial.la-flanders.org/ws"
+shp2pgsql.path: "/usr/bin/shp2pgsql"
+gdal.dir: "/usr/bin/"
+
+slaveKey: "xxxxxxxxxxxxxx"
+serviceKey: "xxxxxxxxxxxxxx"
+
+layers_store.GEONETWORK_URL: 'http://spatial.la-flanders.org/geonetwork'

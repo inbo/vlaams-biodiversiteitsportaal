@@ -17,7 +17,7 @@ ARG VERSION=6.5.6-3
 COPY --from=builder /project/target/cas-exec.war /cas.war
 RUN mkdir -p /data/cas
 
-EXPOSE 80
+EXPOSE 9000
 VOLUME /data
 
 ENTRYPOINT ["java", "-jar", "/cas.war"]

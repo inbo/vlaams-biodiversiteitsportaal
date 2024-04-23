@@ -1,7 +1,7 @@
 info:
   description: ALA CAS Configuration
 server:
-  port: 80
+  port: 9000
   session:
     timeout: 86400  # seconds, 24 hours
   ssl:
@@ -11,7 +11,7 @@ jndi:
   hikari:
     jdbccas:
       # driverClass: com.mysql.jdbc.Driver
-      url: jdbc:mysql://mysql:3306/cas?serverTimezone=Europe/Brussels&zeroDateTimeBehavior=convertToNull&logger=Slf4JLogger&gatherPerfMetrics=true&logSlowQueries=true&characterEncoding=UTF-8&nullCatalogMeansCurrent=true&nullNamePatternMatchesAll=true&noAccessToProcedureBodies=true&useSSL=False
+      url: jdbc:mysql://mysql:3306/cas?serverTimezone=Europe/Brussels&zeroDateTimeBehavior=convertToNull&logger=Slf4JLogger&gatherPerfMetrics=true&logSlowQueries=true&characterEncoding=UTF-8&nullCatalogMeansCurrent=true&nullNamePatternMatchesAll=true&noAccessToProcedureBodies=true&useSSL=False&allowPublicKeyRetrieval=true
       user: cas
       password: my-super-secret-password
       dataSourceProperties:
@@ -27,7 +27,7 @@ logging:
 cas:
   server:
     name: http://auth.la-flanders.org
-    prefix: ${cas.server.name}/cas
+    prefix: http://auth.la-flanders.org/cas
   host:
     name: auth.la-flanders.org
   adminPagesSecurity:
@@ -43,7 +43,7 @@ cas:
   audit:
     mongo:
       sslEnabled: false
-      clientUri: mongodb://audit:my-super-secret-password@mongodb:27017/cas-audit-repository?retryWrites=true&ssl=false
+      clientUri: mongodb://audit:my-super-secret-password@mongodb:27017/cas-audit-repository?retryWrites=true&ssl=false&allowPublicKeyRetrieval=true
       host: mongodb
       port: 27017
       replicaSet: 
@@ -66,8 +66,9 @@ cas:
           encryption:
             key: 
     oidc:
-      issuer: ${cas.server.name}/cas/oidc
-      jwksFile: file:/data/cas/keystore.jwks
+      core:
+        issuer: http://auth.la-flanders.org/cas/oidc
+        jwksFile: file:/data/cas/keystore.jwks
   monitor:
     endpoints:
       enabled: true
@@ -78,7 +79,7 @@ cas:
     initFromJson: true
     mongo:
       sslEnabled: false
-      clientUri: mongodb://services:my-super-secret-password@mongodb:27017/cas-service-registry?retryWrites=true&ssl=false
+      clientUri: mongodb://services:my-super-secret-password@mongodb:27017/cas-service-registry?retryWrites=true&ssl=false&allowPublicKeyRetrieval=true
       host: mongodb
       port: 27017
       replicaSet: 
@@ -95,7 +96,7 @@ cas:
           enabled: true
       mongo:
         sslEnabled: false
-        clientUri: mongodb://tickets:my-super-secret-password@mongodb:27017/cas-ticket-registry?retryWrites=true&ssl=false
+        clientUri: mongodb://tickets:my-super-secret-password@mongodb:27017/cas-ticket-registry?retryWrites=true&ssl=false&allowPublicKeyRetrieval=true
         host: mongodb
         port: 27017
         replicaSet: 
@@ -173,6 +174,6 @@ spring:
 
   flyway:
     baselineOnMigrate: false # Create DB from scratch
-    url: jdbc:mysql://mysql:3306/cas?serverTimezone=Europe/Brussels&zeroDateTimeBehavior=convertToNull&logger=Slf4JLogger&gatherPerfMetrics=true&logSlowQueries=true&characterEncoding=UTF-8&nullCatalogMeansCurrent=true&nullNamePatternMatchesAll=true&noAccessToProcedureBodies=true&useSSL=False
+    url: jdbc:mysql://mysql:3306/cas?serverTimezone=Europe/Brussels&zeroDateTimeBehavior=convertToNull&logger=Slf4JLogger&gatherPerfMetrics=true&logSlowQueries=true&characterEncoding=UTF-8&nullCatalogMeansCurrent=true&nullNamePatternMatchesAll=true&noAccessToProcedureBodies=true&useSSL=False&allowPublicKeyRetrieval=true
     user: cas
     password: my-super-secret-password
