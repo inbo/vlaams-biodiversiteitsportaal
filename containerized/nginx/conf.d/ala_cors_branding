@@ -1,4 +1,4 @@
-# Allow static fonts 
+# Allow static fonts
 if ($uri ~* .(eot|otf|svg|ttf|woff|woff2)$) {
   add_header Access-Control-Allow-Origin *;
 }
@@ -58,4 +58,7 @@ if ($cors = CGET) {
   add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range';
   add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
   add_header 'Access-Control-Allow-Origin' $http_origin;
-  }
+}
+
+# Fix Cors request responses being cached by the browser for different subdomains.
+add_header 'Vary' "Origin";
