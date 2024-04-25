@@ -1,4 +1,3 @@
-use cas;
 --
 -- First admin user creation if not exists
 --

@@ -53,13 +53,54 @@ services:
     ports:
       - "9000:9000"
     volumes:
-      - ./cas/config:/etc/cas/config
-      - ./cas/config:/data/cas/config
+      - cas-shared-conf:/etc/cas
+      - cas-data:/data/cas
+      - ./cas/config:/etc/cas/config:ro
     environment:
       ALA_PASSWORD_PROPERTIES: /etc/cas/config/pwe.properties
     depends_on:
       - mysql
       - mongodb
+
+  cas-management:
+    build: cas-management
+    ports:
+      - "8070:8070"
+      - "8443:8443"
+    volumes:
+      # - ./cas/config:/data/cas/config:ro
+      - cas-shared-conf:/etc/cas
+      - cas-data:/data/cas
+      - ./cas/config:/etc/cas/config:ro
+      - ./cas-management/config:/data/cas-management/config:ro
+      - ./cas-management/keystore/cas.crt:/etc/cas/cas.crt:ro
+      - ./cas-management/keystore/thekeystore:/etc/cas/thekeystore:ro
+      - ./cas-management/services-repo:/data/cas-management/services-repo
+    depends_on:
+      - mysql
+      - cas
+
+  cas-apikey:
+    build: cas-apikey
+    ports:
+      - "9003:9003"
+    volumes:
+      # - ./cas/config:/data/cas/config:ro
+      - ./cas-apikey/keystore:/etc/cas:ro
+      - ./cas-apikey/config:/data/apikey/config:ro
+    depends_on:
+      - mysql
+      - cas
+
+  userdetails:
+    build: userdetails
+    ports:
+      - "9001:9001"
+    volumes:
+      - ./userdetails/config:/data/userdetails/config
+    depends_on:
+      - mysql
+      - cas
 
   postgis:
     image: postgis/postgis:16-3.4-alpine
@@ -67,6 +108,7 @@ services:
       - 5432:5432
     volumes:
       - ./db-init/postgis:/docker-entrypoint-initdb.d
+      - postgis:/var/lib/postgresql/data
     environment:
       - POSTGRES_PASSWORD=my-super-secret-password
       - POSTGRES_USER=postgres
@@ -114,6 +156,7 @@ services:
       - 3306:3306
     volumes:
       - ./db-init/mysql:/docker-entrypoint-initdb.d
+      - mysql:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: my-super-secret-password
 
@@ -121,6 +164,7 @@ services:
     image: mongo
     volumes:
       - ./db-init/mongo:/docker-entrypoint-initdb.d
+      - mongo:/data/db
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: my-super-secret-password
@@ -128,15 +172,31 @@ services:
 
   cassandradb:
     image: cassandra
+    volumes:
+      - cassandra:/var/lib/cassandra
 
   solr:
     image: solr
     ports:
     - "8983:8983"
+    volumes:
+      - solr:/var/solr
     networks:
       default:
         aliases: 
           - index.la-flanders.org
+
+
+  postfix:
+    image: ghusta/fakesmtp:2.5
+    ports:
+    - "25:25"
+    volumes:
+      - /tmp/fakemail:/var/mail
+    networks:
+      default:
+        aliases:
+          - mail.la-flanders.org
 
   nginx:
     image: nginx
@@ -168,4 +228,11 @@ networks:
   default:
 
 volumes:
-  spatial-data: 
+  spatial-data:
+  cassandra:
+  mysql:
+  mongo:
+  postgis:
+  solr:
+  cas-data:
+  cas-shared-conf:

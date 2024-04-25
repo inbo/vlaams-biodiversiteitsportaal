@@ -1,0 +1,82 @@
+# CAS Config
+security:
+  cas:
+    casServerName: http://auth.la-flanders.org
+    casServerUrlPrefix: ${security.cas.casServerName}/cas
+    loginUrl: ${security.cas.casServerUrlPrefix}/login
+    logoutUrl: ${security.cas.casServerUrlPrefix}/logout
+    appServerName: http://auth.la-flanders.org
+    authCookieName: ALA-Auth
+  user:
+    name: admin
+    password: secret
+    role:
+      - ACTUATOR
+  basic:
+    enabled: true
+    authorizeMode: role
+    realm: ALA CAS
+    path:
+      - /status/**
+endpoints:
+  enabled: true
+management:
+  security:
+    enabled: true
+    roles: ACTUATOR
+
+serverURL: http://auth.la-flanders.org
+serverName: http://auth.la-flanders.org
+grails:
+  serverURL: http://auth.la-flanders.org/apikey
+server:
+  port: 9002
+  contextPath: /apikey
+
+# Data source configuration
+dataSource:
+  dbCreate: "none"
+  url: jdbc:mysql://mysql:3306/apikey?serverTimezone=Europe/Brussels&zeroDateTimeBehavior=convertToNull&characterEncoding=UTF-8&useSSL=False&allowPublicKeyRetrieval=true
+  username: apikey
+  password: my-super-secret-password
+flyway:
+  baselineOnMigrate: true
+
+ala:
+  baseURL: http://la-flanders.org
+
+supportEmail: support@la-flanders.org
+homeUrl: http://la-flanders.org
+mainTitle: Living Atlas of Flanders
+emailSenderTitle: Living Atlas of Flanders
+emailSender: support@la-flanders.org
+
+sightings.url: /mine
+spatial.url: http://spatial.la-flanders.org?tool=log
+volunteer.url: /user/myStats
+lists.url: http://lists.la-flanders.org/speciesList/list
+biocache.search.url: http://records.la-flanders.org/occurrences/search
+alerts.url:
+
+# this property is read/used by ala-auth-plugin (included by apikey)
+userDetails:
+  url: http://auth.la-flanders.org/userdetails/
+
+# Header and footer
+headerAndFooter:
+  baseURL: http://branding.la-flanders.org
+  version: 2
+ala.baseURL: http://la-flanders.org
+bie.baseURL: http://species.la-flanders.org
+bie.searchPath: /search
+
+# Skin options
+skin.layout: ala-main
+skin.fluidLayout: true
+skin.orgNameLong: Living Atlas of Flanders
+skin.orgNameShort: LA Flanders
+skin.favicon: https://raw.githubusercontent.com/living-atlases/artwork/master/favicon.ico
+
+spring:
+  session:
+    store-type: none
