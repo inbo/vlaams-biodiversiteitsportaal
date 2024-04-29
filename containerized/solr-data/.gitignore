@@ -17,6 +17,9 @@
 !/biocache/solrconfig.xml
 !/biocache/schema.xml
 !/biocache/core.properties
+!/biocache/protwords.txt
+!/biocache/synonyms.txt
+!/biocache/stopwords.txt
 
 /biocache/conf/*
 !/biocache/conf
