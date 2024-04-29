@@ -1,0 +1,13 @@
+/*
+
+!.gitignore
+
+/bie/*
+!/bie
+!/bie/solrconfig.xml
+!/bie/schema.xml
+!/bie/core.properties
+
+/bie/data/*
+!/bie/data
+!/bie/data/elevate.xml

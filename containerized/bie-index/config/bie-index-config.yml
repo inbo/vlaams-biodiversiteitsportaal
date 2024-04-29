@@ -1,0 +1,202 @@
+grails:
+  serverURL: http://species-ws.la-flanders.org
+  cors:
+    enabled: true
+serverName: http://species-ws.la-flanders.org
+# CAS Config
+security:
+  # cognito specific configs
+  cas:
+    casServerName: http://auth.la-flanders.org
+    uriFilterPattern: /admin/*,/alaAdmin/*
+    uriExclusionFilterPattern: /admin/indexFields
+    appServerName: http://species-ws.la-flanders.org
+    casServerUrlPrefix: http://auth.la-flanders.org/cas
+    loginUrl: http://auth.la-flanders.org/cas/login
+    logoutUrl: http://auth.la-flanders.org/cas/logout
+    contextPath:
+    bypass: false
+    enabled: true
+  oidc:
+    enabled: false
+    clientId: 0cf3eff57958b4bb76eca5055021bcf59bc5
+    secret: 895c1a54c053b38953b5b3d3466f7a171659
+    discoveryUri: http://auth.la-flanders.org/cas/oidc/.well-known
+  # cognito specific configs
+  jwt:
+    discoveryUri: http://auth.la-flanders.org/cas/oidc/.well-known
+    clientId: test
+  # cognito specific configs
+  apiKey:
+    enabled: true
+    auth:
+      serviceUrl: http://auth.la-flanders.org/apikey/
+    check:
+      serviceUrl: http://auth.la-flanders.org/apikey/ws/check?apikey=
+    userdetails:
+      serviceUrl: http://auth.la-flanders.org/userdetails/
+webservice:
+  jwt: false
+  jwt-scopes:
+  client-id: test
+  client-secret: test
+userDetails:
+  url: http://auth.la-flanders.org/userdetails/
+biocache:
+  base: http://records.la-flanders.org
+  service: http://records-ws.la-flanders.org
+collectory:
+  base: http://collections.la-flanders.org
+  service: http://collections.la-flanders.org/ws
+  # A list of uids for the national species list datasets
+  nationalSpeciesDatsets:
+layers:
+  service: http://spatial.la-flanders.org/ws
+  gazetteerId:
+images:
+  # URL of image configuration file
+  config: file:///data/bie-index/config/image-lists.json
+  base: http://images.la-flanders.org
+  service:
+    base: http://images.la-flanders.org
+    thumbnail: http://images.la-flanders.org/image/{0}/thumbnail
+    large: http://images.la-flanders.org/image/{0}/large
+    small: http://images.la-flanders.org/image/{0}/original
+    metadata: http://images.la-flanders.org/ws/image/{0}
+  index: true
+knowledgeBase:
+  service: https://support.ala.org.au
+  sitemap: /support/solutions
+  sectionSelector: section.article-list .list-lead > a
+  articleCssSelector: .article-title a.c-link
+wordPress:
+  service: http://la-flanders.org
+  sitemap: /xmlsitemap.xml
+  index: index.xml
+  page: /?page_id={0}
+  excludedLocations:
+    - .*/category/.*
+  excludedCategories:
+    - button
+  contentOnlyParams: ?content-only=1&categories=1
+lists:
+  useListWs: false
+  service: http://lists.la-flanders.org/ws
+  ui: http://lists.la-flanders.org
+  conservation: /speciesList?isAuthoritative=eq:true&isThreatened=eq:true&max={0}&offset={1}
+  search: /speciesList/?isAuthoritative=eq:true&max={0}&offset={1}
+  show: /speciesListItem/list/{0}
+  add: /createItem
+  remove: /deleteItem
+biocollect:
+  service:
+  search: /ws/project/search?initiator=ala&facets=status
+naming:
+  service: https://namematching-ws.ala.org.au
+attribution:
+  default: National Species Lists
+  common: National Species Lists
+commonName:
+  # Acceptable vernacular names to appear in autocomplete and primary name eg en,en-AU,en-CA,en-GB,en-US (leave empty for any language)
+  languages:
+  defaultLanguage: en
+# Location of conservation lists
+conservationListsUrl: file:///data/bie-index/config/conservation-lists.json
+# Location of vernacular name lists (null for default)
+vernacularListsUrl: file:///data/bie-index/config/vernacular-lists.json
+#nationalSpeciesDatasets: dr2699,dr2700,dr2702,dr2704,dr2703,dr3118
+nationalSpeciesDatasets: ""
+hiddenImages:
+  # URL of hidden images configuration file
+  config: file:///data/bie-index/config/hidden-images-lists.json
+wiki:
+  # URL of wiki configuration file
+  config: file:///data/bie-index/config/wiki-lists.json
+solr:
+  admin:
+    connection: http://localhost:8983/solr
+    type: HTTP
+    queueSize: 10
+    threadCount: 4
+  live:
+    connection: http://index.la-flanders.org:8983/solr/bie
+    type: HTTP
+    queueSize: 10
+    threadCount: 4
+  updatingLive:
+    connection: http://index.la-flanders.org:8983/solr/bie
+    type: UPDATE
+    queueSize: 10
+    threadCount: 4
+  offline:
+    connection: http://index.la-flanders.org:8983/solr/bie-offline
+    type: UPDATE
+    queueSize: 10
+    threadCount: 4
+  search:
+    qf:
+      - exact_text
+      - text
+      - content^0.2
+    boost: searchWeight
+    defType: edismax
+    qAlt: text:*
+skin:
+  layout: main
+  fluidLayout: true
+  orgNameLong: Living Atlas of Flanders
+  favicon: https://raw.githubusercontent.com/living-atlases/artwork/master/favicon.ico
+  homeUrl: http://la-flanders.org
+headerAndFooter:
+  baseURL: http://branding.la-flanders.org
+useLegacyAuto: false
+import:
+  sequence: collectory,taxonomy-all,vernacular,denormalise,layers,regions,localities,conservation-lists,wordpress,knowledgebase,biocollect,species-lists,favourites,weights,link-identifiers,images,occurrences,hidden-images,wiki-urls,suggest-index,sitemap,swap
+  sequenceDaily: conservation-lists,wordpress,knowledgebase,biocollect,species-lists,favourites,suggest-index,images,hidden-images,wiki-urls,sitemap,swap
+  sequenceWeekly: occurrences,layers,regions,localities,suggest-index,swap
+  dailyRunHour: 2
+  weeklyRunDay: 6
+  favouritesConfigUrl: file:///data/bie-index/config/favourites.json
+  enableTasks: false
+  taxonomy:
+    dir: /data/bie/import
+ala:
+  baseURL: http://la-flanders.org
+bie:
+  baseURL: http://species.la-flanders.org
+  searchPath: /search
+
+openapi:
+  terms:
+  contact:
+    email: support@la-flanders.org
+  components:
+    security:
+      oauth2:
+        baseUrl: http://auth.la-flanders.org/cas/oidc
+
+userdetails:
+  url: http://auth.la-flanders.org/userdetails/
+userdetails.web.url: http://auth.la-flanders.org/userdetails/
+userdetails.api.url: http://auth.la-flanders.org/userdetails/
+
+# all available rk_ and rkid_ fields in SOLR are added to defaultDownloadFields when no rk_ field is defined in defaultDownloadFields
+defaultDownloadFields: guid,rank,scientificName,scientificNameAuthorship,taxonomicStatus,establishmentMeans,datasetName,parentGuid,acceptedConceptName,acceptedConceptID,idxtype,name,additionalNames_m_s
+downloadMaxRows: 100000
+
+# override the taxon ranks taxonRanksFile with an external file
+taxonRanksFile:
+
+sitemap:
+  dir: /data/bie-index
+  enabled: true
+
+
+management:
+    endpoint:
+        health:
+            enabled: true
+    endpoints:
+        web:
+            exposure:
+                include: health

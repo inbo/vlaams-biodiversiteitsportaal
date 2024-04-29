@@ -1,0 +1,138 @@
+[
+  {
+    "@class": "org.apereo.cas.services.OidcRegisteredService",
+    "clientId": "collections",
+    "clientSecret": "collections-oidc-super-secret",
+    "serviceId": "^http://collections.la-flanders.org",
+    "name": "OIDC",
+    "id": 1000
+  },
+  {
+    "@class": "org.apereo.cas.services.OidcRegisteredService",
+    "clientId": "hub",
+    "clientSecret": "hub-oidc-super-secret",
+    "serviceId": "^http://hub.la-flanders.org",
+    "name": "OIDC",
+    "id": 1000
+  },
+  {
+    "@class": "org.apereo.cas.services.OidcRegisteredService",
+    "clientId": "biocache_service",
+    "clientSecret": "biocache_service-oidc-super-secret",
+    "serviceId": "^http://biocache_service.la-flanders.org",
+    "name": "OIDC",
+    "id": 1000
+  },
+  {
+    "@class": "org.apereo.cas.services.OidcRegisteredService",
+    "clientId": "bie",
+    "clientSecret": "bie-oidc-super-secret",
+    "serviceId": "^http://bie.la-flanders.org",
+    "name": "OIDC",
+    "id": 1000
+  },
+  {
+    "@class": "org.apereo.cas.services.OidcRegisteredService",
+    "clientId": "bie_index",
+    "clientSecret": "bie_index-oidc-super-secret",
+    "serviceId": "^http://bie_index.la-flanders.org",
+    "name": "OIDC",
+    "id": 1000
+  },
+  {
+    "@class": "org.apereo.cas.services.OidcRegisteredService",
+    "clientId": "images",
+    "clientSecret": "images-oidc-super-secret",
+    "serviceId": "^http://images.la-flanders.org",
+    "name": "OIDC",
+    "id": 1000
+  },
+  {
+    "@class": "org.apereo.cas.services.OidcRegisteredService",
+    "clientId": "logger",
+    "clientSecret": "logger-oidc-super-secret",
+    "serviceId": "^http://logger.la-flanders.org",
+    "name": "OIDC",
+    "id": 1000
+  },
+  {
+    "@class": "org.apereo.cas.services.OidcRegisteredService",
+    "clientId": "lists",
+    "clientSecret": "lists-oidc-super-secret",
+    "serviceId": "^http://lists.la-flanders.org",
+    "name": "OIDC",
+    "id": 1000
+  },
+  {
+    "@class": "org.apereo.cas.services.OidcRegisteredService",
+    "clientId": "regions",
+    "clientSecret": "regions-oidc-super-secret",
+    "serviceId": "^http://regions.la-flanders.org",
+    "name": "OIDC",
+    "id": 1000
+  },
+  {
+    "@class": "org.apereo.cas.services.OidcRegisteredService",
+    "clientId": "alerts",
+    "clientSecret": "alerts-oidc-super-secret",
+    "serviceId": "^http://alerts.la-flanders.org",
+    "name": "OIDC",
+    "id": 1000
+  },
+  {
+    "@class": "org.apereo.cas.services.OidcRegisteredService",
+    "clientId": "doi",
+    "clientSecret": "doi-oidc-super-secret",
+    "serviceId": "^http://doi.la-flanders.org",
+    "name": "OIDC",
+    "id": 1000
+  },
+  {
+    "@class": "org.apereo.cas.services.OidcRegisteredService",
+    "clientId": "dashboard",
+    "clientSecret": "dashboard-oidc-super-secret",
+    "serviceId": "^http://dashboard.la-flanders.org",
+    "name": "OIDC",
+    "id": 1000
+  },
+  {
+    "@class": "org.apereo.cas.services.OidcRegisteredService",
+    "clientId": "sds",
+    "clientSecret": "sds-oidc-super-secret",
+    "serviceId": "^http://sds.la-flanders.org",
+    "name": "OIDC",
+    "id": 1000
+  },
+  {
+    "@class": "org.apereo.cas.services.OidcRegisteredService",
+    "clientId": "spatial",
+    "clientSecret": "spatial-oidc-super-secret",
+    "serviceId": "^http://spatial.la-flanders.org",
+    "name": "OIDC",
+    "id": 1000
+  },
+  {
+    "@class": "org.apereo.cas.services.OidcRegisteredService",
+    "clientId": "data_quality",
+    "clientSecret": "data_quality-oidc-super-secret",
+    "serviceId": "^http://data_quality.la-flanders.org",
+    "name": "OIDC",
+    "id": 1000
+  },
+  {
+    "@class": "org.apereo.cas.services.OidcRegisteredService",
+    "clientId": "biocollect",
+    "clientSecret": "biocollect-oidc-super-secret",
+    "serviceId": "^http://biocollect.la-flanders.org",
+    "name": "OIDC",
+    "id": 1000
+  },
+  {
+    "@class": "org.apereo.cas.services.OidcRegisteredService",
+    "clientId": "ecodata",
+    "clientSecret": "ecodata-oidc-super-secret",
+    "serviceId": "^http://ecodata.la-flanders.org",
+    "name": "OIDC",
+    "id": 1000
+  }
+]

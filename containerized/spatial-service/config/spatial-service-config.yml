@@ -28,3 +28,13 @@ slaveKey: "xxxxxxxxxxxxxx"
 serviceKey: "xxxxxxxxxxxxxx"
 
 layers_store.GEONETWORK_URL: 'http://spatial.la-flanders.org/geonetwork'
+
+
+management:
+    endpoint:
+        health:
+            enabled: true
+    endpoints:
+        web:
+            exposure:
+                include: health

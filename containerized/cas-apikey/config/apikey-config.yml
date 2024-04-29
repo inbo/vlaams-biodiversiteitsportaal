@@ -24,7 +24,16 @@ management:
   security:
     enabled: true
     roles: ACTUATOR
-
+  endpoint:
+      health:
+          enabled: true
+  endpoints:
+      web:
+          exposure:
+              include: health
+  health:
+    mongo:
+      enabled: false
 serverURL: http://auth.la-flanders.org
 serverName: http://auth.la-flanders.org
 grails:
