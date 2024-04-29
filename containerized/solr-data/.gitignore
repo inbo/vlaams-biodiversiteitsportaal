@@ -8,6 +8,16 @@
 !/bie/schema.xml
 !/bie/core.properties
 
-/bie/data/*
-!/bie/data
-!/bie/data/elevate.xml
+/bie/conf/*
+!/bie/conf
+!/bie/conf/elevate.xml
+
+/biocache/*
+!/biocache
+!/biocache/solrconfig.xml
+!/biocache/schema.xml
+!/biocache/core.properties
+
+/biocache/conf/*
+!/biocache/conf
+!/biocache/conf/elevate.xml

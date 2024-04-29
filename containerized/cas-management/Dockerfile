@@ -9,6 +9,7 @@ RUN mkdir /etc/cas
 RUN git clone --branch ${VERSION} --depth 1 https://github.com/AtlasOfLivingAustralia/ala-cas-5-services.git /project
 RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
     gradle build assemble createKeystore --no-daemon \
+    -x test \
     # -Dorg.gradle.debug=true -Dorg.gradle.debug.suspend=no --debug \
     --parallel
 

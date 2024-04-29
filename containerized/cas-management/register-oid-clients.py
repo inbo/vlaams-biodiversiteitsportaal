@@ -6,19 +6,19 @@ clients = [
         "name": "collectory",
         "client_id": "485e3a6ecfa6065ab728eb9fe63fe91e62d1",
         "client_secret": "1b5515b804ab42427475ae9949e77d23d0db",
-        "url": "http://collections.la-flanders.org"
+        "url": "^http://collections.la-flanders.org/.*$"
     },
     {
         "name": "ala_hub",
         "client_id": "7e4d70b59b38cf455269a8746bcac610d333",
         "client_secret": "a42e365c8a3dc80b6e7c93a1485ae22aa4c0",
-        "url": "http://records.la-flanders.org"
+        "url": "^http://records.la-flanders.org/.*$"
     },
     {
         "name": "biocache_service",
         "client_id": "5cf9d53d91a957ee041996c2073be302d267",
         "client_secret": "24152db197bdf9d24dea3386475ec8b8adcd",
-        "url": "http://records-ws.la-flanders.org"
+        "url": "^http://records-ws.la-flanders.org/.*$"
     },
     {
         "name": "ala_bie",
@@ -30,31 +30,31 @@ clients = [
         "name": "bie_index",
         "client_id": "0cf3eff57958b4bb76eca5055021bcf59bc5",
         "client_secret": "895c1a54c053b38953b5b3d3466f7a171659",
-        "url": "http://species-ws.la-flanders.org"
+        "url": "^http://species-ws.la-flanders.org/.*$"
     },
     {
         "name": "images",
         "client_id": "871aeec889021f0fb4b587b0bfb0af1cf7d3",
         "client_secret": "a6d3aed6a75bcfa6da9ff8d58ce0eb23babc",
-        "url": "http://images.la-flanders.org"
+        "url": "^http://images.la-flanders.org/.*$"
     },
     {
         "name": "logger",
         "client_id": "46956e0f3417a06b084dfd6725fdb27b4988",
         "client_secret": "de3ac90fc3b664e5a702e666f04659a96513",
-        "url": "http://logger.la-flanders.org"
+        "url": "^http://logger.la-flanders.org/.*$"
     },
     {
         "name": "lists",
         "client_id": "0f36a12c63bda969b11f332e659a69f2589c",
         "client_secret": "a0e1ea16f5f638a4cd0e0a7a2f1a81a5ede5",
-        "url": "http://lists.la-flanders.org"
+        "url": "^http://lists.la-flanders.org/.*$"
     },
     {
         "name": "regions",
         "client_id": "71f929bf8941808865862db302697a865f8d",
         "client_secret": "eca12458af7e2bc51dcd4215c439ee8f6916",
-        "url": "http://regions.la-flanders.org"
+        "url": "^http://regions.la-flanders.org/.*$"
     },
     {
         "name": "alerts",
@@ -84,7 +84,7 @@ clients = [
         "name": "spatial",
         "client_id": "5c7e3ed9991e67050d626edc2068fb16f584",
         "client_secret": "8f0bff11d9aa5572aa7c6e990a6cdbf728cd",
-        "url": "http://spatial.la-flanders.org"
+        "url": "^http://spatial.la-flanders.org/.*$"
     },
     {
         "name": "data_quality",

@@ -75,14 +75,14 @@ services:
         condition: service_healthy
     healthcheck:
       test: curl --fail --silent http://localhost:8080/actuator/health || exit 1
-  biocache:
-    build: biocache
+  biocache-service:
+    build: biocache-service
     ports:
       - "8003:8080"
     environment:
       BIOCACHE_MEMORY_OPTS: -Xmx1g -Xms1g
     volumes:
-      - ./biocache/config:/data/biocache/config:ro
+      - ./biocache-service/config:/data/biocache/config:ro
     depends_on:
       cas:
         condition: service_healthy
@@ -288,11 +288,21 @@ services:
       test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
 
   cassandradb:
-    image: cassandra
+    image: cassandra:3
     volumes:
       - cassandra:/var/lib/cassandra
     healthcheck:
       test: ["CMD-SHELL", "[ $$(nodetool statusgossip) = running ]"]
+
+  cassandra-load-keyspace:
+      container_name: cassandra-load-keyspace
+      image: cassandra:3
+      depends_on:
+        cassandradb:
+          condition: service_healthy
+      volumes:
+        - ./db-init/cassandra:/docker-entrypoint-initdb.d
+      command: bash -c "cqlsh cassandradb -f /docker-entrypoint-initdb.d/*.cql"
 
   solr:
     image: solr:8
