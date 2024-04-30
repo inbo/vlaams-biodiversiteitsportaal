@@ -24,3 +24,4 @@
 /biocache/conf/*
 !/biocache/conf
 !/biocache/conf/elevate.xml
+!/biocache/conf/managed-schema
