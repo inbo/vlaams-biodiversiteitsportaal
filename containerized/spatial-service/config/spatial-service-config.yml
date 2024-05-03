@@ -1,23 +1,54 @@
-grails.serverURL: http://spatial.la-flanders.org/ws
-#grails.server.context: /ws
-
+grails:
+  serverURL: http://spatial.la-flanders.org/ws
+server:
+  servlet:
+    contextPath: '/ws'
 google:
-    apikey: "xxxxxxxxxxxx"
+  apikey: 'AIzaSyAJDtEeoy7Sc9pij2TAoVnmTwA34Q-2VHk'
 
 api_key: xxxxxxxxxxxxx
 spatialHubUrl: http://spatial.la-flanders.org/
 
+#distributions:
+#  geoserver:
+#    image:
+#      url: "/ALF/wms?service=WMS&version=1.1.0&request=GetMap&layers=ALF%3ABehGebAkkervogel&styles=&bbox=2.52%2C50.64%2C5.94%2C51.51&srs=EPSG:4326&format=image/png&width=400&height=400&viewparams=s:"
+#
+
 geoserver:
-    url: 'http://geoserver/geoserver'
-    username: 'admin'
-    password: 'my-super-secret-password'
+  url: 'http://geoserver:8080/geoserver'
+  username: 'admin'
+  password: 'geoserver'
+  canDeploy: true
+
+  spatialservice:
+    #if colocated, geoserver will load data from spatial service data folder, /data/spatial-data by default
+    colocated: true
+  remote:
+    #In some cases, geoserver need to know its data folder.
+    geoserver_data_dir: "/data/geoserver_data_dir"
 
 dataSource:
-    url: 'jdbc:postgresql://postgis:5432/layersdb'
-    username: postgres
-    password: my-super-secret-password
+  url: 'jdbc:postgresql://postgis:5432/layersdb'
+  username: postgres
+  password: my-super-secret-password
 
 batch_sampling_passwords: ""
+
+ala.baseURL: 'https://www.la-flanders.org'
+bie.baseURL: 'https://bie.la-flanders.org'
+bie.searchPath: '/search'
+
+namematching.url: 'https://namematching-ws.la-flanders.org'
+
+records.url: 'https://archives.la-flanders.org/archives/exports/lat_lon_taxon.zip'
+
+lists.url: 'https://lists.la-flanders.org'
+collections.url: 'https://collections.la-flanders.org'
+sandboxHubUrl: 'https://sandbox.la-flanders.org/ala-hub'
+sandboxBiocacheServiceUrl: 'https://sandbox.la-flanders.org/biocache-service'
+phyloServiceUrl: 'https://phylolink.la-flanders.org'
+
 
 # au.org.ala.spatial.process config
 spatialService.url: "http://spatial.la-flanders.org/ws"
@@ -27,14 +58,48 @@ gdal.dir: "/usr/bin/"
 slaveKey: "xxxxxxxxxxxxxx"
 serviceKey: "xxxxxxxxxxxxxx"
 
-layers_store.GEONETWORK_URL: 'http://spatial.la-flanders.org/geonetwork'
+layers_store:
+  GEONETWORK_URL: 'http://spatial.la-flanders.org/geonetwork'
+  LAYER_INDEX_URL: https://spatial.la-flanders.org/layers-service
+headerAndFooter:
+  baseURL: 'http://branding.la-flanders.org'
+skin:
+  orgNameLong: 'Atlas of Living Flanders'
+  orgNameShort: 'ALF'
 
+apiKeyCheckUrlTemplate: 'https://auth.la-flanders.org/apikey/ws/check?apikey={0}'
+spatialService:
+  remote: "https://spatial.la-flanders.org/ws"
 
 management:
-    endpoint:
-        health:
-            enabled: true
-    endpoints:
-        web:
-            exposure:
-                include: health
+  endpoint:
+    health:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health
+
+
+security:
+  # CAS disabled
+  cas:
+    enabled: true
+    appServerName: http://spatial.la-flanders.org/ws
+    casServerName: "http://auth.la-flanders.org"
+    casServerUrlPrefix: "http://auth.la-flanders.org/cas"
+    loginUrl: "http://auth.la-flanders.org/cas/login"
+    logoutUrl: "http://auth.la-flanders.org/cas/logout"
+    bypass: false
+    disableCAS: false
+    gateway: False
+  #Used for auth plugin
+  apikey:
+    check:
+      serviceUrl:  http://auth.la-flanders.org/apikey/ws/check?apikey=
+  oidc:
+    enabled: true
+    discoveryUri: http://auth.la-flanders.org/cas/oidc/.well-known
+    scope: openid,profile,email,ala,roles, user_defined
+    client-id: "spatial"
+    secret: "spatial-oidc-super-secret"

@@ -26,19 +26,19 @@
         </RollingFile>
     </Appenders>
     <Loggers>
-        <AsyncLogger name="org.springframework" level="warn" />
-        <AsyncLogger name="org.springframework.amqp" level="error" />
-        <AsyncLogger name="org.springframework.webflow" level="warn" />
-        <AsyncLogger name="org.springframework.web" level="warn" />
-        <AsyncLogger name="org.springframework.context.annotation" level="error" />
-        <AsyncLogger name="org.pac4j" level="info" />
-        <AsyncLogger name="org.apereo" level="${sys:cas.log.level}/"/>
-        <AsyncLogger name="org.thymeleaf" level="warn" />
-        <AsyncLogger name="org.apereo.inspektr.audit.support.Slf4jLoggingAuditTrailManager" level="info"/>
+<!--        <AsyncLogger name="org.springframework" level="warn" />-->
+<!--        <AsyncLogger name="org.springframework.amqp" level="error" />-->
+<!--        <AsyncLogger name="org.springframework.webflow" level="warn" />-->
+<!--        <AsyncLogger name="org.springframework.web" level="warn" />-->
+<!--        <AsyncLogger name="org.springframework.context.annotation" level="error" />-->
+<!--        <AsyncLogger name="org.pac4j" level="info" />-->
+<!--        <AsyncLogger name="org.apereo" level="${sys:cas.log.level}/"/>-->
+<!--        <AsyncLogger name="org.thymeleaf" level="warn" />-->
+<!--        <AsyncLogger name="org.apereo.inspektr.audit.support.Slf4jLoggingAuditTrailManager" level="info"/>-->
         <AsyncLogger name="org.mongodb.driver" level="warn" additivity="false" includeLocation="true">
             <AppenderRef ref="console"/>
         </AsyncLogger>
-        <Root level="warn">
+        <Root level="debug">
 <!--            <AppenderRef ref="cas-management"/>-->
              <AppenderRef ref="console"/>
         </Root>

@@ -4,8 +4,10 @@ services:
     ports:
       - "8001:8080"
     volumes:
-      - ./collections/config:/data/collectory/config:ro
+      - ./collections/config:/data/collectory/config
+      - ./collections/config:/data/ala-collectory/config
       - ./collections/taxa:/data/collectory/taxa
+      - ./collections/taxa:/data/ala-collectory/taxa
     environment:
       JAVA_OPTS: -Xmx1g -Xms128m -Xss256k
     depends_on:
@@ -128,13 +130,16 @@ services:
     volumes:
       - ./spatial-service/config:/data/spatial-service/config:ro
       - spatial-data:/data/spatial-data
+      - geoserver-data:/data/geoserver_data_dir
     environment:
       JAVA_OPTS: -Xmx1g -Xms128m -Xss256k
     depends_on:
       postgis:
         condition: service_healthy
+      cas:
+        condition: service_healthy
     healthcheck:
-      test: curl --fail --silent http://localhost:8080/actuator/health || exit 1
+      test: curl --fail --silent http://localhost:8080/ws/actuator/health || exit 1
 
   cas:
     build: cas
@@ -238,6 +243,7 @@ services:
       # - ./spatial/geoserver/geoserver-files:/data/geoserver-files/
       #Spatials service data folder. If they are both in the same machine, some layers are not needed to be uploaded.
       - spatial-data:/data/spatial-data
+      - geoserver-data:/data/geoserver_data_dir
     ports:
       - "8079:8080"
     environment:
@@ -405,3 +411,4 @@ volumes:
   cas-data:
   cas-shared-conf:
   elasticsearch:
+  geoserver-data:

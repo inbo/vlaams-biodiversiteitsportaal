@@ -1,0 +1,323 @@
+grails:
+  serverURL: "http://spatial.la-flanders.org"
+  app:
+    context: "/"
+
+googleAnalyticsId: "UA-XXXXX"
+google:
+  apikey: "get-a-google-api-key"
+
+fathomId: ""
+
+api_key: "898a8ca5-c415-4c9a-a501-36f8bcf001e9"
+
+i18n:
+  region: "default"
+
+security:
+  # CAS disabled
+  cas:
+    enabled: true
+    casServerName: "http://auth.la-flanders.org"
+    casServerUrlPrefix: "http://auth.la-flanders.org/cas"
+    loginUrl: "http://auth.la-flanders.org/cas/login"
+    logoutUrl: "http://auth.la-flanders.org/cas/logout"
+    bypass: false
+    disableCAS: false
+    gateway: False
+  #Used for auth plugin
+  apikey:
+    check:
+      serviceUrl:  http://auth.la-flanders.org/apikey/ws/check?apikey=
+  oidc:
+    enabled: true
+    discoveryUri: http://auth.la-flanders.org/cas/oidc/.well-known
+    scope: openid,profile,email,ala,roles, user_defined
+    client-id: "spatial"
+    secret: "spatial-oidc-super-secret"
+  jwt:
+    enabled: false
+#    discoveryUri: {{ jwt_discoveryUri }}
+#    fallbackToLegacyBehaviour: true
+#    clientId: {{ spatial_hub_oidc_client_id }}
+#    roleAttributes: cognito:groups
+#    rolesFromAccessToken: true
+#    userIdClaim: username
+#    roleClaims: cognito:groups
+  cors:
+    enable: true
+    authenticated:
+      allowedOrigins:
+        - '.*\.la-flanders\.org(:[0-9]+)?'
+    unauthenticated:
+      allowedOrigins:
+        - '*'
+      allowCredentials: false
+  core:
+    authCookieName: ALA-Auth
+  cookie:
+    enabled: false
+    domain: .la-flanders.org
+
+webservice:
+  jwt: true
+  jwt-scopes: ala/attrs ala/internal users/read
+  clientId:
+  secret:
+
+apiKeyCheckUrlTemplate: "http://auth.la-flanders.org/apikey/ws/check?apikey={0}"
+autocompleteUrl: "http://species-ws.la-flanders.org/search/auto.jsonp"
+
+auth:
+    admin_role: ROLE_ADMIN
+
+app:
+    http:
+        header:
+            userId: X-ALA-userId
+
+headerAndFooter:
+  baseURL: "http://branding.la-flanders.org"
+#  version: "2"
+
+ala.baseURL: "http://la-flanders.org"
+bie.baseURL: "http://species.la-flanders.org"
+bie.searchPath: '/search'
+
+bieService:
+    baseURL: "http://species-ws.la-flanders.org"
+
+userdetails:
+  web:
+    url: "http://auth.la-flanders.org/userdetails/"
+  api:
+    url: "http://auth.la-flanders.org/userdetails/"
+
+favicon:
+  url: "https://raw.githubusercontent.com/living-atlases/artwork/master/favicon.ico"
+
+layersService:
+  url: "http://spatial.la-flanders.org/ws"
+
+lists:
+  url: "http://lists.la-flanders.org"
+  threatenedSpeciesUrl: '/ws/speciesList/?isThreatened=eq:true&isAuthoritative=eq:true'
+  invasiveSpeciesUrl: '/ws/speciesList/?isInvasive=eq:true&isAuthoritative=eq:true'
+  facets: True
+  migratoryDR: dr1005
+  iconicSpeciesDR: dr781
+
+journalmap:
+  url: "https://www.journalmap.org/"
+
+collections:
+  url: "http://collections.la-flanders.org"
+
+sandbox:
+  url: "http://la-flanders.org/sandbox"
+  uiUrl: "http://sandbox.la-flanders.org/datacheck"
+
+sandboxService:
+  url: "http://sandbox.la-flanders.org/biocache-service"
+
+gazField: cl2123
+
+userObjectsField: cl1083
+
+biocache:
+  url: "http://records.la-flanders.org"
+
+biocacheService:
+  url: "http://records-ws.la-flanders.org"
+  #Facets to ignore in the biocache grouped/facets service
+  default_facets_ignored: "data_resource_uid,data_provider_uid,species,collection_uid,institution_code_name,institution_uid,uncertainty"
+  custom_facets:
+    Attribution: ['Data Provider;data_provider', 'Collection;collection_name', 'Data Resource;data_resource', 'Institution;institution_name']
+    Location: ['Coordinate Uncertainty;coordinate_uncertainty']
+    Occurrence: ['Year;occurrence_year']
+
+sampling:
+  url: "http://spatial.la-flanders.org/ws"
+
+geoserver:
+  url: "http://spatial.la-flanders.org/geoserver"
+
+flickr:
+  url: "https://api.flickr.com/services/rest/?method="
+  searchPhotos: 'flickr.photos.search'
+  # licensesInfo: 'flickr.photos.licenses.getInfo'
+  # licenses data is found at https://api.flickr.com/services/rest/?method=flickr.photos.licenses.getInfo&api_key=<api_key>&format=json&nojsoncallback=1
+  licensesData: {'licenses': {'license': [{'id': '0', 'name': 'All Rights Reserved', 'url': ''}, {'id': '4', 'name': 'Attribution License', 'url': 'https://creativecommons.org/licenses/by/2.0/'}, {'id': '6', 'name': 'Attribution-NoDerivs License', 'url': 'https://creativecommons.org/licenses/by-nd/2.0/'}, {'id': '3', 'name': 'Attribution-NonCommercial-NoDerivs License', 'url': 'https://creativecommons.org/licenses/by-nc-nd/2.0/'}, {'id': '2', 'name': 'Attribution-NonCommercial License', 'url': 'https://creativecommons.org/licenses/by-nc/2.0/'}, {'id': '1', 'name': 'Attribution-NonCommercial-ShareAlike License', 'url': 'https://creativecommons.org/licenses/by-nc-sa/2.0/'}, {'id': '5', 'name': 'Attribution-ShareAlike License', 'url': 'https://creativecommons.org/licenses/by-sa/2.0/'}, {'id': '7', 'name': 'No known copyright restrictions', 'url': 'https://www.flickr.com/commons/usage/'}, {'id': '8', 'name': 'United States Government Work', 'url': 'http://www.usa.gov/copyright.shtml'}, {'id': '9', 'name': 'Public Domain Dedication (CC0)', 'url': 'https://creativecommons.org/publicdomain/zero/1.0/'}, {'id': '10', 'name': 'Public Domain Mark', 'url': 'https://creativecommons.org/publicdomain/mark/1.0/'}]}, 'stat': 'ok'}
+  apiKey:
+  secret:
+  tags:
+  extra: "geo,date_taken,owner_name,license,url_t,url_s,url_m,title"
+  contentType:
+  geoContext:
+  filter: "&text=landscape"
+  nbrOfPhotosToDisplay: 15
+
+#viewConfig:
+#    json: 'view-config.json'
+
+sessions:
+  dir: '/data/spatial-hub/sessions'
+
+admin_role: ROLE_ADMIN
+
+#skin.orgNameLong: "Living Atlas of Flanders"
+#skin.orgNameShort: "LA Flanders"
+#skin.layout: "portal"
+skin:
+  layout: generic
+
+grails.controllers.upload.maxFileSize: 614400000
+grails.controllers.upload.maxRequestSize: 614400000
+
+speciesDotSize: 5
+speciesDotOpacity: 60
+
+logger:
+  baseUrl: "http://logger.la-flanders.org"
+
+#TBC : decommisioned
+phylolink:
+  url: "https://phylolink.ala.org.au"
+
+biocollect:
+  url: ""
+
+bccvl:
+  login:
+    url: "https://app.bccvl.org.au/bccvl/oauth2/authorize?client_id=F031d7ce-abb0-11e6-a678-0242ac120005&response_type=token&redirect_uri="
+  post:
+    url: "https://app.bccvl.org.au/API/dm/v1/import_ala_data"
+keep:
+  alive:
+    timeout:
+      ms: 10000
+
+startup:
+  lat: 51.5
+  lng: 4.95
+  zoom: 9
+  baselayer:
+    default: osm
+#  baselayers:
+#    google_roadmaps:
+#      name: 'Streets'
+#      layerType: 'ROADMAP'
+#      type: 'google'
+#      exportType: 'normal'
+#      link: 'https://www.google.com/intl/en_au/help/terms_maps.html'
+#      projections: ['3857']
+#    google_hybrid:
+#      name: 'Hybrid'
+#      layerType: 'HYBRID'
+#      type: 'google'
+#      exportType: 'hybrid'
+#      link: 'https://www.google.com/intl/en_au/help/terms_maps.html'
+#      projections: ['3857']
+#    outline:
+#      name: 'Outline'
+#      type: 'wms'
+#      url: "http://spatial.la-flanders.org/geoserver/wms?"
+#      layerParams:
+#        layers: 'ALA:world'
+#        format: 'image/png'
+#        continuousWorld: true
+#      exportType: 'outline'
+#    osm:
+#      name: 'Open Street Map'
+#      url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+#      type: 'xyz'
+#      exportType: 'minimal'
+#      link: 'https://www.openstreetmap.org/about'
+#      projections: ['3857']
+#    google_satellite:
+#      name: 'Satellite'
+#      layerType: 'SATELLITE'
+#      type: 'google'
+#      exportType: 'satellite'
+#      link: 'https://www.google.com/intl/en_au/help/terms_maps.html'
+#      projections: ['3857']
+
+defaultareas:
+  - name: 'Flanders'
+    fqs: ['longitude:[2.296 TO 6.1468505859375]', 'latitude:[50.6 TO 51.5]']
+    wkt: 'POLYGON((2.296 50.6, 6.1468505859375 50.6, 6.1468505859375 51.5, 2.296 51.5, 2.296 50.6))'
+    areaSqKm: 13625
+    bbox: [50.65843926853822, 51.52780962525605, 2.296, 6.1468505859375]
+#  - name: 'World'
+#    fqs: []
+#    wkt: 'POLYGON((-180 -90.0,180.0 -90.0,180.0 90.0,-180 90.0,-180 -90.0))'
+#    areaSqKm: 510000000
+#    bbox: [-180, -90, 180, 90]
+
+#presetWMSServers:
+#  - name: "AusCover"
+#    url: "http://data.auscover.org.au/geoserver/wms?request=getCapabilities"
+#  - name: "Geoserver IMOS"
+#    url: "http://geoserver.imos.org.au/geoserver/wms?REQUEST=GetCapabilities"
+#  - name: "GA"
+#    url: "https://www.ga.gov.au/gis/services/earth_science/GA_Surface_Geology_of_Australia/MapServer/WMSServer?request=GetCapabilities"
+#  - name: "Geofabric BOM"
+#    url: "http://geofabric.bom.gov.au/simplefeatures/ows?request=getcapabilities"
+
+allowProxy:
+  server: "data.auscover.org.au;data.auscover.org.au:80;geoserver.imos.org.au;www.ga.gov.au/gis;geofabric.bom.gov.au"
+
+#getMapExamples:
+#  - name: "Fractional Cover CLW - Non-PS Veg - 2012.297"
+#    url: "http://data.auscover.org.au/geoserver/ows?SERVICE=WMS&REQUEST=GetMap&LAYERS=clw:FractCover.V2_2.NPV&FORMAT=image/png&SRS=epsg:3857&TRANSPARENT=true&VERSION=1.3.0&CRS=EPSG:3857&EXCEPTIONS=INIMAGE&STYLES="
+
+wms:
+  intersect: True
+
+fq:
+  excludeAbsent: "-occurrence_status_s:absent"
+
+# (mandatory) projections.#.definition - usage new L.Proj.CRS(code, proj4js, params)
+# projections.#.definition.code = code
+# projections.#.definition.proj4js = proj4js definition (mandatory when not 3857 or 4326)
+# projections.#.definition.params = parameters (optional)
+#
+# (optional) projections.#.origin  (startup lat, lon, zoom is used when origin is not defined)
+# projections.#.origin.latitude = default latitude
+# projections.#.origin.longitude = default longitude
+# projections.#.origin.zoom = default zoom
+projection:
+  default: 3857
+#projections:
+#    3857:
+#      label: 'Pseudo-Mercator -- Spherical Mercator'
+#      definition:
+#        code: 'EPSG:3857' # leaflet supported, uses startup lat,lon,zoom
+#    4326:
+#      label: 'World Geodetic System 1984'
+#      definition:
+#        code: 'EPSG:4326' # leaflet supported, uses startup lat,lon,zoom
+#    3031:
+#      label: 'Antarctic Polar Stereographic'
+#      definition:
+#        code: 'EPSG:3031'
+#        proj4js: '+proj=stere +lat_0=-90 +lat_ts=-71 +lon_0=0 +k=1 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs'
+#        params: { resolutions: [ 8192, 4096, 2048, 1024, 512, 256, 128, 64, 32, 16, 8, 4, 2, 1, 0.5 ] }
+#      origin:
+#        latitude: -80
+#        longitude: 0
+#        zoom: 1
+#    3575:
+#      label: 'North Pole LAEA Europe'
+#      definition:
+#        code: 'EPSG:3575'
+#        proj4js: '+proj=laea +lat_0=90 +lon_0=10 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs'
+#        params:  { resolutions: [ 8192, 4096, 2048, 1024, 512, 256, 128, 64, 32, 16, 8, 4, 2, 1, 0.5 ]}
+#      origin:
+#        latitude: 60
+#        longitude: 0
+#        zoom: 1
+#
+
+spApp:
+  optionsDownloadMap: false

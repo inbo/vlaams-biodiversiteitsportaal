@@ -123,7 +123,7 @@ cas:
 ala:
   userDetailsBaseUrl: http://auth.la-flanders.org/userdetails/
   cookie:
-    domain: .la-flanders.org
+    domain: la-flanders.org
     secure: false
     httpOnly: true
     maxAge: -1
