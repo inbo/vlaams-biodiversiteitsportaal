@@ -144,7 +144,7 @@ solr:
 skin:
   layout: main
   fluidLayout: true
-  orgNameLong: Living Atlas of Flanders
+  orgNameLong: Vlaams Biodiversiteitsportaal
   favicon: https://raw.githubusercontent.com/living-atlases/artwork/master/favicon.ico
   homeUrl: http://la-flanders.org
 headerAndFooter:

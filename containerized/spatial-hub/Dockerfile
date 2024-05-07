@@ -7,6 +7,8 @@ RUN apt-get update && apt-get -y install \
 
 WORKDIR /project
 RUN git clone --branch ${VERSION} --depth 1 https://github.com/AtlasOfLivingAustralia/spatial-hub.git /project
+COPY ./i18n/ ./grails-app/i18n/
+
 RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
     gradle \
         build assemble \

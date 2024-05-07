@@ -165,7 +165,7 @@ sessions:
 
 admin_role: ROLE_ADMIN
 
-#skin.orgNameLong: "Living Atlas of Flanders"
+#skin.orgNameLong: "Vlaams Biodiversiteitsportaal"
 #skin.orgNameShort: "LA Flanders"
 #skin.layout: "portal"
 skin:

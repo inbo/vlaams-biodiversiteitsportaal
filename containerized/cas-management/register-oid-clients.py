@@ -85,7 +85,7 @@ clients = [
         "client_id": "spatial",
         "name": "OidcClient",
         "client_secret": "8f0bff11d9aa5572aa7c6e990a6cdbf728cd",
-        "url": "^http://spatial.la-flanders.org/.*$"
+        "url": ".*"
     },
     {
         "client_id": "data_quality",

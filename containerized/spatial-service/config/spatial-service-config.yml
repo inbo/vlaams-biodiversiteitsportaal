@@ -35,19 +35,19 @@ dataSource:
 
 batch_sampling_passwords: ""
 
-ala.baseURL: 'https://www.la-flanders.org'
-bie.baseURL: 'https://bie.la-flanders.org'
+ala.baseURL: 'http://www.la-flanders.org'
+bie.baseURL: 'http://bie.la-flanders.org'
 bie.searchPath: '/search'
 
-namematching.url: 'https://namematching-ws.la-flanders.org'
+namematching.url: 'http://namematching-ws.la-flanders.org'
 
-records.url: 'https://archives.la-flanders.org/archives/exports/lat_lon_taxon.zip'
+records.url: 'http://archives.la-flanders.org/archives/exports/lat_lon_taxon.zip'
 
-lists.url: 'https://lists.la-flanders.org'
-collections.url: 'https://collections.la-flanders.org'
-sandboxHubUrl: 'https://sandbox.la-flanders.org/ala-hub'
-sandboxBiocacheServiceUrl: 'https://sandbox.la-flanders.org/biocache-service'
-phyloServiceUrl: 'https://phylolink.la-flanders.org'
+lists.url: 'http://lists.la-flanders.org'
+collections.url: 'http://collections.la-flanders.org'
+sandboxHubUrl: 'http://sandbox.la-flanders.org/ala-hub'
+sandboxBiocacheServiceUrl: 'http://sandbox.la-flanders.org/biocache-service'
+phyloServiceUrl: 'http://phylolink.la-flanders.org'
 
 
 # au.org.ala.spatial.process config
@@ -60,16 +60,16 @@ serviceKey: "xxxxxxxxxxxxxx"
 
 layers_store:
   GEONETWORK_URL: 'http://spatial.la-flanders.org/geonetwork'
-  LAYER_INDEX_URL: https://spatial.la-flanders.org/layers-service
+  LAYER_INDEX_URL: http://spatial.la-flanders.org/layers-service
 headerAndFooter:
   baseURL: 'http://branding.la-flanders.org'
 skin:
   orgNameLong: 'Atlas of Living Flanders'
   orgNameShort: 'ALF'
 
-apiKeyCheckUrlTemplate: 'https://auth.la-flanders.org/apikey/ws/check?apikey={0}'
+apiKeyCheckUrlTemplate: 'http://auth.la-flanders.org/apikey/ws/check?apikey={0}'
 spatialService:
-  remote: "https://spatial.la-flanders.org/ws"
+  remote: "http://spatial.la-flanders.org/ws"
 
 management:
   endpoint:

@@ -84,7 +84,7 @@ wikipedia:
 skin:
   homeUrl: http://la-flanders.org
   layout: ala
-  orgNameLong: Living Atlas of Flanders
+  orgNameLong: Vlaams Biodiversiteitsportaal
   fluidLayout: true
   orgNameShort: LA Flanders
   favicon: https://raw.githubusercontent.com/living-atlases/artwork/master/favicon.ico

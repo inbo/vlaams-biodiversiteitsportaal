@@ -124,7 +124,8 @@ services:
       test: curl --fail --silent http://localhost:8080/actuator/health || exit 1
 
   spatial-service:
-    build: spatial-service
+#    build: spatial-service
+    build: /home/stefan/Projects/Inbo/ala/spatial-service
     ports:
       - "8011:8080"
     volumes:
@@ -137,6 +138,10 @@ services:
       postgis:
         condition: service_healthy
       cas:
+        condition: service_healthy
+      geoserver:
+        condition: service_healthy
+      cas-apikey:
         condition: service_healthy
     healthcheck:
       test: curl --fail --silent http://localhost:8080/ws/actuator/health || exit 1
@@ -153,6 +158,8 @@ services:
       ALA_PASSWORD_PROPERTIES: /etc/cas/config/pwe.properties
       JAVA_OPTS: -Xmx1g -Xms128m -Xss256k
     depends_on:
+      nginx:
+        condition: service_started
       mysql:
         condition: service_healthy
       mongodb:
@@ -355,7 +362,6 @@ services:
       - IPC_LOCK
     volumes:
       - elasticsearch:/usr/share/elasticsearch/data
-    restart: on-failure
     ports:
       - "9200:9200"
       - "9300:9300"
@@ -367,7 +373,6 @@ services:
 
   namematching:
     image: atlasoflivingaustralia/ala-namematching-service:v20210811-3
-    restart: on-failure
     ports:
       - "9179:9179"
 

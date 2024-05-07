@@ -56,8 +56,8 @@ ala:
 
 supportEmail: support@la-flanders.org
 homeUrl: http://la-flanders.org
-mainTitle: Living Atlas of Flanders
-emailSenderTitle: Living Atlas of Flanders
+mainTitle: Vlaams Biodiversiteitsportaal
+emailSenderTitle: Vlaams Biodiversiteitsportaal
 emailSender: support@la-flanders.org
 
 sightings.url: /mine
@@ -82,7 +82,7 @@ bie.searchPath: /search
 # Skin options
 skin.layout: ala-main
 skin.fluidLayout: true
-skin.orgNameLong: Living Atlas of Flanders
+skin.orgNameLong: Vlaams Biodiversiteitsportaal
 skin.orgNameShort: LA Flanders
 skin.favicon: https://raw.githubusercontent.com/living-atlases/artwork/master/favicon.ico
 
