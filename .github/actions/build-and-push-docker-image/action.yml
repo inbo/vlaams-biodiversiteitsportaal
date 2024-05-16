@@ -1,30 +1,8 @@
 name: build-and-push-docker-image
 description: "This action builds a docker image and uploads it to AWS ECR"
 inputs:
-  aws-access-key-id:
-    description: 'The AWS access key ID'
-    required: true
-  aws-secret-access-key:
-    description: 'The AWS access key secret'
-    required: true
-  aws-region:
-    description: 'The AWS region'
-    required: true
-  aws-assume-role-arn:
-    description: 'The ARN of the role to assume'
-    required: false
-  aws-role-session-name:
-    description: 'The name of the role session'
-    required: false
-  aws-ecr-repository-name:
-    description: 'The name of the ECR repository'
-    required: true
-  set-latest-tag:
-    description: 'Tag docker image as latest'
-    required: false
-    default: 'false'
-  context:
-    description: 'Docker build context'
+  name:
+    description: 'Name of the docker image'
     required: false
     default: ''
   build-args:
@@ -50,11 +28,11 @@ runs:
       id: aws-login
       uses: aws-actions/configure-aws-credentials@v4
       with:
-        aws-access-key-id: ${{ inputs.aws-access-key-id }}
-        aws-secret-access-key: ${{ inputs.aws-secret-access-key }}
-        aws-region: ${{ inputs.aws-region }}
-        role-to-assume: ${{ inputs.aws-assume-role-arn }}
-        role-session-name: ${{ inputs.aws-role-session-name }}
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
+#        role-to-assume: ${{ inputs.aws-assume-role-arn }}
+#        role-session-name: ${{ inputs.aws-role-session-name }}
 
     - name: Docker login to Amazon ECR
       id: ecr-login
@@ -64,10 +42,9 @@ runs:
       id: docker-image-name
       shell: bash
       env:
-        ECR_REGISTRY: ${{ steps.ecr-login.outputs.registry }}
-        ECR_REPOSITORY: ${{ inputs.aws-ecr-repository-name }}
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
       run: |
-        echo "name=$ECR_REGISTRY/$ECR_REPOSITORY" >> $GITHUB_OUTPUT
+        echo "image=$ECR_REGISTRY/${{ inputs.name }}" >> $GITHUB_OUTPUT
 
     - name: Checkout Source
       uses: actions/checkout@v4
@@ -79,19 +56,18 @@ runs:
         flavor: |
           latest=false
         images: |
-          ${{ steps.docker-image-name.outputs.name }}
+          ${{ steps.docker-image-name.outputs.image }}
         tags: |
           type=sha
           type=ref,event=branch
           type=semver,pattern={{version}}
           type=semver,pattern={{major}}.{{minor}}
-          type=raw,value=latest,enable=${{ inputs.set-latest-tag}}
 
     - name: Build and push to ECR
       id: build
       uses: docker/build-push-action@v5
       with:
-        context: ${{ inputs.context }}
+        context: ${{ inputs.name }}
         build-args: |
           ${{ inputs.build-args }}
         labels: ${{ steps.docker-metadata.outputs.labels }}
