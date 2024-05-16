@@ -1,0 +1,113 @@
+name: build-and-push-docker-image
+description: "This action builds a docker image and uploads it to AWS ECR"
+inputs:
+  aws-access-key-id:
+    description: 'The AWS access key ID'
+    required: true
+  aws-secret-access-key:
+    description: 'The AWS access key secret'
+    required: true
+  aws-region:
+    description: 'The AWS region'
+    required: true
+  aws-assume-role-arn:
+    description: 'The ARN of the role to assume'
+    required: false
+  aws-role-session-name:
+    description: 'The name of the role session'
+    required: false
+  aws-ecr-repository-name:
+    description: 'The name of the ECR repository'
+    required: true
+  set-latest-tag:
+    description: 'Tag docker image as latest'
+    required: false
+    default: 'false'
+  context:
+    description: 'Docker build context'
+    required: false
+    default: ''
+  build-args:
+    description: 'Build arguments'
+    required: false
+    default: ''
+
+outputs:
+  ecr-image-name:
+    description: 'The name of the ECR image'
+    value: ${{ steps.docker-image-name.outputs.name }}
+  ecr-image-tags:
+    description: 'The tags of the ECR image'
+    value: ${{ steps.docker-metadata.outputs.tags }}
+  ecr-image-labels:
+    description: 'The labels of the ECR image'
+    value: ${{ steps.docker-metadata.outputs.labels }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Login to AWS
+      id: aws-login
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ inputs.aws-access-key-id }}
+        aws-secret-access-key: ${{ inputs.aws-secret-access-key }}
+        aws-region: ${{ inputs.aws-region }}
+        role-to-assume: ${{ inputs.aws-assume-role-arn }}
+        role-session-name: ${{ inputs.aws-role-session-name }}
+
+    - name: Docker login to Amazon ECR
+      id: ecr-login
+      uses: aws-actions/amazon-ecr-login@v2
+
+    - name: Generate full docker image name for ECR Repository
+      id: docker-image-name
+      shell: bash
+      env:
+        ECR_REGISTRY: ${{ steps.ecr-login.outputs.registry }}
+        ECR_REPOSITORY: ${{ inputs.aws-ecr-repository-name }}
+      run: |
+        echo "name=$ECR_REGISTRY/$ECR_REPOSITORY" >> $GITHUB_OUTPUT
+
+    - name: Checkout Source
+      uses: actions/checkout@v4
+
+    - name: Docker meta
+      id: docker-metadata
+      uses: docker/metadata-action@v5
+      with:
+        flavor: |
+          latest=false
+        images: |
+          ${{ steps.docker-image-name.outputs.name }}
+        tags: |
+          type=sha
+          type=ref,event=branch
+          type=semver,pattern={{version}}
+          type=semver,pattern={{major}}.{{minor}}
+          type=raw,value=latest,enable=${{ inputs.set-latest-tag}}
+
+    - name: Build and push to ECR
+      id: build
+      uses: docker/build-push-action@v5
+      with:
+        context: ${{ inputs.context }}
+        build-args: |
+          ${{ inputs.build-args }}
+        labels: ${{ steps.docker-metadata.outputs.labels }}
+        tags: ${{ steps.docker-metadata.outputs.tags }}
+        outputs: type=image,name=${{ steps.docker-image-name.outputs.name }},name-canonical=true,push=true
+
+    - name: Output Step Summary
+      shell: bash
+      run: |
+        echo "# ECR Build Summary" >> $GITHUB_STEP_SUMMARY
+        if [ ${{ job.status }} == "success" ]; then
+          echo "## ECR Build Succeeded :tada:" >> $GITHUB_STEP_SUMMARY
+          echo "ECR Image tags: ${{ steps.docker-metadata.outputs.tags }}" >> $GITHUB_STEP_SUMMARY
+        elif [ ${{ job.status }} == "failure" ]; then
+          echo "## ECR Build Failed :x: " >> $GITHUB_STEP_SUMMARY
+          echo "Check the logs for more details" >> $GITHUB_STEP_SUMMARY
+        else
+            echo "## ECR Build Cancelled :no_entry:" >> $GITHUB_STEP_SUMMARY
+        fi
