@@ -9,6 +9,7 @@ jobs:
   ala-hub:
     runs-on: [ self-hosted ]
     steps:
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/build-and-push-docker-image
         with:
           name: ala-hub
