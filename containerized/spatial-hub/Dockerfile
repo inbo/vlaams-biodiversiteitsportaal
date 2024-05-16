@@ -8,6 +8,7 @@ RUN apt-get update && apt-get -y install \
 WORKDIR /project
 RUN git clone --branch ${VERSION} --depth 1 https://github.com/AtlasOfLivingAustralia/spatial-hub.git /project
 COPY ./i18n/ ./grails-app/i18n/
+COPY ./layouts/* ./grails-app/views/layouts/
 
 RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
     gradle \
@@ -17,13 +18,11 @@ RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
         # -Dorg.gradle.debug=true -Dorg.gradle.debug.suspend=no --debug \
         --parallel
 
-ARG Test=1
-RUN ls -la /project/build/libs/
-
 FROM tomcat:9.0-jdk11-openjdk
 
 ARG VERSION=2.1.0
 
 COPY --from=builder /project/build/libs/project-${VERSION}-plain.war $CATALINA_HOME/webapps/ROOT.war
+
 
 VOLUME /data

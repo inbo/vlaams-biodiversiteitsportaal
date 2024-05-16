@@ -1,4 +1,4 @@
-FROM gradle:7-jdk8 as builder
+FROM gradle:7-jdk11 as builder
 
 ARG VERSION=2.1.2
 
@@ -14,16 +14,42 @@ RUN gradle \
         # -Dorg.gradle.debug=true -Dorg.gradle.debug.suspend=no --debug \
         --parallel
 
-ARG test=1
 RUN ls -la /project/build/libs
 
-# FROM tomcat:9.0-jdk11-openjdk
-FROM tomcat:9.0-jdk8-openjdk
+# FROM openjdk:8 as builder-maxent
+#
+# ARG MAXENT_VERSION=v3.4.3
+#
+# WORKDIR /project
+#
+# RUN apt-get update && apt-get install -y \
+#     make \
+#     zip
+#
+# RUN git clone --branch ${MAXENT_VERSION} --depth 1 https://github.com/mrmaxent/Maxent.git /project
+#
+# RUN make distribution
+
+FROM tomcat:9.0-jdk11-openjdk
 ARG VERSION=2.1.2
+
+ENV UID=1000
+ENV GID=1000
 
 RUN apt-get update && apt-get install -y \
     gettext-base \
     gdal-bin
 
-COPY --from=builder /project/build/libs/spatial-service-${VERSION}.war $CATALINA_HOME/webapps/ws.war
+COPY --from=builder /project/build/libs/project-${VERSION}-plain.war $CATALINA_HOME/webapps/ws.war
+# COPY --from=builder-maxent /project/maxent.jar /maxent.jar
+
+#
+# RUN groupadd -r -g 1000 ala && useradd -u 1000 -g ala ala
+# RUN mkdir /usr/local/tomcat/webapps/ws && chown ala:ala /usr/local/tomcat/webapps/ws
+# USER ala
+
 VOLUME /data
+
+COPY docker-entrypoint.sh /
+ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD []

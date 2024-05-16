@@ -124,8 +124,8 @@ services:
       test: curl --fail --silent http://localhost:8080/actuator/health || exit 1
 
   spatial-service:
-#    build: spatial-service
-    build: /home/stefan/Projects/Inbo/ala/spatial-service
+    build: spatial-service
+    #    build: /home/stefan/Projects/Inbo/ala/spatial-service
     ports:
       - "8011:8080"
     volumes:
@@ -234,22 +234,23 @@ services:
     volumes:
       - ./db-init/postgis:/docker-entrypoint-initdb.d
       - postgis:/var/lib/postgresql/data
+    #      - ./db-init/postgis/pg_hba.conf:/var/lib/postgresql/data/pg_hba.conf
     environment:
       - POSTGRES_PASSWORD=my-super-secret-password
       - POSTGRES_USER=postgres
       - POSTGRES_DB=postgres
+      - POSTGRES_HOST_AUTH_METHOD=md5
+      - POSTGRES_INITDB_ARGS=--auth-host=md5
     healthcheck:
       test: pg_isready
 
   geoserver:
-    # image: kartoza/geoserver:2.23.2
-    build:
-      context: ./spatial-service/geoserver
+    image: kartoza/geoserver:2.23.2
     volumes:
       #geoserver data folder
       # - ./spatial/geoserver/geoserver-files:/data/geoserver-files/
       #Spatials service data folder. If they are both in the same machine, some layers are not needed to be uploaded.
-      - spatial-data:/data/spatial-data
+      - spatial-data:/data/spatial-data:ro
       - geoserver-data:/data/geoserver_data_dir
     ports:
       - "8079:8080"
@@ -307,21 +308,21 @@ services:
     volumes:
       - cassandra:/var/lib/cassandra
     healthcheck:
-      test: ["CMD-SHELL", "[ $$(nodetool statusgossip) = running ]"]
+      test: [ "CMD-SHELL", "[ $$(nodetool statusgossip) = running ]" ]
 
   cassandra-load-keyspace:
-      image: cassandra:3
-      depends_on:
-        cassandradb:
-          condition: service_healthy
-      volumes:
-        - ./db-init/cassandra:/docker-entrypoint-initdb.d
-      command: bash -c "cqlsh cassandradb -f /docker-entrypoint-initdb.d/*.cql"
+    image: cassandra:3
+    depends_on:
+      cassandradb:
+        condition: service_healthy
+    volumes:
+      - ./db-init/cassandra:/docker-entrypoint-initdb.d
+    command: bash -c "cqlsh cassandradb -f /docker-entrypoint-initdb.d/*.cql"
 
   solr:
     image: solr:8
     ports:
-    - "8983:8983"
+      - "8983:8983"
     volumes:
       - ./solr-data:/var/solr/data
     environment:
@@ -330,7 +331,7 @@ services:
       test: [ "CMD-SHELL", "curl -sf http://localhost:8983/solr/bie/admin/ping | grep '\"status\":\"OK\"'" ]
     networks:
       default:
-        aliases: 
+        aliases:
           - index.la-flanders.org
 
   mailhog:
@@ -379,10 +380,10 @@ services:
   nginx:
     image: nginx
     volumes:
-    - ./nginx/conf.d:/etc/nginx/conf.d
-    - ../generated/la-flanders-branding/public:/srv/branding.la-flanders.org/www/
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ../generated/la-flanders-branding/public:/srv/branding.la-flanders.org/www/
     ports:
-    - "80:80"
+      - "80:80"
     environment:
       NGINX_HOST: la-flanders.org
       NGINX_PORT: 80
@@ -390,7 +391,7 @@ services:
       test: service nginx status || exit 1
     networks:
       default:
-        aliases: 
+        aliases:
           - auth.la-flanders.org
           - branding.la-flanders.org
           - collections.la-flanders.org

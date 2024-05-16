@@ -175,7 +175,7 @@ ala:
     bieSearchPath: search
     userDetailsUrl: http://auth.la-flanders.org/userdetails/
     orgShortName: ALA
-    orgLongName: Atlas Of Living Flanders
+    orgLongName: Vlaams Biodiversiteitsportaal
     orgNameKey: ala
     cacheDuration: 1800000 # P30m
 debug: false

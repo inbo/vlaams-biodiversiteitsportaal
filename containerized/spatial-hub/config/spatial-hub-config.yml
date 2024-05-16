@@ -56,8 +56,8 @@ security:
   core:
     authCookieName: ALA-Auth
   cookie:
-    enabled: false
-    domain: .la-flanders.org
+    enabled: true
+    domain: la-flanders.org
 
 webservice:
   jwt: true
@@ -165,11 +165,14 @@ sessions:
 
 admin_role: ROLE_ADMIN
 
-#skin.orgNameLong: "Vlaams Biodiversiteitsportaal"
-#skin.orgNameShort: "LA Flanders"
-#skin.layout: "portal"
 skin:
-  layout: generic
+  orgNameLong: "Vlaams Biodiversiteitsportaal"
+  orgNameShort: "LA Flanders"
+  header: true
+  footer: true
+  fluidLayout: true
+  layout: vlaanderen
+#  layout: 'main'
 
 grails.controllers.upload.maxFileSize: 614400000
 grails.controllers.upload.maxRequestSize: 614400000

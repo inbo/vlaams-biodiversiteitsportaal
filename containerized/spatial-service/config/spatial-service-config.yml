@@ -16,19 +16,21 @@ spatialHubUrl: http://spatial.la-flanders.org/
 #
 
 geoserver:
-  url: 'http://geoserver:8080/geoserver'
+  url: 'http://spatial.la-flanders.org/geoserver'
   username: 'admin'
   password: 'geoserver'
   canDeploy: true
 
   spatialservice:
     #if colocated, geoserver will load data from spatial service data folder, /data/spatial-data by default
-    colocated: true
+    colocated: true # problematic with permissions and stuff
   remote:
     #In some cases, geoserver need to know its data folder.
     geoserver_data_dir: "/data/geoserver_data_dir"
 
 dataSource:
+  driverClassName: org.postgresql.Driver
+  dialect: org.hibernate.spatial.dialect.postgis.PostgisPG9Dialect
   url: 'jdbc:postgresql://postgis:5432/layersdb'
   username: postgres
   password: my-super-secret-password
@@ -64,8 +66,9 @@ layers_store:
 headerAndFooter:
   baseURL: 'http://branding.la-flanders.org'
 skin:
-  orgNameLong: 'Atlas of Living Flanders'
+  orgNameLong: 'Vlaams Biodiversiteitsportaal'
   orgNameShort: 'ALF'
+
 
 apiKeyCheckUrlTemplate: 'http://auth.la-flanders.org/apikey/ws/check?apikey={0}'
 spatialService:
