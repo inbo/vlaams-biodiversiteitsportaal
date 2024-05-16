@@ -38,18 +38,24 @@ runs:
       id: ecr-login
       uses: aws-actions/amazon-ecr-login@v2
 
+    - name: Checkout Source
+      uses: actions/checkout@v4
+
     - name: Generate full docker image name for ECR Repository
       id: docker-image-name
       shell: bash
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
       run: |
+        CONTEXT_HASH="${{ hashFiles(format('./{0}', inputs.name)) }}"
+        IMAGE="$ECR_REGISTRY/${{ inputs.name }}"
+        EXISTS=$(docker manifest inspect $IMAGE:$CONTEXT_HASH > /dev/null && echo 'true' || echo 'false')
         echo "image=$ECR_REGISTRY/${{ inputs.name }}" >> $GITHUB_OUTPUT
-
-    - name: Checkout Source
-      uses: actions/checkout@v4
+        echo "context_hash=$CONTEXT_HASH" >> $GITHUB_OUTPUT
+        echo "image_exists_on_registry=$EXISTS" >> $GITHUB_OUTPUT
 
     - name: Docker meta
+      if : ( steps.docker-image-name.outputs.image_exists_on_registry  != 'true' )
       id: docker-metadata
       uses: docker/metadata-action@v5
       with:
@@ -59,11 +65,13 @@ runs:
           ${{ steps.docker-image-name.outputs.image }}
         tags: |
           type=sha
+          type=raw,value=${{ steps.docker-image-name.outputs.context_hash }}
           type=ref,event=branch
           type=semver,pattern={{version}}
           type=semver,pattern={{major}}.{{minor}}
 
     - name: Build and push to ECR
+      if : ( steps.docker-image-name.outputs.image_exists_on_registry  != 'true' )
       id: build
       uses: docker/build-push-action@v5
       with:
