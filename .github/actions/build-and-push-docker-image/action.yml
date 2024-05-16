@@ -49,10 +49,15 @@ runs:
       run: |
         CONTEXT_HASH="${{ hashFiles(format('./{0}', inputs.name)) }}"
         IMAGE="$ECR_REGISTRY/${{ inputs.name }}"
-        EXISTS=$(docker manifest inspect $IMAGE:$CONTEXT_HASH > /dev/null && echo 'true' || echo 'false')
-        echo "image=$ECR_REGISTRY/${{ inputs.name }}" >> $GITHUB_OUTPUT
+        EXISTS=$(docker manifest inspect $IMAGE:$CONTEXT_HASH 2>&1 > /dev/null && echo 'true' || echo 'false')
+        VERSION=$(sed -n '/^ARG VERSION=/ {s///p;q;}' ./${{ inputs.name }}/Dockerfile)
+        
+        echo "Image $IMAGE:$VERSION with context $CONTEXT_HASH exists=$EXISTS"
+        
+        echo "image=$IMAGE" >> $GITHUB_OUTPUT
         echo "context_hash=$CONTEXT_HASH" >> $GITHUB_OUTPUT
         echo "image_exists_on_registry=$EXISTS" >> $GITHUB_OUTPUT
+        echo "version=$VERSION" >> $GITHUB_OUTPUT
 
     - name: Docker meta
       if : ( steps.docker-image-name.outputs.image_exists_on_registry  != 'true' )
@@ -64,11 +69,8 @@ runs:
         images: |
           ${{ steps.docker-image-name.outputs.image }}
         tags: |
-          type=sha
           type=raw,value=${{ steps.docker-image-name.outputs.context_hash }}
-          type=ref,event=branch
-          type=semver,pattern={{version}}
-          type=semver,pattern={{major}}.{{minor}}
+          type=raw,value=${{ steps.docker-image-name.outputs.version }}
 
     - name: Build and push to ECR
       if : ( steps.docker-image-name.outputs.image_exists_on_registry  != 'true' )
