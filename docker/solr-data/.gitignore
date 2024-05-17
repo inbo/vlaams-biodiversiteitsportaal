@@ -7,10 +7,16 @@
 !/bie/solrconfig.xml
 !/bie/schema.xml
 !/bie/core.properties
+!/bie/bie_stopwords.txt
+!/bie/protwords.txt
+!/bie/synonyms.txt
+!/bie/stopwords.txt
+!/bie/spellings.txt
 
 /bie/conf/*
 !/bie/conf
 !/bie/conf/elevate.xml
+!/bie/conf/mapping-ISOLatin1Accent.txt
 
 /biocache/*
 !/biocache
