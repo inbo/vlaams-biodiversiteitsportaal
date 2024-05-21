@@ -1,0 +1,132 @@
+logging:
+    config: /data/userdetails/config/logback.xml
+management:
+    health:
+        mongo:
+            enabled: false
+    security:
+        enabled: true
+        roles: ACTUATOR
+    endpoint:
+        health:
+            enabled: true
+            defaults:
+                enabled: true
+            jdbc:
+                enabled: true
+            redis:
+                enabled: false
+            mongo:
+                enabled: false
+    endpoints:
+        web:
+            exposure:
+                include: health
+security:
+    cas:
+        enabled: true
+        casServerName: http://auth.la-flanders.org
+        casServerUrlPrefix: ${security.cas.casServerName}/cas
+        loginUrl: ${security.cas.casServerUrlPrefix}/login
+        logoutUrl: ${security.cas.casServerUrlPrefix}/logout
+        appServerName: http://auth.la-flanders.org
+        authCookieName: ALA-Auth
+    jwt:
+        clientId: userdetails
+        discoveryUri: http://auth.la-flanders.org/cas/oidc/.well-known
+    oidc:
+        clientId: userdetails
+        discoveryUri: http://auth.la-flanders.org/cas/oidc/.well-known
+        enabled: false
+        secret: userdetails-oidc-super-secret
+    user:
+        name: admin
+        password: secret
+        role:
+            - ACTUATOR
+    basic:
+        enabled: true
+        authorizeMode: role
+        realm: ALA CAS
+        path:
+            - /status/**
+endpoints:
+    enabled: true
+    health:
+        sensitive: false
+serverURL: http://auth.la-flanders.org
+serverName: http://auth.la-flanders.org
+grails:
+    serverURL: http://auth.la-flanders.org/userdetails
+    mail:
+        host: mail.la-flanders.org
+        port: 1025
+        username: userdetails
+        password: my-super-secret-password
+server:
+    port: 9001
+    servlet:
+        contextPath: /userdetails
+redirectAfterFirstLogin: ${grails.serverURL}/myprofile
+dataSource:
+    dbCreate: none
+    url: jdbc:mysql://mysql:3306/cas?serverTimezone=Europe/Brussels&zeroDateTimeBehavior=convertToNull&characterEncoding=UTF-8&useSSL=False&allowPublicKeyRetrieval=true
+    username: cas
+    password: my-super-secret-password
+oauth:
+    providers: null
+password:
+    encoder: bcrypt
+bcrypt:
+    strength: 10
+registration:
+    showAlaMessage: false
+    resetPasswordArticle: https://support.ala.org.au/support/solutions/articles/6000194958-my-username-password-isn-t-working-or-i-can-t-remember-my-username-password
+    alertArticle: https://support.ala.org.au/support/solutions/articles/6000195858-how-do-i-manage-email-alerts-from-the-ala
+    activationArticle: https://support.ala.org.au/support/solutions/articles/6000195196-i-created-an-account-but-did-not-receive-the-account-activation-email
+recaptcha:
+    baseUrl: https://www.google.com/recaptcha/api/
+    siteKey: null
+    secretKey: null
+ala:
+    baseURL: http://la-flanders.org
+supportEmail: support@la-flanders.org
+homeUrl: http://la-flanders.org
+homeLogoUrl: https://www.ala.org.au/app/uploads/2020/06/ALA_Logo_Inline_RGB-300x63.png
+mainTitle: Vlaams Biodiversiteitsportaal
+emailSenderTitle: Vlaams Biodiversiteitsportaal
+emailSender: support@la-flanders.org
+sightings.url: null
+spatial.url: http://spatial.la-flanders.org?tool=log
+volunteer.url: /user/myStats
+lists.url: http://lists.la-flanders.org/speciesList/list
+biocache.search.baseUrl: http://records.la-flanders.org/occurrences/search
+biocache.search.url: http://records.la-flanders.org/occurrences/search/?q=*%3A*&fq=assertion_user_id%3A
+biocache.myDownloads.url: http://records.la-flanders.org/download/myDownloads/
+myData.url: http://la-flanders.org/tempDataResource/myData
+alerts.url: null
+userDetails:
+    url: http://auth.la-flanders.org/userdetails/
+headerAndFooter:
+    baseURL: http://branding.la-flanders.org
+    version: 2
+ala.baseURL: http://la-flanders.org
+bie.baseURL: http://species.la-flanders.org
+bie.searchPath: /search
+skin.layout: ala-main
+skin.fluidLayout: true
+skin.orgNameLong: Vlaams Biodiversiteitsportaal
+skin.orgNameShort: LA Flanders
+skin.favicon: https://raw.githubusercontent.com/living-atlases/artwork/master/favicon.ico
+skin.homeUrl: http://la-flanders.org
+attributes:
+    affiliations:
+        enabled: false
+webservice.apiKey: e8dcf74d-bcef-41bb-8738-48f0ff0a5b75
+apiKey.showLink: false
+apiKey.showSecret: false
+admin.export.csv.primary.fields: id,userName,firstName,lastName,email,activated,locked,created
+spring:
+    session:
+        store-type: none
+        privacyPolicy: null

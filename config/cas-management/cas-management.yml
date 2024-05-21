@@ -1,0 +1,185 @@
+server:
+    port: 8070
+    ssl:
+        enabled: false
+    servlet:
+        context-path: /cas-management
+    forward-headers-strategy: none
+    tomcat:
+        remote-ip:
+            protocol-header: x-forwarded-proto
+            port-header: x-forwarded-port
+            remote-ip-header: x-forwarded-for
+            protocol-header-https-value: https
+            internal-proxies: .*
+    context-path: /cas-management
+cas:
+    server:
+        name: http://auth.la-flanders.org
+        prefix: ${cas.server.name}/cas
+    host:
+        name: la-flanders.org
+    authn:
+        accept:
+            users: ""
+        attributeRepository:
+            merger: MERGE
+            defaultAttributesToRelease: id,userid,givenName,sn,firstname,lastname,email,affiliation,organisation,city,state,country,role,authority,telephone,primaryUserType,secondaryUserType,legacyPassword
+            stubAttributes: []
+            jdbc:
+                - driverClass: com.mysql.jdbc.Driver
+                  requireAllAttributes: false
+                  caseCanonicalization: NONE
+                  queryType: AND
+                  singleRow: false
+                  sql: call sp_get_user_attributes(?);
+                  username: username
+                  columnMappings:
+                      key: value
+                  attributes:
+                      userid: userid
+                      id: id
+                      givenName: givenName
+                      firstname: firstname
+                      sn: sn
+                      lastname: lastname
+                      email: email
+                      authority: authority
+                      role: role
+                      affiliation: affiliation
+                      organisation: organisation
+                      city: city
+                      state: state
+                      country: country
+                      telephone: telephone
+                      primaryUserType: primaryUserType
+                      secondaryUserType: secondaryUserType
+                - dataSourceName: ""
+                  password: my-super-secret-password
+                  url: jdbc:mysql://mysql:3306/cas?serverTimezone=Europe/Brussels&zeroDateTimeBehavior=convertToNull
+                  user: cas
+        oauth:
+            accessToken:
+                maxTimeToLiveInSeconds: PT28800S
+                timeToKillInSeconds: PT7200S
+            refreshToken:
+                timeToKillInSeconds: P14D
+        oidc:
+            discovery:
+                scopes:
+                    - openid
+                    - profile
+                    - email
+                    - offline_access
+                    - ala
+                    - roles
+                claims:
+                    - sub
+                    - name
+                    - preferred_username
+                    - family_name
+                    - given_name
+                    - middle_name
+                    - given_name
+                    - profile
+                    - picture
+                    - nickname
+                    - website
+                    - zoneinfo
+                    - locale
+                    - updated_at
+                    - birthdate
+                    - email
+                    - email_verified
+                    - phone_number
+                    - phone_number_verified
+                    - address
+                    - organisation
+                    - role
+                    - authority
+                    - city
+                    - state
+                    - country
+                    - primary_user_type
+                    - secondary_user_type
+            userDefinedScopes:
+                ala: organisation, city, state, country, primary_user_type, secondary_user_type
+                roles: role, authority
+            claimsMap:
+                sub: userid
+                name: displayName
+                given_name: givenName
+                family_name: familyName
+                email: email
+                primary_user_type: primaryUserType
+                secondary_user_type: secondaryUserType
+    service-registry:
+        core:
+            init-from-json: false
+        json:
+            watcher-enabled: false
+        mongo:
+            host: mongodb
+            collection: services
+            databaseName: cas-service-registry
+            userId: cas
+            password: my-super-secret-password
+            client-uri: mongodb://services:my-super-secret-password@mongodb:27017/cas-service-registry?retryWrites=true&ssl=false
+    serviceRegistry:
+        mongo:
+            authenticationDatabaseName: ""
+            clientUri: mongodb://services:my-super-secret-password@mongodb:27017/cas-service-registry?retryWrites=true&ssl=false
+            collection: services
+            databaseName: cas-service-registry
+            host: mongodb
+            password: my-super-secret-password
+            port: 27017
+            replicaSet: ""
+            sslEnabled: false
+            userId: services
+mgmt:
+    server-name: http://auth.la-flanders.org/cas-management
+    enable-discovery-endpoint-call: true
+    version-control:
+        enabled: false
+    delegated:
+        enabled: false
+    user-properties-file: classpath:users.properties
+    lucene-index-dir: /data/cas-management/lucene
+    adminRoles:
+        - ROLE_ADMIN
+    authzAttributes:
+        - role
+    serverName: http://auth.la-flanders.org/cas-management
+    userPropertiesFile: file:///data/cas-management/config/users.properties
+ala:
+    skin:
+        baseUrl: http://www.la-flanders.org/
+        headerFooterUrl: ${ala.skin.baseUrl}commonui-bs3/
+        favIconBaseUrl: ${ala.skin.baseUrl}wp-content/themes/ala-wordpress-theme/img/favicon/
+        bieBaseUrl: http://bie.la-flanders.org/
+        bieSearchPath: search
+        userDetailsUrl: http://auth.la-flanders.org/userdetails/
+        orgShortName: ALA
+        orgLongName: Vlaams Biodiversiteitsportaal
+        orgNameKey: ala
+        cacheDuration: 1800000
+debug: false
+spring:
+    autoconfigure:
+        exclude: |
+            org.apereo.cas.mgmt.config.CasManagementSamlConfiguration
+    session:
+        store-type: none
+    thymeleaf:
+        mode: HTML
+logging:
+    config: file:/data/cas-management/config/log4j2.xml
+management:
+    endpoint:
+        health:
+            enabled: true
+    endpoints:
+        web:
+            exposure:
+                include: health

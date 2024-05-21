@@ -1,0 +1,223 @@
+ROLE_ADMIN: ROLE_ADMIN
+ROLE_EDITOR: ROLE_EDITOR
+ala:
+    baseURL: http://la-flanders.org
+alertUrl: ""
+alertsUrl: ""
+api_key: e8dcf74d-bcef-41bb-8738-48f0ff0a5b75
+bie:
+    baseURL: http://species.la-flanders.org
+    searchPath: /search
+biocacheServicesUrl: http://records-ws.la-flanders.org
+biocacheUiURL: http://records.la-flanders.org
+citation:
+    link:
+        template: "For more information: @link@"
+    rights:
+        template: ""
+    template: Records provided by @entityName@, accessed through ALA website.
+collectionsMap:
+    centreMapLat: 16.942
+    centreMapLon: 1.261
+    defaultZoom: 3
+dataSource:
+    password: my-super-secret-password
+    url: jdbc:mysql://mysql:3306/collectory?autoReconnect=true&connectTimeout=0&useUnicode=true&characterEncoding=UTF-8&allowPublicKeyRetrieval=true&useSSL=False&serverTimezone=Europe/Paris
+    username: root
+defaultLocale: en
+disableAlertLinks: true
+disableCAS: false
+disableLoggerLinks: false
+disableOverviewMap: false
+eml:
+    administrativeArea: ACT
+    city: Camberra
+    country: Australia
+    deliveryPoint: Clunies Ross Street
+    electronicMailAddress: support@la-flanders.org
+    organizationName: Vlaams Biodiversiteitsportaal
+    postalCode: 2601
+gbifApiPassword: ""
+gbifApiUrl: https://api.gbif.org/v1/
+gbifApiUser: ""
+gbifDefaultEntityCountry: BEL
+gbifEndorsingNodeKey: ""
+gbifExportUrlBase: ""
+gbifInstallationKey: ""
+gbifLicenceMappingUrl: file:///data/ala-collectory/config/default-gbif-license-mapping.json
+gbifOrphansPublisherID: ""
+gbifRegistrationDryRun: true
+gbifRegistrationEnabled: false
+gbifWebsite: https://www.gbif.org
+google:
+    apikey: get-a-google-api-key
+grails:
+    controllers:
+        upload:
+            maxFileSize: 107374182400
+            maxRequestSize: 107374182400
+    cors:
+        enabled: true
+    resources:
+        adhoc:
+            patterns:
+                "['/images/*', '/data/*', '/img/*', '/theme/default/*', '/css/*',
+                '/js/*', '/plugins/*' ]"
+    serverURL: http://collections.la-flanders.org
+headerAndFooter:
+    baseURL: http://branding.la-flanders.org
+    version: 2
+isPipelinesCompatible: false
+loggerURL: http://logger.la-flanders.org/service
+management:
+    endpoint:
+        health:
+            enabled: true
+    endpoints:
+        web:
+            exposure:
+                include: health
+mapboxAccessToken: RequestAMapBoxKey
+openapi:
+    components:
+        security:
+            oauth2:
+                baseUrl: http://auth.la-flanders.org/cas/oidc
+    contact:
+        email: support@la-flanders.org
+    terms: ""
+orgNameLong: Vlaams Biodiversiteitsportaal
+projectName: Vlaams Biodiversiteitsportaal
+projectNameShort: LA Flanders
+regionName: Australia
+repository:
+    location:
+        images: /data/ala-collectory/data
+resource:
+    gbifExport:
+        url:
+            template: http://records.la-flanders.org/archives/gbif/@UID@/@UID@.zip
+    publicArchive:
+        url:
+            template: http://records.la-flanders.org/archives/gbif/@UID@/@UID@.zip
+rifcs:
+    excludeBounds: true
+security:
+    apiKey:
+        auth:
+            serviceUrl: http://auth.la-flanders.org/apikey/
+    apikey:
+        check:
+            serviceUrl: http://auth.la-flanders.org/apikey/ws/check?apikey=
+        checkEnabled: true
+        enabled: true
+        serviceUrl: http://auth.la-flanders.org/apikey/
+        userdetails:
+            serviceUrl: http://auth.la-flanders.org/userdetails/
+    cas:
+        appServerName: http://collections.la-flanders.org
+        authCookieName: ALA-Auth
+        authenticateOnlyIfLoggedInFilterPattern: /public/show/*
+        bypass: false
+        casServerLoginUrl: http://auth.la-flanders.org/cas/login
+        casServerLogoutUrl: http://auth.la-flanders.org/cas/logout
+        casServerName: http://auth.la-flanders.org
+        casServerUrlPrefix: http://auth.la-flanders.org/cas
+        contextPath: ""
+        enabled: true
+        loginUrl: http://auth.la-flanders.org/cas/login
+        logoutUrl: http://auth.la-flanders.org/cas/logout
+        uriExclusionFilterPattern: /images.*,/css.*,/js.*
+        uriFilterPattern: /admin.*,/admin/.*,/admin/.*/.*,/collection.*,/institution.*,/contact.*,/reports.*,/providerCode.*,/providerMap.*,/dataProvider.*,/dataResource.*,/dataHub.*,/manage/.*,/ws/ipt/scan/.*,/alaAdmin.*
+    jwt:
+        clientId: collections
+        discoveryUri: http://auth.la-flanders.org/cas/oidc/.well-known
+    oidc:
+        clientId: collections
+        discoveryUri: http://auth.la-flanders.org/cas/oidc/.well-known
+        enabled: false
+        secret: collections-oidc-super-secret
+serverName: http://collections.la-flanders.org
+showExtraInfoInDataSetsView:
+    enabled: "true "
+    relativeTime: true
+skin:
+    favicon: https://raw.githubusercontent.com/living-atlases/artwork/master/favicon.ico
+    homeUrl: http://la-flanders.org
+    orgNameLong: Vlaams Biodiversiteitsportaal
+    orgNameShort: LA Flanders
+    orgSupportEmail: support@la-flanders.org
+    taxaLinks:
+        baseUrl: http://species.la-flanders.org/species/
+spatial:
+    baseURL: http://spatial.la-flanders.org
+speciesListToolUrl: http://lists.la-flanders.org/speciesListItem/list/
+suitableFor: '[{"spListNational":"Species list national"}, {"spListState":
+    "Species list state"}, {"spListGreaterThan1000": "Species list >1000km
+    radius"}, {"spList100to1000": "Species list 100-1000km radius"},
+    {"spList10to100":"Species list 10k to 100km radius"},
+    {"spListLessThan10":"Species list <10km radius"},
+    {"speciesDistribution":"Defining a species distribution"},
+    {"quantifyAbundance":"Quantifying abundance at a point in time"},
+    {"quantifyChange": "Quantifying change over time"}, {"other":"Other"}]'
+uploadExternalUrlPath: /upload/
+uploadFilePath: /data/ala-collectory/upload/
+useGbifDoi: false
+userDetails:
+    url: http://auth.la-flanders.org/userdetails/
+userdetails:
+    api:
+        url: http://auth.la-flanders.org/userdetails/
+    url: http://auth.la-flanders.org/userdetails/
+    web:
+        url: http://auth.la-flanders.org/userdetails/
+webservice:
+    client-id: ""
+    client-secret: ""
+    jwt: false
+    jwt-scopes: ""
+dataResource:
+    resourceTypeList:
+        - records
+        - website
+        - document
+        - uploads
+        - species-list
+        - publications
+        - events
+    contentTypesList:
+        - authoritative
+        - behaviour
+        - citizen science
+        - commercial uses
+        - common names
+        - conservation management
+        - conservation status
+        - description
+        - distribution maps
+        - distribution text
+        - Barcoding DNA
+        - Genomic DNA
+        - Environmental DNA
+        - feeding and diet
+        - habitat
+        - human interaction
+        - identification keys
+        - images
+        - lifecycle
+        - molecular
+        - movies
+        - pest management
+        - pest status
+        - point occurrence data
+        - population
+        - references
+        - reproduction
+        - scientific names
+        - sensitive species lists
+        - similar species
+        - sound
+        - species interactions
+        - species list
+        - taxonomy
+        - threats

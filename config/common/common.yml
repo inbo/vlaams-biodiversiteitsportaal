@@ -1,0 +1,27 @@
+# Header and footer
+headerAndFooter:
+  baseURL: http://branding.la-flanders.org
+  version: 2
+
+# Skin and layout
+skin:
+  homeUrl: http://la-flanders.org
+  orgNameLong: Vlaams Biodiversiteitsportaal
+  fluidLayout: true
+  orgNameShort: VlBiDiP
+
+# Healthcheck endpoint
+management:
+  endpoint:
+    health:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health
+
+environments:
+    production:
+      logging:
+        config: /config/common/logback-colorized-terminal.xml
+#        config: /config/common/logback-json.xml
