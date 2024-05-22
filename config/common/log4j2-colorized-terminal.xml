@@ -2,7 +2,7 @@
 <Configuration>
     <Appenders>
         <Console name="console" target="SYSTEM_OUT">
-            <PatternLayout pattern="[%date] %highlight([%level]) %cyan([%logger{10} %file:%line]) %msg%n"/>
+            <PatternLayout pattern="[%date] %highlight{[%level]} %style{[%logger{10} %file:%line]}{cyan} %msg%n"/>
         </Console>
     </Appenders>
     <Loggers>

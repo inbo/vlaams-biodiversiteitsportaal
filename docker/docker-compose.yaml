@@ -7,7 +7,7 @@ services:
     environment:
       JAVA_OPTS: >-
         -Xms128m -Xmx256m 
-        -Dspring.config.location=file:/config/common/common.yml,file:/config/ala-hub/ala-hub.yml
+        -Dspring.config.location=file:/config/config/common/common.yml,file:/config/config/ala-hub/ala-hub.yml
     volumes:
       - ../config:/config/config:ro
     depends_on:
@@ -24,7 +24,7 @@ services:
     environment:
       JAVA_OPTS: >-
         -Xms128m -Xmx256m 
-        -Dspring.config.location=file:/config/common/common.yml,file:/config/bie-hub/bie-hub.yml
+        -Dspring.config.location=file:/config/config/common/common.yml,file:/config/config/bie-hub/bie-hub.yml
     volumes:
       - ../config:/config/config:ro
     depends_on:
@@ -41,7 +41,7 @@ services:
     environment:
       JAVA_OPTS: >-
         -Xms128m -Xmx256m 
-        -Dspring.config.location=file:/config/common/common.yml,file:/config/bie-index/bie-index.yml
+        -Dspring.config.location=file:/config/config/common/common.yml,file:/config/config/bie-index/bie-index.yml
     volumes:
       - ../config:/config/config:ro
     depends_on:
@@ -60,7 +60,7 @@ services:
     environment:
       JAVA_OPTS: >-
         -Xms128m -Xmx256m 
-        -Dspring.config.location=file:/config/common/common.yml,file:/config/biocache-service/biocache-service.yml
+        -Dspring.config.location=file:/config/config/common/common.yml,file:/config/config/biocache-service/biocache-service.yml
       BIOCACHE_MEMORY_OPTS: -Xmx1g -Xms1g
     volumes:
       - ../config:/config/config:ro
@@ -78,13 +78,13 @@ services:
     ports:
       - "9000:8080"
     command:
-      - --spring.config.additional-location=file:/config/common/common.yml,file:/config/cas/cas.yml
+      - --spring.config.additional-location=file:/config/config/common/common.yml,file:/config/config/cas/cas.yml
     environment:
       DOCKERIZE_OPTS: ""
       ALA_PASSWORD_PROPERTIES: /etc/cas/config/pwe.properties
       JAVA_OPTS: >-
         -Xms128m -Xmx256m 
-        -Dspring.config.location=file:/config/common/common.yml,file:/config/cas/cas.yml
+        -Dspring.config.location=file:/config/config/common/common.yml,file:/config/config/cas/cas.yml
         -Dcas.standalone.configurationDirectory=/config/cas 
         -Dala.password.properties=/config/cas/pwe.properties
     volumes:
@@ -107,11 +107,11 @@ services:
     ports:
       - "9002:8080"
     command:
-      - --spring.config.additional-location=file:/config/common/common.yml,file:/config/cas-apikey/cas-apikey.yml
+      - --spring.config.additional-location=file:/config/config/common/common.yml,file:/config/config/cas-apikey/cas-apikey.yml
     environment:
       JAVA_OPTS: >-
         -Xms128m -Xmx256m 
-        -Dspring.config.location=file:/config/common/common.yml,file:/config/cas-apikey/cas-apikey.yml
+        -Dspring.config.location=file:/config/config/common/common.yml,file:/config/config/cas-apikey/cas-apikey.yml
     volumes:
       - ../config:/config/config:ro
       - ./cas-apikey/keystore:/etc/cas:ro
@@ -130,11 +130,11 @@ services:
       - "8070:8080"
       - "8443:8443"
     command:
-      - --spring.config.additional-location=file:/config/common/common.yml,file:/config/cas-management/cas-management.yml
+      - --spring.config.additional-location=file:/config/config/common/common.yml,file:/config/config/cas-management/cas-management.yml
     environment:
       JAVA_OPTS: >-
         -Xms128m -Xmx256m 
-        -Dspring.config.location=file:/config/common/common.yml,file:/config/cas-management/cas-management.yml
+        -Dspring.config.location=file:/config/config/common/common.yml,file:/config/config/cas-management/cas-management.yml
     volumes:
       - ../config:/config/config:ro
       # - ./cas/config:/data/cas/config:ro
@@ -160,7 +160,7 @@ services:
     environment:
       JAVA_OPTS: >-
         -Xms128m -Xmx256m 
-        -Dspring.config.location=file:/config/common/common.yml,file:/config/collectory/collectory.yml
+        -Dspring.config.location=file:/config/config/common/common.yml,file:/config/config/collectory/collectory.yml
     volumes:
       - ../config:/config/config:ro
       - ./collections/taxa:/data/collectory/taxa
@@ -181,7 +181,7 @@ services:
     environment:
       JAVA_OPTS: >-
         -Xms128m -Xmx256m 
-        -Dspring.config.location=file:/config/common/common.yml,file:/config/species-list/species-list.yml
+        -Dspring.config.location=file:/config/config/common/common.yml,file:/config/config/species-list/species-list.yml
     volumes:
       - ../config:/config/config:ro
       - ../config/species-list:/config/species-list:ro
@@ -254,7 +254,7 @@ services:
     environment:
       JAVA_OPTS: >-
         -Xms128m -Xmx256m 
-        -Dspring.config.location=file:/config/common/common.yml,file:/config/userdetails/userdetails.yml
+        -Dspring.config.location=file:/config/config/common/common.yml,file:/config/config/userdetails/userdetails.yml
     volumes:
       - ../config:/config/config:ro
     depends_on:
