@@ -1,7 +1,7 @@
 info:
   description: ALA CAS Configuration
 server:
-  port: 9000
+  port: 8080
   session:
     timeout: 86400  # seconds, 24 hours
   ssl:

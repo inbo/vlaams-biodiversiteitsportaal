@@ -62,7 +62,7 @@ grails:
         username: userdetails
         password: my-super-secret-password
 server:
-    port: 9001
+    port: 8080
     servlet:
         contextPath: /userdetails
 redirectAfterFirstLogin: ${grails.serverURL}/myprofile

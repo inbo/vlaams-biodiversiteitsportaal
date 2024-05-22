@@ -76,7 +76,7 @@ services:
 #    image: atlasoflivingaustralia/cas:6.5.6-2
     build: cas
     ports:
-      - "9000:9000"
+      - "9000:8080"
     command:
       - --spring.config.additional-location=file:/config/common/common.yml,file:/config/cas/cas.yml
     environment:
@@ -105,7 +105,7 @@ services:
 #    image: atlasoflivingaustralia/apikey:1.7.0
     build: cas-apikey
     ports:
-      - "9002:9002"
+      - "9002:8080"
     command:
       - --spring.config.additional-location=file:/config/common/common.yml,file:/config/cas-apikey/cas-apikey.yml
     environment:
@@ -127,7 +127,7 @@ services:
 #    image: atlasoflivingaustralia/cas-management:6.5.5-2
     build: cas-management
     ports:
-      - "8070:8070"
+      - "8070:8080"
       - "8443:8443"
     command:
       - --spring.config.additional-location=file:/config/common/common.yml,file:/config/cas-management/cas-management.yml
@@ -250,7 +250,7 @@ services:
 #    image: atlasoflivingaustralia/userdetails:3.0.3
     build: userdetails
     ports:
-      - "9001:9001"
+      - "9001:8080"
     environment:
       JAVA_OPTS: >-
         -Xms128m -Xmx256m 

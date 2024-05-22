@@ -39,7 +39,7 @@ serverName: http://auth.la-flanders.org
 grails:
   serverURL: http://auth.la-flanders.org/apikey
 server:
-  port: 9002
+  port: 8080
   contextPath: /apikey
 
 # Data source configuration
