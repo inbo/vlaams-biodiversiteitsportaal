@@ -27,7 +27,7 @@ logging:
 cas:
   server:
     name: http://auth.la-flanders.org
-    prefix: http://auth.la-flanders.org/cas
+#    prefix: http://auth.la-flanders.org/cas
   host:
     name: auth.la-flanders.org
   adminPagesSecurity:
@@ -152,40 +152,40 @@ ala:
 
 # Enable these for Spring Boot actuator (required for Spring Boot Admin client)
 
-endpoints:
-  enabled: true
-  sensitive: "*"
-security:
-  user:
-    name: admin
-    password: secret
-    role:
-      - ACTUATOR
-  basic:
-    enabled: true
-    authorizeMode: role
-    # realm: ALA CAS
-    # path:
-    #   - /**
-management:
-  security:
-    # enabled: false
-    roles: ACTUATOR
-  server:
-    # port: 9000
-    # address: 127.0.0.1
-    ssl:
-      enabled: false
-  endpoint:
-    info:
-      enabled: true
-  endpoints:
-    enabled-by-default: true
-    # ip: .*
-    actuatorEndpointsEnabled: true
-    web:
-      exposure:
-        include: "*"
+#endpoints:
+#  enabled: true
+#  sensitive: "*"
+#security:
+#  user:
+#    name: admin
+#    password: secret
+#    role:
+#      - ACTUATOR
+#  basic:
+#    enabled: true
+#    authorizeMode: role
+#    # realm: ALA CAS
+#    # path:
+#    #   - /**
+#management:
+#  security:
+#    # enabled: false
+#    roles: ACTUATOR
+#  server:
+#    # port: 9000
+#    # address: 127.0.0.1
+#    ssl:
+#      enabled: false
+#  endpoint:
+#    info:
+#      enabled: true
+#  endpoints:
+#    enabled-by-default: true
+#    # ip: .*
+#    actuatorEndpointsEnabled: true
+#    web:
+#      exposure:
+#        include: "*"
 
 spring:
   session:
@@ -194,12 +194,12 @@ spring:
     exclude: >
       org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration,
       org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration
-  boot:
-    admin:
-      server:
-        enabled: true
-        ssl: false
-      url: http://auth.la-flanders.org
+#  boot:
+#    admin:
+#      server:
+#        enabled: true
+#        ssl: false
+#      url: http://auth.la-flanders.org
 
   flyway:
     baselineOnMigrate: false # Create DB from scratch

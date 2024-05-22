@@ -1,47 +1,43 @@
 services:
   ala-hub:
-#    image: atlasoflivingaustralia/ala-hub:7.0.0
+    #    image: atlasoflivingaustralia/ala-hub:7.0.0
     build: ala-hub
     ports:
       - "8012:8080"
-    environment:
-      JAVA_OPTS: >-
-        -Xms128m -Xmx256m 
-        -Dspring.config.location=file:/config/config/common/common.yml,file:/config/config/ala-hub/ala-hub.yml
+    command:
+      - -Xms128m
+      - -Xmx256m
+      - --spring.config.additional-location=file:/config/config/common/common.yml,file:/config/config/ala-hub/ala-hub.yml
     volumes:
       - ../config:/config/config:ro
     depends_on:
       cas:
         condition: service_healthy
-    healthcheck:
-      test: curl --fail --silent http://localhost:8080/actuator/health || exit 1
 
   bie-hub:
-#    image: atlasoflivingaustralia/ala-bie-hub:4.1.0
+    #    image: atlasoflivingaustralia/ala-bie-hub:4.1.0
     build: bie-hub
     ports:
       - "8008:8080"
-    environment:
-      JAVA_OPTS: >-
-        -Xms128m -Xmx256m 
-        -Dspring.config.location=file:/config/config/common/common.yml,file:/config/config/bie-hub/bie-hub.yml
+    command:
+      - -Xms128m
+      - -Xmx256m
+      - --spring.config.additional-location=file:/config/config/common/common.yml,file:/config/config/bie-hub/bie-hub.yml
     volumes:
       - ../config:/config/config:ro
     depends_on:
       cas:
         condition: service_healthy
-    healthcheck:
-      test: curl --fail --silent http://localhost:8080/actuator/health || exit 1
 
   bie-index:
-#    image: atlasoflivingaustralia/bie-index:3.1.0
+    #    image: atlasoflivingaustralia/bie-index:3.1.0
     build: bie-index
     ports:
       - "8007:8080"
-    environment:
-      JAVA_OPTS: >-
-        -Xms128m -Xmx256m 
-        -Dspring.config.location=file:/config/config/common/common.yml,file:/config/config/bie-index/bie-index.yml
+    command:
+      - -Xms128m
+      - -Xmx256m
+      - --spring.config.additional-location=file:/config/config/common/common.yml,file:/config/config/bie-index/bie-index.yml
     volumes:
       - ../config:/config/config:ro
     depends_on:
@@ -49,19 +45,15 @@ services:
         condition: service_healthy
       solr:
         condition: service_healthy
-    healthcheck:
-      test: curl --fail --silent http://localhost:8080/actuator/health || exit 1
 
   biocache-service:
-#    image: atlasoflivingaustralia/biocache-service:3.4.1
+    #    image: atlasoflivingaustralia/biocache-service:3.4.1
     build: biocache-service
     ports:
       - "8003:8080"
-    environment:
-      JAVA_OPTS: >-
-        -Xms128m -Xmx256m 
-        -Dspring.config.location=file:/config/config/common/common.yml,file:/config/config/biocache-service/biocache-service.yml
-      BIOCACHE_MEMORY_OPTS: -Xmx1g -Xms1g
+    command:
+      - -Xms128m -Xmx256m
+      - --spring.config.additional-location=file:/config/config/common/common.yml,file:/config/config/biocache-service/biocache-service.yml
     volumes:
       - ../config:/config/config:ro
     depends_on:
@@ -69,24 +61,21 @@ services:
         condition: service_healthy
       solr:
         condition: service_healthy
-    healthcheck:
-      test: curl --fail --silent http://localhost:8080/actuator/health || exit 1
 
   cas:
-#    image: atlasoflivingaustralia/cas:6.5.6-2
+    #    image: atlasoflivingaustralia/cas:6.5.6-2
     build: cas
     ports:
       - "9000:8080"
     command:
       - --spring.config.additional-location=file:/config/config/common/common.yml,file:/config/config/cas/cas.yml
+      - -Xms128m
+      - -Xmx256m
+      - -Dcas.standalone.configurationDirectory=/config/config/cas
+      - -Dala.password.properties=/config/config/cas/pwe.properties
     environment:
       DOCKERIZE_OPTS: ""
-      ALA_PASSWORD_PROPERTIES: /etc/cas/config/pwe.properties
-      JAVA_OPTS: >-
-        -Xms128m -Xmx256m 
-        -Dspring.config.location=file:/config/config/common/common.yml,file:/config/config/cas/cas.yml
-        -Dcas.standalone.configurationDirectory=/config/cas 
-        -Dala.password.properties=/config/cas/pwe.properties
+      ALA_PASSWORD_PROPERTIES: /config/config/cas/pwe.properties
     volumes:
       - ../config:/config/config:ro
       - cas-shared-conf:/etc/cas
@@ -98,20 +87,16 @@ services:
         condition: service_healthy
       mongodb:
         condition: service_healthy
-    healthcheck:
-      test: curl --fail --silent http://auth.la-flanders.org/cas/oidc/.well-known || exit 1
 
   cas-apikey:
-#    image: atlasoflivingaustralia/apikey:1.7.0
+    #    image: atlasoflivingaustralia/apikey:1.7.0
     build: cas-apikey
     ports:
       - "9002:8080"
     command:
+      - -Xms128m
+      - -Xmx256m
       - --spring.config.additional-location=file:/config/config/common/common.yml,file:/config/config/cas-apikey/cas-apikey.yml
-    environment:
-      JAVA_OPTS: >-
-        -Xms128m -Xmx256m 
-        -Dspring.config.location=file:/config/config/common/common.yml,file:/config/config/cas-apikey/cas-apikey.yml
     volumes:
       - ../config:/config/config:ro
       - ./cas-apikey/keystore:/etc/cas:ro
@@ -120,21 +105,17 @@ services:
         condition: service_healthy
       cas:
         condition: service_healthy
-    healthcheck:
-      test: curl --fail --silent http://localhost:9002/actuator/health || exit 1
 
   cas-management:
-#    image: atlasoflivingaustralia/cas-management:6.5.5-2
+    #    image: atlasoflivingaustralia/cas-management:6.5.5-2
     build: cas-management
     ports:
       - "8070:8080"
       - "8443:8443"
     command:
+      - -Xms128m
+      - -Xmx256m
       - --spring.config.additional-location=file:/config/config/common/common.yml,file:/config/config/cas-management/cas-management.yml
-    environment:
-      JAVA_OPTS: >-
-        -Xms128m -Xmx256m 
-        -Dspring.config.location=file:/config/config/common/common.yml,file:/config/config/cas-management/cas-management.yml
     volumes:
       - ../config:/config/config:ro
       # - ./cas/config:/data/cas/config:ro
@@ -149,18 +130,16 @@ services:
         condition: service_healthy
       cas:
         condition: service_healthy
-    healthcheck:
-      test: curl --fail --silent http://localhost:8070/cas-management/actuator/health || exit 1
 
   collectory:
-#    image: atlasoflivingaustralia/collectory:5.1.0
+    #    image: atlasoflivingaustralia/collectory:5.1.0
     build: collectory
     ports:
       - "8001:8080"
-    environment:
-      JAVA_OPTS: >-
-        -Xms128m -Xmx256m 
-        -Dspring.config.location=file:/config/config/common/common.yml,file:/config/config/collectory/collectory.yml
+    command:
+      - -Xms128m
+      - -Xmx256m
+      - --spring.config.additional-location=file:/config/config/common/common.yml,file:/config/config/collectory/collectory.yml
     volumes:
       - ../config:/config/config:ro
       - ./collections/taxa:/data/collectory/taxa
@@ -170,18 +149,16 @@ services:
         condition: service_healthy
       cas:
         condition: service_healthy
-    healthcheck:
-      test: curl --fail --silent http://localhost:8080/actuator/health || exit 1
 
   species-list:
-#    image: atlasoflivingaustralia/species-list:4.5.3
+    #    image: atlasoflivingaustralia/species-list:4.5.3
     build: species-list
     ports:
       - "8002:8080"
-    environment:
-      JAVA_OPTS: >-
-        -Xms128m -Xmx256m 
-        -Dspring.config.location=file:/config/config/common/common.yml,file:/config/config/species-list/species-list.yml
+    command:
+      - -Xms128m
+      - -Xmx256m
+      - --spring.config.additional-location=file:/config/config/common/common.yml,file:/config/config/species-list/species-list.yml
     volumes:
       - ../config:/config/config:ro
       - ../config/species-list:/config/species-list:ro
@@ -190,8 +167,6 @@ services:
         condition: service_healthy
       cas:
         condition: service_healthy
-    healthcheck:
-      test: curl --fail --silent http://localhost:8080/actuator/health || exit 1
 
   regions:
     build: regions
@@ -199,15 +174,14 @@ services:
       - "8005:8080"
     volumes:
       - ./regions/config:/data/regions/config:ro
-    environment:
-      JAVA_OPTS: -Xmx1g -Xms128m -Xss256k
+    command:
+      - -Xms128m
+      - -Xmx128m
     depends_on:
       mysql:
         condition: service_healthy
       cas:
         condition: service_healthy
-    healthcheck:
-      test: curl --fail --silent http://localhost:8080/actuator/health || exit 1
 
   spatial-hub:
     build: spatial-hub
@@ -215,13 +189,13 @@ services:
       - "8010:8080"
     volumes:
       - ../config:/config/config:ro
-    environment:
-      JAVA_OPTS: -Xmx1g -Xms128m -Xss256k
+    command:
+      - -Xms128m
+      - -Xmx256m
+      - --spring.config.additional-location=file:/config/config/common/common.yml,file:/config/config/spatial-hub/spatial-hub.yml
     depends_on:
       spatial-service:
         condition: service_healthy
-    healthcheck:
-      test: curl --fail --silent http://localhost:8080/actuator/health || exit 1
 
   spatial-service:
     build: spatial-service
@@ -232,8 +206,10 @@ services:
       - ../config:/config/config:ro
       - spatial-data:/data/spatial-data
       - geoserver-data:/data/geoserver_data_dir
-    environment:
-      JAVA_OPTS: -Xmx1g -Xms128m -Xss256k
+    command:
+      - -Xms128m
+      - -Xmx256m
+      - --spring.config.additional-location=file:/config/config/common/common.yml,file:/config/config/spatial-service/spatial-service.yml
     depends_on:
       postgis:
         condition: service_healthy
@@ -243,18 +219,16 @@ services:
         condition: service_healthy
       cas-apikey:
         condition: service_healthy
-    healthcheck:
-      test: curl --fail --silent http://localhost:8080/ws/actuator/health || exit 1
 
   userdetails:
-#    image: atlasoflivingaustralia/userdetails:3.0.3
+    #    image: atlasoflivingaustralia/userdetails:3.0.3
     build: userdetails
     ports:
       - "9001:8080"
-    environment:
-      JAVA_OPTS: >-
-        -Xms128m -Xmx256m 
-        -Dspring.config.location=file:/config/config/common/common.yml,file:/config/config/userdetails/userdetails.yml
+    command:
+      - -Xms128m
+      - -Xmx256m
+      - --spring.config.additional-location=file:/config/config/common/common.yml,file:/config/config/userdetails/userdetails.yml
     volumes:
       - ../config:/config/config:ro
     depends_on:
@@ -264,8 +238,6 @@ services:
         condition: service_healthy
       mailhog:
         condition: service_healthy
-    healthcheck:
-      test: curl --fail --silent http://localhost:9001/userdetails/actuator/health || exit 1
 
   postgis:
     image: postgis/postgis:16-3.4-alpine

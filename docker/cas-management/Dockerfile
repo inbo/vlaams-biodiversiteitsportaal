@@ -22,8 +22,8 @@ ARG VERSION=6.5.5-2
 COPY --from=builder /project/build/libs/cas-management-${VERSION}-exec.war /app.war
 RUN mkdir -p /data/cas-management
 
-EXPOSE 9000
+EXPOSE 8080
 VOLUME /data
 
 ENTRYPOINT ["java", "-jar", "/app.war"]
-HEALTHCHECK CMD "curl --fail --silent http://localhost:9000/actuator/health/liveness || exit 1"
+HEALTHCHECK CMD "curl --fail --silent http://localhost:8080/cas-management/actuator/health || exit 1"

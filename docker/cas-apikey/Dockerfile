@@ -16,6 +16,9 @@ ARG VERSION=1.7.0
 
 COPY --from=builder /project/build/libs/apikey-${VERSION}-exec.war /app.war
 
+
+EXPOSE 8080
 VOLUME /data
+
 ENTRYPOINT ["java", "-jar", "/app.war"]
-HEALTHCHECK CMD "curl --fail --silent http://localhost:8080/actuator/health/liveness || exit 1"
+HEALTHCHECK CMD "curl --fail --silent http://localhost:8080/apikey/actuator/health || exit 1"
