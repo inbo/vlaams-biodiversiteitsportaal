@@ -31,5 +31,5 @@ management:
 environments:
     production:
       logging:
-        config: /config/common/logback-colorized-terminal.xml
+        config: /config/config/common/logback-colorized-terminal.xml
 #        config: /config/common/logback-json.xml

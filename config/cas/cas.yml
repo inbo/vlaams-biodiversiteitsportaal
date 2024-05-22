@@ -22,7 +22,7 @@ jndi:
   # dataSourceName: java:comp/env/jdbccas
 
 logging:
-  config: "file:/config/common/log4j2.xml"
+  config: "file:/config/config/common/log4j2.xml"
 
 cas:
   server:
