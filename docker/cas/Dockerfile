@@ -4,7 +4,7 @@ ARG VERSION=6.5.6-3
 
 WORKDIR /project
 RUN git clone --branch ${VERSION} --depth 1 https://github.com/AtlasOfLivingAustralia/ala-cas-5.git /project
-COPY ./i18n/ src/main/resources/
+# COPY ./i18n/ src/main/resources/
 
 
 RUN --mount=type=cache,target=/root/.m2/repository\
@@ -24,3 +24,4 @@ EXPOSE 9000
 VOLUME /data
 
 ENTRYPOINT ["java", "-jar", "/cas.war"]
+HEALTHCHECK CMD "curl --fail --silent http://localhost:8080/actuator/health/liveness || exit 1"

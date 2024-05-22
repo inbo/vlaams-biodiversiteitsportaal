@@ -10,14 +10,15 @@ RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
     # -Dorg.gradle.debug=true -Dorg.gradle.debug.suspend=no --debug \
     --parallel
 
-RUN ls -la /project/build/libs/
 
-FROM tomcat:9.0-jdk11-openjdk
+FROM openjdk:11
 
-# Important, no leading v...
-ARG VERSION=3.0.3 
+ARG VERSION=3.0.3
 
-COPY --from=builder /project/build/libs/userdetails-${VERSION}-exec.war /userdetails.war
+COPY --from=builder /project/build/libs/userdetails-${VERSION}-exec.war /app.war
+
 
 VOLUME /data
-ENTRYPOINT ["java", "-jar", "/userdetails.war"]
+ENTRYPOINT ["java", "-jar", "/app.war"]
+
+HEALTHCHECK CMD "curl --fail --silent http://localhost:8080/actuator/health/liveness || exit 1"

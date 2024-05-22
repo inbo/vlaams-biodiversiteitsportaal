@@ -1,5 +1,3 @@
-logging:
-    config: /data/userdetails/config/logback.xml
 management:
     health:
         mongo:

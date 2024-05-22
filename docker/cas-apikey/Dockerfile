@@ -10,13 +10,12 @@ RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
     # -Dorg.gradle.debug=true -Dorg.gradle.debug.suspend=no --debug \
     --parallel
 
-RUN ls -la /project/build/libs/
-
-FROM tomcat:9.0-jdk11-openjdk
+FROM openjdk:11
 
 ARG VERSION=1.7.0
 
-COPY --from=builder /project/build/libs/apikey-${VERSION}-exec.war /apikey.war
+COPY --from=builder /project/build/libs/apikey-${VERSION}-exec.war /app.war
 
 VOLUME /data
-ENTRYPOINT ["java", "-jar", "/apikey.war"]
+ENTRYPOINT ["java", "-jar", "/app.war"]
+HEALTHCHECK CMD "curl --fail --silent http://localhost:8080/actuator/health/liveness || exit 1"

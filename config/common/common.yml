@@ -1,11 +1,19 @@
+common:
+  protocol: http
+  domain: biodiversiteitsportaal.dev.inbo.be
+  baseUrl: ${common.protocol}://${common.domain}
+
+ala:
+  baseURL: ${common.baseUrl}
+
 # Header and footer
 headerAndFooter:
-  baseURL: http://branding.la-flanders.org
+  baseURL: ${common.baseUrl}
   version: 2
 
 # Skin and layout
 skin:
-  homeUrl: http://la-flanders.org
+  homeUrl: ${common.baseUrl}
   orgNameLong: Vlaams Biodiversiteitsportaal
   fluidLayout: true
   orgNameShort: VlBiDiP

@@ -1,15 +1,178 @@
 services:
-  collections:
-    build: collections
+  ala-hub:
+#    image: atlasoflivingaustralia/ala-hub:7.0.0
+    build: ala-hub
+    ports:
+      - "8012:8080"
+    environment:
+      JAVA_OPTS: >-
+        -Xms128m -Xmx256m 
+        -Dspring.config.location=file:/config/common/common.yml,file:/config/ala-hub/ala-hub.yml
+    volumes:
+      - ../config/common:/config/common:ro
+      - ../config/ala-hub:/config/ala-hub:ro
+    depends_on:
+      cas:
+        condition: service_healthy
+    healthcheck:
+      test: curl --fail --silent http://localhost:8080/actuator/health || exit 1
+
+  bie-hub:
+#    image: atlasoflivingaustralia/ala-bie-hub:4.1.0
+    build: bie-hub
+    ports:
+      - "8008:8080"
+    environment:
+      JAVA_OPTS: >-
+        -Xms128m -Xmx256m 
+        -Dspring.config.location=file:/config/common/common.yml,file:/config/bie-hub/bie-hub.yml
+    volumes:
+      - ../config/common:/config/common:ro
+      - ../config/bie-hub:/config/bie-hub:ro
+    depends_on:
+      cas:
+        condition: service_healthy
+    healthcheck:
+      test: curl --fail --silent http://localhost:8080/actuator/health || exit 1
+
+  bie-index:
+#    image: atlasoflivingaustralia/bie-index:3.1.0
+    build: bie-index
+    ports:
+      - "8007:8080"
+    environment:
+      JAVA_OPTS: >-
+        -Xms128m -Xmx256m 
+        -Dspring.config.location=file:/config/common/common.yml,file:/config/bie-index/bie-index.yml
+    volumes:
+      - ../config/common:/config/common:ro
+      - ../config/bie-index:/config/bie-index:ro
+    depends_on:
+      cas:
+        condition: service_healthy
+      solr:
+        condition: service_healthy
+    healthcheck:
+      test: curl --fail --silent http://localhost:8080/actuator/health || exit 1
+
+  biocache-service:
+#    image: atlasoflivingaustralia/biocache-service:3.4.1
+    build: biocache-service
+    ports:
+      - "8003:8080"
+    environment:
+      JAVA_OPTS: >-
+        -Xms128m -Xmx256m 
+        -Dspring.config.location=file:/config/common/common.yml,file:/config/biocache-service/biocache-service.yml
+      BIOCACHE_MEMORY_OPTS: -Xmx1g -Xms1g
+    volumes:
+      - ../config/common:/config/common:ro
+      - ../config/biocache-service:/config/biocache-service:ro
+    depends_on:
+      cas:
+        condition: service_healthy
+      solr:
+        condition: service_healthy
+    healthcheck:
+      test: curl --fail --silent http://localhost:8080/actuator/health || exit 1
+
+  cas:
+#    image: atlasoflivingaustralia/cas:6.5.6-2
+    build: cas
+    ports:
+      - "9000:9000"
+    command:
+      - --spring.config.additional-location=file:/config/common/common.yml,file:/config/cas/cas.yml
+    environment:
+      DOCKERIZE_OPTS: ""
+      ALA_PASSWORD_PROPERTIES: /etc/cas/config/pwe.properties
+      JAVA_OPTS: >-
+        -Xms128m -Xmx256m 
+        -Dspring.config.location=file:/config/common/common.yml,file:/config/cas/cas.yml
+        -Dcas.standalone.configurationDirectory=/config/cas 
+        -Dala.password.properties=/config/cas/pwe.properties
+    volumes:
+      - ../config/common:/config/common:ro
+      - ../config/cas:/config/cas:ro
+      - cas-shared-conf:/etc/cas
+      - cas-data:/data/cas
+    depends_on:
+      nginx:
+        condition: service_started
+      mysql:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+    healthcheck:
+      test: curl --fail --silent http://auth.la-flanders.org/cas/oidc/.well-known || exit 1
+
+  cas-apikey:
+#    image: atlasoflivingaustralia/apikey:1.7.0
+    build: cas-apikey
+    ports:
+      - "9002:9002"
+    command:
+      - --spring.config.additional-location=file:/config/common/common.yml,file:/config/cas-apikey/cas-apikey.yml
+    environment:
+      JAVA_OPTS: >-
+        -Xms128m -Xmx256m 
+        -Dspring.config.location=file:/config/common/common.yml,file:/config/cas-apikey/cas-apikey.yml
+    volumes:
+      - ../config/common:/config/common:ro
+      - ../config/cas-apikey:/config/cas-apikey:ro
+      - ./cas-apikey/keystore:/etc/cas:ro
+    depends_on:
+      mysql:
+        condition: service_healthy
+      cas:
+        condition: service_healthy
+    healthcheck:
+      test: curl --fail --silent http://localhost:9002/actuator/health || exit 1
+
+  cas-management:
+#    image: atlasoflivingaustralia/cas-management:6.5.5-2
+    build: cas-management
+    ports:
+      - "8070:8070"
+      - "8443:8443"
+    command:
+      - --spring.config.additional-location=file:/config/common/common.yml,file:/config/cas-management/cas-management.yml
+    environment:
+      JAVA_OPTS: >-
+        -Xms128m -Xmx256m 
+        -Dspring.config.location=file:/config/common/common.yml,file:/config/cas-management/cas-management.yml
+    volumes:
+      - ../config/common:/config/common:ro
+      - ../config/cas-management:/config/cas-management:ro
+      # - ./cas/config:/data/cas/config:ro
+      - cas-shared-conf:/etc/cas
+      - cas-data:/data/cas
+      - ./cas/config:/etc/cas/config:ro
+      - ./cas-management/keystore/cas.crt:/etc/cas/cas.crt:ro
+      - ./cas-management/keystore/thekeystore:/etc/cas/thekeystore:ro
+      - ./cas-management/services-repo:/data/cas-management/services-repo
+    depends_on:
+      mysql:
+        condition: service_healthy
+      cas:
+        condition: service_healthy
+    healthcheck:
+      test: curl --fail --silent http://localhost:8070/cas-management/actuator/health || exit 1
+
+  collectory:
+#    image: atlasoflivingaustralia/collectory:5.1.0
+    build: collectory
     ports:
       - "8001:8080"
+    environment:
+      JAVA_OPTS: >-
+        -Xms128m -Xmx256m 
+        -Dspring.config.location=file:/config/common/common.yml,file:/config/collectory/collectory.yml
     volumes:
-      - ./collections/config:/data/collectory/config
-      - ./collections/config:/data/ala-collectory/config
+      - ../config/common:/config/common:ro
+      - ../config/collectory:/config/collectory:ro
       - ./collections/taxa:/data/collectory/taxa
       - ./collections/taxa:/data/ala-collectory/taxa
-    environment:
-      JAVA_OPTS: -Xmx1g -Xms128m -Xss256k
     depends_on:
       mysql:
         condition: service_healthy
@@ -19,76 +182,21 @@ services:
       test: curl --fail --silent http://localhost:8080/actuator/health || exit 1
 
   species-list:
+#    image: atlasoflivingaustralia/species-list:4.5.3
     build: species-list
     ports:
       - "8002:8080"
-    volumes:
-      - ./species-list/config:/data/specieslist-webapp/config:ro
     environment:
-      JAVA_OPTS: -Xmx1g -Xms128m -Xss256k
+      JAVA_OPTS: >-
+        -Xms128m -Xmx256m 
+        -Dspring.config.location=file:/config/common/common.yml,file:/config/species-list/species-list.yml
+    volumes:
+      - ../config/common:/config/common:ro
+      - ../config/species-list:/config/species-list:ro
     depends_on:
       mysql:
         condition: service_healthy
       cas:
-        condition: service_healthy
-    healthcheck:
-      test: curl --fail --silent http://localhost:8080/actuator/health || exit 1
-
-  bie-index:
-    build: bie-index
-    ports:
-      - "8007:8080"
-    environment:
-      JAVA_OPTS: -Xmx1g -Xms128m -Xss256k
-    volumes:
-      - ./bie-index/config:/data/bie-index/config:ro
-    depends_on:
-      cas:
-        condition: service_healthy
-      solr:
-        condition: service_healthy
-    healthcheck:
-      test: curl --fail --silent http://localhost:8080/actuator/health || exit 1
-
-  bie-hub:
-    build: bie-hub
-    ports:
-      - "8008:8080"
-    environment:
-      JAVA_OPTS: -Xmx1g -Xms128m -Xss256k
-    depends_on:
-      cas:
-        condition: service_healthy
-    volumes:
-      - ./bie-hub/config:/data/ala-bie-hub/config:ro
-    healthcheck:
-      test: curl --fail --silent http://localhost:8080/actuator/health || exit 1
-
-  ala-hub:
-    build: ala-hub
-    ports:
-      - "8012:8080"
-    environment:
-      JAVA_OPTS: -Xmx2g -Xms128m -Xss256k
-    volumes:
-      - ./ala-hub/config:/data/ala-hub/config:ro
-    depends_on:
-      cas:
-        condition: service_healthy
-    healthcheck:
-      test: curl --fail --silent http://localhost:8080/actuator/health || exit 1
-  biocache-service:
-    build: biocache-service
-    ports:
-      - "8003:8080"
-    environment:
-      BIOCACHE_MEMORY_OPTS: -Xmx1g -Xms1g
-    volumes:
-      - ./biocache-service/config:/data/biocache/config:ro
-    depends_on:
-      cas:
-        condition: service_healthy
-      solr:
         condition: service_healthy
     healthcheck:
       test: curl --fail --silent http://localhost:8080/actuator/health || exit 1
@@ -146,77 +254,18 @@ services:
     healthcheck:
       test: curl --fail --silent http://localhost:8080/ws/actuator/health || exit 1
 
-  cas:
-    build: cas
-    ports:
-      - "9000:9000"
-    volumes:
-      - cas-shared-conf:/etc/cas
-      - cas-data:/data/cas
-      - ./cas/config:/etc/cas/config:ro
-    environment:
-      ALA_PASSWORD_PROPERTIES: /etc/cas/config/pwe.properties
-      JAVA_OPTS: -Xmx1g -Xms128m -Xss256k
-    depends_on:
-      nginx:
-        condition: service_started
-      mysql:
-        condition: service_healthy
-      mongodb:
-        condition: service_healthy
-    healthcheck:
-      test: curl --fail --silent http://auth.la-flanders.org/cas/oidc/.well-known || exit 1
-
-  cas-management:
-    build: cas-management
-    ports:
-      - "8070:8070"
-      - "8443:8443"
-    environment:
-      JAVA_OPTS: -Xmx1g -Xms128m -Xss256k
-    volumes:
-      # - ./cas/config:/data/cas/config:ro
-      - cas-shared-conf:/etc/cas
-      - cas-data:/data/cas
-      - ./cas/config:/etc/cas/config:ro
-      - ./cas-management/config:/data/cas-management/config:ro
-      - ./cas-management/keystore/cas.crt:/etc/cas/cas.crt:ro
-      - ./cas-management/keystore/thekeystore:/etc/cas/thekeystore:ro
-      - ./cas-management/services-repo:/data/cas-management/services-repo
-    depends_on:
-      mysql:
-        condition: service_healthy
-      cas:
-        condition: service_healthy
-    healthcheck:
-      test: curl --fail --silent http://localhost:8070/cas-management/actuator/health || exit 1
-
-  cas-apikey:
-    build: cas-apikey
-    ports:
-      - "9002:9002"
-    volumes:
-      # - ./cas/config:/data/cas/config:ro
-      - ./cas-apikey/keystore:/etc/cas:ro
-      - ./cas-apikey/config:/data/apikey/config:ro
-    environment:
-      JAVA_OPTS: -Xmx1g -Xms128m -Xss256k
-    depends_on:
-      mysql:
-        condition: service_healthy
-      cas:
-        condition: service_healthy
-    healthcheck:
-      test: curl --fail --silent http://localhost:9002/actuator/health || exit 1
-
   userdetails:
+#    image: atlasoflivingaustralia/userdetails:3.0.3
     build: userdetails
     ports:
       - "9001:9001"
-    volumes:
-      - ./userdetails/config:/data/userdetails/config:ro
     environment:
-      JAVA_OPTS: -Xmx1g -Xms128m -Xss256k
+      JAVA_OPTS: >-
+        -Xms128m -Xmx256m 
+        -Dspring.config.location=file:/config/common/common.yml,file:/config/userdetails/userdetails.yml
+    volumes:
+      - ../config/common:/config/common:ro
+      - ../config/userdetails:/config/userdetails:ro
     depends_on:
       mysql:
         condition: service_healthy
