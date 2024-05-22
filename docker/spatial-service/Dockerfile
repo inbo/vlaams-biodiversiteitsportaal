@@ -53,3 +53,5 @@ VOLUME /data
 COPY docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD []
+
+HEALTHCHECK CMD curl --fail --silent http://localhost:8080/ws/actuator/health/liveness || exit 1
