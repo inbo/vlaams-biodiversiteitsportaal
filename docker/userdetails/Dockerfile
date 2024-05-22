@@ -21,4 +21,4 @@ COPY --from=builder /project/build/libs/userdetails-${VERSION}-exec.war /app.war
 VOLUME /data
 ENTRYPOINT ["java", "-jar", "/app.war"]
 
-HEALTHCHECK CMD curl --fail --silent http://localhost:8080/userdetails/actuator/health/liveness || exit 1
+HEALTHCHECK CMD curl --fail --silent http://localhost:8080/userdetails/actuator/health || exit 1

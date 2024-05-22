@@ -20,4 +20,4 @@ COPY --from=builder /project/build/libs/specieslist-webapp-${VERSION}.war /app.w
 VOLUME /data
 ENTRYPOINT ["java", "-jar", "/app.war"]
 
-HEALTHCHECK CMD curl --fail --silent http://localhost:8080/actuator/health/liveness || exit 1
+HEALTHCHECK CMD curl --fail --silent http://localhost:8080/actuator/health || exit 1
