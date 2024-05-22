@@ -76,6 +76,7 @@ services:
     environment:
       DOCKERIZE_OPTS: ""
       ALA_PASSWORD_PROPERTIES: /config/config/cas/pwe.properties
+#      LOG_FORMAT: JSON
     volumes:
       - ../config:/config/config:ro
       - cas-shared-conf:/etc/cas

@@ -28,8 +28,5 @@ management:
       exposure:
         include: health
 
-environments:
-    production:
-      logging:
-        config: /config/config/common/logback-colorized-terminal.xml
-#        config: /config/common/logback-json.xml
+logging:
+  config: /config/config/common/logback.xml

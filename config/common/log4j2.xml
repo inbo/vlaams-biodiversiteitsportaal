@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Configuration>
     <Appenders>
-        <Console name="console" target="SYSTEM_OUT">
+        <Console name="TEXT" target="SYSTEM_OUT">
             <PatternLayout pattern="[%date] %highlight{[%level]} %style{[%logger{10} %file:%line]}{cyan} %msg%n"/>
+        </Console>
+        <Console name="JSON" target="SYSTEM_OUT">
+             <JSONLayout compact="true" eventEol="true"/>
         </Console>
     </Appenders>
     <Loggers>
-        <Root level="${LOG_LEVEL:-INFO}">
-            <AppenderRef ref="console"/>
+        <Root level="${env:LOG_LEVEL:-INFO}">
+            <AppenderRef ref="${env:LOG_FORMAT:-TEXT}"/>
         </Root>
     </Loggers>
 </Configuration>

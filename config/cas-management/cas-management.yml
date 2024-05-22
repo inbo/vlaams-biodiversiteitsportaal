@@ -174,7 +174,7 @@ spring:
     thymeleaf:
         mode: HTML
 logging:
-    config: "file:/config/config/common/log4j2-colorized-terminal.xml"
+    config: "file:/config/config/common/log4j2.xml"
 management:
     endpoint:
         health:

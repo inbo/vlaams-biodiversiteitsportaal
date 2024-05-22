@@ -22,7 +22,7 @@ jndi:
   # dataSourceName: java:comp/env/jdbccas
 
 logging:
-  config: "file:/config/config/common/log4j2-colorized-terminal.xml"
+  config: "file:/config/config/common/log4j2.xml"
 
 cas:
   server:
@@ -43,6 +43,7 @@ cas:
   audit:
     mongo:
       sslEnabled: false
+      clientUri: mongodb://audit:my-super-secret-password@mongodb:27017/cas-audit-repository?retryWrites=true&ssl=false&allowPublicKeyRetrieval=true
       host: mongodb
       port: 27017
       replicaSet: 
@@ -81,6 +82,7 @@ cas:
     initFromJson: false
     mongo:
       sslEnabled: false
+      clientUri: mongodb://services:my-super-secret-password@mongodb:27017/cas-service-registry?retryWrites=true&ssl=false&allowPublicKeyRetrieval=true
       host: mongodb
       port: 27017
       replicaSet: 
@@ -97,6 +99,7 @@ cas:
           enabled: true
       mongo:
         sslEnabled: false
+        clientUri: mongodb://tickets:my-super-secret-password@mongodb:27017/cas-ticket-registry?retryWrites=true&ssl=false&allowPublicKeyRetrieval=true
         host: mongodb
         port: 27017
         replicaSet: 
