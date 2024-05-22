@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Configuration>
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="[%date] %highlight([%level]) %cyan([%logger{10} %file:%line]) %msg%n"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Root level="${LOG_LEVEL:-INFO}">
+            <AppenderRef ref="console"/>
+        </Root>
+    </Loggers>
+</Configuration>

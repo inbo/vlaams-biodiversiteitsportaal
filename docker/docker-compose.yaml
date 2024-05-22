@@ -9,8 +9,7 @@ services:
         -Xms128m -Xmx256m 
         -Dspring.config.location=file:/config/common/common.yml,file:/config/ala-hub/ala-hub.yml
     volumes:
-      - ../config/common:/config/common:ro
-      - ../config/ala-hub:/config/ala-hub:ro
+      - ../config:/config/config:ro
     depends_on:
       cas:
         condition: service_healthy
@@ -27,8 +26,7 @@ services:
         -Xms128m -Xmx256m 
         -Dspring.config.location=file:/config/common/common.yml,file:/config/bie-hub/bie-hub.yml
     volumes:
-      - ../config/common:/config/common:ro
-      - ../config/bie-hub:/config/bie-hub:ro
+      - ../config:/config/config:ro
     depends_on:
       cas:
         condition: service_healthy
@@ -45,8 +43,7 @@ services:
         -Xms128m -Xmx256m 
         -Dspring.config.location=file:/config/common/common.yml,file:/config/bie-index/bie-index.yml
     volumes:
-      - ../config/common:/config/common:ro
-      - ../config/bie-index:/config/bie-index:ro
+      - ../config:/config/config:ro
     depends_on:
       cas:
         condition: service_healthy
@@ -66,8 +63,7 @@ services:
         -Dspring.config.location=file:/config/common/common.yml,file:/config/biocache-service/biocache-service.yml
       BIOCACHE_MEMORY_OPTS: -Xmx1g -Xms1g
     volumes:
-      - ../config/common:/config/common:ro
-      - ../config/biocache-service:/config/biocache-service:ro
+      - ../config:/config/config:ro
     depends_on:
       cas:
         condition: service_healthy
@@ -92,8 +88,7 @@ services:
         -Dcas.standalone.configurationDirectory=/config/cas 
         -Dala.password.properties=/config/cas/pwe.properties
     volumes:
-      - ../config/common:/config/common:ro
-      - ../config/cas:/config/cas:ro
+      - ../config:/config/config:ro
       - cas-shared-conf:/etc/cas
       - cas-data:/data/cas
     depends_on:
@@ -118,8 +113,7 @@ services:
         -Xms128m -Xmx256m 
         -Dspring.config.location=file:/config/common/common.yml,file:/config/cas-apikey/cas-apikey.yml
     volumes:
-      - ../config/common:/config/common:ro
-      - ../config/cas-apikey:/config/cas-apikey:ro
+      - ../config:/config/config:ro
       - ./cas-apikey/keystore:/etc/cas:ro
     depends_on:
       mysql:
@@ -142,8 +136,7 @@ services:
         -Xms128m -Xmx256m 
         -Dspring.config.location=file:/config/common/common.yml,file:/config/cas-management/cas-management.yml
     volumes:
-      - ../config/common:/config/common:ro
-      - ../config/cas-management:/config/cas-management:ro
+      - ../config:/config/config:ro
       # - ./cas/config:/data/cas/config:ro
       - cas-shared-conf:/etc/cas
       - cas-data:/data/cas
@@ -169,8 +162,7 @@ services:
         -Xms128m -Xmx256m 
         -Dspring.config.location=file:/config/common/common.yml,file:/config/collectory/collectory.yml
     volumes:
-      - ../config/common:/config/common:ro
-      - ../config/collectory:/config/collectory:ro
+      - ../config:/config/config:ro
       - ./collections/taxa:/data/collectory/taxa
       - ./collections/taxa:/data/ala-collectory/taxa
     depends_on:
@@ -191,7 +183,7 @@ services:
         -Xms128m -Xmx256m 
         -Dspring.config.location=file:/config/common/common.yml,file:/config/species-list/species-list.yml
     volumes:
-      - ../config/common:/config/common:ro
+      - ../config:/config/config:ro
       - ../config/species-list:/config/species-list:ro
     depends_on:
       mysql:
@@ -222,7 +214,7 @@ services:
     ports:
       - "8010:8080"
     volumes:
-      - ./spatial-hub/config:/data/spatial-hub/config:ro
+      - ../config:/config/config:ro
     environment:
       JAVA_OPTS: -Xmx1g -Xms128m -Xss256k
     depends_on:
@@ -237,7 +229,7 @@ services:
     ports:
       - "8011:8080"
     volumes:
-      - ./spatial-service/config:/data/spatial-service/config:ro
+      - ../config:/config/config:ro
       - spatial-data:/data/spatial-data
       - geoserver-data:/data/geoserver_data_dir
     environment:
@@ -264,8 +256,7 @@ services:
         -Xms128m -Xmx256m 
         -Dspring.config.location=file:/config/common/common.yml,file:/config/userdetails/userdetails.yml
     volumes:
-      - ../config/common:/config/common:ro
-      - ../config/userdetails:/config/userdetails:ro
+      - ../config:/config/config:ro
     depends_on:
       mysql:
         condition: service_healthy
