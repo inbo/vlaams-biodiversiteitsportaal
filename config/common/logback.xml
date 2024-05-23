@@ -10,7 +10,7 @@
         <!-- <encoder class="ch.qos.logback.classic.encoder.JsonEncoder"/>-->
         <encoder>
             <pattern>
-                {"timestamp":"%date{yyyy-MM-dd'T'HH:mm:ss.SSSXXX}","level":"%level","logger":"%logger","location":"%file:%line","message":"%replace(%msg){'"','\"'}","ex":"%replace(%replace(%ex{full}){'\n','\\n'}){'"','\"'}"}%n
+                {"timestamp":"%date{yyyy-MM-dd'T'HH:mm:ss.SSSXXX}","level":"%level","logger":"%logger","location":"%file:%line","message":"%replace(%replace(%msg){'\n','\\n'}){'"','\"'}","ex":"%replace(%replace(%ex{full}){'\n','\\n'}){'"','\"'}"}%n
             </pattern>
         </encoder>
     </appender>
