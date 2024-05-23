@@ -1,15 +1,15 @@
 ROLE_ADMIN: ROLE_ADMIN
 ROLE_EDITOR: ROLE_EDITOR
 ala:
-  baseURL: http://la-flanders.org
+  baseURL: ${common.protocol}://${common.domain}
 alertUrl: ""
 alertsUrl: ""
 api_key: e8dcf74d-bcef-41bb-8738-48f0ff0a5b75
 bie:
-  baseURL: http://species.la-flanders.org
+  baseURL: ${common.protocol}://species.${common.domain}
   searchPath: /search
-biocacheServicesUrl: http://records-ws.la-flanders.org
-biocacheUiURL: http://records.la-flanders.org
+biocacheServicesUrl: ${common.protocol}://records-ws.${common.domain}
+biocacheUiURL: ${common.protocol}://records.${common.domain}
 citation:
   link:
     template: "For more information: @link@"
@@ -61,12 +61,12 @@ grails:
       patterns:
         "['/images/*', '/data/*', '/img/*', '/theme/default/*', '/css/*',
                 '/js/*', '/plugins/*' ]"
-  serverURL: http://collections.la-flanders.org
+  serverURL: ${common.protocol}://collections.${common.domain}
 headerAndFooter:
-  baseURL: http://branding.la-flanders.org
+  baseURL: ${common.protocol}://branding.${common.domain}
   version: 2
 isPipelinesCompatible: false
-loggerURL: http://logger.la-flanders.org/service
+loggerURL: ${common.protocol}://logger.${common.domain}/service
 management:
   endpoint:
     health:
@@ -80,7 +80,7 @@ openapi:
   components:
     security:
       oauth2:
-        baseUrl: http://auth.la-flanders.org/cas/oidc
+        baseUrl: ${common.protocol}://auth.${common.domain}/cas/oidc
   contact:
     email: support@la-flanders.org
   terms: ""
@@ -94,62 +94,62 @@ repository:
 resource:
   gbifExport:
     url:
-      template: http://records.la-flanders.org/archives/gbif/@UID@/@UID@.zip
+      template: ${common.protocol}://records.${common.domain}/archives/gbif/@UID@/@UID@.zip
   publicArchive:
     url:
-      template: http://records.la-flanders.org/archives/gbif/@UID@/@UID@.zip
+      template: ${common.protocol}://records.${common.domain}/archives/gbif/@UID@/@UID@.zip
 rifcs:
   excludeBounds: true
 security:
   apiKey:
     auth:
-      serviceUrl: http://auth.la-flanders.org/apikey/
+      serviceUrl: ${common.protocol}://auth.${common.domain}/apikey/
   apikey:
     check:
-      serviceUrl: http://auth.la-flanders.org/apikey/ws/check?apikey=
+      serviceUrl: ${common.protocol}://auth.${common.domain}/apikey/ws/check?apikey=
     checkEnabled: true
     enabled: true
-    serviceUrl: http://auth.la-flanders.org/apikey/
+    serviceUrl: ${common.protocol}://auth.${common.domain}/apikey/
     userdetails:
-      serviceUrl: http://auth.la-flanders.org/userdetails/
+      serviceUrl: ${common.protocol}://auth.${common.domain}/userdetails/
   cas:
-    appServerName: http://collections.la-flanders.org
+    appServerName: ${common.protocol}://collections.${common.domain}
     authCookieName: ALA-Auth
     authenticateOnlyIfLoggedInFilterPattern: /public/show/*
     bypass: false
-    casServerLoginUrl: http://auth.la-flanders.org/cas/login
-    casServerLogoutUrl: http://auth.la-flanders.org/cas/logout
-    casServerName: http://auth.la-flanders.org
-    casServerUrlPrefix: http://auth.la-flanders.org/cas
+    casServerLoginUrl: ${common.protocol}://auth.${common.domain}/cas/login
+    casServerLogoutUrl: ${common.protocol}://auth.${common.domain}/cas/logout
+    casServerName: ${common.protocol}://auth.${common.domain}
+    casServerUrlPrefix: ${common.protocol}://auth.${common.domain}/cas
     contextPath: ""
     enabled: true
-    loginUrl: http://auth.la-flanders.org/cas/login
-    logoutUrl: http://auth.la-flanders.org/cas/logout
+    loginUrl: ${common.protocol}://auth.${common.domain}/cas/login
+    logoutUrl: ${common.protocol}://auth.${common.domain}/cas/logout
     uriExclusionFilterPattern: /images.*,/css.*,/js.*
     uriFilterPattern: /admin.*,/admin/.*,/admin/.*/.*,/collection.*,/institution.*,/contact.*,/reports.*,/providerCode.*,/providerMap.*,/dataProvider.*,/dataResource.*,/dataHub.*,/manage/.*,/ws/ipt/scan/.*,/alaAdmin.*
   jwt:
     clientId: collections
-    discoveryUri: http://auth.la-flanders.org/cas/oidc/.well-known
+    discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known
   oidc:
     clientId: collections
-    discoveryUri: http://auth.la-flanders.org/cas/oidc/.well-known
+    discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known
     enabled: false
     secret: collections-oidc-super-secret
-serverName: http://collections.la-flanders.org
+serverName: ${common.protocol}://collections.${common.domain}
 showExtraInfoInDataSetsView:
   enabled: "true "
   relativeTime: true
 skin:
   favicon: https://raw.githubusercontent.com/living-atlases/artwork/master/favicon.ico
-  homeUrl: http://la-flanders.org
+  homeUrl: ${common.protocol}://${common.domain}
   orgNameLong: Vlaams Biodiversiteitsportaal
   orgNameShort: LA Flanders
   orgSupportEmail: support@la-flanders.org
   taxaLinks:
-    baseUrl: http://species.la-flanders.org/species/
+    baseUrl: ${common.protocol}://species.${common.domain}/species/
 spatial:
-  baseURL: http://spatial.la-flanders.org
-speciesListToolUrl: http://lists.la-flanders.org/speciesListItem/list/
+  baseURL: ${common.protocol}://spatial.${common.domain}
+speciesListToolUrl: ${common.protocol}://lists.${common.domain}/speciesListItem/list/
 suitableFor: '[{"spListNational":"Species list national"}, {"spListState":
     "Species list state"}, {"spListGreaterThan1000": "Species list >1000km
     radius"}, {"spList100to1000": "Species list 100-1000km radius"},
@@ -162,13 +162,13 @@ uploadExternalUrlPath: /upload/
 uploadFilePath: /data/ala-collectory/upload/
 useGbifDoi: false
 userDetails:
-  url: http://auth.la-flanders.org/userdetails/
+  url: ${common.protocol}://auth.${common.domain}/userdetails/
 userdetails:
   api:
-    url: http://auth.la-flanders.org/userdetails/
-  url: http://auth.la-flanders.org/userdetails/
+    url: ${common.protocol}://auth.${common.domain}/userdetails/
+  url: ${common.protocol}://auth.${common.domain}/userdetails/
   web:
-    url: http://auth.la-flanders.org/userdetails/
+    url: ${common.protocol}://auth.${common.domain}/userdetails/
 webservice:
   client-id: ""
   client-secret: ""

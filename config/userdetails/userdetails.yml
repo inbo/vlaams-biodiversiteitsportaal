@@ -23,18 +23,18 @@ management:
 security:
     cas:
         enabled: true
-        casServerName: http://auth.la-flanders.org
+        casServerName: ${common.protocol}://auth.${common.domain}
         casServerUrlPrefix: ${security.cas.casServerName}/cas
         loginUrl: ${security.cas.casServerUrlPrefix}/login
         logoutUrl: ${security.cas.casServerUrlPrefix}/logout
-        appServerName: http://auth.la-flanders.org
+        appServerName: ${common.protocol}://auth.${common.domain}
         authCookieName: ALA-Auth
     jwt:
         clientId: userdetails
-        discoveryUri: http://auth.la-flanders.org/cas/oidc/.well-known
+        discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known
     oidc:
         clientId: userdetails
-        discoveryUri: http://auth.la-flanders.org/cas/oidc/.well-known
+        discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known
         enabled: false
         secret: userdetails-oidc-super-secret
     user:
@@ -52,10 +52,10 @@ endpoints:
     enabled: true
     health:
         sensitive: false
-serverURL: http://auth.la-flanders.org
-serverName: http://auth.la-flanders.org
+serverURL: ${common.protocol}://auth.${common.domain}
+serverName: ${common.protocol}://auth.${common.domain}
 grails:
-    serverURL: http://auth.la-flanders.org/userdetails
+    serverURL: ${common.protocol}://auth.${common.domain}/userdetails
     mail:
         host: mail.la-flanders.org
         port: 1025
@@ -87,36 +87,36 @@ recaptcha:
     siteKey: null
     secretKey: null
 ala:
-    baseURL: http://la-flanders.org
+    baseURL: ${common.protocol}://${common.domain}
 supportEmail: support@la-flanders.org
-homeUrl: http://la-flanders.org
+homeUrl: ${common.protocol}://${common.domain}
 homeLogoUrl: https://www.ala.org.au/app/uploads/2020/06/ALA_Logo_Inline_RGB-300x63.png
 mainTitle: Vlaams Biodiversiteitsportaal
 emailSenderTitle: Vlaams Biodiversiteitsportaal
 emailSender: support@la-flanders.org
 sightings.url: null
-spatial.url: http://spatial.la-flanders.org?tool=log
+spatial.url: ${common.protocol}://spatial.${common.domain}?tool=log
 volunteer.url: /user/myStats
-lists.url: http://lists.la-flanders.org/speciesList/list
-biocache.search.baseUrl: http://records.la-flanders.org/occurrences/search
-biocache.search.url: http://records.la-flanders.org/occurrences/search/?q=*%3A*&fq=assertion_user_id%3A
-biocache.myDownloads.url: http://records.la-flanders.org/download/myDownloads/
-myData.url: http://la-flanders.org/tempDataResource/myData
+lists.url: ${common.protocol}://lists.${common.domain}/speciesList/list
+biocache.search.baseUrl: ${common.protocol}://records.${common.domain}/occurrences/search
+biocache.search.url: ${common.protocol}://records.${common.domain}/occurrences/search/?q=*%3A*&fq=assertion_user_id%3A
+biocache.myDownloads.url: ${common.protocol}://records.${common.domain}/download/myDownloads/
+myData.url: ${common.protocol}://${common.domain}/tempDataResource/myData
 alerts.url: null
 userDetails:
-    url: http://auth.la-flanders.org/userdetails/
+    url: ${common.protocol}://auth.${common.domain}/userdetails/
 headerAndFooter:
-    baseURL: http://branding.la-flanders.org
+    baseURL: ${common.protocol}://branding.${common.domain}
     version: 2
-ala.baseURL: http://la-flanders.org
-bie.baseURL: http://species.la-flanders.org
+ala.baseURL: ${common.protocol}://${common.domain}
+bie.baseURL: ${common.protocol}://species.${common.domain}
 bie.searchPath: /search
 skin.layout: ala-main
 skin.fluidLayout: true
 skin.orgNameLong: Vlaams Biodiversiteitsportaal
 skin.orgNameShort: LA Flanders
 skin.favicon: https://raw.githubusercontent.com/living-atlases/artwork/master/favicon.ico
-skin.homeUrl: http://la-flanders.org
+skin.homeUrl: ${common.protocol}://${common.domain}
 attributes:
     affiliations:
         enabled: false

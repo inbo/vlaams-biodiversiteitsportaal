@@ -1,6 +1,6 @@
 common:
   protocol: http
-  domain: biodiversiteitsportaal.dev.inbo.be
+  domain: 34.254.45.171.nip.io
   baseUrl: ${common.protocol}://${common.domain}
 
 ala:

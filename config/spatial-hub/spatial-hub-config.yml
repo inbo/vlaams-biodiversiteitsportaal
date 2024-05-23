@@ -1,5 +1,5 @@
 grails:
-  serverURL: "http://spatial.la-flanders.org"
+  serverURL: "${common.protocol}://spatial.${common.domain}"
   app:
     context: "/"
 
@@ -18,20 +18,20 @@ security:
   # CAS disabled
   cas:
     enabled: true
-    casServerName: "http://auth.la-flanders.org"
-    casServerUrlPrefix: "http://auth.la-flanders.org/cas"
-    loginUrl: "http://auth.la-flanders.org/cas/login"
-    logoutUrl: "http://auth.la-flanders.org/cas/logout"
+    casServerName: "${common.protocol}://auth.${common.domain}"
+    casServerUrlPrefix: "${common.protocol}://auth.${common.domain}/cas"
+    loginUrl: "${common.protocol}://auth.${common.domain}/cas/login"
+    logoutUrl: "${common.protocol}://auth.${common.domain}/cas/logout"
     bypass: false
     disableCAS: false
     gateway: False
   #Used for auth plugin
   apikey:
     check:
-      serviceUrl:  http://auth.la-flanders.org/apikey/ws/check?apikey=
+      serviceUrl:  ${common.protocol}://auth.${common.domain}/apikey/ws/check?apikey=
   oidc:
     enabled: true
-    discoveryUri: http://auth.la-flanders.org/cas/oidc/.well-known
+    discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known
     scope: openid,profile,email,ala,roles, user_defined
     client-id: "spatial"
     secret: "spatial-oidc-super-secret"
@@ -65,8 +65,8 @@ webservice:
   clientId:
   secret:
 
-apiKeyCheckUrlTemplate: "http://auth.la-flanders.org/apikey/ws/check?apikey={0}"
-autocompleteUrl: "http://species-ws.la-flanders.org/search/auto.jsonp"
+apiKeyCheckUrlTemplate: "${common.protocol}://auth.${common.domain}/apikey/ws/check?apikey={0}"
+autocompleteUrl: "${common.protocol}://species-ws.${common.domain}/search/auto.jsonp"
 
 auth:
     admin_role: ROLE_ADMIN
@@ -77,30 +77,30 @@ app:
             userId: X-ALA-userId
 
 headerAndFooter:
-  baseURL: "http://branding.la-flanders.org"
+  baseURL: "${common.protocol}://branding.${common.domain}"
 #  version: "2"
 
-ala.baseURL: "http://la-flanders.org"
-bie.baseURL: "http://species.la-flanders.org"
+ala.baseURL: "${common.protocol}://${common.domain}"
+bie.baseURL: "${common.protocol}://species.${common.domain}"
 bie.searchPath: '/search'
 
 bieService:
-    baseURL: "http://species-ws.la-flanders.org"
+    baseURL: "${common.protocol}://species-ws.${common.domain}"
 
 userdetails:
   web:
-    url: "http://auth.la-flanders.org/userdetails/"
+    url: "${common.protocol}://auth.${common.domain}/userdetails/"
   api:
-    url: "http://auth.la-flanders.org/userdetails/"
+    url: "${common.protocol}://auth.${common.domain}/userdetails/"
 
 favicon:
   url: "https://raw.githubusercontent.com/living-atlases/artwork/master/favicon.ico"
 
 layersService:
-  url: "http://spatial.la-flanders.org/ws"
+  url: "${common.protocol}://spatial.${common.domain}/ws"
 
 lists:
-  url: "http://lists.la-flanders.org"
+  url: "${common.protocol}://lists.${common.domain}"
   threatenedSpeciesUrl: '/ws/speciesList/?isThreatened=eq:true&isAuthoritative=eq:true'
   invasiveSpeciesUrl: '/ws/speciesList/?isInvasive=eq:true&isAuthoritative=eq:true'
   facets: True
@@ -111,24 +111,24 @@ journalmap:
   url: "https://www.journalmap.org/"
 
 collections:
-  url: "http://collections.la-flanders.org"
+  url: "${common.protocol}://collections.${common.domain}"
 
 sandbox:
-  url: "http://la-flanders.org/sandbox"
-  uiUrl: "http://sandbox.la-flanders.org/datacheck"
+  url: "${common.protocol}://${common.domain}/sandbox"
+  uiUrl: "${common.protocol}://sandbox.${common.domain}/datacheck"
 
 sandboxService:
-  url: "http://sandbox.la-flanders.org/biocache-service"
+  url: "${common.protocol}://sandbox.${common.domain}/biocache-service"
 
 gazField: cl2123
 
 userObjectsField: cl1083
 
 biocache:
-  url: "http://records.la-flanders.org"
+  url: "${common.protocol}://records.${common.domain}"
 
 biocacheService:
-  url: "http://records-ws.la-flanders.org"
+  url: "${common.protocol}://records-ws.${common.domain}"
   #Facets to ignore in the biocache grouped/facets service
   default_facets_ignored: "data_resource_uid,data_provider_uid,species,collection_uid,institution_code_name,institution_uid,uncertainty"
   custom_facets:
@@ -137,10 +137,10 @@ biocacheService:
     Occurrence: ['Year;occurrence_year']
 
 sampling:
-  url: "http://spatial.la-flanders.org/ws"
+  url: "${common.protocol}://spatial.${common.domain}/ws"
 
 geoserver:
-  url: "http://spatial.la-flanders.org/geoserver"
+  url: "${common.protocol}://spatial.${common.domain}/geoserver"
 
 flickr:
   url: "https://api.flickr.com/services/rest/?method="
@@ -181,7 +181,7 @@ speciesDotSize: 5
 speciesDotOpacity: 60
 
 logger:
-  baseUrl: "http://logger.la-flanders.org"
+  baseUrl: "${common.protocol}://logger.${common.domain}"
 
 #TBC : decommisioned
 phylolink:
@@ -224,7 +224,7 @@ startup:
 #    outline:
 #      name: 'Outline'
 #      type: 'wms'
-#      url: "http://spatial.la-flanders.org/geoserver/wms?"
+#      url: "${common.protocol}://spatial.${common.domain}/geoserver/wms?"
 #      layerParams:
 #        layers: 'ALA:world'
 #        format: 'image/png'

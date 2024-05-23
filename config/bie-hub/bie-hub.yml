@@ -1,30 +1,30 @@
 grails:
-  serverURL: http://species.la-flanders.org
+  serverURL: ${common.protocol}://species.${common.domain}
   cors:
     enabled: true
-serverName: http://species.la-flanders.org
+serverName: ${common.protocol}://species.${common.domain}
 
 # CAS Config
 security:
   oidc:
     enabled: true # Cannot disable oidc :(
-    discoveryUri: http://auth.la-flanders.org/cas/oidc/.well-known
+    discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known
     scope: openid,profile,email,ala,roles, user_defined
     client-id: "ala_bie"
     secret: "ala_bie-oidc-super-secret"
   jwt:
     enabled: false
-    discoveryUri: http://auth.la-flanders.org/cas/oidc/.well-known
+    discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known
     fallbackToLegacyBehaviour: true
   # cognito specific configs
   cas:
-    casServerName: http://auth.la-flanders.org
+    casServerName: ${common.protocol}://auth.${common.domain}
     uriFilterPattern: /admin/*,/alaAdmin/*
     uriExclusionFilterPattern: /images.*,/css.*,/js.*,/less.*
-    appServerName: http://species.la-flanders.org
-    casServerUrlPrefix: http://auth.la-flanders.org/cas
-    loginUrl: http://auth.la-flanders.org/cas/login
-    logoutUrl: http://auth.la-flanders.org/cas/logout
+    appServerName: ${common.protocol}://species.${common.domain}
+    casServerUrlPrefix: ${common.protocol}://auth.${common.domain}/cas
+    loginUrl: ${common.protocol}://auth.${common.domain}/cas/login
+    logoutUrl: ${common.protocol}://auth.${common.domain}/cas/logout
     contextPath:
     bypass: false
     applyUriFiltersToTicketValidation: false
@@ -34,11 +34,11 @@ security:
   apiKey:
     enabled: true
     auth:
-      serviceUrl: http://auth.la-flanders.org/apikey/
+      serviceUrl: ${common.protocol}://auth.${common.domain}/apikey/
     check:
-      serviceUrl: http://auth.la-flanders.org/apikey/ws/check?apikey=
+      serviceUrl: ${common.protocol}://auth.${common.domain}/apikey/ws/check?apikey=
     userdetails:
-      serviceUrl: http://auth.la-flanders.org/userdetails/
+      serviceUrl: ${common.protocol}://auth.${common.domain}/userdetails/
 webservice:
   jwt: false
   jwt-scopes: test
@@ -46,34 +46,34 @@ webservice:
   client-secret: "ala_bie-oidc-super-secret"
 disableCAS: false
 userDetails:
-  url: http://auth.la-flanders.org/userdetails/
+  url: ${common.protocol}://auth.${common.domain}/userdetails/
 
 # BIE index webservices
 bie:
-  baseURL: http://species.la-flanders.org
+  baseURL: ${common.protocol}://species.${common.domain}
   searchPath: /search
   index:
-    url: http://species-ws.la-flanders.org
+    url: ${common.protocol}://species-ws.${common.domain}
 
 # Query contexts - used to filter search results
 bieService:
-  baseUrl: http://species-ws.la-flanders.org
+  baseUrl: ${common.protocol}://species-ws.${common.domain}
   queryContext:
   apiKey: 5bd6d4fc-3f1c-4fa2-903a-7ec771c02999
 biocacheService:
-  baseURL: http://records-ws.la-flanders.org
+  baseURL: ${common.protocol}://records-ws.${common.domain}
   queryContext: -_nest_parent_:*
 
 # Header and footer
 headerAndFooter:
-  baseURL: http://branding.la-flanders.org
+  baseURL: ${common.protocol}://branding.${common.domain}
   version: 2
 
 ala:
-  baseURL: http://la-flanders.org
+  baseURL: ${common.protocol}://${common.domain}
   image:
     service:
-      url: http://images.la-flanders.org
+      url: ${common.protocol}://images.${common.domain}
 allowedImageEditingRoles: ROLE_ADMIN,ROLE_EDITOR
 
 wikipedia:
@@ -82,7 +82,7 @@ wikipedia:
 
 # Skin and layout
 skin:
-  homeUrl: http://la-flanders.org
+  homeUrl: ${common.protocol}://${common.domain}
   layout: ala
   orgNameLong: Vlaams Biodiversiteitsportaal
   fluidLayout: true
@@ -100,40 +100,40 @@ show:
 
 # ALA services
 biocache:
-  baseURL: http://records.la-flanders.org
+  baseURL: ${common.protocol}://records.${common.domain}
 
 # Other ALA Services
 profileService:
   baseURL: https://profiles-ws.ala.org.au/
 spatial:
-  baseURL: http://spatial.la-flanders.org
+  baseURL: ${common.protocol}://spatial.${common.domain}
 collectory:
-  baseURL: http://collections.la-flanders.org
-  threatenedSpeciesCodesUrl: http://collections.la-flanders.org/public/showDataResource
+  baseURL: ${common.protocol}://collections.${common.domain}
+  threatenedSpeciesCodesUrl: ${common.protocol}://collections.${common.domain}/public/showDataResource
 collectoryService:
-  baseURL: http://collections.la-flanders.org/ws
+  baseURL: ${common.protocol}://collections.${common.domain}/ws
 speciesList:
-  baseURL: http://lists.la-flanders.org
+  baseURL: ${common.protocol}://lists.${common.domain}
   preferredSpeciesListDruid: dr4778
   preferredListName: ALA Preferred Species Images
   apiKey: 081489d3-e581-4dad-8f37-b9331bcf04a8
   useListWs: False
-  wsURL: http://lists.la-flanders.org/ws
+  wsURL: ${common.protocol}://lists.${common.domain}/ws
 speciesListService:
-  baseURL: http://lists.la-flanders.org/ws
+  baseURL: ${common.protocol}://lists.${common.domain}/ws
 alerts:
   baseUrl:
 regions:
-  baseURL: http://regions.la-flanders.org
+  baseURL: ${common.protocol}://regions.${common.domain}
 sightings:
   url:
 layersService:
-  baseURL: http://spatial.la-flanders.org/ws
-imageServiceBaseURL: http://images.la-flanders.org
+  baseURL: ${common.protocol}://spatial.${common.domain}/ws
+imageServiceBaseURL: ${common.protocol}://images.${common.domain}
 
 image:
-  baseUrl: http://images.la-flanders.org
-  thumbnailUrl: http://images.la-flanders.org/image/
+  baseUrl: ${common.protocol}://images.${common.domain}
+  thumbnailUrl: ${common.protocol}://images.${common.domain}/image/
 ausTraits:
   baseURL: http://traitdata.austraits.cloud.edu.au
   homeURL: https://austraits.org/
@@ -192,7 +192,7 @@ namematching:
 dataquality:
   baseUrl: https://dataquality.ala.org.au/data-profiles
 
-speciesParent: http://lists.la-flanders.org/iconic-species
+speciesParent: ${common.protocol}://lists.${common.domain}/iconic-species
 
 supportEmail: support@la-flanders.org
 
@@ -205,11 +205,11 @@ survey:
   cookieAge: 30
   html:
 userdetails:
-  url: http://auth.la-flanders.org/userdetails/
+  url: ${common.protocol}://auth.${common.domain}/userdetails/
   web:
-    url: http://auth.la-flanders.org/userdetails/
+    url: ${common.protocol}://auth.${common.domain}/userdetails/
   api:
-    url: http://auth.la-flanders.org/userdetails/
+    url: ${common.protocol}://auth.${common.domain}/userdetails/
 imageFilter: "&qualityProfile=LA"
 
 

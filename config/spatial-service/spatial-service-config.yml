@@ -1,5 +1,5 @@
 grails:
-  serverURL: http://spatial.la-flanders.org/ws
+  serverURL: ${common.protocol}://spatial.${common.domain}/ws
 server:
   servlet:
     contextPath: '/ws'
@@ -7,7 +7,7 @@ google:
   apikey: 'AIzaSyAJDtEeoy7Sc9pij2TAoVnmTwA34Q-2VHk'
 
 api_key: xxxxxxxxxxxxx
-spatialHubUrl: http://spatial.la-flanders.org/
+spatialHubUrl: ${common.protocol}://spatial.${common.domain}/
 
 #distributions:
 #  geoserver:
@@ -16,7 +16,7 @@ spatialHubUrl: http://spatial.la-flanders.org/
 #
 
 geoserver:
-  url: 'http://spatial.la-flanders.org/geoserver'
+  url: '${common.protocol}://spatial.${common.domain}/geoserver'
   username: 'admin'
   password: 'geoserver'
   canDeploy: true
@@ -37,23 +37,23 @@ dataSource:
 
 batch_sampling_passwords: ""
 
-ala.baseURL: 'http://www.la-flanders.org'
-bie.baseURL: 'http://bie.la-flanders.org'
+ala.baseURL: '${common.protocol}://www.${common.domain}'
+bie.baseURL: '${common.protocol}://bie.${common.domain}'
 bie.searchPath: '/search'
 
-namematching.url: 'http://namematching-ws.la-flanders.org'
+namematching.url: '${common.protocol}://namematching-ws.${common.domain}'
 
-records.url: 'http://archives.la-flanders.org/archives/exports/lat_lon_taxon.zip'
+records.url: '${common.protocol}://archives.${common.domain}/archives/exports/lat_lon_taxon.zip'
 
-lists.url: 'http://lists.la-flanders.org'
-collections.url: 'http://collections.la-flanders.org'
-sandboxHubUrl: 'http://sandbox.la-flanders.org/ala-hub'
-sandboxBiocacheServiceUrl: 'http://sandbox.la-flanders.org/biocache-service'
-phyloServiceUrl: 'http://phylolink.la-flanders.org'
+lists.url: '${common.protocol}://lists.${common.domain}'
+collections.url: '${common.protocol}://collections.${common.domain}'
+sandboxHubUrl: '${common.protocol}://sandbox.${common.domain}/ala-hub'
+sandboxBiocacheServiceUrl: '${common.protocol}://sandbox.${common.domain}/biocache-service'
+phyloServiceUrl: '${common.protocol}://phylolink.${common.domain}'
 
 
 # au.org.ala.spatial.process config
-spatialService.url: "http://spatial.la-flanders.org/ws"
+spatialService.url: "${common.protocol}://spatial.${common.domain}/ws"
 shp2pgsql.path: "/usr/bin/shp2pgsql"
 gdal.dir: "/usr/bin/"
 
@@ -61,18 +61,18 @@ slaveKey: "xxxxxxxxxxxxxx"
 serviceKey: "xxxxxxxxxxxxxx"
 
 layers_store:
-  GEONETWORK_URL: 'http://spatial.la-flanders.org/geonetwork'
-  LAYER_INDEX_URL: http://spatial.la-flanders.org/layers-service
+  GEONETWORK_URL: '${common.protocol}://spatial.${common.domain}/geonetwork'
+  LAYER_INDEX_URL: ${common.protocol}://spatial.${common.domain}/layers-service
 headerAndFooter:
-  baseURL: 'http://branding.la-flanders.org'
+  baseURL: '${common.protocol}://branding.${common.domain}'
 skin:
   orgNameLong: 'Vlaams Biodiversiteitsportaal'
   orgNameShort: 'ALF'
 
 
-apiKeyCheckUrlTemplate: 'http://auth.la-flanders.org/apikey/ws/check?apikey={0}'
+apiKeyCheckUrlTemplate: '${common.protocol}://auth.${common.domain}/apikey/ws/check?apikey={0}'
 spatialService:
-  remote: "http://spatial.la-flanders.org/ws"
+  remote: "${common.protocol}://spatial.${common.domain}/ws"
 
 management:
   endpoint:
@@ -88,21 +88,21 @@ security:
   # CAS disabled
   cas:
     enabled: true
-    appServerName: http://spatial.la-flanders.org/ws
-    casServerName: "http://auth.la-flanders.org"
-    casServerUrlPrefix: "http://auth.la-flanders.org/cas"
-    loginUrl: "http://auth.la-flanders.org/cas/login"
-    logoutUrl: "http://auth.la-flanders.org/cas/logout"
+    appServerName: ${common.protocol}://spatial.${common.domain}/ws
+    casServerName: "${common.protocol}://auth.${common.domain}"
+    casServerUrlPrefix: "${common.protocol}://auth.${common.domain}/cas"
+    loginUrl: "${common.protocol}://auth.${common.domain}/cas/login"
+    logoutUrl: "${common.protocol}://auth.${common.domain}/cas/logout"
     bypass: false
     disableCAS: false
     gateway: False
   #Used for auth plugin
   apikey:
     check:
-      serviceUrl:  http://auth.la-flanders.org/apikey/ws/check?apikey=
+      serviceUrl:  ${common.protocol}://auth.${common.domain}/apikey/ws/check?apikey=
   oidc:
     enabled: true
-    discoveryUri: http://auth.la-flanders.org/cas/oidc/.well-known
+    discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known
     scope: openid,profile,email,ala,roles, user_defined
     client-id: "spatial"
     secret: "spatial-oidc-super-secret"

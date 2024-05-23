@@ -6,7 +6,7 @@ allow:
 auth:
     user:
         details:
-            url: http://auth.la-flanders.org/userdetails/userDetails/
+            url: ${common.protocol}://auth.${common.domain}/userdetails/userDetails/
         names:
             id:
                 path: getUserList
@@ -26,7 +26,7 @@ autocomplete:
             enabled: true
 biocache:
     ui:
-        url: http://records.la-flanders.org
+        url: ${common.protocol}://records.${common.domain}
 caches:
     auth:
         enabled: false
@@ -48,7 +48,7 @@ citations:
     enabled: true
 collection:
     contacts:
-        url: http://collections.la-flanders.org/ws/collection
+        url: ${common.protocol}://collections.${common.domain}/ws/collection
 concurrent:
     downloads:
         json: '[{"label": "smallSolr", "threads": 4, "maxRecords": 50000, "type":
@@ -100,13 +100,13 @@ heatmap:
         dir: /data/output/heatmap
 layers:
     service:
-        url: http://spatial.la-flanders.org/ws
+        url: ${common.protocol}://spatial.${common.domain}/ws
 list:
     tool:
-        url: http://lists.la-flanders.org
+        url: ${common.protocol}://lists.${common.domain}
 media:
     dir: /data/biocache-media/
-    url: http://media.la-flanders.org
+    url: ${common.protocol}://media.${common.domain}
 name:
     index:
         dir: /data/lucene/namematching_v13
@@ -121,18 +121,18 @@ qid:
     wkt:
         maxPoints: 5000
 registry:
-    url: http://collections.la-flanders.org/ws
+    url: ${common.protocol}://collections.${common.domain}/ws
 sample:
     fields: none
 sds:
-    url: http://sds.la-flanders.org/sensitive-species-data.xml
+    url: ${common.protocol}://sds.${common.domain}/sensitive-species-data.xml
 service:
     bie:
         enabled: true
         ui:
-            url: http://species.la-flanders.org
+            url: ${common.protocol}://species.${common.domain}
         ws:
-            url: http://species-ws.la-flanders.org/ws
+            url: ${common.protocol}://species-ws.${common.domain}/ws
 shapefile:
     tmp:
         dir: /data/biocache-download/tmp
@@ -141,7 +141,7 @@ solr:
         busywaitsleep: 100
         maxthreads: 30
         writertimeout: 60000
-    home: http://index.la-flanders.org:8983/solr/biocache
+    home: ${common.protocol}://index.${common.domain}:8983/solr/biocache
     server:
         indexVersion:
             refresh: 300000
@@ -163,7 +163,7 @@ webservice:
     jwt: false
     jwt-scopes: ''
 webservices:
-    root: http://records-ws.la-flanders.org
+    root: ${common.protocol}://records-ws.${common.domain}
 wms:
     cache:
         age:

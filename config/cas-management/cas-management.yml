@@ -15,7 +15,7 @@ server:
     context-path: /cas-management
 cas:
     server:
-        name: http://auth.la-flanders.org
+        name: ${common.protocol}://auth.${common.domain}
         prefix: ${cas.server.name}/cas
     host:
         name: la-flanders.org
@@ -138,7 +138,7 @@ cas:
             sslEnabled: false
             userId: services
 mgmt:
-    server-name: http://auth.la-flanders.org/cas-management
+    server-name: ${common.protocol}://auth.${common.domain}/cas-management
     enable-discovery-endpoint-call: true
     version-control:
         enabled: false
@@ -150,16 +150,16 @@ mgmt:
         - ROLE_ADMIN
     authzAttributes:
         - role
-    serverName: http://auth.la-flanders.org/cas-management
+    serverName: ${common.protocol}://auth.${common.domain}/cas-management
     userPropertiesFile: file:///data/cas-management/config/users.properties
 ala:
     skin:
-        baseUrl: http://www.la-flanders.org/
+        baseUrl: ${common.protocol}://www.${common.domain}/
         headerFooterUrl: ${ala.skin.baseUrl}commonui-bs3/
         favIconBaseUrl: ${ala.skin.baseUrl}wp-content/themes/ala-wordpress-theme/img/favicon/
-        bieBaseUrl: http://bie.la-flanders.org/
+        bieBaseUrl: ${common.protocol}://bie.${common.domain}/
         bieSearchPath: search
-        userDetailsUrl: http://auth.la-flanders.org/userdetails/
+        userDetailsUrl: ${common.protocol}://auth.${common.domain}/userdetails/
         orgShortName: ALA
         orgLongName: Vlaams Biodiversiteitsportaal
         orgNameKey: ala

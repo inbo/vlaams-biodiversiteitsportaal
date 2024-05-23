@@ -1,11 +1,11 @@
 # CAS Config
 security:
   cas:
-    casServerName: http://auth.la-flanders.org
+    casServerName: ${common.protocol}://auth.${common.domain}
     casServerUrlPrefix: ${security.cas.casServerName}/cas
     loginUrl: ${security.cas.casServerUrlPrefix}/login
     logoutUrl: ${security.cas.casServerUrlPrefix}/logout
-    appServerName: http://auth.la-flanders.org
+    appServerName: ${common.protocol}://auth.${common.domain}
     authCookieName: ALA-Auth
   user:
     name: admin
@@ -34,10 +34,10 @@ management:
   health:
     mongo:
       enabled: false
-serverURL: http://auth.la-flanders.org
-serverName: http://auth.la-flanders.org
+serverURL: ${common.protocol}://auth.${common.domain}
+serverName: ${common.protocol}://auth.${common.domain}
 grails:
-  serverURL: http://auth.la-flanders.org/apikey
+  serverURL: ${common.protocol}://auth.${common.domain}/apikey
 server:
   port: 8080
   servlet:
@@ -53,31 +53,31 @@ flyway:
   baselineOnMigrate: true
 
 ala:
-  baseURL: http://la-flanders.org
+  baseURL: ${common.protocol}://${common.domain}
 
 supportEmail: support@la-flanders.org
-homeUrl: http://la-flanders.org
+homeUrl: ${common.protocol}://${common.domain}
 mainTitle: Vlaams Biodiversiteitsportaal
 emailSenderTitle: Vlaams Biodiversiteitsportaal
 emailSender: support@la-flanders.org
 
 sightings.url: /mine
-spatial.url: http://spatial.la-flanders.org?tool=log
+spatial.url: ${common.protocol}://spatial.${common.domain}?tool=log
 volunteer.url: /user/myStats
-lists.url: http://lists.la-flanders.org/speciesList/list
-biocache.search.url: http://records.la-flanders.org/occurrences/search
+lists.url: ${common.protocol}://lists.${common.domain}/speciesList/list
+biocache.search.url: ${common.protocol}://records.${common.domain}/occurrences/search
 alerts.url:
 
 # this property is read/used by ala-auth-plugin (included by apikey)
 userDetails:
-  url: http://auth.la-flanders.org/userdetails/
+  url: ${common.protocol}://auth.${common.domain}/userdetails/
 
 # Header and footer
 headerAndFooter:
-  baseURL: http://branding.la-flanders.org
+  baseURL: ${common.protocol}://branding.${common.domain}
   version: 2
-ala.baseURL: http://la-flanders.org
-bie.baseURL: http://species.la-flanders.org
+ala.baseURL: ${common.protocol}://${common.domain}
+bie.baseURL: ${common.protocol}://species.${common.domain}
 bie.searchPath: /search
 
 # Skin options
