@@ -26,10 +26,10 @@ logging:
 
 cas:
   server:
-    name: http://auth.la-flanders.org
-    prefix: http://auth.la-flanders.org/cas
+    name: ${common.protocol}://auth.${common.domain}
+    prefix: ${common.protocol}://auth.${common.domain}/cas
   host:
-    name: auth.la-flanders.org
+    name: auth.${common.domain}
   adminPagesSecurity:
     ip: .*
     actuatorEndpointsEnabled: true
@@ -37,7 +37,7 @@ cas:
     cors:
       enabled: true
       allow-origins:
-      - http://spatial.la-flanders.org
+      - ${common.protocol}://spatial.${common.domain}
   jdbc:
     showSql: false
   audit:
@@ -58,7 +58,7 @@ cas:
             key: 
     oidc:
       core:
-        issuer: http://auth.la-flanders.org/cas/oidc
+        issuer: ${common.protocol}://auth.${common.domain}/cas/oidc
         jwksFile: file:/data/cas/keystore.jwks
   monitor:
     endpoints:
@@ -93,9 +93,9 @@ cas:
         key: 
 
 ala:
-  userDetailsBaseUrl: http://auth.la-flanders.org/userdetails/
+  userDetailsBaseUrl: ${common.protocol}://auth.${common.domain}/userdetails/
   cookie:
-    domain: la-flanders.org
+    domain: ${common.domain}
     secure: false
     httpOnly: true
     maxAge: -1
@@ -110,14 +110,14 @@ ala:
       enableRequestExtraAttributes: true
       enableUpdateLegacyPasswords: true
   skin:
-    baseUrl: http://la-flanders.org
+    baseUrl: ${common.protocol}://${common.domain}
     termsUrl: 
     uiVersion: 3
-    headerFooterUrl: http://branding.la-flanders.org/
-    favIconBaseUrl: http://la-flanders.org/favicon/
-    bieBaseUrl: http://species.la-flanders.org
+    headerFooterUrl: ${common.protocol}://branding.${common.domain}/
+    favIconBaseUrl: ${common.protocol}://${common.domain}/favicon/
+    bieBaseUrl: ${common.protocol}://species.${common.domain}
     bieSearchPath: /search
-    userDetailsUrl: http://auth.la-flanders.org/userdetails/
+    userDetailsUrl: ${common.protocol}://auth.${common.domain}/userdetails/
     orgShortName: LA Flanders
     orgLongName: Vlaams Biodiversiteitsportaal
     orgNameKey: ala
@@ -171,7 +171,7 @@ spring:
 #      server:
 #        enabled: true
 #        ssl: false
-#      url: http://auth.la-flanders.org
+#      url: ${common.protocol}://auth.${common.domain}
 
   flyway:
     baselineOnMigrate: false # Create DB from scratch
