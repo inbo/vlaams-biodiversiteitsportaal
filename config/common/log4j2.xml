@@ -6,7 +6,7 @@
         </Console>
         <Console name="JSON" target="SYSTEM_OUT">
             <PatternLayout>
-                <Pattern>{"timestamp":"%date{yyyy-MM-dd'T'HH:mm:ss.SSSXXX}","level":"%level","logger":"%logger","location":"%file:%line","message":"%encode{%msg}{JSON}","ex":"%ex{full}"}%n</Pattern>
+                <Pattern>{"timestamp":"%date{yyyy-MM-dd'T'HH:mm:ss.SSSXXX}","level":"%level","logger":"%logger","location":"%file:%line","message":"%encode{%msg}{JSON}","ex":"%encode{%ex{full}}{JSON}"}%n</Pattern>
             </PatternLayout>
 <!--            -->
 <!--            <JSONLayout compact="true" eventEol="true">-->
