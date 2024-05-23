@@ -7,8 +7,8 @@
     </appender>
     <appender name="JSON" class="ch.qos.logback.core.ConsoleAppender">
 <!--        JSON Encoder is missing from the classpath :( -->
-            <pattern>{"timestamp":"%date","level":"%level","logger":"%logger","location":"%file:%line","message":"%replace(%msg){'"', '\"'}"}%n</pattern>
 <!--        <encoder class="ch.qos.logback.classic.encoder.JsonEncoder"/>-->
+            <pattern>{"timestamp":"%date","level":"%level","logger":"%logger","location":"%file:%line","message":"%replace(%msg){'"', '\"'}"}%n</pattern>
     </appender>
 
     <root level="${LOG_LEVEL:-INFO}">
