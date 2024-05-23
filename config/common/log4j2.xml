@@ -5,7 +5,9 @@
             <PatternLayout pattern="[%date] %highlight{[%level]} %style{[%logger{10} %file:%line]}{cyan} %msg%n"/>
         </Console>
         <Console name="JSON" target="SYSTEM_OUT">
-             <JSONLayout compact="true" eventEol="true"/>
+            <JSONLayout compact="true" eventEol="true">
+                <KeyValuePair key="timestamp" value="$${date:yyyy-MM-dd'T'HH:mm:ss.SSSXXX}"/>
+            </JSONLayout>
         </Console>
     </Appenders>
     <Loggers>
