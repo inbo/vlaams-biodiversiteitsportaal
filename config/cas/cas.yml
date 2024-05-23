@@ -28,9 +28,6 @@ cas:
     prefix: ${common.protocol}://auth.${common.domain}/cas
   host:
     name: auth.${common.domain}
-  adminPagesSecurity:
-    ip: .*
-    actuatorEndpointsEnabled: true
   http-web-request:
     cors:
       enabled: true
