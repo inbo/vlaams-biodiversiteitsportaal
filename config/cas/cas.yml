@@ -11,9 +11,7 @@ jndi:
   hikari:
     jdbccas:
       # driverClass: com.mysql.jdbc.Driver
-      url: jdbc:mysql://mysql:3306/cas?serverTimezone=Europe/Brussels&zeroDateTimeBehavior=convertToNull&logger=Slf4JLogger&gatherPerfMetrics=true&logSlowQueries=true&characterEncoding=UTF-8&nullCatalogMeansCurrent=true&nullNamePatternMatchesAll=true&noAccessToProcedureBodies=true&useSSL=False&allowPublicKeyRetrieval=true
-      user: cas
-      password: my-super-secret-password
+      url: jdbc:mysql://cas:my-super-secret-password@mysql:3306/cas?serverTimezone=Europe/Brussels&zeroDateTimeBehavior=convertToNull&logger=Slf4JLogger&gatherPerfMetrics=true&logSlowQueries=true&characterEncoding=UTF-8&nullCatalogMeansCurrent=true&nullNamePatternMatchesAll=true&noAccessToProcedureBodies=true&useSSL=False&allowPublicKeyRetrieval=true
       dataSourceProperties:
         cachePrepStmts: true
         prepStmtCacheSize: 250
