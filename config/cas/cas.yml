@@ -174,7 +174,5 @@ spring:
 #      url: ${common.protocol}://auth.${common.domain}
 
   flyway:
-    baselineOnMigrate: false # Create DB from scratch
-    url: jdbc:mysql://mysql:3306/cas?serverTimezone=Europe/Brussels&zeroDateTimeBehavior=convertToNull&logger=Slf4JLogger&gatherPerfMetrics=true&logSlowQueries=true&characterEncoding=UTF-8&nullCatalogMeansCurrent=true&nullNamePatternMatchesAll=true&noAccessToProcedureBodies=true&useSSL=False&allowPublicKeyRetrieval=true
-    user: cas
-    password: my-super-secret-password
+    baselineOnMigrate: true # Create DB from scratch
+    url: jdbc:mysql://cas:my-super-secret-password@mysql:3306/cas?serverTimezone=Europe/Brussels&zeroDateTimeBehavior=convertToNull&logger=Slf4JLogger&gatherPerfMetrics=true&logSlowQueries=true&characterEncoding=UTF-8&nullCatalogMeansCurrent=true&nullNamePatternMatchesAll=true&noAccessToProcedureBodies=true&useSSL=False&allowPublicKeyRetrieval=true
