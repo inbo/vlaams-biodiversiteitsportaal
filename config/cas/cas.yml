@@ -27,7 +27,7 @@ logging:
 cas:
   server:
     name: http://auth.la-flanders.org
-#    prefix: http://auth.la-flanders.org/cas
+    prefix: http://auth.la-flanders.org/cas
   host:
     name: auth.la-flanders.org
   adminPagesSecurity:

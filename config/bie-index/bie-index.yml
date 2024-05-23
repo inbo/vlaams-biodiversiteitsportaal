@@ -55,7 +55,7 @@ layers:
   gazetteerId:
 images:
   # URL of image configuration file
-  config: file:///data/bie-index/config/image-lists.json
+  config: file:///config/config/bie-index/image-lists.json
   base: http://images.la-flanders.org
   service:
     base: http://images.la-flanders.org
@@ -101,17 +101,17 @@ commonName:
   languages:
   defaultLanguage: en
 # Location of conservation lists
-conservationListsUrl: file:///data/bie-index/config/conservation-lists.json
+conservationListsUrl: file:///config/config/bie-index/conservation-lists.json
 # Location of vernacular name lists (null for default)
-vernacularListsUrl: file:///data/bie-index/config/vernacular-lists.json
+vernacularListsUrl: file:///config/config/bie-index/vernacular-lists.json
 #nationalSpeciesDatasets: dr2699,dr2700,dr2702,dr2704,dr2703,dr3118
 nationalSpeciesDatasets: ""
 hiddenImages:
   # URL of hidden images configuration file
-  config: file:///data/bie-index/config/hidden-images-lists.json
+  config: file:///config/config/bie-index/hidden-images-lists.json
 wiki:
   # URL of wiki configuration file
-  config: file:///data/bie-index/config/wiki-lists.json
+  config: file:///config/config/bie-index/wiki-lists.json
 solr:
   admin:
     connection: http://localhost:8983/solr
@@ -156,7 +156,7 @@ import:
   sequenceWeekly: occurrences,layers,regions,localities,suggest-index,swap
   dailyRunHour: 2
   weeklyRunDay: 6
-  favouritesConfigUrl: file:///data/bie-index/config/favourites.json
+  favouritesConfigUrl: file:///config/config/bie-index/favourites.json
   enableTasks: false
   taxonomy:
     dir: /data/bie/import
