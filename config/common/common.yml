@@ -16,7 +16,7 @@ skin:
   homeUrl: ${common.baseUrl}
   orgNameLong: Vlaams Biodiversiteitsportaal
   fluidLayout: true
-  orgNameShort: VlBiDiP
+  orgNameShort: VBP
 
 # Healthcheck endpoint
 management:
