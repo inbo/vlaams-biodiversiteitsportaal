@@ -68,9 +68,7 @@ server:
 redirectAfterFirstLogin: ${grails.serverURL}/myprofile
 dataSource:
     dbCreate: none
-    url: jdbc:mysql://mysql:3306/cas?serverTimezone=Europe/Brussels&zeroDateTimeBehavior=convertToNull&characterEncoding=UTF-8&useSSL=False&allowPublicKeyRetrieval=true
-    username: cas
-    password: my-super-secret-password
+    url: jdbc:mysql://cas:my-super-secret-password@mysql:3306/cas?serverTimezone=Europe/Brussels&zeroDateTimeBehavior=convertToNull&characterEncoding=UTF-8&useSSL=False&allowPublicKeyRetrieval=true
 oauth:
     providers: null
 password:

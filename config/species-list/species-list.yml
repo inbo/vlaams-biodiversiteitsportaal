@@ -1,124 +1,121 @@
 ala:
-    baseURL: ${common.protocol}://${common.domain}
+  baseURL: ${common.protocol}://${common.domain}
 apiGateway:
-    enabled: false
+  enabled: false
 auth:
-    userDetailsUrl: ${common.protocol}://auth.${common.domain}/userdetails/userDetails/
+  userDetailsUrl: ${common.protocol}://auth.${common.domain}/userdetails/userDetails/
 batchSize: 500
 bie:
-    baseURL: ${common.protocol}://species.${common.domain}
-    download: /data/bie-staging/species-list
-    nameIndexLocation: /data/lucene/namematching
-    searchPath: /search
+  baseURL: ${common.protocol}://species.${common.domain}
+  download: /data/bie-staging/species-list
+  nameIndexLocation: /data/lucene/namematching
+  searchPath: /search
 bieService:
-    baseURL: ${common.protocol}://species-ws.${common.domain}
+  baseURL: ${common.protocol}://species-ws.${common.domain}
 biocache:
-    baseURL: ${common.protocol}://records.${common.domain}
+  baseURL: ${common.protocol}://records.${common.domain}
 biocacheService:
-    baseURL: ${common.protocol}://records-ws.${common.domain}
+  baseURL: ${common.protocol}://records-ws.${common.domain}
 collectory:
-    baseURL: ${common.protocol}://collections.${common.domain}
-    enableSync: false
+  baseURL: ${common.protocol}://collections.${common.domain}
+  enableSync: false
 dataSource:
-    dbCreate: update
-    driverClassName: com.mysql.jdbc.Driver
-    password: my-super-secret-password
-    url: jdbc:mysql://mysql:3306/specieslists?allowPublicKeyRetrieval=true&autoReconnect=true&connectTimeout=0&useUnicode=true&characterEncoding=UTF-8&useSSL=False
-    username: species
+  dbCreate: update
+  url: jdbc:mysql://species:my-super-secret-password@mysql:3306/specieslists?allowPublicKeyRetrieval=true&autoReconnect=true&connectTimeout=0&useUnicode=true&characterEncoding=UTF-8&useSSL=False
 downloadLimit: 200
 fieldGuide:
-    baseURL: ''
+  baseURL: ''
 grails:
-    serverURL: ${common.protocol}://lists.${common.domain}
+  serverURL: ${common.protocol}://lists.${common.domain}
 headerAndFooter:
-    baseURL: ${common.protocol}://branding.${common.domain}
-    version: 2
+  baseURL: ${common.protocol}://branding.${common.domain}
+  version: 2
 httpTimeoutMillis: 60000
 iconicSpecies:
-    uid: dr781
+  uid: dr781
 logger:
-    baseURL: ${common.protocol}://logger.${common.domain}/service
-    baseUrl: ${common.protocol}://logger.${common.domain}/service
+  baseURL: ${common.protocol}://logger.${common.domain}/service
+  baseUrl: ${common.protocol}://logger.${common.domain}/service
 management:
-    endpoint:
-        health:
-            enabled: true
-    endpoints:
-        web:
-            exposure:
-                include: health
+  endpoint:
+    health:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health
 namematching:
-    serviceURL: https://namematching-ws.ala.org.au
+  serviceURL: https://namematching-ws.ala.org.au
 openapi:
-    components:
-        security:
-            oauth2:
-                baseUrl: ${common.protocol}://auth.${common.domain}/cas/oidc
-    contact:
-        email: support@la-flanders.org
-    terms: ''
+  components:
+    security:
+      oauth2:
+        baseUrl: ${common.protocol}://auth.${common.domain}/cas/oidc
+  contact:
+    email: support@la-flanders.org
+  terms: ''
 outboundhttp:
-    timeout: 8000
+  timeout: 8000
 ownerVisibleToEditor: false
 publicview:
-    hidePrivateLists: true
+  hidePrivateLists: true
 registryApiKey: 449cac3c-0498-4c25-ae0b-2517267c3f05
 security:
-    apikey:
-        auth:
-            serviceUrl: ${common.protocol}://auth.${common.domain}/apikey/ws/check/
-        check:
-            serviceUrl: ${common.protocol}://auth.${common.domain}/apikey/ws/check?apikey=
-        enabled: true
-        header:
-            alternatives: Authorization
-        userdetails:
-            serviceUrl: ${common.protocol}://auth.${common.domain}/userdetails/userDetails/
-    cas:
-        appServerName: ${common.protocol}://lists.${common.domain}
-        authCookieName: ALA-Auth
-        bypass: false
-        casServerName: ${common.protocol}://auth.${common.domain}
-        casServerUrlPrefix: ${common.protocol}://auth.${common.domain}/cas/
-        contextPath: ''
-        enabled: true
-        loginUrl: ${common.protocol}://auth.${common.domain}/cas/login
-        logoutUrl: ${common.protocol}://auth.${common.domain}/cas/logout
-    cookie:
-        domain: .la-flanders.org
-        enabled: false
-    core:
-        authCookieName: ALA-Auth
-    jwt:
-        clientId: lists
-        discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known
-        enabled: true
-        fallbackToLegacyBehaviour: true
-        roleAttributes: cognito:groups
-    oidc:
-        clientId: lists
-        discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known
-        enabled: false
-        secret: lists-oidc-super-secret
+  apikey:
+    auth:
+      serviceUrl: ${common.protocol}://auth.${common.domain}/apikey/ws/check/
+    check:
+      serviceUrl: ${common.protocol}://auth.${common.domain}/apikey/ws/check?apikey=
+    enabled: true
+    header:
+      alternatives: Authorization
+    userdetails:
+      serviceUrl: ${common.protocol}://auth.${common.domain}/userdetails/userDetails/
+  cas:
+    appServerName: ${common.protocol}://lists.${common.domain}
+    authCookieName: ALA-Auth
+    bypass: false
+    casServerName: ${common.protocol}://auth.${common.domain}
+    casServerUrlPrefix: ${common.protocol}://auth.${common.domain}/cas/
+    contextPath: ''
+    enabled: true
+    loginUrl: ${common.protocol}://auth.${common.domain}/cas/login
+    logoutUrl: ${common.protocol}://auth.${common.domain}/cas/logout
+  cookie:
+    domain: .la-flanders.org
+    enabled: false
+  core:
+    authCookieName: ALA-Auth
+  jwt:
+    clientId: lists
+    discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known
+    enabled: true
+    fallbackToLegacyBehaviour: true
+    roleAttributes: cognito:groups
+  oidc:
+    clientId: lists
+    discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known
+    enabled: false
+    secret: lists-oidc-super-secret
 serverName: ${common.protocol}://lists.${common.domain}
 serverURL: ${common.protocol}://lists.${common.domain}
 skin:
-    favicon: https://raw.githubusercontent.com/living-atlases/artwork/master/favicon.ico
-    fluidLayout: true
-    homeUrl: ${common.protocol}://${common.domain}
-    layout: main
-    orgNameLong: Vlaams Biodiversiteitsportaal
-    orgNameShort: LA Flanders
+  favicon: https://raw.githubusercontent.com/living-atlases/artwork/master/favicon.ico
+  fluidLayout: true
+  homeUrl: ${common.protocol}://${common.domain}
+  layout: main
+  orgNameLong: Vlaams Biodiversiteitsportaal
+  orgNameShort: LA Flanders
 spatial:
-    baseURL: ${common.protocol}://spatial.${common.domain}
+  baseURL: ${common.protocol}://spatial.${common.domain}
 termsOfUseUrl: ''
 userdetails:
-    api:
-        url: ${common.protocol}://auth.${common.domain}/userdetails/
-    web:
-        url: ${common.protocol}://auth.${common.domain}/userdetails/
+  api:
+    url: ${common.protocol}://auth.${common.domain}/userdetails/
+  web:
+    url: ${common.protocol}://auth.${common.domain}/userdetails/
 webservice:
-    client-id: ''
-    client-secret: ''
-    jwt: false
-    jwt-scopes: ''
+  client-id: ''
+  client-secret: ''
+  jwt: false
+  jwt-scopes: ''
