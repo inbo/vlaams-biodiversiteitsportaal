@@ -89,7 +89,7 @@ skin:
   orgNameShort: LA Flanders
   favicon: https://raw.githubusercontent.com/living-atlases/artwork/master/favicon.ico
 
-languageCodesUrl: file:///data/ala-bie-hub/config/languages.json
+languageCodesUrl: file:///config/config/bie-hub/languages.json
 
 # Facets displayed on search page
 facets: idxtype,rank,locatedInHubCountry,imageAvailable,speciesGroup,taxonomicStatus,conservationStatusAUS_s,conservationStatusACT_s,conservationStatusNSW_s,conservationStatusQLD_s,conservationStatusVIC_s,conservationStatusTAS_s,conservationStatusSA_s,conservationStatusWA_s,conservationStatusNT_s
@@ -161,7 +161,7 @@ literature:
     api: https://api.trove.nla.gov.au/v2
     apikey: get-an-api-key
 external:
-  blacklist: file:///data/ala-bie-hub/config/blacklist.json
+  blacklist: file:///config/config/bie-hub/blacklist.json
 
 # Mapping options
 defaultDecimalLatitude: 16.942
