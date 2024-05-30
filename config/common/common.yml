@@ -30,3 +30,11 @@ management:
 
 logging:
   config: /config/config/common/logback.xml
+
+environment:
+  local:
+    protocol: http
+    domain: la-flanders.org
+  production:
+    protocol: http
+    domain: 34.254.45.171.nip.io
