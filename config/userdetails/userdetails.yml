@@ -85,9 +85,9 @@ recaptcha:
     siteKey: null
     secretKey: null
 ala:
-    baseURL: ${common.protocol}://${common.domain}
+    baseURL: ${common.homepage}
 supportEmail: support@la-flanders.org
-homeUrl: ${common.protocol}://${common.domain}
+homeUrl: ${common.homepage}
 homeLogoUrl: https://www.ala.org.au/app/uploads/2020/06/ALA_Logo_Inline_RGB-300x63.png
 mainTitle: Vlaams Biodiversiteitsportaal
 emailSenderTitle: Vlaams Biodiversiteitsportaal
@@ -99,7 +99,7 @@ lists.url: ${common.protocol}://lists.${common.domain}/speciesList/list
 biocache.search.baseUrl: ${common.protocol}://records.${common.domain}/occurrences/search
 biocache.search.url: ${common.protocol}://records.${common.domain}/occurrences/search/?q=*%3A*&fq=assertion_user_id%3A
 biocache.myDownloads.url: ${common.protocol}://records.${common.domain}/download/myDownloads/
-myData.url: ${common.protocol}://${common.domain}/tempDataResource/myData
+myData.url: ${common.protocol}://www.${common.domain}/tempDataResource/myData
 alerts.url: null
 userDetails:
     url: ${common.protocol}://auth.${common.domain}/userdetails/
@@ -114,7 +114,7 @@ skin.fluidLayout: true
 skin.orgNameLong: Vlaams Biodiversiteitsportaal
 skin.orgNameShort: LA Flanders
 skin.favicon: ${common.protocol}://branding.${common.domain}/favicon.ico
-skin.homeUrl: ${common.protocol}://${common.domain}
+skin.homeUrl: ${common.protocol}://branding.${common.domain}
 attributes:
     affiliations:
         enabled: false
