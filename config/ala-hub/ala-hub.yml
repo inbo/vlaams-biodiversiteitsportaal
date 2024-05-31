@@ -163,7 +163,7 @@ mdba:
   basinChampions: https://biocollect.ala.org.au/mdba/project/index/4d15b4df-c05b-41bd-ac5b-8a65c9e37d17
   regions: ${common.protocol}://mdba-regions.ala.org.au/
 organisation:
-  baseUrl: ${common.protocol}://${common.domain}
+  baseUrl: ${common.homepage}
 pdfgen:
   baseURL: ${common.protocol}://pdfgen.ala.org.au
 privacyPolicy: ''
@@ -204,7 +204,7 @@ skin:
     text: not set
     url: ''
   exploreUrl: https://www.ala.org.au/explore-by-location/
-  favicon: https://raw.githubusercontent.com/living-atlases/artwork/master/favicon.ico
+  favicon: ${common.protocol}://branding.${common.domain}/favicon.ico
   fluidLayout: true
   homeUrl: ${common.protocol}://${common.domain}
   layout: ala

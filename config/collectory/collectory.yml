@@ -1,7 +1,7 @@
 ROLE_ADMIN: ROLE_ADMIN
 ROLE_EDITOR: ROLE_EDITOR
 ala:
-  baseURL: ${common.protocol}://${common.domain}
+  baseURL: ${common.homepage}
 alertUrl: ""
 alertsUrl: ""
 api_key: e8dcf74d-bcef-41bb-8738-48f0ff0a5b75
@@ -140,7 +140,7 @@ showExtraInfoInDataSetsView:
   enabled: "true "
   relativeTime: true
 skin:
-  favicon: https://raw.githubusercontent.com/living-atlases/artwork/master/favicon.ico
+  favicon: ${common.protocol}://branding.${common.domain}/
   homeUrl: ${common.protocol}://${common.domain}
   orgNameLong: Vlaams Biodiversiteitsportaal
   orgNameShort: LA Flanders

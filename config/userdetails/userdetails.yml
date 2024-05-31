@@ -106,14 +106,14 @@ userDetails:
 headerAndFooter:
     baseURL: ${common.protocol}://branding.${common.domain}
     version: 2
-ala.baseURL: ${common.protocol}://${common.domain}
+ala.baseURL: ${common.homepage}
 bie.baseURL: ${common.protocol}://species.${common.domain}
 bie.searchPath: /search
 skin.layout: ala-main
 skin.fluidLayout: true
 skin.orgNameLong: Vlaams Biodiversiteitsportaal
 skin.orgNameShort: LA Flanders
-skin.favicon: https://raw.githubusercontent.com/living-atlases/artwork/master/favicon.ico
+skin.favicon: ${common.protocol}://branding.${common.domain}/favicon.ico
 skin.homeUrl: ${common.protocol}://${common.domain}
 attributes:
     affiliations:

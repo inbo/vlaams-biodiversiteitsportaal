@@ -94,7 +94,7 @@ userdetails:
     url: "${common.protocol}://auth.${common.domain}/userdetails/"
 
 favicon:
-  url: "https://raw.githubusercontent.com/living-atlases/artwork/master/favicon.ico"
+  url: "${common.protocol}://branding.${common.domain}/favicon.ico"
 
 layersService:
   url: "${common.protocol}://spatial.${common.domain}/ws"

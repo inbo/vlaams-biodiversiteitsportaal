@@ -10,13 +10,14 @@ RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
     # -Dorg.gradle.debug=true -Dorg.gradle.debug.suspend=no --debug \
     --parallel
 
-FROM openjdk:11
+FROM tomcat:9.0-jdk11-openjdk
 
 ARG VERSION=3.4.1
 
-COPY --from=builder /project/build/libs/biocache-service-${VERSION}.war /app.war
+COPY --from=builder /project/build/libs/biocache-service-${VERSION}.war $CATALINA_HOME/webapps/ROOT.war
 
-VOLUME /data
-ENTRYPOINT ["java", "-jar", "/app.war"]
+RUN mkdir -p /data/biocache/config
+
+VOLUME /data/biocache-service
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/actuator/health || exit 1

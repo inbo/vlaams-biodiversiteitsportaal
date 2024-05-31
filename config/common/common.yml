@@ -1,19 +1,19 @@
 common:
   protocol: http
   domain: biodiversiteitsportaal.dev.svdev.be
-  baseUrl: ${common.protocol}://${common.domain}
+  homepage: ${common.protocol}://www.${common.domain}
 
 ala:
-  baseURL: ${common.baseUrl}
+  baseURL: ${common.homepage}
 
 # Header and footer
 headerAndFooter:
-  baseURL: ${common.baseUrl}
+  baseURL: ${common.protocol}://branding.${common.domain}
   version: 2
 
 # Skin and layout
 skin:
-  homeUrl: ${common.baseUrl}
+  homeUrl: ${common.homepage}
   orgNameLong: Vlaams Biodiversiteitsportaal
   fluidLayout: true
   orgNameShort: VBP

@@ -70,7 +70,7 @@ headerAndFooter:
   version: 2
 
 ala:
-  baseURL: ${common.protocol}://${common.domain}
+  baseURL: ${common.homepage}
   image:
     service:
       url: ${common.protocol}://images.${common.domain}
@@ -87,7 +87,7 @@ skin:
   orgNameLong: Vlaams Biodiversiteitsportaal
   fluidLayout: true
   orgNameShort: LA Flanders
-  favicon: https://raw.githubusercontent.com/living-atlases/artwork/master/favicon.ico
+  favicon: ${common.protocol}://branding.${common.domain}/favicon.ico
 
 languageCodesUrl: file:///config/config/bie-hub/languages.json
 

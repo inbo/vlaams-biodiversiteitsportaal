@@ -105,11 +105,11 @@ ala:
       enableRequestExtraAttributes: true
       enableUpdateLegacyPasswords: true
   skin:
-    baseUrl: ${common.protocol}://${common.domain}
+    baseUrl: ${common.protocol}://branding.${common.domain}
     termsUrl: 
     uiVersion: 3
     headerFooterUrl: ${common.protocol}://branding.${common.domain}/
-    favIconBaseUrl: ${common.protocol}://${common.domain}/favicon/
+    favIconBaseUrl: ${common.protocol}://branding.${common.domain}/
     bieBaseUrl: ${common.protocol}://species.${common.domain}
     bieSearchPath: /search
     userDetailsUrl: ${common.protocol}://auth.${common.domain}/userdetails/

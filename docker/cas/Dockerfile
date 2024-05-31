@@ -17,6 +17,8 @@ FROM openjdk:11
 
 ARG VERSION=6.5.6-3
 
+RUN mkdir /certs
+COPY rds-truststore.jks $JAVA_HOME/jre/lib/security/cacerts
 COPY --from=builder /project/target/cas-exec.war /cas.war
 RUN mkdir -p /data/cas
 

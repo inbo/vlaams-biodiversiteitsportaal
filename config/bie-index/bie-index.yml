@@ -145,7 +145,7 @@ skin:
   layout: main
   fluidLayout: true
   orgNameLong: Vlaams Biodiversiteitsportaal
-  favicon: https://raw.githubusercontent.com/living-atlases/artwork/master/favicon.ico
+  favicon: ${common.protocol}://branding.${common.domain}/favicon.ico
   homeUrl: ${common.protocol}://${common.domain}
 headerAndFooter:
   baseURL: ${common.protocol}://branding.${common.domain}

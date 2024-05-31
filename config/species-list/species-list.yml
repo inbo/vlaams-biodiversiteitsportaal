@@ -100,7 +100,7 @@ security:
 serverName: ${common.protocol}://lists.${common.domain}
 serverURL: ${common.protocol}://lists.${common.domain}
 skin:
-  favicon: https://raw.githubusercontent.com/living-atlases/artwork/master/favicon.ico
+  favicon: ${common.protocol}://branding.${common.domain}/favicon.ico
   fluidLayout: true
   homeUrl: ${common.protocol}://${common.domain}
   layout: main

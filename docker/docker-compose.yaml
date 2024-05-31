@@ -13,6 +13,9 @@ services:
     depends_on:
       cas:
         condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+      LOG_FORMAT: JSON
 
   bie-hub:
     #    image: atlasoflivingaustralia/ala-bie-hub:4.1.0
@@ -28,6 +31,9 @@ services:
     depends_on:
       cas:
         condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+      LOG_FORMAT: JSON
 
   bie-index:
     #    image: atlasoflivingaustralia/bie-index:3.1.0
@@ -45,15 +51,15 @@ services:
         condition: service_healthy
       solr:
         condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+      LOG_FORMAT: JSON
 
   biocache-service:
     #    image: atlasoflivingaustralia/biocache-service:3.4.1
     build: biocache-service
     ports:
       - "8003:8080"
-    command:
-      - -Xms128m -Xmx256m
-      - --spring.config.additional-location=file:/config/config/common/common.yml,file:/config/config/biocache-service/biocache-service.yml
     volumes:
       - ../config:/config/config:ro
     depends_on:
@@ -61,6 +67,13 @@ services:
         condition: service_healthy
       solr:
         condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+#      LOG_FORMAT: JSON
+      LOG_LEVEL: DEBUG
+      CATALINA_OPTS: "-Xms128m -Xmx256m -Dspring.config.additional-location=file:/config/config/common/common.yml,file:/config/config/biocache-service/biocache-service.yml -Dspring.config.import=''"
+      JAVA_OPTS: "-Xms128m -Xmx256m -Dspring.config.additional-location=file:/config/config/common/common.yml,file:/config/config/biocache-service/biocache-service.yml -Dspring.config.import=''"
+      SPRING_CONFIG_IMPORT: ''
 
   cas:
     #    image: atlasoflivingaustralia/cas:6.5.6-2
@@ -76,7 +89,9 @@ services:
     environment:
       DOCKERIZE_OPTS: ""
       ALA_PASSWORD_PROPERTIES: /config/config/cas/pwe.properties
+      SPRING_PROFILES_ACTIVE: local
 #      LOG_FORMAT: JSON
+      LOG_LEVEL: DEBUG
     volumes:
       - ../config:/config/config:ro
       - cas-shared-conf:/etc/cas
@@ -106,6 +121,9 @@ services:
         condition: service_healthy
       cas:
         condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+      LOG_FORMAT: JSON
 
   cas-management:
     #    image: atlasoflivingaustralia/cas-management:6.5.5-2
@@ -131,6 +149,9 @@ services:
         condition: service_healthy
       cas:
         condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+      LOG_FORMAT: JSON
 
   collectory:
     #    image: atlasoflivingaustralia/collectory:5.1.0
@@ -150,6 +171,9 @@ services:
         condition: service_healthy
       cas:
         condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+      LOG_FORMAT: JSON
 
   species-list:
     #    image: atlasoflivingaustralia/species-list:4.5.3
@@ -168,6 +192,9 @@ services:
         condition: service_healthy
       cas:
         condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+      LOG_FORMAT: JSON
 
   regions:
     build: regions
@@ -183,6 +210,9 @@ services:
         condition: service_healthy
       cas:
         condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+      LOG_FORMAT: JSON
 
   spatial-hub:
     build: spatial-hub
@@ -197,6 +227,9 @@ services:
     depends_on:
       spatial-service:
         condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+      LOG_FORMAT: JSON
 
   spatial-service:
     build: spatial-service
@@ -220,6 +253,9 @@ services:
         condition: service_healthy
       cas-apikey:
         condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+      LOG_FORMAT: JSON
 
   userdetails:
     #    image: atlasoflivingaustralia/userdetails:3.0.3
@@ -239,6 +275,9 @@ services:
         condition: service_healthy
       mailhog:
         condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+      LOG_FORMAT: JSON
 
   postgis:
     image: postgis/postgis:16-3.4-alpine
