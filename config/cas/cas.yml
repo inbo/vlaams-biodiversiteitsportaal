@@ -50,11 +50,17 @@ cas:
           signing:
             key: 
           encryption:
-            key: 
+            key:
+
     oidc:
       core:
-        issuer: ${common.protocol}://auth.${common.domain}/cas/oidc
-        jwksFile: file:/data/cas/keystore.jwks
+        issuer: https://biodiversiteitsportaal-dev.auth.eu-west-1.amazoncognito.com/oauth2
+        client-id: YOUR_COGNITO_APP_CLIENT_ID
+        client-secret: YOUR_COGNITO_APP_CLIENT_SECRET
+        discovery-uri: https://biodiversiteitsportaal-dev.auth.eu-west-1.amazoncognito.com/.well-known/openid-configuration
+        response-type: code
+        scope: openid profile email
+        callback-url: ${common.protocol}://auth.${common.domain}/cas/oidc/callback
   monitor:
     endpoints:
       discovery:
