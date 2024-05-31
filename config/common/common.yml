@@ -1,6 +1,6 @@
 common:
   protocol: http
-  domain: 34.254.45.171.nip.io
+  domain: biodiversiteitsportaal.dev.svdev.be
   baseUrl: ${common.protocol}://${common.domain}
 
 ala:
@@ -37,4 +37,4 @@ environment:
     domain: la-flanders.org
   production:
     protocol: http
-    domain: 34.254.45.171.nip.io
+    domain: biodiversiteitsportaal.dev.svdev.be
