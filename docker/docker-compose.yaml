@@ -89,7 +89,7 @@ services:
     environment:
       DOCKERIZE_OPTS: ""
       ALA_PASSWORD_PROPERTIES: /config/config/cas/pwe.properties
-      SPRING_PROFILES_ACTIVE: local
+      SPRING_PROFILES_ACTIVE: production
 #      LOG_FORMAT: JSON
       LOG_LEVEL: DEBUG
     volumes:
