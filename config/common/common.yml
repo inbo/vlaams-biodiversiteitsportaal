@@ -1,5 +1,5 @@
 common:
-  protocol: http
+  protocol: https
   domain: biodiversiteitsportaal.dev.svdev.be
   homepage: ${common.protocol}://www.${common.domain}
 
