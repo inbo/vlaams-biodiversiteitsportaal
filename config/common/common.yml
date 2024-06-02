@@ -36,5 +36,5 @@ environment:
     protocol: http
     domain: la-flanders.org
   production:
-    protocol: http
+    protocol: https
     domain: biodiversiteitsportaal.dev.svdev.be
