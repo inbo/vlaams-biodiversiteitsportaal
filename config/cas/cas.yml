@@ -6,7 +6,7 @@ server:
     timeout: 86400  # seconds, 24 hours
   ssl:
     enabled: false
-    key-store: 
+    key-store:
 jndi:
   hikari:
     jdbccas:
@@ -22,6 +22,38 @@ jndi:
 logging:
   config: "file:/config/config/common/log4j2.xml"
 
+ala:
+  userDetailsBaseUrl: ${common.protocol}://auth.${common.domain}/userdetails/
+  cookie:
+    domain: ${common.domain}
+    secure: false
+    httpOnly: true
+    maxAge: -1
+    name: ALA-Auth
+    path: /
+  userCreator:
+    userCreatePassword: wormishmensurablearchitecture
+    enableUserSurvey: false
+    jdbc:
+      dataSourceName: java:comp/env/jdbccas
+      enableUpdateLastLoginTime: true
+      enableRequestExtraAttributes: true
+      enableUpdateLegacyPasswords: true
+
+  skin:
+    baseUrl: ${common.protocol}://branding.${common.domain}
+    termsUrl:
+    uiVersion: 3
+    headerFooterUrl: ${common.protocol}://branding.${common.domain}/
+    favIconBaseUrl: ${common.protocol}://branding.${common.domain}/
+    bieBaseUrl: ${common.protocol}://species.${common.domain}
+    bieSearchPath: /search
+    userDetailsUrl: ${common.protocol}://auth.${common.domain}/userdetails/
+    orgShortName: VBP
+    orgLongName: Vlaams Biodiversiteitsportaal
+    orgNameKey: vbp
+
+
 cas:
   server:
     name: ${common.protocol}://auth.${common.domain}
@@ -32,7 +64,7 @@ cas:
     cors:
       enabled: true
       allow-origins:
-      - ${common.protocol}://spatial.${common.domain}
+        - ${common.protocol}://spatial.${common.domain}
   jdbc:
     showSql: false
   audit:
@@ -44,23 +76,25 @@ cas:
         range-seconds: 30
         threshold: 3
     pac4j:
+      issuer: https://biodiversiteitsportaal-dev.auth.eu-west-1.amazoncognito.com/oauth2
+      client-id: YOUR_COGNITO_APP_CLIENT_ID
+      client-secret: YOUR_COGNITO_APP_CLIENT_SECRET
+      discovery-uri: https://biodiversiteitsportaal-dev.auth.eu-west-1.amazoncognito.com/.well-known/openid-configuration
+      response-type: code
+      scope: openid profile email
+      callback-url: ${common.protocol}://auth.${common.domain}/cas/oidc/callback
       typedIdUsed: true
       cookie:
         crypto:
           signing:
-            key: 
+            key:
           encryption:
             key:
 
     oidc:
       core:
-        issuer: https://biodiversiteitsportaal-dev.auth.eu-west-1.amazoncognito.com/oauth2
-        client-id: YOUR_COGNITO_APP_CLIENT_ID
-        client-secret: YOUR_COGNITO_APP_CLIENT_SECRET
-        discovery-uri: https://biodiversiteitsportaal-dev.auth.eu-west-1.amazoncognito.com/.well-known/openid-configuration
-        response-type: code
-        scope: openid profile email
-        callback-url: ${common.protocol}://auth.${common.domain}/cas/oidc/callback
+        issuer: ${common.protocol}://auth.${common.domain}/cas/oidc
+        jwksFile: file:/data/cas/keystore.jwks
   monitor:
     endpoints:
       discovery:
@@ -89,39 +123,9 @@ cas:
   webflow:
     crypto:
       signing:
-        key: 
+        key:
       encryption:
-        key: 
-
-ala:
-  userDetailsBaseUrl: ${common.protocol}://auth.${common.domain}/userdetails/
-  cookie:
-    domain: ${common.domain}
-    secure: false
-    httpOnly: true
-    maxAge: -1
-    name: ALA-Auth
-    path: /
-  userCreator:
-    userCreatePassword: wormishmensurablearchitecture
-    enableUserSurvey: false
-    jdbc:
-      dataSourceName: java:comp/env/jdbccas
-      enableUpdateLastLoginTime: true
-      enableRequestExtraAttributes: true
-      enableUpdateLegacyPasswords: true
-  skin:
-    baseUrl: ${common.protocol}://branding.${common.domain}
-    termsUrl: 
-    uiVersion: 3
-    headerFooterUrl: ${common.protocol}://branding.${common.domain}/
-    favIconBaseUrl: ${common.protocol}://branding.${common.domain}/
-    bieBaseUrl: ${common.protocol}://species.${common.domain}
-    bieSearchPath: /search
-    userDetailsUrl: ${common.protocol}://auth.${common.domain}/userdetails/
-    orgShortName: LA Flanders
-    orgLongName: Vlaams Biodiversiteitsportaal
-    orgNameKey: ala
+        key:
 
 # Enable these for Spring Boot actuator (required for Spring Boot Admin client)
 
@@ -167,12 +171,12 @@ spring:
     exclude: >
       org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration,
       org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration
-#  boot:
-#    admin:
-#      server:
-#        enabled: true
-#        ssl: false
-#      url: ${common.protocol}://auth.${common.domain}
+  #  boot:
+  #    admin:
+  #      server:
+  #        enabled: true
+  #        ssl: false
+  #      url: ${common.protocol}://auth.${common.domain}
 
   flyway:
     baselineOnMigrate: true # Create DB from scratch
