@@ -169,7 +169,7 @@ bie:
 openapi:
   terms:
   contact:
-    email: support@la-flanders.org
+    email: support@${common.domain}
   components:
     security:
       oauth2:

@@ -88,12 +88,12 @@ recaptcha:
 ala:
   baseURL: http://la-flanders.org
 
-supportEmail: support@la-flanders.org
+supportEmail: support@${common.domain}
 homeUrl: http://la-flanders.org
 homeLogoUrl: https://www.ala.org.au/app/uploads/2020/06/ALA_Logo_Inline_RGB-300x63.png
 mainTitle: Vlaams Biodiversiteitsportaal
 emailSenderTitle: Vlaams Biodiversiteitsportaal
-emailSender: support@la-flanders.org
+emailSender: support@${common.domain}
 
 sightings.url: 
 spatial.url: http://spatial.la-flanders.org?tool=log

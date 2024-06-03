@@ -52,7 +52,7 @@ openapi:
       oauth2:
         baseUrl: ${common.protocol}://auth.${common.domain}/cas/oidc
   contact:
-    email: support@la-flanders.org
+    email: support@${common.domain}
   terms: ''
 outboundhttp:
   timeout: 8000

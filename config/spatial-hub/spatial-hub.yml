@@ -57,7 +57,7 @@ security:
     authCookieName: ALA-Auth
   cookie:
     enabled: true
-    domain: la-flanders.org
+    domain: ${common.domain}
 
 webservice:
   jwt: true

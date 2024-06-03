@@ -194,7 +194,7 @@ dataquality:
 
 speciesParent: ${common.protocol}://lists.${common.domain}/iconic-species
 
-supportEmail: support@la-flanders.org
+supportEmail: support@${common.domain}
 
 survey:
   indexPage: False

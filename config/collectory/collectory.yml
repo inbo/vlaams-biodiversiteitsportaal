@@ -32,7 +32,7 @@ eml:
   city: Camberra
   country: Australia
   deliveryPoint: Clunies Ross Street
-  electronicMailAddress: support@la-flanders.org
+  electronicMailAddress: support@${common.domain}
   organizationName: Vlaams Biodiversiteitsportaal
   postalCode: 2601
 gbifApiPassword: ""
@@ -82,7 +82,7 @@ openapi:
       oauth2:
         baseUrl: ${common.protocol}://auth.${common.domain}/cas/oidc
   contact:
-    email: support@la-flanders.org
+    email: support@${common.domain}
   terms: ""
 orgNameLong: Vlaams Biodiversiteitsportaal
 projectName: Vlaams Biodiversiteitsportaal
@@ -144,7 +144,7 @@ skin:
   homeUrl: ${common.protocol}://www.${common.domain}
   orgNameLong: Vlaams Biodiversiteitsportaal
   orgNameShort: LA Flanders
-  orgSupportEmail: support@la-flanders.org
+  orgSupportEmail: support@${common.domain}
   taxaLinks:
     baseUrl: ${common.protocol}://species.${common.domain}/species/
 spatial:

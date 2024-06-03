@@ -53,11 +53,11 @@ flyway:
 ala:
   baseURL: ${common.homepage}
 
-supportEmail: support@la-flanders.org
+supportEmail: support@${common.domain}
 homeUrl: ${common.protocol}://www.${common.domain}
 mainTitle: Vlaams Biodiversiteitsportaal
 emailSenderTitle: Vlaams Biodiversiteitsportaal
-emailSender: support@la-flanders.org
+emailSender: support@${common.domain}
 
 sightings.url: /mine
 spatial.url: ${common.protocol}://spatial.${common.domain}?tool=log

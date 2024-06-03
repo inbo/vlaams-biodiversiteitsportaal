@@ -18,7 +18,7 @@ cas:
         name: ${common.protocol}://auth.${common.domain}
         prefix: ${cas.server.name}/cas
     host:
-        name: la-flanders.org
+        name: ${common.domain}
     authn:
         accept:
             users: ""

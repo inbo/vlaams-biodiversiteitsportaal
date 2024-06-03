@@ -57,7 +57,7 @@ serverName: ${common.protocol}://auth.${common.domain}
 grails:
   serverURL: ${common.protocol}://auth.${common.domain}/userdetails
   mail:
-    host: mail.la-flanders.org
+    host: mail.${common.domain}
     port: 1025
     username: userdetails
     password: my-super-secret-password
@@ -84,12 +84,12 @@ recaptcha:
   baseUrl: https://www.google.com/recaptcha/api/
   siteKey: null
   secretKey: null
-supportEmail: support@la-flanders.org
+supportEmail: support@${common.domain}
 homeUrl: ${common.homepage}
 homeLogoUrl: https://www.ala.org.au/app/uploads/2020/06/ALA_Logo_Inline_RGB-300x63.png
 mainTitle: Vlaams Biodiversiteitsportaal
 emailSenderTitle: Vlaams Biodiversiteitsportaal
-emailSender: support@la-flanders.org
+emailSender: support@${common.domain}
 sightings:
   url: null
 spatial:

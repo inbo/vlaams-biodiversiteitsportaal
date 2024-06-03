@@ -124,61 +124,61 @@ for client in clients:
     print(f"{client['name']}: {response.status_code} | {response.text}")
 
     i += 1
-
-# General CAS Service
-response = requests.post(f"{PROTOCOL}://auth.{DOMAIN}/cas/actuator/registeredServices/import", json={
-    "@class": "org.apereo.cas.services.RegexRegisteredService",
-    "serviceId": "^https?://.*",
-    "name": "Atlas of Living Australia",
-    "theme": "ala",
-    "id": "10000003",
-    "description": "All Atlas Services",
-    "expirationPolicy": {
-        "@class": "org.apereo.cas.services.DefaultRegisteredServiceExpirationPolicy",
-        "deleteWhenExpired": "false",
-        "notifyWhenDeleted": "false"
-    },
-    "proxyPolicy": {
-        "@class": "org.apereo.cas.services.RefuseRegisteredServiceProxyPolicy"
-    },
-    "evaluationOrder": "1",
-    "usernameAttributeProvider": {
-        "@class": "org.apereo.cas.services.DefaultRegisteredServiceUsernameProvider",
-        "canonicalizationMode": "NONE",
-        "encryptUsername": "false"
-    },
-    "logoutType": "BACK_CHANNEL",
-    "attributeReleasePolicy": {
-        "@class": "org.apereo.cas.services.ReturnAllowedAttributeReleasePolicy",
-        "principalAttributesRepository": {
-            "@class": "org.apereo.cas.authentication.principal.DefaultPrincipalAttributesRepository",
-            "expiration": "2",
-            "timeUnit": "HOURS"
-        },
-        "consentPolicy": {
-            "@class": "org.apereo.cas.services.consent.DefaultRegisteredServiceConsentPolicy",
-            "enabled": "true"
-        },
-        "authorizedToReleaseCredentialPassword": "false",
-        "authorizedToReleaseProxyGrantingTicket": "false",
-        "excludeDefaultAttributes": "false",
-        "authorizedToReleaseAuthenticationAttributes": "true"
-    },
-    "multifactorPolicy": {
-        "@class": "org.apereo.cas.services.DefaultRegisteredServiceMultifactorPolicy",
-        "failureMode": "UNDEFINED",
-        "bypassEnabled": "false"
-    },
-    "accessStrategy": {
-        "@class": "org.apereo.cas.services.DefaultRegisteredServiceAccessStrategy",
-        "order": "0",
-        "enabled": "true",
-        "ssoEnabled": "true",
-        "delegatedAuthenticationPolicy": {
-            "@class": "org.apereo.cas.services.DefaultRegisteredServiceDelegatedAuthenticationPolicy"
-        },
-        "requireAllAttributes": "true",
-        "caseInsensitive": "false"
-    }
-})
-print(f"General CAS service: {response.status_code} | {response.text}")
+#
+# # General CAS Service
+# response = requests.post(f"{PROTOCOL}://auth.{DOMAIN}/cas/actuator/registeredServices/import", json={
+#     "@class": "org.apereo.cas.services.RegexRegisteredService",
+#     "serviceId": "^https?://.*",
+#     "name": "Atlas of Living Australia",
+#     "theme": "ala",
+#     "id": "10000003",
+#     "description": "All Atlas Services",
+#     "expirationPolicy": {
+#         "@class": "org.apereo.cas.services.DefaultRegisteredServiceExpirationPolicy",
+#         "deleteWhenExpired": "false",
+#         "notifyWhenDeleted": "false"
+#     },
+#     "proxyPolicy": {
+#         "@class": "org.apereo.cas.services.RefuseRegisteredServiceProxyPolicy"
+#     },
+#     "evaluationOrder": "1",
+#     "usernameAttributeProvider": {
+#         "@class": "org.apereo.cas.services.DefaultRegisteredServiceUsernameProvider",
+#         "canonicalizationMode": "NONE",
+#         "encryptUsername": "false"
+#     },
+#     "logoutType": "BACK_CHANNEL",
+#     "attributeReleasePolicy": {
+#         "@class": "org.apereo.cas.services.ReturnAllowedAttributeReleasePolicy",
+#         "principalAttributesRepository": {
+#             "@class": "org.apereo.cas.authentication.principal.DefaultPrincipalAttributesRepository",
+#             "expiration": "2",
+#             "timeUnit": "HOURS"
+#         },
+#         "consentPolicy": {
+#             "@class": "org.apereo.cas.services.consent.DefaultRegisteredServiceConsentPolicy",
+#             "enabled": "true"
+#         },
+#         "authorizedToReleaseCredentialPassword": "false",
+#         "authorizedToReleaseProxyGrantingTicket": "false",
+#         "excludeDefaultAttributes": "false",
+#         "authorizedToReleaseAuthenticationAttributes": "true"
+#     },
+#     "multifactorPolicy": {
+#         "@class": "org.apereo.cas.services.DefaultRegisteredServiceMultifactorPolicy",
+#         "failureMode": "UNDEFINED",
+#         "bypassEnabled": "false"
+#     },
+#     "accessStrategy": {
+#         "@class": "org.apereo.cas.services.DefaultRegisteredServiceAccessStrategy",
+#         "order": "0",
+#         "enabled": "true",
+#         "ssoEnabled": "true",
+#         "delegatedAuthenticationPolicy": {
+#             "@class": "org.apereo.cas.services.DefaultRegisteredServiceDelegatedAuthenticationPolicy"
+#         },
+#         "requireAllAttributes": "true",
+#         "caseInsensitive": "false"
+#     }
+# })
+# print(f"General CAS service: {response.status_code} | {response.text}")

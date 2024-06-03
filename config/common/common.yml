@@ -35,7 +35,7 @@ environment:
   local:
     common:
       protocol: http
-      domain: la-flanders.org
+      domain: ${common.domain}
   production:
     common:
       protocol: https
