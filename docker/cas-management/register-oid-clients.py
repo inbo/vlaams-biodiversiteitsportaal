@@ -1,8 +1,11 @@
 #!/usr/bin/env python
 import requests
 
-PROTOCOL = 'https'
-DOMAIN = 'biodiversiteitsportaal.dev.svdev.be'
+# PROTOCOL = 'https'
+# DOMAIN = 'biodiversiteitsportaal.dev.svdev.be'
+
+PROTOCOL = 'http'
+DOMAIN = 'la-flanders.org'
 
 # Service specific OIDC clients
 clients = [

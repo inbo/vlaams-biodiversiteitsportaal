@@ -80,6 +80,8 @@ cas:
         issuer: ${common.protocol}://auth.${common.domain}/cas/oidc
         jwksFile: file:/data/cas/keystore.jwks
     pac4j:
+      core:
+        name: DelegatedClientAuthenticationHandler
       oidc:
         - generic:
             id: 5rp2hoga3r3o9ct31rap66efrc
