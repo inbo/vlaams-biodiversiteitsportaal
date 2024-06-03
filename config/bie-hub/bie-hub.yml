@@ -82,7 +82,7 @@ wikipedia:
 
 # Skin and layout
 skin:
-  homeUrl: ${common.protocol}://${common.domain}
+  homeUrl: ${common.protocol}://www.${common.domain}
   layout: ala
   orgNameLong: Vlaams Biodiversiteitsportaal
   fluidLayout: true

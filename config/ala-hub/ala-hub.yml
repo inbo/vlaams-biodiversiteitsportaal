@@ -206,7 +206,7 @@ skin:
   exploreUrl: https://www.ala.org.au/explore-by-location/
   favicon: ${common.protocol}://branding.${common.domain}/favicon.ico
   fluidLayout: true
-  homeUrl: ${common.protocol}://${common.domain}
+  homeUrl: ${common.protocol}://www.${common.domain}
   layout: ala
   orgNameLong: Vlaams Biodiversiteitsportaal
   orgNameShort: LA Flanders

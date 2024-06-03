@@ -82,7 +82,7 @@ security:
     loginUrl: ${common.protocol}://auth.${common.domain}/cas/login
     logoutUrl: ${common.protocol}://auth.${common.domain}/cas/logout
   cookie:
-    domain: .la-flanders.org
+    domain: ${common.domain}
     enabled: false
   core:
     authCookieName: ALA-Auth
@@ -102,7 +102,7 @@ serverURL: ${common.protocol}://lists.${common.domain}
 skin:
   favicon: ${common.protocol}://branding.${common.domain}/favicon.ico
   fluidLayout: true
-  homeUrl: ${common.protocol}://${common.domain}
+  homeUrl: ${common.protocol}://www.${common.domain}
   layout: main
   orgNameLong: Vlaams Biodiversiteitsportaal
   orgNameShort: LA Flanders

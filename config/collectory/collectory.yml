@@ -141,7 +141,7 @@ showExtraInfoInDataSetsView:
   relativeTime: true
 skin:
   favicon: ${common.protocol}://branding.${common.domain}/
-  homeUrl: ${common.protocol}://${common.domain}
+  homeUrl: ${common.protocol}://www.${common.domain}
   orgNameLong: Vlaams Biodiversiteitsportaal
   orgNameShort: LA Flanders
   orgSupportEmail: support@la-flanders.org

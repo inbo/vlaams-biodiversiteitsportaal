@@ -54,7 +54,7 @@ ala:
   baseURL: ${common.homepage}
 
 supportEmail: support@la-flanders.org
-homeUrl: ${common.protocol}://${common.domain}
+homeUrl: ${common.protocol}://www.${common.domain}
 mainTitle: Vlaams Biodiversiteitsportaal
 emailSenderTitle: Vlaams Biodiversiteitsportaal
 emailSender: support@la-flanders.org

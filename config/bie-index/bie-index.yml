@@ -146,7 +146,7 @@ skin:
   fluidLayout: true
   orgNameLong: Vlaams Biodiversiteitsportaal
   favicon: ${common.protocol}://branding.${common.domain}/favicon.ico
-  homeUrl: ${common.protocol}://${common.domain}
+  homeUrl: ${common.protocol}://www.${common.domain}
 headerAndFooter:
   baseURL: ${common.protocol}://branding.${common.domain}
 useLegacyAuto: false

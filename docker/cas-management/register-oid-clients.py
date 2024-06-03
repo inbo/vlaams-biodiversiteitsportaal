@@ -1,61 +1,64 @@
 #!/usr/bin/env python
 import requests
 
+PROTOCOL = 'https'
+DOMAIN = 'biodiversiteitsportaal.dev.svdev.be'
+
 # Service specific OIDC clients
 clients = [
     {
         "client_id": "collectory",
         "name": "OidcClient",
         "client_secret": "1b5515b804ab42427475ae9949e77d23d0db",
-        "url": "^http://collections.la-flanders.org/.*$"
+        "url": f"^{PROTOCOL}://collections.{DOMAIN}/.*$"
     },
     {
         "client_id": "ala_hub",
         "name": "OidcClient",
         "client_secret": "a42e365c8a3dc80b6e7c93a1485ae22aa4c0",
-        "url": "^http://records.la-flanders.org/.*$"
+        "url": f"^{PROTOCOL}://records.{DOMAIN}/.*$"
     },
     {
         "client_id": "biocache_service",
         "name": "OidcClient",
         "client_secret": "24152db197bdf9d24dea3386475ec8b8adcd",
-        "url": "^http://records-ws.la-flanders.org/.*$"
+        "url": f"^{PROTOCOL}://records-ws.{DOMAIN}/.*$"
     },
     {
         "client_id": "ala_bie",
         "name": "OidcClient",
         "client_secret": "0efee21e743303cd49a78deca397ae98256c",
-        "url": "^http://species.la-flanders.org/.*$"
+        "url": f"^{PROTOCOL}://species.{DOMAIN}/.*$"
     },
     {
         "client_id": "bie_index",
         "name": "OidcClient",
         "client_secret": "895c1a54c053b38953b5b3d3466f7a171659",
-        "url": "^http://species-ws.la-flanders.org/.*$"
+        "url": f"^{PROTOCOL}://species-ws.{DOMAIN}/.*$"
     },
     {
         "client_id": "images",
         "name": "OidcClient",
         "client_secret": "a6d3aed6a75bcfa6da9ff8d58ce0eb23babc",
-        "url": "^http://images.la-flanders.org/.*$"
+        "url": f"^{PROTOCOL}://images.{DOMAIN}/.*$"
     },
     {
         "client_id": "logger",
         "name": "OidcClient",
         "client_secret": "de3ac90fc3b664e5a702e666f04659a96513",
-        "url": "^http://logger.la-flanders.org/.*$"
+        "url": f"^{PROTOCOL}://logger.{DOMAIN}/.*$"
     },
     {
         "client_id": "lists",
         "name": "OidcClient",
         "client_secret": "a0e1ea16f5f638a4cd0e0a7a2f1a81a5ede5",
-        "url": "^http://lists.la-flanders.org/.*$"
+        "url": f"^{PROTOCOL}://lists.{DOMAIN}/.*$"
     },
     {
         "client_id": "regions",
         "name": "OidcClient",
-        "client_secret": "eca12458af7e2bc51dcd4215c439ee8f6916",
-        "url": "^http://regions.la-flanders.org/.*$"
+        "client_secret": f"eca12458af7e2bc51dcd4215c439ee8f6916",
+        "url": f"^{PROTOCOL}://regions.{DOMAIN}/.*$"
     },
     {
         "client_id": "alerts",
@@ -109,7 +112,7 @@ clients = [
 
 i = 1000
 for client in clients:
-    response = requests.post("http://auth.la-flanders.org/cas/actuator/registeredServices/import", json={
+    response = requests.post(f"{PROTOCOL}://auth.{DOMAIN}/cas/actuator/registeredServices/import", json={
         "@class": "org.apereo.cas.services.OidcRegisteredService",
         "clientId": client['client_id'],
         "clientSecret": f"{client['client_id']}-oidc-super-secret",
@@ -123,7 +126,7 @@ for client in clients:
     i += 1
 
 # General CAS Service
-response = requests.post("http://auth.la-flanders.org/cas/actuator/registeredServices/import", json={
+response = requests.post(f"{PROTOCOL}://auth.{DOMAIN}/cas/actuator/registeredServices/import", json={
     "@class": "org.apereo.cas.services.RegexRegisteredService",
     "serviceId": "^https?://.*",
     "name": "Atlas of Living Australia",
