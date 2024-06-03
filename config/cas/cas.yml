@@ -89,15 +89,6 @@ cas:
 #            discovery-uri: https://cognito-idp.eu-west-1.amazonaws.com/eu-west-1_Vnh6QR6dG/.well-known/openid-configuration
 #            client-name: local
 #            auto-redirect-type: SERVER
-      core:
-        issuer: ${common.protocol}://auth.${common.domain}/cas/oidc
-        jwksFile: file:/data/cas/keystore.jwks
-  monitor:
-    endpoints:
-      discovery:
-        enabled: true
-      enabled: true
-      sensitive: "*"
     jdbc:
       validationQuery: /* ping */ SELECT 1
       dataSourceName: java:comp/env/jdbccas
