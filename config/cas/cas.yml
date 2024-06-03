@@ -76,22 +76,19 @@ cas:
         range-seconds: 30
         threshold: 3
     pac4j:
-      issuer: https://biodiversiteitsportaal-dev.auth.eu-west-1.amazoncognito.com/oauth2
-      client-id: YOUR_COGNITO_APP_CLIENT_ID
-      client-secret: YOUR_COGNITO_APP_CLIENT_SECRET
-      discovery-uri: https://biodiversiteitsportaal-dev.auth.eu-west-1.amazoncognito.com/.well-known/openid-configuration
-      response-type: code
-      scope: openid profile email
-      callback-url: ${common.protocol}://auth.${common.domain}/cas/oidc/callback
-      typedIdUsed: true
-      cookie:
-        crypto:
-          signing:
-            key:
-          encryption:
-            key:
-
-    oidc:
+      oidc:
+        - generic:
+            id: 5rp2hoga3r3o9ct31rap66efrc
+            secret: 1njk6u0seslslg0gqiprs6i6pj7qd47j1832tf6var15b8jbsj7r
+            discovery-uri: https://cognito-idp.eu-west-1.amazonaws.com/eu-west-1_Vnh6QR6dG/.well-known/openid-configuration
+            client-name: cognito
+            auto-redirect-type: SERVER
+#        - generic:
+#            id: 4jmnkmlrcu398mgqu6ls94p9rf
+#            secret: 122v6gjchnohaak988ruikn5hkl53tvrbn0j3cce3hgdvpqu92n
+#            discovery-uri: https://cognito-idp.eu-west-1.amazonaws.com/eu-west-1_Vnh6QR6dG/.well-known/openid-configuration
+#            client-name: local
+#            auto-redirect-type: SERVER
       core:
         issuer: ${common.protocol}://auth.${common.domain}/cas/oidc
         jwksFile: file:/data/cas/keystore.jwks
