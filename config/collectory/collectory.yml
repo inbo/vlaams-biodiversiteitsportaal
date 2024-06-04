@@ -42,7 +42,7 @@ gbifDefaultEntityCountry: BEL
 gbifEndorsingNodeKey: ""
 gbifExportUrlBase: ""
 gbifInstallationKey: ""
-gbifLicenceMappingUrl: file:///data/ala-collectory/config/default-gbif-license-mapping.json
+gbifLicenceMappingUrl: file://config/config/collectory/default-gbif-license-mapping.json
 gbifOrphansPublisherID: ""
 gbifRegistrationDryRun: true
 gbifRegistrationEnabled: false
