@@ -28,7 +28,7 @@ security:
     loginUrl: ${security.cas.casServerUrlPrefix}/login
     logoutUrl: ${security.cas.casServerUrlPrefix}/logout
     appServerName: ${common.protocol}://auth.${common.domain}
-    authCookieName: ALA-Auth
+    authCookieName: VBP-Auth
   jwt:
     clientId: userdetails
     discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known

@@ -32,7 +32,7 @@ security:
   oidc:
     enabled: true
     discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known
-    scope: openid,profile,email,ala,roles, user_defined
+    scope: openid,profile,email,ala,roles,user_defined
     client-id: "spatial"
     secret: "spatial-oidc-super-secret"
   jwt:
@@ -54,7 +54,7 @@ security:
         - '*'
       allowCredentials: false
   core:
-    authCookieName: ALA-Auth
+    authCookieName: VBP-Auth
   cookie:
     enabled: true
     domain: ${common.domain}

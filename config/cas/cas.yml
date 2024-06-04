@@ -29,7 +29,7 @@ ala:
     secure: false
     httpOnly: true
     maxAge: -1
-    name: ALA-Auth
+    name: VBP-Auth
     path: /
   userCreator:
     userCreatePassword: wormishmensurablearchitecture

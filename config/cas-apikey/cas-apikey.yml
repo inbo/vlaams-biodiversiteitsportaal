@@ -6,7 +6,7 @@ security:
     loginUrl: ${security.cas.casServerUrlPrefix}/login
     logoutUrl: ${security.cas.casServerUrlPrefix}/logout
     appServerName: ${common.protocol}://auth.${common.domain}
-    authCookieName: ALA-Auth
+    authCookieName: VBP-Auth
   user:
     name: admin
     password: secret

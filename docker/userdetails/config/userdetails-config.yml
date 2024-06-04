@@ -6,7 +6,7 @@ security:
     loginUrl: ${security.cas.casServerUrlPrefix}/login
     logoutUrl: ${security.cas.casServerUrlPrefix}/logout
     appServerName: http://auth.la-flanders.org
-    authCookieName: ALA-Auth
+    authCookieName: VBP-Auth
   user:
     name: admin
     password: secret

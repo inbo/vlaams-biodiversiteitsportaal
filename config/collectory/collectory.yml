@@ -90,7 +90,7 @@ projectNameShort: LA Flanders
 regionName: Australia
 repository:
   location:
-    images: /data/ala-collectory/data
+    images: /data/collectory/data
 resource:
   gbifExport:
     url:
@@ -114,7 +114,7 @@ security:
       serviceUrl: ${common.protocol}://auth.${common.domain}/userdetails/
   cas:
     appServerName: ${common.protocol}://collections.${common.domain}
-    authCookieName: ALA-Auth
+    authCookieName: VBP-Auth
     authenticateOnlyIfLoggedInFilterPattern: /public/show/*
     bypass: false
     casServerLoginUrl: ${common.protocol}://auth.${common.domain}/cas/login
@@ -159,7 +159,7 @@ suitableFor: '[{"spListNational":"Species list national"}, {"spListState":
     {"quantifyAbundance":"Quantifying abundance at a point in time"},
     {"quantifyChange": "Quantifying change over time"}, {"other":"Other"}]'
 uploadExternalUrlPath: /upload/
-uploadFilePath: /data/ala-collectory/upload/
+uploadFilePath: /data/collectory/upload/
 useGbifDoi: false
 userDetails:
   url: ${common.protocol}://auth.${common.domain}/userdetails/

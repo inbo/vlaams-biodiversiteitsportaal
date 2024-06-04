@@ -170,7 +170,7 @@ privacyPolicy: ''
 security:
   cas:
     appServerName: ${common.protocol}://records.${common.domain}
-    authCookieName: ALA-Auth
+    authCookieName: VBP-Auth
     authenticateOnlyIfLoggedInFilterPattern: /occurrences/*,/explore/your-area,/query,/proxy/download/*,/
     bypass: false
     casServerLoginUrl: ${common.protocol}://auth.${common.domain}/cas/login

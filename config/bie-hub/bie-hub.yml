@@ -29,7 +29,7 @@ security:
     bypass: false
     applyUriFiltersToTicketValidation: false
     enabled: true
-    authCookiename: ALA-Auth
+    authCookiename: VBP-Auth
   # cognito specific configs
   apiKey:
     enabled: true

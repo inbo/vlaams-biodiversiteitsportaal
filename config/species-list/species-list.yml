@@ -73,7 +73,7 @@ security:
       serviceUrl: ${common.protocol}://auth.${common.domain}/userdetails/userDetails/
   cas:
     appServerName: ${common.protocol}://lists.${common.domain}
-    authCookieName: ALA-Auth
+    authCookieName: VBP-Auth
     bypass: false
     casServerName: ${common.protocol}://auth.${common.domain}
     casServerUrlPrefix: ${common.protocol}://auth.${common.domain}/cas/
@@ -85,7 +85,7 @@ security:
     domain: ${common.domain}
     enabled: false
   core:
-    authCookieName: ALA-Auth
+    authCookieName: VBP-Auth
   jwt:
     clientId: lists
     discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known
