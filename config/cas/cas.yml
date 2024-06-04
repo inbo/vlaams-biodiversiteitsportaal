@@ -78,7 +78,7 @@ cas:
     oidc:
       core:
         issuer: ${common.protocol}://auth.${common.domain}/cas/oidc
-        jwksFile: file:/data/cas/keystore.jwks
+
     pac4j:
       core:
         name: DelegatedClientAuthenticationHandler
@@ -90,16 +90,12 @@ cas:
             client-name: cognito
             auto-redirect-type: SERVER
 #        - generic:
-#            id: 4jmnkmlrcu398mgqu6ls94p9rf
-#            secret: 122v6gjchnohaak988ruikn5hkl53tvrbn0j3cce3hgdvpqu92n
-#            discovery-uri: https://cognito-idp.eu-west-1.amazonaws.com/eu-west-1_Vnh6QR6dG/.well-known/openid-configuration
-#            client-name: local
+#            id: test
+#            secret: test
+#            discovery-uri: http://mock-oauth2-server:9999/default/.well-known/openid-configuration
+#            client-name: default
 #            auto-redirect-type: SERVER
-    jdbc:
-      validationQuery: /* ping */ SELECT 1
-      dataSourceName: java:comp/env/jdbccas
   serviceRegistry:
-    initFromJson: false
     mongo:
       clientUri: mongodb://services:my-super-secret-password@mongodb:27017/cas-service-registry?retryWrites=true&ssl=false&allowPublicKeyRetrieval=true
   ticket:
