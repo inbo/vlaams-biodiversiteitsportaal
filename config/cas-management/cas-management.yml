@@ -119,24 +119,10 @@ cas:
         json:
             watcher-enabled: false
         mongo:
-            host: mongodb
-            collection: services
-            databaseName: cas-service-registry
-            userId: cas
-            password: my-super-secret-password
             client-uri: mongodb://services:my-super-secret-password@mongodb:27017/cas-service-registry?retryWrites=true&ssl=false
     serviceRegistry:
         mongo:
-            authenticationDatabaseName: ""
             clientUri: mongodb://services:my-super-secret-password@mongodb:27017/cas-service-registry?retryWrites=true&ssl=false
-            collection: services
-            databaseName: cas-service-registry
-            host: mongodb
-            password: my-super-secret-password
-            port: 27017
-            replicaSet: ""
-            sslEnabled: false
-            userId: services
 mgmt:
     server-name: ${common.protocol}://auth.${common.domain}/cas-management
     enable-discovery-endpoint-call: true
