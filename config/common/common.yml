@@ -31,6 +31,9 @@ management:
 logging:
   config: /config/config/common/logback.xml
 
+server:
+  use-forward-headers: true
+
 environment:
   local:
     common:
