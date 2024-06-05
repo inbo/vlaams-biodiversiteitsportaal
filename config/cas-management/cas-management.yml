@@ -124,7 +124,7 @@ cas:
         mongo:
             clientUri: mongodb://services:my-super-secret-password@mongodb:27017/cas-service-registry?retryWrites=true&ssl=false
 mgmt:
-    server-name: ${common.protocol}://auth.${common.domain}/cas-management
+    server-name: ${common.protocol}://auth.${common.domain}
     enable-discovery-endpoint-call: true
     version-control:
         enabled: false
@@ -136,7 +136,7 @@ mgmt:
         - ROLE_ADMIN
     authzAttributes:
         - role
-    serverName: ${common.protocol}://auth.${common.domain}/cas-management
+    serverName: ${common.protocol}://auth.${common.domain}
     userPropertiesFile: file:///data/cas-management/config/users.properties
 ala:
     skin:
