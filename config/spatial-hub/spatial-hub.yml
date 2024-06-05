@@ -48,7 +48,7 @@ security:
     enable: true
     authenticated:
       allowedOrigins:
-        - '.*\.la-flanders\.org(:[0-9]+)?'
+        - '.*\.biodiversiteitsportaal.dev.svdev.be(:[0-9]+)?'
     unauthenticated:
       allowedOrigins:
         - '*'
