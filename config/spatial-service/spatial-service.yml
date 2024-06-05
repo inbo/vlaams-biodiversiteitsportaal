@@ -32,8 +32,6 @@ dataSource:
   driverClassName: org.postgresql.Driver
   dialect: org.hibernate.spatial.dialect.postgis.PostgisPG9Dialect
   url: 'jdbc:postgresql://postgis:5432/layersdb'
-  username: postgres
-  password: my-super-secret-password
 
 batch_sampling_passwords: ""
 
