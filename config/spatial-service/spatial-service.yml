@@ -61,12 +61,6 @@ serviceKey: "xxxxxxxxxxxxxx"
 layers_store:
   GEONETWORK_URL: '${common.protocol}://spatial.${common.domain}/geonetwork'
   LAYER_INDEX_URL: ${common.protocol}://spatial.${common.domain}/layers-service
-headerAndFooter:
-  baseURL: '${common.protocol}://branding.${common.domain}'
-skin:
-  orgNameLong: 'Vlaams Biodiversiteitsportaal'
-  orgNameShort: 'ALF'
-
 
 apiKeyCheckUrlTemplate: '${common.protocol}://auth.${common.domain}/apikey/ws/check?apikey={0}'
 spatialService:
@@ -99,7 +93,7 @@ security:
     check:
       serviceUrl:  ${common.protocol}://auth.${common.domain}/apikey/ws/check?apikey=
   oidc:
-    enabled: true
+    enabled: false
     discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known
     scope: openid,profile,email,ala,roles, user_defined
     client-id: "spatial"
