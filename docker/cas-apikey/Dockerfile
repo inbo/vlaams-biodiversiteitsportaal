@@ -14,11 +14,19 @@ FROM openjdk:11
 
 ARG VERSION=1.7.0
 
-COPY --from=builder /project/build/libs/apikey-${VERSION}-exec.war /app.war
+# Create the user
+RUN groupadd --gid 1000 app \
+    && useradd --uid 1000 --gid 1000 -m -d /app app
 
-
-EXPOSE 8080
+RUN mkdir /data && chown app:app /data
 VOLUME /data
 
-ENTRYPOINT ["java", "-jar", "/app.war"]
+USER app
+WORKDIR app
+
+COPY --from=builder --chown=app\
+    /project/build/libs/apikey-${VERSION}-exec.war /app/app.war
+
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "/app/app.war"]
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/apikey/actuator/health || exit 1

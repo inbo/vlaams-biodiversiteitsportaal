@@ -1,57 +1,43 @@
 FROM gradle:7-jdk11 as builder
 
-ARG VERSION=2.1.2
+ARG VERSION=fix-loading-task-when-running-jar-directly
 
-WORKDIR /project
+WORKDIR /spatial-service
 
-RUN git clone --branch ${VERSION} --depth 1 https://github.com/AtlasOfLivingAustralia/spatial-service.git /project
+ARG test=3
+
+RUN git clone --branch ${VERSION} --depth 1 https://github.com/StefanVanDyck/spatial-service.git /spatial-service
 COPY ./i18n/ ./grails-app/i18n/
 
-RUN gradle \
+RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
+    gradle \
         build assemble \
         -x test -x integrationTest \
         --no-daemon \
         # -Dorg.gradle.debug=true -Dorg.gradle.debug.suspend=no --debug \
         --parallel
 
-RUN ls -la /project/build/libs
+FROM openjdk:11
 
-# FROM openjdk:8 as builder-maxent
-#
-# ARG MAXENT_VERSION=v3.4.3
-#
-# WORKDIR /project
-#
-# RUN apt-get update && apt-get install -y \
-#     make \
-#     zip
-#
-# RUN git clone --branch ${MAXENT_VERSION} --depth 1 https://github.com/mrmaxent/Maxent.git /project
-#
-# RUN make distribution
-
-FROM tomcat:9.0-jdk11-openjdk
-ARG VERSION=2.1.2
-
-ENV UID=1000
-ENV GID=1000
+ARG VERSION=2.1.3-SNAPSHOT
 
 RUN apt-get update && apt-get install -y \
     gettext-base \
     gdal-bin
 
-COPY --from=builder /project/build/libs/project-${VERSION}-plain.war $CATALINA_HOME/webapps/ws.war
-# COPY --from=builder-maxent /project/maxent.jar /maxent.jar
+# Create the user
+RUN groupadd --gid 1000 app \
+    && useradd --uid 1000 --gid 1000 -m -d /app app
 
-#
-# RUN groupadd -r -g 1000 ala && useradd -u 1000 -g ala ala
-# RUN mkdir /usr/local/tomcat/webapps/ws && chown ala:ala /usr/local/tomcat/webapps/ws
-# USER ala
-
+RUN mkdir /data && chown app:app /data
 VOLUME /data
 
-COPY docker-entrypoint.sh /
-ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD []
+USER app
+WORKDIR app
+
+COPY --from=builder --chown=app \
+    /spatial-service/build/libs/spatial-service-${VERSION}.war /app/app.war
+
+ENTRYPOINT ["java", "-jar", "/app/app.war"]
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/ws/actuator/health || exit 1

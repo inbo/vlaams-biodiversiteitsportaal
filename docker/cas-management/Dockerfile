@@ -19,11 +19,20 @@ FROM openjdk:11
 
 ARG VERSION=6.5.5-2
 
-COPY --from=builder /project/build/libs/cas-management-${VERSION}-exec.war /app.war
-RUN mkdir -p /data/cas-management
+# Create the user
+RUN groupadd --gid 1000 app \
+    && useradd --uid 1000 --gid 1000 -m -d /app app
 
-EXPOSE 8080
+RUN mkdir /data && chown app:app /data
 VOLUME /data
 
-ENTRYPOINT ["java", "-jar", "/app.war"]
+USER app
+WORKDIR app
+
+COPY --from=builder --chown=app \
+    /project/build/libs/cas-management-${VERSION}-exec.war /app/app.war
+
+EXPOSE 8080
+
+ENTRYPOINT ["java", "-jar", "/app/app.war"]
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/cas-management/actuator/health || exit 1

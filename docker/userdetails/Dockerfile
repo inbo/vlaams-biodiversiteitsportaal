@@ -15,10 +15,19 @@ FROM openjdk:11
 
 ARG VERSION=3.0.3
 
-COPY --from=builder /project/build/libs/userdetails-${VERSION}-exec.war /app.war
+# Create the user
+RUN groupadd --gid 1000 app \
+    && useradd --uid 1000 --gid 1000 -m -d /app app
 
-
+RUN mkdir /data && chown app:app /data
 VOLUME /data
-ENTRYPOINT ["java", "-jar", "/app.war"]
+
+USER app
+WORKDIR app
+
+COPY --from=builder --chown=app \
+    /project/build/libs/userdetails-${VERSION}-exec.war /app/app.war
+
+ENTRYPOINT ["java", "-jar", "/app/app.war"]
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/userdetails/actuator/health || exit 1

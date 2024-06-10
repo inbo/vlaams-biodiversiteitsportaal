@@ -19,11 +19,23 @@ ARG VERSION=6.5.6-3
 
 RUN mkdir /certs
 COPY rds-truststore.jks $JAVA_HOME/jre/lib/security/cacerts
-COPY --from=builder /project/target/cas-exec.war /cas.war
-RUN mkdir -p /data/cas
 
-EXPOSE 8080
+
+# Create the user
+RUN groupadd --gid 1000 app \
+    && useradd --uid 1000 --gid 1000 -m -d /app app
+RUN mkdir -p /build/tomcat && chown app:app /build/tomcat
+
+RUN mkdir /data && chown app:app /data
 VOLUME /data
 
-ENTRYPOINT ["java", "-jar", "/cas.war"]
+COPY --from=builder --chown=app \
+    /project/target/cas-exec.war /app/cas.war
+
+USER app
+WORKDIR app
+
+EXPOSE 8080
+
+ENTRYPOINT ["java", "-jar", "/app/cas.war"]
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/cas/actuator/health || exit 1
