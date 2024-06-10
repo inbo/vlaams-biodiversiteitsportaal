@@ -257,15 +257,11 @@ defaultareas:
 #    areaSqKm: 510000000
 #    bbox: [-180, -90, 180, 90]
 
-#presetWMSServers:
-#  - name: "AusCover"
-#    url: "http://data.auscover.org.au/geoserver/wms?request=getCapabilities"
-#  - name: "Geoserver IMOS"
-#    url: "http://geoserver.imos.org.au/geoserver/wms?REQUEST=GetCapabilities"
-#  - name: "GA"
-#    url: "https://www.ga.gov.au/gis/services/earth_science/GA_Surface_Geology_of_Australia/MapServer/WMSServer?request=GetCapabilities"
-#  - name: "Geofabric BOM"
-#    url: "http://geofabric.bom.gov.au/simplefeatures/ows?request=getcapabilities"
+presetWMSServers:
+  - name: "GRB"
+    url: "https://geo.api.vlaanderen.be/GRB/wms?service=WMS&request=getcapabilities"
+  - name: "INBO"
+    url: "https://geo.api.vlaanderen.be/INBO/wms?service=WMS&request=getcapabilities"
 
 allowProxy:
   server: "data.auscover.org.au;data.auscover.org.au:80;geoserver.imos.org.au;www.ga.gov.au/gis;geofabric.bom.gov.au"
