@@ -13,55 +13,55 @@ clients = [
         "client_id": "collectory",
         "name": "OidcClient",
         "client_secret": "1b5515b804ab42427475ae9949e77d23d0db",
-        "url": f"^https?://collections.{DOMAIN}.*$"
+        "url": f"^https://collections.{DOMAIN}.*$"
     },
     {
         "client_id": "ala_hub",
         "name": "OidcClient",
         "client_secret": "a42e365c8a3dc80b6e7c93a1485ae22aa4c0",
-        "url": f"^https?://records.{DOMAIN}.*$"
+        "url": f"^https://records.{DOMAIN}.*$"
     },
     {
         "client_id": "biocache_service",
         "name": "OidcClient",
         "client_secret": "24152db197bdf9d24dea3386475ec8b8adcd",
-        "url": f"^https?://records-ws.{DOMAIN}.*$"
+        "url": f"^https://records-ws.{DOMAIN}.*$"
     },
     {
         "client_id": "ala_bie",
         "name": "OidcClient",
         "client_secret": "0efee21e743303cd49a78deca397ae98256c",
-        "url": f"^https?://species.{DOMAIN}.*$"
+        "url": f"^https://species.{DOMAIN}.*$"
     },
     {
         "client_id": "bie_index",
         "name": "OidcClient",
         "client_secret": "895c1a54c053b38953b5b3d3466f7a171659",
-        "url": f"^https?://species-ws.{DOMAIN}.*$"
+        "url": f"^https://species-ws.{DOMAIN}.*$"
     },
     {
         "client_id": "images",
         "name": "OidcClient",
         "client_secret": "a6d3aed6a75bcfa6da9ff8d58ce0eb23babc",
-        "url": f"^https?://images.{DOMAIN}.*$"
+        "url": f"^https://images.{DOMAIN}.*$"
     },
     {
         "client_id": "logger",
         "name": "OidcClient",
         "client_secret": "de3ac90fc3b664e5a702e666f04659a96513",
-        "url": f"^https?://logger.{DOMAIN}.*$"
+        "url": f"^https://logger.{DOMAIN}.*$"
     },
     {
         "client_id": "lists",
         "name": "OidcClient",
         "client_secret": "a0e1ea16f5f638a4cd0e0a7a2f1a81a5ede5",
-        "url": f"^https?://lists.{DOMAIN}.*$"
+        "url": f"^https://lists.{DOMAIN}.*$"
     },
     {
         "client_id": "regions",
         "name": "OidcClient",
         "client_secret": f"eca12458af7e2bc51dcd4215c439ee8f6916",
-        "url": f"^https?://regions.{DOMAIN}.*$"
+        "url": f"^https://regions.{DOMAIN}.*$"
     },
     {
         "client_id": "alerts",
@@ -91,7 +91,7 @@ clients = [
         "client_id": "spatial",
         "name": "OidcClient",
         "client_secret": "8f0bff11d9aa5572aa7c6e990a6cdbf728cd",
-        "url": f"https?://spatial.{DOMAIN}.*$"
+        "url": f"^https://spatial.{DOMAIN}.*$"
     },
     {
         "client_id": "data_quality",
@@ -110,6 +110,12 @@ clients = [
         "name": "OidcClient",
         "client_secret": "6f43e208e416890b3c7fe38e4f5992c0b45e",
         "url": ""
+    },
+    {
+        "client_id": "cas-management",
+        "name": "CasClient",
+        "client_secret": "6f43e208e416890b3c7fe38e4f5992c0b45e",
+        "url": f"^https://auth.{DOMAIN}/cas-management.*$"
     }
 ]
 
@@ -123,72 +129,27 @@ for client in clients:
         "name": client['name'],
         "id": i,
         # "scopes": ["java.util.HashSet", ["users/read", "openid", "Email", "Profile", "ala", "roles"]],
+
+        "bypassApprovalPrompt": True,
         "attributeReleasePolicy": {
-            "@class": "org.apereo.cas.services.ReturnMappedAttributeReleasePolicy",
-            "allowedAttributes": {
-                "@class": "java.util.TreeMap",
-                "role": "groovy { return 'ROLE_' + attributes['cognito:groups'].get(0) }"
-            }
+            "@class": "org.apereo.cas.services.ReturnAllAttributeReleasePolicy",
         }
     })
     print(f"{client['name']}: {response.status_code} | {response.text}")
 
     i += 1
-#
-# General CAS Service
-# response = requests.post(f"{PROTOCOL}://auth.{DOMAIN}/cas/actuator/registeredServices/import", json={
-#     "@class": "org.apereo.cas.services.RegexRegisteredService",
-#     "serviceId": f"^https?://.*{DOMAIN}.*",
-#     "name": "Atlas of Living Australia",
-#     "theme": "ala",
-#     "id": "10000003",
-#     "description": "All Atlas Services",
-#     "expirationPolicy": {
-#         "@class": "org.apereo.cas.services.DefaultRegisteredServiceExpirationPolicy",
-#         "deleteWhenExpired": "false",
-#         "notifyWhenDeleted": "false"
-#     },
-#     "proxyPolicy": {
-#         "@class": "org.apereo.cas.services.RefuseRegisteredServiceProxyPolicy"
-#     },
-#     "evaluationOrder": "1",
-#     "usernameAttributeProvider": {
-#         "@class": "org.apereo.cas.services.DefaultRegisteredServiceUsernameProvider",
-#         "canonicalizationMode": "NONE",
-#         "encryptUsername": "false"
-#     },
-#     "logoutType": "BACK_CHANNEL",
-#     "attributeReleasePolicy": {
-#         "@class": "org.apereo.cas.services.ReturnAllowedAttributeReleasePolicy",
-#         "principalAttributesRepository": {
-#             "@class": "org.apereo.cas.authentication.principal.DefaultPrincipalAttributesRepository",
-#             "expiration": "2",
-#             "timeUnit": "HOURS"
-#         },
-#         "consentPolicy": {
-#             "@class": "org.apereo.cas.services.consent.DefaultRegisteredServiceConsentPolicy",
-#             "enabled": "true"
-#         },
-#         "authorizedToReleaseCredentialPassword": "false",
-#         "authorizedToReleaseProxyGrantingTicket": "false",
-#         "excludeDefaultAttributes": "false",
-#         "authorizedToReleaseAuthenticationAttributes": "true"
-#     },
-#     "multifactorPolicy": {
-#         "@class": "org.apereo.cas.services.DefaultRegisteredServiceMultifactorPolicy",
-#         "failureMode": "UNDEFINED",
-#         "bypassEnabled": "false"
-#     },
-#     "accessStrategy": {
-#         "@class": "org.apereo.cas.services.DefaultRegisteredServiceAccessStrategy",
-#         "order": "0",
-#         "enabled": "true",
-#         "ssoEnabled": "true",
-#         "delegatedAuthenticationPolicy": {
-#             "@class": "org.apereo.cas.services.DefaultRegisteredServiceDelegatedAuthenticationPolicy"
-#         },
-#         "requireAllAttributes": "true",
-#         "caseInsensitive": "false"
-#     }
-# })
-# print(f"General CAS service: {response.status_code} | {response.text}")
+    #
+    # General CAS Service
+    response = requests.post(f"{PROTOCOL}://auth.{DOMAIN}/cas/actuator/registeredServices/import", json={
+        "@class": "org.apereo.cas.services.RegexRegisteredService",
+        "serviceId": f"^https://.*{DOMAIN}.*",
+        "name": "Atlas of Living Australia",
+        "theme": "ala",
+        "id": "10000003",
+        "description": "All Atlas Services",
+
+        "attributeReleasePolicy": {
+            "@class": "org.apereo.cas.services.ReturnAllAttributeReleasePolicy",
+        }
+    })
+    print(f"General CAS service: {response.status_code} | {response.text}")
