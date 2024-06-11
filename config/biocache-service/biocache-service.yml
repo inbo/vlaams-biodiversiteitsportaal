@@ -24,6 +24,10 @@ autocomplete:
       enabled: true
     images:
       enabled: true
+    groups:
+      url: /config/config/biocache-service/groups.json
+    subgroups:
+      url: /config/config/biocache-service/subgroups.json
 biocache:
   ui:
     url: ${common.protocol}://records.${common.domain}
@@ -91,6 +95,7 @@ extra:
     fields: ''
 facet:
   default: true
+  config: /config/config/biocache-service/facets.json
 facets:
   defaultmax: 0
   max: 4
