@@ -264,7 +264,7 @@ presetWMSServers:
     url: "https://geo.api.vlaanderen.be/INBO/wms?service=WMS&request=getcapabilities"
 
 allowProxy:
-  server: "data.auscover.org.au;data.auscover.org.au:80;geoserver.imos.org.au;www.ga.gov.au/gis;geofabric.bom.gov.au"
+  server: "geo.api.vlaanderen.be"
 
 #getMapExamples:
 #  - name: "Fractional Cover CLW - Non-PS Veg - 2012.297"
