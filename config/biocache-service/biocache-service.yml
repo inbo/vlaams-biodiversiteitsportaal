@@ -1,56 +1,56 @@
 allow:
-    layer:
-        lookup: false
-    registry:
-        updates: true
+  layer:
+    lookup: false
+  registry:
+    updates: true
 auth:
-    user:
-        details:
-            url: ${common.protocol}://auth.${common.domain}/userdetails/userDetails/
-        names:
-            id:
-                path: getUserList
-    usernames:
-        for:
-            numeric:
-                id:
-                    path: getUserListWithIds
+  user:
+    details:
+      url: ${common.protocol}://auth.${common.domain}/userdetails/userDetails/
+    names:
+      id:
+        path: getUserList
+  usernames:
+    for:
+      numeric:
+        id:
+          path: getUserListWithIds
 autocomplete:
-    commonnames:
-        extra:
-            enabled: true
-    species:
-        counts:
-            enabled: true
-        images:
-            enabled: true
+  commonnames:
+    extra:
+      enabled: true
+  species:
+    counts:
+      enabled: true
+    images:
+      enabled: true
 biocache:
-    ui:
-        url: ${common.protocol}://records.${common.domain}
+  ui:
+    url: ${common.protocol}://records.${common.domain}
 caches:
-    auth:
-        enabled: false
-    collections:
-        enabled: false
-    layers:
-        enabled: false
-    log:
-        enabled: false
+  auth:
+    enabled: false
+  collections:
+    enabled: false
+  layers:
+    enabled: false
+  log:
+    enabled: false
 cassandra:
-    hosts: cassandradb
-    max:
-        connections: -1
-        retries: 6
-    pool: biocache-store-pool
-    port: 9042
+  hosts: cassandradb
+  max:
+    connections: -1
+    retries: 6
+  pool: biocache-store-pool
+  port: 9042
 citations:
-    enabled: true
+  enabled: true
 collection:
-    contacts:
-        url: ${common.protocol}://collections.${common.domain}/ws/collection
+  contacts:
+    url: ${common.protocol}://collections.${common.domain}/ws/collection
 concurrent:
-    downloads:
-        json: '[{"label": "smallSolr", "threads": 4, "maxRecords": 50000, "type":
+  downloads:
+    json: '[{"label": "smallSolr", "threads": 4, "maxRecords": 50000, "type":
             "index", "pollDelay": 10, "executionDelay": 10, "threadPriority": 5},
             {"label": "largeSolr", "threads": 1, "maxRecords": 100000000, "type":
             "index", "pollDelay": 100, "executionDelay": 100, "threadPriority": 1},
@@ -60,120 +60,123 @@ concurrent:
             100, "threadPriority": 1}]}'
 db: cassandra
 default:
-    sample:
-        fields: cl20,cl23
+  sample:
+    fields: cl20,cl23
 deleted:
-    file:
-        store: /data/biocache-delete/
+  file:
+    store: /data/biocache-delete/
 download:
-    batch:
-        size: 500
-    internal:
-        queue:
-            size: 1000
-    max: 500000
-    max.completion.time: 300000
-    max.execute.time: 604800000
-    throttle:
-        ms: 50
-    unzipped:
-        limit: 10000
+  batch:
+    size: 500
+  internal:
+    queue:
+      size: 1000
+  max: 500000
+  max.completion.time: 300000
+  max.execute.time: 604800000
+  throttle:
+    ms: 50
+  unzipped:
+    limit: 10000
 dwc:
-    url: http://rs.tdwg.org/dwc/terms/
+  url: http://rs.tdwg.org/dwc/terms/
 endemic:
-    query:
-        maxthreads: 30
+  query:
+    maxthreads: 30
 exclude:
-    sensitive:
-        values: ''
+  sensitive:
+    values: ''
 extra:
-    misc:
-        fields: ''
+  misc:
+    fields: ''
 facet:
-    default: true
+  default: true
 facets:
-    defaultmax: 0
-    max: 4
+  defaultmax: 0
+  max: 4
 heatmap:
-    output:
-        dir: /data/output/heatmap
+  output:
+    dir: /data/output/heatmap
 layers:
-    service:
-        url: ${common.protocol}://spatial.${common.domain}/ws
+  service:
+    url: ${common.protocol}://spatial.${common.domain}/ws
 list:
-    tool:
-        url: ${common.protocol}://lists.${common.domain}
+  tool:
+    url: ${common.protocol}://lists.${common.domain}
 media:
-    dir: /data/biocache-media/
-    url: ${common.protocol}://media.${common.domain}
+  dir: /data/biocache-media/
+  url: ${common.protocol}://media.${common.domain}
 name:
-    index:
-        dir: /data/lucene/namematching_v13
+  index:
+    dir: /data/lucene/namematching_v13
 namesearch:
-    url: http://namematching:9179
+  url: http://namematching2:9179
 qid:
-    cache:
-        largestCacheableSize: 5242880
-        size:
-            max: 104857600
-            min: 52428800
-    wkt:
-        maxPoints: 5000
+  cache:
+    largestCacheableSize: 5242880
+    size:
+      max: 104857600
+      min: 52428800
+  wkt:
+    maxPoints: 5000
 registry:
-    url: ${common.protocol}://collections.${common.domain}/ws
+  url: ${common.protocol}://collections.${common.domain}/ws
 sample:
-    fields: none
+  fields: none
 sds:
-    url: ${common.protocol}://sds.${common.domain}/sensitive-species-data.xml
+  url: ${common.protocol}://sds.${common.domain}/sensitive-species-data.xml
 service:
-    bie:
-        enabled: true
-        ui:
-            url: ${common.protocol}://species.${common.domain}
-        ws:
-            url: ${common.protocol}://species-ws.${common.domain}/ws
+  bie:
+    enabled: true
+    ui:
+      url: ${common.protocol}://species.${common.domain}
+    ws:
+      url: ${common.protocol}://species-ws.${common.domain}/ws
 shapefile:
-    tmp:
-        dir: /data/biocache-download/tmp
+  tmp:
+    dir: /data/biocache-download/tmp
 solr:
-    downloadquery:
-        busywaitsleep: 100
-        maxthreads: 30
-        writertimeout: 60000
-    home: ${common.protocol}://index.${common.domain}:8983/solr/biocache
-    server:
-        indexVersion:
-            refresh: 300000
-        retry:
-            max: 6
-            wait: 50
+  downloadquery:
+    busywaitsleep: 100
+    maxthreads: 30
+    writertimeout: 60000
+  home: ${common.protocol}://index.${common.domain}:8983/solr/biocache
+  server:
+    indexVersion:
+      refresh: 300000
+    retry:
+      max: 6
+      wait: 50
+  pipelines:
+    field:
+      config: /config/config/biocache-service/pipelines-field-config.json
 term:
-    query:
-        limit: 1000
+  query:
+    limit: 1000
 thrift:
-    operation:
-        timeout: 8000
+  operation:
+    timeout: 8000
 upload:
-    status: /data/biocache-upload/status
-    temp: /data/biocache-upload/temp
+  status: /data/biocache-upload/status
+  temp: /data/biocache-upload/temp
 webservice:
-    client-id: ''
-    client-secret: ''
-    jwt: false
-    jwt-scopes: ''
+  client-id: ''
+  client-secret: ''
+  jwt: false
+  jwt-scopes: ''
 webservices:
-    root: ${common.protocol}://records-ws.${common.domain}
+  root: ${common.protocol}://records-ws.${common.domain}
 wms:
-    cache:
-        age:
-            max: 3600000
-        enabled: true
-        maxLayerPoints: 100000
-        size:
-            max: 104857600
-            min: 52428800
-    facetPivotCutoff: 2000
-    highlight:
-        radius: 3
-    uncertainty:
-        max: 30000
+  cache:
+    age:
+      max: 3600000
+    enabled: true
+    maxLayerPoints: 100000
+    size:
+      max: 104857600
+      min: 52428800
+  facetPivotCutoff: 2000
+  highlight:
+    radius: 3
+  uncertainty:
+    max: 30000
