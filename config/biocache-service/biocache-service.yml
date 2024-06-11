@@ -38,7 +38,6 @@ caches:
         enabled: false
 cassandra:
     hosts: cassandradb
-    keyspace: occ
     max:
         connections: -1
         retries: 6
