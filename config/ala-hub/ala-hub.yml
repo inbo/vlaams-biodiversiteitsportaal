@@ -257,3 +257,68 @@ webservice:
   client-secret: ''
   jwt: false
   jwt-scopes: ''
+
+config:
+  serverName: ${common.protocol}://records.${common.domain}
+  sightings:
+    baseUrl: ''
+  skin:
+    attribution: ''
+    dataQualityLink:
+      show: false
+      text: not set
+      url: ''
+    exploreUrl: https://www.ala.org.au/explore-by-location/
+    favicon: ${common.protocol}://branding.${common.domain}/favicon.ico
+    fluidLayout: true
+    homeUrl: ${common.protocol}://www.${common.domain}
+    layout: ala
+    orgNameLong: Vlaams Biodiversiteitsportaal
+    orgNameShort: LA Flanders
+    taxaLinks:
+      baseUrl: ${common.protocol}://species.${common.domain}/species/
+    useAlaBie: true
+    useAlaImageService: true
+    useAlaSpatialPortal: true
+  spatial:
+    baseURL: ${common.protocol}://spatial.${common.domain}
+    baseUrl: ${common.protocol}://spatial.${common.domain}
+    params: ''
+  speciesList:
+    baseURL: ${common.protocol}://lists.${common.domain}
+    preferredListName: ALA Preferred Species Images
+    preferredSpeciesListDruid: dr4778
+  speciesListToolUrl: ${common.protocol}://lists.${common.domain}/speciesListItem/list/
+  specieslist:
+    baseUrl: ${common.protocol}://lists.${common.domain}/ws
+  stateConservationListPath:
+    AustralianCapitalTerritory: /speciesListItem/list/dr649
+    NewSouthWales: /speciesListItem/list/dr650
+    NorthernTerritory: /speciesListItem/list/dr651
+    Queensland: /speciesListItem/list/dr652
+    SouthAustralia: /speciesListItem/list/dr653
+    Tasmania: /speciesListItem/list/dr654
+    Victoria: /speciesListItem/list/dr655
+    WesternAustralia: /speciesListItem/list/dr2201
+  supportEmail: support@${common.domain}
+  table:
+    displayDynamicProperties: false
+  uriExclusionFilterPattern: /occurrences/shapeUpload,/images.*,/css.*,/js.*,.*json,/help/.*
+  uriFilterPattern: /admin/*,/alaAdmin/*,/download/*
+  useDownloadPlugin: true
+  userCharts: false
+  userDetails:
+    url: ${common.protocol}://auth.${common.domain}/userdetails/
+  userdetails:
+    api:
+      url: ${common.protocol}://auth.${common.domain}/userdetails/
+    baseUrl: ${common.protocol}://auth.${common.domain}
+    url: ${common.protocol}://auth.${common.domain}/userdetails/
+    web:
+      url: ${common.protocol}://auth.${common.domain}/userdetails/
+  webservice:
+    apiKey: ae1cc2a8-0509-4792-8e62-ded96510d5cc
+    client-id: ''
+    client-secret: ''
+    jwt: false
+    jwt-scopes: ''
