@@ -4,6 +4,11 @@ ARG VERSION=7.0.0
 
 WORKDIR /project
 RUN git clone --branch ${VERSION} --depth 1 https://github.com/AtlasOfLivingAustralia/ala-hub.git /project
+
+# TODO: ugly fix for config values being overwritten by ala defaults
+RUN sed -i '10d' grails-app/conf/application.yml
+RUN cat grails-app/conf/application.yml
+
 RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
     gradle build assemble --no-daemon \
     -x test -x integrationTest \
