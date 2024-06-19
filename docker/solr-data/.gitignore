@@ -13,10 +13,8 @@
 !/bie/stopwords.txt
 !/bie/spellings.txt
 
-/bie/conf/*
-!/bie/conf
-!/bie/conf/elevate.xml
-!/bie/conf/mapping-ISOLatin1Accent.txt
+!/bie/elevate.xml
+!/bie/mapping-ISOLatin1Accent.txt
 
 /biocache/*
 !/biocache
@@ -27,7 +25,5 @@
 !/biocache/synonyms.txt
 !/biocache/stopwords.txt
 
-/biocache/conf/*
-!/biocache/conf
-!/biocache/conf/elevate.xml
-!/biocache/conf/managed-schema
+!/biocache/elevate.xml
+!/biocache/schema.xml
