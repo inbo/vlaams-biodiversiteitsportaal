@@ -26,7 +26,7 @@ RUN groupadd --gid 1000 app \
     && useradd --uid 1000 --gid 1000 -m -d /app app
 RUN mkdir -p /build/tomcat && chown app:app /build/tomcat
 
-RUN mkdir /data && chown app:app /data
+RUN mkdir -p /data/cas && chown -R app:app /data
 VOLUME /data
 
 COPY --from=builder --chown=app \

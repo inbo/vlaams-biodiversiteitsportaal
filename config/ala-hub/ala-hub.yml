@@ -191,7 +191,7 @@ security:
     client-id: "ala_hub"
     secret: "ala_hub-oidc-super-secret"
 server:
-  address: 127.0.0.1
+  address: 0.0.0.0
   contextPath: ''
   port: 8080
 serverName: ${common.protocol}://records.${common.domain}

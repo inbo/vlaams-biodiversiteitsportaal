@@ -4,7 +4,7 @@ ARG VERSION=fix-loading-task-when-running-jar-directly
 
 WORKDIR /spatial-service
 
-ARG test=3
+ARG test=4
 
 RUN git clone --branch ${VERSION} --depth 1 https://github.com/StefanVanDyck/spatial-service.git /spatial-service
 COPY ./i18n/ ./grails-app/i18n/

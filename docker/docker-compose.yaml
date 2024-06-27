@@ -67,12 +67,15 @@ services:
         condition: service_healthy
       solr:
         condition: service_healthy
+      cassandradb:
+        condition: service_healthy
+      cassandra-load-keyspace:
+        condition: service_started
     environment:
       SPRING_PROFILES_ACTIVE: local
 #      LOG_FORMAT: JSON
       LOG_LEVEL: DEBUG
-      CATALINA_OPTS: "-Xms128m -Xmx256m -Dspring.config.additional-location=file:/config/config/common/common.yml,file:/config/config/biocache-service/biocache-service.yml -Dspring.config.import=''"
-      JAVA_OPTS: "-Xms128m -Xmx256m -Dspring.config.additional-location=file:/config/config/common/common.yml,file:/config/config/biocache-service/biocache-service.yml -Dspring.config.import=''"
+      JAVA_OPTS: "-Xms128m -Xmx256m -Dspring.profiles.active=local -Dspring.config.additional-location=file:/config/config/common/common.yml,file:/config/config/biocache-service/biocache-service.yml -Dspring.config.import=''"
       SPRING_CONFIG_IMPORT: ''
 
   cas:

@@ -1,9 +1,9 @@
 FROM gradle:7-jdk11 as builder
 
-ARG VERSION=5.1.1
+ARG VERSION=develop
 
 WORKDIR /project
-RUN git clone --branch ${VERSION} --depth 1 https://github.com/AtlasOfLivingAustralia/collectory.git /project
+RUN git clone --branch ${VERSION} --depth 1 https://github.com/StefanVanDyck/collectory /project
 RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
     gradle build assemble --no-daemon \
     -x test -x integrationTest \
@@ -12,7 +12,7 @@ RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
 
 FROM openjdk:11
 
-ARG VERSION=5.1.1
+ARG VERSION=5.2.0-SNAPSHOT
 
 # Create the user
 RUN groupadd --gid 1000 app \
