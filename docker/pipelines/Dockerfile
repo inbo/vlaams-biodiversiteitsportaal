@@ -32,10 +32,19 @@ VOLUME /data
 # RUN apt-get update &&\
 #     apt-get install -y yq
 
-RUN curl -o /usr/bin/yq -LJO https://github.com/mikefarah/yq/releases/download/v4.9.6/yq_linux_386 \
+ARG TARGETARCH
+
+RUN curl -o /usr/bin/yq -LJO https://github.com/mikefarah/yq/releases/download/v4.9.6/yq_linux_$TARGETARCH \
     && chmod +x /usr/bin/yq
-RUN curl -o /usr/bin/docopts -LJO https://github.com/docopt/docopts/releases/download/v0.6.3-rc2/docopts_linux_amd64 &&\
-    chmod +x /usr/bin/docopts
+
+RUN if [ $TARGETARCH = "amd64" ] ; then curl -o /usr/bin/docopts -LJO https://github.com/docopt/docopts/releases/download/v0.6.3-rc2/docopts_linux_amd64 ; fi
+RUN if [ $TARGETARCH = "arm64" ] ; then curl -o /usr/bin/docopts -LJO https://github.com/docopt/docopts/releases/download/v0.6.3-rc2/docopts_linux_arm ; fi
+RUN chmod +x /usr/bin/docopts
+
+RUN if [ $TARGETARCH = "amd64" ] ; then curl https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o "awscliv2.zip" ; fi
+RUN if [ $TARGETARCH = "arm64" ] ; then curl https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip -o "awscliv2.zip" ; fi
+RUN unzip awscliv2.zip && \
+    ./aws/install
 
 
 COPY config/la-pipelines.yaml /app/livingatlas/configs/la-pipelines.yaml
@@ -47,4 +56,3 @@ USER app
 WORKDIR /app/livingatlas/scripts
 
 ENTRYPOINT ["bash", "-c"]
-
