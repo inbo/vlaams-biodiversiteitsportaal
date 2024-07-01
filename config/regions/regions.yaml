@@ -1,0 +1,102 @@
+security:
+  oidc:
+    secret: regions-oidc-super-secret
+    clientId: regions
+    discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known
+    enabled: 'false'
+  cas:
+    bypass: 'false'
+    casServerLoginUrl: ${common.protocol}://auth.${common.domain}/cas/login
+    casServerLogoutUrl: http${common.protocol}http://auth.${common.domain}/cas/login
+    logoutUrl: ${common.protocol}://auth.${common.domain}/cas/logout
+    enabled: 'true'
+    casServerUrlPrefix: http${common.protocol}http://auth.${common.domain}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      enabled: 'true'
+bieService:
+  baseURL: ${common.protocol}://species-ws.${common.domain}
+images:
+  baseURL: ${common.protocol}://images.${common.domain}
+uriExclusionFilterPattern: /images.*,/css.*,/js.*,/less.*,/vendor.*
+biocache:
+  baseURL: ${common.protocol}://records.${common.domain}
+  enableQueryContext: 'false'
+  queryContext: ''
+layers:
+  enableObjectIntersection: 'false'
+  queryContextBieContext: ''
+  queryContextOrder: '0'
+  queryContextShortName: ''
+  queryContextFid: ''
+  showQueryContext: 'false'
+  intersectObject: ''
+  queryContextDisplayName: ''
+  queryContextName: ''
+grails:
+  serverURL: ${common.protocol}://regions.${common.domain}
+userDetails:
+  url: ${common.protocol}://auth.${common.domain}/userdetails/
+casServerName: ${common.protocol}://auth.${common.domain}
+breadcrumbParent: https://www.ala.org.au/explore-by-location/,Explore
+alertsResourceName: Atlas
+skin:
+  homeUrl: ${common.protocol}://${common.domain}
+  layout: ala
+  favicon: https://raw.githubusercontent.com/living-atlases/artwork/master/favicon.ico
+  fluidLayout: 'true'
+bie:
+  baseURL: ${common.protocol}://species.${common.domain}
+  searchPath: /search
+default:
+  region: Flanders
+  regionType: ''
+map:
+  bounds: '[]'
+  height: ''
+contextPath: ''
+spatial:
+  baseURL: ${common.protocol}://spatial.${common.domain}
+google:
+  apikey: get-a-google-api-key
+geoserver:
+  baseURL: ${common.protocol}://spatial.${common.domain}/geoserver
+ala:
+  baseURL: ${common.protocol}://${common.domain}
+  skin: ala
+biocacheService:
+  baseURL: ${common.protocol}://records-ws.${common.domain}
+casProperties: casServerLoginUrl,serverName,centralServer,casServerName,uriFilterPattern,uriExclusionFilter,authenticateOnlyIfLoggedInFilterPattern,casServerLoginUrlPrefix,gateway,casServerUrlPrefix,contextPath
+userdetails:
+  api:
+    url: ${common.protocol}://auth.${common.domain}/userdetails/
+  web:
+    url: http${common.protocol}http://auth.${common.domain}/userdetails/
+allowedHosts: spatial.${common.domain}
+showNotesInfoInAccordionPanel: 'false'
+serverName: ${common.protocol}://regions.${common.domain}
+disableCAS: 'false'
+uriFilterPattern: /admin/*,/alaAdmin/*
+headerAndFooter:
+  baseURL: ${common.protocol}://branding.${common.domain}
+accordion:
+  panel:
+    maxHeight: ''
+layersService:
+  baseURL: ${common.protocol}://spatial.${common.domain}/ws
+orgNameLong: Vlaams Biodiversiteitsportaal
+casServerLoginUrl: ${common.protocol}://auth.${common.domain}/cas/login
+alerts:
+  baseURL: ''
+hub:
+  hubFilter: ''
+  enableHubData: 'false'
+layout:
+  skin: ala
+casServerUrlPrefix: ${common.protocol}://auth.${common.domain}/cas
+gateway: 'false'
