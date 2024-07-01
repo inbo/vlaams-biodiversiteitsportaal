@@ -7,10 +7,10 @@ security:
   cas:
     bypass: 'false'
     casServerLoginUrl: ${common.protocol}://auth.${common.domain}/cas/login
-    casServerLogoutUrl: ${common.protocol}http://auth.${common.domain}/cas/login
+    casServerLogoutUrl: ${common.protocol}://auth.${common.domain}/cas/login
     logoutUrl: ${common.protocol}://auth.${common.domain}/cas/logout
     enabled: 'true'
-    casServerUrlPrefix: ${common.protocol}http://auth.${common.domain}
+    casServerUrlPrefix: ${common.protocol}://auth.${common.domain}
 management:
   endpoints:
     web:
@@ -48,7 +48,6 @@ alertsResourceName: Atlas
 skin:
   homeUrl: ${common.protocol}://www.${common.domain}
   layout: ala
-  favicon: https://raw.githubusercontent.com/living-atlases/artwork/master/favicon.ico
   fluidLayout: 'true'
 bie:
   baseURL: ${common.protocol}://species.${common.domain}
@@ -76,7 +75,7 @@ userdetails:
   api:
     url: ${common.protocol}://auth.${common.domain}/userdetails/
   web:
-    url: ${common.protocol}http://auth.${common.domain}/userdetails/
+    url: ${common.protocol}://auth.${common.domain}/userdetails/
 allowedHosts: spatial.${common.domain}
 showNotesInfoInAccordionPanel: 'false'
 serverName: ${common.protocol}://regions.${common.domain}
