@@ -43,7 +43,7 @@ grails:
 userDetails:
   url: ${common.protocol}://auth.${common.domain}/userdetails/
 casServerName: ${common.protocol}://auth.${common.domain}
-breadcrumbParent: https://www.ala.org.au/explore-by-location/,Explore
+breadcrumbParent: https://www.${common.domain}/explore-by-location/,Explore
 alertsResourceName: Atlas
 skin:
   homeUrl: ${common.protocol}://www.${common.domain}
@@ -76,7 +76,7 @@ userdetails:
     url: ${common.protocol}://auth.${common.domain}/userdetails/
   web:
     url: ${common.protocol}://auth.${common.domain}/userdetails/
-allowedHosts: spatial.${common.domain}
+allowedHosts: spatial.${common.domain},regions.${common.domain}
 showNotesInfoInAccordionPanel: 'false'
 serverName: ${common.protocol}://regions.${common.domain}
 disableCAS: 'false'
