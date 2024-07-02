@@ -23,7 +23,7 @@ geoserver:
 
   spatialservice:
     #if colocated, geoserver will load data from spatial service data folder, /data/spatial-data by default
-    colocated: false # problematic with permissions and stuff
+    colocated: true # problematic with permissions and stuff
   remote:
     #In some cases, geoserver need to know its data folder.
     geoserver_data_dir: "/data/geoserver_data_dir"
