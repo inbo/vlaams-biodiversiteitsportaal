@@ -45,16 +45,16 @@ spatial:
 images:
   baseURL: ${common.protocol}://images.${common.domain}
 layersService:
-  baseURL: ${common.protocol}://spatial.${common.domain}/ws'
+  baseURL: ${common.protocol}://spatial.${common.domain}/ws
 alerts:
 #  baseURL: ${common.protocol}://alerts.${common.domain}
   baseURL: ''
 bieService:
-  baseURL: ${common.protocol}://species-ws.${common.domain}'
+  baseURL: ${common.protocol}://species-ws.${common.domain}
 geoserver:
-  baseURL: ${common.protocol}://spatial.${common.domain}/geoserver'
+  baseURL: ${common.protocol}://spatial.${common.domain}/geoserver
 biocacheService:
-  baseURL: ${common.protocol}://records-ws.${common.domain}'
+  baseURL: ${common.protocol}://records-ws.${common.domain}
 map:
   minLat: -41.5
   minLng: 114
