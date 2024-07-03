@@ -18,6 +18,8 @@ casProperties: casServerLoginUrl,serverName,centralServer,casServerName,uriFilte
 
 grails:
   serverURL: ${common.protocol}://regions.${common.domain}
+  cors:
+    enabled: false
 uriExclusionFilterPattern: /images.*,/css.*,/js.*,/less.*,/vendor.*
 breadcrumbParent: ${common.protocol}://www.${common.domain}/explore-by-location/,Explore
 alertsResourceName: Atlas
@@ -33,7 +35,7 @@ disableCAS: 'false'
 uriFilterPattern: /admin/*,/alaAdmin/*
 orgNameLong: Vlaams Biodiversiteitsportaal
 skin:
-  layout: ger
+  layout: ala
 bie:
   baseURL: ${common.protocol}://species.${common.domain}
   searchPath: /search
