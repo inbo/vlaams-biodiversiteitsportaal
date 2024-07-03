@@ -1,5 +1,3 @@
-ala:
-  baseURL: ${common.protocol}://${common.domain}
 apiGateway:
   enabled: false
 auth:
@@ -27,23 +25,12 @@ fieldGuide:
   baseURL: ''
 grails:
   serverURL: ${common.protocol}://lists.${common.domain}
-headerAndFooter:
-  baseURL: ${common.protocol}://branding.${common.domain}
-  version: 2
 httpTimeoutMillis: 60000
 iconicSpecies:
   uid: dr781
 logger:
   baseURL: ${common.protocol}://logger.${common.domain}/service
   baseUrl: ${common.protocol}://logger.${common.domain}/service
-management:
-  endpoint:
-    health:
-      enabled: true
-  endpoints:
-    web:
-      exposure:
-        include: health
 namematching:
   serviceURL: https://namematching-ws.ala.org.au
 openapi:
