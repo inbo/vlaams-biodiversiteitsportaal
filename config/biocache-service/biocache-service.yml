@@ -185,3 +185,6 @@ wms:
     radius: 3
   uncertainty:
     max: 30000
+
+logging:
+  config: "file:/config/config/common/log4j2.xml"
