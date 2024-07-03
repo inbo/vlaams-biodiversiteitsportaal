@@ -32,7 +32,8 @@ serverName: ${common.protocol}://regions.${common.domain}
 disableCAS: 'false'
 uriFilterPattern: /admin/*,/alaAdmin/*
 orgNameLong: Vlaams Biodiversiteitsportaal
-
+skin:
+  layout: ger
 bie:
   baseURL: ${common.protocol}://species.${common.domain}
   searchPath: /search
