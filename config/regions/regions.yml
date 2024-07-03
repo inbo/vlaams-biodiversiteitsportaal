@@ -35,7 +35,7 @@ disableCAS: 'false'
 uriFilterPattern: /admin/*,/alaAdmin/*
 orgNameLong: Vlaams Biodiversiteitsportaal
 skin:
-  layout: ala
+  layout: main
 bie:
   baseURL: ${common.protocol}://species.${common.domain}
   searchPath: /search
