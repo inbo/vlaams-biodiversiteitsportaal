@@ -23,7 +23,7 @@ breadcrumbParent: ${common.protocol}://www.${common.domain}/explore-by-location/
 alertsResourceName: Atlas
 skin:
   homeUrl: ${common.protocol}://www.${common.domain}
-#  layout: ala
+  layout: ala
   fluidLayout: 'true'
 #default:
 #  region: Flanders
