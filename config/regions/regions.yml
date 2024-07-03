@@ -21,10 +21,6 @@ grails:
 uriExclusionFilterPattern: /images.*,/css.*,/js.*,/less.*,/vendor.*
 breadcrumbParent: ${common.protocol}://www.${common.domain}/explore-by-location/,Explore
 alertsResourceName: Atlas
-skin:
-  homeUrl: ${common.protocol}://www.${common.domain}
-  layout: ala
-  fluidLayout: 'true'
 #default:
 #  region: Flanders
 #  regionType: ''
@@ -37,10 +33,6 @@ disableCAS: 'false'
 uriFilterPattern: /admin/*,/alaAdmin/*
 orgNameLong: Vlaams Biodiversiteitsportaal
 
-headerAndFooter:
-  baseURL: ${common.protocol}://branding.${common.domain}
-ala:
-  baseURL: ${common.protocol}://${common.domain}
 bie:
   baseURL: ${common.protocol}://species.${common.domain}
   searchPath: /search
