@@ -249,7 +249,7 @@ solr:
   includeJackKnife: false
   includeClustering: false
   runner: SparkRunner
-  zkHost: localhost:9983
+  zkHost: solr.biodiversiteitsportaal.dev.internal:9983
 
 # class: au.org.ala.pipelines.beam.IndexRecordToSolrPipeline
 elastic:
@@ -257,7 +257,7 @@ elastic:
   inputPath: '{fsPath}/pipelines-data'
   targetPath: '{fsPath}/pipelines-data'
   runner: SparkRunner
-  esHosts: http://localhost:9200
+  esHosts: http://elasticsearch.biodiversiteitsportaal.dev.internal:9200
   esSchemaPath: /tmp/es-parent-schema.json
   esAlias: event
   esIndexName: 'event_{datasetId}'
@@ -332,7 +332,7 @@ validation-report:
   inputPath: '{fsPath}/pipelines-data'
   targetPath: /tmp/dataset-validation-list.csv
   fullReportPath: /tmp/full-validation-list.csv
-  zkHost: localhost:9983
+  zkHost: solr.biodiversiteitsportaal.dev.internal:9983
   checkSolr: true
   checkSampling: true
   solrCollection: biocache
@@ -341,9 +341,9 @@ validation-report:
 
 -dwca-avro-sh-args:
   local:
-    jvm: -Xmx2g
+    jvm: -Xmx90g
   spark-embedded:
-    jvm: -Xmx2g
+    jvm: -Xmx90g
   spark-cluster:
     conf: spark.default.parallelism=144
     num-executors: 6
@@ -354,21 +354,21 @@ validation-report:
 ### la-pipelines cli additional arguments, like JVM or spark command line arguments
 interpret-sh-args:
   local:
-    jvm: -Xmx8g -XX:+UseG1GC -Dspark.master=local[*]
+    jvm: -Xmx90g -XX:+UseG1GC -Dspark.master=local[*]
   spark-embedded:
-    jvm: -Xmx8g -XX:+UseG1GC -Dspark.master=local[*]
+    jvm: -Xmx90g -XX:+UseG1GC -Dspark.master=local[*]
   spark-cluster:
     conf: spark.default.parallelism=144
-    num-executors: 6
-    executor-cores: 8
-    executor-memory: 24G
+    num-executors: 14
+    executor-cores: 16
+    executor-memory: 90G
     driver-memory: 4G
 
 image-sync-sh-args:
   local:
-    jvm: -Xmx8g -XX:+UseG1GC -Dspark.master=local[*]
+    jvm: -Xmx10g -XX:+UseG1GC -Dspark.master=local[*]
   spark-embedded:
-    jvm: -Xmx8g -XX:+UseG1GC -Dspark.master=local[*]
+    jvm: -Xmx10g -XX:+UseG1GC -Dspark.master=local[*]
   spark-cluster:
     conf: spark.default.parallelism=144
     num-executors: 16
@@ -378,9 +378,9 @@ image-sync-sh-args:
 
 image-load-sh-args:
   local:
-    jvm: -Xmx8g -XX:+UseG1GC -Dspark.master=local[*]
+    jvm: -Xmx10g -XX:+UseG1GC -Dspark.master=local[*]
   spark-embedded:
-    jvm: -Xmx8g -XX:+UseG1GC -Dspark.master=local[*]
+    jvm: -Xmx10g -XX:+UseG1GC -Dspark.master=local[*]
   spark-cluster:
     conf: spark.default.parallelism=144
     num-executors: 16
@@ -390,9 +390,9 @@ image-load-sh-args:
 
 annotations-sh-args:
   local:
-    jvm: -Xmx8g -XX:+UseG1GC -Dspark.master=local[*]
+    jvm: -Xmx10g -XX:+UseG1GC -Dspark.master=local[*]
   spark-embedded:
-    jvm: -Xmx8g -XX:+UseG1GC -Dspark.master=local[*]
+    jvm: -Xmx10g -XX:+UseG1GC -Dspark.master=local[*]
   spark-cluster:
     conf: spark.default.parallelism=144
     num-executors: 16
@@ -402,9 +402,9 @@ annotations-sh-args:
 
 export-sh-args:
   local:
-    jvm: -Xmx8g -XX:+UseG1GC -Dspark.master=local[*]
+    jvm: -Xmx10g -XX:+UseG1GC -Dspark.master=local[*]
   spark-embedded:
-    jvm: -Xmx8g -XX:+UseG1GC -Dspark.master=local[*]
+    jvm: -Xmx10g -XX:+UseG1GC -Dspark.master=local[*]
   spark-cluster:
     conf: spark.default.parallelism=144
     num-executors: 16
@@ -414,71 +414,71 @@ export-sh-args:
 
 uuid-sh-args:
   local:
-    jvm: -Xmx8g -XX:+UseG1GC
+    jvm: -Xmx10g -XX:+UseG1GC
   spark-embedded:
-    jvm: -Xmx8g -XX:+UseG1GC
+    jvm: -Xmx10g -XX:+UseG1GC
   spark-cluster:
     conf: spark.default.parallelism=500
-    num-executors: 6
-    executor-cores: 8
-    executor-memory: 20G
+    num-executors: 14
+    executor-cores: 16
+    executor-memory: 90G
     driver-memory: 4G
 
 sampling-sh-args:
   local:
-    jvm: -Xmx8g -XX:+UseG1GC -Dspark.master=local[*]
+    jvm: -Xmx10g -XX:+UseG1GC -Dspark.master=local[*]
   spark-embedded:
-    jvm: -Xmx8g -XX:+UseG1GC -Dspark.master=local[*]
+    jvm: -Xmx10g -XX:+UseG1GC -Dspark.master=local[*]
   spark-cluster:
     conf: spark.default.parallelism=144
     num-executors: 8
     executor-cores: 8
-    executor-memory: 16G
+    executor-memory: 94G
     driver-memory: 4G
 
 outlier-sh-args:
   local:
-    jvm: -Xmx8g -XX:+UseG1GC -Dspark.master=local[*]
+    jvm: -Xmx10g -XX:+UseG1GC -Dspark.master=local[*]
   spark-embedded:
-    jvm: -Xmx8g -XX:+UseG1GC -Dspark.master=local[*]
+    jvm: -Xmx10g -XX:+UseG1GC -Dspark.master=local[*]
   spark-cluster:
     conf: spark.default.parallelism=144
     num-executors: 8
     executor-cores: 8
-    executor-memory: 16G
+    executor-memory: 94G
     driver-memory: 4G
 
 sensitive-sh-args:
   spark-embedded:
-    jvm: -Xmx8g -XX:+UseG1GC
+    jvm: -Xmx10g -XX:+UseG1GC
   spark-cluster:
-    jvm: -Xmx8g -XX:+UseG1GC
+    jvm: -Xmx10g -XX:+UseG1GC
     num-executors: 8
     executor-cores: 8
-    executor-memory: 16G
+    executor-memory: 94G
     driver-memory: 4G
 
 sample-sh-args:
   local:
-    jvm: -Xmx8g -XX:+UseG1GC
+    jvm: -Xmx10g -XX:+UseG1GC
 
 index-sh-args:
   local:
-    jvm: -Xmx8g -XX:+UseG1GC
+    jvm: -Xmx90g -XX:+UseG1GC
   spark-embedded:
-    jvm: -Xmx8g -XX:+UseG1GC
+    jvm: -Xmx90g -XX:+UseG1GC
   spark-cluster:
     conf: spark.default.parallelism=48
-    num-executors: 6
-    executor-cores: 8
-    executor-memory: 20G
+    num-executors: 14
+    executor-cores: 16
+    executor-memory: 90G
     driver-memory: 4G
 
 jackknife-sh-args:
   local:
-    jvm: -Xmx8g -XX:+UseG1GC
+    jvm: -Xmx10g -XX:+UseG1GC
   spark-embedded:
-    jvm: -Xmx8g -XX:+UseG1GC
+    jvm: -Xmx10g -XX:+UseG1GC
   spark-cluster:
     conf: spark.default.parallelism=500
     num-executors: 24
@@ -488,9 +488,9 @@ jackknife-sh-args:
 
 clustering-sh-args:
   local:
-    jvm: -Xmx8g -XX:+UseG1GC
+    jvm: -Xmx10g -XX:+UseG1GC
   spark-embedded:
-    jvm: -Xmx8g -XX:+UseG1GC
+    jvm: -Xmx10g -XX:+UseG1GC
   spark-cluster:
     conf: spark.default.parallelism=500
     num-executors: 6
@@ -500,21 +500,21 @@ clustering-sh-args:
 
 solr-sh-args:
   local:
-    jvm: -Xmx8g -XX:+UseG1GC
+    jvm: -Xmx90g -XX:+UseG1GC
   spark-embedded:
-    jvm: -Xmx8g -XX:+UseG1GC
+    jvm: -Xmx90g -XX:+UseG1GC
   spark-cluster:
     conf: spark.default.parallelism=500
-    num-executors: 6
-    executor-cores: 8
-    executor-memory: 22G
+    num-executors: 14
+    executor-cores: 16
+    executor-memory: 90G
     driver-memory: 6G
 
 elastic-sh-args:
   local:
-    jvm: -Xmx8g -XX:+UseG1GC
+    jvm: -Xmx10g -XX:+UseG1GC
   spark-embedded:
-    jvm: -Xmx8g -XX:+UseG1GC
+    jvm: -Xmx10g -XX:+UseG1GC
   spark-cluster:
     conf: spark.default.parallelism=48
     num-executors: 6
