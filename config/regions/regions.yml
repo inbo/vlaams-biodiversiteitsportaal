@@ -67,7 +67,7 @@ map:
     url: "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
     attr: "Map data &copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a>, imagery &copy; <a href='https://cartodb.com/attributions'>CartoDB</a>"
     subdomains: "abcd"
-subgroupFile: '/data/regions/config/regionsGroups.json'
+#subgroupFile: '/data/regions/config/regionsGroups.json'
 layers:
   enableObjectIntersection: 'false'
   queryContextBieContext: ''
