@@ -40,18 +40,17 @@ skin:
 
 facets: [ "recognisedLicence", "dataResourceUid", "creator.keyword", "imageSize", "fileType", "format", "dateUploadedYearMonth" ]
 
-#
-#elasticsearch:
-#  indexName: "images"
-#  maxFacetSize: 10000
-#  maxOffset: 10000
-#  maxPageSize: 200
-#  defaultPageSize: 10
-#  batchIndexSize: 1000
-#  hosts:
-#      - host: "127.0.0.1"
-#        scheme: "http"
-#        port: 9200
+elasticsearch:
+  indexName: "images"
+  maxFacetSize: 10000
+  maxOffset: 10000
+  maxPageSize: 200
+  defaultPageSize: 10
+  batchIndexSize: 1000
+  hosts:
+      - host: "elasticsearch"
+        scheme: "http"
+        port: 9200
 
 # The URLs to recognise as image service URL for the purposes of recognising incoming
 # URLs for images (to avoid re-downloading the images)
