@@ -203,7 +203,7 @@ skin:
     show: false
     text: not set
     url: ''
-  exploreUrl: ${common.protocol}://records.${common.domain}/explore-by-location/
+  exploreUrl: ${common.protocol}://regions.${common.domain}/explore-by-location/
   favicon: ${common.protocol}://branding.${common.domain}/favicon.ico
   fluidLayout: true
   homeUrl: ${common.protocol}://www.${common.domain}
