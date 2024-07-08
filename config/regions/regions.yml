@@ -21,7 +21,7 @@ grails:
   cors:
     enabled: false
 uriExclusionFilterPattern: /images.*,/css.*,/js.*,/less.*,/vendor.*
-breadcrumbParent: ${common.protocol}://www.${common.domain}/explore-by-location/,Explore
+breadcrumbParent: ${common.protocol}://records.${common.domain}/explore-by-location/,Explore
 alertsResourceName: Atlas
 #default:
 #  region: Flanders
