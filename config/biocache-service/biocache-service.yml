@@ -188,3 +188,6 @@ wms:
 
 logging:
   config: "file:/config/config/biocache-service/log4j.xml"
+
+cors:
+  allowedOrigins: []
