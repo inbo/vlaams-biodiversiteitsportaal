@@ -1,6 +1,6 @@
 ---
 grails:
-  serverURL: 'http://dev.ala.org.au:8080'
+  serverURL: '${common.protocol}://images.${common.domain}'
 security:
   oidc:
     enabled: true
