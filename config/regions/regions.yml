@@ -62,10 +62,10 @@ geoserver:
 biocacheService:
   baseURL: ${common.protocol}://records-ws.${common.domain}
 map:
-  minLat: -41.5
-  minLng: 114
-  maxLat: -13.5
-  maxLng: 154
+  minLat: 2.51357303225
+  minLng: 49.5294835476
+  maxLat: 6.15665815596
+  maxLng: 51.4750237087
   minimal:
     url: "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
     attr: "Map data &copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a>, imagery &copy; <a href='https://cartodb.com/attributions'>CartoDB</a>"
