@@ -43,3 +43,7 @@ environment:
     common:
       protocol: https
       domain: biodiversiteitsportaal.dev.svdev.be
+
+grails:
+  cors:
+    enabled: true
