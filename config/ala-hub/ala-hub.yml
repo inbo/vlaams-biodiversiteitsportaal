@@ -142,8 +142,8 @@ map:
   cloudmade:
     key: BC9A493B41014CAABB98F0471D759707
   defaultFacetMapColourBy: ''
-  defaultLatitude: 16.942
-  defaultLongitude: 1.261
+  defaultLatitude: 51.0950
+  defaultLongitude: 4.4478
   defaultZoom: 5
   height: 600
   minimal:
