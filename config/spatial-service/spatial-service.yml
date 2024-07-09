@@ -42,7 +42,7 @@ ala.baseURL: '${common.protocol}://www.${common.domain}'
 bie.baseURL: '${common.protocol}://bie.${common.domain}'
 bie.searchPath: '/search'
 
-namematching.url: '${common.protocol}://namematching-ws.${common.domain}'
+namematching.url: http://namematching.biodiversiteitsportaal.dev.internal:9180
 
 records.url: '${common.protocol}://archives.${common.domain}/archives/exports/lat_lon_taxon.zip'
 

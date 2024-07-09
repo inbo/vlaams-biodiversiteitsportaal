@@ -32,7 +32,7 @@ logger:
   baseURL: ${common.protocol}://logger.${common.domain}/service
   baseUrl: ${common.protocol}://logger.${common.domain}/service
 namematching:
-  serviceURL: https://namematching-ws.ala.org.au
+  serviceURL: http://namematching.biodiversiteitsportaal.dev.internal:9180
 openapi:
   components:
     security:

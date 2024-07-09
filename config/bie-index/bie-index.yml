@@ -92,7 +92,7 @@ biocollect:
   service:
   search: /ws/project/search?initiator=ala&facets=status
 naming:
-  service: https://namematching-ws.ala.org.au
+  service: http://namematching.biodiversiteitsportaal.dev.internal:9180
 attribution:
   default: National Species Lists
   common: National Species Lists
