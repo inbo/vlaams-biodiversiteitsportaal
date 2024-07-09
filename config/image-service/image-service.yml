@@ -40,6 +40,10 @@ skin:
 
 facets: [ "recognisedLicence", "dataResourceUid", "creator.keyword", "imageSize", "fileType", "format", "dateUploadedYearMonth" ]
 
+management:
+  health:
+    elasticsearch:
+      enabled: false
 elasticsearch:
   indexName: "images"
   maxFacetSize: 10000
