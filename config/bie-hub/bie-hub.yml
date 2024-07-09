@@ -164,8 +164,8 @@ external:
   blacklist: file:///config/config/bie-hub/blacklist.json
 
 # Mapping options
-defaultDecimalLatitude: 51.0950
-defaultDecimalLongitude: 4.4478
+defaultDecimalLatitude: 51.0
+defaultDecimalLongitude: 4.4
 defaultZoomLevel: 9
 map:
   default:

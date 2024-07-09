@@ -17,8 +17,8 @@ citation:
     template: ""
   template: Records provided by @entityName@, accessed through ALA website.
 collectionsMap:
-  centreMapLat: 51.0950
-  centreMapLon: 4.4478
+  centreMapLat: 51.0
+  centreMapLon: 4.4
   defaultZoom: 9
 dataSource:
   url: jdbc:mysql://root:my-super-secret-password@mysql:3306/collectory?autoReconnect=true&connectTimeout=0&useUnicode=true&characterEncoding=UTF-8&allowPublicKeyRetrieval=true&useSSL=False&serverTimezone=Europe/Paris

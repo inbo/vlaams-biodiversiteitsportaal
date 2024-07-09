@@ -81,8 +81,8 @@ events:
   eventUrl: https://events.${common.domain}/?view=EVENTS&eventHierarchy=
   graphql: https://api.${common.domain}/event/graphql
 exploreYourArea:
-  lat: 51.0950
-  lng: 4.4478
+  lat: 51.0
+  lng: 4.4
   location: Flanders
 facets:
   cached: species_group,species_subgroup,state,country,institution_uid,collection_uid,data_resource_uid
@@ -142,8 +142,8 @@ map:
   cloudmade:
     key: BC9A493B41014CAABB98F0471D759707
   defaultFacetMapColourBy: ''
-  defaultLatitude: 51.0950
-  defaultLongitude: 4.4478
+  defaultLatitude: 51.0
+  defaultLongitude: 4.4
   defaultZoom: 9
   height: 600
   minimal:
