@@ -6,7 +6,7 @@ security:
     enabled: true
     scope: openid profile email ala roles
     allowUnsignedIdTokens: true # Disable once CAS no longer suggests the none algorithm
-    clientId: collections
+    clientId: images
     discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known
     secret: images-oidc-super-secret
   jwt:
