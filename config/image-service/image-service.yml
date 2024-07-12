@@ -14,6 +14,10 @@ security:
     fallbackToLegacyKeys: true # Reset to false once legacy api keys no longer supported
     discoveryUri: ${security.oidc.discoveryUri}
   apikey:
+    ip:
+      whitelist: ''
+    check:
+      serviceUrl: ${common.protocol}://auth.${common.domain}/apikey/ws/check?apikey=
     auth:
       serviceUrl: ${common.protocol}://auth.${common.domain}/apikey/
 
