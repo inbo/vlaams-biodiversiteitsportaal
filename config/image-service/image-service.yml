@@ -15,7 +15,7 @@ security:
     discoveryUri: ${security.oidc.discoveryUri}
   apikey:
     ip:
-      whitelist: ''
+      whitelist: '10.30.0.0/20'
     check:
       serviceUrl: ${common.protocol}://auth.${common.domain}/apikey/ws/check?apikey=
     auth:
