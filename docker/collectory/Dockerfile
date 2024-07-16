@@ -4,6 +4,7 @@ ARG VERSION=develop
 
 WORKDIR /project
 RUN git clone --branch ${VERSION} --depth 1 https://github.com/StefanVanDyck/collectory /project
+COPY ./i18n/ ./grails-app/i18n/
 RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
     gradle build assemble --no-daemon \
     -x test -x integrationTest \

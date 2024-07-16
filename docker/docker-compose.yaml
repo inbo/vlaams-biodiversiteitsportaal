@@ -1,7 +1,11 @@
 services:
   ala-hub:
-    #    image: atlasoflivingaustralia/ala-hub:7.0.0
-    build: ala-hub
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/ala-hub:dev
+    build:
+      context: ala-hub
+      x-bake:
+        platforms:
+        - linux/arm64
     ports:
       - "8012:8080"
     command:
@@ -18,8 +22,12 @@ services:
       LOG_FORMAT: JSON
 
   bie-hub:
-    #    image: atlasoflivingaustralia/ala-bie-hub:4.1.0
-    build: bie-hub
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/bie-hub:dev
+    build:
+      context: bie-hub
+      x-bake:
+        platforms:
+        - linux/arm64
     ports:
       - "8008:8080"
     command:
@@ -36,8 +44,12 @@ services:
       LOG_FORMAT: JSON
 
   bie-index:
-    #    image: atlasoflivingaustralia/bie-index:3.1.0
-    build: bie-index
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/bie-index:dev
+    build:
+      context: bie-index
+      x-bake:
+        platforms:
+        - linux/arm64
     ports:
       - "8007:8080"
     command:
@@ -56,8 +68,12 @@ services:
       LOG_FORMAT: JSON
 
   biocache-service:
-    #    image: atlasoflivingaustralia/biocache-service:3.4.1
-    build: biocache-service
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/biocache-service:dev
+    build:
+      context: biocache-service
+      x-bake:
+        platforms:
+        - linux/arm64
     ports:
       - "8003:8080"
     volumes:
@@ -79,8 +95,12 @@ services:
       SPRING_CONFIG_IMPORT: ''
 
   cas:
-    #    image: atlasoflivingaustralia/cas:6.5.6-2
-    build: cas
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/cas:dev
+    build:
+      context: cas
+      x-bake:
+        platforms:
+        - linux/arm64
     ports:
       - "9000:8080"
     command:
@@ -110,8 +130,12 @@ services:
         condition: service_started
 
   cas-apikey:
-    #    image: atlasoflivingaustralia/apikey:1.7.0
-    build: cas-apikey
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/cas-apikey:dev
+    build:
+      context: cas-apikey
+      x-bake:
+        platforms:
+        - linux/arm64
     ports:
       - "9002:8080"
     command:
@@ -131,8 +155,12 @@ services:
       LOG_FORMAT: JSON
 
   cas-management:
-    #    image: atlasoflivingaustralia/cas-management:6.5.5-2
-    build: cas-management
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/cas-management:dev
+    build:
+      context: cas-management
+      x-bake:
+        platforms:
+        - linux/arm64
     ports:
       - "8070:8080"
       - "8443:8443"
@@ -159,8 +187,12 @@ services:
       LOG_FORMAT: JSON
 
   collectory:
-    #    image: atlasoflivingaustralia/collectory:5.1.0
-    build: collectory
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/collectory:dev
+    build:
+      context: collectory
+      x-bake:
+        platforms:
+        - linux/arm64
     ports:
       - "8001:8080"
     command:
@@ -181,8 +213,12 @@ services:
       LOG_FORMAT: JSON
 
   species-list:
-    #    image: atlasoflivingaustralia/species-list:4.5.3
-    build: species-list
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/species-list:dev
+    build:
+      context: species-list
+      x-bake:
+        platforms:
+        - linux/arm64
     ports:
       - "8002:8080"
     command:
@@ -202,7 +238,12 @@ services:
       LOG_FORMAT: JSON
 
   regions:
-    build: regions
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/regions:dev
+    build:
+      context: regions
+      x-bake:
+        platforms:
+        - linux/arm64
     ports:
       - "8005:8080"
     volumes:
@@ -219,8 +260,36 @@ services:
       SPRING_PROFILES_ACTIVE: local
       LOG_FORMAT: JSON
 
+  image-service:
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/image-service:dev
+    build:
+      context: image-service
+      x-bake:
+        platforms:
+        - linux/arm64
+    ports:
+      - "8005:8080"
+    volumes:
+      - ./image-service/config:/data/image-service/config:ro
+    command:
+      - -Xms128m
+      - -Xmx128m
+    depends_on:
+      mysql:
+        condition: service_healthy
+      cas:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+      LOG_FORMAT: JSON
+
   spatial-hub:
-    build: spatial-hub
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/spatial-hub:dev
+    build:
+      context: spatial-hub
+      x-bake:
+        platforms:
+        - linux/arm64
     ports:
       - "8010:8080"
     volumes:
@@ -237,8 +306,12 @@ services:
       LOG_FORMAT: JSON
 
   spatial-service:
-    build: spatial-service
-    #    build: /home/stefan/Projects/Inbo/ala/spatial-service
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/spatial-service:dev
+    build:
+      context: spatial-service
+      x-bake:
+        platforms:
+        - linux/arm64
     ports:
       - "8011:8080"
     volumes:
@@ -263,8 +336,12 @@ services:
       LOG_FORMAT: JSON
 
   userdetails:
-    #    image: atlasoflivingaustralia/userdetails:3.0.3
-    build: userdetails
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/userdetails:dev
+    build:
+      context: userdetails
+      x-bake:
+        platforms:
+        - linux/arm64
     ports:
       - "9001:8080"
     command:

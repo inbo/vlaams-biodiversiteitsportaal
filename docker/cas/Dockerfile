@@ -4,7 +4,7 @@ ARG VERSION=6.5.6-3
 
 WORKDIR /project
 RUN git clone --branch ${VERSION} --depth 1 https://github.com/AtlasOfLivingAustralia/ala-cas-5.git /project
-# COPY ./i18n/ src/main/resources/
+COPY ./i18n/ src/main/resources/
 
 
 RUN --mount=type=cache,target=/root/.m2/repository\

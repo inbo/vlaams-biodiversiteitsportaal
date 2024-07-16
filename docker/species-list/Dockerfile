@@ -4,6 +4,7 @@ ARG VERSION=4.5.3
 
 WORKDIR /project
 RUN git clone --branch ${VERSION} --depth 1 https://github.com/AtlasOfLivingAustralia/specieslist-webapp.git /project
+COPY ./i18n/ ./grails-app/i18n/
 RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
     gradle build assemble --no-daemon \
     -x test -x integrationTest \

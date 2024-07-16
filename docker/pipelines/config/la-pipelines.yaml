@@ -52,15 +52,15 @@ collectory:
   httpHeaders:
     Authorization: 02b8538a-4910-45a0-99de-1fc5175dd015
 imageService:
-  wsUrl: http://images.http://namematching.biodiversiteitsportaal.dev.internal:8080
+  wsUrl: http://image-service.biodiversiteitsportaal.dev.internal:8080
   timeoutSec: 70
   httpHeaders:
-    apiKey: add-a-api-key-here
+    apiKey: 02b8538a-4910-45a0-99de-1fc5175dd015
 speciesListService:
   wsUrl: http://species-list.biodiversiteitsportaal.dev.internal:8080
   timeoutSec: 70
 samplingService:
-  wsUrl: http://sampling:8080
+  wsUrl: http://spatial-service.biodiversiteitsportaal.dev.internal:8080/ws/
   timeoutSec: 70
   batchSize: 25000
   batchStatusSleepTime: 1000
@@ -245,11 +245,12 @@ solr:
   outlierPath: '{fsPath}/pipelines-outlier'
   annotationsPath: '{fsPath}/pipelines-annotations'
   solrCollection: biocache
-  includeSampling: false
-  includeJackKnife: false
+  includeSampling: true
+  includeJackKnife: true
   includeClustering: false
   runner: SparkRunner
   zkHost: solr.biodiversiteitsportaal.dev.internal:9983
+  numOfPartitions: 3
 
 # class: au.org.ala.pipelines.beam.IndexRecordToSolrPipeline
 elastic:
@@ -306,7 +307,7 @@ solrSchema:
 jackKnife:
   appName: Jack knife outlier detection
   jackKnifePath: "{fsPath}/pipelines-jackknife"
-  layers: el882,el889,el887,el865,el894
+  layers: cl10001,cl10000,cl10002
   minSampleThreshold: 80
   allDatasetsInputPath: '{fsPath}/pipelines-all-datasets'
   runner: SparkRunner
@@ -366,9 +367,9 @@ interpret-sh-args:
 
 image-sync-sh-args:
   local:
-    jvm: -Xmx10g -XX:+UseG1GC -Dspark.master=local[*]
+    jvm: -Xmx90g -XX:+UseG1GC -Dspark.master=local[*]
   spark-embedded:
-    jvm: -Xmx10g -XX:+UseG1GC -Dspark.master=local[*]
+    jvm: -Xmx90g -XX:+UseG1GC -Dspark.master=local[*]
   spark-cluster:
     conf: spark.default.parallelism=144
     num-executors: 16
@@ -378,9 +379,9 @@ image-sync-sh-args:
 
 image-load-sh-args:
   local:
-    jvm: -Xmx10g -XX:+UseG1GC -Dspark.master=local[*]
+    jvm: -Xmx90g -XX:+UseG1GC -Dspark.master=local[*]
   spark-embedded:
-    jvm: -Xmx10g -XX:+UseG1GC -Dspark.master=local[*]
+    jvm: -Xmx90g -XX:+UseG1GC -Dspark.master=local[*]
   spark-cluster:
     conf: spark.default.parallelism=144
     num-executors: 16
@@ -390,9 +391,9 @@ image-load-sh-args:
 
 annotations-sh-args:
   local:
-    jvm: -Xmx10g -XX:+UseG1GC -Dspark.master=local[*]
+    jvm: -Xmx90g -XX:+UseG1GC -Dspark.master=local[*]
   spark-embedded:
-    jvm: -Xmx10g -XX:+UseG1GC -Dspark.master=local[*]
+    jvm: -Xmx90g -XX:+UseG1GC -Dspark.master=local[*]
   spark-cluster:
     conf: spark.default.parallelism=144
     num-executors: 16
@@ -402,9 +403,9 @@ annotations-sh-args:
 
 export-sh-args:
   local:
-    jvm: -Xmx10g -XX:+UseG1GC -Dspark.master=local[*]
+    jvm: -Xmx90g -XX:+UseG1GC -Dspark.master=local[*]
   spark-embedded:
-    jvm: -Xmx10g -XX:+UseG1GC -Dspark.master=local[*]
+    jvm: -Xmx90g -XX:+UseG1GC -Dspark.master=local[*]
   spark-cluster:
     conf: spark.default.parallelism=144
     num-executors: 16
@@ -414,9 +415,9 @@ export-sh-args:
 
 uuid-sh-args:
   local:
-    jvm: -Xmx10g -XX:+UseG1GC
+    jvm: -Xmx90g -XX:+UseG1GC
   spark-embedded:
-    jvm: -Xmx10g -XX:+UseG1GC
+    jvm: -Xmx90g -XX:+UseG1GC
   spark-cluster:
     conf: spark.default.parallelism=500
     num-executors: 14
@@ -426,9 +427,9 @@ uuid-sh-args:
 
 sampling-sh-args:
   local:
-    jvm: -Xmx10g -XX:+UseG1GC -Dspark.master=local[*]
+    jvm: -Xmx90g -XX:+UseG1GC -Dspark.master=local[*]
   spark-embedded:
-    jvm: -Xmx10g -XX:+UseG1GC -Dspark.master=local[*]
+    jvm: -Xmx90g -XX:+UseG1GC -Dspark.master=local[*]
   spark-cluster:
     conf: spark.default.parallelism=144
     num-executors: 8
@@ -438,9 +439,9 @@ sampling-sh-args:
 
 outlier-sh-args:
   local:
-    jvm: -Xmx10g -XX:+UseG1GC -Dspark.master=local[*]
+    jvm: -Xmx90g -XX:+UseG1GC -Dspark.master=local[*]
   spark-embedded:
-    jvm: -Xmx10g -XX:+UseG1GC -Dspark.master=local[*]
+    jvm: -Xmx90g -XX:+UseG1GC -Dspark.master=local[*]
   spark-cluster:
     conf: spark.default.parallelism=144
     num-executors: 8
@@ -450,9 +451,9 @@ outlier-sh-args:
 
 sensitive-sh-args:
   spark-embedded:
-    jvm: -Xmx10g -XX:+UseG1GC
+    jvm: -Xmx90g -XX:+UseG1GC
   spark-cluster:
-    jvm: -Xmx10g -XX:+UseG1GC
+    jvm: -Xmx90g -XX:+UseG1GC
     num-executors: 8
     executor-cores: 8
     executor-memory: 94G
@@ -460,7 +461,7 @@ sensitive-sh-args:
 
 sample-sh-args:
   local:
-    jvm: -Xmx10g -XX:+UseG1GC
+    jvm: -Xmx90g -XX:+UseG1GC
 
 index-sh-args:
   local:
@@ -476,9 +477,9 @@ index-sh-args:
 
 jackknife-sh-args:
   local:
-    jvm: -Xmx10g -XX:+UseG1GC
+    jvm: -Xmx90g -XX:+UseG1GC
   spark-embedded:
-    jvm: -Xmx10g -XX:+UseG1GC
+    jvm: -Xmx90g -XX:+UseG1GC
   spark-cluster:
     conf: spark.default.parallelism=500
     num-executors: 24
@@ -488,9 +489,9 @@ jackknife-sh-args:
 
 clustering-sh-args:
   local:
-    jvm: -Xmx10g -XX:+UseG1GC
+    jvm: -Xmx90g -XX:+UseG1GC
   spark-embedded:
-    jvm: -Xmx10g -XX:+UseG1GC
+    jvm: -Xmx90g -XX:+UseG1GC
   spark-cluster:
     conf: spark.default.parallelism=500
     num-executors: 6
@@ -512,9 +513,9 @@ solr-sh-args:
 
 elastic-sh-args:
   local:
-    jvm: -Xmx10g -XX:+UseG1GC
+    jvm: -Xmx90g -XX:+UseG1GC
   spark-embedded:
-    jvm: -Xmx10g -XX:+UseG1GC
+    jvm: -Xmx90g -XX:+UseG1GC
   spark-cluster:
     conf: spark.default.parallelism=48
     num-executors: 6

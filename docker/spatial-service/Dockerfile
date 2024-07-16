@@ -1,10 +1,10 @@
 FROM gradle:7-jdk11 as builder
 
-ARG VERSION=fix-loading-task-when-running-jar-directly
+ARG VERSION=fix-bbox-from-geoserver
 
 WORKDIR /spatial-service
 
-ARG test=4
+ARG test=12
 
 RUN git clone --branch ${VERSION} --depth 1 https://github.com/StefanVanDyck/spatial-service.git /spatial-service
 COPY ./i18n/ ./grails-app/i18n/
@@ -19,7 +19,7 @@ RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
 
 FROM openjdk:11
 
-ARG VERSION=2.1.3-SNAPSHOT
+ARG VERSION=2.1.6-SNAPSHOT
 
 RUN apt-get update && apt-get install -y \
     gettext-base \

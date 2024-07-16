@@ -4,6 +4,7 @@ ARG VERSION=3.1.0
 
 WORKDIR /project
 RUN git clone --branch ${VERSION} --depth 1 https://github.com/AtlasOfLivingAustralia/bie-index.git /project
+COPY ./i18n/ ./grails-app/i18n/
 RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
     gradle build assemble --no-daemon \
     -x test -x integrationTest \
