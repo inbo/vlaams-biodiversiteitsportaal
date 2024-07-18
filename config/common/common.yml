@@ -9,6 +9,8 @@ environment:
       domain: biodiversiteitsportaal.dev.svdev.be
 
 common:
+  protocol: https
+  domain: biodiversiteitsportaal.dev.svdev.be
   homepage: ${common.protocol}://www.${common.domain}
 ala:
   baseURL: ${common.homepage}
