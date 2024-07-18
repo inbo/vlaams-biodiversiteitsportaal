@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<!DOCTYPE web-app
+        PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+        "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app>
+    <context-param>
+        <param-name>spring.profiles.active</param-name>
+        <param-value>local</param-value>
+    </context-param>
+    <context-param>
+        <param-name>common.protocol</param-name>
+        <param-value>http</param-value>
+    </context-param>
+    <context-param>
+        <param-name>common.domain</param-name>
+        <param-value>la-flanders.org</param-value>
+    </context-param>
+</web-app>

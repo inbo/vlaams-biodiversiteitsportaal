@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context docBase="/usr/local/tomcat/webapps/userdetails.war"
+         path="/userdetails"
+         reloadable="false">
+
+    <Parameter name="spring.config.additional-location"
+               value="file:/config/config/common/common.yml,file:/config/config/userdetails/userdetails.yml"
+               override="false"/>
+    <Parameter name="spring.profiles.active"
+               value="local"
+               override="false"/>
+</Context>

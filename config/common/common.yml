@@ -1,8 +1,15 @@
-common:
-  protocol: https
-  domain: biodiversiteitsportaal.dev.svdev.be
-  homepage: ${common.protocol}://www.${common.domain}
+environment:
+  local:
+    common:
+      protocol: http
+      domain: la-flanders.org
+  production:
+    common:
+      protocol: https
+      domain: biodiversiteitsportaal.dev.svdev.be
 
+common:
+  homepage: ${common.protocol}://www.${common.domain}
 ala:
   baseURL: ${common.homepage}
 
@@ -34,15 +41,6 @@ logging:
 server:
   use-forward-headers: true
 
-environment:
-  local:
-    common:
-      protocol: http
-      domain: la-flanders.org
-  production:
-    common:
-      protocol: https
-      domain: biodiversiteitsportaal.dev.svdev.be
 
 grails:
   cors:

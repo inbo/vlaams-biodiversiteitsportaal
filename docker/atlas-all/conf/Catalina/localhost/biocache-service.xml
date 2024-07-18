@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context docBase="/usr/local/tomcat/webapps/biocache-service.war"
+         path="/biocache-service"
+         reloadable="false">
+
+    <Parameter name="spring.config.additional-location"
+               value="file:/config/config/common/common.yml,file:/config/config/biocache-service/biocache-service.yml"
+               override="false"/>
+    <Parameter name="common.protocol"
+               value="http"
+               override="false"/>
+    <Parameter name="common.domain"
+               value="la-flanders.org"
+               override="false"/>
+</Context>
