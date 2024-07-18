@@ -24,7 +24,7 @@
     {
       "datasource": {
         "type": "cloudwatch",
-        "uid": "adn6bzl4a1se8d"
+        "uid": "cloudwatch"
       },
       "fieldConfig": {
         "defaults": {
@@ -107,7 +107,7 @@
         {
           "datasource": {
             "type": "cloudwatch",
-            "uid": "adn6bzl4a1se8d"
+            "uid": "cloudwatch"
           },
           "dimensions": {},
           "expression": "fields @timestamp, @message, @logStream\n| filter @logStream like /CloudWatchLogStreamECSCluster\\/biodiversiteitsportaal-${service}.*\\//\n| filter @message like /$query/\n| stats count() by @logStream, bin(${__interval})\n| limit 100",
@@ -151,7 +151,7 @@
     {
       "datasource": {
         "type": "cloudwatch",
-        "uid": "adn6bzl4a1se8d"
+        "uid": "cloudwatch"
       },
       "gridPos": {
         "h": 13,
@@ -175,7 +175,7 @@
         {
           "datasource": {
             "type": "cloudwatch",
-            "uid": "adn6bzl4a1se8d"
+            "uid": "cloudwatch"
           },
           "dimensions": {},
           "expression": "fields @timestamp, @message, @logStream\n| filter @logStream like /CloudWatchLogStreamECSCluster\\/biodiversiteitsportaal-$service.*\\//\n| filter @message like /$query/\n| sort @timestamp desc\n| limit 1000",
@@ -219,7 +219,7 @@
         },
         "datasource": {
           "type": "cloudwatch",
-          "uid": "adn6bzl4a1se8d"
+          "uid": "cloudwatch"
         },
         "definition": "",
         "hide": 0,
