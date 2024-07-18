@@ -4,3 +4,5 @@ datasources:
   - name: cloudwatch
     type: cloudwatch
     uid: cloudwatch
+    jsonData:
+      defaultRegion: eu-west-1
