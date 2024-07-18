@@ -3,3 +3,4 @@ apiVersion: 1
 datasources:
   - name: cloudwatch
     type: cloudwatch
+    uid: cloudwatch
