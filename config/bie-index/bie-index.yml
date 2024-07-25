@@ -142,7 +142,7 @@ solr:
     defType: edismax
     qAlt: text:*
 skin:
-  layout: main
+  layout: ala-main
   fluidLayout: true
   orgNameLong: Vlaams Biodiversiteitsportaal
   favicon: ${common.protocol}://branding.${common.domain}/favicon.ico
