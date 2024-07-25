@@ -44,8 +44,8 @@ ala:
     baseUrl: ${common.protocol}://www.${common.domain}
     termsUrl:
     uiVersion: 3
-    headerFooterUrl: ${common.protocol}://branding.${common.domain}/
-    favIconBaseUrl: ${common.protocol}://branding.${common.domain}/
+    headerFooterUrl: ${common.protocol}://branding.${common.domain}
+    favIconBaseUrl: ${common.protocol}://branding.${common.domain}
     bieBaseUrl: ${common.protocol}://species.${common.domain}
     bieSearchPath: /search
     userDetailsUrl: ${common.protocol}://auth.${common.domain}/userdetails/
@@ -136,20 +136,9 @@ security:
     #   - /**
 management:
   security:
-    # enabled: false
+    enabled: true
     roles: ACTUATOR
-  server:
-    # port: 9000
-    # address: 127.0.0.1
-    ssl:
-      enabled: false
-  endpoint:
-    info:
-      enabled: true
   endpoints:
-    enabled-by-default: true
-    # ip: .*
-    actuatorEndpointsEnabled: true
     web:
       exposure:
         include: "*"
@@ -157,10 +146,10 @@ management:
 spring:
   session:
     store-type: none
-  autoconfigure:
-    exclude: >
-      org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration,
-      org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration
+#  autoconfigure:
+#    exclude: >
+#      org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration,
+#      org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration
   #  boot:
   #    admin:
   #      server:
