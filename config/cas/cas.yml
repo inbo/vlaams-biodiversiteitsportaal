@@ -26,11 +26,11 @@ ala:
   userDetailsBaseUrl: ${common.protocol}://auth.${common.domain}/userdetails/
   cookie:
     domain: ${common.domain}
-    secure: false
+    secure: true
     httpOnly: true
-    maxAge: -1
+    maxAge: 1200
     name: VBP-Auth
-    path: /
+#    path: /
   userCreator:
     userCreatePassword: wormishmensurablearchitecture
     enableUserSurvey: false
@@ -44,7 +44,7 @@ ala:
     baseUrl: ${common.protocol}://www.${common.domain}
     termsUrl:
     uiVersion: 3
-    headerFooterUrl: ${common.protocol}://branding.${common.domain}
+    headerFooterUrl: ${common.protocol}://branding.${common.domain}/
     favIconBaseUrl: ${common.protocol}://branding.${common.domain}
     bieBaseUrl: ${common.protocol}://species.${common.domain}
     bieSearchPath: /search
