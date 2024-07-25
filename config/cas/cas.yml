@@ -30,7 +30,7 @@ ala:
     httpOnly: true
     maxAge: 1200
     name: VBP-Auth
-#    path: /
+    path: ''
   userCreator:
     userCreatePassword: wormishmensurablearchitecture
     enableUserSurvey: false
@@ -89,12 +89,12 @@ cas:
             discovery-uri: https://cognito-idp.eu-west-1.amazonaws.com/eu-west-1_Vnh6QR6dG/.well-known/openid-configuration
             client-name: cognito
             auto-redirect-type: SERVER
-#        - generic:
-#            id: test
-#            secret: test
-#            discovery-uri: http://mock-oauth2-server:9999/default/.well-known/openid-configuration
-#            client-name: default
-#            auto-redirect-type: SERVER
+  #        - generic:
+  #            id: test
+  #            secret: test
+  #            discovery-uri: http://mock-oauth2-server:9999/default/.well-known/openid-configuration
+  #            client-name: default
+  #            auto-redirect-type: SERVER
   serviceRegistry:
     mongo:
       clientUri: mongodb://services:my-super-secret-password@mongodb:27017/cas-service-registry?retryWrites=true&ssl=false&allowPublicKeyRetrieval=true
@@ -122,21 +122,8 @@ cas:
 endpoints:
   enabled: true
   sensitive: "*"
-security:
-  user:
-    name: admin
-    password: secret
-    role:
-      - ACTUATOR
-  basic:
-    enabled: true
-    authorizeMode: role
-    # realm: ALA CAS
-    # path:
-    #   - /**
 management:
   security:
-    enabled: true
     roles: ACTUATOR
   endpoints:
     web:
@@ -146,10 +133,16 @@ management:
 spring:
   session:
     store-type: none
-#  autoconfigure:
-#    exclude: >
-#      org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration,
-#      org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration
+  security:
+    user:
+      name: admin
+      password: secret
+      role:
+        - ACTUATOR
+  autoconfigure:
+    exclude: >
+      org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration,
+      org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration
   #  boot:
   #    admin:
   #      server:
