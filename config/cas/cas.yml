@@ -26,8 +26,8 @@ ala:
   userDetailsBaseUrl: ${common.protocol}://auth.${common.domain}/userdetails/
   cookie:
     domain: ${common.domain}
-    secure: true
-    httpOnly: true
+    secure: false
+    httpOnly: false
     maxAge: 1200
     name: VBP-Auth
     path: ''
