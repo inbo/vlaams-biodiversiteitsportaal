@@ -5,12 +5,17 @@ security:
     discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known
     enabled: 'false'
   cas:
-    bypass: 'false'
+    appServerName: ${common.protocol}://records.${common.domain}
+    authCookieName: VBP-Auth
+    authenticateOnlyIfLoggedInFilterPattern: /occurrences/*,/explore/your-area,/query,/proxy/download/*,/
+    bypass: false
     casServerLoginUrl: ${common.protocol}://auth.${common.domain}/cas/login
-    casServerLogoutUrl: ${common.protocol}://auth.${common.domain}/cas/login
+    casServerLogoutUrl: ${common.protocol}://auth.${common.domain}/cas/logout
+    casServerName: ${common.protocol}://auth.${common.domain}
+    casServerUrlPrefix: ${common.protocol}://auth.${common.domain}/cas
+    enabled: true
+    loginUrl: ${common.protocol}://auth.${common.domain}/cas/login
     logoutUrl: ${common.protocol}://auth.${common.domain}/cas/logout
-    enabled: 'true'
-    casServerUrlPrefix: ${common.protocol}://auth.${common.domain}
 casServerName: ${common.protocol}://auth.${common.domain}
 casServerLoginUrl: ${common.protocol}://auth.${common.domain}/cas/login
 casServerUrlPrefix: ${common.protocol}://auth.${common.domain}/cas
