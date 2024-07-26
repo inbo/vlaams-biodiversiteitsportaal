@@ -41,7 +41,7 @@ ala:
       enableUpdateLegacyPasswords: true
 
   skin:
-    baseUrl: ${common.protocol}://www.${common.domain}
+    baseUrl: ${common.protocol}://www.${common.domain}/
     termsUrl:
     uiVersion: 3
     headerFooterUrl: ${common.protocol}://branding.${common.domain}/
