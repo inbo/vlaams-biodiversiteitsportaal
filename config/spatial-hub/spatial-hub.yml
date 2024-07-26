@@ -17,7 +17,7 @@ i18n:
 security:
   # CAS disabled
   cas:
-    enabled: true
+    enabled: false
     casServerName: "${common.protocol}://auth.${common.domain}"
     casServerUrlPrefix: "${common.protocol}://auth.${common.domain}/cas"
     loginUrl: "${common.protocol}://auth.${common.domain}/cas/login"
@@ -28,7 +28,7 @@ security:
   #Used for auth plugin
   apikey:
     check:
-      serviceUrl:  ${common.protocol}://auth.${common.domain}/apikey/ws/check?apikey=
+      serviceUrl: ${common.protocol}://auth.${common.domain}/apikey/ws/check?apikey=
   oidc:
     enabled: true
     discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known
@@ -37,13 +37,13 @@ security:
     secret: "spatial-oidc-super-secret"
   jwt:
     enabled: false
-#    discoveryUri: {{ jwt_discoveryUri }}
-#    fallbackToLegacyBehaviour: true
-#    clientId: {{ spatial_hub_oidc_client_id }}
-#    roleAttributes: cognito:groups
-#    rolesFromAccessToken: true
-#    userIdClaim: username
-#    roleClaims: cognito:groups
+  #    discoveryUri: {{ jwt_discoveryUri }}
+  #    fallbackToLegacyBehaviour: true
+  #    clientId: {{ spatial_hub_oidc_client_id }}
+  #    roleAttributes: cognito:groups
+  #    rolesFromAccessToken: true
+  #    userIdClaim: username
+  #    roleClaims: cognito:groups
   cors:
     enable: true
     authenticated:
@@ -69,23 +69,25 @@ apiKeyCheckUrlTemplate: "${common.protocol}://auth.${common.domain}/apikey/ws/ch
 autocompleteUrl: "${common.protocol}://species-ws.${common.domain}/search/auto.jsonp"
 
 auth:
-    admin_role: ROLE_ADMIN
+  admin_role: ROLE_ADMIN
 
-app:
-    http:
-        header:
-            userId: X-ALA-userId
+#app:
+#  http:
+#    header:
+#      userId: X-ALA-userId
 
 headerAndFooter:
   baseURL: "${common.protocol}://branding.${common.domain}"
 #  version: "2"
 
-ala.baseURL: "${common.protocol}://${common.domain}"
-bie.baseURL: "${common.protocol}://species.${common.domain}"
-bie.searchPath: '/search'
+ala:
+  baseURL: "${common.protocol}://${common.domain}"
+bie:
+  baseURL: "${common.protocol}://species.${common.domain}"
+  searchPath: '/search'
 
 bieService:
-    baseURL: "${common.protocol}://species-ws.${common.domain}"
+  baseURL: "${common.protocol}://species-ws.${common.domain}"
 
 userdetails:
   web:
@@ -132,9 +134,9 @@ biocacheService:
   #Facets to ignore in the biocache grouped/facets service
   default_facets_ignored: "data_resource_uid,data_provider_uid,species,collection_uid,institution_code_name,institution_uid,uncertainty"
   custom_facets:
-    Attribution: ['Data Provider;data_provider', 'Collection;collection_name', 'Data Resource;data_resource', 'Institution;institution_name']
-    Location: ['Coordinate Uncertainty;coordinate_uncertainty']
-    Occurrence: ['Year;occurrence_year']
+    Attribution: [ 'Data Provider;data_provider', 'Collection;collection_name', 'Data Resource;data_resource', 'Institution;institution_name' ]
+    Location: [ 'Coordinate Uncertainty;coordinate_uncertainty' ]
+    Occurrence: [ 'Year;occurrence_year' ]
 
 sampling:
   url: "${common.protocol}://spatial.${common.domain}/ws"
@@ -147,7 +149,7 @@ flickr:
   searchPhotos: 'flickr.photos.search'
   # licensesInfo: 'flickr.photos.licenses.getInfo'
   # licenses data is found at https://api.flickr.com/services/rest/?method=flickr.photos.licenses.getInfo&api_key=<api_key>&format=json&nojsoncallback=1
-  licensesData: {'licenses': {'license': [{'id': '0', 'name': 'All Rights Reserved', 'url': ''}, {'id': '4', 'name': 'Attribution License', 'url': 'https://creativecommons.org/licenses/by/2.0/'}, {'id': '6', 'name': 'Attribution-NoDerivs License', 'url': 'https://creativecommons.org/licenses/by-nd/2.0/'}, {'id': '3', 'name': 'Attribution-NonCommercial-NoDerivs License', 'url': 'https://creativecommons.org/licenses/by-nc-nd/2.0/'}, {'id': '2', 'name': 'Attribution-NonCommercial License', 'url': 'https://creativecommons.org/licenses/by-nc/2.0/'}, {'id': '1', 'name': 'Attribution-NonCommercial-ShareAlike License', 'url': 'https://creativecommons.org/licenses/by-nc-sa/2.0/'}, {'id': '5', 'name': 'Attribution-ShareAlike License', 'url': 'https://creativecommons.org/licenses/by-sa/2.0/'}, {'id': '7', 'name': 'No known copyright restrictions', 'url': 'https://www.flickr.com/commons/usage/'}, {'id': '8', 'name': 'United States Government Work', 'url': 'http://www.usa.gov/copyright.shtml'}, {'id': '9', 'name': 'Public Domain Dedication (CC0)', 'url': 'https://creativecommons.org/publicdomain/zero/1.0/'}, {'id': '10', 'name': 'Public Domain Mark', 'url': 'https://creativecommons.org/publicdomain/mark/1.0/'}]}, 'stat': 'ok'}
+  licensesData: { 'licenses': { 'license': [ { 'id': '0', 'name': 'All Rights Reserved', 'url': '' }, { 'id': '4', 'name': 'Attribution License', 'url': 'https://creativecommons.org/licenses/by/2.0/' }, { 'id': '6', 'name': 'Attribution-NoDerivs License', 'url': 'https://creativecommons.org/licenses/by-nd/2.0/' }, { 'id': '3', 'name': 'Attribution-NonCommercial-NoDerivs License', 'url': 'https://creativecommons.org/licenses/by-nc-nd/2.0/' }, { 'id': '2', 'name': 'Attribution-NonCommercial License', 'url': 'https://creativecommons.org/licenses/by-nc/2.0/' }, { 'id': '1', 'name': 'Attribution-NonCommercial-ShareAlike License', 'url': 'https://creativecommons.org/licenses/by-nc-sa/2.0/' }, { 'id': '5', 'name': 'Attribution-ShareAlike License', 'url': 'https://creativecommons.org/licenses/by-sa/2.0/' }, { 'id': '7', 'name': 'No known copyright restrictions', 'url': 'https://www.flickr.com/commons/usage/' }, { 'id': '8', 'name': 'United States Government Work', 'url': 'http://www.usa.gov/copyright.shtml' }, { 'id': '9', 'name': 'Public Domain Dedication (CC0)', 'url': 'https://creativecommons.org/publicdomain/zero/1.0/' }, { 'id': '10', 'name': 'Public Domain Mark', 'url': 'https://creativecommons.org/publicdomain/mark/1.0/' } ] }, 'stat': 'ok' }
   apiKey:
   secret:
   tags:
@@ -247,10 +249,10 @@ startup:
 
 defaultareas:
   - name: 'Flanders'
-    fqs: ['longitude:[2.296 TO 6.1468505859375]', 'latitude:[50.6 TO 51.5]']
+    fqs: [ 'longitude:[2.296 TO 6.1468505859375]', 'latitude:[50.6 TO 51.5]' ]
     wkt: 'POLYGON((2.296 50.6, 6.1468505859375 50.6, 6.1468505859375 51.5, 2.296 51.5, 2.296 50.6))'
     areaSqKm: 13625
-    bbox: [50.65843926853822, 51.52780962525605, 2.296, 6.1468505859375]
+    bbox: [ 50.65843926853822, 51.52780962525605, 2.296, 6.1468505859375 ]
 #  - name: 'World'
 #    fqs: []
 #    wkt: 'POLYGON((-180 -90.0,180.0 -90.0,180.0 90.0,-180 90.0,-180 -90.0))'
