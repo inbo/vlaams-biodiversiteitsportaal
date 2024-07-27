@@ -41,11 +41,9 @@ ala:
       enableUpdateLegacyPasswords: true
 
   skin:
-    baseUrl: ${common.protocol}://www.${common.domain}/
-    termsUrl:
-    uiVersion: 3
-    headerFooterUrl: ${common.protocol}://branding.${common.domain}/
-    favIconBaseUrl: ${common.protocol}://branding.${common.domain}
+    baseUrl: ${common.protocol}://branding.${common.domain}/
+    headerFooterUrl: ${common.protocol}://branding.${common.domain}
+    favIconBaseUrl: ${common.protocol}://branding.${common.domain}/
     bieBaseUrl: ${common.protocol}://species.${common.domain}
     bieSearchPath: /search
     userDetailsUrl: ${common.protocol}://auth.${common.domain}/userdetails/
