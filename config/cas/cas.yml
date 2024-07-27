@@ -42,8 +42,7 @@ ala:
 
   skin:
     baseUrl: ${common.protocol}://branding.${common.domain}/
-    uiVersion: 2
-    headerFooterUrl: ${common.protocol}://branding.${common.domain}
+    headerFooterUrl: ${common.protocol}://branding.${common.domain}/
     favIconBaseUrl: ${common.protocol}://branding.${common.domain}/
     bieBaseUrl: ${common.protocol}://species.${common.domain}
     bieSearchPath: /search
