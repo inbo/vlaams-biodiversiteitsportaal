@@ -28,7 +28,7 @@ security:
     contextPath:
     bypass: false
     applyUriFiltersToTicketValidation: false
-    enabled: true
+    enabled: false
     authCookiename: VBP-Auth
   # cognito specific configs
   apiKey:

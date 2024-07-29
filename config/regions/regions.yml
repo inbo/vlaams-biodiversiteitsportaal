@@ -3,7 +3,7 @@ security:
     secret: regions-oidc-super-secret
     clientId: regions
     discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known
-    enabled: 'false'
+    enabled: true
   cas:
     appServerName: ${common.protocol}://records.${common.domain}
     authCookieName: VBP-Auth
@@ -13,7 +13,7 @@ security:
     casServerLogoutUrl: ${common.protocol}://auth.${common.domain}/cas/logout
     casServerName: ${common.protocol}://auth.${common.domain}
     casServerUrlPrefix: ${common.protocol}://auth.${common.domain}/cas
-    enabled: true
+    enabled: false
     loginUrl: ${common.protocol}://auth.${common.domain}/cas/login
     logoutUrl: ${common.protocol}://auth.${common.domain}/cas/logout
 casServerName: ${common.protocol}://auth.${common.domain}

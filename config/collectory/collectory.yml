@@ -122,7 +122,7 @@ security:
     casServerName: ${common.protocol}://auth.${common.domain}
     casServerUrlPrefix: ${common.protocol}://auth.${common.domain}/cas
     contextPath: ""
-    enabled: true
+    enabled: false
     loginUrl: ${common.protocol}://auth.${common.domain}/cas/login
     logoutUrl: ${common.protocol}://auth.${common.domain}/cas/logout
     uriExclusionFilterPattern: /images.*,/css.*,/js.*
@@ -133,7 +133,7 @@ security:
   oidc:
     clientId: collections
     discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known
-    enabled: false
+    enabled: true
     secret: collections-oidc-super-secret
 serverName: ${common.protocol}://collections.${common.domain}
 showExtraInfoInDataSetsView:

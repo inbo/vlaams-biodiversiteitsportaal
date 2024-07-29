@@ -82,7 +82,7 @@ management:
 security:
   # CAS disabled
   cas:
-    enabled: true
+    enabled: false
     appServerName: ${common.protocol}://spatial.${common.domain}/ws
     casServerName: "${common.protocol}://auth.${common.domain}"
     casServerUrlPrefix: "${common.protocol}://auth.${common.domain}/cas"

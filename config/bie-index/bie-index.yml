@@ -16,9 +16,9 @@ security:
     logoutUrl: ${common.protocol}://auth.${common.domain}/cas/logout
     contextPath:
     bypass: false
-    enabled: true
-  oidc:
     enabled: false
+  oidc:
+    enabled: true
     clientId: 0cf3eff57958b4bb76eca5055021bcf59bc5
     secret: 895c1a54c053b38953b5b3d3466f7a171659
     discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known
