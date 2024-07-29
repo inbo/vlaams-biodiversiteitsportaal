@@ -83,25 +83,25 @@ events:
 exploreYourArea:
   lat: 51.0
   lng: 4.4
-  location: Flanders
-facets:
-  cached: species_group,species_subgroup,state,country,institution_uid,collection_uid,data_resource_uid
-  customOrder: ''
-  defaultColourBy: ''
-  defaultSelected: basis_of_record,taxon_name,collection_uid,data_resource_uid,year,species_group
-  exclude: ''
-  hide: ''
-  include: ''
-  includeDynamicFacets: false
-  limit: 100
-  max: 32
+  location: Vlaanderen
+#facets:
+#  cached: species_group,species_subgroup,state,country,institution_uid,collection_uid,data_resource_uid
+#  customOrder: ''
+#  defaultColourBy: ''
+#  defaultSelected: basis_of_record,taxon_name,collection_uid,data_resource_uid,year,species_group
+#  exclude: ''
+#  hide: ''
+#  include: ''
+#  includeDynamicFacets: false
+#  limit: 100
+#  max: 32
 fieldguide:
   url: ''
 filetype:
   shapefile:
     hidden: false
 geocode:
-  region: AU
+  region: BE
 google:
   apikey: get-a-google-api-key
 grails:
@@ -221,20 +221,20 @@ spatial:
   params: ''
 speciesList:
   baseURL: ${common.protocol}://lists.${common.domain}
-  preferredListName: ALA Preferred Species Images
-  preferredSpeciesListDruid: dr4778
+#  preferredListName: ALA Preferred Species Images
+#  preferredSpeciesListDruid: dr4778
 speciesListToolUrl: ${common.protocol}://lists.${common.domain}/speciesListItem/list/
 specieslist:
   baseUrl: ${common.protocol}://lists.${common.domain}/ws
-stateConservationListPath:
-  AustralianCapitalTerritory: /speciesListItem/list/dr649
-  NewSouthWales: /speciesListItem/list/dr650
-  NorthernTerritory: /speciesListItem/list/dr651
-  Queensland: /speciesListItem/list/dr652
-  SouthAustralia: /speciesListItem/list/dr653
-  Tasmania: /speciesListItem/list/dr654
-  Victoria: /speciesListItem/list/dr655
-  WesternAustralia: /speciesListItem/list/dr2201
+#stateConservationListPath:
+#  AustralianCapitalTerritory: /speciesListItem/list/dr649
+#  NewSouthWales: /speciesListItem/list/dr650
+#  NorthernTerritory: /speciesListItem/list/dr651
+#  Queensland: /speciesListItem/list/dr652
+#  SouthAustralia: /speciesListItem/list/dr653
+#  Tasmania: /speciesListItem/list/dr654
+#  Victoria: /speciesListItem/list/dr655
+#  WesternAustralia: /speciesListItem/list/dr2201
 supportEmail: support@${common.domain}
 table:
   displayDynamicProperties: false
@@ -244,15 +244,7 @@ useDownloadPlugin: true
 userCharts: false
 userDetails:
   url: ${common.protocol}://auth.${common.domain}/userdetails/
-userdetails:
-  api:
-    url: ${common.protocol}://auth.${common.domain}/userdetails/
-  baseUrl: ${common.protocol}://auth.${common.domain}/userdetails/
-  url: ${common.protocol}://auth.${common.domain}/userdetails/
-  web:
-    url: ${common.protocol}://auth.${common.domain}/userdetails/
 webservice:
-  apiKey: ae1cc2a8-0509-4792-8e62-ded96510d5cc
   client-id: ''
   client-secret: ''
   jwt: false
