@@ -1,4 +1,4 @@
-FROM gradle:7-jdk11 as builder
+FROM gradle:7-jdk11 AS builder
 
 ARG VERSION=7.0.0
 
@@ -27,7 +27,7 @@ RUN mkdir /data && chown app:app /data
 VOLUME /data
 
 USER app
-WORKDIR app
+WORKDIR /app
 
 COPY --from=builder --chown=app \
     /project/build/libs/ala-hub-${VERSION}.war /app/app.war

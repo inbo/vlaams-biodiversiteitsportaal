@@ -1,15 +1,23 @@
-FROM maven:3.8-openjdk-8 as builder
+FROM maven:3.8-openjdk-8 AS builder
 
-ARG VERSION=pipelines-parent-2.18.5
 
 RUN mkdir ~/.m2
 COPY settings.xml /root/.m2/settings.xml
 
-RUN git clone --branch ${VERSION} --depth 1 https://github.com/gbif/pipelines.git /app
+ARG VERSION=fix-multimedia-record
+RUN git clone --branch ${VERSION} --depth 1 https://github.com/StefanVanDyck/pipelines.git /app
 WORKDIR /app
 
-RUN --mount=type=cache,target=/root/.m2/repository\
+RUN --mount=type=cache,target=/root/.m2/repository \
+    mvn clean install -DskipTests -DskipITs -T 10 -U && \
     cd livingatlas && mvn clean package -P livingatlas-artifacts -DskipTests -DskipITs -T 10 -U
+
+# ARG VERSION=pipelines-parent-2.18.5
+# RUN git clone --branch ${VERSION} --depth 1 https://github.com/gbif/pipelines.git /app
+# WORKDIR /app
+#
+# RUN --mount=type=cache,target=/root/.m2/repository \
+#     cd livingatlas && mvn clean package -P livingatlas-artifacts -DskipTests -DskipITs -T 10 -U
 
 # ARG test=2
 # RUN ls -la livingatlas/pipelines/target/pipelines-2.18.6-SNAPSHOT.jar

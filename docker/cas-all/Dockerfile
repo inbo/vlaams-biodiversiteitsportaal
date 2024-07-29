@@ -1,5 +1,5 @@
 ######################################### CAS #########################################
-FROM maven:3.8-openjdk-11 as cas-builder
+FROM maven:3.8-openjdk-11 AS cas-builder
 
 ARG CAS_VERSION=6.5.6-3
 
@@ -13,7 +13,7 @@ RUN --mount=type=cache,target=/root/.m2/repository\
 RUN ls -la /project/target/*
 
 ######################################### CAS MANAGEMENT #########################################
-FROM gradle:7-jdk11 as cas-management-builder
+FROM gradle:7-jdk11 AS cas-management-builder
 
 ARG CAS_MANAGEMENT_VERSION=6.5.5-2
 
@@ -29,7 +29,7 @@ RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
     --parallel
 
 ######################################### CAS APIKEY #########################################
-FROM gradle:7-jdk11 as cas-apikey-builder
+FROM gradle:7-jdk11 AS cas-apikey-builder
 
 ARG CAS_APIKEY_VERSION=1.7.0
 
@@ -44,7 +44,7 @@ RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
 RUN ls -la /project/build/libs/
 
 ######################################### USERDETAILS #########################################
-FROM gradle:7-jdk11 as userdetails-builder
+FROM gradle:7-jdk11 AS userdetails-builder
 
 ARG USERDETAILS_VERSION=3.0.3
 

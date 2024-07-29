@@ -1,4 +1,4 @@
-FROM gradle:7-jdk11 as builder
+FROM gradle:7-jdk11 AS builder
 
 ARG VERSION=3.1.0
 
@@ -23,7 +23,7 @@ RUN mkdir /data && chown app:app /data
 VOLUME /data
 
 USER app
-WORKDIR app
+WORKDIR /app
 
 COPY --from=builder --chown=app \
     /project/build/libs/bie-index-${VERSION}.war /app/app.war

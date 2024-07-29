@@ -1,4 +1,4 @@
-FROM gradle:7-jdk11 as builder
+FROM gradle:7-jdk11 AS builder
 
 ARG VERSION=4.0.0
 WORKDIR /project
@@ -20,7 +20,7 @@ RUN mkdir /data && chown app:app /data
 VOLUME /data
 
 USER app
-WORKDIR app
+WORKDIR /app
 
 COPY --from=builder --chown=app \
     /project/build/libs/regions-${VERSION}.war /app/app.war

@@ -1,4 +1,4 @@
-FROM gradle:7-jdk11 as builder
+FROM gradle:7-jdk11 AS builder
 
 ARG VERSION=v3.0.3
 
