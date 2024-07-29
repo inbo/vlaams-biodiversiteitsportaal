@@ -22,7 +22,7 @@ management:
         include: health
 security:
   cas:
-    enabled: true
+    enabled: false
     casServerName: ${common.protocol}://auth.${common.domain}
     casServerUrlPrefix: ${security.cas.casServerName}/cas
     loginUrl: ${security.cas.casServerUrlPrefix}/login
@@ -35,7 +35,7 @@ security:
   oidc:
     clientId: userdetails
     discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known
-    enabled: false
+    enabled: true
     secret: userdetails-oidc-super-secret
   user:
     name: admin
