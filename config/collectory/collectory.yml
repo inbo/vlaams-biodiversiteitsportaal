@@ -86,7 +86,7 @@ openapi:
   terms: ""
 orgNameLong: Vlaams Biodiversiteitsportaal
 projectName: Vlaams Biodiversiteitsportaal
-projectNameShort: LA Flanders
+projectNameShort: VBP
 regionName: Australia
 repository:
   location:
@@ -143,7 +143,7 @@ skin:
   favicon: ${common.protocol}://branding.${common.domain}/
   homeUrl: ${common.protocol}://www.${common.domain}
   orgNameLong: Vlaams Biodiversiteitsportaal
-  orgNameShort: LA Flanders
+  orgNameShort: VBP
   orgSupportEmail: support@${common.domain}
   taxaLinks:
     baseUrl: ${common.protocol}://species.${common.domain}/species/

@@ -121,7 +121,7 @@ skin:
   layout: ala-main
   fluidLayout: true
   orgNameLong: Vlaams Biodiversiteitsportaal
-  orgNameShort: LA Flanders
+  orgNameShort: VBP
   favicon: ${common.protocol}://branding.${common.domain}/favicon.ico
   homeUrl: ${common.protocol}://branding.${common.domain}
 attributes:

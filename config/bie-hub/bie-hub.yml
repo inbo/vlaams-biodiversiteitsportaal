@@ -86,7 +86,7 @@ skin:
   layout: ala
   orgNameLong: Vlaams Biodiversiteitsportaal
   fluidLayout: true
-  orgNameShort: LA Flanders
+  orgNameShort: VBP
   favicon: ${common.protocol}://branding.${common.domain}/favicon.ico
 
 languageCodesUrl: file:///config/config/bie-hub/languages.json

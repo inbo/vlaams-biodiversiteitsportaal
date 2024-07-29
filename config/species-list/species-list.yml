@@ -92,7 +92,7 @@ skin:
   homeUrl: ${common.protocol}://www.${common.domain}
   layout: ala-main
   orgNameLong: Vlaams Biodiversiteitsportaal
-  orgNameShort: LA Flanders
+  orgNameShort: VBP
 spatial:
   baseURL: ${common.protocol}://spatial.${common.domain}
 termsOfUseUrl: ''

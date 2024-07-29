@@ -154,10 +154,10 @@ map:
   zoomOutsideScopedRegion: true
 mapdownloads:
   baseLayers:
-    states:
-      displayName: States & territories
-      i18nCode: baselayer.states
-      name: aus1
+    provincies:
+      displayName: Provincies
+#      i18nCode: baselayer.states
+      name: provincies_wgs84
 maxDownloadRecords: ''
 mdba:
   basinChampions: https://biocollect.ala.org.au/mdba/project/index/4d15b4df-c05b-41bd-ac5b-8a65c9e37d17
@@ -209,7 +209,7 @@ skin:
   homeUrl: ${common.protocol}://www.${common.domain}
   layout: ala
   orgNameLong: Vlaams Biodiversiteitsportaal
-  orgNameShort: LA Flanders
+  orgNameShort: VBP
   taxaLinks:
     baseUrl: ${common.protocol}://species.${common.domain}/species/
   useAlaBie: true

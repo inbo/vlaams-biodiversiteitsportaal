@@ -82,7 +82,7 @@ bie.searchPath: /search
 skin.layout: ala-main
 skin.fluidLayout: true
 skin.orgNameLong: Vlaams Biodiversiteitsportaal
-skin.orgNameShort: LA Flanders
+skin.orgNameShort: VBP
 skin.favicon: ${common.protocol}://branding.${common.domain}/favicon.ico
 
 spring:

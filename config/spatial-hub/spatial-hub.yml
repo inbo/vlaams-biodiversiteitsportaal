@@ -169,7 +169,7 @@ admin_role: ROLE_ADMIN
 
 skin:
   orgNameLong: "Vlaams Biodiversiteitsportaal"
-  orgNameShort: "LA Flanders"
+  orgNameShort: "VBP"
   header: true
   footer: true
   fluidLayout: true
