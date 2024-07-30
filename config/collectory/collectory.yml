@@ -135,6 +135,7 @@ security:
     discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known
     enabled: true
     secret: collections-oidc-super-secret
+    scope: openid,profile,email,ala,roles
 serverName: ${common.protocol}://collections.${common.domain}
 showExtraInfoInDataSetsView:
   enabled: "true "
