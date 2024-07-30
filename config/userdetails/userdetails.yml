@@ -1,0 +1,124 @@
+---
+### OIDC Credentials ###
+security:
+  jwt:
+    clientId: userdetails
+  oidc:
+    clientId: userdetails
+    secret: userdetails-oidc-super-secret
+webservice:
+  client-id: userdetails
+  client-secret: xxx
+
+management:
+  health:
+    mongo:
+      enabled: false
+  security:
+    enabled: true
+    roles: ACTUATOR
+  endpoint:
+    health:
+      enabled: true
+      defaults:
+        enabled: true
+      jdbc:
+        enabled: true
+      redis:
+        enabled: false
+      mongo:
+        enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: health
+
+endpoints:
+  enabled: true
+  health:
+    sensitive: false
+serverURL: ${common.protocol}://auth.${common.domain}
+serverName: ${common.protocol}://auth.${common.domain}
+grails:
+  serverURL: ${common.protocol}://auth.${common.domain}/userdetails
+  mail:
+    host: mail.${common.domain}
+    port: 1025
+    username: userdetails
+    password: my-super-secret-password
+server:
+  port: 8080
+  servlet:
+    contextPath: /userdetails
+redirectAfterFirstLogin: ${grails.serverURL}/myprofile
+dataSource:
+  dbCreate: none
+  url: jdbc:mysql://cas:my-super-secret-password@mysql:3306/cas?serverTimezone=Europe/Brussels&zeroDateTimeBehavior=convertToNull&characterEncoding=UTF-8&useSSL=False&allowPublicKeyRetrieval=true
+oauth:
+  providers: null
+password:
+  encoder: bcrypt
+bcrypt:
+  strength: 10
+registration:
+  showAlaMessage: false
+  resetPasswordArticle: https://support.ala.org.au/support/solutions/articles/6000194958-my-username-password-isn-t-working-or-i-can-t-remember-my-username-password
+  alertArticle: https://support.ala.org.au/support/solutions/articles/6000195858-how-do-i-manage-email-alerts-from-the-ala
+  activationArticle: https://support.ala.org.au/support/solutions/articles/6000195196-i-created-an-account-but-did-not-receive-the-account-activation-email
+recaptcha:
+  baseUrl: https://www.google.com/recaptcha/api/
+  siteKey: null
+  secretKey: null
+supportEmail: support@${common.domain}
+homeUrl: ${common.homepage}
+homeLogoUrl: https://www.ala.org.au/app/uploads/2020/06/ALA_Logo_Inline_RGB-300x63.png
+mainTitle: Vlaams Biodiversiteitsportaal
+emailSenderTitle: Vlaams Biodiversiteitsportaal
+emailSender: support@${common.domain}
+sightings:
+  url: null
+spatial:
+  url: ${common.protocol}://spatial.${common.domain}?tool=log
+volunteer:
+  url: /user/myStats
+lists:
+  url: ${common.protocol}://lists.${common.domain}/speciesList/list
+biocache:
+  search:
+    baseUrl: ${common.protocol}://records.${common.domain}/occurrences/search
+  myDownloads:
+    url: ${common.protocol}://records.${common.domain}/download/myDownloads/
+myData:
+  url: ${common.protocol}://www.${common.domain}/tempDataResource/myData
+alerts:
+  url: null
+userDetails:
+  url: ${common.protocol}://auth.${common.domain}/userdetails/
+headerAndFooter:
+  baseURL: ${common.protocol}://branding.${common.domain}
+  version: 2
+ala:
+  baseURL: ${common.homepage}
+bie:
+  baseURL: ${common.protocol}://species.${common.domain}
+  searchPath: /search
+skin:
+  layout: ala-main
+  fluidLayout: true
+  orgNameLong: Vlaams Biodiversiteitsportaal
+  orgNameShort: VBP
+  favicon: ${common.protocol}://branding.${common.domain}/favicon.ico
+  homeUrl: ${common.protocol}://branding.${common.domain}
+attributes:
+  affiliations:
+    enabled: false
+
+apiKey:
+  showLink: false
+  showSecret: false
+admin:
+  export.csv.primary.fields: id,userName,firstName,lastName,email,activated,locked,created
+spring:
+  session:
+    store-type: none
+    privacyPolicy: null

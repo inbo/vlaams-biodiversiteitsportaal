@@ -1,0 +1,562 @@
+services:
+  ala-hub:
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/ala-hub:dev
+    build:
+      context: ala-hub
+      x-bake:
+        platforms:
+        - linux/arm64
+    ports:
+      - "8012:8080"
+    command:
+      - -Xms128m
+      - -Xmx256m
+      - --spring.config.additional-location=file:/config/config/common/common.yml,file:/config/config/ala-hub/ala-hub.yml
+    volumes:
+      - ../config:/config/config:ro
+    depends_on:
+      cas:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+      LOG_FORMAT: JSON
+
+  bie-hub:
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/bie-hub:dev
+    build:
+      context: bie-hub
+      x-bake:
+        platforms:
+        - linux/arm64
+    ports:
+      - "8008:8080"
+    command:
+      - -Xms128m
+      - -Xmx256m
+      - --spring.config.additional-location=file:/config/config/common/common.yml,file:/config/config/bie-hub/bie-hub.yml
+    volumes:
+      - ../config:/config/config:ro
+    depends_on:
+      cas:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+      LOG_FORMAT: JSON
+
+  bie-index:
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/bie-index:dev
+    build:
+      context: bie-index
+      x-bake:
+        platforms:
+        - linux/arm64
+    ports:
+      - "8007:8080"
+    command:
+      - -Xms128m
+      - -Xmx256m
+      - --spring.config.additional-location=file:/config/config/common/common.yml,file:/config/config/bie-index/bie-index.yml
+    volumes:
+      - ../config:/config/config:ro
+    depends_on:
+      cas:
+        condition: service_healthy
+      solr:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+      LOG_FORMAT: JSON
+
+  biocache-service:
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/biocache-service:dev
+    build:
+      context: biocache-service
+      x-bake:
+        platforms:
+        - linux/arm64
+    ports:
+      - "8003:8080"
+    volumes:
+      - ../config:/config/config:ro
+    depends_on:
+      cas:
+        condition: service_healthy
+      solr:
+        condition: service_healthy
+      cassandradb:
+        condition: service_healthy
+      cassandra-load-keyspace:
+        condition: service_started
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+#      LOG_FORMAT: JSON
+      LOG_LEVEL: DEBUG
+      JAVA_OPTS: "-Xms128m -Xmx256m -Dspring.profiles.active=local -Dspring.config.additional-location=file:/config/config/common/common.yml,file:/config/config/biocache-service/biocache-service.yml -Dspring.config.import=''"
+      SPRING_CONFIG_IMPORT: ''
+
+  cas:
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/cas:dev
+    build:
+      context: cas
+      x-bake:
+        platforms:
+        - linux/arm64
+    ports:
+      - "9000:8080"
+    command:
+      - --spring.config.additional-location=file:/config/config/common/common.yml,file:/config/config/cas/cas.yml
+      - -Xms128m
+      - -Xmx256m
+      - -Dcas.standalone.configurationDirectory=/config/config/cas
+      - -Dala.password.properties=/config/config/cas/pwe.properties
+    environment:
+      DOCKERIZE_OPTS: ""
+      ALA_PASSWORD_PROPERTIES: /config/config/cas/pwe.properties
+      SPRING_PROFILES_ACTIVE: production
+#      LOG_FORMAT: JSON
+      LOG_LEVEL: INFO
+    volumes:
+      - ../config:/config/config:ro
+      - cas-shared-conf:/etc/cas
+      - cas-data:/data/cas
+    depends_on:
+      nginx:
+        condition: service_started
+      mysql:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+      mock-oauth2-server:
+        condition: service_started
+
+  cas-apikey:
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/cas-apikey:dev
+    build:
+      context: cas-apikey
+      x-bake:
+        platforms:
+        - linux/arm64
+    ports:
+      - "9002:8080"
+    command:
+      - -Xms128m
+      - -Xmx256m
+      - --spring.config.additional-location=file:/config/config/common/common.yml,file:/config/config/cas-apikey/cas-apikey.yml
+    volumes:
+      - ../config:/config/config:ro
+      - ./cas-apikey/keystore:/etc/cas:ro
+    depends_on:
+      mysql:
+        condition: service_healthy
+      cas:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+      LOG_FORMAT: JSON
+
+  cas-management:
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/cas-management:dev
+    build:
+      context: cas-management
+      x-bake:
+        platforms:
+        - linux/arm64
+    ports:
+      - "8070:8080"
+      - "8443:8443"
+    command:
+      - -Xms128m
+      - -Xmx256m
+      - --spring.config.additional-location=file:/config/config/common/common.yml,file:/config/config/cas-management/cas-management.yml
+    volumes:
+      - ../config:/config/config:ro
+      # - ./cas/config:/data/cas/config:ro
+      - cas-shared-conf:/etc/cas
+      - cas-data:/data/cas
+      - ./cas/config:/etc/cas/config:ro
+      - ./cas-management/keystore/cas.crt:/etc/cas/cas.crt:ro
+      - ./cas-management/keystore/thekeystore:/etc/cas/thekeystore:ro
+      - ./cas-management/services-repo:/data/cas-management/services-repo
+    depends_on:
+      mysql:
+        condition: service_healthy
+      cas:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+      LOG_FORMAT: JSON
+
+  collectory:
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/collectory:dev
+    build:
+      context: collectory
+      x-bake:
+        platforms:
+        - linux/arm64
+    ports:
+      - "8001:8080"
+    command:
+      - -Xms128m
+      - -Xmx256m
+      - --spring.config.additional-location=file:/config/config/common/common.yml,file:/config/config/collectory/collectory.yml
+    volumes:
+      - ../config:/config/config:ro
+      - ./collections/taxa:/data/collectory/taxa
+      - ./collections/taxa:/data/ala-collectory/taxa
+    depends_on:
+      mysql:
+        condition: service_healthy
+      cas:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+      LOG_FORMAT: JSON
+
+  species-list:
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/species-list:dev
+    build:
+      context: species-list
+      x-bake:
+        platforms:
+        - linux/arm64
+    ports:
+      - "8002:8080"
+    command:
+      - -Xms128m
+      - -Xmx256m
+      - --spring.config.additional-location=file:/config/config/common/common.yml,file:/config/config/species-list/species-list.yml
+    volumes:
+      - ../config:/config/config:ro
+      - ../config/species-list:/config/species-list:ro
+    depends_on:
+      mysql:
+        condition: service_healthy
+      cas:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+      LOG_FORMAT: JSON
+
+  regions:
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/regions:dev
+    build:
+      context: regions
+      x-bake:
+        platforms:
+        - linux/arm64
+    ports:
+      - "8005:8080"
+    volumes:
+      - ./regions/config:/data/regions/config:ro
+    command:
+      - -Xms128m
+      - -Xmx128m
+    depends_on:
+      mysql:
+        condition: service_healthy
+      cas:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+      LOG_FORMAT: JSON
+
+  image-service:
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/image-service:dev
+    build:
+      context: image-service
+      x-bake:
+        platforms:
+        - linux/arm64
+    ports:
+      - "8005:8080"
+    volumes:
+      - ./image-service/config:/data/image-service/config:ro
+    command:
+      - -Xms128m
+      - -Xmx128m
+    depends_on:
+      mysql:
+        condition: service_healthy
+      cas:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+      LOG_FORMAT: JSON
+
+  spatial-hub:
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/spatial-hub:dev
+    build:
+      context: spatial-hub
+      x-bake:
+        platforms:
+        - linux/arm64
+    ports:
+      - "8010:8080"
+    volumes:
+      - ../config:/config/config:ro
+    command:
+      - -Xms128m
+      - -Xmx256m
+      - --spring.config.additional-location=file:/config/config/common/common.yml,file:/config/config/spatial-hub/spatial-hub.yml
+    depends_on:
+      spatial-service:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+      LOG_FORMAT: JSON
+
+  spatial-service:
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/spatial-service:dev
+    build:
+      context: spatial-service
+      x-bake:
+        platforms:
+        - linux/arm64
+    ports:
+      - "8011:8080"
+    volumes:
+      - ../config:/config/config:ro
+      - spatial-data:/data/spatial-data
+      - geoserver-data:/data/geoserver_data_dir
+    command:
+      - -Xms128m
+      - -Xmx256m
+      - --spring.config.additional-location=file:/config/config/common/common.yml,file:/config/config/spatial-service/spatial-service.yml
+    depends_on:
+      postgis:
+        condition: service_healthy
+      cas:
+        condition: service_healthy
+      geoserver:
+        condition: service_healthy
+      cas-apikey:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+      LOG_FORMAT: JSON
+
+  userdetails:
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/userdetails:dev
+    build:
+      context: userdetails
+      x-bake:
+        platforms:
+        - linux/arm64
+    ports:
+      - "9001:8080"
+    command:
+      - -Xms128m
+      - -Xmx256m
+      - --spring.config.additional-location=file:/config/config/common/common.yml,file:/config/config/userdetails/userdetails.yml
+    volumes:
+      - ../config:/config/config:ro
+    depends_on:
+      mysql:
+        condition: service_healthy
+      cas:
+        condition: service_healthy
+      mailhog:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+      LOG_FORMAT: JSON
+
+  postgis:
+    image: postgis/postgis:16-3.4-alpine
+    ports:
+      - 5432:5432
+    volumes:
+      - ./db-init/postgis:/docker-entrypoint-initdb.d
+      - postgis:/var/lib/postgresql/data
+    #      - ./db-init/postgis/pg_hba.conf:/var/lib/postgresql/data/pg_hba.conf
+    environment:
+      - POSTGRES_PASSWORD=my-super-secret-password
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
+      - POSTGRES_HOST_AUTH_METHOD=md5
+      - POSTGRES_INITDB_ARGS=--auth-host=md5
+    healthcheck:
+      test: pg_isready
+
+  geoserver:
+    image: kartoza/geoserver:2.23.2
+    volumes:
+      #geoserver data folder
+      # - ./spatial/geoserver/geoserver-files:/data/geoserver-files/
+      #Spatials service data folder. If they are both in the same machine, some layers are not needed to be uploaded.
+      - spatial-data:/data/spatial-data:ro
+      - geoserver-data:/data/geoserver_data_dir
+    ports:
+      - "8079:8080"
+    environment:
+      JAVA_OPTS: -Xmx1g -Xms128m -Xss256k
+      #Geoserver
+      GEOSERVER_ADMIN_USER: admin
+      GEOSERVER_ADMIN_PASSWORD: geoserver
+      #If you want to create a user/password
+      #NEW_USER: true
+      USERNAME: admin
+      PASS: my-super-secret-password
+      #Geoserver internal server url. It is used to run a local script to init geoserver
+      GEOSERVER_URL: http://localhost:8080/geoserver
+      GEOSERVER_LOG_PROFILE: PRODUCTION_LOGGING
+      GEOSERVER_DATA_DIR: /data/geoserver_data_dir
+      GEOWEBCACHE_CACHE_DIR: /data/geoserver_data_dir/gwc
+      GEOSERVER_LOG_LOCATION: /data/geoserver_data_dir/logs/geoserver.log
+      FOOTPRINTS_DATA_DIR: /data/geoserver_data_dir/footprints_dir
+      RELINQUISH_LOG4J_CONTROL: true
+      ENABLE_JSONP: true
+      MAX_FILTER_RULES: 20
+      OPTIMIZE_LINE_WIDTH: false
+    healthcheck:
+      test: curl --fail --head --silent http://localhost:8080
+
+  mysql:
+    image: mysql
+    # NOTE: use of "mysql_native_password" is not recommended: https://dev.mysql.com/doc/refman/8.0/en/upgrading-from-previous-series.html#upgrade-caching-sha2-password
+    # (this is just an example, not intended to be a production configuration)
+    # command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - 3306:3306
+    volumes:
+      - ./db-init/mysql:/docker-entrypoint-initdb.d
+      - mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: my-super-secret-password
+    healthcheck:
+      test: mysqladmin ping -h localhost
+
+  mongodb:
+    image: mongo
+    volumes:
+      - ./db-init/mongo:/docker-entrypoint-initdb.d
+      - mongo:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: my-super-secret-password
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+
+  cassandradb:
+    image: cassandra:3
+    volumes:
+      - cassandra:/var/lib/cassandra
+    healthcheck:
+      test: [ "CMD-SHELL", "[ $$(nodetool statusgossip) = running ]" ]
+
+  cassandra-load-keyspace:
+    image: cassandra:3
+    depends_on:
+      cassandradb:
+        condition: service_healthy
+    volumes:
+      - ./db-init/cassandra:/docker-entrypoint-initdb.d
+    command: bash -c "cqlsh cassandradb -f /docker-entrypoint-initdb.d/*.cql"
+
+  solr:
+    image: solr:8
+    ports:
+      - "8983:8983"
+    volumes:
+      - ./solr-data:/var/solr/data
+    environment:
+      SOLR_HEAP: 4g
+    healthcheck:
+      test: [ "CMD-SHELL", "curl -sf http://localhost:8983/solr/bie/admin/ping | grep '\"status\":\"OK\"'" ]
+    networks:
+      default:
+        aliases:
+          - index.la-flanders.org
+
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    healthcheck:
+      test: "wget localhost:8025 --spider -q"
+    networks:
+      default:
+        aliases:
+          - mail.la-flanders.org
+
+  elasticsearch:
+    image: elasticsearch:7.17.20
+    environment:
+      - node.name=elasticsearch
+      - xpack.security.enabled=false
+      - discovery.type=single-node
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    cap_add:
+      - IPC_LOCK
+    volumes:
+      - elasticsearch:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://elasticsearch:9200" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  namematching:
+    image: atlasoflivingaustralia/ala-namematching-service:v20210811-3
+    ports:
+      - "9179:9179"
+
+  nginx:
+    image: nginx
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ../generated/la-flanders-branding/public:/srv/branding.la-flanders.org/www/
+    ports:
+      - "80:80"
+    environment:
+      NGINX_HOST: la-flanders.org
+      NGINX_PORT: 80
+    healthcheck:
+      test: service nginx status || exit 1
+    networks:
+      default:
+        aliases:
+          - auth.la-flanders.org
+          - branding.la-flanders.org
+          - collections.la-flanders.org
+          - images.la-flanders.org
+          - lists.la-flanders.org
+          - logger.la-flanders.org
+          - records-ws.la-flanders.org
+          - records.la-flanders.org
+          - regions.la-flanders.org
+          - spatial.la-flanders.org
+          - species-ws.la-flanders.org
+          - species.la-flanders.org
+
+  mock-oauth2-server:
+    image: ghcr.io/navikt/mock-oauth2-server:2.1.5
+    ports:
+      - "9999:9999"
+    environment:
+      LOG_LEVEL: "info"
+      SERVER_PORT: 9999
+
+networks:
+  default:
+
+volumes:
+  spatial-data:
+  cassandra:
+  mysql:
+  mongo:
+  postgis:
+  cas-data:
+  cas-shared-conf:
+  elasticsearch:
+  geoserver-data:

@@ -1,0 +1,91 @@
+---
+### OIDC Credentials ###
+security:
+  jwt:
+    clientId: spatial_service
+  oidc:
+    clientId: spatial_service
+    secret: spatial_service-oidc-super-secret
+webservice:
+  client-id: spatial_service
+  client-secret: xxx
+
+grails:
+  serverURL: ${common.protocol}://spatial.${common.domain}/ws
+server:
+  servlet:
+    contextPath: '/ws'
+google:
+  apikey: 'AIzaSyAJDtEeoy7Sc9pij2TAoVnmTwA34Q-2VHk'
+
+api_key: xxxxxxxxxxxxx
+spatialHubUrl: ${common.protocol}://spatial.${common.domain}/
+
+#distributions:
+#  geoserver:
+#    image:
+#      url: "/ALF/wms?service=WMS&version=1.1.0&request=GetMap&layers=ALF%3ABehGebAkkervogel&styles=&bbox=2.52%2C50.64%2C5.94%2C51.51&srs=EPSG:4326&format=image/png&width=400&height=400&viewparams=s:"
+#
+
+geoserver:
+  url: '${common.protocol}://spatial.${common.domain}/geoserver'
+  username: 'admin'
+  password: 'geoserver'
+  canDeploy: true
+
+  spatialservice:
+    #if colocated, geoserver will load data from spatial service data folder, /data/spatial-data by default
+    colocated: true # problematic with permissions and stuff
+  remote:
+    #In some cases, geoserver need to know its data folder.
+    geoserver_data_dir: "/data/geoserver_data_dir"
+
+dataSource:
+  driverClassName: org.postgresql.Driver
+  dialect: org.hibernate.spatial.dialect.postgis.PostgisPG9Dialect
+  url: 'jdbc:postgresql://postgis:5432/layersdb'
+  pooled: true
+  jmxExport: true
+  transactional: true
+
+batch_sampling_passwords: ""
+
+ala.baseURL: '${common.protocol}://www.${common.domain}'
+bie.baseURL: '${common.protocol}://bie.${common.domain}'
+bie.searchPath: '/search'
+
+namematching.url: http://namematching.biodiversiteitsportaal.dev.internal:9180
+
+records.url: '${common.protocol}://archives.${common.domain}/archives/exports/lat_lon_taxon.zip'
+
+lists.url: '${common.protocol}://lists.${common.domain}'
+collections.url: '${common.protocol}://collections.${common.domain}'
+sandboxHubUrl: '${common.protocol}://sandbox.${common.domain}/ala-hub'
+sandboxBiocacheServiceUrl: '${common.protocol}://sandbox.${common.domain}/biocache-service'
+phyloServiceUrl: '${common.protocol}://phylolink.${common.domain}'
+
+
+# au.org.ala.spatial.process config
+spatialService.url: "${common.protocol}://spatial.${common.domain}/ws"
+shp2pgsql.path: "/usr/bin/shp2pgsql"
+gdal.dir: "/usr/bin/"
+
+slaveKey: "xxxxxxxxxxxxxx"
+serviceKey: "xxxxxxxxxxxxxx"
+
+layers_store:
+  GEONETWORK_URL: '${common.protocol}://spatial.${common.domain}/geonetwork'
+  LAYER_INDEX_URL: ${common.protocol}://spatial.${common.domain}/layers-service
+
+apiKeyCheckUrlTemplate: '${common.protocol}://auth.${common.domain}/apikey/ws/check?apikey={0}'
+spatialService:
+  remote: "${common.protocol}://spatial.${common.domain}/ws"
+
+management:
+  endpoint:
+    health:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health

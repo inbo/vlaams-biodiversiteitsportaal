@@ -1,0 +1,7 @@
+security:
+  oidc:
+    enabled: true # Cannot disable oidc :(
+    discoveryUri: http://auth.la-flanders.org/cas/oidc/.well-known
+    scope: openid,profile,email,ala,roles, user_defined
+    client-id: "ala_hub"
+    secret: "ala_hub-oidc-super-secret"

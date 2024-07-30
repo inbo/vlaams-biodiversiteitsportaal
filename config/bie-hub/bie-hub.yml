@@ -1,0 +1,195 @@
+---
+### OIDC Credentials ###
+security:
+  jwt:
+    clientId: ala_hub
+  oidc:
+    clientId: "ala_bie"
+    secret: "ala_bie-oidc-super-secret"
+webservice:
+  client-id: "ala_bie"
+  client-secret: "ala_bie-oidc-super-secret"
+
+grails:
+  serverURL: ${common.protocol}://species.${common.domain}
+  cors:
+    enabled: true
+
+serverName: ${common.protocol}://species.${common.domain}
+
+userDetails:
+  url: ${common.protocol}://auth.${common.domain}/userdetails/
+
+# BIE index webservices
+bie:
+  baseURL: ${common.protocol}://species.${common.domain}
+  searchPath: /search
+  index:
+    url: ${common.protocol}://species-ws.${common.domain}
+
+# Query contexts - used to filter search results
+bieService:
+  baseUrl: ${common.protocol}://species-ws.${common.domain}
+  queryContext:
+  apiKey: 5bd6d4fc-3f1c-4fa2-903a-7ec771c02999
+biocacheService:
+  baseURL: ${common.protocol}://records-ws.${common.domain}
+  queryContext: -_nest_parent_:*
+
+# Header and footer
+headerAndFooter:
+  baseURL: ${common.protocol}://branding.${common.domain}
+  version: 2
+
+ala:
+  baseURL: ${common.homepage}
+  image:
+    service:
+      url: ${common.protocol}://images.${common.domain}
+allowedImageEditingRoles: ROLE_ADMIN,ROLE_EDITOR
+
+wikipedia:
+  url: https://en.wikipedia.org/api/rest_v1/page/html/
+  lang: en
+
+# Skin and layout
+skin:
+  homeUrl: ${common.protocol}://www.${common.domain}
+  layout: ala
+  orgNameLong: Vlaams Biodiversiteitsportaal
+  fluidLayout: true
+  orgNameShort: VBP
+  favicon: ${common.protocol}://branding.${common.domain}/favicon.ico
+
+languageCodesUrl: file:///config/config/bie-hub/languages.json
+
+# Facets displayed on search page
+facets: idxtype,rank,locatedInHubCountry,imageAvailable,speciesGroup,taxonomicStatus,conservationStatusAUS_s,conservationStatusACT_s,conservationStatusNSW_s,conservationStatusQLD_s,conservationStatusVIC_s,conservationStatusTAS_s,conservationStatusSA_s,conservationStatusWA_s,conservationStatusNT_s
+
+# Tabs displayed on species page
+show:
+  tabs: overview,gallery,names,classification,records,literature,sequences,data-partners
+
+# ALA services
+biocache:
+  baseURL: ${common.protocol}://records.${common.domain}
+
+# Other ALA Services
+profileService:
+  baseURL: https://profiles-ws.ala.org.au/
+spatial:
+  baseURL: ${common.protocol}://spatial.${common.domain}
+collectory:
+  baseURL: ${common.protocol}://collections.${common.domain}
+  threatenedSpeciesCodesUrl: ${common.protocol}://collections.${common.domain}/public/showDataResource
+collectoryService:
+  baseURL: ${common.protocol}://collections.${common.domain}/ws
+speciesList:
+  baseURL: ${common.protocol}://lists.${common.domain}
+  preferredSpeciesListDruid: dr4778
+  preferredListName: ALA Preferred Species Images
+  apiKey: 081489d3-e581-4dad-8f37-b9331bcf04a8
+  useListWs: False
+  wsURL: ${common.protocol}://lists.${common.domain}/ws
+speciesListService:
+  baseURL: ${common.protocol}://lists.${common.domain}/ws
+alerts:
+  baseUrl:
+regions:
+  baseURL: ${common.protocol}://regions.${common.domain}
+sightings:
+  url:
+layersService:
+  baseURL: ${common.protocol}://spatial.${common.domain}/ws
+imageServiceBaseURL: ${common.protocol}://images.${common.domain}
+
+image:
+  baseUrl: ${common.protocol}://images.${common.domain}
+  thumbnailUrl: ${common.protocol}://images.${common.domain}/image/
+ausTraits:
+  baseURL: http://traitdata.austraits.cloud.edu.au
+  homeURL: https://austraits.org/
+  sourceURL: https://doi.org/10.5281/zenodo.3568417
+  definitionsURL: https://traitecoevo.github.io/austraits.build/articles/trait_definitions.html
+
+# External Literature and reference sources
+synonymsTypes: synonym,homotypicSynonym,objectiveSynonym,heterotypicSynonym,subjectiveSynonym,proParteSynonym,inferredSynonym
+literature:
+  bhl:
+    url: https://biodiversitylibrary.org
+    api: https://www.biodiversitylibrary.org/api3
+    apikey: get-an-api-key
+    fulltext: False
+    pageSize: 200
+    extend: False
+  genbank:
+    url: https://www.ncbi.nlm.nih.gov
+  scholar:
+    url: https://scholar.google.com
+  google:
+    url: https://www.google.com
+  trove:
+    url: https://trove.nla.gov.au
+    api: https://api.trove.nla.gov.au/v2
+    apikey: get-an-api-key
+external:
+  blacklist: file:///config/config/bie-hub/blacklist.json
+
+# Mapping options
+defaultDecimalLatitude: 51.0
+defaultDecimalLongitude: 4.4
+defaultZoomLevel: 9
+map:
+  default:
+    url: https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png
+  simpleMapButton: False
+  records:
+    colour: e6704c
+
+
+
+eol:
+  lang: en
+  # Sanitise EOL content
+  sanitise: true
+  # comma-delimited HTML elements
+  html:
+    allowedElements: h1,h2,h3,h4,h5,h6,div,a,br,i,b,u,small,strike,span,ul,li,p,sup,cite,ol,em,hr
+    # comma-delimited HTML attributes (attribute;pattern;element)
+    allowAttributes: href;a;^(http|https|mailto|#).+,class;span,id;span,src;img;^(http|https).+
+
+namematching:
+  serviceURL: http://namematching.biodiversiteitsportaal.dev.internal:9180
+
+dataquality:
+  baseUrl: https://dataquality.ala.org.au/data-profiles
+
+speciesParent: ${common.protocol}://lists.${common.domain}/iconic-species
+
+supportEmail: support@${common.domain}
+
+survey:
+  indexPage: False
+  searchPage: False
+  speciesPage: False
+  url:
+  header:
+  cookieAge: 30
+  html:
+userdetails:
+  url: ${common.protocol}://auth.${common.domain}/userdetails/
+  web:
+    url: ${common.protocol}://auth.${common.domain}/userdetails/
+  api:
+    url: ${common.protocol}://auth.${common.domain}/userdetails/
+imageFilter: "&qualityProfile=LA"
+
+
+management:
+  endpoint:
+    health:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health

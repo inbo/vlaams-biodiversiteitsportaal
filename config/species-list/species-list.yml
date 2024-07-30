@@ -1,0 +1,80 @@
+---
+### OIDC Credentials ###
+security:
+  jwt:
+    clientId: lists
+  oidc:
+    clientId: lists
+    secret: lists-oidc-super-secret
+webservice:
+  client-id: lists
+  client-secret: xxx
+
+apiGateway:
+  enabled: false
+auth:
+  userDetailsUrl: ${common.protocol}://auth.${common.domain}/userdetails/userDetails/
+batchSize: 500
+bie:
+  baseURL: ${common.protocol}://species.${common.domain}
+  download: /data/bie-staging/species-list
+  nameIndexLocation: /data/lucene/namematching
+  searchPath: /search
+bieService:
+  baseURL: ${common.protocol}://species-ws.${common.domain}
+biocache:
+  baseURL: ${common.protocol}://records.${common.domain}
+biocacheService:
+  baseURL: ${common.protocol}://records-ws.${common.domain}
+collectory:
+  baseURL: ${common.protocol}://collections.${common.domain}
+  enableSync: false
+dataSource:
+  dbCreate: update
+  url: jdbc:mysql://species:my-super-secret-password@mysql:3306/specieslists?allowPublicKeyRetrieval=true&autoReconnect=true&connectTimeout=0&useUnicode=true&characterEncoding=UTF-8&useSSL=False
+downloadLimit: 200
+fieldGuide:
+  baseURL: ''
+grails:
+  serverURL: ${common.protocol}://lists.${common.domain}
+httpTimeoutMillis: 60000
+iconicSpecies:
+  uid: dr781
+logger:
+  baseURL: ${common.protocol}://logger.${common.domain}/service
+  baseUrl: ${common.protocol}://logger.${common.domain}/service
+namematching:
+  serviceURL: http://namematching.biodiversiteitsportaal.dev.internal:9180
+openapi:
+  components:
+    security:
+      oauth2:
+        baseUrl: ${common.protocol}://auth.${common.domain}/cas/oidc
+  contact:
+    email: support@${common.domain}
+  terms: ''
+outboundhttp:
+  timeout: 8000
+ownerVisibleToEditor: false
+publicview:
+  hidePrivateLists: true
+
+registryApiKey: 449cac3c-0498-4c25-ae0b-2517267c3f05
+
+serverName: ${common.protocol}://lists.${common.domain}
+serverURL: ${common.protocol}://lists.${common.domain}
+skin:
+  favicon: ${common.protocol}://branding.${common.domain}/favicon.ico
+  fluidLayout: true
+  homeUrl: ${common.protocol}://www.${common.domain}
+  layout: ala-main
+  orgNameLong: Vlaams Biodiversiteitsportaal
+  orgNameShort: VBP
+spatial:
+  baseURL: ${common.protocol}://spatial.${common.domain}
+termsOfUseUrl: ''
+userdetails:
+  api:
+    url: ${common.protocol}://auth.${common.domain}/userdetails/
+  web:
+    url: ${common.protocol}://auth.${common.domain}/userdetails/

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="TEXT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>[%date] %highlight([%level]) %cyan([%logger{10} %file:%line]) %msg%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="JSON" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- JSON Encoder is missing from the classpath :( -->
+        <!-- <encoder class="ch.qos.logback.classic.encoder.JsonEncoder"/>-->
+        <encoder>
+            <pattern>
+                {"timestamp":"%date{yyyy-MM-dd'T'HH:mm:ss.SSSXXX}","level":"%level","logger":"%logger","location":"%file:%line","message":"%replace(%replace(%msg){'\n','\\n'}){'"','\"'}","ex":"%replace(%replace(%ex{full}){'\n','\\n'}){'"','\"'}"}%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <root level="${LOG_LEVEL:-INFO}">
+        <appender-ref ref="${LOG_FORMAT:-TEXT}"/>
+    </root>
+</configuration>

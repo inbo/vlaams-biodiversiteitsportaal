@@ -1,0 +1,67 @@
+---
+### OIDC Credentials ###
+security:
+  jwt:
+    clientId: apikey
+  oidc:
+    clientId: apikey
+    secret: apikey-oidc-super-secret
+
+management:
+  health:
+    mongo:
+      enabled: false
+serverURL: ${common.protocol}://auth.${common.domain}
+serverName: ${common.protocol}://auth.${common.domain}
+grails:
+  serverURL: ${common.protocol}://auth.${common.domain}/apikey
+server:
+  port: 8080
+  servlet:
+    contextPath: /apikey
+
+# Data source configuration
+dataSource:
+  dbCreate: "none"
+  url: jdbc:mysql://apikey:my-super-secret-password@mysql:3306/apikey?serverTimezone=Europe/Brussels&zeroDateTimeBehavior=convertToNull&characterEncoding=UTF-8&useSSL=False&allowPublicKeyRetrieval=true
+flyway:
+  baselineOnMigrate: true
+
+ala:
+  baseURL: ${common.homepage}
+
+supportEmail: support@${common.domain}
+homeUrl: ${common.protocol}://www.${common.domain}
+mainTitle: Vlaams Biodiversiteitsportaal
+emailSenderTitle: Vlaams Biodiversiteitsportaal
+emailSender: support@${common.domain}
+
+sightings.url: /mine
+spatial.url: ${common.protocol}://spatial.${common.domain}?tool=log
+volunteer.url: /user/myStats
+lists.url: ${common.protocol}://lists.${common.domain}/speciesList/list
+biocache.search.url: ${common.protocol}://records.${common.domain}/occurrences/search
+alerts.url:
+
+# this property is read/used by ala-auth-plugin (included by apikey)
+userDetails:
+  url: ${common.protocol}://auth.${common.domain}/userdetails/
+
+# Header and footer
+headerAndFooter:
+  baseURL: ${common.protocol}://branding.${common.domain}
+  version: 2
+ala.baseURL: ${common.homepage}
+bie.baseURL: ${common.protocol}://species.${common.domain}
+bie.searchPath: /search
+
+# Skin options
+skin.layout: ala-main
+skin.fluidLayout: true
+skin.orgNameLong: Vlaams Biodiversiteitsportaal
+skin.orgNameShort: VBP
+skin.favicon: ${common.protocol}://branding.${common.domain}/favicon.ico
+
+spring:
+  session:
+    store-type: none

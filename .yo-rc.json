@@ -3,7 +3,7 @@
     "firstRun": false,
     "promptValues": {
       "LA_project_name": "Living Atlas of Flanders",
-      "LA_project_shortname": "LA Flanders",
+      "LA_project_shortname": "VBP",
       "LA_pkg_name": "la-flanders",
       "LA_domain": "la-flanders.org",
       "LA_hostnames": "vm-1,vm-2,vm-3",

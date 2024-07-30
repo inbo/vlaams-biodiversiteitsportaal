@@ -1,0 +1,72 @@
+environment:
+  local:
+    common:
+      protocol: http
+      domain: la-flanders.org
+  production:
+    common:
+      protocol: https
+      domain: biodiversiteitsportaal.dev.svdev.be
+
+common:
+  protocol: https
+  domain: biodiversiteitsportaal.dev.svdev.be
+  homepage: ${common.protocol}://www.${common.domain}
+ala:
+  baseURL: ${common.homepage}
+
+# Header and footer
+headerAndFooter:
+  baseURL: ${common.protocol}://branding.${common.domain}
+  version: 2
+
+# Skin and layout
+skin:
+  homeUrl: ${common.homepage}
+  orgNameLong: Vlaams Biodiversiteitsportaal
+  fluidLayout: true
+  orgNameShort: VBP
+
+# Healthcheck endpoint
+management:
+  endpoint:
+    health:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health
+
+logging:
+  config: /config/config/common/logback.xml
+
+server:
+  use-forward-headers: true
+
+
+grails:
+  cors:
+    enabled: true
+
+security:
+  apikey:
+    enabled: true
+    auth:
+      serviceUrl: ${common.protocol}://auth.${common.domain}/apikey/ws/check/
+    check:
+      serviceUrl: ${common.protocol}://auth.${common.domain}/apikey/ws/check?apikey=
+    userdetails:
+      serviceUrl: ${common.protocol}://auth.${common.domain}/userdetails/
+  cas:
+    enabled: false
+  jwt:
+    enabled: true
+    discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known
+    fallbackToLegacyBehaviour: true
+  oidc:
+    enabled: true
+    discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known
+
+webservice:
+  jwt: true
+  jwt-scopes: openid users/read

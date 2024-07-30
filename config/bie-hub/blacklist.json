@@ -1,0 +1,12 @@
+{
+  "metadata": {
+    "title": "Blacklist for external websites",
+    "description": "A list sources that should not have articles fetched from an external site. This is usually because the article is subject to controversy or is not correct for Australia.",
+    "version": "1.0",
+    "created": "2024-04-18"
+  },
+  "blacklist": [
+    {
+    }
+  ]
+}

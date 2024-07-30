@@ -1,0 +1,14 @@
+[
+  {
+    "label": "Gewest",
+    "fid": "cl10011"
+  },
+  {
+    "label": "Provincies",
+    "fid": "cl10003"
+  },
+  {
+    "label": "Gemeenten",
+    "fid": "cl10012"
+  }
+]

@@ -1,0 +1,179 @@
+---
+### OIDC Credentials ###
+security:
+  jwt:
+    clientId: bie_index
+  oidc:
+    clientId: "bie_index"
+    secret: "bie_index-oidc-super-secret"
+webservice:
+  client-id: "bie_index"
+  client-secret: "bie_index-oidc-super-secret"
+
+grails:
+  serverURL: ${common.protocol}://species-ws.${common.domain}
+  cors:
+    enabled: true
+
+serverName: ${common.protocol}://species-ws.${common.domain}
+
+userDetails:
+  url: ${common.protocol}://auth.${common.domain}/userdetails/
+biocache:
+  base: ${common.protocol}://records.${common.domain}
+  service: ${common.protocol}://records-ws.${common.domain}
+collectory:
+  base: ${common.protocol}://collections.${common.domain}
+  service: ${common.protocol}://collections.${common.domain}/ws
+  # A list of uids for the national species list datasets
+  nationalSpeciesDatsets:
+layers:
+  service: ${common.protocol}://spatial.${common.domain}/ws
+  gazetteerId:
+images:
+  # URL of image configuration file
+  config: file:///config/config/bie-index/image-lists.json
+  base: ${common.protocol}://images.${common.domain}
+  service:
+    base: ${common.protocol}://images.${common.domain}
+    thumbnail: ${common.protocol}://images.${common.domain}/image/{0}/thumbnail
+    large: ${common.protocol}://images.${common.domain}/image/{0}/large
+    small: ${common.protocol}://images.${common.domain}/image/{0}/original
+    metadata: ${common.protocol}://images.${common.domain}/ws/image/{0}
+  index: true
+knowledgeBase:
+  service: https://support.ala.org.au
+  sitemap: /support/solutions
+  sectionSelector: section.article-list .list-lead > a
+  articleCssSelector: .article-title a.c-link
+wordPress:
+  service: ${common.protocol}://${common.domain}
+  sitemap: /xmlsitemap.xml
+  index: index.xml
+  page: /?page_id={0}
+  excludedLocations:
+    - .*/category/.*
+  excludedCategories:
+    - button
+  contentOnlyParams: ?content-only=1&categories=1
+lists:
+  useListWs: false
+  service: ${common.protocol}://lists.${common.domain}/ws
+  ui: ${common.protocol}://lists.${common.domain}
+  conservation: /speciesList?isAuthoritative=eq:true&isThreatened=eq:true&max={0}&offset={1}
+  search: /speciesList/?isAuthoritative=eq:true&max={0}&offset={1}
+  show: /speciesListItem/list/{0}
+  add: /createItem
+  remove: /deleteItem
+biocollect:
+  service:
+  search: /ws/project/search?initiator=ala&facets=status
+naming:
+  service: http://namematching.biodiversiteitsportaal.dev.internal:9180
+attribution:
+  default: National Species Lists
+  common: National Species Lists
+commonName:
+  # Acceptable vernacular names to appear in autocomplete and primary name eg en,en-AU,en-CA,en-GB,en-US (leave empty for any language)
+  languages:
+  defaultLanguage: en
+# Location of conservation lists
+conservationListsUrl: file:///config/config/bie-index/conservation-lists.json
+# Location of vernacular name lists (null for default)
+vernacularListsUrl: file:///config/config/bie-index/vernacular-lists.json
+#nationalSpeciesDatasets: dr2699,dr2700,dr2702,dr2704,dr2703,dr3118
+nationalSpeciesDatasets: ""
+hiddenImages:
+  # URL of hidden images configuration file
+  config: file:///config/config/bie-index/hidden-images-lists.json
+wiki:
+  # URL of wiki configuration file
+  config: file:///config/config/bie-index/wiki-lists.json
+solr:
+  admin:
+    connection: ${common.protocol}://index.${common.domain}:8983/solr
+    type: HTTP
+    queueSize: 10
+    threadCount: 4
+  live:
+    connection: ${common.protocol}://index.${common.domain}:8983/solr/bie
+    type: HTTP
+    queueSize: 10
+    threadCount: 4
+  updatingLive:
+    connection: ${common.protocol}://index.${common.domain}:8983/solr/bie
+    type: UPDATE
+    queueSize: 10
+    threadCount: 4
+  offline:
+    connection: ${common.protocol}://index.${common.domain}:8983/solr/bie-offline
+    type: UPDATE
+    queueSize: 10
+    threadCount: 4
+  search:
+    qf:
+      - exact_text
+      - text
+      - content^0.2
+    boost: searchWeight
+    defType: edismax
+    qAlt: text:*
+skin:
+  layout: ala-main
+  fluidLayout: true
+  orgNameLong: Vlaams Biodiversiteitsportaal
+  favicon: ${common.protocol}://branding.${common.domain}/favicon.ico
+  homeUrl: ${common.protocol}://www.${common.domain}
+headerAndFooter:
+  baseURL: ${common.protocol}://branding.${common.domain}
+useLegacyAuto: false
+import:
+  sequence: collectory,taxonomy-all,vernacular,denormalise,layers,regions,localities,conservation-lists,wordpress,knowledgebase,biocollect,species-lists,favourites,weights,link-identifiers,images,occurrences,hidden-images,wiki-urls,suggest-index,sitemap,swap
+  sequenceDaily: conservation-lists,wordpress,knowledgebase,biocollect,species-lists,favourites,suggest-index,images,hidden-images,wiki-urls,sitemap,swap
+  sequenceWeekly: occurrences,layers,regions,localities,suggest-index,swap
+  dailyRunHour: 2
+  weeklyRunDay: 6
+  favouritesConfigUrl: file:///config/config/bie-index/favourites.json
+  enableTasks: false
+  taxonomy:
+    dir: /data/bie/import
+ala:
+  baseURL: ${common.protocol}://${common.domain}
+bie:
+  baseURL: ${common.protocol}://species.${common.domain}
+  searchPath: /search
+
+openapi:
+  terms:
+  contact:
+    email: support@${common.domain}
+  components:
+    security:
+      oauth2:
+        baseUrl: ${common.protocol}://auth.${common.domain}/cas/oidc
+
+userdetails:
+  url: ${common.protocol}://auth.${common.domain}/userdetails/
+userdetails.web.url: ${common.protocol}://auth.${common.domain}/userdetails/
+userdetails.api.url: ${common.protocol}://auth.${common.domain}/userdetails/
+
+# all available rk_ and rkid_ fields in SOLR are added to defaultDownloadFields when no rk_ field is defined in defaultDownloadFields
+defaultDownloadFields: guid,rank,scientificName,scientificNameAuthorship,taxonomicStatus,establishmentMeans,datasetName,parentGuid,acceptedConceptName,acceptedConceptID,idxtype,name,additionalNames_m_s
+downloadMaxRows: 100000
+
+# override the taxon ranks taxonRanksFile with an external file
+taxonRanksFile:
+
+sitemap:
+  dir: /data/bie-index
+  enabled: true
+
+
+management:
+    endpoint:
+        health:
+            enabled: true
+    endpoints:
+        web:
+            exposure:
+                include: health

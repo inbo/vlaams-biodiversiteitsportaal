@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Configuration>
+    <Appenders>
+        <Console name="TEXT" target="SYSTEM_OUT">
+            <PatternLayout pattern="[%date] %highlight{[%level]} %style{[%logger{10} %file:%line]}{cyan} %msg%n"/>
+        </Console>
+        <Console name="JSON" target="SYSTEM_OUT">
+            <PatternLayout>
+                <Pattern>{"timestamp":"%date{yyyy-MM-dd'T'HH:mm:ss.SSSXXX}","level":"%level","logger":"%logger","location":"%file:%line","message":"%encode{%msg}{JSON}","ex":"%encode{%ex{full}}{JSON}"}%n</Pattern>
+            </PatternLayout>
+<!--            -->
+<!--            <JSONLayout compact="true" eventEol="true">-->
+<!--                <KeyValuePair key="timestamp" value="$${date:yyyy-MM-dd'T'HH:mm:ss.SSSXXX}"/>-->
+<!--            </JSONLayout>-->
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Root level="${env:LOG_LEVEL:-INFO}">
+            <AppenderRef ref="${env:LOG_FORMAT:-TEXT}"/>
+        </Root>
+    </Loggers>
+</Configuration>

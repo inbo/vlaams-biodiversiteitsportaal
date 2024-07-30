@@ -1,0 +1,196 @@
+---
+### OIDC Credentials ###
+security:
+  jwt:
+    clientId: collections
+  oidc:
+    clientId: collections
+    discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known
+webservice:
+  client-id: collections
+  client-secret: xxx
+
+ROLE_ADMIN: ROLE_ADMIN
+ROLE_EDITOR: ROLE_EDITOR
+ala:
+  baseURL: ${common.homepage}
+alertUrl: ""
+alertsUrl: ""
+api_key: e8dcf74d-bcef-41bb-8738-48f0ff0a5b75
+bie:
+  baseURL: ${common.protocol}://species.${common.domain}
+  searchPath: /search
+biocacheServicesUrl: ${common.protocol}://records-ws.${common.domain}
+biocacheUiURL: ${common.protocol}://records.${common.domain}
+citation:
+  link:
+    template: "For more information: @link@"
+  rights:
+    template: ""
+  template: Records provided by @entityName@, accessed through ALA website.
+collectionsMap:
+  centreMapLat: 51.0
+  centreMapLon: 4.4
+  defaultZoom: 9
+dataSource:
+  url: jdbc:mysql://root:my-super-secret-password@mysql:3306/collectory?autoReconnect=true&connectTimeout=0&useUnicode=true&characterEncoding=UTF-8&allowPublicKeyRetrieval=true&useSSL=False&serverTimezone=Europe/Paris
+defaultLocale: en
+disableAlertLinks: true
+disableCAS: false
+disableLoggerLinks: false
+disableOverviewMap: false
+eml:
+  administrativeArea: ACT
+  city: Camberra
+  country: Australia
+  deliveryPoint: Clunies Ross Street
+  electronicMailAddress: support@${common.domain}
+  organizationName: Vlaams Biodiversiteitsportaal
+  postalCode: 2601
+gbifApiPassword: ""
+gbifApiUrl: https://api.gbif.org/v1/
+gbifApiUser: ""
+gbifDefaultEntityCountry: BEL
+gbifEndorsingNodeKey: ""
+gbifExportUrlBase: ""
+gbifInstallationKey: ""
+gbifLicenceMappingUrl: file:///config/config/collectory/default-gbif-license-mapping.json
+gbifOrphansPublisherID: ""
+gbifRegistrationDryRun: true
+gbifRegistrationEnabled: false
+gbifWebsite: https://www.gbif.org
+google:
+  apikey: get-a-google-api-key
+grails:
+  controllers:
+    upload:
+      maxFileSize: 107374182400
+      maxRequestSize: 107374182400
+  cors:
+    enabled: true
+  resources:
+    adhoc:
+      patterns:
+        "['/images/*', '/data/*', '/img/*', '/theme/default/*', '/css/*',
+                '/js/*', '/plugins/*' ]"
+  serverURL: ${common.protocol}://collections.${common.domain}
+headerAndFooter:
+  baseURL: ${common.protocol}://branding.${common.domain}
+  version: 2
+isPipelinesCompatible: false
+loggerURL: ${common.protocol}://logger.${common.domain}/service
+management:
+  endpoint:
+    health:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health
+mapboxAccessToken: RequestAMapBoxKey
+openapi:
+  components:
+    security:
+      oauth2:
+        baseUrl: ${common.protocol}://auth.${common.domain}/cas/oidc
+  contact:
+    email: support@${common.domain}
+  terms: ""
+orgNameLong: Vlaams Biodiversiteitsportaal
+projectName: Vlaams Biodiversiteitsportaal
+projectNameShort: VBP
+regionName: Australia
+repository:
+  location:
+    images: /data/collectory/data
+resource:
+  gbifExport:
+    url:
+      template: ${common.protocol}://records.${common.domain}/archives/gbif/@UID@/@UID@.zip
+  publicArchive:
+    url:
+      template: ${common.protocol}://records.${common.domain}/archives/gbif/@UID@/@UID@.zip
+rifcs:
+  excludeBounds: true
+serverName: ${common.protocol}://collections.${common.domain}
+
+
+showExtraInfoInDataSetsView:
+  enabled: "true "
+  relativeTime: true
+skin:
+  favicon: ${common.protocol}://branding.${common.domain}/
+  homeUrl: ${common.protocol}://www.${common.domain}
+  orgNameLong: Vlaams Biodiversiteitsportaal
+  orgNameShort: VBP
+  orgSupportEmail: support@${common.domain}
+  taxaLinks:
+    baseUrl: ${common.protocol}://species.${common.domain}/species/
+spatial:
+  baseURL: ${common.protocol}://spatial.${common.domain}
+speciesListToolUrl: ${common.protocol}://lists.${common.domain}/speciesListItem/list/
+suitableFor: '[{"spListNational":"Species list national"}, {"spListState":
+    "Species list state"}, {"spListGreaterThan1000": "Species list >1000km
+    radius"}, {"spList100to1000": "Species list 100-1000km radius"},
+    {"spList10to100":"Species list 10k to 100km radius"},
+    {"spListLessThan10":"Species list <10km radius"},
+    {"speciesDistribution":"Defining a species distribution"},
+    {"quantifyAbundance":"Quantifying abundance at a point in time"},
+    {"quantifyChange": "Quantifying change over time"}, {"other":"Other"}]'
+uploadExternalUrlPath: /upload/
+uploadFilePath: /data/collectory/upload/
+useGbifDoi: false
+userDetails:
+  url: ${common.protocol}://auth.${common.domain}/userdetails/
+userdetails:
+  api:
+    url: ${common.protocol}://auth.${common.domain}/userdetails/
+  url: ${common.protocol}://auth.${common.domain}/userdetails/
+  web:
+    url: ${common.protocol}://auth.${common.domain}/userdetails/
+
+dataResource:
+  resourceTypeList:
+    - records
+    - website
+    - document
+    - uploads
+    - species-list
+    - publications
+    - events
+  contentTypesList:
+    - authoritative
+    - behaviour
+    - citizen science
+    - commercial uses
+    - common names
+    - conservation management
+    - conservation status
+    - description
+    - distribution maps
+    - distribution text
+    - Barcoding DNA
+    - Genomic DNA
+    - Environmental DNA
+    - feeding and diet
+    - habitat
+    - human interaction
+    - identification keys
+    - images
+    - lifecycle
+    - molecular
+    - movies
+    - pest management
+    - pest status
+    - point occurrence data
+    - population
+    - references
+    - reproduction
+    - scientific names
+    - sensitive species lists
+    - similar species
+    - sound
+    - species interactions
+    - species list
+    - taxonomy
+    - threats

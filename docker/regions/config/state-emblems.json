@@ -1,0 +1,126 @@
+{
+  "AUSTRALIAN CAPITAL TERRITORY": {
+    "bird": {
+      "name": "Callocephalon fimbriatum",
+      "guid": "https://biodiversity.org.au/afd/taxa/6c646af8-06fb-40ae-83aa-3dd001cc4ea6"
+    },
+    "plant": {
+      "name": "Wahlenbergia gloriosa",
+      "guid": "https://id.biodiversity.org.au/node/apni/2892148"
+    }
+  },
+  "NEW SOUTH WALES": {
+    "bird": {
+      "name": "Dacelo novaeguineae",
+      "guid": "https://biodiversity.org.au/afd/taxa/1fc76c4d-4830-4129-9b86-1c7e944c3c50"
+    },
+    "plant": {
+      "name": "Telopea speciosissima",
+      "guid": "https://id.biodiversity.org.au/taxon/apni/51293559"
+    },
+    "animal": {
+      "name": "Ornithorhynchus anatinus",
+      "guid": "https://biodiversity.org.au/afd/taxa/ac61fd14-4950-4566-b384-304bd99ca75f"
+    },
+    "marine": {
+      "name": "Achoerodus viridis",
+      "guid": "https://biodiversity.org.au/afd/taxa/d9b5a99b-768a-4266-9f68-243f24d52ba4"
+    }
+  },
+  "NORTHERN TERRITORY": {
+    "bird": {
+      "name": "Aquila audax",
+      "guid": "https://biodiversity.org.au/afd/taxa/ac93f7f0-0686-4589-801a-5832378cb7c1"
+    },
+    "plant": {
+      "name": "Gossypium sturtianum",
+      "guid": "https://id.biodiversity.org.au/node/apni/2893745"
+    },
+    "animal": {
+      "name": "Osphranter rufus",
+      "guid": "https://biodiversity.org.au/afd/taxa/e6aff6af-ff36-4ad5-95f2-2dfdcca8caff"
+    }
+  },
+  "QUEENSLAND": {
+    "bird": {
+      "name": "Grus rubicunda",
+      "guid": "ALA_DR650_128"
+    },
+    "plant": {
+      "name": "Vappodes phalaenopsis",
+      "guid": "ALA_DR656_1873"
+    },
+    "animal": {
+      "name": "Phascolarctos cinereus",
+      "guid": "https://biodiversity.org.au/afd/taxa/e9d6fbbd-1505-4073-990a-dc66c930dad6"
+    },
+    "marine": {
+      "name": "Amphiprion akindynos",
+      "guid": "https://biodiversity.org.au/afd/taxa/191ab506-892f-4fda-b21e-2029354cce7d"
+    }
+  },
+  "SOUTH AUSTRALIA": {
+    "bird": {
+      "name": "Cracticus tibicen",
+      "guid": "https://biodiversity.org.au/afd/taxa/5291343e-fdeb-4a65-8ba5-928f5b96acf5"
+    },
+    "plant": {
+      "name": "Swainsona formosa",
+      "guid": "https://id.biodiversity.org.au/node/apni/2914960"
+    },
+    "animal": {
+      "name": "Lasiorhinus latifrons",
+      "guid": "https://biodiversity.org.au/afd/taxa/24a9ba35-3c1e-4f23-bd3c-47b2ae942355"
+    },
+    "marine": {
+      "name": "Phycodurus eques",
+      "guid": "https://biodiversity.org.au/afd/taxa/b2c89995-9152-488c-abaa-45a02ec3d6fb"
+    }
+  },
+  "TASMANIA": {
+    "bird": {
+      "name": "Anthochaera paradoxa",
+      "guid": "https://biodiversity.org.au/afd/taxa/2a768ef6-c37f-4735-9ab3-8655adc33948"
+    },
+    "plant": {
+      "name": "Eucalyptus globulus",
+      "guid": "https://id.biodiversity.org.au/node/apni/5272169"
+    },
+    "animal": {
+      "name": "Sarcophilus harrisii",
+      "guid": "https://biodiversity.org.au/afd/taxa/5c2a733c-9f1a-4ec5-8dd6-951118f3fbfc"
+    }
+  },
+  "VICTORIA": {
+    "bird": {
+      "name": "Lichenostomus melanops cassidix",
+      "guid": "https://biodiversity.org.au/afd/taxa/c74c3d35-c98c-4ef0-93bf-b9b6ace016b1"
+    },
+    "plant": {
+      "name": "Epacris impressa",
+      "guid": "https://id.biodiversity.org.au/node/apni/2894437"
+    },
+    "animal": {
+      "name": "Gymnobelideus leadbeateri",
+      "guid": "https://biodiversity.org.au/afd/taxa/6119c642-08ad-403e-b8c9-215814f63ee3"
+    },
+    "marine": {
+      "name": "Phyllopteryx taeniolatus",
+      "guid": "https://biodiversity.org.au/afd/taxa/64a63130-12c0-4147-aafa-43f372888f0a"
+    }
+  },
+  "WESTERN AUSTRALIA": {
+    "bird": {
+      "name": "Cygnus atratus",
+      "guid": "https://biodiversity.org.au/afd/taxa/3f66250c-eec1-4f23-8338-26663c929d66"
+    },
+    "plant": {
+      "name": "Anigozanthos manglesii",
+      "guid": "https://id.biodiversity.org.au/node/apni/2900921"
+    },
+    "animal": {
+      "name": "Myrmecobius fasciatus",
+      "guid": "https://biodiversity.org.au/afd/taxa/6c72d199-f0f1-44d3-8197-224a2f7cff5f"
+    }
+  }
+}
