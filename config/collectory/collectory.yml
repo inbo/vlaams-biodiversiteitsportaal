@@ -171,11 +171,7 @@ userdetails:
   url: ${common.protocol}://auth.${common.domain}/userdetails/
   web:
     url: ${common.protocol}://auth.${common.domain}/userdetails/
-webservice:
-  client-id: ""
-  client-secret: ""
-  jwt: false
-  jwt-scopes: ""
+
 dataResource:
   resourceTypeList:
     - records
