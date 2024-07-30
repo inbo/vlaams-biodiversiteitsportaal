@@ -138,6 +138,13 @@ security:
     secret: collections-oidc-super-secret
     scope: openid,profile,email,ala,roles
 serverName: ${common.protocol}://collections.${common.domain}
+
+webservice:
+  jwt: true
+  jwt-scopes: openid users/read
+  client-id: collections
+  client-secret: xxx
+
 showExtraInfoInDataSetsView:
   enabled: "true "
   relativeTime: true
