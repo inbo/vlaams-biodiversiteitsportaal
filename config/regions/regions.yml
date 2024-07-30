@@ -1,21 +1,15 @@
+---
+### OIDC Credentials ###
 security:
-  oidc:
-    secret: regions-oidc-super-secret
+  jwt:
     clientId: regions
-    discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known
-    enabled: true
-  cas:
-    appServerName: ${common.protocol}://records.${common.domain}
-    authCookieName: VBP-Auth
-    authenticateOnlyIfLoggedInFilterPattern: /occurrences/*,/explore/your-area,/query,/proxy/download/*,/
-    bypass: false
-    casServerLoginUrl: ${common.protocol}://auth.${common.domain}/cas/login
-    casServerLogoutUrl: ${common.protocol}://auth.${common.domain}/cas/logout
-    casServerName: ${common.protocol}://auth.${common.domain}
-    casServerUrlPrefix: ${common.protocol}://auth.${common.domain}/cas
-    enabled: false
-    loginUrl: ${common.protocol}://auth.${common.domain}/cas/login
-    logoutUrl: ${common.protocol}://auth.${common.domain}/cas/logout
+  oidc:
+    clientId: regions
+    secret: regions-oidc-super-secret
+webservice:
+  client-id: regions
+  client-secret: xxx
+
 casServerName: ${common.protocol}://auth.${common.domain}
 casServerLoginUrl: ${common.protocol}://auth.${common.domain}/cas/login
 casServerUrlPrefix: ${common.protocol}://auth.${common.domain}/cas

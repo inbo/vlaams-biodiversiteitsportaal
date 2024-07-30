@@ -1,36 +1,13 @@
-# CAS Config
+---
+### OIDC Credentials ###
 security:
-  cas:
-    casServerName: ${common.protocol}://auth.${common.domain}
-    casServerUrlPrefix: ${security.cas.casServerName}/cas
-    loginUrl: ${security.cas.casServerUrlPrefix}/login
-    logoutUrl: ${security.cas.casServerUrlPrefix}/logout
-    appServerName: ${common.protocol}://auth.${common.domain}
-    authCookieName: VBP-Auth
-  user:
-    name: admin
-    password: secret
-    role:
-      - ACTUATOR
-  basic:
-    enabled: true
-    authorizeMode: role
-    realm: ALA CAS
-    path:
-      - /status/**
-endpoints:
-  enabled: true
+  jwt:
+    clientId: apikey
+  oidc:
+    clientId: apikey
+    secret: apikey-oidc-super-secret
+
 management:
-  security:
-    enabled: true
-    roles: ACTUATOR
-  endpoint:
-      health:
-          enabled: true
-  endpoints:
-      web:
-          exposure:
-              include: health
   health:
     mongo:
       enabled: false

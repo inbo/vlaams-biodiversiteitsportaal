@@ -164,13 +164,16 @@ thrift:
 upload:
   status: /data/biocache-upload/status
   temp: /data/biocache-upload/temp
+
 webservice:
-  client-id: ''
-  client-secret: ''
-  jwt: false
-  jwt-scopes: ''
+  jwt: true
+  client-id: "biocache_service"
+  client-secret: "biocache_service-oidc-super-secret"
+  jwt-scopes: users/read
+
 webservices:
   root: ${common.protocol}://records-ws.${common.domain}
+
 wms:
   cache:
     age:

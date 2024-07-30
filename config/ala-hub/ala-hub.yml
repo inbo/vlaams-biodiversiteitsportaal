@@ -1,3 +1,15 @@
+---
+### OIDC Credentials ###
+security:
+  jwt:
+    clientId: ala_hub
+  oidc:
+    clientId: "ala_hub"
+    secret: "ala_hub-oidc-super-secret"
+webservice:
+  client-id: "ala_hub"
+  client-secret: "ala_hub-oidc-super-secret"
+
 advancedTaxaField: taxa
 alerts:
   apiKey: a5c2e4d1-324c-4bc2-8770-2a2aa092df49
@@ -167,29 +179,6 @@ organisation:
 pdfgen:
   baseURL: ${common.protocol}://pdfgen.ala.org.au
 privacyPolicy: ''
-security:
-  cas:
-    appServerName: ${common.protocol}://records.${common.domain}
-    authCookieName: VBP-Auth
-    authenticateOnlyIfLoggedInFilterPattern: /occurrences/*,/explore/your-area,/query,/proxy/download/*,/
-    bypass: false
-    casServerLoginUrl: ${common.protocol}://auth.${common.domain}/cas/login
-    casServerLogoutUrl: ${common.protocol}://auth.${common.domain}/cas/logout
-    casServerName: ${common.protocol}://auth.${common.domain}
-    casServerUrlPrefix: ${common.protocol}://auth.${common.domain}/cas
-    enabled: false
-    loginUrl: ${common.protocol}://auth.${common.domain}/cas/login
-    logoutUrl: ${common.protocol}://auth.${common.domain}/cas/logout
-    uriFilterPattern: /admin/*,/alaAdmin/*,/download/*
-  jwt:
-    clientId: ''
-    discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known
-  oidc:
-    enabled: true # Cannot disable oidc :(
-    discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known
-    scope: openid,profile,email,ala,roles, user_defined
-    client-id: "ala_hub"
-    secret: "ala_hub-oidc-super-secret"
 server:
   address: 0.0.0.0
   contextPath: ''
@@ -244,8 +233,4 @@ useDownloadPlugin: true
 userCharts: false
 userDetails:
   url: ${common.protocol}://auth.${common.domain}/userdetails/
-webservice:
-  client-id: ''
-  client-secret: ''
-  jwt: false
-  jwt-scopes: ''
+

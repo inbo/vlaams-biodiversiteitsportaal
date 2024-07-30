@@ -47,3 +47,26 @@ server:
 grails:
   cors:
     enabled: true
+
+security:
+  apikey:
+    enabled: true
+    auth:
+      serviceUrl: ${common.protocol}://auth.${common.domain}/apikey/ws/check/
+    check:
+      serviceUrl: ${common.protocol}://auth.${common.domain}/apikey/ws/check?apikey=
+    userdetails:
+      serviceUrl: ${common.protocol}://auth.${common.domain}/userdetails/
+  cas:
+    enabled: false
+  jwt:
+    enabled: true
+    discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known
+    fallbackToLegacyBehaviour: true
+  oidc:
+    enabled: true
+    discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known
+
+webservice:
+  jwt: true
+  jwt-scopes: openid users/read

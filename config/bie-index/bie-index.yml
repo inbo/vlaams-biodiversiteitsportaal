@@ -1,45 +1,22 @@
+---
+### OIDC Credentials ###
+security:
+  jwt:
+    clientId: bie_index
+  oidc:
+    clientId: "bie_index"
+    secret: "bie_index-oidc-super-secret"
+webservice:
+  client-id: "bie_index"
+  client-secret: "bie_index-oidc-super-secret"
+
 grails:
   serverURL: ${common.protocol}://species-ws.${common.domain}
   cors:
     enabled: true
+
 serverName: ${common.protocol}://species-ws.${common.domain}
-# CAS Config
-security:
-  # cognito specific configs
-  cas:
-    casServerName: ${common.protocol}://auth.${common.domain}
-    uriFilterPattern: /admin/*,/alaAdmin/*
-    uriExclusionFilterPattern: /admin/indexFields
-    appServerName: ${common.protocol}://species-ws.${common.domain}
-    casServerUrlPrefix: ${common.protocol}://auth.${common.domain}/cas
-    loginUrl: ${common.protocol}://auth.${common.domain}/cas/login
-    logoutUrl: ${common.protocol}://auth.${common.domain}/cas/logout
-    contextPath:
-    bypass: false
-    enabled: false
-  oidc:
-    enabled: true
-    clientId: 0cf3eff57958b4bb76eca5055021bcf59bc5
-    secret: 895c1a54c053b38953b5b3d3466f7a171659
-    discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known
-  # cognito specific configs
-  jwt:
-    discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known
-    clientId: test
-  # cognito specific configs
-  apiKey:
-    enabled: true
-    auth:
-      serviceUrl: ${common.protocol}://auth.${common.domain}/apikey/
-    check:
-      serviceUrl: ${common.protocol}://auth.${common.domain}/apikey/ws/check?apikey=
-    userdetails:
-      serviceUrl: ${common.protocol}://auth.${common.domain}/userdetails/
-webservice:
-  jwt: false
-  jwt-scopes:
-  client-id: test
-  client-secret: test
+
 userDetails:
   url: ${common.protocol}://auth.${common.domain}/userdetails/
 biocache:

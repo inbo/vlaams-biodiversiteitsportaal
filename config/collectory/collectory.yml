@@ -1,3 +1,15 @@
+---
+### OIDC Credentials ###
+security:
+  jwt:
+    clientId: collections
+  oidc:
+    clientId: collections
+    discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known
+webservice:
+  client-id: collections
+  client-secret: xxx
+
 ROLE_ADMIN: ROLE_ADMIN
 ROLE_EDITOR: ROLE_EDITOR
 ala:
@@ -100,50 +112,8 @@ resource:
       template: ${common.protocol}://records.${common.domain}/archives/gbif/@UID@/@UID@.zip
 rifcs:
   excludeBounds: true
-security:
-  apiKey:
-    auth:
-      serviceUrl: ${common.protocol}://auth.${common.domain}/apikey/
-  apikey:
-    check:
-      serviceUrl: ${common.protocol}://auth.${common.domain}/apikey/ws/check?apikey=
-    checkEnabled: true
-    enabled: true
-    serviceUrl: ${common.protocol}://auth.${common.domain}/apikey/
-    userdetails:
-      serviceUrl: ${common.protocol}://auth.${common.domain}/userdetails/
-  cas:
-    appServerName: ${common.protocol}://collections.${common.domain}
-    authCookieName: VBP-Auth
-    authenticateOnlyIfLoggedInFilterPattern: /public/show/*
-    bypass: false
-    casServerLoginUrl: ${common.protocol}://auth.${common.domain}/cas/login
-    casServerLogoutUrl: ${common.protocol}://auth.${common.domain}/cas/logout
-    casServerName: ${common.protocol}://auth.${common.domain}
-    casServerUrlPrefix: ${common.protocol}://auth.${common.domain}/cas
-    contextPath: ""
-    enabled: false
-    loginUrl: ${common.protocol}://auth.${common.domain}/cas/login
-    logoutUrl: ${common.protocol}://auth.${common.domain}/cas/logout
-    uriExclusionFilterPattern: /images.*,/css.*,/js.*
-    uriFilterPattern: /admin.*,/admin/.*,/admin/.*/.*,/collection.*,/institution.*,/contact.*,/reports.*,/providerCode.*,/providerMap.*,/dataProvider.*,/dataResource.*,/dataHub.*,/manage/.*,/ws/ipt/scan/.*,/alaAdmin.*
-  jwt:
-    enabled: true
-    clientId: collections
-    discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known
-  oidc:
-    enabled: true
-    clientId: collections
-    discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known
-    secret: collections-oidc-super-secret
-    scope: openid,profile,email,ala,roles
 serverName: ${common.protocol}://collections.${common.domain}
 
-webservice:
-  jwt: true
-  jwt-scopes: openid users/read
-  client-id: collections
-  client-secret: xxx
 
 showExtraInfoInDataSetsView:
   enabled: "true "

@@ -1,3 +1,15 @@
+---
+### OIDC Credentials ###
+security:
+  jwt:
+    clientId: spatial_hub
+  oidc:
+    clientId: spatial_hub
+    secret: spatial_hub-oidc-super-secret
+webservice:
+  client-id: spatial_hub
+  client-secret: xxx
+
 grails:
   serverURL: "${common.protocol}://spatial.${common.domain}"
   app:
@@ -13,57 +25,6 @@ api_key: "898a8ca5-c415-4c9a-a501-36f8bcf001e9"
 
 i18n:
   region: "default"
-
-security:
-  # CAS disabled
-  cas:
-    enabled: false
-    casServerName: "${common.protocol}://auth.${common.domain}"
-    casServerUrlPrefix: "${common.protocol}://auth.${common.domain}/cas"
-    loginUrl: "${common.protocol}://auth.${common.domain}/cas/login"
-    logoutUrl: "${common.protocol}://auth.${common.domain}/cas/logout"
-    bypass: false
-    disableCAS: false
-    gateway: False
-  #Used for auth plugin
-  apikey:
-    check:
-      serviceUrl: ${common.protocol}://auth.${common.domain}/apikey/ws/check?apikey=
-  oidc:
-    enabled: true
-    discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known
-    scope: openid,profile,email,ala,roles,user_defined
-    client-id: "spatial"
-    secret: "spatial-oidc-super-secret"
-  jwt:
-    enabled: false
-  #    discoveryUri: {{ jwt_discoveryUri }}
-  #    fallbackToLegacyBehaviour: true
-  #    clientId: {{ spatial_hub_oidc_client_id }}
-  #    roleAttributes: cognito:groups
-  #    rolesFromAccessToken: true
-  #    userIdClaim: username
-  #    roleClaims: cognito:groups
-  cors:
-    enable: true
-    authenticated:
-      allowedOrigins:
-        - '.*\.biodiversiteitsportaal.dev.svdev.be(:[0-9]+)?'
-    unauthenticated:
-      allowedOrigins:
-        - '*'
-      allowCredentials: false
-  core:
-    authCookieName: VBP-Auth
-  cookie:
-    enabled: true
-    domain: ${common.domain}
-
-webservice:
-  jwt: true
-  jwt-scopes: ala/attrs ala/internal users/read
-  clientId:
-  secret:
 
 apiKeyCheckUrlTemplate: "${common.protocol}://auth.${common.domain}/apikey/ws/check?apikey={0}"
 autocompleteUrl: "${common.protocol}://species-ws.${common.domain}/search/auto.jsonp"

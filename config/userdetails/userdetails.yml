@@ -1,3 +1,15 @@
+---
+### OIDC Credentials ###
+security:
+  jwt:
+    clientId: userdetails
+  oidc:
+    clientId: userdetails
+    secret: userdetails-oidc-super-secret
+webservice:
+  client-id: userdetails
+  client-secret: xxx
+
 management:
   health:
     mongo:
@@ -20,34 +32,7 @@ management:
     web:
       exposure:
         include: health
-security:
-  cas:
-    enabled: false
-    casServerName: ${common.protocol}://auth.${common.domain}
-    casServerUrlPrefix: ${security.cas.casServerName}/cas
-    loginUrl: ${security.cas.casServerUrlPrefix}/login
-    logoutUrl: ${security.cas.casServerUrlPrefix}/logout
-    appServerName: ${common.protocol}://auth.${common.domain}
-    authCookieName: VBP-Auth
-  jwt:
-    clientId: userdetails
-    discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known
-  oidc:
-    clientId: userdetails
-    discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known
-    enabled: true
-    secret: userdetails-oidc-super-secret
-  user:
-    name: admin
-    password: secret
-    role:
-      - ACTUATOR
-  basic:
-    enabled: true
-    authorizeMode: role
-    realm: ALA CAS
-    path:
-      - /status/**
+
 endpoints:
   enabled: true
   health:
@@ -127,8 +112,7 @@ skin:
 attributes:
   affiliations:
     enabled: false
-webservice:
-  apiKey: e8dcf74d-bcef-41bb-8738-48f0ff0a5b75
+
 apiKey:
   showLink: false
   showSecret: false

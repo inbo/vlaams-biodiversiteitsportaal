@@ -1,22 +1,17 @@
 ---
+### OIDC Credentials ###
+security:
+  jwt:
+    clientId: images
+  oidc:
+    clientId: images
+    secret: images-oidc-super-secret
+webservice:
+  client-id: images
+  client-secret: xxx
+
 grails:
   serverURL: '${common.protocol}://images.${common.domain}'
-security:
-  oidc:
-    enabled: true
-    scope: openid profile email ala roles
-    allowUnsignedIdTokens: true # Disable once CAS no longer suggests the none algorithm
-    clientId: images
-    discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known
-    secret: images-oidc-super-secret
-  jwt:
-    enabled: true # default for backwards compat with v1
-    fallbackToLegacyKeys: true # Reset to false once legacy api keys no longer supported
-    discoveryUri: ${security.oidc.discoveryUri}
-  apikey:
-    enabled: true
-    auth:
-      serviceUrl: ${common.protocol}://auth.${common.domain}/apikey/
 
 imageservice:
   imagestore:
