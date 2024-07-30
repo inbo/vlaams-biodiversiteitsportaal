@@ -128,12 +128,13 @@ security:
     uriExclusionFilterPattern: /images.*,/css.*,/js.*
     uriFilterPattern: /admin.*,/admin/.*,/admin/.*/.*,/collection.*,/institution.*,/contact.*,/reports.*,/providerCode.*,/providerMap.*,/dataProvider.*,/dataResource.*,/dataHub.*,/manage/.*,/ws/ipt/scan/.*,/alaAdmin.*
   jwt:
+    enabled: true
     clientId: collections
     discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known
   oidc:
+    enabled: true
     clientId: collections
     discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known
-    enabled: true
     secret: collections-oidc-super-secret
     scope: openid,profile,email,ala,roles
 serverName: ${common.protocol}://collections.${common.domain}
