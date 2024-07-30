@@ -1,147 +1,147 @@
-name: Release new version of the portal
-run-name: ${{ github.actor }} is releasing a new version
-on:
-  push:
-    branches:
-      - 'main'
-      - 'build-and-publish-docker-images'
-jobs:
-
-  upload-config-to-s3:
-    runs-on: [ self-hosted ]
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: jakejarvis/s3-sync-action@master
-        with:
-          args: --acl private --follow-symlinks --delete
-        env:
-          AWS_S3_BUCKET: biodiversiteitsportaal-dev-config
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
-
-  upload-branding-to-s3:
-    runs-on: [ self-hosted ]
-    steps:
-      - uses: actions/checkout@v4
-      - uses: jakejarvis/s3-sync-action@master
-        with:
-          args: --acl public-read --follow-symlinks --delete
-        env:
-          AWS_S3_BUCKET: biodiversiteitsportaal-dev-branding
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
-
-  build-and-push-ala-hub-docker-image:
-    runs-on: [ self-hosted ]
-    steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/actions/build-and-push-docker-image
-        with:
-          name: ala-hub
-
-  build-and-push-bie-hub-docker-image:
-    runs-on: [ self-hosted ]
-    steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/actions/build-and-push-docker-image
-        with:
-          name: bie-hub
-
-  build-and-push-bie-index-docker-image:
-    runs-on: [ self-hosted ]
-    steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/actions/build-and-push-docker-image
-        with:
-          name: bie-index
-
-  build-and-push-biocache-service-docker-image:
-    runs-on: [ self-hosted ]
-    steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/actions/build-and-push-docker-image
-        with:
-          name: biocache-service
-
-  build-and-push-cas-docker-image:
-    runs-on: [ self-hosted ]
-    steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/actions/build-and-push-docker-image
-        with:
-          name: cas
-
-  build-and-push-cas-apikey-docker-image:
-    runs-on: [ self-hosted ]
-    steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/actions/build-and-push-docker-image
-        with:
-          name: cas-apikey
-
-  build-and-push-cas-management-docker-image:
-    runs-on: [ self-hosted ]
-    steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/actions/build-and-push-docker-image
-        with:
-          name: cas-management
-
-  build-and-push-collections-docker-image:
-    runs-on: [ self-hosted ]
-    steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/actions/build-and-push-docker-image
-        with:
-          name: collections
-
-  build-and-push-images-docker-image:
-    runs-on: [ self-hosted ]
-    steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/actions/build-and-push-docker-image
-        with:
-          name: images
-
-  build-and-push-regions-docker-image:
-    runs-on: [ self-hosted ]
-    steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/actions/build-and-push-docker-image
-        with:
-          name: regions
-
-  build-and-push-spatial-hub-docker-image:
-    runs-on: [ self-hosted ]
-    steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/actions/build-and-push-docker-image
-        with:
-          name: spatial-hub
-
-  build-and-push-spatial-service-docker-image:
-    runs-on: [ self-hosted ]
-    steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/actions/build-and-push-docker-image
-        with:
-          name: spatial-service
-
-  build-and-push-species-list-docker-image:
-    runs-on: [ self-hosted ]
-    steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/actions/build-and-push-docker-image
-        with:
-          name: species-list
-
-  build-and-push-userdetails-docker-image:
-    runs-on: [ self-hosted ]
-    steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/actions/build-and-push-docker-image
-        with:
-          name: userdetails
+#name: Release new version of the portal
+#run-name: ${{ github.actor }} is releasing a new version
+#on:
+#  push:
+#    branches:
+#      - 'main'
+#      - 'build-and-publish-docker-images'
+#jobs:
+#
+#  upload-config-to-s3:
+#    runs-on: [ self-hosted ]
+#    steps:
+#      - uses: actions/checkout@v4
+#
+#      - uses: jakejarvis/s3-sync-action@master
+#        with:
+#          args: --acl private --follow-symlinks --delete
+#        env:
+#          AWS_S3_BUCKET: biodiversiteitsportaal-dev-config
+#          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#          AWS_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+#
+#  upload-branding-to-s3:
+#    runs-on: [ self-hosted ]
+#    steps:
+#      - uses: actions/checkout@v4
+#      - uses: jakejarvis/s3-sync-action@master
+#        with:
+#          args: --acl public-read --follow-symlinks --delete
+#        env:
+#          AWS_S3_BUCKET: biodiversiteitsportaal-dev-branding
+#          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#          AWS_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+#
+#  build-and-push-ala-hub-docker-image:
+#    runs-on: [ self-hosted ]
+#    steps:
+#      - uses: actions/checkout@v4
+#      - uses: ./.github/actions/build-and-push-docker-image
+#        with:
+#          name: ala-hub
+#
+#  build-and-push-bie-hub-docker-image:
+#    runs-on: [ self-hosted ]
+#    steps:
+#      - uses: actions/checkout@v4
+#      - uses: ./.github/actions/build-and-push-docker-image
+#        with:
+#          name: bie-hub
+#
+#  build-and-push-bie-index-docker-image:
+#    runs-on: [ self-hosted ]
+#    steps:
+#      - uses: actions/checkout@v4
+#      - uses: ./.github/actions/build-and-push-docker-image
+#        with:
+#          name: bie-index
+#
+#  build-and-push-biocache-service-docker-image:
+#    runs-on: [ self-hosted ]
+#    steps:
+#      - uses: actions/checkout@v4
+#      - uses: ./.github/actions/build-and-push-docker-image
+#        with:
+#          name: biocache-service
+#
+#  build-and-push-cas-docker-image:
+#    runs-on: [ self-hosted ]
+#    steps:
+#      - uses: actions/checkout@v4
+#      - uses: ./.github/actions/build-and-push-docker-image
+#        with:
+#          name: cas
+#
+#  build-and-push-cas-apikey-docker-image:
+#    runs-on: [ self-hosted ]
+#    steps:
+#      - uses: actions/checkout@v4
+#      - uses: ./.github/actions/build-and-push-docker-image
+#        with:
+#          name: cas-apikey
+#
+#  build-and-push-cas-management-docker-image:
+#    runs-on: [ self-hosted ]
+#    steps:
+#      - uses: actions/checkout@v4
+#      - uses: ./.github/actions/build-and-push-docker-image
+#        with:
+#          name: cas-management
+#
+#  build-and-push-collections-docker-image:
+#    runs-on: [ self-hosted ]
+#    steps:
+#      - uses: actions/checkout@v4
+#      - uses: ./.github/actions/build-and-push-docker-image
+#        with:
+#          name: collections
+#
+#  build-and-push-images-docker-image:
+#    runs-on: [ self-hosted ]
+#    steps:
+#      - uses: actions/checkout@v4
+#      - uses: ./.github/actions/build-and-push-docker-image
+#        with:
+#          name: images
+#
+#  build-and-push-regions-docker-image:
+#    runs-on: [ self-hosted ]
+#    steps:
+#      - uses: actions/checkout@v4
+#      - uses: ./.github/actions/build-and-push-docker-image
+#        with:
+#          name: regions
+#
+#  build-and-push-spatial-hub-docker-image:
+#    runs-on: [ self-hosted ]
+#    steps:
+#      - uses: actions/checkout@v4
+#      - uses: ./.github/actions/build-and-push-docker-image
+#        with:
+#          name: spatial-hub
+#
+#  build-and-push-spatial-service-docker-image:
+#    runs-on: [ self-hosted ]
+#    steps:
+#      - uses: actions/checkout@v4
+#      - uses: ./.github/actions/build-and-push-docker-image
+#        with:
+#          name: spatial-service
+#
+#  build-and-push-species-list-docker-image:
+#    runs-on: [ self-hosted ]
+#    steps:
+#      - uses: actions/checkout@v4
+#      - uses: ./.github/actions/build-and-push-docker-image
+#        with:
+#          name: species-list
+#
+#  build-and-push-userdetails-docker-image:
+#    runs-on: [ self-hosted ]
+#    steps:
+#      - uses: actions/checkout@v4
+#      - uses: ./.github/actions/build-and-push-docker-image
+#        with:
+#          name: userdetails
