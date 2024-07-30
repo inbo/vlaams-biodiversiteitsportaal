@@ -42,7 +42,7 @@ bie:
   baseURL: ${common.protocol}://species.${common.domain}
   searchPath: /search
 biocache:
-  baseURL: ${common.protocol}://biocache.${common.domain}
+  baseURL: ${common.protocol}://records.${common.domain}
   enableQueryContext: 'false'
   queryContext: ''
 spatial:
