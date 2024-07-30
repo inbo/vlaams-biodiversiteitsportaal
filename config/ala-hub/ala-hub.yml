@@ -150,26 +150,26 @@ management:
     web:
       exposure:
         include: health
-#map:
-#  cloudmade:
-#    key: BC9A493B41014CAABB98F0471D759707
-#  defaultFacetMapColourBy: ''
-#  defaultLatitude: 51.0
-#  defaultLongitude: 4.4
-#  defaultZoom: 9
-#  height: 600
-#  minimal:
-#    url: https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png
-#  overlay:
-#    url: ${common.protocol}://spatial.${common.domain}/geoserver/gwc/service/wms
-#  pointColour: df4a21
-#  zoomOutsideScopedRegion: true
-#mapdownloads:
-#  baseLayers:
-#    provincies:
-#      displayName: Provincies
-##      i18nCode: baselayer.states
-#      name: provincies_wgs84
+map:
+  cloudmade:
+    key: BC9A493B41014CAABB98F0471D759707
+  defaultFacetMapColourBy: ''
+  defaultLatitude: 51.0
+  defaultLongitude: 4.4
+  defaultZoom: 9
+  height: 600
+  minimal:
+    url: https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png
+  overlay:
+    url: ${common.protocol}://spatial.${common.domain}/geoserver/gwc/service/wms
+  pointColour: df4a21
+  zoomOutsideScopedRegion: true
+mapdownloads:
+  baseLayers:
+    provincies:
+      displayName: Provincies
+#      i18nCode: baselayer.states
+      name: provincies_wgs84
 maxDownloadRecords: ''
 mdba:
   basinChampions: https://biocollect.ala.org.au/mdba/project/index/4d15b4df-c05b-41bd-ac5b-8a65c9e37d17
