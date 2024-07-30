@@ -1,3 +1,15 @@
+---
+### OIDC Credentials ###
+security:
+  jwt:
+    clientId: biocache_service
+  oidc:
+    clientId: "biocache_service"
+    secret: "biocache_service-oidc-super-secret"
+webservice:
+  client-id: "biocache_service"
+  client-secret: "biocache_service-oidc-super-secret"
+
 allow:
   layer:
     lookup: false
@@ -164,12 +176,6 @@ thrift:
 upload:
   status: /data/biocache-upload/status
   temp: /data/biocache-upload/temp
-
-webservice:
-  jwt: true
-  client-id: "biocache_service"
-  client-secret: "biocache_service-oidc-super-secret"
-  jwt-scopes: users/read
 
 webservices:
   root: ${common.protocol}://records-ws.${common.domain}
