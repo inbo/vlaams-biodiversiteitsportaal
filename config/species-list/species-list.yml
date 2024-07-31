@@ -10,6 +10,7 @@ webservice:
   client-id: lists
   client-secret: xxx
 
+
 apiGateway:
   enabled: false
 auth:
@@ -37,7 +38,6 @@ fieldGuide:
   baseURL: ''
 grails:
   serverURL: ${common.protocol}://lists.${common.domain}
-httpTimeoutMillis: 60000
 iconicSpecies:
   uid: dr781
 logger:
