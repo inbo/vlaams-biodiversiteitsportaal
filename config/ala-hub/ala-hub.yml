@@ -23,10 +23,8 @@ authenticateOnlyIfLoggedInFilterPattern: /occurrences/*,/explore/your-area,/quer
 authorise:
   roles: ROLE_ADMIN,ROLE_COLLECTION_ADMIN
 bie:
-  baseURL: ${common.protocol}://species.${common.domain}
   baseUrl: ${common.protocol}://species.${common.domain}
   searchPath: /search
-bieApiKey: 5bd6d4fc-3f1c-4fa2-903a-7ec771c02999
 bieService:
   baseUrl: ${common.protocol}://species-ws.${common.domain}
 biocache:
@@ -158,6 +156,7 @@ privacyPolicy: ''
 server:
   address: 0.0.0.0
   port: 8080
+  use-forward-headers: false
 serverName: ${common.protocol}://records.${common.domain}
 sightings:
   baseUrl: ''
