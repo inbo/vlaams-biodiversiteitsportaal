@@ -11,11 +11,11 @@ webservice:
   client-secret: "ala_hub-oidc-super-secret"
 
 advancedTaxaField: taxa
-alerts:
-  apiKey: a5c2e4d1-324c-4bc2-8770-2a2aa092df49
-  baseUrl: ''
-  myannotation:
-    enabled: false
+#alerts:
+#  apiKey: a5c2e4d1-324c-4bc2-8770-2a2aa092df49
+#  baseUrl: ''
+#  myannotation:
+#    enabled: false
 allowedImageEditingRoles: ROLE_ADMIN
 alwaysshow:
   imagetab: true
@@ -154,9 +154,7 @@ map:
 ##      i18nCode: baselayer.states
 #      name: provincies_wgs84
 maxDownloadRecords: ''
-mdba:
-  basinChampions: https://biocollect.ala.org.au/mdba/project/index/4d15b4df-c05b-41bd-ac5b-8a65c9e37d17
-  regions: ${common.protocol}://mdba-regions.ala.org.au/
+
 organisation:
   baseUrl: ${common.homepage}
 pdfgen:
@@ -188,7 +186,7 @@ skin:
 #  useAlaImageService: true
 #  useAlaSpatialPortal: true
 spatial:
-  baseURL: ${common.protocol}://spatial.${common.domain}
+  baseUrl: ${common.protocol}://spatial.${common.domain}
 speciesList:
   baseURL: ${common.protocol}://lists.${common.domain}
 #  preferredListName: ALA Preferred Species Images
@@ -212,6 +210,6 @@ uriExclusionFilterPattern: /occurrences/shapeUpload,/images.*,/css.*,/js.*,.*jso
 uriFilterPattern: /admin/*,/alaAdmin/*,/download/*
 useDownloadPlugin: true
 userCharts: false
-userDetails:
+userdetails:
   url: ${common.protocol}://auth.${common.domain}/userdetails/
 
