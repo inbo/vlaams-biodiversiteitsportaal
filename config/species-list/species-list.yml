@@ -44,7 +44,7 @@ logger:
   baseURL: ${common.protocol}://logger.${common.domain}/service
   baseUrl: ${common.protocol}://logger.${common.domain}/service
 namematching:
-  serviceURL: http://namematching.biodiversiteitsportaal.dev.internal:9180
+  serviceURL: http://namematching.biodiversiteitsportaal.dev.internal:9179
 openapi:
   components:
     security:
