@@ -159,7 +159,6 @@
         "y": 3
       },
       "id": 1,
-      "maxDataPoints": 100,
       "options": {
         "dedupStrategy": "none",
         "enableLogDetails": true,
@@ -177,7 +176,7 @@
             "uid": "cloudwatch"
           },
           "dimensions": {},
-          "expression": "fields @timestamp, @message, @logStream\n| filter @logStream like /$service\\/.*/\n| filter @message like /$query/\n| sort @timestamp desc\n| limit 1000",
+          "expression": "fields @timestamp, @message, @logStream\n| filter @logStream like /$service\\/.*/\n| filter @message like /$query/\n| sort @timestamp desc\n| limit ${log_limit}",
           "id": "",
           "label": "",
           "logGroups": [
@@ -212,9 +211,9 @@
       {
         "allValue": ".*",
         "current": {
-          "selected": false,
-          "text": "cas",
-          "value": "cas"
+          "selected": true,
+          "text": "biocache-service",
+          "value": "biocache-service"
         },
         "datasource": {
           "type": "cloudwatch",
@@ -261,6 +260,39 @@
         "query": "",
         "skipUrlSync": false,
         "type": "textbox"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": "1000",
+          "value": "1000"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": "Max number of log lines",
+        "multi": false,
+        "name": "log_limit",
+        "options": [
+          {
+            "selected": false,
+            "text": "100",
+            "value": "100"
+          },
+          {
+            "selected": true,
+            "text": "1000",
+            "value": "1000"
+          },
+          {
+            "selected": false,
+            "text": "10000",
+            "value": "10000"
+          }
+        ],
+        "query": "100, 1000, 10000",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
       }
     ]
   },
