@@ -32,7 +32,6 @@ bieService:
 biocache:
   ajax:
     useProxy: false
-  apiKey: ae1cc2a8-0509-4792-8e62-ded96510d5cc
   baseUrl: ${common.protocol}://records-ws.${common.domain}
   downloads:
     extra: dataResourceUid,dataResourceName.p
@@ -55,16 +54,9 @@ collectory:
   resources: ${common.protocol}://collections.${common.domain}/public/resources.json
 dataQualityChecksUrl: https://docs.google.com/spreadsheet/pub?key=0AjNtzhUIIHeNdHJOYk1SYWE4dU1BMWZmb2hiTjlYQlE&single=true&gid=0&output=csv
 dataquality:
-  apiKey: 28f72d39-6c8b-44fc-8184-cd81f6ea518a
-  baseUrl: https://dataquality.ala.org.au/
-  disableAllFiltersByDefault: false
   enabled: false
-  expandFiltersByDefault: true
-  learnmore_link: ''
-  warningOn: false
-defaultListView: ''
-defaultLocale: en
-disableCAS: false
+defaultLocale: nl
+disableCAS: true
 doi:
   mintDoi: false
 doiService:
@@ -82,8 +74,6 @@ downloads:
     defaultFields: id,data_resource_uid,data_resource,license,catalogue_number,taxon_concept_lsid,raw_taxon_name,raw_common_name,taxon_name,rank,common_name,kingdom,phylum,class,order,family,genus,species,subspecies,institution_code,collection_code,locality,raw_latitude,raw_longitude,raw_datum,latitude,longitude,datum,coordinate_precision,coordinate_uncertainty,country,state,cl959,min_elevation_d,max_elevation_d,min_depth_d,max_depth_d,individual_count,recorded_by,year,month,day,verbatim_event_date,basis_of_record,raw_basis_of_record,sex,preparations,information_withheld,data_generalizations,outlier_layer,taxonomic_kosher,geospatial_kosher"
   staticDownloadsUrl: ''
   termsOfUseUrl: ''
-dwc:
-  exclude: dataHubUid,dataProviderUid,institutionUid,year,month,day,left,right,provenance,taxonID,preferredFlag,outlierForLayers,speciesGroups,associatedMedia,images,userQualityAssertion,speciesHabitats,duplicationType,taxonomicIssues,subspeciesID,nameMatchMetric,sounds
 ecodata:
   baseURL: ''
 endpoints:
@@ -142,34 +132,27 @@ layersservice:
 logger:
   baseUrl: ${common.protocol}://logger.${common.domain}/service
 loggerURL: ${common.protocol}://logger.${common.domain}/service
-management:
-  endpoint:
-    health:
-      enabled: true
-  endpoints:
-    web:
-      exposure:
-        include: health
+
 map:
-  cloudmade:
-    key: BC9A493B41014CAABB98F0471D759707
-  defaultFacetMapColourBy: ''
+#  cloudmade:
+#    key: BC9A493B41014CAABB98F0471D759707
+#  defaultFacetMapColourBy: ''
   defaultLatitude: 51.0
   defaultLongitude: 4.4
   defaultZoom: 9
-  height: 600
-  minimal:
-    url: https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png
-  overlay:
-    url: ${common.protocol}://spatial.${common.domain}/geoserver/gwc/service/wms
-  pointColour: df4a21
-  zoomOutsideScopedRegion: true
-mapdownloads:
-  baseLayers:
-    provincies:
-      displayName: Provincies
-#      i18nCode: baselayer.states
-      name: provincies_wgs84
+#  height: 600
+#  minimal:
+#    url: https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png
+#  overlay:
+#    url: ${common.protocol}://spatial.${common.domain}/geoserver/gwc/service/wms
+#  pointColour: df4a21
+#  zoomOutsideScopedRegion: true
+#mapdownloads:
+#  baseLayers:
+#    provincies:
+#      displayName: Provincies
+##      i18nCode: baselayer.states
+#      name: provincies_wgs84
 maxDownloadRecords: ''
 mdba:
   basinChampions: https://biocollect.ala.org.au/mdba/project/index/4d15b4df-c05b-41bd-ac5b-8a65c9e37d17
@@ -201,13 +184,11 @@ skin:
   orgNameShort: VBP
   taxaLinks:
     baseUrl: ${common.protocol}://species.${common.domain}/species/
-  useAlaBie: true
-  useAlaImageService: true
-  useAlaSpatialPortal: true
+#  useAlaBie: true
+#  useAlaImageService: true
+#  useAlaSpatialPortal: true
 spatial:
   baseURL: ${common.protocol}://spatial.${common.domain}
-  baseUrl: ${common.protocol}://spatial.${common.domain}
-  params: ''
 speciesList:
   baseURL: ${common.protocol}://lists.${common.domain}
 #  preferredListName: ALA Preferred Species Images
