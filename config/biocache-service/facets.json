@@ -99,7 +99,7 @@
       {
         "sort": "index",
         "field": "country"
-      }
+      },
       {
         "sort": "count",
         "field": "sensitive"
