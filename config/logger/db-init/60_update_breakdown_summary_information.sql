@@ -11,7 +11,7 @@ DELIMITER $$
 
 DROP TRIGGER if exists `logger`.`update_breakdown_summary_information`;
 CREATE
-  DEFINER=`logger_user`@`localhost`
+  DEFINER=`logger`@`localhost`
 TRIGGER `logger`.`update_breakdown_summary_information`
 AFTER INSERT ON `logger`.`log_detail`
 FOR EACH ROW

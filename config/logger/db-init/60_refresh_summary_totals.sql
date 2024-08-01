@@ -5,7 +5,7 @@ DELIMITER $$
 
 DROP PROCEDURE IF EXISTS `logger`.`refresh_summary_totals`;
 
-CREATE DEFINER=`logger_user`@`%` PROCEDURE `refresh_summary_totals`()
+CREATE DEFINER=`logger`@`%` PROCEDURE `refresh_summary_totals`()
 BEGIN
 DECLARE current_month varchar(255);
 DECLARE done INT DEFAULT 0;

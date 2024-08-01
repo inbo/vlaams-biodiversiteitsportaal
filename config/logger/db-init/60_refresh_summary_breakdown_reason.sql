@@ -6,7 +6,7 @@ DELIMITER $$
 
 DROP PROCEDURE IF EXISTS `logger`.`refresh_summary_breakdown_reason`;
 
-CREATE DEFINER=`logger_user`@`%` PROCEDURE `refresh_summary_breakdown_reason`()
+CREATE DEFINER=`logger`@`%` PROCEDURE `refresh_summary_breakdown_reason`()
   BEGIN
 
 -- ############ Create temporary tables #################
