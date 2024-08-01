@@ -127,9 +127,9 @@ logger:
 loggerURL: ${common.protocol}://logger.${common.domain}/service
 
 map:
-#  cloudmade:
-#    key: BC9A493B41014CAABB98F0471D759707
-#  defaultFacetMapColourBy: ''
+  #  cloudmade:
+  #    key: BC9A493B41014CAABB98F0471D759707
+  #  defaultFacetMapColourBy: ''
   defaultLatitude: 51.0
   defaultLongitude: 4.4
   defaultZoom: 9
@@ -175,9 +175,9 @@ skin:
   orgNameShort: VBP
   taxaLinks:
     baseUrl: ${common.protocol}://species.${common.domain}/species/
-#  useAlaBie: true
-#  useAlaImageService: true
-#  useAlaSpatialPortal: true
+  useAlaBie: true
+  useAlaImageService: true
+  useAlaSpatialPortal: true
 spatial:
   baseUrl: ${common.protocol}://spatial.${common.domain}
 speciesList:
