@@ -109,7 +109,7 @@
             "uid": "cloudwatch"
           },
           "dimensions": {},
-          "expression": "fields @timestamp, @message, @logStream\n| filter @logStream like /${service}\\/.*/\n| filter @message like /$query/\n| stats count() by @logStream, bin(${__interval})\n| limit 100",
+          "expression": "fields @timestamp, @message, @logStream\n| filter @logStream like /${service}\\/$log_stream.*/\n| filter @message like /$query/\n| stats count() by @logStream, bin(${__interval})\n| limit 100",
           "id": "",
           "label": "",
           "logGroups": [
@@ -176,7 +176,7 @@
             "uid": "cloudwatch"
           },
           "dimensions": {},
-          "expression": "fields @timestamp, @message, @logStream\n| filter @logStream like /$service\\/.*/\n| filter @message like /$query/\n| sort @timestamp desc\n| limit ${log_limit}",
+          "expression": "fields @timestamp, @message, @logStream\n| filter @logStream like /$service\\/$log_stream.*/\n| filter @message like /$query/\n| sort @timestamp desc\n| limit ${log_limit}",
           "id": "",
           "label": "",
           "logGroups": [
@@ -203,7 +203,7 @@
       "type": "logs"
     }
   ],
-  "refresh": "1m",
+  "refresh": "",
   "schemaVersion": 39,
   "tags": [],
   "templating": {
@@ -212,8 +212,8 @@
         "allValue": ".*",
         "current": {
           "selected": true,
-          "text": "biocache-service",
-          "value": "biocache-service"
+          "text": "logger",
+          "value": "logger"
         },
         "datasource": {
           "type": "cloudwatch",
@@ -245,6 +245,26 @@
       {
         "current": {
           "selected": false,
+          "text": "mysql",
+          "value": "mysql"
+        },
+        "hide": 0,
+        "label": "Log Stream",
+        "name": "log_stream",
+        "options": [
+          {
+            "selected": true,
+            "text": "mysql",
+            "value": "mysql"
+          }
+        ],
+        "query": "mysql",
+        "skipUrlSync": false,
+        "type": "textbox"
+      },
+      {
+        "current": {
+          "selected": true,
           "text": "",
           "value": ""
         },
@@ -263,7 +283,7 @@
       },
       {
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "1000",
           "value": "1000"
         },
@@ -304,6 +324,6 @@
   "timezone": "browser",
   "title": "ECS Logs",
   "uid": "fdn6d7an0e5mod",
-  "version": 1,
+  "version": 2,
   "weekStart": ""
 }
