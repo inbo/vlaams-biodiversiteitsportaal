@@ -1,7 +1,8 @@
 -- This stored procedure is used to (re)populate the "event_summary_breakdown_reason"
 -- and "event_summary_breakdown_reason_entity" tables
 -- from all existing log information
-delimiter $$
+
+DELIMITER $$
 
 DROP PROCEDURE IF EXISTS `logger`.`refresh_summary_breakdown_reason`;
 

@@ -7,7 +7,7 @@
 -- event_summary_breakdown_email_entity
 -- event_summary_breakdown_reason_source_entity
 
-delimiter $$
+DELIMITER $$
 DROP TRIGGER if exists `logger`.`update_breakdown_summary_information`;
 CREATE
   DEFINER=`logger_user`@`localhost`
