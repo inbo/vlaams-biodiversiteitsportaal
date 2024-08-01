@@ -1,0 +1,14 @@
+---
+### OIDC Credentials ###
+security:
+  jwt:
+    clientId: logger
+  oidc:
+    clientId: logger
+    secret: logger-oidc-super-secret
+webservice:
+  client-id: logger
+  client-secret: xxx
+
+grails:
+  serverURL: ${common.protocol}://logger.${common.domain}/ws

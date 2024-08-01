@@ -81,6 +81,18 @@ RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
     # -Dorg.gradle.debug=true -Dorg.gradle.debug.suspend=no --debug \
     --parallel
 
+######################################### LOGGER SERVICE #########################################
+FROM gradle:7-jdk11 AS logger-service-builder
+
+ARG LOGGER_SERVICE_VERSION=4.3
+WORKDIR /project
+RUN git clone --branch v${LOGGER_SERVICE_VERSION} --depth 1 https://github.com/AtlasOfLivingAustralia/logger-service.git /project
+RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
+    gradle build assemble --no-daemon \
+    -x test -x integrationTest \
+    # -Dorg.gradle.debug=true -Dorg.gradle.debug.suspend=no --debug \
+    --parallel
+
 ######################################### REGIONS #########################################
 FROM gradle:7-jdk11 AS regions-builder
 
@@ -153,6 +165,7 @@ ARG BIE_INDEX_VERSION=3.1.0
 ARG BIOCACHE_HUB_VERSION=7.0.0
 ARG BIOCACHE_SERVICE_VERSION=3.4.1
 ARG COLLECTORY_VERSION=5.2.0-SNAPSHOT
+ARG LOGGER_SERVICE_VERSION=4.3
 ARG IMAGE_SERVICE_VERSION=3.0.0
 ARG REGIONS_VERSION=4.0.0
 ARG SPATIAL_HUB_VERSION=2.1.0
@@ -169,6 +182,8 @@ COPY --from=biocache-service-builder \
     /project/build/libs/biocache-service-${BIOCACHE_SERVICE_VERSION}.war ${CATALINA_HOME}/webapps/biocache-service.war
 COPY --from=collectory-builder \
     /project/build/libs/collectory-${COLLECTORY_VERSION}-plain.war ${CATALINA_HOME}/webapps/collectory.war
+COPY --from=logger-service-builder \
+    /project/build/libs/logger-service-${IMAGE_SERVICE_VERSION}-plain.war ${CATALINA_HOME}/webapps/logger-service.war
 COPY --from=image-service-builder \
     /project/build/libs/image-service-${IMAGE_SERVICE_VERSION}-plain.war ${CATALINA_HOME}/webapps/image-service.war
 COPY --from=regions-builder \
