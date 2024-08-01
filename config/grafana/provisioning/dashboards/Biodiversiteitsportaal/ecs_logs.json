@@ -203,7 +203,7 @@
       "type": "logs"
     }
   ],
-  "refresh": "",
+  "refresh": "1m",
   "schemaVersion": 39,
   "tags": [],
   "templating": {
@@ -212,8 +212,8 @@
         "allValue": ".*",
         "current": {
           "selected": true,
-          "text": "logger",
-          "value": "logger"
+          "text": "All",
+          "value": "$__all"
         },
         "datasource": {
           "type": "cloudwatch",
@@ -245,8 +245,8 @@
       {
         "current": {
           "selected": false,
-          "text": "mysql",
-          "value": "mysql"
+          "text": "",
+          "value": ""
         },
         "hide": 0,
         "label": "Log Stream",
@@ -254,11 +254,11 @@
         "options": [
           {
             "selected": true,
-            "text": "mysql",
-            "value": "mysql"
+            "text": "",
+            "value": ""
           }
         ],
-        "query": "mysql",
+        "query": "",
         "skipUrlSync": false,
         "type": "textbox"
       },
@@ -324,6 +324,6 @@
   "timezone": "browser",
   "title": "ECS Logs",
   "uid": "fdn6d7an0e5mod",
-  "version": 2,
+  "version": 3,
   "weekStart": ""
 }
