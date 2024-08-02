@@ -62,18 +62,11 @@ security:
   jwt:
     enabled: true
     discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known
-    fallbackToLegacyBehaviour: false
+    fallbackToLegacyBehaviour: true
   oidc:
     enabled: true
     discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known
-  core:
-    authCookieName: VBP-AUTH
-    roleAttribute: ala:role
-    affiliation-survey:
-      enabled: true
-  cookie:
-    enabled: true
-    domain: .biodiversiteitsportaal.dev.svdev.be
+
 webservice:
   jwt: true
   jwt-scopes: openid users/read
