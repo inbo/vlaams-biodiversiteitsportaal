@@ -66,10 +66,10 @@ security:
   oidc:
     enabled: true
     discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known
-  core:
-    roleAttribute: cognito:groups
-    affiliation-survey:
-      enabled: true
+#  core:
+#    roleAttribute: cognito:groups
+#    affiliation-survey:
+#      enabled: true
 #    authCookieName: "VBP-AUTH"
 webservice:
   jwt: true
