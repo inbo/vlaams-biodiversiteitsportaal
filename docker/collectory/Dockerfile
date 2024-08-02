@@ -1,6 +1,6 @@
 FROM gradle:7-jdk11 AS builder
 
-ARG VERSION=develop
+ARG VERSION=fix-missing-properties-attribute
 
 WORKDIR /project
 RUN git clone --branch ${VERSION} --depth 1 https://github.com/StefanVanDyck/collectory /project

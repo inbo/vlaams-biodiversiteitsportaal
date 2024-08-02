@@ -14,9 +14,6 @@ services:
       - --spring.config.additional-location=file:/config/config/common/common.yml,file:/config/config/ala-hub/ala-hub.yml
     volumes:
       - ../config:/config/config:ro
-    depends_on:
-      cas:
-        condition: service_healthy
     environment:
       SPRING_PROFILES_ACTIVE: local
       LOG_FORMAT: JSON
@@ -36,9 +33,6 @@ services:
       - --spring.config.additional-location=file:/config/config/common/common.yml,file:/config/config/bie-hub/bie-hub.yml
     volumes:
       - ../config:/config/config:ro
-    depends_on:
-      cas:
-        condition: service_healthy
     environment:
       SPRING_PROFILES_ACTIVE: local
       LOG_FORMAT: JSON
@@ -59,8 +53,6 @@ services:
     volumes:
       - ../config:/config/config:ro
     depends_on:
-      cas:
-        condition: service_healthy
       solr:
         condition: service_healthy
     environment:
@@ -79,8 +71,6 @@ services:
     volumes:
       - ../config:/config/config:ro
     depends_on:
-      cas:
-        condition: service_healthy
       solr:
         condition: service_healthy
       cassandradb:
@@ -94,45 +84,10 @@ services:
       JAVA_OPTS: "-Xms128m -Xmx256m -Dspring.profiles.active=local -Dspring.config.additional-location=file:/config/config/common/common.yml,file:/config/config/biocache-service/biocache-service.yml -Dspring.config.import=''"
       SPRING_CONFIG_IMPORT: ''
 
-  cas:
-    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/cas:dev
+  apikey:
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/apikey:dev
     build:
-      context: cas
-      x-bake:
-        platforms:
-        - linux/arm64
-    ports:
-      - "9000:8080"
-    command:
-      - --spring.config.additional-location=file:/config/config/common/common.yml,file:/config/config/cas/cas.yml
-      - -Xms128m
-      - -Xmx256m
-      - -Dcas.standalone.configurationDirectory=/config/config/cas
-      - -Dala.password.properties=/config/config/cas/pwe.properties
-    environment:
-      DOCKERIZE_OPTS: ""
-      ALA_PASSWORD_PROPERTIES: /config/config/cas/pwe.properties
-      SPRING_PROFILES_ACTIVE: production
-#      LOG_FORMAT: JSON
-      LOG_LEVEL: INFO
-    volumes:
-      - ../config:/config/config:ro
-      - cas-shared-conf:/etc/cas
-      - cas-data:/data/cas
-    depends_on:
-      nginx:
-        condition: service_started
-      mysql:
-        condition: service_healthy
-      mongodb:
-        condition: service_healthy
-      mock-oauth2-server:
-        condition: service_started
-
-  cas-apikey:
-    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/cas-apikey:dev
-    build:
-      context: cas-apikey
+      context: apikey
       x-bake:
         platforms:
         - linux/arm64
@@ -141,46 +96,12 @@ services:
     command:
       - -Xms128m
       - -Xmx256m
-      - --spring.config.additional-location=file:/config/config/common/common.yml,file:/config/config/cas-apikey/cas-apikey.yml
+      - --spring.config.additional-location=file:/config/config/common/common.yml,file:/config/config/apikey/apikey.yml
     volumes:
       - ../config:/config/config:ro
-      - ./cas-apikey/keystore:/etc/cas:ro
+      - ./apikey/keystore:/etc/cas:ro
     depends_on:
       mysql:
-        condition: service_healthy
-      cas:
-        condition: service_healthy
-    environment:
-      SPRING_PROFILES_ACTIVE: local
-      LOG_FORMAT: JSON
-
-  cas-management:
-    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/cas-management:dev
-    build:
-      context: cas-management
-      x-bake:
-        platforms:
-        - linux/arm64
-    ports:
-      - "8070:8080"
-      - "8443:8443"
-    command:
-      - -Xms128m
-      - -Xmx256m
-      - --spring.config.additional-location=file:/config/config/common/common.yml,file:/config/config/cas-management/cas-management.yml
-    volumes:
-      - ../config:/config/config:ro
-      # - ./cas/config:/data/cas/config:ro
-      - cas-shared-conf:/etc/cas
-      - cas-data:/data/cas
-      - ./cas/config:/etc/cas/config:ro
-      - ./cas-management/keystore/cas.crt:/etc/cas/cas.crt:ro
-      - ./cas-management/keystore/thekeystore:/etc/cas/thekeystore:ro
-      - ./cas-management/services-repo:/data/cas-management/services-repo
-    depends_on:
-      mysql:
-        condition: service_healthy
-      cas:
         condition: service_healthy
     environment:
       SPRING_PROFILES_ACTIVE: local
@@ -206,8 +127,6 @@ services:
     depends_on:
       mysql:
         condition: service_healthy
-      cas:
-        condition: service_healthy
     environment:
       SPRING_PROFILES_ACTIVE: local
       LOG_FORMAT: JSON
@@ -231,8 +150,6 @@ services:
     depends_on:
       mysql:
         condition: service_healthy
-      cas:
-        condition: service_healthy
     environment:
       SPRING_PROFILES_ACTIVE: local
       LOG_FORMAT: JSON
@@ -254,8 +171,6 @@ services:
     depends_on:
       mysql:
         condition: service_healthy
-      cas:
-        condition: service_healthy
     environment:
       SPRING_PROFILES_ACTIVE: local
       LOG_FORMAT: JSON
@@ -276,8 +191,6 @@ services:
       - -Xmx128m
     depends_on:
       mysql:
-        condition: service_healthy
-      cas:
         condition: service_healthy
     environment:
       SPRING_PROFILES_ACTIVE: local
@@ -325,11 +238,9 @@ services:
     depends_on:
       postgis:
         condition: service_healthy
-      cas:
-        condition: service_healthy
       geoserver:
         condition: service_healthy
-      cas-apikey:
+      apikey:
         condition: service_healthy
     environment:
       SPRING_PROFILES_ACTIVE: local
@@ -352,8 +263,6 @@ services:
       - ../config:/config/config:ro
     depends_on:
       mysql:
-        condition: service_healthy
-      cas:
         condition: service_healthy
       mailhog:
         condition: service_healthy
@@ -556,7 +465,5 @@ volumes:
   mysql:
   mongo:
   postgis:
-  cas-data:
-  cas-shared-conf:
   elasticsearch:
   geoserver-data:

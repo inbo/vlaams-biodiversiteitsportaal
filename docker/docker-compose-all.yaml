@@ -18,34 +18,6 @@ services:
       SPRING_PROFILES_ACTIVE: local
 #      LOG_FORMAT: JSON
 
-  cas:
-    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/cas-all:dev
-    build:
-      context: cas-all
-      x-bake:
-        platforms:
-        - linux/arm64
-    ports:
-      - "80:8080"
-    environment:
-      DOCKERIZE_OPTS: ""
-      ALA_PASSWORD_PROPERTIES: /config/config/cas/pwe.properties
-      SPRING_PROFILES_ACTIVE: production
-#      LOG_FORMAT: JSON
-      LOG_LEVEL: INFO
-    volumes:
-      - ../config:/config/config:ro
-      - cas-data:/data
-    depends_on:
-      nginx:
-        condition: service_started
-      mysql:
-        condition: service_healthy
-      mongodb:
-        condition: service_healthy
-      mock-oauth2-server:
-        condition: service_started
-
   postgis:
     image: postgis/postgis:16-3.4-alpine
     ports:
@@ -109,17 +81,6 @@ services:
       MYSQL_ROOT_PASSWORD: my-super-secret-password
     healthcheck:
       test: mysqladmin ping -h localhost
-
-  mongodb:
-    image: mongo
-    volumes:
-      - ./db-init/mongo:/docker-entrypoint-initdb.d
-      - mongo:/data/db
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: my-super-secret-password
-    healthcheck:
-      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
 
   cassandradb:
     image: cassandra:3

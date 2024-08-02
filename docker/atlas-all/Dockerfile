@@ -157,6 +157,38 @@ RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
     # -Dorg.gradle.debug=true -Dorg.gradle.debug.suspend=no --debug \
     --parallel
 
+
+######################################### CAS APIKEY #########################################
+FROM gradle:7-jdk11 AS cas-apikey-builder
+
+ARG CAS_APIKEY_VERSION=1.7.0
+
+WORKDIR /project
+RUN git clone --branch ${CAS_APIKEY_VERSION} --depth 1 https://github.com/AtlasOfLivingAustralia/apikey.git /project
+RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
+    gradle build assemble --no-daemon \
+    -x test -x integrationTest \
+    # -Dorg.gradle.debug=true -Dorg.gradle.debug.suspend=no --debug \
+    --parallel
+
+RUN ls -la /project/build/libs/
+
+######################################### USERDETAILS #########################################
+FROM gradle:7-jdk11 AS userdetails-builder
+
+ARG USERDETAILS_VERSION=3.0.3
+
+WORKDIR /project
+RUN git clone --branch v${USERDETAILS_VERSION} --depth 1 https://github.com/AtlasOfLivingAustralia/userdetails.git /project
+RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
+    gradle build assemble --no-daemon \
+    -x test -x integrationTest \
+    # -Dorg.gradle.debug=true -Dorg.gradle.debug.suspend=no --debug \
+    --parallel
+
+
+RUN ls -la /project/build/libs/
+
 ######################################### TOMCAT SERVER #########################################
 FROM tomcat:9.0-jdk11-openjdk
 
@@ -171,6 +203,8 @@ ARG REGIONS_VERSION=4.0.0
 ARG SPATIAL_HUB_VERSION=2.1.0
 ARG SPATIAL_SERVICE_VERSION=2.1.6-SNAPSHOT
 ARG SPECIES_LIST_VERSION=4.5.3
+ARG CAS_APIKEY_VERSION=1.7.0
+ARG USERDETAILS_VERSION=3.0.3
 
 COPY --from=bie-hub-builder \
     /project/build/libs/ala-bie-hub-${BIE_HUB_VERSION}-plain.war ${CATALINA_HOME}/webapps/bie-hub.war
@@ -194,6 +228,10 @@ COPY --from=spatial-service-builder \
     /project/build/libs/project-${SPATIAL_SERVICE_VERSION}-plain.war ${CATALINA_HOME}/webapps/spatial-service.war
 COPY --from=species-list-builder \
     /project/build/libs/specieslist-webapp-${SPECIES_LIST_VERSION}-plain.war ${CATALINA_HOME}/webapps/species-list.war
+COPY --from=cas-apikey-builder \
+    /project/build/libs/apikey-${CAS_APIKEY_VERSION}-plain.war ${CATALINA_HOME}/webapps/cas-apikey.war
+COPY --from=userdetails-builder \
+    /project/build/libs/userdetails-${USERDETAILS_VERSION}-plain.war ${CATALINA_HOME}/webapps/userdetails.war
 
 COPY conf ${CATALINA_HOME}/conf
 
