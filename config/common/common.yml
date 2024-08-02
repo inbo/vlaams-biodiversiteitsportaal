@@ -62,7 +62,7 @@ security:
   jwt:
     enabled: true
     discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known
-    fallbackToLegacyBehaviour: false
+    fallbackToLegacyBehaviour: true
   oidc:
     enabled: true
     discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known
