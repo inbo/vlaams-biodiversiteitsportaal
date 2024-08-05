@@ -46,15 +46,7 @@ server:
 grails:
   cors:
     enabled: true
-    allowCredentials: true
-    allowedMethods:
-        - '*'
-    allowedHeaders:
-        - '*'
-    allowedOrigins:
-        - '*'
-    mappings:
-        /ws/**: inherit
+    allowedOriginPatterns: [ "https://.*.${common.domain}" ]
 
 security:
   apikey:
