@@ -3,7 +3,6 @@
 security:
   jwt:
     clientId: images
-    fallbackToLegacyKeys: true # Reset to false once legacy api keys no longer supported
   oidc:
     clientId: images
     secret: images-oidc-super-secret

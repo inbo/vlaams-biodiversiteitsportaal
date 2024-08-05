@@ -36,16 +36,16 @@ recordedByConfig:
   cacheSizeMb: 64
 alaNameMatch:
   wsUrl: http://namematching.biodiversiteitsportaal.dev.internal:9179
-  timeoutSec: 70
+  timeoutSec: 300
   retryConfig:
     maxAttempts: 5
     initialIntervalMillis: 5000
 sds:
   wsUrl: http://sensitivedataservice.biodiversiteitsportaal.dev.internal:9189
-  timeoutSec: 70
+  timeoutSec: 300
 collectory:
   wsUrl: http://collectory.biodiversiteitsportaal.dev.internal:8080/ws/
-  timeoutSec: 70
+  timeoutSec: 300
   retryConfig:
     maxAttempts: 10
     initialIntervalMillis: 10000
@@ -54,15 +54,15 @@ collectory:
     apiKey: 02b8538a-4910-45a0-99de-1fc5175dd015
 imageService:
   wsUrl: http://image-service.biodiversiteitsportaal.dev.internal:8080
-  timeoutSec: 70
+  timeoutSec: 300
   httpHeaders:
     apiKey: 02b8538a-4910-45a0-99de-1fc5175dd015
 speciesListService:
   wsUrl: http://species-list.biodiversiteitsportaal.dev.internal:8080
-  timeoutSec: 70
+  timeoutSec: 600
 samplingService:
   wsUrl: http://spatial-service.biodiversiteitsportaal.dev.internal:8080/ws/
-  timeoutSec: 70
+  timeoutSec: 300
   batchSize: 25000
   batchStatusSleepTime: 1000
   downloadRetries: 5
