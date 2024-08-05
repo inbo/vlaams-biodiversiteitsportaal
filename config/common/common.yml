@@ -55,7 +55,7 @@ security:
   apikey:
     enabled: true
     auth:
-      serviceUrl: ${common.protocol}://auth.${common.domain}/apikey
+      serviceUrl: ${common.protocol}://auth.${common.domain}/apikey/
     check:
       serviceUrl: ${common.protocol}://auth.${common.domain}/apikey/ws/check?apikey=
     userdetails:
