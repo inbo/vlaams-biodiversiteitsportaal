@@ -7,7 +7,7 @@ security:
     clientId: images
     secret: images-oidc-super-secret
   ip:
-    enabled: false
+    whitelist: '10.30.0.0/20'
 webservice:
   client-id: images
   client-secret: xxx
