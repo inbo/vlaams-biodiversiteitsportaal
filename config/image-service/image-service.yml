@@ -6,6 +6,8 @@ security:
   oidc:
     clientId: images
     secret: images-oidc-super-secret
+  ip:
+    enabled: false
 webservice:
   client-id: images
   client-secret: xxx
