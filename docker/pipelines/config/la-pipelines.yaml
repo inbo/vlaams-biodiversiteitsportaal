@@ -50,7 +50,7 @@ collectory:
     maxAttempts: 10
     initialIntervalMillis: 10000
   httpHeaders:
-    Authorization: 02b8538a-4910-45a0-99de-1fc5175dd015
+    apiKey: 02b8538a-4910-45a0-99de-1fc5175dd015
 imageService:
   wsUrl: http://image-service.biodiversiteitsportaal.dev.internal:8080
   timeoutSec: 70

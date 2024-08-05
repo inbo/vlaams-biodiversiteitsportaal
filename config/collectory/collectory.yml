@@ -16,7 +16,6 @@ ala:
   baseURL: ${common.homepage}
 alertUrl: ""
 alertsUrl: ""
-api_key: e8dcf74d-bcef-41bb-8738-48f0ff0a5b75
 bie:
   baseURL: ${common.protocol}://species.${common.domain}
   searchPath: /search
