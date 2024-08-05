@@ -43,10 +43,18 @@ logging:
 server:
   use-forward-headers: true
 
-
 grails:
   cors:
     enabled: true
+    allowCredentials: true
+    allowedMethods:
+        - '*'
+    allowedHeaders:
+        - '*'
+    allowedOrigins:
+        - '*'
+    mappings:
+        /ws/**: inherit
 
 security:
   apikey:
