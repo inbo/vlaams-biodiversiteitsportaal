@@ -43,12 +43,15 @@ logging:
 server:
   use-forward-headers: true
 
-grails:
-  cors:
-    enabled: true
-    allowedOriginPatterns: [ "https://.*.${common.domain}" ]
 
 security:
+  cors:
+    enable: true
+    authenticated:
+      allowedOriginPatterns: [ "https://.*.${common.domain}" ]
+    unauthenticated:
+      allowedOriginPatterns: [ "https://.*.${common.domain}" ]
+      allowCredentials: false
   apikey:
     enabled: true
     auth:
