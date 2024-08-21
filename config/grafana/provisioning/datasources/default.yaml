@@ -4,5 +4,7 @@ datasources:
   - name: cloudwatch
     type: cloudwatch
     uid: cloudwatch
+    isDefault: true
     jsonData:
       defaultRegion: eu-west-1
+      customMetricsNamespaces: CWAgent
