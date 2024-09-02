@@ -179,6 +179,7 @@ upload:
 
 webservices:
   root: ${common.protocol}://records-ws.${common.domain}
+  cache-tokens: false
 
 wms:
   cache:
