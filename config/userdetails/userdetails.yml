@@ -122,3 +122,8 @@ spring:
   session:
     store-type: none
     privacyPolicy: null
+
+myProfile:
+  useDigiVol: false
+  useSandbox: false
+  useBiocollect: false
