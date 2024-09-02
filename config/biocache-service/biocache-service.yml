@@ -201,3 +201,10 @@ logging:
 
 cors:
   allowedOrigins: ["*"]
+
+userdetails:
+  url: https://auth.${common.domain}/userdetails
+  web:
+    url: https://auth.${common.domain}/userdetails/
+  api:
+    url: https://auth.${common.domain}/userdetails/
