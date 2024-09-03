@@ -11,7 +11,4 @@ webservice:
   client-secret: xxx
 
 grails:
-  serverURL: ${common.protocol}://logger.${common.domain}/ws
-server:
-  servlet:
-    contextPath: '/ws'
+  serverURL: ${common.protocol}://logger.${common.domain}
