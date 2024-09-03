@@ -56,7 +56,11 @@ dataSource:
   dbCreate: none
   url: jdbc:mysql://cas:my-super-secret-password@mysql:3306/cas?serverTimezone=Europe/Brussels&zeroDateTimeBehavior=convertToNull&characterEncoding=UTF-8&useSSL=False&allowPublicKeyRetrieval=true
 oauth:
-  providers: null
+  providers:
+    flickr:
+      enabled: false
+    inaturalist:
+      enabled: false
 password:
   encoder: bcrypt
 bcrypt:
