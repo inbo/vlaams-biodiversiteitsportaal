@@ -8,7 +8,7 @@ RUN git clone --branch ${VERSION} --depth 1 https://github.com/AtlasOfLivingAust
 RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
     gradle \
         build assemble \
-        -x test -x integrationTest \
+        -x test \
         --no-daemon \
         # -Dorg.gradle.debug=true -Dorg.gradle.debug.suspend=no --debug \
         --parallel

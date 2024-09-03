@@ -150,10 +150,10 @@ services:
       SPRING_PROFILES_ACTIVE: local
       LOG_FORMAT: JSON
 
-  doi:
-    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/doi:dev
+  doi-service:
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/doi-service:dev
     build:
-      context: doi
+      context: doi-service
       x-bake:
         platforms:
         - linux/arm64
@@ -162,7 +162,7 @@ services:
     command:
       - -Xms128m
       - -Xmx256m
-      - --spring.config.additional-location=file:/config/config/common/common.yml,file:/config/config/doi/doi.yml
+      - --spring.config.additional-location=file:/config/config/common/common.yml,file:/config/config/doi-service/doi-service.yml
     volumes:
       - ../config:/config/config:ro
     environment:

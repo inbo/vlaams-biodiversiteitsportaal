@@ -13,6 +13,7 @@ RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
         # -Dorg.gradle.debug=true -Dorg.gradle.debug.suspend=no --debug \
         --parallel
 
+RUN ls -la build/libs
 
 FROM openjdk:11
 
@@ -29,7 +30,7 @@ USER app
 WORKDIR /app
 
 COPY --from=builder --chown=app \
-    /project/build/libs/project-${VERSION}.war /app/app.war
+    /project/build/libs/alerts-${VERSION}.war /app/app.war
 
 ENTRYPOINT ["java", "-jar", "/app/app.war"]
 
