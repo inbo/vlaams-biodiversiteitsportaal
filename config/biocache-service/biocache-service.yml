@@ -210,3 +210,7 @@ userdetails:
     url: https://auth.${common.domain}/userdetails/
   api:
     url: https://auth.${common.domain}/userdetails/
+
+doi:
+  service:
+    url: https://doi.${common.domain}
