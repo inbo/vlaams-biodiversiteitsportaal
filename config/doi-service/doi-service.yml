@@ -1,12 +1,12 @@
 skin:
-    layout: "ala-main"
+  layout: "ala-main"
 
 flyway:
-    enabled: true
-    table: schema_version
+  enabled: true
+  table: schema_version
 
 support:
-    email: support@${common.domain}
+  email: support@${common.domain}
 
 #ands:
 #    doi:
@@ -29,31 +29,32 @@ support:
 #            prefix: 10.XXXXX
 #            shoulder: ala
 ala:
-    base:
-        url: ${common.protocol}://www.${common.domain}
-    contact:
-        form: ${common.protocol}://www.${common.domain}/contact-todo
+  base:
+    url: ${common.protocol}://www.${common.domain}
+  contact:
+    form: ${common.protocol}://www.${common.domain}/contact-todo
 doi:
-    service:
-        mock: true # TODO
-        provider:
-#            # define mapping from provider name to a valid DoiProvider (ANDS or DATACITE)
-#            mapping: { ALA: 'DATACITE' }
+  service:
+    mock: true # TODO
+    provider:
+      #            # define mapping from provider name to a valid DoiProvider (ANDS or DATACITE)
+      #      mapping: { ALA: 'DATACITE' }
+      mapping: { ALA: 'LOCAL' }
 
-    storage:
-        provider: LOCAL
-        cloud:
-          private: true
-    resolverUrl: https://doi.org/
-    displayTemplates:
-      - "template"
-      - "biocache"
-      - "phylolink"
-      - "csdm"
-    publicationLang: "en"
-    supportContact: https://www.ala.org.au/about-the-atlas/communications-centre/
+  storage:
+    provider: LOCAL
+    cloud:
+      private: true
+  resolverUrl: https://doi.org/
+  displayTemplates:
+    - "template"
+    - "biocache"
+    - "phylolink"
+    - "csdm"
+  publicationLang: "en"
+  supportContact: https://www.ala.org.au/about-the-atlas/communications-centre/
 file:
-    store: /data/doi-service/files
+  store: /data/doi-service/files
 
 biocache:
   wsUrl: https://records-ws.${common.domain}
@@ -69,7 +70,7 @@ elasticSearch:
   client:
     mode: transport
     hosts:
-      - {host: localhost, port: 9200}
+      - { host: localhost, port: 9200 }
   cluster.name: elasticsearch
   disableAutoIndex: false
   bulkIndexOnStartup: false
