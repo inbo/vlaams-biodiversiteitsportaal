@@ -1,0 +1,324 @@
+---
+grails:
+    profile: web
+    codegen:
+        defaultPackage: au.org.ala.doi
+    config:
+        locations:
+            - file:/data/doi-service/config/doi-service-config.properties
+            - file:/data/doi-service/config/doi-service-config.yml
+            - file:/data/doi-service/config/doi-service-config.groovy
+    spring:
+        transactionManagement:
+            proxies: false
+    gorm:
+        reactor:
+            # Whether to translate GORM events into Reactor events
+            # Disabled by default for performance reasons
+            events: false
+info:
+    app:
+        name: '@info.app.name@'
+        version: '@info.app.version@'
+        grailsVersion: '@info.app.grailsVersion@'
+spring:
+    main:
+        banner-mode: "off"
+    groovy:
+        template:
+            check-template-location: false
+
+# Spring Actuator Endpoints are Disabled by Default
+endpoints:
+    enabled: false
+    jmx:
+        enabled: true
+
+---
+grails:
+    mime:
+        disable:
+            accept:
+                header:
+                    userAgents:
+        types:
+            all: '*/*'
+            atom: application/atom+xml
+            css: text/css
+            csv: text/csv
+            form: application/x-www-form-urlencoded
+            html:
+              - text/html
+              - application/xhtml+xml
+            js: text/javascript
+            json:
+              - application/json
+              - text/json
+            multipartForm: multipart/form-data
+            pdf: application/pdf
+            rss: application/rss+xml
+            text: text/plain
+            hal:
+              - application/hal+json
+              - application/hal+xml
+            xml:
+              - text/xml
+              - application/xml
+    urlmapping:
+        cache:
+            maxsize: 1000
+    controllers:
+        defaultScope: singleton
+        upload:
+            maxFileSize: 9999999999
+            maxRequestSize: 9999999999
+    converters:
+        encoding: UTF-8
+    scaffolding:
+        templates:
+            domainSuffix: Instance
+    views:
+        default:
+            codec: html
+        gsp:
+            encoding: UTF-8
+            htmlcodec: xml
+            codecs:
+                expression: html
+                scriptlets: html
+                taglib: none
+                staticparts: none
+endpoints:
+    jmx:
+        unique-names: true
+---
+
+environments:
+    development:
+        security:
+            cas:
+                appServerName: https://devt.ala.org.au
+        grails:
+            serverURL: https://devt.ala.org.au
+            # use something like FakeSMTP locally to test without actually sending emails.
+            mail:
+                host: "localhost"
+                port: 1025
+                props:
+                    "mail.debug": "true"
+        doi:
+            service:
+                mock: true
+        datacite:
+            doi:
+                service:
+                    baseApiUrl: https://api.test.datacite.org/
+                    user: XXXXX
+                    password: XXXXX
+                    prefix: 10.XXXXX
+    test:
+        flyway:
+            enabled: false # TODO is necessary?
+    production:
+        grails:
+            mail:
+                host: "localhost"
+                port: 25
+                props:
+                    "mail.debug": "false"
+server:
+  tomcat:
+    port-header: 'X-Forwarded-Port'
+    protocol-header: 'X-Forwarded-Proto'
+    remote-ip-header: 'X-Forwarded-For'
+
+skin:
+    layout: "ala-main"
+headerAndFooter:
+    version: 2
+
+app:
+    http:
+        header:
+            userId: "X-ALA-userId"
+flyway:
+    enabled: true
+    table: schema_version
+
+security:
+    apikey:
+        check:
+            serviceUrl: https://auth.ala.org.au/apikey/ws/check?apikey=
+        ip:
+            whitelist:
+    core:
+        uri-filter-pattern: ['/admin', '/admin/*', '/alaAdmin/*', '/myDownloads/*']
+        optional-filter-pattern: ['/*']
+        uriExclusionFilterPattern: ['/images.*','/css.*','/js.*','/less.*']
+    cas:
+        enabled: false
+        uriExclusionFilterPattern: ['/images.*','/css.*','/js.*','/less.*']
+        authenticateOnlyIfLoggedInFilterPattern: ['/*']
+        uriFilterPattern: ['/admin', '/admin/*', '/alaAdmin/*', '/myDownloads/*']
+    oidc:
+        enabled: true
+        scope: openid profile email ala roles
+        allowUnsignedIdTokens: true # Disable once CAS no longer suggests the none algorithm
+    jwt:
+        enabled: true
+        fallbackToLegacyKeys: true # Reset to false once legacy api keys no longer supported
+
+webservice:
+  jwt: true
+
+support:
+    email: support@ala.org.au
+
+ands:
+    doi:
+        service:
+            url: https://services.ands.org.au/doi/1.1/
+        app:
+            id: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        key: xxxxxxxxxx
+        client:
+            id: xx
+
+datacite:
+    doi:
+        service:
+            baseApiUrl: https://api.datacite.org/
+            user: XXXXX
+            password: XXXXX
+            fileCacheMaxSizeMb: 64
+            timeOut: 60
+            prefix: 10.XXXXX
+            shoulder: ala
+ala:
+    base:
+        url: https://ala.org.au
+    contact:
+        form: https://www.ala.org.au/who-we-are/feedback-form/
+doi:
+    service:
+        mock: false
+        provider:
+#            # define mapping from provider name to a valid DoiProvider (ANDS or DATACITE)
+            mapping: { ALA: 'DATACITE' }
+
+    storage:
+        provider: LOCAL
+        cloud:
+          private: true
+    resolverUrl: https://doi.org/
+    displayTemplates:
+      - "template"
+      - "biocache"
+      - "phylolink"
+      - "csdm"
+    publicationLang: "en"
+    supportContact: https://www.ala.org.au/about-the-atlas/communications-centre/
+file:
+    store: /data/doi-service/files
+
+biocache:
+  wsUrl: https://biocache-ws-test.ala.org.au/ws
+
+dqservice:
+  url: https://data-quality-service.ala.org.au
+
+googleAnalyticsId: UA-4355440-1
+
+elasticSearch:
+  plugin:
+    mapperAttachment:
+      enabled: false
+  datastoreImpl: hibernateDatastore
+  client:
+    mode: transport
+    hosts:
+      - {host: localhost, port: 9200}
+  cluster.name: elasticsearch
+  disableAutoIndex: false
+  bulkIndexOnStartup: false
+
+openapi:
+    title: ALA DOI service
+    description: Generate DOIs for ALA applications
+    terms: "https://www.ala.org.au/who-we-are/terms-of-use/"
+    contact:
+        name: ALA Support
+        url: "https://www.ala.org.au"
+        email: support@ala.org.au
+    license:
+        name: Mozilla Public License 1.1
+        url: https://www.mozilla.org/en-US/MPL/1.1/
+    version: '@info.app.version@'
+    cachetimeoutms: 0
+    components:
+      security:
+        oauth2:
+          scopes:
+            doi/write: Update a DOI record
+
+s3:
+  temporaryurl:
+    duration: 6 # hours
+
+---
+hibernate:
+    allow_update_outside_transaction: true # Hibernate 5 made transactions required to flush changes, set to true for backwards compat but should be set to false and bugs fixed in the future
+    show_sql: false
+    cache:
+        queries: false
+        use_second_level_cache: false
+        use_query_cache: false
+        region:
+            factory_class: org.hibernate.cache.jcache.internal.JCacheRegionFactory
+    dialect: au.org.ala.doi.PostgresqlExtensionsDialect
+
+dataSource:
+    dbCreate: validate
+    pooled: true
+    jmxExport: true
+    driverClassName: org.postgresql.Driver
+    username: root
+    password: password
+    loggingSql: true
+
+environments:
+    development:
+        dataSource:
+            dbCreate: validate
+            url: jdbc:postgresql://localhost/doi
+            username: "postgres"
+            passowrd: "password"
+            logSql: false
+    test:
+        dataSource:
+            dbCreate: validate
+    production:
+        dataSource:
+            dbCreate: validate
+            properties:
+                jmxEnabled: true
+                initialSize: 5
+                maxActive: 50
+                minIdle: 5
+                maxIdle: 25
+                maxWait: 10000
+                maxAge: 600000
+                timeBetweenEvictionRunsMillis: 5000
+                minEvictableIdleTimeMillis: 60000
+                validationQuery: SELECT 1
+                validationQueryTimeout: 3
+                validationInterval: 15000
+                testOnBorrow: true
+                testWhileIdle: true
+                testOnReturn: false
+                jdbcInterceptors: ConnectionState;StatementCache(max=200);SlowQueryReport(logFailed=true)
+                defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
+                abandonWhenPercentageFull: 100
+                removeAbandonedTimeout: 120
+                removeAbandoned: true
+                logAbandoned: false

@@ -107,6 +107,25 @@ services:
       SPRING_PROFILES_ACTIVE: local
       LOG_FORMAT: JSON
 
+  alerts:
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/alerts:dev
+    build:
+      context: alerts
+      x-bake:
+        platforms:
+        - linux/arm64
+    ports:
+      - "9123:8080"
+    command:
+      - -Xms128m
+      - -Xmx256m
+      - --spring.config.additional-location=file:/config/config/common/common.yml,file:/config/config/alerts/alerts.yml
+    volumes:
+      - ../config:/config/config:ro
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+      LOG_FORMAT: JSON
+
   collectory:
     image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/collectory:dev
     build:
@@ -127,6 +146,25 @@ services:
     depends_on:
       mysql:
         condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+      LOG_FORMAT: JSON
+
+  doi:
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/doi:dev
+    build:
+      context: doi
+      x-bake:
+        platforms:
+        - linux/arm64
+    ports:
+      - "9124:8080"
+    command:
+      - -Xms128m
+      - -Xmx256m
+      - --spring.config.additional-location=file:/config/config/common/common.yml,file:/config/config/doi/doi.yml
+    volumes:
+      - ../config:/config/config:ro
     environment:
       SPRING_PROFILES_ACTIVE: local
       LOG_FORMAT: JSON
