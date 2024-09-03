@@ -12,3 +12,5 @@ webservice:
 
 grails:
   serverURL: ${common.protocol}://logger.${common.domain}/ws
+  app:
+    context: /ws
