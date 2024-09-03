@@ -3,7 +3,6 @@
 security:
   jwt:
     clientId: userdetails
-    jwtType: null
   oidc:
     clientId: userdetails
     secret: userdetails-oidc-super-secret
