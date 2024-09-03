@@ -8,6 +8,9 @@ flyway:
 support:
   email: support@${common.domain}
 
+grails:
+  serverURL: ${common.protocol}://doi.${common.domain}
+
 #ands:
 #    doi:
 #        service:
