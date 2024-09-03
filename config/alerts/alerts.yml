@@ -20,6 +20,7 @@ mail:
 
 grails:
     #default mail service
+    serverURL: "${common.protocol}://alerts.${common.domain}"
     mail:
         port: 2525
         server: localhost
@@ -27,33 +28,33 @@ grails:
 skin:
     layout: "ala-main"
     orgSupportEmail: support@${common.domain}
-privacyPolicy: "https://www.${common.domain}/terms-of-use/privacy-policy/"
+privacyPolicy: "${common.protocol}://www.${common.domain}/terms-of-use/privacy-policy/"
 siteDefaultLanguage: "nl"
 
 ala:
     baseURL: "${common.protocol}://www.${common.domain}"
     userDetailsURL: "${common.protocol}://auth.${common.domain}/userdetails/userDetails/getUserListFull"
 biocacheService:
-    baseURL: "https://records-ws.${common.domain}"
+    baseURL: "${common.protocol}://records-ws.${common.domain}"
 biocache:
-    baseURL: "https://records.${common.domain}"
+    baseURL: "${common.protocol}://records.${common.domain}"
 spatial:
-    baseURL: "https://spatial.${common.domain}"
+    baseURL: "${common.protocol}://spatial.${common.domain}"
 collectory:
-    baseURL: "https://collections.${common.domain}"
+    baseURL: "${common.protocol}://collections.${common.domain}"
 lists:
-    baseURL: "https://lists.${common.domain}"
+    baseURL: "${common.protocol}://lists.${common.domain}"
 speciesPages:
-    searchURL: "https://species.${common.domain}/species/Tiliqua+rugosa"
+    searchURL: "${common.protocol}://species.${common.domain}/species/Tiliqua+rugosa"
     searchTitle: Shingle-back
 collection:
-    searchURL: "https://collections.${common.domain}/public/show/co13"
+    searchURL: "${common.protocol}://collections.${common.domain}/public/show/co13"
     searchTitle: ANIC
 regions:
-    searchURL: "https://regions.${common.domain}/states/Australian+Capital+Territory"
+    searchURL: "${common.protocol}://regions.${common.domain}/states/Australian+Capital+Territory"
     searchTitle: ACT
 occurrence:
-    searchURL: "https://records.${common.domain}/occurrences/search?q=passer"
+    searchURL: "${common.protocol}://records.${common.domain}/occurrences/search?q=passer"
     searchTitle: occurrence search
 
 useSpeciesListsAlerts: true
@@ -68,7 +69,7 @@ biosecurity:
             nonAuthoritativeList: /occurrences/search?q=species_list:___LISTIDPARAM___&fq=decade:2020&fq=country:Australia&fq=first_loaded_date:[___DATEPARAM___%20TO%20*]&fq=occurrence_date:[___LASTYEARPARAM___%20TO%20*]&sort=first_loaded_date&dir=desc&disableAllQualityFilters=true
         maxRecords: 500
     moreinfo:
-        link: https://www.${common.domain}/blogs-news/ala-helps-to-stop-pests-in-their-tracks/
+        link: ${common.protocol}://www.${common.domain}/blogs-news/ala-helps-to-stop-pests-in-their-tracks/
     csv:
         local:
             enabled: true
@@ -114,9 +115,9 @@ biosecurity:
 #                    enabled: true
 #        userdetails:
 #            web:
-#                url: https://aws-auth-test-2023.test.${common.domain}/userdetails/
+#                url: ${common.protocol}://aws-auth-test-2023.test.${common.domain}/userdetails/
 #            api:
-#                url: https://api.test.${common.domain}/userdetails/cognito/
+#                url: ${common.protocol}://api.test.${common.domain}/userdetails/cognito/
 #        mail:
 #            details:
 #                sender: "alerts-test@${common.domain}"
@@ -131,12 +132,12 @@ biosecurity:
 #                port: 25
 #        security:
 #            cas:
-#                appServerName: "https://auth.${common.domain}"
+#                appServerName: "${common.protocol}://auth.${common.domain}"
 #        userdetails:
 #            web:
-#                url: https://aws-auth-test-2023.test.${common.domain}/userdetails/
+#                url: ${common.protocol}://aws-auth-test-2023.test.${common.domain}/userdetails/
 #            api:
-#                url: https://api.test.${common.domain}/userdetails/cognito/
+#                url: ${common.protocol}://api.test.${common.domain}/userdetails/cognito/
 #        mail:
 #            details:
 #                sender: "alerts-test@${common.domain}"
@@ -145,18 +146,18 @@ biosecurity:
 #                infoSender: "alerts-test@${common.domain}"
 #    production:
 #        grails:
-#            serverURL: "https://auth.${common.domain}/alerts"
+#            serverURL: "${common.protocol}://auth.${common.domain}/alerts"
 #            mail:
 #                host: "localhost"
 #                port: 25
 #        security:
 #            cas:
-#                appServerName: "https://auth.${common.domain}"
+#                appServerName: "${common.protocol}://auth.${common.domain}"
 #        userdetails:
 #            web:
-#                url: https://auth.${common.domain}/userdetails/
+#                url: ${common.protocol}://auth.${common.domain}/userdetails/
 #            api:
-#                url: https://api.${common.domain}/userdetails/cognito/
+#                url: ${common.protocol}://api.${common.domain}/userdetails/cognito/
 #
 #---
 #hibernate:
@@ -216,7 +217,7 @@ biosecurity:
 #            password:
 #            url: jdbc:h2:mem:testDb;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
 #        userDetails:
-#            url: https://aws-auth-test-2023.test.${common.domain}/userdetails/
+#            url: ${common.protocol}://aws-auth-test-2023.test.${common.domain}/userdetails/
 #    production:
 #        dataSource:
 #            dbCreate: update
@@ -235,18 +236,18 @@ biosecurity:
 #        enabled: false
 #    oidc:
 #        enabled: true
-#        discoveryUri: https://cognito-idp.ap-southeast-2.amazonaws.com/ap-southeast-2_8pKx9BtGz/.well-known/openid-configuration
+#        discoveryUri: ${common.protocol}://cognito-idp.ap-southeast-2.amazonaws.com/ap-southeast-2_8pKx9BtGz/.well-known/openid-configuration
 #        scope: openid,profile,email,ala,roles
 #    # this config is used to check incoming requests to protected APIs (methods protected with @RequireApiKey()) for JWT token in the expected header i.e. "Authorization". `fallbackToLegacyBehaviour` determines whether to check for the legacy API key when JWT is not detected/valid.
 #    jwt:
-#        discoveryUri: https://cognito-idp.ap-southeast-2.amazonaws.com/ap-southeast-2_8pKx9BtGz/.well-known/openid-configuration
+#        discoveryUri: ${common.protocol}://cognito-idp.ap-southeast-2.amazonaws.com/ap-southeast-2_8pKx9BtGz/.well-known/openid-configuration
 #        enabled: true
 #        fallbackToLegacyBehaviour: true
 #    apikey:
 #        enabled: true
 #        auth:
-#            serviceUrl: https://auth-test.${common.domain}/apikey/ws/check/
+#            serviceUrl: ${common.protocol}://auth-test.${common.domain}/apikey/ws/check/
 #        check:
-#            serviceUrl: https://auth-test.${common.domain}/apikey/ws/check?apikey=
+#            serviceUrl: ${common.protocol}://auth-test.${common.domain}/apikey/ws/check?apikey=
 #        userdetails:
-#            serviceUrl: https://auth-test.${common.domain}/userdetails/userDetails/
+#            serviceUrl: ${common.protocol}://auth-test.${common.domain}/userdetails/userDetails/
