@@ -94,6 +94,8 @@ download:
     ms: 50
   unzipped:
     limit: 10000
+  support:
+    email: support@${common.domain}
 dwc:
   url: http://rs.tdwg.org/dwc/terms/
 endemic:
