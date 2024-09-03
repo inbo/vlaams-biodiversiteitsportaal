@@ -24,8 +24,8 @@ headerAndFooter:
 skin:
   homeUrl: ${common.homepage}
   orgNameLong: Vlaams Biodiversiteitsportaal
-  fluidLayout: true
   orgNameShort: VBP
+  fluidLayout: true
 
 # Healthcheck endpoint
 management:

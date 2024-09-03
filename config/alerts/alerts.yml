@@ -8,11 +8,11 @@
 mail:
     enabled: true
     ses:
-        enabled: false
+        enabled: true
     details:
-        sender: "alerts@ala.org.au"
+        sender: "alerts@${common.domain}"
         alertAddressTitle: "Atlas alerts"
-        infoSender: "alerts@ala.org.au"
+        infoSender: "alerts@${common.domain}"
         infoAddressTitle: "Atlas of Living Australia"
         defaultResourceName: "Atlas of Living Australia"
         # forceAllAlertsGetSent results in emails getting sent regardless if data has changed - only use in DEV env
@@ -23,145 +23,37 @@ grails:
     mail:
         port: 2525
         server: localhost
-    profile: web
-    cache:
-        clearAtStartup: true
-        ehcache:
-            ehcacheXmlLocation: classpath:ehcache3.xml
-            lockTimeout: 200
-    codegen:
-        defaultPackage: au.org.au.alerts
-    config:
-        locations:
-            - file:/data/alerts/config/alerts-config.properties
-            - file:/data/alerts/config/alerts-config.yml
-            - file:/data/alerts/config/alerts-config.groovy
-    spring:
-        transactionManagement:
-            proxies: false
-    gorm:
-        # Whether to autowire entities.
-        # Disabled by default for performance reasons.
-        autowire: false
-        reactor:
-            # Whether to translate GORM events into Reactor events
-            # Disabled by default for performance reasons
-            events: false
-        default:
-            mapping:
-                autowire: true
-info:
-    app:
-        name: '@info.app.name@'
-        version: '@info.app.version@'
-        grailsVersion: '@info.app.grailsVersion@'
-spring:
-    main:
-        banner-mode: "off"
-    groovy:
-        template:
-            check-template-location: false
-# Spring Actuator Endpoints are Disabled by Default
-    jmx:
-        unique-names: true
-management:
-    endpoints:
-        enabled-by-default: true
-
----
-grails:
-    mime:
-        disable:
-            accept:
-                header:
-                    userAgents:
-                        - Gecko
-                        - WebKit
-                        - Presto
-                        - Trident
-        types:
-            all: '*/*'
-            atom: application/atom+xml
-            css: text/css
-            csv: text/csv
-            form: application/x-www-form-urlencoded
-            html:
-              - text/html
-              - application/xhtml+xml
-            js: text/javascript
-            json:
-              - application/json
-              - text/json
-            multipartForm: multipart/form-data
-            pdf: application/pdf
-            rss: application/rss+xml
-            text: text/plain
-            hal:
-              - application/hal+json
-              - application/hal+xml
-            xml:
-              - text/xml
-              - application/xml
-    urlmapping:
-        cache:
-            maxsize: 1000
-    controllers:
-        defaultScope: singleton
-    converters:
-        encoding: UTF-8
-    views:
-        default:
-            codec: html
-        gsp:
-            encoding: UTF-8
-            htmlcodec: xml
-            codecs:
-                expression: html
-                scriptlets: html
-                taglib: none
-                staticparts: none
----
-headerAndFooter:
-    baseURL: "https://www.ala.org.au/commonui-bs3-2019"
-    version: "2"
 
 skin:
     layout: "ala-main"
-    orgNameLong: "Atlas of Living Australia"
-    orgNameShort: "ALA"
-    orgSupportEmail: support@ala.org.au
-privacyPolicy: "https://www.ala.org.au/terms-of-use/privacy-policy/"
-siteDefaultLanguage: "en"
-
-security:
-    cas:
-        adminRole: ROLE_ADMIN
-        uriFilterPattern: ["/","/alaAdmin/*","/testAuth/*","/query/*","/admin/*","/admin/user/*","/admin/user/debug/*","/admin/debug/all","/notification/myAlerts","/notification/changeFrequency","/notification/addMyAlert","/notification/addMyAlert/*","/notification/deleteMyAlert/*","/notification/deleteMyAlert/*","/notification/deleteMyAlertWR/*","/webservice/*","/webservice/createTaxonAlert","/webservice/taxonAlerts","/webservice/createRegionAlert","/webservice/regionAlerts","/webservice/deleteTaxonAlert/*","/webservice/create*","/webservice/createSpeciesGroupRegionAlert","/ws/*","/ws/createTaxonAlert","/ws/taxonAlerts","/ws/createRegionAlert","/ws/regionAlerts","/ws/deleteTaxonAlert/*","/ws/createTaxonRegionAlert","/ws/createSpeciesGroupRegionAlert","/admin/runChecksNow"]
+    orgSupportEmail: support@${common.domain}
+privacyPolicy: "https://www.${common.domain}/terms-of-use/privacy-policy/"
+siteDefaultLanguage: "nl"
 
 ala:
-    baseURL: "https://www.ala.org.au"
-    userDetailsURL: "https://auth.ala.org.au/userdetails/userDetails/getUserListFull"
+    baseURL: "${common.protocol}://www.${common.domain}"
+    userDetailsURL: "${common.protocol}://auth.${common.domain}/userdetails/userDetails/getUserListFull"
 biocacheService:
-    baseURL: "https://biocache-ws.ala.org.au/ws"
+    baseURL: "https://records-ws.${common.domain}"
 biocache:
-    baseURL: "https://biocache.ala.org.au"
+    baseURL: "https://records.${common.domain}"
 spatial:
-    baseURL: "https://spatial.ala.org.au"
+    baseURL: "https://spatial.${common.domain}"
 collectory:
-    baseURL: "https://collections.ala.org.au"
+    baseURL: "https://collections.${common.domain}"
 lists:
-    baseURL: "https://lists.ala.org.au"
+    baseURL: "https://lists.${common.domain}"
 speciesPages:
-    searchURL: "https://bie.ala.org.au/species/Tiliqua+rugosa"
+    searchURL: "https://species.${common.domain}/species/Tiliqua+rugosa"
     searchTitle: Shingle-back
 collection:
-    searchURL: "https://collections.ala.org.au/public/show/co13"
+    searchURL: "https://collections.${common.domain}/public/show/co13"
     searchTitle: ANIC
 regions:
-    searchURL: "https://regions.ala.org.au/states/Australian+Capital+Territory"
+    searchURL: "https://regions.${common.domain}/states/Australian+Capital+Territory"
     searchTitle: ACT
 occurrence:
-    searchURL: "https://biocache.ala.org.au/occurrences/search?q=passer"
+    searchURL: "https://records.${common.domain}/occurrences/search?q=passer"
     searchTitle: occurrence search
 
 useSpeciesListsAlerts: true
@@ -176,7 +68,7 @@ biosecurity:
             nonAuthoritativeList: /occurrences/search?q=species_list:___LISTIDPARAM___&fq=decade:2020&fq=country:Australia&fq=first_loaded_date:[___DATEPARAM___%20TO%20*]&fq=occurrence_date:[___LASTYEARPARAM___%20TO%20*]&sort=first_loaded_date&dir=desc&disableAllQualityFilters=true
         maxRecords: 500
     moreinfo:
-        link: https://www.ala.org.au/blogs-news/ala-helps-to-stop-pests-in-their-tracks/
+        link: https://www.${common.domain}/blogs-news/ala-helps-to-stop-pests-in-their-tracks/
     csv:
         local:
             enabled: true
@@ -203,171 +95,158 @@ biosecurity:
         eventDateAge: 150
         firstLoadedDateAge: 8
 
-environments:
-    development:
-        grails:
-            serverURL: "http://localhost:8080"
-            mail:
-                host: "localhost"
-                port: 1025
-                #username: postie.emailSender
-        security:
-            cas:
-                appServerName: "http://localhost:8080"
-        quartz:
-            autoStartup : false
-        biosecurity:
-            csv:
-                local:
-                    enabled: true
-        userdetails:
-            web:
-                url: https://aws-auth-test-2023.test.ala.org.au/userdetails/
-            api:
-                url: https://api.test.ala.org.au/userdetails/cognito/
-        mail:
-            details:
-                sender: "alerts-test@ala.org.au"
-                alertAddressTitle: "Atlas alerts [Dev]"
-                infoAddressTitle: "Atlas of Living Australia [Dev]"
-                infoSender: "alerts-test@ala.org.au"
-    test:
-        grails:
-            serverURL: "http://dev.ala.org.au:8080"
-            mail:
-                host: "localhost"
-                port: 25
-        security:
-            cas:
-                appServerName: "https://auth.ala.org.au"
-        userdetails:
-            web:
-                url: https://aws-auth-test-2023.test.ala.org.au/userdetails/
-            api:
-                url: https://api.test.ala.org.au/userdetails/cognito/
-        mail:
-            details:
-                sender: "alerts-test@ala.org.au"
-                alertAddressTitle: "Atlas alerts [Test]"
-                infoAddressTitle: "Atlas of Living Australia [Test]"
-                infoSender: "alerts-test@ala.org.au"
-    production:
-        grails:
-            serverURL: "https://auth.ala.org.au/alerts"
-            mail:
-                host: "localhost"
-                port: 25
-        security:
-            cas:
-                appServerName: "https://auth.ala.org.au"
-        userdetails:
-            web:
-                url: https://auth.ala.org.au/userdetails/
-            api:
-                url: https://api.ala.org.au/userdetails/cognito/
-
----
-hibernate:
-    show_sql: false
-    cache:
-        queries: false
-        use_second_level_cache: true
-        use_query_cache: true
-        region:
-            factory_class: org.hibernate.cache.jcache.internal.JCacheRegionFactory
-
-dataSource:
-    pooled: true
-    jmxExport: true
-    driverClassName: com.mysql.jdbc.Driver
-    username:
-    password:
-    properties:
-        # http://www.grails.org/doc/latest/guide/single.html#dataSource
-        # see http://tomcat.apache.org/tomcat-7.0-doc/jdbc-pool.html#Common_Attributes for more
-        timeBetweenEvictionRunsMillis: 60000 # milliseconds (default: 5000)
-        testOnBorrow: true # default: false
-        testOnReturn: false # default: false
-        testWhileIdle: true # default: false
-        validationQuery: "SELECT 1" # default: null
-        validationQueryTimeout: 10 # seconds (default: -1 i.e. disabled)
-        validationInterval: 30000 # milliseconds, default is 30000 (30 seconds)
-        removeAbandoned: true # # default: false
-        removeAbandonedTimeout: 3600 # seconds (default: 60), must be > quartz job duration
-        logAbandoned: true # adds some overhead to every borrow from the pool, disable if it becomes a performance issue
-        logValidationErrors: true # default: false, logs validation errors at SEVERE
-        # NOTE: removeAbandoned: true OR testWhileIdle: true enables the Pool Cleaner. There is a bug with the
-        # pool cleaner which causes deadlocks when using older mysql jdbc drivers. This configuration has been
-        # tested successfully with mysql:mysql-connector-java:5.1.34.
-        # mysql jdbc connection properties - see http://dev.mysql.com/doc/connector-j/en/connector-j-reference-configuration-properties.html
-        dbProperties:
-            autoReconnect: true
-            connectTimeout: 0
-            useUnicode: true
-            characterEncoding: "UTF-8"
-
-environments:
-    development:
-        dataSource:
-            dbCreate: update
-            driverClassName: com.mysql.jdbc.Driver
-            url: jdbc:mysql://localhost/alerts
-            username: alerts_user
-            password: password
-    test:
-        dataSource:
-            dbCreate: update
-            pooled: true
-            jmxExport: true
-            driverClassName: org.h2.Driver
-            username: sa
-            password:
-            url: jdbc:h2:mem:testDb;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
-        userDetails:
-            url: https://aws-auth-test-2023.test.ala.org.au/userdetails/
-    production:
-        dataSource:
-            dbCreate: update
-
-myannotation:
-    enabled: false
-
-webservice:
-    jwt: true
-    jwt-scopes: "openid users/read"
-
-
-
-security:
-    cas:
-        enabled: false
-    oidc:
-        enabled: true
-        discoveryUri: https://cognito-idp.ap-southeast-2.amazonaws.com/ap-southeast-2_8pKx9BtGz/.well-known/openid-configuration
-        scope: openid,profile,email,ala,roles
-    # this config is used to check incoming requests to protected APIs (methods protected with @RequireApiKey()) for JWT token in the expected header i.e. "Authorization". `fallbackToLegacyBehaviour` determines whether to check for the legacy API key when JWT is not detected/valid.
-    jwt:
-        discoveryUri: https://cognito-idp.ap-southeast-2.amazonaws.com/ap-southeast-2_8pKx9BtGz/.well-known/openid-configuration
-        enabled: true
-        fallbackToLegacyBehaviour: true
-    apikey:
-        enabled: true
-        auth:
-            serviceUrl: https://auth-test.ala.org.au/apikey/ws/check/
-        check:
-            serviceUrl: https://auth-test.ala.org.au/apikey/ws/check?apikey=
-        userdetails:
-            serviceUrl: https://auth-test.ala.org.au/userdetails/userDetails/
-
-openapi:
-    title: Alerts REST services
-    description: REST services for interacting with the alerts webapp
-    terms: https://www.ala.org.au/terms
-    contact:
-        name: Support
-        email: support@ala.org.au
-    license:
-        name: Mozilla Public License 1.1
-        url: https://www.mozilla.org/en-US/MPL/1.1/
-    version: '@info.app.version@'
-    cachetimeoutms: 0
+#environments:
+#    development:
+#        grails:
+#            serverURL: "http://localhost:8080"
+#            mail:
+#                host: "localhost"
+#                port: 1025
+#                #username: postie.emailSender
+#        security:
+#            cas:
+#                appServerName: "http://localhost:8080"
+#        quartz:
+#            autoStartup : false
+#        biosecurity:
+#            csv:
+#                local:
+#                    enabled: true
+#        userdetails:
+#            web:
+#                url: https://aws-auth-test-2023.test.${common.domain}/userdetails/
+#            api:
+#                url: https://api.test.${common.domain}/userdetails/cognito/
+#        mail:
+#            details:
+#                sender: "alerts-test@${common.domain}"
+#                alertAddressTitle: "Atlas alerts [Dev]"
+#                infoAddressTitle: "Atlas of Living Australia [Dev]"
+#                infoSender: "alerts-test@${common.domain}"
+#    test:
+#        grails:
+#            serverURL: "http://dev.${common.domain}:8080"
+#            mail:
+#                host: "localhost"
+#                port: 25
+#        security:
+#            cas:
+#                appServerName: "https://auth.${common.domain}"
+#        userdetails:
+#            web:
+#                url: https://aws-auth-test-2023.test.${common.domain}/userdetails/
+#            api:
+#                url: https://api.test.${common.domain}/userdetails/cognito/
+#        mail:
+#            details:
+#                sender: "alerts-test@${common.domain}"
+#                alertAddressTitle: "Atlas alerts [Test]"
+#                infoAddressTitle: "Atlas of Living Australia [Test]"
+#                infoSender: "alerts-test@${common.domain}"
+#    production:
+#        grails:
+#            serverURL: "https://auth.${common.domain}/alerts"
+#            mail:
+#                host: "localhost"
+#                port: 25
+#        security:
+#            cas:
+#                appServerName: "https://auth.${common.domain}"
+#        userdetails:
+#            web:
+#                url: https://auth.${common.domain}/userdetails/
+#            api:
+#                url: https://api.${common.domain}/userdetails/cognito/
+#
+#---
+#hibernate:
+#    show_sql: false
+#    cache:
+#        queries: false
+#        use_second_level_cache: true
+#        use_query_cache: true
+#        region:
+#            factory_class: org.hibernate.cache.jcache.internal.JCacheRegionFactory
+#
+#dataSource:
+#    pooled: true
+#    jmxExport: true
+#    driverClassName: com.mysql.jdbc.Driver
+#    username:
+#    password:
+#    properties:
+#        # http://www.grails.org/doc/latest/guide/single.html#dataSource
+#        # see http://tomcat.apache.org/tomcat-7.0-doc/jdbc-pool.html#Common_Attributes for more
+#        timeBetweenEvictionRunsMillis: 60000 # milliseconds (default: 5000)
+#        testOnBorrow: true # default: false
+#        testOnReturn: false # default: false
+#        testWhileIdle: true # default: false
+#        validationQuery: "SELECT 1" # default: null
+#        validationQueryTimeout: 10 # seconds (default: -1 i.e. disabled)
+#        validationInterval: 30000 # milliseconds, default is 30000 (30 seconds)
+#        removeAbandoned: true # # default: false
+#        removeAbandonedTimeout: 3600 # seconds (default: 60), must be > quartz job duration
+#        logAbandoned: true # adds some overhead to every borrow from the pool, disable if it becomes a performance issue
+#        logValidationErrors: true # default: false, logs validation errors at SEVERE
+#        # NOTE: removeAbandoned: true OR testWhileIdle: true enables the Pool Cleaner. There is a bug with the
+#        # pool cleaner which causes deadlocks when using older mysql jdbc drivers. This configuration has been
+#        # tested successfully with mysql:mysql-connector-java:5.1.34.
+#        # mysql jdbc connection properties - see http://dev.mysql.com/doc/connector-j/en/connector-j-reference-configuration-properties.html
+#        dbProperties:
+#            autoReconnect: true
+#            connectTimeout: 0
+#            useUnicode: true
+#            characterEncoding: "UTF-8"
+#
+#environments:
+#    development:
+#        dataSource:
+#            dbCreate: update
+#            driverClassName: com.mysql.jdbc.Driver
+#            url: jdbc:mysql://localhost/alerts
+#            username: alerts_user
+#            password: password
+#    test:
+#        dataSource:
+#            dbCreate: update
+#            pooled: true
+#            jmxExport: true
+#            driverClassName: org.h2.Driver
+#            username: sa
+#            password:
+#            url: jdbc:h2:mem:testDb;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
+#        userDetails:
+#            url: https://aws-auth-test-2023.test.${common.domain}/userdetails/
+#    production:
+#        dataSource:
+#            dbCreate: update
+#
+#myannotation:
+#    enabled: false
+#
+#webservice:
+#    jwt: true
+#    jwt-scopes: "openid users/read"
+#
+#
+#
+#security:
+#    cas:
+#        enabled: false
+#    oidc:
+#        enabled: true
+#        discoveryUri: https://cognito-idp.ap-southeast-2.amazonaws.com/ap-southeast-2_8pKx9BtGz/.well-known/openid-configuration
+#        scope: openid,profile,email,ala,roles
+#    # this config is used to check incoming requests to protected APIs (methods protected with @RequireApiKey()) for JWT token in the expected header i.e. "Authorization". `fallbackToLegacyBehaviour` determines whether to check for the legacy API key when JWT is not detected/valid.
+#    jwt:
+#        discoveryUri: https://cognito-idp.ap-southeast-2.amazonaws.com/ap-southeast-2_8pKx9BtGz/.well-known/openid-configuration
+#        enabled: true
+#        fallbackToLegacyBehaviour: true
+#    apikey:
+#        enabled: true
+#        auth:
+#            serviceUrl: https://auth-test.${common.domain}/apikey/ws/check/
+#        check:
+#            serviceUrl: https://auth-test.${common.domain}/apikey/ws/check?apikey=
+#        userdetails:
+#            serviceUrl: https://auth-test.${common.domain}/userdetails/userDetails/
