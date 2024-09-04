@@ -53,7 +53,7 @@ disableCAS: true
 doi:
   mintDoi: false
 doiService:
-  baseUrl: https://doi.ala.org.au
+  baseUrl: ${common.protocol}://doi.${common.domain}
 downloads:
   checklistDownloadUrl: ${common.protocol}://records-ws.${common.domain}/occurrences/facets/download
   customSections:
