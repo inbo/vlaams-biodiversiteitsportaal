@@ -51,7 +51,7 @@ dataquality:
 defaultLocale: nl
 disableCAS: true
 doi:
-  mintDoi: false
+  mintDoi: true
 doiService:
   baseUrl: ${common.protocol}://doi.${common.domain}
 downloads:
