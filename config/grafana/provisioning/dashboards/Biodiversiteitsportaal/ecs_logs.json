@@ -109,7 +109,7 @@
             "uid": "cloudwatch"
           },
           "dimensions": {},
-          "expression": "fields @timestamp, @message, @logStream\n| filter @logStream like /${service}\\/$log_stream.*/\n| filter @message like /$query/\n| stats count() by @logStream, bin(${__interval})\n| limit 100",
+          "expression": "fields @timestamp, @message, @logStream\n| filter @logStream like /${service}\\/$log_stream.*/\n| filter @message like /(?i)$query/\n| stats count() by @logStream, bin(${__interval})\n| limit 100",
           "id": "",
           "label": "",
           "logGroups": [
@@ -176,7 +176,7 @@
             "uid": "cloudwatch"
           },
           "dimensions": {},
-          "expression": "fields @timestamp, @message, @logStream\n| filter @logStream like /$service\\/$log_stream.*/\n| filter @message like /$query/\n| sort @timestamp desc\n| limit ${log_limit}",
+          "expression": "fields @timestamp, @message, @logStream\n| filter @logStream like /$service\\/$log_stream.*/\n| filter @message like /(?i)$query/\n| sort @timestamp desc\n| limit ${log_limit}",
           "id": "",
           "label": "",
           "logGroups": [
