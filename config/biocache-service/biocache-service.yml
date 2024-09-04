@@ -205,12 +205,12 @@ cors:
   allowedOrigins: ["*"]
 
 userdetails:
-  url: https://auth.${common.domain}/userdetails
+  url: ${common.protocol}://auth.${common.domain}/userdetails
   web:
-    url: https://auth.${common.domain}/userdetails/
+    url: ${common.protocol}://auth.${common.domain}/userdetails/
   api:
-    url: https://auth.${common.domain}/userdetails/
+    url: ${common.protocol}://auth.${common.domain}/userdetails/
 
 doi:
   service:
-    url: https://doi.${common.domain}
+    url: ${common.protocol}://doi.${common.domain}
