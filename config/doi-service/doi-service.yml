@@ -42,10 +42,10 @@ doi:
     provider:
       #            # define mapping from provider name to a valid DoiProvider (ANDS or DATACITE)
       #      mapping: { ALA: 'DATACITE' }
-      mapping: { ALA: 'DATACITE' }
+      mapping: {  }
 
   storage:
-    provider: LOCAL
+    provider: S3
     cloud:
       private: true
   resolverUrl: https://doi.org/
@@ -73,7 +73,7 @@ elasticSearch:
   client:
     mode: transport
     hosts:
-      - { host: localhost, port: 9200 }
+      - { host: elasticsearch.biodiversiteitsportaal.dev.internal, port: 9200 }
   cluster.name: elasticsearch
   disableAutoIndex: false
   bulkIndexOnStartup: false
