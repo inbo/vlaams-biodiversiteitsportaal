@@ -51,7 +51,7 @@ caches:
   layers:
     enabled: false
   log:
-    enabled: false
+    enabled: true
 cassandra:
   hosts: cassandradb
   max:
