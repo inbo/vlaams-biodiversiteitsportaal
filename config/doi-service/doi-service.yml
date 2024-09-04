@@ -42,7 +42,7 @@ doi:
     provider:
       #            # define mapping from provider name to a valid DoiProvider (ANDS or DATACITE)
       #      mapping: { ALA: 'DATACITE' }
-      mapping: { ALA: 'LOCAL' }
+      mapping: { ALA: 'DATACITE' }
 
   storage:
     provider: LOCAL
