@@ -31,6 +31,13 @@ grails:
 #            timeOut: 60
 #            prefix: 10.XXXXX
 #            shoulder: ala
+
+
+management:
+  health:
+    elasticsearch:
+      enabled: false
+
 ala:
   base:
     url: ${common.protocol}://www.${common.domain}
