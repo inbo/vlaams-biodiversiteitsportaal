@@ -27,7 +27,8 @@ CREATE EXTENSION postgis;
 -- Enable Topology
 CREATE EXTENSION postgis_topology;
 
-SET ROLE ${POSTGRES_USERNAME);
+-- TODO: Configure somehow
+SET ROLE spatial;
 
 CREATE TYPE searchobjectstype AS
 (
