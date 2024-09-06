@@ -47,6 +47,7 @@ dataSource:
   pooled: true
   jmxExport: true
   transactional: true
+  dbCreate: update
 
 batch_sampling_passwords: ""
 
