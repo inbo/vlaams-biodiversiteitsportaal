@@ -27,6 +27,8 @@ CREATE EXTENSION postgis;
 -- Enable Topology
 CREATE EXTENSION postgis_topology;
 
+SET ROLE ${POSTGRES_USERNAME);
+
 CREATE TYPE searchobjectstype AS
 (
     pid       character varying,
