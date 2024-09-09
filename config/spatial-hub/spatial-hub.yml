@@ -142,7 +142,7 @@ speciesDotSize: 5
 speciesDotOpacity: 60
 
 logger:
-  baseUrl: "${common.protocol}://logger.${common.domain}"
+  baseUrl: "${common.protocol}://logger.${common.domain}/service"
 
 #TBC : decommisioned
 phylolink:
