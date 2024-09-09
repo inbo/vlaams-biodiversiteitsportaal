@@ -142,7 +142,7 @@ map:
 
 
 eol:
-  lang: en
+  lang: nl
   # Sanitise EOL content
   sanitise: true
   # comma-delimited HTML elements
