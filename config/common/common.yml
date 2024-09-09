@@ -26,6 +26,7 @@ skin:
   orgNameLong: Vlaams Biodiversiteitsportaal
   orgNameShort: VBP
   fluidLayout: true
+  favicon: '${common.protocol}://branding.${common.domain}/favicon.ico'
 
 # Healthcheck endpoint
 management:
