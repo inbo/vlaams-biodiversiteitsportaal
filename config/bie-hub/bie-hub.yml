@@ -83,9 +83,9 @@ speciesList:
   preferredListName: ALA Preferred Species Images
   apiKey: 081489d3-e581-4dad-8f37-b9331bcf04a8
   useListWs: False
-  wsURL: ${common.protocol}://lists.${common.domain}/ws
+  wsURL: ${common.protocol}://lists.${common.domain}
 speciesListService:
-  baseURL: ${common.protocol}://lists.${common.domain}/ws
+  baseURL: ${common.protocol}://lists.${common.domain}
 alerts:
   baseUrl:
 regions:
