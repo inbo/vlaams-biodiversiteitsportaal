@@ -80,3 +80,7 @@ security:
 webservice:
   jwt: true
   jwt-scopes: openid users/read
+
+grails:
+    cors:
+        enabled: true
