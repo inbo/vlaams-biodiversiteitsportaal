@@ -82,5 +82,5 @@ webservice:
   jwt-scopes: openid users/read
 
 grails:
-    cors:
-        enabled: true
+  cors:
+    enabled: true

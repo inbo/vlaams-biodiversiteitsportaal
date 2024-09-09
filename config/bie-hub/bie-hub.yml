@@ -54,12 +54,8 @@ wikipedia:
 
 # Skin and layout
 skin:
-  homeUrl: ${common.protocol}://www.${common.domain}
   layout: ala
-  orgNameLong: Vlaams Biodiversiteitsportaal
   fluidLayout: true
-  orgNameShort: VBP
-  favicon: ${common.protocol}://branding.${common.domain}/favicon.ico
 
 languageCodesUrl: file:///config/config/bie-hub/languages.json
 
@@ -74,9 +70,6 @@ show:
 biocache:
   baseURL: ${common.protocol}://records.${common.domain}
 
-# Other ALA Services
-profileService:
-  baseURL: https://profiles-ws.ala.org.au/
 spatial:
   baseURL: ${common.protocol}://spatial.${common.domain}
 collectory:
@@ -162,7 +155,7 @@ namematching:
   serviceURL: http://namematching.biodiversiteitsportaal.dev.internal:9180
 
 dataquality:
-  baseUrl: https://dataquality.ala.org.au/data-profiles
+  enabled: false
 
 speciesParent: ${common.protocol}://lists.${common.domain}/iconic-species
 
