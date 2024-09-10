@@ -341,7 +341,8 @@ startup:
       type: 'wms'
       url: "https://geo.api.vlaanderen.be/GRB/wms?"
       layerParams:
-        layers: grb_bsk
+        layers: GRB_BSK
+        format: 'image/png'
       link: "https://www.vlaanderen.be/datavindplaats/catalogus/wms-grb"
       exportType: 'normal'
     osm:
