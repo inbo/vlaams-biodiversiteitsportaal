@@ -320,7 +320,7 @@ startup:
   lng: 4.4
   zoom: 9
   baselayer:
-    default: osm
+    default: grb
 #  baselayers:
 #    google_roadmaps:
 #      name: 'Streets'
@@ -336,22 +336,19 @@ startup:
 #      exportType: 'hybrid'
 #      link: 'https://www.google.com/intl/en_au/help/terms_maps.html'
 #      projections: ['3857']
-#    outline:
-#      name: 'Outline'
-#      type: 'wms'
-#      url: "${common.protocol}://spatial.${common.domain}/geoserver/wms?"
-#      layerParams:
-#        layers: 'ALA:world'
-#        format: 'image/png'
-#        continuousWorld: true
-#      exportType: 'outline'
-#    osm:
-#      name: 'Open Street Map'
-#      url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-#      type: 'xyz'
-#      exportType: 'minimal'
-#      link: 'https://www.openstreetmap.org/about'
-#      projections: ['3857']
+    grb:
+      name: 'Grootschalig Referentiebestand'
+      type: 'wms'
+      url: "https://geo.api.vlaanderen.be/GRB/wms?service=WMS&request=getcapabilities"
+      link: "https://www.vlaanderen.be/datavindplaats/catalogus/wms-grb"
+      exportType: 'normal'
+    osm:
+      name: 'Open Street Map'
+      url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+      type: 'xyz'
+      exportType: 'minimal'
+      link: 'https://www.openstreetmap.org/about'
+      projections: ['3857']
 #    google_satellite:
 #      name: 'Satellite'
 #      layerType: 'SATELLITE'
