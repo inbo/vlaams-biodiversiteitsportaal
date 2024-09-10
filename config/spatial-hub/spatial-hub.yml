@@ -338,13 +338,13 @@ startup:
 #      projections: ['3857']
     grb:
       name: 'Grootschalig Referentiebestand'
-      type: 'wmts'
-      url: "https://geo.api.vlaanderen.be/GRB/wmts?"
+      type: 'wms'
+      url: "https://geo.api.vlaanderen.be/GRB/wms?"
       layerParams:
         layer: grb_bsk
         style: GRB-Basiskaart
         tilematrixset: BPL72VL
-        Service: WMTS
+        Service: WMS
         Request: GetTile
         Version: 1.0.0
         Format: image/png
