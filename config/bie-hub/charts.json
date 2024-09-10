@@ -11,7 +11,7 @@
       "chartType": "bar",
       "emptyValueMsg": "Year not specified",
       "hideEmptyValues": true,
-      "filter": "fq=year:[1990 TO *]"
+      "filter": "fq=year:%5B1990 TO *%5D"
     },
     "decade": {
       "title": "By decade",
