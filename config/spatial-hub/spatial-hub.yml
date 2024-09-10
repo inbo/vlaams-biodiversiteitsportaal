@@ -346,7 +346,6 @@ startup:
         tilematrixset: BPL72VL
         Service: WMS
         Request: GetTile
-        Version: 1.0.0
         Format: image/png
         TileMatrix: 2
         TileCol: 1
