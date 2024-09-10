@@ -319,9 +319,9 @@ startup:
   lat: 51.0
   lng: 4.4
   zoom: 9
-  baselayers:
+  baselayer:
     default: grb
-#  baselayers:
+  baselayers:
 #    google_roadmaps:
 #      name: 'Streets'
 #      layerType: 'ROADMAP'
