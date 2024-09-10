@@ -338,7 +338,7 @@ startup:
 #      projections: ['3857']
     grb:
       name: 'Grootschalig Referentiebestand'
-      type: 'wms'
+      type: 'wmts'
       url: "https://geo.api.vlaanderen.be/GRB/wmts?"
       layerParams:
         layer: grb_bsk
