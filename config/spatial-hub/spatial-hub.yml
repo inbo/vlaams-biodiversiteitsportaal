@@ -339,9 +339,18 @@ startup:
     grb:
       name: 'Grootschalig Referentiebestand'
       type: 'wms'
-      url: "https://geo.api.vlaanderen.be/GRB/wms?"
+      url: "https://geo.api.vlaanderen.be/GRB/wmts?"
       layerParams:
-        service: 'WMS'
+        layer: grb_bsk
+        style: GRB-Basiskaart
+        tilematrixset: BPL72VL
+        Service: WMTS
+        Request: GetTile
+        Version: 1.0.0
+        Format: image/png
+        TileMatrix: 2
+        TileCol: 1
+        TileRow: 1
       link: "https://www.vlaanderen.be/datavindplaats/catalogus/wms-grb"
       exportType: 'normal'
     osm:
