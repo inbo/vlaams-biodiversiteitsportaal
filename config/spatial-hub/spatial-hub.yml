@@ -1,4 +1,8 @@
 ---
+startup:
+  baselayers: null
+projections: null
+---
 ### OIDC Credentials ###
 security:
   jwt:
@@ -425,9 +429,6 @@ projections:
       label: 'Pseudo-Mercator -- Spherical Mercator'
       definition:
         code: 'EPSG:3857' # leaflet supported, uses startup lat,lon,zoom
-    4326: null
-    3031: null
-    3575: null
     31370:
       label: 'Belgische Lambert 1972'
       definition:
