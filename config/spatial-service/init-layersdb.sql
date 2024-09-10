@@ -238,7 +238,7 @@ CREATE TABLE task
 (
     id       serial NOT NULL,
     name     character varying(40),
-    json     character varying(256),
+    json     text,
     error    character varying(256),
     created  timestamp without time zone,
     finished timestamp without time zone,
