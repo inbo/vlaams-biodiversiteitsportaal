@@ -339,7 +339,9 @@ startup:
     grb:
       name: 'Grootschalig Referentiebestand'
       type: 'wms'
-      url: "https://geo.api.vlaanderen.be/GRB/wms?service=WMS&request=getcapabilities"
+      url: "https://geo.api.vlaanderen.be/GRB/wms?"
+      layerParams:
+        service: 'WMS'
       link: "https://www.vlaanderen.be/datavindplaats/catalogus/wms-grb"
       exportType: 'normal'
     osm:
