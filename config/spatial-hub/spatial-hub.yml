@@ -319,7 +319,7 @@ startup:
   lat: 51.0
   lng: 4.4
   zoom: 9
-  baselayer:
+  baselayers:
     default: grb
 #  baselayers:
 #    google_roadmaps:
