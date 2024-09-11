@@ -345,31 +345,31 @@ startup:
         format: 'image/png'
       link: "https://www.vlaanderen.be/datavindplaats/catalogus/wms-grb"
       exportType: 'normal'
-    grb_grijs:
-      name: 'Grootschalig Referentiebestand (Grijs)'
-      type: 'wms'
-      url: "https://geo.api.vlaanderen.be/GRB/wms?"
-      layerParams:
-        layers: GRB_BSK_GRIJS
-        format: 'image/png'
-      link: "https://www.vlaanderen.be/datavindplaats/catalogus/wms-grb"
-      exportType: 'normal'
-    luchtkaart:
-      name: 'Luchtfoto'
-      type: 'wms'
-      url: "https://geo.api.vlaanderen.be/OMWRGBMRVL/wms?"
-      layerParams:
-        layers: OMWRGBMRVL
-        format: 'image/png'
-      link: "https://www.vlaanderen.be/datavindplaats/catalogus/wms-grb"
-      exportType: 'normal'
-    osm:
-      name: 'Open Street Map'
-      url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-      type: 'xyz'
-      exportType: 'minimal'
-      link: 'https://www.openstreetmap.org/about'
-      projections: ['3857']
+#    grb_grijs:
+#      name: 'Grootschalig Referentiebestand (Grijs)'
+#      type: 'wms'
+#      url: "https://geo.api.vlaanderen.be/GRB/wms?"
+#      layerParams:
+#        layers: GRB_BSK_GRIJS
+#        format: 'image/png'
+#      link: "https://www.vlaanderen.be/datavindplaats/catalogus/wms-grb"
+#      exportType: 'normal'
+#    luchtkaart:
+#      name: 'Luchtfoto'
+#      type: 'wms'
+#      url: "https://geo.api.vlaanderen.be/OMWRGBMRVL/wms?"
+#      layerParams:
+#        layers: OMWRGBMRVL
+#        format: 'image/png'
+#      link: "https://www.vlaanderen.be/datavindplaats/catalogus/wms-grb"
+#      exportType: 'satellite'
+#    osm:
+#      name: 'Open Street Map'
+#      url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+#      type: 'xyz'
+#      exportType: 'minimal'
+#      link: 'https://www.openstreetmap.org/about'
+#      projections: ['3857']
 #    google_satellite:
 #      name: 'Satellite'
 #      layerType: 'SATELLITE'
