@@ -418,14 +418,14 @@ fq:
 # projections.#.origin.latitude = default latitude
 # projections.#.origin.longitude = default longitude
 # projections.#.origin.zoom = default zoom
-projection:
-  default: 31370
-projections:
-    3857:
-      label: 'Pseudo-Mercator -- Spherical Mercator'
-      definition:
-        code: 'EPSG:3857' # leaflet supported, uses startup lat,lon,zoom
-    31370:
-      label: 'Belgische Lambert 1972'
-      definition:
-        code: 'EPSG:31370'
+#projection:
+#  default: 31370
+#projections:
+#    3857:
+#      label: 'Pseudo-Mercator -- Spherical Mercator'
+#      definition:
+#        code: 'EPSG:3857' # leaflet supported, uses startup lat,lon,zoom
+#    31370:
+#      label: 'Belgische Lambert 1972'
+#      definition:
+#        code: 'EPSG:31370'
