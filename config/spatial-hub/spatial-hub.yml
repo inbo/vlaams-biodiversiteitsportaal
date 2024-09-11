@@ -1,8 +1,4 @@
 ---
-startup:
-  baselayers: null
-projections: null
----
 ### OIDC Credentials ###
 security:
   jwt:
