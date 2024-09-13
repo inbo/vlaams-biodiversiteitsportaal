@@ -1,12 +1,14 @@
-FROM gradle:7-jdk11 AS builder
+ARG BUILDPLATFORM=linux/amd64
+FROM --platform=${BUILDPLATFORM} gradle:7-jdk11 AS builder
 
 
 WORKDIR /spatial-service
 
-ARG VERSION=fix-bbox-from-geoserver
+ARG test=14
+ARG VERSION=fix-deleting-uploads
 RUN git clone --branch ${VERSION} --depth 1 https://github.com/StefanVanDyck/spatial-service.git /spatial-service
 
-# ARG VERSION=2.1.4
+# ARG VERSION=2.1.5
 # RUN git clone --branch ${VERSION} --depth 1 https://github.com/AtlasOfLivingAustralia/spatial-service.git /spatial-service
 
 COPY ./i18n/ ./grails-app/i18n/
@@ -22,7 +24,7 @@ RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
 FROM openjdk:11
 
 ARG VERSION=2.1.6-SNAPSHOT
-# ARG VERSION=2.1.4
+# ARG VERSION=2.1.5
 
 RUN apt-get update && apt-get install -y \
     gettext-base \

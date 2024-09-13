@@ -1,4 +1,5 @@
-FROM gradle:7-jdk11 AS builder
+ARG BUILDPLATFORM=linux/amd64
+FROM --platform=${BUILDPLATFORM} gradle:7-jdk11 AS builder
 
 ARG VERSION=4.0.0
 
@@ -12,7 +13,6 @@ RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
         --no-daemon \
         # -Dorg.gradle.debug=true -Dorg.gradle.debug.suspend=no --debug \
         --parallel
-
 
 FROM openjdk:11
 
@@ -29,7 +29,7 @@ USER app
 WORKDIR /app
 
 COPY --from=builder --chown=app \
-    /project/build/libs/project-${VERSION}.war /app/app.war
+    /project/build/libs/doi-service-${VERSION}-exec.war /app/app.war
 
 ENTRYPOINT ["java", "-jar", "/app/app.war"]
 

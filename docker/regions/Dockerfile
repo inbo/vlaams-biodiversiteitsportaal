@@ -1,13 +1,19 @@
-FROM gradle:7-jdk11 AS builder
+ARG BUILDPLATFORM=linux/amd64
+FROM --platform=${BUILDPLATFORM} gradle:7-jdk11 AS builder
+
+WORKDIR /project
 
 ARG VERSION=4.0.0
-WORKDIR /project
 RUN git clone --branch ${VERSION} --depth 1 https://github.com/AtlasOfLivingAustralia/regions.git /project
+
+COPY ./i18n/ ./grails-app/i18n/
+
 RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
     gradle build assetCompile assemble --no-daemon \
     -x test \
     # -Dorg.gradle.debug=true -Dorg.gradle.debug.suspend=no --debug \
     --parallel
+
 
 FROM openjdk:11
 

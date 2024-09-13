@@ -1,0 +1,22 @@
+{
+    "interactiveLogin": true,
+    "httpServer": "NettyWrapper",
+    "tokenCallbacks": [
+        {
+            "issuerId": "vbp",
+            "tokenExpiry": 120,
+            "requestMappings": [
+                {
+                    "requestParam": "scope",
+                    "match": "roles",
+                    "claims": {
+                        "sub": "default",
+                        "role": [
+                            "ROLE_ADMIN"
+                        ]
+                    }
+                }
+            ]
+        }
+    ]
+}

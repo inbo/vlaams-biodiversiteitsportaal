@@ -1,10 +1,17 @@
-FROM gradle:7-jdk11 AS builder
+ARG BUILDPLATFORM=linux/amd64
+FROM --platform=${BUILDPLATFORM} gradle:7-jdk11 AS builder
 
-ARG VERSION=fix-missing-properties-attribute
 
 WORKDIR /project
+
+ARG VERSION=fix-list-my-institutions
 RUN git clone --branch ${VERSION} --depth 1 https://github.com/StefanVanDyck/collectory /project
+
+# ARG VERSION=5.1.1
+# RUN git clone --branch ${VERSION} --depth 1 https://github.com/AtlasOfLivingAustralia/collectory.git /project
+
 COPY ./i18n/ ./grails-app/i18n/
+
 RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
     gradle build assemble --no-daemon \
     -x test -x integrationTest \
@@ -14,6 +21,7 @@ RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
 FROM openjdk:11
 
 ARG VERSION=5.2.0-SNAPSHOT
+# ARG VERSION=5.1.1
 
 # Create the user
 RUN groupadd --gid 1000 app \

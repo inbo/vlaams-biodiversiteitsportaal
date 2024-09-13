@@ -62,7 +62,7 @@ speciesListService:
   timeoutSec: 600
 samplingService:
   wsUrl: http://spatial-service.biodiversiteitsportaal.dev.internal:8080/ws/
-  timeoutSec: 300
+  timeoutSec: 600
   batchSize: 25000
   batchStatusSleepTime: 1000
   downloadRetries: 5
@@ -260,7 +260,6 @@ elastic:
   targetPath: '{fsPath}/pipelines-data'
   runner: SparkRunner
   esHosts: http://elasticsearch.biodiversiteitsportaal.dev.internal:9200
-  esSchemaPath: /tmp/es-parent-schema.json
   esAlias: event
   esIndexName: 'event_{datasetId}'
   indexNumberShards: 1

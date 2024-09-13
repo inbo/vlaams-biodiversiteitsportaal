@@ -1,19 +1,26 @@
-FROM gradle:7-jdk11 AS builder
-
-ARG VERSION=v3.0.3
+ARG BUILDPLATFORM=linux/amd64
+FROM --platform=${BUILDPLATFORM} gradle:7-jdk11 AS builder
 
 WORKDIR /project
+
+ARG VERSION=v3.2.0
 RUN git clone --branch ${VERSION} --depth 1 https://github.com/AtlasOfLivingAustralia/userdetails.git /project
+
+# ARG test=1
+# ARG VERSION=66-fix-dwca-download
+# RUN git clone --branch ${VERSION} --depth 1 https://github.com/StefanVanDyck/userdetails.git /project
+
 RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
     gradle build assemble --no-daemon \
     -x test -x integrationTest \
     # -Dorg.gradle.debug=true -Dorg.gradle.debug.suspend=no --debug \
     --parallel
 
+RUN ls -la build/libs
 
 FROM openjdk:11
 
-ARG VERSION=3.0.3
+ARG VERSION=3.2.0
 
 # Create the user
 RUN groupadd --gid 1000 app \

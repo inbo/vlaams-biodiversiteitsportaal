@@ -1,4 +1,5 @@
-FROM gradle:7-jdk11 AS builder
+ARG BUILDPLATFORM=linux/amd64
+FROM --platform=${BUILDPLATFORM} gradle:7-jdk11 AS builder
 
 ARG VERSION=3.0.0
 WORKDIR /project

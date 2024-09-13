@@ -10,10 +10,7 @@ services:
       - "8080:8080"
     volumes:
       - ../config:/config/config:ro
-      - atlas-data:/data
-    depends_on:
-      cas:
-        condition: service_healthy
+      - vbp-data:/data
     environment:
       SPRING_PROFILES_ACTIVE: local
 #      LOG_FORMAT: JSON
@@ -41,7 +38,7 @@ services:
       #geoserver data folder
       # - ./spatial/geoserver/geoserver-files:/data/geoserver-files/
       #Spatials service data folder. If they are both in the same machine, some layers are not needed to be uploaded.
-      - atlas-data:/data
+      - vbp-data:/data
     ports:
       - "8079:8080"
     environment:
@@ -203,11 +200,9 @@ networks:
   default:
 
 volumes:
-  atlas-data:
+  vbp-data:
   cassandra:
   mysql:
   mongo:
   postgis:
-  cas-data:
-  cas-shared-conf:
   elasticsearch:

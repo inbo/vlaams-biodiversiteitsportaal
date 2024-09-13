@@ -1,10 +1,13 @@
-FROM gradle:7-jdk11 AS builder
+ARG BUILDPLATFORM=linux/amd64
+FROM --platform=${BUILDPLATFORM} gradle:7-jdk11 AS builder
 
-ARG VERSION=3.1.0
+ARG VERSION=fix-admin-index-page
 
 WORKDIR /project
-RUN git clone --branch ${VERSION} --depth 1 https://github.com/AtlasOfLivingAustralia/bie-index.git /project
+RUN git clone --branch ${VERSION} --depth 1 https://github.com/StefanVanDyck/bie-index.git /project
+
 COPY ./i18n/ ./grails-app/i18n/
+
 RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
     gradle build assemble --no-daemon \
     -x test -x integrationTest \
