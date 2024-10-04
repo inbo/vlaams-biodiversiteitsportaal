@@ -1,0 +1,18 @@
+
+/* Authentication menu items */
+.signedIn > li > a.signUpBtn {
+    display: none;
+  }
+  
+  .signedOut > li > a.myProfileBtn {
+    display: none;
+  }
+  
+  .signedIn > li > a.loginBtn  {
+    display: none;
+  }
+  
+  .signedOut > li > a.logoutBtn  {
+    display: none;
+  }
+  
