@@ -18,11 +18,19 @@
     ]
   },
   {
-    "label": "Natura 2000 gebieden",
+    "label": "Openbaar bos en natuurgebieden",
     "fid": "cl10022"
   },
   {
-    "label": "Habitatrichtlijngebieden",
+    "label": "Natura 2000 gebieden",
     "fid": "cl110007"
+  },
+  {
+    "label": "Jachtterreinen",
+    "fid": "cl10013"
+  },
+  {
+    "label": "Wildbeheereenheden",
+    "fid": "cl10011"
   }
 ]
