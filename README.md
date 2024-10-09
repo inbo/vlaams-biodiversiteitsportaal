@@ -44,6 +44,24 @@ The portal is currently deployed to AWS using terraform.
 That logic is maintained in a separate, private project: [inbo-aws-biodiversiteitsportaal-terraform](https://github.com/inbo/inbo-aws-biodiversiteitsportaal-terraform)  
 Look there for more information on how to make changes to the cloud environments.
 
+#### Docker images
+The definition of the docker images can be found in the [/docker folder](/docker).
+To build them and release them to the AWS Elastic Container Registry, you can use the [build.sh script](/docker/build.sh).
+
+```commandline
+# Get AWS ECR authorization token
+aws ecr get-login-password --profile <aws profile name> | docker login --username AWS --password-stdin 632683202044.dkr.ecr.eu-west-1.amazonaws.com
+
+# Build and push the images
+cd docker && DOCKER_BUILDKIT=1 COMPOSE_PARALLEL_LIMIT=1 docker-compose build --push
+```
+
+The `COMPOSE_PARALLEL_LIMIT` is needed because most of the images share a single gradle cache.   
+Most of the projects have the Australian gradle repo hard coded and this makes downloading the dependencies very slow.
+Unfortunately it is not possible to share a gradle between different instances of gradle.  
+That means we can only build a single image at a time.
+
+
 ### Local
 To run the portal locally, you can use the docker-compose files in the [/docker folder](/docker).
 
