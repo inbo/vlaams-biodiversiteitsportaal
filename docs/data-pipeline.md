@@ -1,6 +1,9 @@
 # Data Pipeline
 To add data to the platform, it requires processing first.
 
+##  Code
+The actual logic for processing the data is maintained in the [gbif-pipelines project](https://github.com/gbif/pipelines/tree/dev/livingatlas)
+
 ## Adding a data resource
 The raw data is added in the form of Darwin Core Archives (DwC-A).  
 These are configured in [the _collectory_ service admin interface](https://collections.biodiversiteitsportaal.dev.svdev.be/admin).
