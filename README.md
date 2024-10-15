@@ -61,6 +61,15 @@ Most of the projects have the Australian gradle repo hard coded and this makes d
 Unfortunately it is not possible to share a gradle between different instances of gradle.  
 That means we can only build a single image at a time.
 
+Additionally a specific buildx builder might be required to build the images.
+Again to limit the amount of concurrent gradle instances.
+```commandline
+docker buildx create --use \                                                                                                                            ✔  09:23:28 ▓▒░
+  --name living-atlas \
+  --driver docker-container \
+  --config ./buildkitd.toml
+```
+
 
 ### Local
 To run the portal locally, you can use the docker-compose files in the [/docker folder](/docker).
