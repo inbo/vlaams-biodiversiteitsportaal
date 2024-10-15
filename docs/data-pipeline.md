@@ -50,7 +50,7 @@ Example:
 A distinction is made between small and large data resources.
 This is done to avoid the overhead and additional costs of using AWS EMR when it is not necessary.
 
-The distinction is made based on the size of the downloaded Darwin Core Archive.
+The choice is made based on the size of the downloaded Darwin Core Archive.  
 The threshold is currently set at 10MB.
 
 #### Monitoring
