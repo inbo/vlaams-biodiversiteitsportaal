@@ -72,6 +72,13 @@ cd docker && docker-compose up
 Be aware that running the entire platform requires a lot of resources.  
 [(We are currently working on a hopefully more lightweight version)](https://github.com/orgs/inbo/projects/15?pane=issue&itemId=72746951&issue=inbo%7Cvlaams-biodiversiteitsportaal%7C61)  
 
+The platform currently uses subdomains to differentiate between the different services.
+To make this work locally, you need to add the following lines to your `/etc/hosts` file.
+
+```commandline
+127.0.0.1 localhost branding.la-flanders.org collections.la-flanders.org records.la-flanders.org records-ws.la-flanders.org species-ws.la-flanders.org auth.la-flanders.org logger.la-flanders.org images.la-flanders.org lists.la-flanders.org regions.la-flanders.org species.la-flanders.org la-flanders.org spatial.la-flanders.org index.la-flanders.org mock-oauth2-server
+```
+
 #### Differences with the cloud environments
 Because some AWS Cloud services are not available locally, alternatives are used in the local environment.
 These are:
