@@ -217,7 +217,7 @@ COPY --from=biocache-service-builder \
 COPY --from=collectory-builder \
     /project/build/libs/collectory-${COLLECTORY_VERSION}-plain.war ${CATALINA_HOME}/webapps/collectory.war
 COPY --from=logger-service-builder \
-    /project/build/libs/logger-service-${IMAGE_SERVICE_VERSION}-plain.war ${CATALINA_HOME}/webapps/logger-service.war
+    /project/build/libs/logger-service-${LOGGER_SERVICE_VERSION}-plain.war ${CATALINA_HOME}/webapps/logger-service.war
 COPY --from=image-service-builder \
     /project/build/libs/image-service-${IMAGE_SERVICE_VERSION}-plain.war ${CATALINA_HOME}/webapps/image-service.war
 COPY --from=regions-builder \
