@@ -26,3 +26,5 @@ A script has been provided in the scripts folder to make this a little easier:
 ./scripts/port-forward.sh tf-20240617092958781900000003.ccdv8uvkk6xd.eu-west-1.rds.amazonaws.com 5432 5432
 ```
 
+This should allow you to connect to the database locally using your favorite database client.
+To find the correct host, port and DB credentials, you can look at the [AWS console](https://eu-west-1.console.aws.amazon.com/rds/home?region=eu-west-1).
