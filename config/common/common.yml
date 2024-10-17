@@ -53,6 +53,7 @@ security:
     unauthenticated:
       allowedOriginPatterns: [ "https://.*.${common.domain}" ]
       allowCredentials: false
+
   apikey:
     enabled: true
     auth:
@@ -84,3 +85,11 @@ webservice:
 grails:
   cors:
     enabled: true
+    allowCredentials: false
+    allowedMethods:
+        - '*'
+    allowedHeaders:
+        - '*'
+    allowedOrigins:
+        - '*'
+    mappings: {}
