@@ -396,11 +396,13 @@ services:
     ports:
       - "8983:8983"
     volumes:
-      - ./solr-data:/var/solr/data
+      - ./solr-data:/var/solr/init/docker/solr-data:ro
+      - solr-data:/var/solr/data
     environment:
-      SOLR_HEAP: 4g
+      SOLR_HEAP: 2g
+      SOLR_MODE: solrcloud
     healthcheck:
-      test: [ "CMD-SHELL", "curl -sf http://localhost:8983/solr/bie/admin/ping | grep '\"status\":\"OK\"'" ]
+      test: [ "CMD-SHELL", "curl -sf http://localhost:8983/solr/" ]
     networks:
       default:
         aliases:
