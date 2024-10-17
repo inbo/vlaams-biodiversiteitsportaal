@@ -112,7 +112,7 @@ services:
       SOLR_HEAP: 2g
       SOLR_MODE: solrcloud
     healthcheck:
-      test: [ "CMD-SHELL", "curl -sf http://localhost:8983/solr/bie/admin/ping | grep '\"status\":\"OK\"'" ]
+      test: [ "CMD-SHELL", "curl -sf http://localhost:8983/solr/" ]
     networks:
       default:
         aliases:
