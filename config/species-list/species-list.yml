@@ -40,17 +40,6 @@ fieldGuide:
   baseURL: ''
 grails:
   serverURL: ${common.protocol}://lists.${common.domain}
-  cors:
-      enabled: true
-      allowCredentials: false
-      allowedMethods:
-          - '*'
-      allowedHeaders:
-          - '*'
-      allowedOrigins:
-          - '*'
-      mappings:
-        '[/ws/**]': inherit
 iconicSpecies:
   uid: dr781
 logger:
