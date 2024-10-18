@@ -49,7 +49,8 @@ grails:
           - '*'
       allowedOrigins:
           - '*'
-      mappings: {}
+      mappings:
+        '[/ws/**]': inherit
 iconicSpecies:
   uid: dr781
 logger:
