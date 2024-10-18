@@ -6,14 +6,8 @@ security:
   oidc:
     clientId: lists
     secret: lists-oidc-super-secret
-
   cors:
-    enable: true
-    authenticated:
-      allowedOriginPatterns: [ "https://.*.${common.domain}" ]
-    unauthenticated:
-      allowedOriginPatterns: [ "https://.*.${common.domain}" ]
-      allowCredentials: false
+    enable: false
 webservice:
   client-id: lists
   client-secret: xxx
