@@ -40,6 +40,18 @@ fieldGuide:
   baseURL: ''
 grails:
   serverURL: ${common.protocol}://lists.${common.domain}
+  cors:
+    enabled: true
+    allowCredentials: true
+    allowedMethods:
+      - '*'
+    allowedHeaders:
+      - '*'
+    allowedOrigins: [ ]
+    allowedOriginPatterns: [ "https://*.${common.domain}" ]
+    # Especially needed to override bad default in species list, but might as well make it common
+    mappings:
+      '[/ws/**]': inherit
 iconicSpecies:
   uid: dr781
 logger:
