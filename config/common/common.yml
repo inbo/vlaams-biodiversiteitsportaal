@@ -46,13 +46,13 @@ server:
 
 
 security:
-  cors:
-    enable: true
-    authenticated:
-      allowedOriginPatterns: [ "https://.*.${common.domain}" ]
-    unauthenticated:
-      allowedOriginPatterns: [ "https://.*.${common.domain}" ]
-      allowCredentials: false
+#  cors:
+#    enable: true
+#    authenticated:
+#      allowedOriginPatterns: [ "https://.*.${common.domain}" ]
+#    unauthenticated:
+#      allowedOriginPatterns: [ "https://.*.${common.domain}" ]
+#      allowCredentials: false
 
   apikey:
     enabled: true
