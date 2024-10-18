@@ -6,8 +6,6 @@ security:
   oidc:
     clientId: lists
     secret: lists-oidc-super-secret
-  cors:
-    enable: false
 webservice:
   client-id: lists
   client-secret: xxx

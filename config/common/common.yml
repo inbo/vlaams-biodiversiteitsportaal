@@ -94,4 +94,4 @@ grails:
     allowedOriginPatterns: [ "https://*.${common.domain}" ]
     # Especially needed to override bad default in species list, but might as well make it common
     mappings:
-        '[/ws/**]': inherit
+      '[/ws/**]': inherit
