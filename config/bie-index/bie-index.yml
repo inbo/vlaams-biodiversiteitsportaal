@@ -12,8 +12,6 @@ webservice:
 
 grails:
   serverURL: ${common.protocol}://species-ws.${common.domain}
-  cors:
-    enabled: true
 
 serverName: ${common.protocol}://species-ws.${common.domain}
 
