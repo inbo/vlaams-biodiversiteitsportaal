@@ -27,10 +27,6 @@ auth:
       numeric:
         id:
           path: getUserListWithIds
-  legacy:
-    emailonly:
-      downloads:
-        enabled: false
 autocomplete:
   commonnames:
     extra:
