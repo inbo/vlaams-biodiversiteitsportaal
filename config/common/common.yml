@@ -94,4 +94,5 @@ grails:
     allowedOriginPatterns: [ "https://*.biodiversiteitsportaal.dev.svdev.be" ]
     # Especially needed to override bad default in species list, but might as well make it common
     mappings:
+        '[/**]': inherit
         '[/ws/**]': inherit
