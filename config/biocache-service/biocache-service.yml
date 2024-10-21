@@ -86,6 +86,9 @@ deleted:
   file:
     store: /data/biocache-delete/
 download:
+  offline:
+    max:
+      url: ${common.protocol}://records.${common.domain}/biocache-download/
   batch:
     size: 500
   internal:
@@ -100,6 +103,7 @@ download:
     limit: 10000
   support:
     email: support@${common.domain}
+  url: ${common.protocol}://records.${common.domain}/biocache-download
 dwc:
   url: http://rs.tdwg.org/dwc/terms/
 endemic:
@@ -218,3 +222,5 @@ userdetails:
 doi:
   service:
     url: ${common.protocol}://doi.${common.domain}
+
+
