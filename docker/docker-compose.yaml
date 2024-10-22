@@ -455,7 +455,7 @@ services:
     image: nginx
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d
-      - ../generated/la-flanders-branding/public:/srv/branding.la-flanders.org/www/
+      - ../branding/public:/srv/branding.la-flanders.org/www/
     ports:
       - "80:80"
     environment:
