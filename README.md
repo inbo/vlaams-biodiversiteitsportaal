@@ -88,6 +88,12 @@ To make this work locally, you need to add the following lines to your `/etc/hos
 127.0.0.1 localhost branding.la-flanders.org collections.la-flanders.org records.la-flanders.org records-ws.la-flanders.org species-ws.la-flanders.org auth.la-flanders.org logger.la-flanders.org images.la-flanders.org lists.la-flanders.org regions.la-flanders.org species.la-flanders.org la-flanders.org spatial.la-flanders.org index.la-flanders.org mock-oauth2-server
 ```
 
+To generate the static pages like the homepage and styling, you also need to run the following command in the [branding folder](./branding)
+```commandline
+npm install
+npx brunch build --production
+```
+
 #### Differences with the cloud environments
 Because some AWS Cloud services are not available locally, alternatives are used in the local environment.
 These are:
