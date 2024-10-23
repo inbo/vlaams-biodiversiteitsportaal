@@ -60,7 +60,7 @@ cassandra:
   pool: biocache-store-pool
   port: 9042
 citations:
-  enabled: true
+  enabled: false
 collection:
   contacts:
     url: ${common.protocol}://collections.${common.domain}/ws/collection
