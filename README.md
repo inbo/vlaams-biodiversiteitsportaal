@@ -90,6 +90,7 @@ To make this work locally, you need to add the following lines to your `/etc/hos
 
 To generate the static pages like the homepage and styling, you also need to run the following command in the [branding folder](./branding)
 ```commandline
+git submodule update --init --recursive
 npm install
 npx brunch build --production
 ```
