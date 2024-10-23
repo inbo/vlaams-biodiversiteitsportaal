@@ -101,10 +101,10 @@ download:
   support:
     email: support@${common.domain}
   email:
-    subject: "Jou data op het Vlaams Biodiversiteitsportaal is klaar om te downloaden - [filename]"
-    subject.failure: "Er is een fout opgetreden bij het verwerken van uw downloadverzoek - [filename]"
+    subject: "Jouw data op het Vlaams Biodiversiteitsportaal is klaar om te downloaden - [filename]"
+    subject.failure: "Er is een fout opgetreden bij het verwerken van jouw downloadverzoek - [filename]"
     body:
-      error: "Jou [hubName] download is mislukt."
+      error: "Jouw [hubName] download is mislukt."
   doi:
     resolver: ${common.protocol}://doi.${common.domain}
     email:
