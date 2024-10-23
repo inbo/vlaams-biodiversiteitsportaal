@@ -1,0 +1,232 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        @font-face {
+            font-family: 'flanders-sans';
+            font-style: normal;
+            font-weight: 300;
+            src: local("☺"),
+            url("https://biodiversiteitsportaal.dev.svdev.be/fonts/FlandersArtSans-Light.woff") format("woff")
+        }
+
+        @font-face {
+            font-family: 'flanders-sans';
+            font-style: normal;
+            font-weight: 400;
+            src: local("☺"),
+            url("https://biodiversiteitsportaal.dev.svdev.be/fonts/FlandersArtSans-Regular.woff") format("woff")
+        }
+
+        @font-face {
+            font-family: 'flanders-sans';
+            font-style: normal;
+            font-weight: 500;
+            src: local("☺"),
+            url("https://biodiversiteitsportaal.dev.svdev.be/fonts/FlandersArtSans-Medium.woff") format("woff")
+        }
+
+        @font-face {
+            font-family: 'flanders-sans';
+            font-style: normal;
+            font-weight: 700;
+            src: local("☺"),
+            url("https://biodiversiteitsportaal.dev.svdev.be/fonts/FlandersArtSans-Bold.woff") format("woff")
+        }
+
+        @font-face {
+            font-family: 'flanders-serif';
+            font-style: normal;
+            font-weight: 300;
+            src: local("☺"),
+            url("https://biodiversiteitsportaal.dev.svdev.be/fonts/FlandersArtSerif-Light.woff") format("woff")
+        }
+
+        @font-face {
+            font-family: 'flanders-serif';
+            font-style: normal;
+            font-weight: 400;
+            src: local("☺"),
+            url("https://biodiversiteitsportaal.dev.svdev.be/fonts/FlandersArtSerif-Regular.woff") format("woff")
+        }
+
+        @font-face {
+            font-family: 'flanders-serif';
+            font-style: normal;
+            font-weight: 500;
+            src: local("☺"),
+            url("https://biodiversiteitsportaal.dev.svdev.be/fonts/FlandersArtSerif-Medium.woff") format("woff")
+        }
+
+        @font-face {
+            font-family: 'flanders-serif';
+            font-style: normal;
+            font-weight: 700;
+            src: local("☺"),
+            url("https://biodiversiteitsportaal.dev.svdev.be/fonts/FlandersArtSerif-Bold.woff") format("woff")
+        }
+
+        body {
+            margin: 2em;
+            font-family: 'flanders-sans', sans-serif !important;
+        }
+        .content {
+            text-align: center;
+        }
+        query_link {
+            font-size: small;
+            color: #666;
+        }
+        a {
+            color: #a83d7a;
+            text-decoration: none;
+        }
+        a:hover {
+            color: rgb(53, 97, 150);
+            text-decoration: underline;
+        }
+        footer {
+            margin-top: 2em;
+        }
+        .vlaanderen-logo {
+            max-width: 200px
+        }
+
+        .button {
+           background-color: #a83d7a;
+           color: white;
+           border-radius: 0.5em;
+           padding: 1em;
+           margin: 1em;
+           display: inline-block;
+           font-weight: bold;
+        }
+
+        .button:hover{
+            color: white;
+            background-color: rgb(53, 97, 150);
+            text-decoration: none;
+        }
+        .query-link {
+            margin-top: 2em;
+        }
+
+        .footer-container {
+          display: flex;
+          align-items: center;
+          border-top: 1px #cbd2da solid;
+          padding-top: 1em;
+          height: 100px;
+          position: relative;
+        }
+        .footer-logo {
+            display: flex;
+              align-items: center;
+              position: relative;
+        }
+        .footer-body {
+            display: inline-block;
+            margin-left: 5em;
+            font-size: 0.75em;
+        }
+        .footer-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin: 0px;
+            padding: 0px;
+        }
+        footer p {
+            margin: 0px;
+            padding: 0px;
+        }
+        footer a {
+            color: black;
+            text-decoration: underline;
+
+            &:hover {
+                color: "red";
+                text-decoration: none;
+            }
+        }
+        .footer-links {
+          list-style: none;
+          display: flex;
+          flex-wrap: wrap;
+          margin-top: 15px;
+        }
+        .footer-link-item {
+            display: flex;
+            box-sizing: border-box;
+            align-items: center;
+            padding: 0;
+            border: 0;
+            margin: 0;
+            margin-right: 10px;
+
+            &:not(:last-of-type)::after {
+                content: "";
+                display: inline-block;
+                width: 1px;
+                margin-top: 1px;
+                height: 10px;
+                background: #cbd2da;
+                margin-left: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="content">
+    <h1>🎉 Je download staat klaar in het portaal 🎉</h1>
+    <a class="button" href="[url]">
+        🖴 Nu downloaden
+    </a>
+    <p class="query-link">
+        Bekijk de gebruikte zoekopdracht in het portaal: <a href="[searchUrl]">[queryTitle]</a>
+    </p>
+</div>
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-logo">
+            <img class="vlaanderen-logo"
+                 src="https://assets.vlaanderen.be/image/upload/c_scale,q_auto:eco,w_1000/Vlaanderen_is_wetenschap_vol_xnbdq2"
+                 srcset="https://assets.vlaanderen.be/image/upload/c_scale,q_auto:eco,w_320/Vlaanderen_is_wetenschap_vol_xnbdq2 320w, https://assets.vlaanderen.be/image/upload/c_scale,q_auto:eco,w_480/Vlaanderen_is_wetenschap_vol_xnbdq2 480w, https://assets.vlaanderen.be/image/upload/c_scale,q_auto:eco,w_960/Vlaanderen_is_wetenschap_vol_xnbdq2 960w, https://assets.vlaanderen.be/image/upload/c_scale,q_auto:eco,w_1420/Vlaanderen_is_wetenschap_vol_xnbdq2 1420w, https://assets.vlaanderen.be/image/upload/c_scale,q_auto:eco,w_1920/Vlaanderen_is_wetenschap_vol_xnbdq2 1920w"
+                 sizes="(max-width:500px) 50vw, 25vw"/>
+        </div>
+        <div class="footer-body">
+            <div>
+                <h2 class="footer-title">
+                    Het Vlaams Biodiversiteitsportaal is een officiële website van de Vlaamse overheid
+                </h2>
+                <p class="footer-subtitle">
+                    uitgegeven door
+                    <a href="https://www.vlaanderen.be/inbo" target="_blank" rel="noopener noreferrer">
+                        Instituut voor Natuur- en Bosonderzoek
+                    </a>
+            </div>
+            <ul class="footer-links">
+                <li class="footer-link-item">
+                    <a
+                        href="https://www.vlaanderen.be/inbo/privacyverklaring/"
+                        rel="noopener noreferrer" class="footer-link-item__cta">Privacyverklaring
+                </a>
+                </li>
+                <li class="footer-link-item">
+                    <a
+                        href="https://www.vlaanderen.be/inbo/cookiebeleid/"
+                        rel="noopener noreferrer" class="footer-link-item__cta">Cookieverklaring
+                </a>
+                </li>
+                <li class="footer-link-item">
+                    <a
+                        href="https://www.vlaanderen.be/inbo/toegankelijkheidsverklaring/"
+                        rel="noopener noreferrer"
+                        class="footer-link-item__cta">Toegankelijkheidsverklaring
+                </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
