@@ -5,6 +5,9 @@ ARG VERSION=3.5.1
 
 WORKDIR /project
 RUN git clone --branch ${VERSION} --depth 1 https://github.com/AtlasOfLivingAustralia/biocache-service.git /project
+
+COPY ./i18n/messages-nl.properties ./src/main/webapp/WEB-INF/messages.properties
+
 RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
     gradle build assemble --no-daemon \
     -x test \

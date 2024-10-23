@@ -82,6 +82,7 @@ deleted:
   file:
     store: /data/biocache-delete/
 download:
+  url: ${common.protocol}://records.${common.domain}/biocache-download
   offline:
     max:
       url: ${common.protocol}://records.${common.domain}/biocache-download/
@@ -99,7 +100,30 @@ download:
     limit: 10000
   support:
     email: support@${common.domain}
-  url: ${common.protocol}://records.${common.domain}/biocache-download
+  email:
+    subject: "Jou data op het Vlaams Biodiversiteitsportaal is klaar om te downloaden - [filename]"
+    subject.failure: "Er is een fout opgetreden bij het verwerken van uw downloadverzoek - [filename]"
+    body:
+      error: "Jou [hubName] download is mislukt."
+  doi:
+    resolver: ${common.protocol}://doi.${common.domain}
+    email:
+      template:
+    title:
+      prefix: "Waarnemingen download"
+    landing:
+        page: ${common.protocol}://doi.${common.domain}/
+    readme:
+      template:
+  readme:
+    template:
+      url: ${common.protocol}://doi.${common.domain}/
+    email:
+      template:
+my:
+  download:
+    doi:
+      baseUrl: ${common.protocol}://doi.${common.domain}/myDownloads
 dwc:
   url: http://rs.tdwg.org/dwc/terms/
 endemic:
@@ -218,5 +242,6 @@ userdetails:
 doi:
   service:
     url: ${common.protocol}://doi.${common.domain}
+  provider: VBP
 
 
