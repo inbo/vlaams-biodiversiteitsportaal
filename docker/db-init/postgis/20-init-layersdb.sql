@@ -20,12 +20,7 @@ SET default_with_oids = false;
 -- CREATE USER ${POSTGRES_USER} WITH PASSWORD '${POSTGRES_PASSWORD}';
 -- GRANT ALL PRIVILEGES ON DATABASE ${POSTGRES_DB} TO ${POSTGRES_USER};
 
-\connect layersdb;
-
--- Enable PostGIS (includes raster)
-CREATE EXTENSION postgis;
--- Enable Topology
-CREATE EXTENSION postgis_topology;
+\connect layersdb spatial;
 
 CREATE TYPE searchobjectstype AS
 (

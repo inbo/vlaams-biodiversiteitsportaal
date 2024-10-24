@@ -3,6 +3,7 @@ services:
     image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/living-atlas:dev
     build:
       context: atlas-all
+###   !! Comment the next section out on local environment (unless it's arm64)
       x-bake:
         platforms:
         - linux/arm64
@@ -10,10 +11,15 @@ services:
       - "8080:8080"
     volumes:
       - ../config:/config/config:ro
+      - ./atlas-all/tomcat-manager-ui/host-manager:/usr/local/tomcat/webapps/host-manager
+      - ./atlas-all/tomcat-manager-ui/manager:/usr/local/tomcat/webapps/manager
       - vbp-data:/data
     environment:
       SPRING_PROFILES_ACTIVE: local
 #      LOG_FORMAT: JSON
+#    depends_on:
+#      mysql-logger-init:
+#        condition: service_completed_successfully
 
   postgis:
     image: postgis/postgis:16-3.4-alpine
@@ -78,6 +84,26 @@ services:
       MYSQL_ROOT_PASSWORD: my-super-secret-password
     healthcheck:
       test: mysqladmin ping -h localhost
+
+  mysql-logger-init:
+#    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/docker-hub/library/mysql
+    image: mysql
+    volumes:
+      - ../config:/config/config:ro
+    command: bash -c "cat /config/config/logger/db-init/*.sql | mysql --host=mysql --user=logger --password=my-super-secret-password --database logger"
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  mysql-userdetails-init:
+    #    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/docker-hub/library/mysql
+    image: mysql
+    volumes:
+      - ../config:/config/config:ro
+    command: bash -c "cat /config/config/userdetails/db-init/*.sql | mysql --host=mysql --user=cas --password=my-super-secret-password --database cas"
+    depends_on:
+      mysql:
+        condition: service_healthy
 
   cassandradb:
     image: cassandra:3
