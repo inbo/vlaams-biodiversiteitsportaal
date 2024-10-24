@@ -3,7 +3,10 @@
 security:
   jwt:
     clientId: userdetails
+  cas:
+    enabled: true
   oidc:
+    enabled: false
     clientId: userdetails
     secret: userdetails-oidc-super-secret
 webservice:
@@ -53,6 +56,7 @@ server:
 redirectAfterFirstLogin: ${grails.serverURL}/myprofile
 dataSource:
   dbCreate: none
+  driverClassName: com.mysql.jdbc.Driver
   url: jdbc:mysql://cas:my-super-secret-password@mysql:3306/cas?serverTimezone=Europe/Brussels&zeroDateTimeBehavior=convertToNull&characterEncoding=UTF-8&useSSL=False&allowPublicKeyRetrieval=true
 oauth:
   providers:

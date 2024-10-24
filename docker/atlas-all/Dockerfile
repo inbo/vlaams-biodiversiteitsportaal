@@ -158,22 +158,22 @@ RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
     --parallel
 
 
-######################################### CAS APIKEY #########################################
-FROM gradle:7-jdk11 AS cas-apikey-builder
+########################################## CAS APIKEY #########################################
+#FROM gradle:7-jdk11 AS cas-apikey-builder
+#
+#ARG CAS_APIKEY_VERSION=1.7.0
+#
+#WORKDIR /project
+#RUN git clone --branch ${CAS_APIKEY_VERSION} --depth 1 https://github.com/AtlasOfLivingAustralia/apikey.git /project
+#RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
+#    gradle build assemble --no-daemon \
+#    -x test -x integrationTest \
+#    # -Dorg.gradle.debug=true -Dorg.gradle.debug.suspend=no --debug \
+#    --parallel
+#
+#RUN ls -la /project/build/libs/
 
-ARG CAS_APIKEY_VERSION=1.7.0
-
-WORKDIR /project
-RUN git clone --branch ${CAS_APIKEY_VERSION} --depth 1 https://github.com/AtlasOfLivingAustralia/apikey.git /project
-RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
-    gradle build assemble --no-daemon \
-    -x test -x integrationTest \
-    # -Dorg.gradle.debug=true -Dorg.gradle.debug.suspend=no --debug \
-    --parallel
-
-RUN ls -la /project/build/libs/
-
-######################################### USERDETAILS #########################################
+########################################## USERDETAILS #########################################
 FROM gradle:7-jdk11 AS userdetails-builder
 
 ARG USERDETAILS_VERSION=3.0.3
@@ -228,8 +228,8 @@ COPY --from=spatial-service-builder \
     /project/build/libs/project-${SPATIAL_SERVICE_VERSION}-plain.war ${CATALINA_HOME}/webapps/spatial-service.war
 COPY --from=species-list-builder \
     /project/build/libs/specieslist-webapp-${SPECIES_LIST_VERSION}-plain.war ${CATALINA_HOME}/webapps/species-list.war
-COPY --from=cas-apikey-builder \
-    /project/build/libs/apikey-${CAS_APIKEY_VERSION}-plain.war ${CATALINA_HOME}/webapps/cas-apikey.war
+#COPY --from=cas-apikey-builder \
+#    /project/build/libs/apikey-${CAS_APIKEY_VERSION}-plain.war ${CATALINA_HOME}/webapps/cas-apikey.war
 COPY --from=userdetails-builder \
     /project/build/libs/userdetails-${USERDETAILS_VERSION}-plain.war ${CATALINA_HOME}/webapps/userdetails.war
 

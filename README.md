@@ -93,7 +93,7 @@ To generate the static pages like the homepage and styling, you also need to run
 cd branding
 git submodule update --init --recursive
 npm install
-npx brunch build --production
+NODE_ENV=docker npx brunch build
 ```
 
 #### Differences with the cloud environments

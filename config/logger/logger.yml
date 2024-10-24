@@ -12,3 +12,6 @@ webservice:
 
 grails:
   serverURL: ${common.protocol}://logger.${common.domain}
+
+dataSource:
+  url: jdbc:mysql://logger:my-super-secret-password@mysql:3306/logger?autoReconnect=true&connectTimeout=0&useUnicode=true&characterEncoding=UTF-8&allowPublicKeyRetrieval=true&useSSL=False&serverTimezone=Europe/Paris
