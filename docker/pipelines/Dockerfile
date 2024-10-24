@@ -42,7 +42,7 @@ VOLUME /data
 
 ARG TARGETARCH
 
-RUN curl -o /usr/bin/yq -LJO https://github.com/mikefarah/yq/releases/download/v4.9.6/yq_linux_$TARGETARCH \
+RUN curl -o /usr/bin/yq -LJO https://github.com/mikefarah/yq/releases/download/v4.44.3/yq_linux_$TARGETARCH \
     && chmod +x /usr/bin/yq
 
 RUN if [ $TARGETARCH = "amd64" ] ; then curl -o /usr/bin/docopts -LJO https://github.com/docopt/docopts/releases/download/v0.6.3-rc2/docopts_linux_amd64 ; fi

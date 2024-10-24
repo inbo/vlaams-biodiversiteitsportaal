@@ -105,21 +105,20 @@ download:
     subject.failure: "Er is een fout opgetreden bij het verwerken van jouw downloadverzoek - [filename]"
     body:
       error: "Jouw [hubName] download is mislukt."
+    template: /config/config/biocache-service/templates/email.html
   doi:
     resolver: ${common.protocol}://doi.${common.domain}
     email:
-      template:
+      template: /config/config/biocache-service/templates/email.html
     title:
       prefix: "Waarnemingen download"
     landing:
         page: ${common.protocol}://doi.${common.domain}/
     readme:
-      template:
+      template: /config/config/biocache-service/templates/readme.html
   readme:
     template:
       url: ${common.protocol}://doi.${common.domain}/
-    email:
-      template:
 my:
   download:
     doi:

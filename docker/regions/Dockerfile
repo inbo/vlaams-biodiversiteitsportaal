@@ -3,8 +3,11 @@ FROM --platform=${BUILDPLATFORM} gradle:7-jdk11 AS builder
 
 WORKDIR /project
 
-ARG VERSION=4.0.0
-RUN git clone --branch ${VERSION} --depth 1 https://github.com/AtlasOfLivingAustralia/regions.git /project
+ARG VERSION=inbo/vlaams-biodiversiteitsportaal-26-fix-error-when-showing-timelapse
+RUN git clone --branch ${VERSION} --depth 1 https://github.com/StefanVanDyck/regions.git /project
+
+# ARG VERSION=4.0.0
+# RUN git clone --branch ${VERSION} --depth 1 https://github.com/AtlasOfLivingAustralia/regions.git /project
 
 COPY ./i18n/ ./grails-app/i18n/
 
@@ -14,10 +17,10 @@ RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
     # -Dorg.gradle.debug=true -Dorg.gradle.debug.suspend=no --debug \
     --parallel
 
-
 FROM openjdk:11
 
-ARG VERSION=4.0.0
+# ARG VERSION=4.0.0
+ARG VERSION=4.1.0-SNAPSHOT
 # Create the user
 RUN groupadd --gid 1000 app \
     && useradd --uid 1000 --gid 1000 -m -d /app app
