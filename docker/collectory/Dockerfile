@@ -4,7 +4,7 @@ FROM --platform=${BUILDPLATFORM} gradle:7-jdk11 AS builder
 
 WORKDIR /project
 
-ARG VERSION=fix-list-my-institutions
+ARG VERSION=fix-use-occurenceid-as-default-unique-id-when-scanning-ipt
 RUN git clone --branch ${VERSION} --depth 1 https://github.com/StefanVanDyck/collectory /project
 
 # ARG VERSION=5.1.1
