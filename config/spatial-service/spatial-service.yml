@@ -107,3 +107,5 @@ management:
     web:
       exposure:
         include: health
+
+useFixedLocale: en

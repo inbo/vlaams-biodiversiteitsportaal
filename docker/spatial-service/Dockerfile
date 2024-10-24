@@ -4,8 +4,7 @@ FROM --platform=${BUILDPLATFORM} gradle:7-jdk11 AS builder
 
 WORKDIR /spatial-service
 
-ARG test=14
-ARG VERSION=fix-deleting-uploads
+ARG VERSION=vbp-develop
 RUN git clone --branch ${VERSION} --depth 1 https://github.com/StefanVanDyck/spatial-service.git /spatial-service
 
 # ARG VERSION=2.1.5
