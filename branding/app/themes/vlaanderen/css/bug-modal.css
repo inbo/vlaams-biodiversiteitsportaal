@@ -1,0 +1,40 @@
+.banner-bug-modal {
+    display: inline-block;
+    margin-top: 0.8em;
+    margin-left: 0.5em;
+    margin-right: 5em !important;
+}
+
+.footer-bug-modal {
+  text-align: right;
+  margin-left: auto !important;
+  margin-right: 0;
+}
+
+.bug-modal-button {
+  margin-left: auto;
+  margin-right: 0;
+  display: block;
+  height: 2em;
+  width: 2em;
+}
+
+.bug-icon {
+  fill: #a83d7a;
+  height: 2em;
+  width: 2em;
+}
+
+.bug-icon:hover {
+  fill: rgb(53, 97, 150);
+}
+
+.bug-modal-header {
+    padding-top: 1.5em;
+    padding-left: 2em;
+}
+
+.bug-modal-content {
+  white-space: pre-line;
+  padding: 2em;
+}
