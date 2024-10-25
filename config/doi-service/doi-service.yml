@@ -6,7 +6,7 @@ flyway:
   table: schema_version
 
 support:
-  email: support@${common.domain}
+  email: ${common.supportEmail}
 
 grails:
   serverURL: ${common.protocol}://doi.${common.domain}

@@ -144,7 +144,7 @@ bie:
 openapi:
   terms:
   contact:
-    email: support@${common.domain}
+    email: ${common.supportEmail}
   components:
     security:
       oauth2:
