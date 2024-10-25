@@ -196,7 +196,7 @@ specieslist:
 #  Tasmania: /speciesListItem/list/dr654
 #  Victoria: /speciesListItem/list/dr655
 #  WesternAustralia: /speciesListItem/list/dr2201
-supportEmail: support@${common.domain}
+supportEmail: ${common.supportEmail}
 table:
   displayDynamicProperties: false
 uriExclusionFilterPattern: /occurrences/shapeUpload,/images.*,/css.*,/js.*,.*json,/help/.*

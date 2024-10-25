@@ -159,7 +159,7 @@ dataquality:
 
 speciesParent: ${common.protocol}://lists.${common.domain}/iconic-species
 
-supportEmail: support@${common.domain}
+supportEmail: ${common.supportEmail}
 
 survey:
   indexPage: False
