@@ -122,21 +122,37 @@
                resourceName="UserDatabase"/>
       </Realm>
 
-      <Host name="localhost"  appBase="webapps"
-            unpackWARs="true" autoDeploy="false">
+      <Host name="auth.la-flanders.org" appBase="webapps/userdetails" unpackWARs="true" autoDeploy="false">
 
-        <!-- SingleSignOn valve, share authentication between web applications
-             Documentation at: /docs/config/valve.html -->
-        <!--
-        <Valve className="org.apache.catalina.authenticator.SingleSignOn" />
-        -->
+      </Host>
+      <Host name="collections.la-flanders.org" appBase="webapps/collectory" unpackWARs="true" autoDeploy="false">
 
-        <!-- Access log processes all example.
-             Documentation at: /docs/config/valve.html
-             Note: The pattern used is equivalent to using pattern="common" -->
-<!--        <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"-->
-<!--               prefix="localhost_access_log." suffix=".txt"-->
-<!--               pattern="%h %l %u %t &quot;%r&quot; %s %b" />-->
+      </Host>
+      <Host name="images.la-flanders.org" appBase="webapps/imageservice" unpackWARs="true" autoDeploy="false">
+
+      </Host>
+      <Host name="lists.la-flanders.org" appBase="webapps/species-list" unpackWARs="true" autoDeploy="false">
+
+      </Host>
+      <Host name="logger.la-flanders.org" appBase="webapps/logger" unpackWARs="true" autoDeploy="false">
+
+      </Host>
+      <Host name="records.la-flanders.org" appBase="webapps/biocache-hub" unpackWARs="true" autoDeploy="false">
+
+      </Host>
+      <Host name="records-ws.la-flanders.org" appBase="webapps/biocache-service" unpackWARs="true" autoDeploy="false">
+
+      </Host>
+      <Host name="regions.la-flanders.org" appBase="webapps/regions" unpackWARs="true" autoDeploy="false">
+
+      </Host>
+      <Host name="spatial.la-flanders.org" appBase="webapps/spatial" unpackWARs="true" autoDeploy="false">
+
+      </Host>
+      <Host name="species.la-flanders.org" appBase="webapps/bie-hub" unpackWARs="true" autoDeploy="false">
+
+      </Host>
+      <Host name="species-ws.la-flanders.org" appBase="webapps/bie-index" unpackWARs="true" autoDeploy="false">
 
       </Host>
     </Engine>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context docBase="/usr/local/tomcat/webapps/biocache-service.war"
-         path="/biocache-service"
-         reloadable="false">
+<!-- biocache-service -->
+<Context reloadable="false">
 
     <Parameter name="spring.config.additional-location"
                value="file:/config/config/common/common.yml,file:/config/config/biocache-service/biocache-service.yml"

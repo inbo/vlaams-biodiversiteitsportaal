@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context docBase="/usr/local/tomcat/webapps/regions.war"
-         path="/regions"
-         reloadable="false">
+<!-- spatial-service -->
+<Context reloadable="false">
 
     <Parameter name="spring.config.additional-location"
-               value="file:/config/config/common/common.yml,file:/config/config/regions/regions.yml"
+               value="file:/config/config/common/common.yml,file:/config/config/spatial-service/spatial-service.yml"
                override="false"/>
     <Parameter name="spring.profiles.active"
                value="local"

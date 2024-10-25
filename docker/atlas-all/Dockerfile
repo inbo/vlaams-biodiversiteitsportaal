@@ -207,31 +207,31 @@ ARG CAS_APIKEY_VERSION=1.7.0
 ARG USERDETAILS_VERSION=3.0.3
 
 COPY --from=bie-hub-builder \
-    /project/build/libs/ala-bie-hub-${BIE_HUB_VERSION}-plain.war ${CATALINA_HOME}/webapps/bie-hub.war
+    /project/build/libs/ala-bie-hub-${BIE_HUB_VERSION}-plain.war ${CATALINA_HOME}/webapps/bie-hub/ROOT.war
 COPY --from=bie-index-builder \
-    /project/build/libs/bie-index-${BIE_INDEX_VERSION}-plain.war ${CATALINA_HOME}/webapps/bie-index.war
+    /project/build/libs/bie-index-${BIE_INDEX_VERSION}-plain.war ${CATALINA_HOME}/webapps/bie-index/ROOT.war
 COPY --from=biocache-hub-builder \
-    /project/build/libs/ala-hub-${BIOCACHE_HUB_VERSION}-plain.war ${CATALINA_HOME}/webapps/biocache-hub.war
+    /project/build/libs/ala-hub-${BIOCACHE_HUB_VERSION}-plain.war ${CATALINA_HOME}/webapps/biocache-hub/ROOT.war
 COPY --from=biocache-service-builder \
-    /project/build/libs/biocache-service-${BIOCACHE_SERVICE_VERSION}.war ${CATALINA_HOME}/webapps/biocache-service.war
+    /project/build/libs/biocache-service-${BIOCACHE_SERVICE_VERSION}.war ${CATALINA_HOME}/webapps/biocache-service/ROOT.war
 COPY --from=collectory-builder \
-    /project/build/libs/collectory-${COLLECTORY_VERSION}-plain.war ${CATALINA_HOME}/webapps/collectory.war
+    /project/build/libs/collectory-${COLLECTORY_VERSION}-plain.war ${CATALINA_HOME}/webapps/collectory/ROOT.war
 COPY --from=logger-service-builder \
-    /project/build/libs/logger-service-${LOGGER_SERVICE_VERSION}-plain.war ${CATALINA_HOME}/webapps/logger-service.war
+    /project/build/libs/logger-service-${LOGGER_SERVICE_VERSION}-plain.war ${CATALINA_HOME}/webapps/logger/ROOT.war
 COPY --from=image-service-builder \
-    /project/build/libs/image-service-${IMAGE_SERVICE_VERSION}-plain.war ${CATALINA_HOME}/webapps/image-service.war
+    /project/build/libs/image-service-${IMAGE_SERVICE_VERSION}-plain.war ${CATALINA_HOME}/webapps/imageservice/ROOT.war
 COPY --from=regions-builder \
-    /project/build/libs/regions-${REGIONS_VERSION}-plain.war ${CATALINA_HOME}/webapps/regions.war
+    /project/build/libs/regions-${REGIONS_VERSION}-plain.war ${CATALINA_HOME}/webapps/regions/ROOT.war
 COPY --from=spatial-hub-builder \
-    /project/build/libs/project-${SPATIAL_HUB_VERSION}-plain.war ${CATALINA_HOME}/webapps/spatial-hub.war
+    /project/build/libs/project-${SPATIAL_HUB_VERSION}-plain.war ${CATALINA_HOME}/webapps/spatial/ROOT.war
 COPY --from=spatial-service-builder \
-    /project/build/libs/project-${SPATIAL_SERVICE_VERSION}-plain.war ${CATALINA_HOME}/webapps/spatial-service.war
+    /project/build/libs/project-${SPATIAL_SERVICE_VERSION}-plain.war ${CATALINA_HOME}/webapps/spatial/ws.war
 COPY --from=species-list-builder \
-    /project/build/libs/specieslist-webapp-${SPECIES_LIST_VERSION}-plain.war ${CATALINA_HOME}/webapps/species-list.war
+    /project/build/libs/specieslist-webapp-${SPECIES_LIST_VERSION}-plain.war ${CATALINA_HOME}/webapps/species-list/ROOT.war
 #COPY --from=cas-apikey-builder \
 #    /project/build/libs/apikey-${CAS_APIKEY_VERSION}-plain.war ${CATALINA_HOME}/webapps/cas-apikey.war
 COPY --from=userdetails-builder \
-    /project/build/libs/userdetails-${USERDETAILS_VERSION}-plain.war ${CATALINA_HOME}/webapps/userdetails.war
+    /project/build/libs/userdetails-${USERDETAILS_VERSION}-plain.war ${CATALINA_HOME}/webapps/userdetails/userdetails.war
 
 COPY conf ${CATALINA_HOME}/conf
 

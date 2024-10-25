@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context docBase="/usr/local/tomcat/webapps/bie-index.war"
-         path="/bie-index"
-         reloadable="false">
+<!-- imageservice -->
+<Context reloadable="false">
 
     <Parameter name="spring.config.additional-location"
-               value="file:/config/config/common/common.yml,file:/config/config/bie-index/bie-index.yml"
+               value="file:/config/config/common/common.yml,file:/config/config/image-service/image-service.yml"
                override="false"/>
     <Parameter name="spring.profiles.active"
                value="local"

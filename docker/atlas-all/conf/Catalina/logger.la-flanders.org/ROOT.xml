@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context docBase="/usr/local/tomcat/webapps/bie-hub.war"
-         path="/bie-hub"
-         reloadable="false">
+<Context reloadable="false">
 
     <Parameter name="spring.config.additional-location"
-               value="file:/config/config/common/common.yml,file:/config/config/bie-hub/bie-hub.yml"
+               value="file:/config/config/common/common.yml,file:/config/config/logger/logger.yml"
                override="false"/>
     <Parameter name="spring.profiles.active"
                value="local"

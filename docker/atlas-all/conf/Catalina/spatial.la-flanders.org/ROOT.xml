@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context docBase="/usr/local/tomcat/webapps/species-list.war"
-         path="/species-list"
-         reloadable="false">
+<!-- spatial-hub -->
+<Context reloadable="false">
 
     <Parameter name="spring.config.additional-location"
-               value="file:/config/config/common/common.yml,file:/config/config/species-list/species-list.yml"
+               value="file:/config/config/common/common.yml,file:/config/config/spatial-hub/spatial-hub.yml"
                override="false"/>
     <Parameter name="spring.profiles.active"
                value="local"
