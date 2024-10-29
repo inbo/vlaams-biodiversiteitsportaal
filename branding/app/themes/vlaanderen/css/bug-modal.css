@@ -19,13 +19,13 @@
   width: 2em;
 }
 
-.bug-icon {
+#bug-icon {
   fill: #a83d7a;
   height: 2em;
   width: 2em;
 }
 
-.bug-icon:hover {
+#bug-icon:hover {
   fill: rgb(53, 97, 150);
 }
 
