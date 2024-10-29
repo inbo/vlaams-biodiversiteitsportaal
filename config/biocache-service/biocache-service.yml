@@ -151,7 +151,9 @@ list:
     url: ${common.protocol}://lists.${common.domain}
 media:
   dir: /data/biocache-media/
-  url: ${common.protocol}://media.${common.domain}
+  url: ${common.protocol}://images.${common.domain}
+  store:
+    url: ${common.protocol}://images.${common.domain}/store
 name:
   index:
     dir: /data/lucene/namematching_v13
