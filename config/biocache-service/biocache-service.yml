@@ -153,7 +153,7 @@ media:
   dir: /data/biocache-media/
   url: ${common.protocol}://images.${common.domain}
   store:
-    url: ${common.protocol}://images.${common.domain}/store
+    url: ${common.protocol}://images.${common.domain}
 name:
   index:
     dir: /data/lucene/namematching_v13
