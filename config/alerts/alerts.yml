@@ -6,95 +6,95 @@
 # In dev, email will be posted to Postie docker container, which can be accessed via http://localhost:3000
 
 mail:
+  enabled: true
+  ses:
     enabled: true
-    ses:
-        enabled: true
-    details:
-        sender: "${common.supportEmail}"
-        alertAddressTitle: "Biodiversiteitsportaal alerts"
-        infoSender: "${common.supportEmail}"
-        infoAddressTitle: "Vlaams Biodiversiteitsportaal"
-        defaultResourceName: "Vlaams Biodiversiteitsportaal"
-        # forceAllAlertsGetSent results in emails getting sent regardless if data has changed - only use in DEV env
-        forceAllAlertsGetSent: true
+  details:
+    sender: "${common.supportEmail}"
+    alertAddressTitle: "Biodiversiteitsportaal alerts"
+    infoSender: "${common.supportEmail}"
+    infoAddressTitle: "Vlaams Biodiversiteitsportaal"
+    defaultResourceName: "Vlaams Biodiversiteitsportaal"
+    # forceAllAlertsGetSent results in emails getting sent regardless if data has changed - only use in DEV env
+    forceAllAlertsGetSent: true
 
 grails:
-    #default mail service
-    serverURL: "${common.protocol}://alerts.${common.domain}"
-    mail:
-        port: 2525
-        server: localhost
+  #default mail service
+  serverURL: "${common.protocol}://alerts.${common.domain}"
+  mail:
+    port: 2525
+    server: localhost
 
 skin:
-    layout: "ala-main"
-    orgSupportEmail: ${common.supportEmail}
+  layout: "ala-main"
+  orgSupportEmail: ${common.supportEmail}
 privacyPolicy: "${common.protocol}://www.${common.domain}/terms-of-use/privacy-policy/"
 siteDefaultLanguage: "nl"
 
 ala:
-    baseURL: "${common.protocol}://www.${common.domain}"
-    userDetailsURL: "${common.protocol}://auth.${common.domain}/userdetails/userDetails/getUserListFull"
+  baseURL: "${common.protocol}://www.${common.domain}"
+  userDetailsURL: "${common.protocol}://auth.${common.domain}/userdetails/userDetails/getUserListFull"
 biocacheService:
-    biocacheService: "${common.protocol}://records-ws.${common.domain}"
+  biocacheService: "${common.protocol}://records-ws.${common.domain}"
 biocache:
-    baseURL: "${common.protocol}://records.${common.domain}"
+  baseURL: "${common.protocol}://records.${common.domain}"
 spatial:
-    baseURL: "${common.protocol}://spatial.${common.domain}"
+  baseURL: "${common.protocol}://spatial.${common.domain}"
 collectory:
-    baseURL: "${common.protocol}://collections.${common.domain}"
+  baseURL: "${common.protocol}://collections.${common.domain}"
 lists:
-    baseURL: "${common.protocol}://lists.${common.domain}"
+  baseURL: "${common.protocol}://lists.${common.domain}"
 speciesPages:
-    searchURL: "${common.protocol}://species.${common.domain}/species/Tiliqua+rugosa"
-    searchTitle: Shingle-back
+  searchURL: "${common.protocol}://species.${common.domain}/species/Tiliqua+rugosa"
+  searchTitle: Shingle-back
 collection:
-    searchURL: "${common.protocol}://collections.${common.domain}/public/show/co13"
-    searchTitle: ANIC
+  searchURL: "${common.protocol}://collections.${common.domain}/public/show/co13"
+  searchTitle: ANIC
 regions:
-    searchURL: "${common.protocol}://regions.${common.domain}/states/Australian+Capital+Territory"
-    searchTitle: ACT
+  searchURL: "${common.protocol}://regions.${common.domain}/states/Australian+Capital+Territory"
+  searchTitle: ACT
 occurrence:
-    searchURL: "${common.protocol}://records.${common.domain}/occurrences/search?q=passer"
-    searchTitle: occurrence search
+  searchURL: "${common.protocol}://records.${common.domain}/occurrences/search?q=passer"
+  searchTitle: occurrence search
 
 useSpeciesListsAlerts: true
 useSpatialAlerts: true
 useBlogsAlerts: false
 useCitizenScienceAlerts: false
 biosecurity:
-    cronExpression: '0 30 9 ? * WED'
-    query:
-        template:
-            authoritativeList: /occurrences/search?q=species_list_uid:___LISTIDPARAM___&fq=decade:2020&fq=country:Australia&fq=first_loaded_date:[___DATEPARAM___%20TO%20*]&fq=occurrence_date:[___LASTYEARPARAM___%20TO%20*]&sort=first_loaded_date&dir=desc&disableAllQualityFilters=true
-            nonAuthoritativeList: /occurrences/search?q=species_list:___LISTIDPARAM___&fq=decade:2020&fq=country:Australia&fq=first_loaded_date:[___DATEPARAM___%20TO%20*]&fq=occurrence_date:[___LASTYEARPARAM___%20TO%20*]&sort=first_loaded_date&dir=desc&disableAllQualityFilters=true
-        maxRecords: 500
-    moreinfo:
-        link: ${common.protocol}://www.${common.domain}/blogs-news/ala-helps-to-stop-pests-in-their-tracks/
-    csv:
-        local:
-            enabled: true
-            directory: /data/alerts/csv
-        s3:
-            enabled: false
-            bucket: alerts
-        # read lga from the layer
-        lga: LGA2023
+  cronExpression: '0 30 9 ? * WED'
+  query:
+    template:
+      authoritativeList: /occurrences/search?q=species_list_uid:___LISTIDPARAM___&fq=decade:2020&fq=country:Australia&fq=first_loaded_date:[___DATEPARAM___%20TO%20*]&fq=occurrence_date:[___LASTYEARPARAM___%20TO%20*]&sort=first_loaded_date&dir=desc&disableAllQualityFilters=true
+      nonAuthoritativeList: /occurrences/search?q=species_list:___LISTIDPARAM___&fq=decade:2020&fq=country:Australia&fq=first_loaded_date:[___DATEPARAM___%20TO%20*]&fq=occurrence_date:[___LASTYEARPARAM___%20TO%20*]&sort=first_loaded_date&dir=desc&disableAllQualityFilters=true
+    maxRecords: 500
+  moreinfo:
+    link: ${common.protocol}://www.${common.domain}/blogs-news/ala-helps-to-stop-pests-in-their-tracks/
+  csv:
+    local:
+      enabled: true
+      directory: /data/alerts/csv
+    s3:
+      enabled: false
+      bucket: alerts
+    # read lga from the layer
+    lga: LGA2023
 
-    legacy:
-        aus: cl927:*
-        act: cl927:"Australian Capital Territory" OR cl927:"Jervis Bay Territory"
-        sa: cl927:"South Australia (including Coastal Waters)"
-        vic: cl927:"Victoria (including Coastal Waters)"
-        wa: cl927:"Western Australia (including Coastal Waters)"
-        nt: cl927:"Northern Territory (including Coastal Waters)"
-        qld: cl927:"Queensland (including Coastal Waters)"
-        tas: cl927:"Tasmania (including Coastal Waters)"
-        nsw: cl927:"New South Wales (including Coastal Waters)"
-        lgaField: cl10923
-        shape: cl11033:"Namadgi" OR cl11033:"Tidbinbilla" OR cl11033:"Bimberi"
-        #shape: spatialObject:9223660
-        eventDateAge: 150
-        firstLoadedDateAge: 8
+  legacy:
+    aus: cl927:*
+    act: cl927:"Australian Capital Territory" OR cl927:"Jervis Bay Territory"
+    sa: cl927:"South Australia (including Coastal Waters)"
+    vic: cl927:"Victoria (including Coastal Waters)"
+    wa: cl927:"Western Australia (including Coastal Waters)"
+    nt: cl927:"Northern Territory (including Coastal Waters)"
+    qld: cl927:"Queensland (including Coastal Waters)"
+    tas: cl927:"Tasmania (including Coastal Waters)"
+    nsw: cl927:"New South Wales (including Coastal Waters)"
+    lgaField: cl10923
+    shape: cl11033:"Namadgi" OR cl11033:"Tidbinbilla" OR cl11033:"Bimberi"
+    #shape: spatialObject:9223660
+    eventDateAge: 150
+    firstLoadedDateAge: 8
 
 #environments:
 #    development:
@@ -251,3 +251,8 @@ biosecurity:
 #            serviceUrl: ${common.protocol}://auth-test.${common.domain}/apikey/ws/check?apikey=
 #        userdetails:
 #            serviceUrl: ${common.protocol}://auth-test.${common.domain}/userdetails/userDetails/
+
+cloud:
+  aws:
+    region:
+      static: eu-west-1
