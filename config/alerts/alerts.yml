@@ -25,6 +25,13 @@ grails:
     port: 2525
     server: localhost
 
+  plugin:
+    awssdk:
+      region:
+        static: eu-west-1
+      s3:
+        bucket: ala-alerts-test
+        profile: comp-ala-developer
 skin:
   layout: "ala-main"
   orgSupportEmail: ${common.supportEmail}
@@ -251,8 +258,3 @@ biosecurity:
 #            serviceUrl: ${common.protocol}://auth-test.${common.domain}/apikey/ws/check?apikey=
 #        userdetails:
 #            serviceUrl: ${common.protocol}://auth-test.${common.domain}/userdetails/userDetails/
-
-cloud:
-  aws:
-    region:
-      static: eu-west-1
