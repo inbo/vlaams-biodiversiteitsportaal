@@ -35,7 +35,7 @@ ala:
     baseURL: "${common.protocol}://www.${common.domain}"
     userDetailsURL: "${common.protocol}://auth.${common.domain}/userdetails/userDetails/getUserListFull"
 biocacheService:
-    baseURL: "${common.protocol}://records-ws.${common.domain}"
+    biocacheService: "${common.protocol}://records-ws.${common.domain}"
 biocache:
     baseURL: "${common.protocol}://records.${common.domain}"
 spatial:
@@ -59,8 +59,8 @@ occurrence:
 
 useSpeciesListsAlerts: true
 useSpatialAlerts: true
-useBlogsAlerts: true
-useCitizenScienceAlerts: true
+useBlogsAlerts: false
+useCitizenScienceAlerts: false
 biosecurity:
     cronExpression: '0 30 9 ? * WED'
     query:
@@ -72,7 +72,7 @@ biosecurity:
         link: ${common.protocol}://www.${common.domain}/blogs-news/ala-helps-to-stop-pests-in-their-tracks/
     csv:
         local:
-            enabled: true
+            enabled: false
             directory: /data/alerts/csv
         s3:
             enabled: false
