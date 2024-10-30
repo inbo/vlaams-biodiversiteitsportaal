@@ -21,7 +21,7 @@ grails:
     enabled: false
 uriExclusionFilterPattern: /images.*,/css.*,/js.*,/less.*,/vendor.*
 breadcrumbParent: ${common.protocol}://regions.${common.domain}/explore-by-location/
-alertsResourceName: Atlas
+alertsResourceName: Biodiversiteitsportaal
 #default:
 #  region: Flanders
 #  regionType: ''
@@ -52,8 +52,7 @@ images:
 layersService:
   baseURL: ${common.protocol}://spatial.${common.domain}/ws
 alerts:
-#  baseURL: ${common.protocol}://alerts.${common.domain}
-  baseURL: ''
+  baseURL: ${common.protocol}://alerts.${common.domain}
 bieService:
   baseURL: ${common.protocol}://species-ws.${common.domain}
 geoserver:

@@ -41,7 +41,7 @@ spatial.url: ${common.protocol}://spatial.${common.domain}?tool=log
 volunteer.url: /user/myStats
 lists.url: ${common.protocol}://lists.${common.domain}/speciesList/list
 biocache.search.url: ${common.protocol}://records.${common.domain}/occurrences/search
-alerts.url:
+alerts.url: ${common.protocol}://alerts.${common.domain}
 
 # this property is read/used by ala-auth-plugin (included by apikey)
 userDetails:

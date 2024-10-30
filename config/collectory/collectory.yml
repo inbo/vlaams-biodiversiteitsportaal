@@ -14,8 +14,8 @@ ROLE_ADMIN: ROLE_ADMIN
 ROLE_EDITOR: ROLE_EDITOR
 ala:
   baseURL: ${common.homepage}
-alertUrl: ""
-alertsUrl: ""
+alertUrl: "${common.protocol}://alerts.${common.domain}"
+alertsUrl: "${common.protocol}://alerts.${common.domain}"
 bie:
   baseURL: ${common.protocol}://species.${common.domain}
   searchPath: /search

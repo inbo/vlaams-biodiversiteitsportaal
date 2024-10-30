@@ -87,7 +87,7 @@ speciesList:
 speciesListService:
   baseURL: ${common.protocol}://lists.${common.domain}
 alerts:
-  baseUrl:
+  baseUrl: ${common.protocol}://alerts.${common.domain}
 regions:
   baseURL: ${common.protocol}://regions.${common.domain}
 sightings:
