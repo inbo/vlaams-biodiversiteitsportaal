@@ -108,7 +108,7 @@ services:
       LOG_FORMAT: JSON
 
   alerts:
-    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/alerts:dev
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/alerts:dev-v2
     build:
       context: alerts
       x-bake:

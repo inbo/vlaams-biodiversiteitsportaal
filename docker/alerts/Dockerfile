@@ -1,10 +1,14 @@
 ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} gradle:7-jdk11 AS builder
 
-ARG VERSION=4.2.1
 
 WORKDIR /project
-RUN git clone --branch ${VERSION} --depth 1 https://github.com/AtlasOfLivingAustralia/alerts.git /project
+
+# RUN git clone --branch ${VERSION} --depth 1 https://github.com/AtlasOfLivingAustralia/alerts.git /project
+
+ARG VERSION=fix-invalid-characters-for-alb-in-biocache-query-urls
+ARG t=2
+RUN git clone --branch ${VERSION} --depth 1 https://github.com/StefanVanDyck/alerts.git /project
 
 RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
     gradle \
@@ -14,11 +18,12 @@ RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
         # -Dorg.gradle.debug=true -Dorg.gradle.debug.suspend=no --debug \
         --parallel
 
+ARG t=2
 RUN ls -la build/libs
 
 FROM openjdk:11
 
-ARG VERSION=4.2.1
+ARG VERSION=4.3.0-SNAPSHOT
 
 # Create the user
 RUN groupadd --gid 1000 app \

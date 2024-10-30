@@ -72,7 +72,7 @@ biosecurity:
         link: ${common.protocol}://www.${common.domain}/blogs-news/ala-helps-to-stop-pests-in-their-tracks/
     csv:
         local:
-            enabled: false
+            enabled: true
             directory: /data/alerts/csv
         s3:
             enabled: false
