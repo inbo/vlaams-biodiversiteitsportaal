@@ -10,13 +10,13 @@ mail:
     ses:
         enabled: true
     details:
-        sender: "alerts@${common.domain}"
-        alertAddressTitle: "Atlas alerts"
-        infoSender: "alerts@${common.domain}"
-        infoAddressTitle: "Atlas of Living Australia"
-        defaultResourceName: "Atlas of Living Australia"
+        sender: "${common.supportEmail}"
+        alertAddressTitle: "Biodiversiteitsportaal alerts"
+        infoSender: "${common.supportEmail}"
+        infoAddressTitle: "Vlaams Biodiversiteitsportaal"
+        defaultResourceName: "Vlaams Biodiversiteitsportaal"
         # forceAllAlertsGetSent results in emails getting sent regardless if data has changed - only use in DEV env
-        forceAllAlertsGetSent: false
+        forceAllAlertsGetSent: true
 
 grails:
     #default mail service
