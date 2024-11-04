@@ -3,16 +3,7 @@
 <Context reloadable="false">
 
     <Parameter name="spring.config.additional-location"
-               value="file:/config/config/common/common.yml,file:/config/config/image-service/image-service.yml"
-               override="false"/>
-    <Parameter name="spring.profiles.active"
-               value="local"
-               override="false"/>
-    <Parameter name="common.protocol"
-           value="http"
-           override="false"/>
-    <Parameter name="common.domain"
-               value="la-flanders.org"
+               value="file:/config/config/common/common.yml,file:/config/config/common/common-docker.yml,file:/config/config/image-service/image-service.yml"
                override="false"/>
 
     <!-- Logging config -->

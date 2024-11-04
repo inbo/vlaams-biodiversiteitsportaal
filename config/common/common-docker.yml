@@ -1,0 +1,10 @@
+common:
+  protocol: http
+  domain: la-flanders.org
+
+logging:
+  config: /config/config/common/logback-docker.xml
+
+grails:
+  cors:
+    allowedOriginPatterns: [ "http://*.la-flanders.org" ]

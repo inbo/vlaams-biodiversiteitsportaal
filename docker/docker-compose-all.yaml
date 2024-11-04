@@ -14,9 +14,6 @@ services:
       - ./atlas-all/tomcat-manager-ui/host-manager:/usr/local/tomcat/webapps/host-manager
       - ./atlas-all/tomcat-manager-ui/manager:/usr/local/tomcat/webapps/manager
       - vbp-data:/data
-    environment:
-      SPRING_PROFILES_ACTIVE: local
-#      LOG_FORMAT: JSON
 #    depends_on:
 #      mysql-logger-init:
 #        condition: service_completed_successfully

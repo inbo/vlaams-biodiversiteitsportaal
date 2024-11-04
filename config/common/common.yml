@@ -1,13 +1,3 @@
-environment:
-  local:
-    common:
-      protocol: http
-      domain: la-flanders.org
-  production:
-    common:
-      protocol: https
-      domain: biodiversiteitsportaal.dev.svdev.be
-
 common:
   protocol: https
   domain: biodiversiteitsportaal.dev.svdev.be
