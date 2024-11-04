@@ -124,7 +124,7 @@ gbifConfig:
       http://rs.tdwg.org/dwc/terms/pathway: Pathway
 
 alaNameMatchConfig:
-  matchOnTaxonID: true
+  matchOnTaxonID: false
 
 #locationInfoConfig:
 #    countryNamesFile : /data/pipelines-data/resources/countries.txt

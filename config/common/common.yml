@@ -12,6 +12,7 @@ common:
   protocol: https
   domain: biodiversiteitsportaal.dev.svdev.be
   homepage: ${common.protocol}://www.${common.domain}
+  supportEmail: support.natuurdata@inbo.be
 ala:
   baseURL: ${common.homepage}
 

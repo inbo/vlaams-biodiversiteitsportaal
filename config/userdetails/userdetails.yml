@@ -77,12 +77,12 @@ recaptcha:
   baseUrl: https://www.google.com/recaptcha/api/
   siteKey: null
   secretKey: null
-supportEmail: support@${common.domain}
+supportEmail: ${common.supportEmail}
 homeUrl: ${common.homepage}
 homeLogoUrl: https://www.ala.org.au/app/uploads/2020/06/ALA_Logo_Inline_RGB-300x63.png
 mainTitle: Vlaams Biodiversiteitsportaal
 emailSenderTitle: Vlaams Biodiversiteitsportaal
-emailSender: support@${common.domain}
+emailSender: ${common.supportEmail}
 sightings:
   url: null
 spatial:

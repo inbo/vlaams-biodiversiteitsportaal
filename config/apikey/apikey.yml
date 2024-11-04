@@ -30,11 +30,11 @@ flyway:
 ala:
   baseURL: ${common.homepage}
 
-supportEmail: support@${common.domain}
+supportEmail: ${common.supportEmail}
 homeUrl: ${common.protocol}://www.${common.domain}
 mainTitle: Vlaams Biodiversiteitsportaal
 emailSenderTitle: Vlaams Biodiversiteitsportaal
-emailSender: support@${common.domain}
+emailSender: ${common.supportEmail}
 
 sightings.url: /mine
 spatial.url: ${common.protocol}://spatial.${common.domain}?tool=log

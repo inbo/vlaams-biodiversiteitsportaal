@@ -27,7 +27,7 @@ grails:
 
 skin:
     layout: "ala-main"
-    orgSupportEmail: support@${common.domain}
+    orgSupportEmail: ${common.supportEmail}
 privacyPolicy: "${common.protocol}://www.${common.domain}/terms-of-use/privacy-policy/"
 siteDefaultLanguage: "nl"
 

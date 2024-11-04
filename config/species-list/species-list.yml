@@ -51,7 +51,7 @@ openapi:
       oauth2:
         baseUrl: ${common.protocol}://auth.${common.domain}/cas/oidc
   contact:
-    email: support@${common.domain}
+    email: ${common.supportEmail}
   terms: ''
 outboundhttp:
   timeout: 8000

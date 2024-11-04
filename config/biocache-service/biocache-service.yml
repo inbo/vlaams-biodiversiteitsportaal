@@ -99,7 +99,7 @@ download:
   unzipped:
     limit: 10000
   support:
-    email: support@${common.domain}
+    email: ${common.supportEmail}
   email:
     subject: "Jouw data op het Vlaams Biodiversiteitsportaal is klaar om te downloaden - [filename]"
     subject.failure: "Er is een fout opgetreden bij het verwerken van jouw downloadverzoek - [filename]"
@@ -151,7 +151,9 @@ list:
     url: ${common.protocol}://lists.${common.domain}
 media:
   dir: /data/biocache-media/
-  url: ${common.protocol}://media.${common.domain}
+  url: ${common.protocol}://images.${common.domain}
+  store:
+    url: ${common.protocol}://images.${common.domain}
 name:
   index:
     dir: /data/lucene/namematching_v13
