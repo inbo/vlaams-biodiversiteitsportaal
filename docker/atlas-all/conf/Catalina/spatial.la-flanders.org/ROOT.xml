@@ -14,4 +14,12 @@
     <Parameter name="common.domain"
                value="la-flanders.org"
                override="false"/>
+
+    <!-- Logging config -->
+    <Parameter name="logging.config"
+               value="/config/config/common/logback-docker.xml"
+               override="false"/>
+    <Parameter name="appName"
+               value="spatial-hub"
+               override="false"/>
 </Context>
