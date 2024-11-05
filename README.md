@@ -53,16 +53,13 @@ To build them and release them to the AWS Elastic Container Registry, you can us
 aws ecr get-login-password --profile <aws profile name> | docker login --username AWS --password-stdin 632683202044.dkr.ecr.eu-west-1.amazonaws.com
 
 # Build and push the images
-cd docker && DOCKER_BUILDKIT=1 COMPOSE_PARALLEL_LIMIT=1 docker-compose build --push
+cd docker && docker buildx bake --push <optional_name_of_container>
 ```
 
-The `COMPOSE_PARALLEL_LIMIT` is needed because most of the images share a single gradle cache.   
 Most of the projects have the Australian gradle repo hard coded and this makes downloading the dependencies very slow.
 Unfortunately it is not possible to share a gradle between different instances of gradle.  
-That means we can only build a single image at a time.
-
-Additionally a specific buildx builder might be required to build the images.
-Again to limit the amount of concurrent gradle instances.
+That means we can only build a single image at a time.  
+To accomplish this, a specific buildx builder might be required to build the images.
 ```commandline
 docker buildx create --use \                                                                                                                            ✔  09:23:28 ▓▒░
   --name living-atlas \
