@@ -13,4 +13,10 @@
     <Parameter name="appName"
                value="species-list"
                override="false"/>
+    <Parameter name="grails.serverURL"
+               value="http://la-flanders.org/species-list"
+               override="false"/>
+    <Parameter name="server.servlet.contextPath"
+               value="/species-list"
+               override="false"/>
 </Context>

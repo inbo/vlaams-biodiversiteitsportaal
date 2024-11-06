@@ -13,4 +13,10 @@
     <Parameter name="appName"
                value="regions"
                override="false"/>
+    <Parameter name="grails.serverURL"
+               value="http://la-flanders.org/regions"
+               override="false"/>
+    <Parameter name="server.servlet.contextPath"
+               value="/regions"
+               override="false"/>
 </Context>

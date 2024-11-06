@@ -10,4 +10,10 @@
     <Parameter name="appName"
                value="userdetails"
                override="false"/>
+    <Parameter name="grails.serverURL"
+               value="http://la-flanders.org/userdetails"
+               override="false"/>
+    <Parameter name="server.servlet.contextPath"
+               value="/userdetails"
+               override="false"/>
 </Context>

@@ -13,4 +13,10 @@
     <Parameter name="appName"
                value="biocache-hub"
                override="false"/>
+    <Parameter name="grails.serverURL"
+               value="http://la-flanders.org/biocache-hub"
+               override="false"/>
+    <Parameter name="server.servlet.contextPath"
+               value="/biocache-hub"
+               override="false"/>
 </Context>

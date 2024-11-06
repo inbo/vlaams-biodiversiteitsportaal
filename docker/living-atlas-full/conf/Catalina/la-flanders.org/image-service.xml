@@ -13,5 +13,11 @@
     <Parameter name="appName"
                value="image-service"
                override="false"/>
+    <Parameter name="grails.serverURL"
+               value="http://la-flanders.org/image-service"
+               override="false"/>
+    <Parameter name="server.servlet.contextPath"
+               value="/image-service"
+               override="false"/>
 
 </Context>

@@ -13,4 +13,10 @@
     <Parameter name="appName"
                value="bie-index"
                override="false"/>
+    <Parameter name="grails.serverURL"
+               value="http://la-flanders.org/bie-index"
+               override="false"/>
+    <Parameter name="server.servlet.contextPath"
+               value="/bie-index"
+               override="false"/>
 </Context>

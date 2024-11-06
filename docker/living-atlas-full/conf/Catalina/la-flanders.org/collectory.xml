@@ -13,4 +13,10 @@
     <Parameter name="appName"
                value="collectory"
                override="false"/>
+    <Parameter name="grails.serverURL"
+               value="http://la-flanders.org/collectory"
+               override="false"/>
+    <Parameter name="server.servlet.contextPath"
+               value="/collectory"
+               override="false"/>
 </Context>

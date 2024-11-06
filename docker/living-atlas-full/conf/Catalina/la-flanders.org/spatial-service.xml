@@ -13,4 +13,10 @@
     <Parameter name="appName"
                value="spatial-service"
                override="false"/>
+    <Parameter name="grails.serverURL"
+               value="http://la-flanders.org/spatial-service"
+               override="false"/>
+    <Parameter name="server.servlet.contextPath"
+               value="/spatial-service"
+               override="false"/>
 </Context>

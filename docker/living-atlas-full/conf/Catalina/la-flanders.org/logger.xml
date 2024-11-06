@@ -12,4 +12,10 @@
     <Parameter name="appName"
                value="logger"
                override="false"/>
+    <Parameter name="grails.serverURL"
+               value="http://la-flanders.org/logger"
+               override="false"/>
+    <Parameter name="server.servlet.contextPath"
+               value="/logger"
+               override="false"/>
 </Context>
