@@ -1,6 +1,8 @@
 ######################################### TOMCAT BASE #########################################
 FROM tomcat:9.0-jdk11-openjdk AS base
 
+WORKDIR ${CATALINA_HOME}
+
 # Create the user
 ENV UID=1000
 ENV GID=1000
@@ -12,25 +14,57 @@ RUN chown tomcat:tomcat /data
 VOLUME /data
 
 COPY docker-entrypoint.sh /docker-entrypoint.sh
-COPY conf ${CATALINA_HOME}/conf
+
+COPY conf conf
+# Folder container the context xml configs for every service
+RUN mkdir -p ${CATALINA_HOME}/conf/portal/localhost
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
 ######################################### PORTAL FULL #########################################
 FROM base AS portal
 
-COPY --from=alerts ${CATALINA_HOME}/webapps/alerts.war ${CATALINA_HOME}/webapps/alerts.war
-COPY --from=apikey ${CATALINA_HOME}/webapps/apikey.war ${CATALINA_HOME}/webapps/apikey.war
-COPY --from=bie-hub ${CATALINA_HOME}/webapps/bie-hub.war ${CATALINA_HOME}/webapps/bie-hub.war
-COPY --from=bie-index ${CATALINA_HOME}/webapps/bie-index.war ${CATALINA_HOME}/webapps/bie-index.war
-COPY --from=biocache-hub ${CATALINA_HOME}/webapps/biocache-hub.war ${CATALINA_HOME}/webapps/biocache-hub.war
-COPY --from=biocache-service ${CATALINA_HOME}/webapps/biocache-service.war ${CATALINA_HOME}/webapps/biocache-service.war
-COPY --from=collectory ${CATALINA_HOME}/webapps/collectory.war ${CATALINA_HOME}/webapps/collectory.war
-COPY --from=doi-service ${CATALINA_HOME}/webapps/doi-service.war ${CATALINA_HOME}/webapps/doi-service.war
-COPY --from=image-service ${CATALINA_HOME}/webapps/image-service.war ${CATALINA_HOME}/webapps/image-service.war
-COPY --from=logger ${CATALINA_HOME}/webapps/logger.war ${CATALINA_HOME}/webapps/logger.war
-COPY --from=regions ${CATALINA_HOME}/webapps/regions.war ${CATALINA_HOME}/webapps/regions.war
-COPY --from=spatial-hub ${CATALINA_HOME}/webapps/spatial-hub.war ${CATALINA_HOME}/webapps/spatial-hub.war
-COPY --from=spatial-service ${CATALINA_HOME}/webapps/spatial-service.war ${CATALINA_HOME}/webapps/spatial-service.war
-COPY --from=species-list ${CATALINA_HOME}/webapps/species-list.war ${CATALINA_HOME}/webapps/species-list.war
-COPY --from=userdetails ${CATALINA_HOME}/webapps/userdetails.war ${CATALINA_HOME}/webapps/userdetails.war
+COPY --from=alerts ${CATALINA_HOME}/webapps webapps
+COPY --from=alerts ${CATALINA_HOME}/conf/portal/localhost conf/portal/localhost
+
+COPY --from=apikey ${CATALINA_HOME}/webapps webapps
+COPY --from=apikey ${CATALINA_HOME}/conf/portal/localhost conf/portal/localhost
+
+COPY --from=bie-hub ${CATALINA_HOME}/webapps webapps
+COPY --from=bie-hub ${CATALINA_HOME}/conf/portal/localhost conf/portal/localhost
+
+COPY --from=bie-index ${CATALINA_HOME}/webapps webapps
+COPY --from=bie-index ${CATALINA_HOME}/conf/portal/localhost conf/portal/localhost
+
+COPY --from=biocache-hub ${CATALINA_HOME}/webapps webapps
+COPY --from=biocache-hub ${CATALINA_HOME}/conf/portal/localhost conf/portal/localhost
+
+COPY --from=biocache-service ${CATALINA_HOME}/webapps webapps
+COPY --from=biocache-service ${CATALINA_HOME}/conf/portal/localhost conf/portal/localhost
+
+COPY --from=collectory ${CATALINA_HOME}/webapps webapps
+COPY --from=collectory ${CATALINA_HOME}/conf/portal/localhost conf/portal/localhost
+
+COPY --from=doi-service ${CATALINA_HOME}/webapps webapps
+COPY --from=doi-service ${CATALINA_HOME}/conf/portal/localhost conf/portal/localhost
+
+COPY --from=image-service ${CATALINA_HOME}/webapps webapps
+COPY --from=image-service ${CATALINA_HOME}/conf/portal/localhost conf/portal/localhost
+
+COPY --from=logger ${CATALINA_HOME}/webapps webapps
+COPY --from=logger ${CATALINA_HOME}/conf/portal/localhost conf/portal/localhost
+
+COPY --from=regions ${CATALINA_HOME}/webapps webapps
+COPY --from=regions ${CATALINA_HOME}/conf/portal/localhost conf/portal/localhost
+
+COPY --from=spatial-hub ${CATALINA_HOME}/webapps webapps
+COPY --from=spatial-hub ${CATALINA_HOME}/conf/portal/localhost conf/portal/localhost
+
+COPY --from=spatial-service ${CATALINA_HOME}/webapps webapps
+COPY --from=spatial-service ${CATALINA_HOME}/conf/portal/localhost conf/portal/localhost
+
+COPY --from=species-list ${CATALINA_HOME}/webapps webapps
+COPY --from=species-list ${CATALINA_HOME}/conf/portal/localhost conf/portal/localhost
+
+COPY --from=userdetails ${CATALINA_HOME}/webapps webapps
+COPY --from=userdetails ${CATALINA_HOME}/conf/portal/localhost conf/portal/localhost

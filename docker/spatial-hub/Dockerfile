@@ -20,9 +20,11 @@ RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
         --no-daemon \
         --parallel
 
+
 FROM tomcat-base
 
 ARG VERSION=2.1.0
 COPY --from=builder /project/build/libs/project-${VERSION}-plain.war ${CATALINA_HOME}/webapps/spatial-hub.war
+COPY spatial-hub.xml ${CATALINA_HOME}/conf/portal/localhost/spatial-hub.xml
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/spatial-hub/actuator/health || exit 1

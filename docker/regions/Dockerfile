@@ -17,10 +17,12 @@ RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
     -x test \
     --parallel
 
+
 FROM tomcat-base
 
 # ARG VERSION=4.0.0
 ARG VERSION=4.1.0-SNAPSHOT
 COPY --from=builder /project/build/libs/regions-${VERSION}-plain.war ${CATALINA_HOME}/webapps/regions.war
+COPY regions.xml ${CATALINA_HOME}/conf/portal/localhost/regions.xml
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/regions/actuator/health || exit 1

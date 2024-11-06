@@ -14,10 +14,12 @@ RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
     -x test -x integrationTest \
     --parallel
 
+
 FROM tomcat-base
 
 ARG VERSION=3.1.0
 
 COPY --from=builder /project/build/libs/bie-index-${VERSION}-plain.war ${CATALINA_HOME}/webapps/bie-index.war
+COPY bie-index.xml ${CATALINA_HOME}/conf/portal/localhost/bie-index.xml
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/apikey/actuator/health || exit 1

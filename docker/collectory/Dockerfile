@@ -18,10 +18,12 @@ RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
     -x test -x integrationTest \
     --parallel
 
+
 FROM tomcat-base
 
 ARG VERSION=5.2.0-SNAPSHOT
 
 COPY --from=builder /project/build/libs/collectory-${VERSION}-plain.war ${CATALINA_HOME}/webapps/collectory.war
+COPY collectory.xml ${CATALINA_HOME}/conf/portal/localhost/collectory.xml
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/collectory/actuator/health || exit 1

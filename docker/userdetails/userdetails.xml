@@ -11,6 +11,6 @@
                value="/config/config/common/logback-docker.xml"
                override="false"/>
     <Parameter name="appName"
-               value="%boldGrey(userdetails)"
+               value="%boldGreen(userdetails)"
                override="false"/>
 </Context>

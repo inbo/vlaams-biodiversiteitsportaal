@@ -14,10 +14,12 @@ RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
         --no-daemon \
         --parallel
 
+
 FROM tomcat-base
 
 ARG VERSION=4.0.0
 
 COPY --from=builder /project/build/libs/doi-service-${VERSION}-plain.war ${CATALINA_HOME}/webapps/doi-service.war
+COPY doi-service.xml ${CATALINA_HOME}/conf/portal/localhost/doi-service.xml
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/doi-service/actuator/health || exit 1

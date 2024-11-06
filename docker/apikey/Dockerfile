@@ -12,10 +12,12 @@ RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
     -x test -x integrationTest \
     --parallel
 
+
 FROM tomcat-base
 
 ARG VERSION=1.7.0
 
 COPY --from=builder /project/build/libs/apikey-${VERSION}-plain.war ${CATALINA_HOME}/webapps/apikey.war
+COPY apikey.xml ${CATALINA_HOME}/conf/portal/localhost/apikey.xml
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/apikey/actuator/health || exit 1

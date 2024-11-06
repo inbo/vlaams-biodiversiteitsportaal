@@ -11,7 +11,7 @@
                value="/config/config/common/logback-docker.xml"
                override="false"/>
     <Parameter name="appName"
-               value="%grey(image-service)"
+               value="%gray(image-service)"
                override="false"/>
 
 </Context>

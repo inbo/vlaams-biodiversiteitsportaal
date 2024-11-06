@@ -19,10 +19,12 @@ RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
     -x test -x integrationTest \
     --parallel
 
+
 FROM tomcat-base
 
 ARG VERSION=4.2.0-SNAPSHOT
 
 COPY --from=builder /project/build/libs/ala-bie-hub-${VERSION}-plain.war ${CATALINA_HOME}/webapps/bie-hub.war
+COPY bie-hub.xml ${CATALINA_HOME}/conf/portal/localhost/bie-hub.xml
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/apikey/actuator/health || exit 1

@@ -15,10 +15,12 @@ RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
     -x test -x integrationTest \
     --parallel
 
+
 FROM tomcat-base
 
 ARG VERSION=4.3
 
 COPY --from=builder /project/build/libs/logger-service-${VERSION}-plain.war ${CATALINA_HOME}/webapps/logger.war
+COPY logger.xml ${CATALINA_HOME}/conf/portal/localhost/logger.xml
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/logger/actuator/health || exit 1

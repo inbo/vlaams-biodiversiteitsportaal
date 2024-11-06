@@ -19,6 +19,7 @@ RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
         --no-daemon \
         --parallel
 
+
 FROM tomcat-base
 
 RUN apt-get update && apt-get install -y \
@@ -28,5 +29,6 @@ RUN apt-get update && apt-get install -y \
 # ARG VERSION=2.1.5
 ARG VERSION=2.1.6-SNAPSHOT
 COPY --from=builder /project/build/libs/project-${VERSION}-plain.war ${CATALINA_HOME}/webapps/spatial-service.war
+COPY spatial-service.xml ${CATALINA_HOME}/conf/portal/localhost/spatial-service.xml
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/spatial-service/actuator/health || exit 1

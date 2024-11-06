@@ -14,10 +14,12 @@ RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
     -x test \
     --parallel
 
+
 FROM tomcat-base
 
 ARG VERSION=3.5.1
 
 COPY --from=builder /project/build/libs/biocache-service-${VERSION}.war ${CATALINA_HOME}/webapps/biocache-service.war
+COPY biocache-service.xml ${CATALINA_HOME}/conf/portal/localhost/biocache-service.xml
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/biocache-service/actuator/health || exit 1
