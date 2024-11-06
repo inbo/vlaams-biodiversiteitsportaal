@@ -14,21 +14,21 @@ webservice:
 apiGateway:
   enabled: false
 auth:
-  userDetailsUrl: ${common.protocol}://auth.${common.domain}/userdetails/userDetails/
+  userDetailsUrl: ${common.protocol}://${common.domain}/userdetails/userDetails/
 batchSize: 500
 bie:
-  baseURL: ${common.protocol}://species.${common.domain}
+  baseURL: ${common.protocol}://${common.domain}/bie-hub
   download: /data/bie-staging/species-list
   nameIndexLocation: /data/lucene/namematching
   searchPath: /search
 bieService:
-  baseURL: ${common.protocol}://species-ws.${common.domain}
+  baseURL: ${common.protocol}://${common.domain}/bie-index
 biocache:
-  baseURL: ${common.protocol}://records.${common.domain}
+  baseURL: ${common.protocol}://${common.domain}/biocache-hub
 biocacheService:
-  baseURL: ${common.protocol}://records-ws.${common.domain}
+  baseURL: ${common.protocol}://${common.domain}/biocache-service
 collectory:
-  baseURL: ${common.protocol}://collections.${common.domain}
+  baseURL: ${common.protocol}://${common.domain}/collectory
   enableSync: false
 dataSource:
   dbCreate: update
@@ -37,12 +37,12 @@ downloadLimit: 200
 fieldGuide:
   baseURL: ''
 grails:
-  serverURL: ${common.protocol}://lists.${common.domain}
+  serverURL: ${common.protocol}://${common.domain}/species-list
 iconicSpecies:
   uid: dr781
 logger:
-  baseURL: ${common.protocol}://logger.${common.domain}/service
-  baseUrl: ${common.protocol}://logger.${common.domain}/service
+  baseURL: ${common.protocol}://${common.domain}/logger/service
+  baseUrl: ${common.protocol}://${common.domain}/logger/service
 namematching:
   serviceURL: namematching:9179
 openapi:
@@ -61,8 +61,8 @@ publicview:
 
 registryApiKey: 449cac3c-0498-4c25-ae0b-2517267c3f05
 
-serverName: ${common.protocol}://lists.${common.domain}
-serverURL: ${common.protocol}://lists.${common.domain}
+serverName: ${common.protocol}://${common.domain}/species-list
+serverURL: ${common.protocol}://${common.domain}/species-list
 skin:
   favicon: ${common.protocol}://branding.${common.domain}/favicon.ico
   fluidLayout: true
@@ -71,10 +71,10 @@ skin:
   orgNameLong: Vlaams Biodiversiteitsportaal
   orgNameShort: VBP
 spatial:
-  baseURL: ${common.protocol}://spatial.${common.domain}
+  baseURL: ${common.protocol}://${common.domain}/spatial-hub
 termsOfUseUrl: ''
 userdetails:
   api:
-    url: ${common.protocol}://auth.${common.domain}/userdetails/
+    url: ${common.protocol}://${common.domain}/userdetails/
   web:
-    url: ${common.protocol}://auth.${common.domain}/userdetails/
+    url: ${common.protocol}://${common.domain}/userdetails/

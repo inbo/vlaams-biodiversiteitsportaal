@@ -13,7 +13,7 @@ webservice:
   client-secret: xxx
 
 grails:
-  serverURL: '${common.protocol}://images.${common.domain}'
+  serverURL: '${common.protocol}://${common.domain}/image-service'
 
 imageservice:
   imagestore:
@@ -29,7 +29,7 @@ imageservice:
   thumbnail:
     size: 300
 
-serverName: '${common.protocol}://images.${common.domain}'
+serverName: '${common.protocol}://${common.domain}/image-service'
 
 skin:
   layout: 'ala-main'
@@ -56,11 +56,11 @@ elasticsearch:
 
 # The URLs to recognise as image service URL for the purposes of recognising incoming
 # URLs for images (to avoid re-downloading the images)
-imageServiceUrls: [ "${common.protocol}://images.${common.domain}","http://images.biodiversiteitsportaal.dev.internal" ]
+imageServiceUrls: [ "${common.protocol}://${common.domain}/image-service","http://images.biodiversiteitsportaal.dev.internal" ]
 
 # External links
 collectory:
-  baseURL: "${common.protocol}://collections.${common.domain}"
+  baseURL: "${common.protocol}://${common.domain}/collectory"
 biocache:
   baseURL: "${common.protocol}://biocache.${common.domain}"
 

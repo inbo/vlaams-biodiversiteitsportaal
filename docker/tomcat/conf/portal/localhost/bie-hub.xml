@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- bie-hub -->
+<Context reloadable="false">
+
+    <Parameter name="spring.config.additional-location"
+               value="file:/config/config/common/common.yml,file:/config/config/common/common-docker.yml,file:/config/config/bie-hub/bie-hub.yml"
+               override="false"/>
+
+    <Parameter name="appName"
+               value="%yellow(bie-hub)"
+               override="false"/>
+
+    <!-- Logging config -->
+    <Parameter name="logging.config"
+               value="/config/config/common/logback-docker.xml"
+               override="false"/>
+</Context>

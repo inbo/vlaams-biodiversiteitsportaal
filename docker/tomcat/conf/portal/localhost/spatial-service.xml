@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- spatial-service -->
+<Context reloadable="false">
+
+    <Parameter name="spring.config.additional-location"
+               value="file:/config/config/common/common.yml,file:/config/config/common/common-docker.yml,file:/config/config/spatial-service/spatial-service.yml"
+               override="false"/>
+
+    <!-- Logging config -->
+    <Parameter name="logging.config"
+               value="/config/config/common/logback-docker.xml"
+               override="false"/>
+    <Parameter name="appName"
+               value="%boldCyan(spatial-service)"
+               override="false"/>
+</Context>

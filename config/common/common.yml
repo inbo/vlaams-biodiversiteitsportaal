@@ -1,8 +1,11 @@
+# Custom common config values, used to template others
 common:
   protocol: https
   domain: biodiversiteitsportaal.dev.svdev.be
   homepage: ${common.protocol}://www.${common.domain}
   supportEmail: support.natuurdata@inbo.be
+
+# Common ala config values
 ala:
   baseURL: ${common.homepage}
 
@@ -32,10 +35,6 @@ management:
 logging:
   config: /config/config/common/logback.xml
 
-server:
-  use-forward-headers: true
-
-
 security:
   cors:
     enable: true
@@ -48,11 +47,11 @@ security:
   apikey:
     enabled: true
     auth:
-      serviceUrl: ${common.protocol}://auth.${common.domain}/apikey/
+      serviceUrl: ${common.protocol}://${common.domain}/apikey/
     check:
-      serviceUrl: ${common.protocol}://auth.${common.domain}/apikey/ws/check?apikey=
+      serviceUrl: ${common.protocol}://${common.domain}/apikey/ws/check?apikey=
     userdetails:
-      serviceUrl: ${common.protocol}://auth.${common.domain}/userdetails/
+      serviceUrl: ${common.protocol}://${common.domain}/userdetails/
   cas:
     enabled: false
   jwt:

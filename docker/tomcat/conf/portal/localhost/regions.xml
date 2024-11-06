@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- regions -->
+<Context reloadable="false">
+
+    <Parameter name="spring.config.additional-location"
+               value="file:/config/config/common/common.yml,file:/config/config/common/common-docker.yml,file:/config/config/regions/regions.yml"
+               override="false"/>
+
+    <!-- Logging config -->
+    <Parameter name="logging.config"
+               value="/config/config/common/logback-docker.xml"
+               override="false"/>
+    <Parameter name="appName"
+               value="%boldBlue(regions)"
+               override="false"/>
+</Context>

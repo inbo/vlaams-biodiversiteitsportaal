@@ -16,11 +16,11 @@ casServerUrlPrefix: ${common.protocol}://auth.${common.domain}/cas
 casProperties: casServerLoginUrl,serverName,centralServer,casServerName,uriFilterPattern,uriExclusionFilter,authenticateOnlyIfLoggedInFilterPattern,casServerLoginUrlPrefix,gateway,casServerUrlPrefix,contextPath
 
 grails:
-  serverURL: ${common.protocol}://regions.${common.domain}
+  serverURL: ${common.protocol}://${common.domain}/regions
   cors:
     enabled: false
 uriExclusionFilterPattern: /images.*,/css.*,/js.*,/less.*,/vendor.*
-breadcrumbParent: ${common.protocol}://regions.${common.domain}/explore-by-location/
+breadcrumbParent: ${common.protocol}://${common.domain}/regions/explore-by-location/
 alertsResourceName: Atlas
 #default:
 #  region: Flanders
@@ -29,7 +29,7 @@ google:
   apikey: get-a-google-api-key
 
 showNotesInfoInAccordionPanel: 'false'
-serverName: ${common.protocol}://regions.${common.domain}
+serverName: ${common.protocol}://${common.domain}/regions
 disableCAS: 'false'
 uriFilterPattern: /admin/*,/alaAdmin/*
 orgNameLong: Vlaams Biodiversiteitsportaal
@@ -39,27 +39,27 @@ skin:
 ala:
   skin: ala-main
 bie:
-  baseURL: ${common.protocol}://species.${common.domain}
+  baseURL: ${common.protocol}://${common.domain}/bie-hub
   searchPath: /search
 biocache:
-  baseURL: ${common.protocol}://records.${common.domain}
+  baseURL: ${common.protocol}://${common.domain}/biocache-hub
   enableQueryContext: 'false'
   queryContext: ''
 spatial:
-  baseURL: ${common.protocol}://spatial.${common.domain}
+  baseURL: ${common.protocol}://${common.domain}/spatial-hub
 images:
-  baseURL: ${common.protocol}://images.${common.domain}
+  baseURL: ${common.protocol}://${common.domain}/image-service
 layersService:
-  baseURL: ${common.protocol}://spatial.${common.domain}/ws
+  baseURL: ${common.protocol}://${common.domain}/spatial-service
 alerts:
-#  baseURL: ${common.protocol}://alerts.${common.domain}
+#  baseURL: ${common.protocol}://${common.domain}/alerts
   baseURL: ''
 bieService:
-  baseURL: ${common.protocol}://species-ws.${common.domain}
+  baseURL: ${common.protocol}://${common.domain}/bie-index
 geoserver:
-  baseURL: ${common.protocol}://spatial.${common.domain}/geoserver
+  baseURL: ${common.protocol}://${common.domain}/spatial-hub/geoserver
 biocacheService:
-  baseURL: ${common.protocol}://records-ws.${common.domain}
+  baseURL: ${common.protocol}://${common.domain}/biocache-service
 map:
   minLat: 49.5294835476
   minLng: 2.51357303225

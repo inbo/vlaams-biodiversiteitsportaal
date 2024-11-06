@@ -1,41 +1,27 @@
 ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} gradle:7-jdk11 AS builder
 
-
 WORKDIR /project
 
-ARG VERSION=fix-use-occurenceid-as-default-unique-id-when-scanning-ipt
-RUN git clone --branch ${VERSION} --depth 1 https://github.com/StefanVanDyck/collectory /project
-
 # ARG VERSION=5.1.1
-# RUN git clone --branch ${VERSION} --depth 1 https://github.com/AtlasOfLivingAustralia/collectory.git /project
+# ARG SOURCE=https://github.com/AtlasOfLivingAustralia/collectory.git
+
+ARG VERSION=fix-use-occurenceid-as-default-unique-id-when-scanning-ipt
+ARG SOURCE=https://github.com/StefanVanDyck/collectory
+
+RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} .
 
 COPY ./i18n/ ./grails-app/i18n/
 
 RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
     gradle build assemble --no-daemon \
     -x test -x integrationTest \
-    # -Dorg.gradle.debug=true -Dorg.gradle.debug.suspend=no --debug \
     --parallel
 
-FROM openjdk:11
+FROM tomcat-base
 
 ARG VERSION=5.2.0-SNAPSHOT
-# ARG VERSION=5.1.1
 
-# Create the user
-RUN groupadd --gid 1000 app \
-    && useradd --uid 1000 --gid 1000 -m -d /app app
+COPY --from=builder /project/build/libs/collectory-${VERSION}-plain.war ${CATALINA_HOME}/webapps/collectory.war
 
-RUN mkdir /data && chown app:app /data
-VOLUME /data
-
-USER app
-WORKDIR /app
-
-COPY --from=builder --chown=app \
-    /project/build/libs/collectory-${VERSION}.war /app/app.war
-
-ENTRYPOINT ["java", "-jar", "/app/app.war"]
-
-HEALTHCHECK CMD curl --fail --silent http://localhost:8080/actuator/health || exit 1
+HEALTHCHECK CMD curl --fail --silent http://localhost:8080/collectory/actuator/health || exit 1

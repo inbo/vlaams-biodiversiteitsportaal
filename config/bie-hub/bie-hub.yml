@@ -11,29 +11,29 @@ webservice:
   client-secret: "ala_bie-oidc-super-secret"
 
 grails:
-  serverURL: ${common.protocol}://species.${common.domain}
+  serverURL: ${common.protocol}://${common.domain}/bie-hub
   cors:
     enabled: true
 
-serverName: ${common.protocol}://species.${common.domain}
+serverName: ${common.protocol}://${common.domain}/bie-hub
 
 userDetails:
-  url: ${common.protocol}://auth.${common.domain}/userdetails/
+  url: ${common.protocol}://${common.domain}/userdetails/
 
 # BIE index webservices
 bie:
-  baseURL: ${common.protocol}://species.${common.domain}
+  baseURL: ${common.protocol}://${common.domain}/bie-hub
   searchPath: /search
   index:
-    url: ${common.protocol}://species-ws.${common.domain}
+    url: ${common.protocol}://${common.domain}/bie-index
 
 # Query contexts - used to filter search results
 bieService:
-  baseUrl: ${common.protocol}://species-ws.${common.domain}
+  baseUrl: ${common.protocol}://${common.domain}/bie-index
   queryContext:
   apiKey: 5bd6d4fc-3f1c-4fa2-903a-7ec771c02999
 biocacheService:
-  baseURL: ${common.protocol}://records-ws.${common.domain}
+  baseURL: ${common.protocol}://${common.domain}/biocache-service
   queryContext: -_nest_parent_:*
 
 # Header and footer
@@ -45,7 +45,7 @@ ala:
   baseURL: ${common.homepage}
   image:
     service:
-      url: ${common.protocol}://images.${common.domain}
+      url: ${common.protocol}://${common.domain}/image-service
 allowedImageEditingRoles: ROLE_ADMIN,ROLE_EDITOR
 
 wikipedia:
@@ -68,37 +68,37 @@ show:
 
 # ALA services
 biocache:
-  baseURL: ${common.protocol}://records.${common.domain}
+  baseURL: ${common.protocol}://${common.domain}/biocache-hub
 
 spatial:
-  baseURL: ${common.protocol}://spatial.${common.domain}
+  baseURL: ${common.protocol}://${common.domain}/spatial-hub
 collectory:
-  baseURL: ${common.protocol}://collections.${common.domain}
-  threatenedSpeciesCodesUrl: ${common.protocol}://collections.${common.domain}/public/showDataResource
+  baseURL: ${common.protocol}://${common.domain}/collectory
+  threatenedSpeciesCodesUrl: ${common.protocol}://${common.domain}/collectory/public/showDataResource
 collectoryService:
-  baseURL: ${common.protocol}://collections.${common.domain}/ws
+  baseURL: ${common.protocol}://${common.domain}/collectory/ws
 speciesList:
-  baseURL: ${common.protocol}://lists.${common.domain}
+  baseURL: ${common.protocol}://${common.domain}/species-list
   preferredSpeciesListDruid: dr4778
   preferredListName: ALA Preferred Species Images
   apiKey: 081489d3-e581-4dad-8f37-b9331bcf04a8
   useListWs: False
-  wsURL: ${common.protocol}://lists.${common.domain}
+  wsURL: ${common.protocol}://${common.domain}/species-list
 speciesListService:
-  baseURL: ${common.protocol}://lists.${common.domain}
+  baseURL: ${common.protocol}://${common.domain}/species-list
 alerts:
   baseUrl:
 regions:
-  baseURL: ${common.protocol}://regions.${common.domain}
+  baseURL: ${common.protocol}://${common.domain}/regions
 sightings:
   url:
 layersService:
-  baseURL: ${common.protocol}://spatial.${common.domain}/ws
-imageServiceBaseURL: ${common.protocol}://images.${common.domain}
+  baseURL: ${common.protocol}://${common.domain}/spatial-service
+imageServiceBaseURL: ${common.protocol}://${common.domain}/image-service
 
 image:
-  baseUrl: ${common.protocol}://images.${common.domain}
-  thumbnailUrl: ${common.protocol}://images.${common.domain}/image/
+  baseUrl: ${common.protocol}://${common.domain}/image-service
+  thumbnailUrl: ${common.protocol}://${common.domain}/image-service/image/
 ausTraits:
   baseURL: http://traitdata.austraits.cloud.edu.au
   homeURL: https://austraits.org/
@@ -157,7 +157,7 @@ namematching:
 dataquality:
   enabled: false
 
-speciesParent: ${common.protocol}://lists.${common.domain}/iconic-species
+speciesParent: ${common.protocol}://${common.domain}/species-list/iconic-species
 
 supportEmail: ${common.supportEmail}
 
@@ -170,11 +170,11 @@ survey:
   cookieAge: 30
   html:
 userdetails:
-  url: ${common.protocol}://auth.${common.domain}/userdetails/
+  url: ${common.protocol}://${common.domain}/userdetails/
   web:
-    url: ${common.protocol}://auth.${common.domain}/userdetails/
+    url: ${common.protocol}://${common.domain}/userdetails/
   api:
-    url: ${common.protocol}://auth.${common.domain}/userdetails/
+    url: ${common.protocol}://${common.domain}/userdetails/
 imageFilter: "&qualityProfile=LA"
 
 

@@ -2,33 +2,21 @@ ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} gradle:7-jdk11 AS builder
 
 ARG VERSION=4.5.3
+ARG SOURCE=https://github.com/AtlasOfLivingAustralia/specieslist-webapp.git
 
 WORKDIR /project
-RUN git clone --branch ${VERSION} --depth 1 https://github.com/AtlasOfLivingAustralia/specieslist-webapp.git /project
+RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} .
+
 COPY ./i18n/ ./grails-app/i18n/
+
 RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
     gradle build assemble --no-daemon \
     -x test -x integrationTest \
-    # -Dorg.gradle.debug=true -Dorg.gradle.debug.suspend=no --debug \
     --parallel
 
-FROM openjdk:11
+FROM tomcat-base
 
 ARG VERSION=4.5.3
+COPY --from=builder /project/build/libs/specieslist-webapp-${VERSION}-plain.war ${CATALINA_HOME}/webapps/species-list.war
 
-# Create the user
-RUN groupadd --gid 1000 app \
-    && useradd --uid 1000 --gid 1000 -m -d /app app
-
-RUN mkdir /data && chown app:app /data
-VOLUME /data
-
-USER app
-WORKDIR /app
-
-COPY --from=builder --chown=app \
-    /project/build/libs/specieslist-webapp-${VERSION}.war /app/app.war
-
-ENTRYPOINT ["java", "-jar", "/app/app.war"]
-
-HEALTHCHECK CMD curl --fail --silent http://localhost:8080/actuator/health || exit 1
+HEALTHCHECK CMD curl --fail --silent http://localhost:8080/species-list/actuator/health || exit 1

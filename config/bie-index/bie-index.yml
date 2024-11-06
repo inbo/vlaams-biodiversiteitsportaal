@@ -11,33 +11,33 @@ webservice:
   client-secret: "bie_index-oidc-super-secret"
 
 grails:
-  serverURL: ${common.protocol}://species-ws.${common.domain}
+  serverURL: ${common.protocol}://${common.domain}/bie-index
 
-serverName: ${common.protocol}://species-ws.${common.domain}
+serverName: ${common.protocol}://${common.domain}/bie-index
 
 userDetails:
-  url: ${common.protocol}://auth.${common.domain}/userdetails/
+  url: ${common.protocol}://${common.domain}/userdetails/
 biocache:
-  base: ${common.protocol}://records.${common.domain}
-  service: ${common.protocol}://records-ws.${common.domain}
+  base: ${common.protocol}://${common.domain}/biocache-hub
+  service: ${common.protocol}://${common.domain}/biocache-service
 collectory:
-  base: ${common.protocol}://collections.${common.domain}
-  service: ${common.protocol}://collections.${common.domain}/ws
+  base: ${common.protocol}://${common.domain}/collectory
+  service: ${common.protocol}://${common.domain}/collectory/ws
   # A list of uids for the national species list datasets
   nationalSpeciesDatsets:
 layers:
-  service: ${common.protocol}://spatial.${common.domain}/ws
+  service: ${common.protocol}://${common.domain}/spatial-service
   gazetteerId:
 images:
   # URL of image configuration file
   config: file:///config/config/bie-index/image-lists.json
-  base: ${common.protocol}://images.${common.domain}
+  base: ${common.protocol}://${common.domain}/image-service
   service:
-    base: ${common.protocol}://images.${common.domain}
-    thumbnail: ${common.protocol}://images.${common.domain}/image/{0}/thumbnail
-    large: ${common.protocol}://images.${common.domain}/image/{0}/large
-    small: ${common.protocol}://images.${common.domain}/image/{0}/original
-    metadata: ${common.protocol}://images.${common.domain}/ws/image/{0}
+    base: ${common.protocol}://${common.domain}/image-service
+    thumbnail: ${common.protocol}://${common.domain}/image-service/image/{0}/thumbnail
+    large: ${common.protocol}://${common.domain}/image-service/image/{0}/large
+    small: ${common.protocol}://${common.domain}/image-service/image/{0}/original
+    metadata: ${common.protocol}://${common.domain}/image-service/ws/image/{0}
   index: true
 knowledgeBase:
   service: https://support.ala.org.au
@@ -56,8 +56,8 @@ wordPress:
   contentOnlyParams: ?content-only=1&categories=1
 lists:
   useListWs: false
-  service: ${common.protocol}://lists.${common.domain}/ws
-  ui: ${common.protocol}://lists.${common.domain}
+  service: ${common.protocol}://${common.domain}/species-list/ws
+  ui: ${common.protocol}://${common.domain}/species-list
   conservation: /speciesList?isAuthoritative=eq:true&isThreatened=eq:true&max={0}&offset={1}
   search: /speciesList/?isAuthoritative=eq:true&max={0}&offset={1}
   show: /speciesListItem/list/{0}
@@ -138,7 +138,7 @@ import:
 ala:
   baseURL: ${common.protocol}://${common.domain}
 bie:
-  baseURL: ${common.protocol}://species.${common.domain}
+  baseURL: ${common.protocol}://${common.domain}/bie-hub
   searchPath: /search
 
 openapi:
@@ -151,9 +151,9 @@ openapi:
         baseUrl: ${common.protocol}://auth.${common.domain}/cas/oidc
 
 userdetails:
-  url: ${common.protocol}://auth.${common.domain}/userdetails/
-userdetails.web.url: ${common.protocol}://auth.${common.domain}/userdetails/
-userdetails.api.url: ${common.protocol}://auth.${common.domain}/userdetails/
+  url: ${common.protocol}://${common.domain}/userdetails/
+userdetails.web.url: ${common.protocol}://${common.domain}/userdetails/
+userdetails.api.url: ${common.protocol}://${common.domain}/userdetails/
 
 # all available rk_ and rkid_ fields in SOLR are added to defaultDownloadFields when no rk_ field is defined in defaultDownloadFields
 defaultDownloadFields: guid,rank,scientificName,scientificNameAuthorship,taxonomicStatus,establishmentMeans,datasetName,parentGuid,acceptedConceptName,acceptedConceptID,idxtype,name,additionalNames_m_s

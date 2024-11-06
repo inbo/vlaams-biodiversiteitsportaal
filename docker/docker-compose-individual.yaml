@@ -1,0 +1,370 @@
+services:
+  biocache-hub:
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/biocache-hub:dev
+    build:
+      context: biocache-hub
+    volumes:
+      - ../config:/config/config:ro
+
+  bie-hub:
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/bie-hub:dev
+    build:
+      context: bie-hub
+    volumes:
+      - ../config:/config/config:ro
+
+  bie-index:
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/bie-index:dev
+    build:
+      context: bie-index
+    volumes:
+      - ../config:/config/config:ro
+    depends_on:
+      solr:
+        condition: service_healthy
+
+  biocache-service:
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/biocache-service:dev
+    build:
+      context: biocache-service
+    volumes:
+      - ../config:/config/config:ro
+    depends_on:
+      solr:
+        condition: service_healthy
+      cassandradb:
+        condition: service_healthy
+      cassandra-load-keyspace:
+        condition: service_started
+    environment:
+##      LOG_FORMAT: JSON
+      LOG_LEVEL: DEBUG
+      JAVA_OPTS: "-Xms128m -Xmx256m -Dspring.profiles.active=local -Dspring.config.additional-location=file:/config/config/common/common.yml,file:/config/config/common/common-docker.yml,file:/config/config/biocache-service/biocache-service.yml -Dspring.config.import=''"
+      SPRING_CONFIG_IMPORT: ''
+
+  apikey:
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/apikey:dev
+    build:
+      context: apikey
+    volumes:
+      - ../config:/config/config:ro
+      - ./apikey/keystore:/etc/cas:ro
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  alerts:
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/alerts:dev
+    build:
+      context: alerts
+    volumes:
+      - ../config:/config/config:ro
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  collectory:
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/collectory:dev
+    build:
+      context: collectory
+    volumes:
+      - ../config:/config/config:ro
+      - ./collections/taxa:/data/collectory/taxa
+      - ./collections/taxa:/data/ala-collectory/taxa
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  doi-service:
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/doi-service:dev
+    build:
+      context: doi-service
+    volumes:
+      - ../config:/config/config:ro
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  logger:
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/logger:dev
+    build:
+      context: logger
+    volumes:
+      - ../config:/config/config:ro
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  species-list:
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/species-list:dev
+    build:
+      context: species-list
+    volumes:
+      - ../config:/config/config:ro
+      - ../config/species-list:/config/species-list:ro
+    depends_on:
+      mysql:
+        condition: service_healthy
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  regions:
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/regions:dev
+    build:
+      context: regions
+    volumes:
+      - ./regions/config:/data/regions/config:ro
+    command:
+      - -Xms128m
+      - -Xmx128m
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  image-service:
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/image-service:dev
+    build:
+      context: image-service
+    volumes:
+      - ./image-service/config:/data/image-service/config:ro
+    command:
+      - -Xms128m
+      - -Xmx128m
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  spatial-hub:
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/spatial-hub:dev
+    build:
+      context: spatial-hub
+    volumes:
+      - ../config:/config/config:ro
+    depends_on:
+      spatial-service:
+        condition: service_healthy
+
+  spatial-service:
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/spatial-service:dev
+    build:
+      context: spatial-service
+    volumes:
+      - ../config:/config/config:ro
+      - /home/stefan/Projects/Inbo/spatial-service/data/spatial-data:/data/spatial-data
+      - geoserver-data:/data/geoserver_data_dir
+    depends_on:
+      postgis:
+        condition: service_healthy
+      geoserver:
+        condition: service_healthy
+      apikey:
+        condition: service_healthy
+
+  userdetails:
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/userdetails:dev
+    build:
+      context: userdetails
+    volumes:
+      - ../config:/config/config:ro
+    depends_on:
+      mysql:
+        condition: service_healthy
+      mailhog:
+        condition: service_healthy
+
+  postgis:
+    image: postgis/postgis:16-3.4-alpine
+    ports:
+      - 5432:5432
+    volumes:
+      - ../config/local-db-init/postgis:/docker-entrypoint-initdb.d
+      - postgis:/var/lib/postgresql/data
+    #      - ../config/local-db-init/postgis/pg_hba.conf:/var/lib/postgresql/data/pg_hba.conf
+    environment:
+      - POSTGRES_PASSWORD=my-super-secret-password
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
+      - POSTGRES_HOST_AUTH_METHOD=md5
+      - POSTGRES_INITDB_ARGS=--auth-host=md5
+    healthcheck:
+      test: pg_isready
+
+  geoserver:
+    image: kartoza/geoserver:2.23.2
+    volumes:
+      #geoserver data folder
+      # - ./spatial/geoserver/geoserver-files:/data/geoserver-files/
+      #Spatials service data folder. If they are both in the same machine, some layers are not needed to be uploaded.
+      - spatial-data:/data/spatial-data:ro
+      - geoserver-data:/data/geoserver_data_dir
+    ports:
+      - "8079:8080"
+    environment:
+      JAVA_OPTS: -Xmx1g -Xms128m -Xss256k
+      #Geoserver
+      GEOSERVER_ADMIN_USER: admin
+      GEOSERVER_ADMIN_PASSWORD: geoserver
+      #If you want to create a user/password
+      #NEW_USER: true
+      USERNAME: admin
+      PASS: my-super-secret-password
+      #Geoserver internal server url. It is used to run a local script to init geoserver
+      GEOSERVER_URL: http://localhost:8080/geoserver
+      GEOSERVER_LOG_PROFILE: PRODUCTION_LOGGING
+      GEOSERVER_DATA_DIR: /data/geoserver_data_dir
+      GEOWEBCACHE_CACHE_DIR: /data/geoserver_data_dir/gwc
+      GEOSERVER_LOG_LOCATION: /data/geoserver_data_dir/logs/geoserver.log
+      FOOTPRINTS_DATA_DIR: /data/geoserver_data_dir/footprints_dir
+      RELINQUISH_LOG4J_CONTROL: true
+      ENABLE_JSONP: true
+      MAX_FILTER_RULES: 20
+      OPTIMIZE_LINE_WIDTH: false
+    healthcheck:
+      test: curl --fail --head --silent http://localhost:8080
+
+  mysql:
+    image: mysql
+    # NOTE: use of "mysql_native_password" is not recommended: https://dev.mysql.com/doc/refman/8.0/en/upgrading-from-previous-series.html#upgrade-caching-sha2-password
+    # (this is just an example, not intended to be a production configuration)
+    # command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - 3306:3306
+    volumes:
+      - ../config/local-db-init/mysql:/docker-entrypoint-initdb.d
+      - mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: my-super-secret-password
+    healthcheck:
+      test: mysqladmin ping -h localhost
+
+  cassandradb:
+    image: cassandra:3
+    volumes:
+      - cassandra:/var/lib/cassandra
+    healthcheck:
+      test: [ "CMD-SHELL", "[ $$(nodetool statusgossip) = running ]" ]
+
+  cassandra-load-keyspace:
+    image: cassandra:3
+    depends_on:
+      cassandradb:
+        condition: service_healthy
+    volumes:
+      - ../config/local-db-init/cassandra:/docker-entrypoint-initdb.d
+    command: bash -c "cqlsh cassandradb -f /docker-entrypoint-initdb.d/*.cql"
+
+  solr:
+    image: solr:8
+    ports:
+      - "8983:8983"
+    volumes:
+      - ../config/solr:/var/solr/init/docker/solr-data:ro
+      - solr-data:/var/solr/data
+    environment:
+      SOLR_HEAP: 2g
+      SOLR_MODE: solrcloud
+    healthcheck:
+      test: [ "CMD-SHELL", "curl -sf http://localhost:8983/solr/" ]
+
+  solr-init:
+    image: solr:8
+    entrypoint: ["bash", "-c"]
+    command:
+      - |-
+        set -e -x
+        ./server/scripts/cloud-scripts/zkcli.sh -zkhost solr:9983 -cmd upconfig -confdir /var/solr/init/docker/solr-data/bie/ -confname bie
+        ./server/scripts/cloud-scripts/zkcli.sh -zkhost solr:9983 -cmd upconfig -confdir /var/solr/init/docker/solr-data/biocache/ -confname biocache
+  
+        curl -X POST --fail 'http://solr:8983/solr/admin/collections?action=CREATE&name=biocache&collection.configName=biocache&numShards=1' || curl -X POST --fail 'http://solr:8983/solr/admin/collections?action=RELOAD&name=biocache'
+        curl -X POST --fail 'http://solr:8983/solr/admin/collections?action=CREATE&name=bie&collection.configName=bie&numShards=1' || curl -X POST --fail 'http://solr:8983/solr/admin/collections?action=RELOAD&name=bie'
+        curl -X POST --fail 'http://solr:8983/solr/admin/collections?action=CREATE&name=bie-offline&collection.configName=bie&numShards=1' || curl -X POST --fail 'http://solr:8983/solr/admin/collections?action=RELOAD&name=bie-offline'
+    volumes:
+      - ../config/solr:/var/solr/init/docker/solr-data:ro
+      - solr-data:/var/solr/data
+    depends_on:
+      solr:
+        condition: service_healthy
+
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    healthcheck:
+      test: "wget localhost:8025 --spider -q"
+
+  elasticsearch:
+    image: elasticsearch:7.17.20
+    environment:
+      - node.name=elasticsearch
+      - xpack.security.enabled=false
+      - discovery.type=single-node
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    cap_add:
+      - IPC_LOCK
+    volumes:
+      - elasticsearch:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://elasticsearch:9200" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  namematching:
+    image: atlasoflivingaustralia/ala-namematching-service:v20210811-3
+    ports:
+      - "9179:9179"
+
+  nginx:
+    image: nginx
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ../branding/public:/srv/branding.la-flanders.org/www/
+    ports:
+      - "80:80"
+    environment:
+      NGINX_HOST: la-flanders.org
+      NGINX_PORT: 80
+    healthcheck:
+      test: service nginx status || exit 1
+          - branding.la-flanders.org
+          - collections.la-flanders.org
+          - images.la-flanders.org
+          - lists.la-flanders.org
+          - logger.la-flanders.org
+          - records-ws.la-flanders.org
+          - records.la-flanders.org
+          - regions.la-flanders.org
+          - spatial.la-flanders.org
+          - species-ws.la-flanders.org
+          - species.la-flanders.org
+
+  mock-oauth2-server:
+    image: ghcr.io/navikt/mock-oauth2-server:2.1.5
+    ports:
+      - "9999:9999"
+    environment:
+      LOG_LEVEL: "info"
+      SERVER_PORT: 9999
+      JSON_CONFIG_PATH: /config/config.json
+    volumes:
+      - ../config/mock-oauth2-server:/config:ro
+
+volumes:
+  spatial-data:
+  cassandra:
+  mysql:
+  postgis:
+  elasticsearch:
+  geoserver-data:
+  solr-data:

@@ -2,26 +2,22 @@ ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} gradle:7-jdk11 AS builder
 
 ARG VERSION=3.5.1
+ARG SOURCE=https://github.com/AtlasOfLivingAustralia/biocache-service.git
 
 WORKDIR /project
-RUN git clone --branch ${VERSION} --depth 1 https://github.com/AtlasOfLivingAustralia/biocache-service.git /project
+RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} .
 
 COPY ./i18n/messages-nl.properties ./src/main/webapp/WEB-INF/messages.properties
 
 RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
     gradle build assemble --no-daemon \
     -x test \
-    # -Dorg.gradle.debug=true -Dorg.gradle.debug.suspend=no --debug \
     --parallel
 
-FROM tomcat:9.0-jdk11-openjdk
+FROM tomcat-base
 
 ARG VERSION=3.5.1
 
-COPY --from=builder /project/build/libs/biocache-service-${VERSION}.war $CATALINA_HOME/webapps/ROOT.war
+COPY --from=builder /project/build/libs/biocache-service-${VERSION}.war ${CATALINA_HOME}/webapps/biocache-service.war
 
-RUN mkdir -p /data/biocache/config
-
-VOLUME /data/biocache-service
-
-HEALTHCHECK CMD curl --fail --silent http://localhost:8080/actuator/health || exit 1
+HEALTHCHECK CMD curl --fail --silent http://localhost:8080/biocache-service/actuator/health || exit 1
