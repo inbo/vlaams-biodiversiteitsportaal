@@ -104,9 +104,6 @@ grails:
     work:
       dir: /data/ala-hub/cache
   serverURL: ${common.protocol}://${common.domain}/biocache-hub
-headerAndFooter:
-  baseURL: ${common.protocol}://branding.${common.domain}
-  version: 2
 image:
   baseUrl: ${common.protocol}://${common.domain}/image-service
 images:
@@ -163,12 +160,8 @@ skin:
     text: not set
     url: ''
   exploreUrl: ${common.protocol}://${common.domain}/regions/explore-by-location/
-  favicon: ${common.protocol}://branding.${common.domain}/favicon.ico
   fluidLayout: true
-  homeUrl: ${common.protocol}://www.${common.domain}
   layout: ala
-  orgNameLong: Vlaams Biodiversiteitsportaal
-  orgNameShort: VBP
   taxaLinks:
     baseUrl: ${common.protocol}://${common.domain}/bie-hub/species/
   useAlaBie: true

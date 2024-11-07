@@ -89,22 +89,22 @@ wiki:
   config: file:///config/config/bie-index/wiki-lists.json
 solr:
   admin:
-    connection: ${common.protocol}://index.${common.domain}:8983/solr
+    connection: http://solr:8983/solr
     type: HTTP
     queueSize: 10
     threadCount: 4
   live:
-    connection: ${common.protocol}://index.${common.domain}:8983/solr/bie
+    connection: http://solr:8983/solr/bie
     type: HTTP
     queueSize: 10
     threadCount: 4
   updatingLive:
-    connection: ${common.protocol}://index.${common.domain}:8983/solr/bie
+    connection: http://solr:8983/solr/bie
     type: UPDATE
     queueSize: 10
     threadCount: 4
   offline:
-    connection: ${common.protocol}://index.${common.domain}:8983/solr/bie-offline
+    connection: http://solr:8983/solr/bie-offline
     type: UPDATE
     queueSize: 10
     threadCount: 4
@@ -119,11 +119,7 @@ solr:
 skin:
   layout: ala-main
   fluidLayout: true
-  orgNameLong: Vlaams Biodiversiteitsportaal
-  favicon: ${common.protocol}://branding.${common.domain}/favicon.ico
-  homeUrl: ${common.protocol}://www.${common.domain}
-headerAndFooter:
-  baseURL: ${common.protocol}://branding.${common.domain}
+
 useLegacyAuto: false
 import:
   sequence: collectory,taxonomy-all,vernacular,denormalise,layers,regions,localities,conservation-lists,wordpress,knowledgebase,biocollect,species-lists,favourites,weights,link-identifiers,images,occurrences,hidden-images,wiki-urls,suggest-index,sitemap,swap

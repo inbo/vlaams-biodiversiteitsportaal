@@ -82,7 +82,7 @@ The platform currently uses subdomains to differentiate between the different se
 To make this work locally, you need to add the following lines to your `/etc/hosts` file.
 
 ```commandline
-127.0.0.1 localhost branding.la-flanders.org collections.la-flanders.org records.la-flanders.org records-ws.la-flanders.org species-ws.la-flanders.org auth.la-flanders.org logger.la-flanders.org images.la-flanders.org lists.la-flanders.org regions.la-flanders.org species.la-flanders.org la-flanders.org spatial.la-flanders.org index.la-flanders.org mock-oauth2-server
+127.0.0.1 localhost branding mock-oauth2-server
 ```
 
 To generate the static pages like the homepage and styling, you also need to run the following command in the [branding folder](./branding)

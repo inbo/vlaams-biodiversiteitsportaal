@@ -44,7 +44,7 @@ logger:
   baseURL: ${common.protocol}://${common.domain}/logger/service
   baseUrl: ${common.protocol}://${common.domain}/logger/service
 namematching:
-  serviceURL: namematching:9179
+  serviceURL: http://namematching:9179
 openapi:
   components:
     security:
@@ -64,12 +64,8 @@ registryApiKey: 449cac3c-0498-4c25-ae0b-2517267c3f05
 serverName: ${common.protocol}://${common.domain}/species-list
 serverURL: ${common.protocol}://${common.domain}/species-list
 skin:
-  favicon: ${common.protocol}://branding.${common.domain}/favicon.ico
   fluidLayout: true
-  homeUrl: ${common.protocol}://www.${common.domain}
   layout: ala-main
-  orgNameLong: Vlaams Biodiversiteitsportaal
-  orgNameShort: VBP
 spatial:
   baseURL: ${common.protocol}://${common.domain}/spatial-hub
 termsOfUseUrl: ''

@@ -42,19 +42,14 @@ userDetails:
   url: ${common.protocol}://${common.domain}/userdetails/
 
 # Header and footer
-headerAndFooter:
-  baseURL: ${common.protocol}://branding.${common.domain}
-  version: 2
 ala.baseURL: ${common.homepage}
 bie.baseURL: ${common.protocol}://${common.domain}/bie-hub
 bie.searchPath: /search
 
 # Skin options
-skin.layout: ala-main
-skin.fluidLayout: true
-skin.orgNameLong: Vlaams Biodiversiteitsportaal
-skin.orgNameShort: VBP
-skin.favicon: ${common.protocol}://branding.${common.domain}/favicon.ico
+skin:
+  layout: ala-main
+  fluidLayout: true
 
 spring:
   session:

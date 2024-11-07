@@ -72,9 +72,6 @@ grails:
         "['/images/*', '/data/*', '/img/*', '/theme/default/*', '/css/*',
                 '/js/*', '/plugins/*' ]"
   serverURL: ${common.protocol}://${common.domain}/collectory
-headerAndFooter:
-  baseURL: ${common.protocol}://branding.${common.domain}
-  version: 2
 isPipelinesCompatible: false
 loggerURL: ${common.protocol}://${common.domain}/logger/service
 management:
@@ -117,11 +114,6 @@ showExtraInfoInDataSetsView:
   enabled: "true "
   relativeTime: true
 skin:
-  favicon: ${common.protocol}://branding.${common.domain}/
-  homeUrl: ${common.protocol}://www.${common.domain}
-  orgNameLong: Vlaams Biodiversiteitsportaal
-  orgNameShort: VBP
-  orgSupportEmail: ${common.supportEmail}
   taxaLinks:
     baseUrl: ${common.protocol}://${common.domain}/bie-hub/species/
 spatial:

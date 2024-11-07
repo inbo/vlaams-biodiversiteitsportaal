@@ -98,9 +98,6 @@ alerts:
   url: null
 userDetails:
   url: ${common.protocol}://${common.domain}/userdetails/
-headerAndFooter:
-  baseURL: ${common.protocol}://branding.${common.domain}
-  version: 2
 ala:
   baseURL: ${common.homepage}
 bie:
@@ -109,10 +106,6 @@ bie:
 skin:
   layout: ala-main
   fluidLayout: true
-  orgNameLong: Vlaams Biodiversiteitsportaal
-  orgNameShort: VBP
-  favicon: ${common.protocol}://branding.${common.domain}/favicon.ico
-  homeUrl: ${common.protocol}://branding.${common.domain}
 attributes:
   affiliations:
     enabled: false

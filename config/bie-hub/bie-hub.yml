@@ -36,11 +36,6 @@ biocacheService:
   baseURL: ${common.protocol}://${common.domain}/biocache-service
   queryContext: -_nest_parent_:*
 
-# Header and footer
-headerAndFooter:
-  baseURL: ${common.protocol}://branding.${common.domain}
-  version: 2
-
 ala:
   baseURL: ${common.homepage}
   image:

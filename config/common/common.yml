@@ -11,7 +11,7 @@ ala:
 
 # Header and footer
 headerAndFooter:
-  baseURL: ${common.protocol}://branding.${common.domain}
+  baseURL: ${common.protocol}://${common.domain}
   version: 2
 
 # Skin and layout

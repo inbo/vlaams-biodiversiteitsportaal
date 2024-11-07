@@ -192,10 +192,6 @@ auth:
 #    header:
 #      userId: X-ALA-userId
 
-headerAndFooter:
-  baseURL: "${common.protocol}://branding.${common.domain}"
-#  version: "2"
-
 ala:
   baseURL: "${common.protocol}://${common.domain}"
 bie:
@@ -215,7 +211,10 @@ layersService:
   url: "${common.protocol}://${common.domain}/spatial-service"
 
 lists:
-  url: "${common.protocol}://${common.domain}/species-list"
+  url: ''
+#  TODO: causes the portal-full tomcat to hang at startup, spatial-hub blocks on this
+#        and species-lists is no yet serving any requests
+#  url: "${common.protocol}://${common.domain}/species-list"
   threatenedSpeciesUrl: '/ws/speciesList/?isThreatened=eq:true&isAuthoritative=eq:true'
   invasiveSpeciesUrl: '/ws/speciesList/?isInvasive=eq:true&isAuthoritative=eq:true'
   facets: True
@@ -255,7 +254,7 @@ sampling:
   url: "${common.protocol}://${common.domain}/spatial-service"
 
 geoserver:
-  url: "${common.protocol}://${common.domain}/spatial-hub/geoserver"
+  url: "${common.protocol}://${common.domain}/geoserver"
 
 flickr:
   url: "https://api.flickr.com/services/rest/?method="
