@@ -111,7 +111,7 @@ services:
     build:
       context: regions
     volumes:
-      - ./regions/config:/data/regions/config:ro
+      - ../config:/config/config:ro
     command:
       - -Xms128m
       - -Xmx128m
@@ -328,9 +328,13 @@ services:
       - ./nginx/conf.d:/etc/nginx/conf.d
       - ../branding/public:/srv/branding.la-flanders.org/www/
     ports:
-      - "81:80"
+      - "80:80"
     healthcheck:
       test: service nginx status || exit 1
+    networks:
+      default:
+        aliases:
+          - branding
 
   mock-oauth2-server:
     image: ghcr.io/navikt/mock-oauth2-server:2.1.5

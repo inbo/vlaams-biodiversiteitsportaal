@@ -72,13 +72,13 @@ docker buildx create --use \                                                    
 To run the portal locally, you can use the docker-compose files in the [/docker folder](/docker).
 
 ```commandline
-cd docker && docker-compose up
+cd docker && docker buildx bake all --load  && docker-compose up
 ```
 
 Be aware that running the entire platform requires a lot of resources.  
 [(We are currently working on a hopefully more lightweight version)](https://github.com/orgs/inbo/projects/15?pane=issue&itemId=72746951&issue=inbo%7Cvlaams-biodiversiteitsportaal%7C61)  
 
-The platform currently uses subdomains to differentiate between the different services.
+The platform requires a few domains to be recognized by the services and the user browsing, using the same name.
 To make this work locally, you need to add the following lines to your `/etc/hosts` file.
 
 ```commandline
