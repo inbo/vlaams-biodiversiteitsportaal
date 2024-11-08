@@ -40,10 +40,10 @@ endpoints:
   enabled: true
   health:
     sensitive: false
-serverURL: ${common.protocol}://auth.${common.domain}
-serverName: ${common.protocol}://auth.${common.domain}
+serverURL: ${common.protocol}://${common.domain}/userdetails
+serverName: ${common.protocol}://${common.domain}/userdetails
 grails:
-  serverURL: ${common.protocol}://auth.${common.domain}/userdetails
+  serverURL: ${common.protocol}://${common.domain}/userdetails
   mail:
     host: mail.${common.domain}
     port: 1025

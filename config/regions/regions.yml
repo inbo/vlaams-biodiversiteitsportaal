@@ -10,11 +10,6 @@ webservice:
   client-id: regions
   client-secret: xxx
 
-casServerName: ${common.protocol}://auth.${common.domain}
-casServerLoginUrl: ${common.protocol}://auth.${common.domain}/cas/login
-casServerUrlPrefix: ${common.protocol}://auth.${common.domain}/cas
-casProperties: casServerLoginUrl,serverName,centralServer,casServerName,uriFilterPattern,uriExclusionFilter,authenticateOnlyIfLoggedInFilterPattern,casServerLoginUrlPrefix,gateway,casServerUrlPrefix,contextPath
-
 grails:
   serverURL: ${common.protocol}://${common.domain}/regions
   cors:

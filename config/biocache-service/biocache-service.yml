@@ -234,7 +234,7 @@ cors:
   allowedOrigins: ["*"]
 
 userdetails:
-  url: ${common.protocol}://auth.${common.domain}/userdetails
+  url: ${common.protocol}://${common.domain}/userdetails
   web:
     url: ${common.protocol}://${common.domain}/userdetails/
   api:
