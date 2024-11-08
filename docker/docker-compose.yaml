@@ -14,6 +14,7 @@ services:
       LOG_LEVEL: "INFO"
       JAVA_OPTS: "-Xmx6g"
       REMOTE_DEBUGGER_PORT: 5005
+      ADDITIONAL_SPRING_CONFIG_LOCATIONS: "file:/config/config/common/common-docker.yml"
     networks:
       default:
         aliases:

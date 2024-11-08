@@ -3,7 +3,7 @@
 <Context reloadable="false">
 
     <Parameter name="spring.config.additional-location"
-               value="file:/config/config/common/common.yml,file:/config/config/common/common-docker.yml,file:/config/config/doi-service/doi-service.yml"
+               value="file:/config/config/common/common.yml,file:/config/config/doi-service/doi-service.yml,${ADDITIONAL_SPRING_CONFIG_LOCATIONS}"
                override="false"/>
 
 

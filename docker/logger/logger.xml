@@ -2,7 +2,7 @@
 <Context reloadable="false">
 
     <Parameter name="spring.config.additional-location"
-               value="file:/config/config/common/common.yml,file:/config/config/common/common-docker.yml,file:/config/config/logger/logger.yml"
+               value="file:/config/config/common/common.yml,file:/config/config/logger/logger.yml,${ADDITIONAL_SPRING_CONFIG_LOCATIONS}"
                override="false"/>
 
     <!-- Logging config -->

@@ -72,7 +72,7 @@ docker buildx create --use \                                                    
 To run the portal locally, you can use the docker-compose files in the [/docker folder](/docker).
 
 ```commandline
-cd docker && docker buildx bake all --load  && docker-compose up
+cd docker && docker buildx bake portal-full --load  && docker-compose up
 ```
 
 Be aware that running the entire platform requires a lot of resources.  

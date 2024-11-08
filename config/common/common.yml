@@ -1,7 +1,7 @@
 # Custom common config values, used to template others
 common:
   protocol: https
-  domain: biodiversiteitsportaal.dev.svdev.be
+  domain: www.biodiversiteitsportaal.dev.svdev.be
   homepage: ${common.protocol}://www.${common.domain}
   supportEmail: support.natuurdata@inbo.be
 
@@ -11,7 +11,7 @@ ala:
 
 # Header and footer
 headerAndFooter:
-  baseURL: ${common.protocol}://${common.domain}
+  baseURL: ${common.protocol}://www.${common.domain}
   version: 2
 
 # Skin and layout
@@ -35,14 +35,14 @@ management:
 logging:
   config: /config/config/common/logback.xml
 
+# CORS is managed by cloudfront and nginx
+grails:
+  cors:
+    enabled: false
+
 security:
   cors:
-    enable: true
-    authenticated:
-      allowedOriginPatterns: [ "https://.*.${common.domain}" ]
-    unauthenticated:
-      allowedOriginPatterns: [ "https://.*.${common.domain}" ]
-      allowCredentials: false
+    enable: false
 
   apikey:
     enabled: true
@@ -71,18 +71,3 @@ security:
 webservice:
   jwt: true
   jwt-scopes: openid users/read
-
-grails:
-  cors:
-    enabled: true
-    allowCredentials: true
-    allowedMethods:
-        - '*'
-    allowedHeaders:
-        - '*'
-    allowedOrigins: [ ]
-    allowedOriginPatterns: [ "https://*.biodiversiteitsportaal.dev.svdev.be" ]
-    # Especially needed to override bad default in species list, but might as well make it common
-    mappings:
-        '[/**]': inherit
-        '[/ws/**]': inherit
