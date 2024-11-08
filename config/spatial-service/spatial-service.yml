@@ -67,7 +67,7 @@ dataSource:
 
 batch_sampling_passwords: ""
 
-ala.baseURL: '${common.protocol}://www.${common.domain}'
+ala.baseURL: '${common.protocol}://${common.domain}'
 bie.baseURL: '${common.protocol}://bie.${common.domain}'
 bie.searchPath: '/search'
 

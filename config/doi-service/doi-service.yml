@@ -40,9 +40,9 @@ management:
 
 ala:
   base:
-    url: ${common.protocol}://www.${common.domain}
+    url: ${common.protocol}://${common.domain}
   contact:
-    form: ${common.protocol}://www.${common.domain}/contact-todo
+    form: ${common.protocol}://${common.domain}/contact-todo
 doi:
   service:
     mock: true # TODO
@@ -62,7 +62,7 @@ doi:
     - "phylolink"
     - "csdm"
   publicationLang: "en"
-  supportContact: https://www.ala.org.au/about-the-atlas/communications-centre/
+  supportContact: https://${common.domain}/about-the-atlas/communications-centre/
 file:
   store: /data/doi-service/files
 

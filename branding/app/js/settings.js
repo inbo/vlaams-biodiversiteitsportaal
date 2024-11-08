@@ -8,8 +8,8 @@ let logoutUrl = "https://biodiversiteitsportaal-dev.auth.eu-west-1.amazoncognito
 if (process.env.NODE_ENV === 'docker') {
     protocol = "http"
     domain = "localhost"
-    loginUrl = "http://localhost:9999/default/authorize?client_id=7072p1h0hnf2hiu7172iuqjsbb&response_type=code&scope=openid&redirect_uri=http%3A%2F%2Fwww.la-flanders.org?auth-cookie-action=remove"
-    logoutUrl = "http://localhost:9999/default/endsession?post_logout_redirect_uri=http%3A%2F%2Fwww.la-flanders.org?auth-cookie-action=remove"
+    loginUrl = "http://localhost:9999/default/authorize?client_id=7072p1h0hnf2hiu7172iuqjsbb&response_type=code&scope=openid&redirect_uri=http%3A%2F%2Flocalhost?auth-cookie-action=remove"
+    logoutUrl = "http://localhost:9999/default/endsession?post_logout_redirect_uri=http%3A%2F%2Flocalhost?auth-cookie-action=remove"
 }
 
 module.exports = {

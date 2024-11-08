@@ -1,8 +1,8 @@
 # Custom common config values, used to template others
 common:
   protocol: https
-  domain: www.biodiversiteitsportaal.dev.svdev.be
-  homepage: ${common.protocol}://www.${common.domain}
+  domain: biodiversiteitsportaal.dev.svdev.be
+  homepage: ${common.protocol}://${common.domain}
   supportEmail: support.natuurdata@inbo.be
 
 # Common ala config values
@@ -11,7 +11,7 @@ ala:
 
 # Header and footer
 headerAndFooter:
-  baseURL: ${common.protocol}://www.${common.domain}
+  baseURL: ${common.protocol}://${common.domain}
   version: 2
 
 # Skin and layout

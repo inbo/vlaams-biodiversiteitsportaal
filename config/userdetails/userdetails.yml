@@ -93,7 +93,7 @@ biocache:
   myDownloads:
     url: ${common.protocol}://${common.domain}/biocache-hub/download/myDownloads/
 myData:
-  url: ${common.protocol}://www.${common.domain}/tempDataResource/myData
+  url: ${common.protocol}://${common.domain}/tempDataResource/myData
 alerts:
   url: null
 userDetails:

@@ -28,11 +28,11 @@ grails:
 skin:
   layout: "ala-main"
   orgSupportEmail: ${common.supportEmail}
-privacyPolicy: "${common.protocol}://www.${common.domain}/terms-of-use/privacy-policy/"
+privacyPolicy: "${common.protocol}://${common.domain}/terms-of-use/privacy-policy/"
 siteDefaultLanguage: "nl"
 
 ala:
-  baseURL: "${common.protocol}://www.${common.domain}"
+  baseURL: "${common.protocol}://${common.domain}"
   userDetailsURL: "${common.protocol}://${common.domain}/userdetails/userDetails/getUserListFull"
 biocacheService:
   baseURL: "${common.protocol}://${common.domain}/biocache-service"
@@ -69,7 +69,7 @@ biosecurity:
       nonAuthoritativeList: /occurrences/search?q=species_list:___LISTIDPARAM___&fq=decade:2020&fq=country:Australia&fq=first_loaded_date:[___DATEPARAM___%20TO%20*]&fq=occurrence_date:[___LASTYEARPARAM___%20TO%20*]&sort=first_loaded_date&dir=desc&disableAllQualityFilters=true
     maxRecords: 500
   moreinfo:
-    link: ${common.protocol}://www.${common.domain}/blogs-news/ala-helps-to-stop-pests-in-their-tracks/
+    link: ${common.protocol}://${common.domain}/blogs-news/ala-helps-to-stop-pests-in-their-tracks/
   csv:
     local:
       enabled: true

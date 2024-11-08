@@ -25,7 +25,7 @@ ala:
   baseURL: ${common.homepage}
 
 supportEmail: ${common.supportEmail}
-homeUrl: ${common.protocol}://www.${common.domain}
+homeUrl: ${common.protocol}://${common.domain}
 mainTitle: Vlaams Biodiversiteitsportaal
 emailSenderTitle: Vlaams Biodiversiteitsportaal
 emailSender: ${common.supportEmail}

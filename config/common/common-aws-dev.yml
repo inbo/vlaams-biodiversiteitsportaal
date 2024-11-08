@@ -2,5 +2,5 @@
 common:
   protocol: https
   domain: biodiversiteitsportaal.dev.svdev.be
-  homepage: ${common.protocol}://www.${common.domain}
+  homepage: ${common.protocol}://${common.domain}
   supportEmail: support.natuurdata@inbo.be
