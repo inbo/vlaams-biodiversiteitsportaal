@@ -1,6 +1,6 @@
 var BC_CONF = BC_CONF || {}
 if (!BC_CONF.hasOwnProperty('contextPath')) {
-    BC_CONF.contextPath = ""
+    BC_CONF.contextPath = "/biocache-hub"
 }
 if (!BC_CONF.hasOwnProperty('locale')) {
     BC_CONF.locale = "nl"
