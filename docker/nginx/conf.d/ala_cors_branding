@@ -7,7 +7,7 @@ set $cors '';
 
 # Test your regexp of type PCRE with a tool like https://www.regextester.com/
 # Sample:  ^https?:\/\/(localhost|l-a\.site|.*\.l-a\.site)
-if ($http_origin ~* '^https?:\/\/(localhost|la-flanders\.org|.+\.la-flanders\.org)') {
+if ($http_origin ~* '^https?:\/\/localhost(:?\:\d+)?$') {
   set $cors 'C';
 }
 

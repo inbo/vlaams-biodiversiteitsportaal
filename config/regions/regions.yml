@@ -52,7 +52,7 @@ alerts:
 bieService:
   baseURL: ${common.protocol}://${common.domain}/bie-index
 geoserver:
-  baseURL: ${common.protocol}://${common.domain}/spatial-hub/geoserver
+  baseURL: ${common.protocol}://${common.domain}/geoserver
 biocacheService:
   baseURL: ${common.protocol}://${common.domain}/biocache-service
 map:
