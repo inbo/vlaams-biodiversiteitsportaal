@@ -6,7 +6,7 @@ security:
   cas:
     enabled: false
   oidc:
-    enabled: false
+    enabled: true
     clientId: userdetails
     secret: userdetails-oidc-super-secret
 webservice:
