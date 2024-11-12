@@ -6,9 +6,6 @@
                override="false"/>
 
     <!-- Logging config -->
-    <Parameter name="logging.config"
-               value="/config/config/common/logback-docker.xml"
-               override="false"/>
     <Parameter name="appName"
                value="%boldYellow(logger)"
                override="false"/>

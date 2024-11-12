@@ -7,9 +7,6 @@
                override="false"/>
 
     <!-- Logging config -->
-    <Parameter name="logging.config"
-               value="/config/config/biocache-service/log4j-docker.xml"
-               override="false"/>
     <Parameter name="appName"
                value="biocache-service"
                override="false"/>
