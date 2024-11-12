@@ -82,10 +82,10 @@ deleted:
   file:
     store: /data/biocache-delete/
 download:
-  url: ${common.protocol}://${common.domain}/biocache-hub/biocache-download
+  url: ${common.protocol}://${common.domain}/biocache-download
   offline:
     max:
-      url: ${common.protocol}://${common.domain}/biocache-hub/biocache-download/
+      url: ${common.protocol}://${common.domain}/biocache-download/
   batch:
     size: 500
   internal:
