@@ -71,7 +71,7 @@ collectory:
   baseURL: ${common.protocol}://${common.domain}/collectory
   threatenedSpeciesCodesUrl: ${common.protocol}://${common.domain}/collectory/public/showDataResource
 collectoryService:
-  baseURL: ${common.protocol}://${common.domain}/collectory/ws
+  baseURL: ${common.protocol}://${common.domain}/collectory
 speciesList:
   baseURL: ${common.protocol}://${common.domain}/species-list
   preferredSpeciesListDruid: dr4778
