@@ -7,7 +7,7 @@ WORKDIR /project
 # ARG VERSION=4.1.0
 # ARG SOURCE=https://github.com/AtlasOfLivingAustralia/ala-bie-hub.git
 
-ARG VERSION=fix-search-page-not-showing-refine-results
+ARG VERSION=fix-wolf-wiki-page
 ARG SOURCE=https://github.com/StefanVanDyck/ala-bie-hub.git
 
 RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} .
