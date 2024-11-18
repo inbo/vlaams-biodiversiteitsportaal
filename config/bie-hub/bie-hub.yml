@@ -135,9 +135,10 @@ defaultZoomLevel: 9
 map:
   default:
     url: https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png
+    colour: a83d7a
   simpleMapButton: False
   records:
-    colour: e6704c
+    colour: a83d7a
 
 
 
