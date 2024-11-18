@@ -25,7 +25,7 @@ spatialHubUrl: ${common.protocol}://${common.domain}/spatial-hub/
 #
 
 geoserver:
-  url: '${common.protocol}://${common.domain}/spatial-hub/geoserver'
+  url: '${common.protocol}://${common.domain}/geoserver'
   username: 'admin'
   password: 'geoserver'
   canDeploy: true
