@@ -7,29 +7,14 @@ However, a few additional manual steps are required.
 A special tomcat container is used, "portal-full", which contains all the services required to run the portal in a single docker image.
 This is to reduce the amount of resources needed, making it possible to run everything on a single laptop.
 
-Most of the projects have the Australian gradle repo hard coded and this makes downloading the dependencies very slow.
-To mitigate this we use a custom docker cache for gradle.  
-Unfortunately it is not possible to share this cache between different instances of gradle.    
-That means we can only build a single image at a time.    
-
-To accomplish this, a specific buildx builder can be used.  
-(This should also allow for multi-platform builds)
-The command to create the builder and immediately use it as the default is this:
-```commandline
-docker buildx create --use \                                                                                                                            ✔  09:23:28 ▓▒░
-  --name living-atlas \
-  --driver docker-container \
-  --config ./buildkitd.toml
-```
-
 Next, to build the portal-full image, you can use the following command:
 ```commandline
 cd docker && docker buildx bake portal-full --load
 ```
 
 Be aware this can take quite a while the first time.  
-It requires checking out all of the services one-by-one and building them from scratch.
-
+It requires checking out all the services one-by-one and building them from scratch.
+(one-by-one because of the shared gradle cache)
 
 ### 2. Add hostname
 The platform requires a hostname that resolves to the same thing by both the services, running inside docker containers and the client browser.

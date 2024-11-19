@@ -13,7 +13,7 @@ RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} .
 COPY ./i18n/ ./grails-app/i18n/
 COPY ./layouts/* ./grails-app/views/layouts/
 
-RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
+RUN --mount=type=cache,target=/home/gradle/.gradle/caches,sharing=locked \
     gradle \
         build assemble \
         -x test -x integrationTest \

@@ -10,7 +10,7 @@ RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} .
 # Remove absolutely ridiculous and annoying "security" check
 RUN rm /project/grails-app/controllers/au/org/ala/logger/IpAddressInterceptor.groovy
 
-RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
+RUN --mount=type=cache,target=/home/gradle/.gradle/caches,sharing=locked \
     gradle build assemble --no-daemon \
     -x test -x integrationTest \
     --parallel

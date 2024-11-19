@@ -7,7 +7,7 @@ ARG SOURCE=https://github.com/AtlasOfLivingAustralia/image-service.git
 WORKDIR /project
 RUN git clone --branch v${VERSION} --depth 1 ${SOURCE} /project
 COPY build.gradle /project/build.gradle
-RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
+RUN --mount=type=cache,target=/home/gradle/.gradle/caches,sharing=locked \
     gradle build assetCompile assemble --no-daemon \
     -x test -x integrationTest \
     --parallel

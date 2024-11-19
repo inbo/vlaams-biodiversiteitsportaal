@@ -9,7 +9,7 @@ RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} .
 
 COPY ./i18n/messages-nl.properties ./src/main/webapp/WEB-INF/messages.properties
 
-RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
+RUN --mount=type=cache,target=/home/gradle/.gradle/caches,sharing=locked \
     gradle build assemble --no-daemon \
     -x test \
     --parallel

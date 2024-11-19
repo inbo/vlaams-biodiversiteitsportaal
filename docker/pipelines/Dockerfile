@@ -25,7 +25,10 @@ RUN --mount=type=cache,target=/root/.m2/repository \
 #
 # ARG VERSION=2.18.6-SNAPSHOT
 
-RUN apt-get update && apt-get -y install \
+RUN --mount=target=/var/lib/apt/lists,type=cache,sharing=locked \
+    --mount=target=/var/cache/apt,type=cache,sharing=locked \
+    rm -f /etc/apt/apt.conf.d/docker-clean \
+    apt-get update && apt-get install -y --no-install-recommends \
     nano \
     file
 
@@ -35,9 +38,6 @@ RUN groupadd --gid 1000 app \
 
 RUN mkdir /data && chown app:app /data
 VOLUME /data
-#
-# RUN apt-get update &&\
-#     apt-get install -y yq
 
 ARG TARGETARCH
 

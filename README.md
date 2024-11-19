@@ -56,16 +56,12 @@ aws ecr get-login-password --profile <aws profile name> | docker login --usernam
 cd docker && docker buildx bake --push <optional_name_of_container>
 ```
 
-Most of the projects have the Australian gradle repo hard coded and this makes downloading the dependencies very slow.
-Unfortunately it is not possible to share a gradle between different instances of gradle.  
-That means we can only build a single image at a time.  
-To accomplish this, a specific buildx builder might be required to build the images.
-```commandline
-docker buildx create --use \                                                                                                                            ✔  09:23:28 ▓▒░
-  --name living-atlas \
-  --driver docker-container \
-  --config ./buildkitd.toml
-```
+Be aware that the first time building the images can take a long time.
+All the services need to be built form scratch.  
+Additionally, because of the use of the Australian repositories, we opted to add a shared gradle cache.  
+This prevents slow downloading of the same dependencies over and over again.  
+But it prevents us running the builds in parallel, as this cache cannot be shared between concurrent gradle builds.
+
 
 ### Local
 

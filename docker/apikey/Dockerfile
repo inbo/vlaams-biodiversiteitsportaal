@@ -7,7 +7,7 @@ ARG SOURCE=https://github.com/AtlasOfLivingAustralia/apikey.git
 WORKDIR /project
 RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} .
 
-RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
+RUN --mount=type=cache,target=/home/gradle/.gradle/caches,sharing=locked \
     gradle build assemble --no-daemon \
     -x test -x integrationTest \
     --parallel
