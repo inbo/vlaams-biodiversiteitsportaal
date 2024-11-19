@@ -15,6 +15,10 @@ RUN --mount=type=cache,target=/gradle-cache,ro \
     gradle build assemble \
     -x test -x integrationTest
 
+# Copy dependencies to shared read-only cache
+RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
+    rsync -a /home/gradle/.gradle/caches/modules-2 /gradle-cache \
+    && rm /gradle-cache/modules-2/*.lock && rm /gradle-cache/modules-2/gc.properties
 
 FROM tomcat-base
 

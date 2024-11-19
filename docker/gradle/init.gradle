@@ -34,6 +34,12 @@ allprojects {
             }
         }
         maven {
+            url "https://repo.osgeo.org/repository/release/"
+            content {
+                excludeGroup("au.org.ala")
+            }
+        }
+        maven {
             url "https://maven.geo-solutions.it/"
             content {
                 excludeGroup("au.org.ala")
