@@ -9,8 +9,9 @@ target "tomcat-base" {
 }
 
 target "portal-full" {
-  context = "./tomcat-base"
+  context = "./tomcat"
   contexts = {
+    "tomcat-base"      = "target:tomcat-base"
     "alerts"           = "target:alerts"
     "apikey"           = "target:apikey"
     "bie-hub"          = "target:bie-hub"
@@ -151,15 +152,6 @@ target "userdetails" {
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/userdetails:${TAG}"]
 }
 
-target "portal-full" {
-  context = "./tomcat"
-  contexts = {
-    "tomcat-base" = "target:tomcat-base"
-    "alerts"      = "target:alerts"
-  }
-  tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/portal-full:${TAG}"]
-}
-
 target "pipelines" {
   context = "./pipelines"
   contexts = {
@@ -187,7 +179,7 @@ group "all" {
     "species-list",
     "userdetails",
     "portal-full",
-#     "pipelines"
+    #     "pipelines"
   ]
 }
 

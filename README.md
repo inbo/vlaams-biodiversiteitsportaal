@@ -67,41 +67,9 @@ docker buildx create --use \                                                    
   --config ./buildkitd.toml
 ```
 
-
 ### Local
-To run the portal locally, you can use the docker-compose files in the [/docker folder](/docker).
 
-```commandline
-cd docker && docker buildx bake portal-full --load  && docker-compose up
-```
-
-Be aware that running the entire platform requires a lot of resources.  
-[(We are currently working on a hopefully more lightweight version)](https://github.com/orgs/inbo/projects/15?pane=issue&itemId=72746951&issue=inbo%7Cvlaams-biodiversiteitsportaal%7C61)  
-
-The platform requires a few domains to be recognized by the services and the user browsing, using the same name.
-To make this work locally, you need to add the following lines to your `/etc/hosts` file.
-
-```commandline
-127.0.0.1 localhost branding mock-oauth2-server
-```
-
-To generate the static pages like the homepage and styling, you also need to run the following command in the [branding folder](./branding)
-```commandline
-cd branding
-git submodule update --init --recursive
-npm install
-NODE_ENV=docker npx brunch build
-```
-
-#### Differences with the cloud environments
-Because some AWS Cloud services are not available locally, alternatives are used in the local environment.
-These are:
-- **nginx**   
-Instead of the AWS Application Load Balancer and the AWS CloudFront distribution with static pages.
-- **mock-oauth2**  
-Instead of AWS Cognito for user authentication and authorization.
-- **mailhog**  
-Instead of SES a smtp server.
+Please refer to the [running locally documentation](docs/running-locally.md) for more information on how to run the portal locally.
 
 ## Making changes to the actual code
 This project only contains the things needed to build and configure the platform.  

@@ -10,12 +10,14 @@ grails:
   cors:
     allowedOriginPatterns: [ "http://localhost" ]
 
+# Need to use host.docker.internal because these urls are use both by the client browser, and the services themselves
+# So it is important they resolve to the same thing
 security:
   jwt:
-    discoveryUri: http://mock-oauth2-server:9999/default/.well-known/openid-configuration
+    discoveryUri: http://host.docker.internal/mock-oauth2/.well-known/openid-configuration
   oidc:
-    discoveryUri: http://mock-oauth2-server:9999/default/.well-known/openid-configuration
+    discoveryUri: http://host.docker.internal/mock-oauth2/.well-known/openid-configuration
 
 # Header and footer
 headerAndFooter:
-  baseURL: ${common.protocol}://branding
+  baseURL: ${common.protocol}://host.docker.internal

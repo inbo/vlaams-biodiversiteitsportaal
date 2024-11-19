@@ -13,8 +13,10 @@ services:
     environment:
       LOG_LEVEL: "INFO"
       JAVA_OPTS: "-Xmx6g"
-      REMOTE_DEBUGGER_PORT: 5005
       ADDITIONAL_SPRING_CONFIG_LOCATIONS: "file:/config/config/common/common-docker.yml"
+#      REMOTE_DEBUGGER_PORT: 5005
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     networks:
       default:
         aliases:
@@ -40,6 +42,8 @@ services:
         condition: service_healthy
       postgis:
         condition: service_healthy
+      mock-oauth2-server:
+        condition: service_started
 
   postgis:
     image: postgis/postgis:16-3.4-alpine
@@ -203,6 +207,8 @@ services:
 
   namematching:
     image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/namematching-service:2024-11-12
+#    build:
+#      context: namematching
     ports:
       - "9179:9179"
 
@@ -224,13 +230,14 @@ services:
         condition: service_started
       geoserver:
         condition: service_started
+      mock-oauth2-server:
+        condition: service_started
 
   mock-oauth2-server:
     image: ghcr.io/navikt/mock-oauth2-server:2.1.5
     ports:
       - "9999:9999"
     environment:
-      LOG_LEVEL: "info"
       SERVER_PORT: 9999
 
 networks:
