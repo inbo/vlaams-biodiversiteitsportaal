@@ -138,7 +138,7 @@ map:
 #    url: https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png
 #  overlay:
 #    url: ${common.protocol}://spatial.${common.domain}/geoserver/gwc/service/wms
-#  pointColour: df4a21
+  pointColour: a83d7a
 #  zoomOutsideScopedRegion: true
 #mapdownloads:
 #  baseLayers:
