@@ -12,7 +12,11 @@ RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} .
 
 COPY ./i18n/ ./grails-app/i18n/
 
-RUN --mount=type=cache,target=/home/gradle/.gradle/caches,sharing=locked \
+
+ENV GRADLE_RO_DEP_CACHE=/gradle-cache
+
+RUN --mount=type=cache,target=/gradle-cache,ro \
+    ls -la /gradle-cache && \
     gradle \
         build assemble \
         -x test -x integrationTest \
@@ -22,9 +26,9 @@ RUN --mount=type=cache,target=/home/gradle/.gradle/caches,sharing=locked \
 
 FROM tomcat-base
 
-RUN --mount=target=/var/lib/apt/lists,type=cache,sharing=locked \
-    --mount=target=/var/cache/apt,type=cache,sharing=locked \
-    rm -f /etc/apt/apt.conf.d/docker-clean \
+RUN rm -f /etc/apt/apt.conf.d/docker-clean; echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/keep-cache
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,target=/var/lib/apt,sharing=locked \
     apt-get update && apt-get install -y --no-install-recommends \
     gettext-base \
     gdal-bin

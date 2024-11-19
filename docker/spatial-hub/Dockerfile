@@ -4,7 +4,10 @@ FROM --platform=${BUILDPLATFORM} gradle:7-jdk11 AS builder
 ARG VERSION=2.1.0
 ARG SOURCE=https://github.com/AtlasOfLivingAustralia/spatial-hub.git
 
-RUN apt-get update && apt-get -y install \
+RUN rm -f /etc/apt/apt.conf.d/docker-clean; echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/keep-cache
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,target=/var/lib/apt,sharing=locked \
+    apt-get update && apt-get -y install --no-install-recommends \
     npm
 
 WORKDIR /project
@@ -13,7 +16,11 @@ RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} .
 COPY ./i18n/ ./grails-app/i18n/
 COPY ./layouts/* ./grails-app/views/layouts/
 
-RUN --mount=type=cache,target=/home/gradle/.gradle/caches,sharing=locked \
+
+ENV GRADLE_RO_DEP_CACHE=/gradle-cache
+
+RUN --mount=type=cache,target=/gradle-cache,ro \
+    ls -la /gradle-cache && \
     gradle \
         build assemble \
         -x test -x integrationTest \

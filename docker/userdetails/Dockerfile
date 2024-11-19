@@ -7,7 +7,11 @@ ARG SOURCE=https://github.com/AtlasOfLivingAustralia/userdetails.git
 WORKDIR /project
 RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} .
 
-RUN --mount=type=cache,target=/home/gradle/.gradle/caches,sharing=locked \
+
+ENV GRADLE_RO_DEP_CACHE=/gradle-cache
+
+RUN --mount=type=cache,target=/gradle-cache,ro \
+    ls -la /gradle-cache && \
     gradle build assemble --no-daemon \
     -x test -x integrationTest \
     --parallel

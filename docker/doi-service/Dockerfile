@@ -7,13 +7,21 @@ ARG SOURCE=https://github.com/AtlasOfLivingAustralia/doi-service.git
 WORKDIR /project
 RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} .
 
-RUN --mount=type=cache,target=/home/gradle/.gradle/caches,sharing=locked \
+
+ENV GRADLE_RO_DEP_CACHE=/gradle-cache
+
+RUN --mount=type=cache,target=/gradle-cache,ro \
+    ls -la /gradle-cache && \
     gradle \
         build assemble \
         -x test \
         --no-daemon \
         --parallel
 
+# Copy dependencies to shared read-only cache
+RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
+    cp -rv /home/gradle/.gradle/caches/modules-2 /gradle-cache \
+    && ls -la /gradle-cache
 
 FROM tomcat-base
 
