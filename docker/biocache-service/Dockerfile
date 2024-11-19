@@ -1,5 +1,6 @@
 ARG BUILDPLATFORM=linux/amd64
-FROM --platform=${BUILDPLATFORM} gradle:7-jdk11 AS builder
+FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
+
 
 ARG VERSION=3.5.1
 ARG SOURCE=https://github.com/AtlasOfLivingAustralia/biocache-service.git
@@ -9,18 +10,14 @@ RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} .
 
 COPY ./i18n/messages-nl.properties ./src/main/webapp/WEB-INF/messages.properties
 
-ENV GRADLE_RO_DEP_CACHE=/gradle-cache
-
 RUN --mount=type=cache,target=/gradle-cache,ro \
-    ls -la /gradle-cache && \
-    gradle build assemble --no-daemon \
-    -x test \
-    --parallel
+    gradle build assemble \
+    -x test
 
 # Copy dependencies to shared read-only cache
 RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
-    cp -rv /home/gradle/.gradle/caches/modules-2 /gradle-cache \
-    && ls -la /gradle-cache
+    cp -r /home/gradle/.gradle/caches/modules-2 /gradle-cache \
+    && rm /gradle-cache/modules-2/*.lock && rm /gradle-cache/modules-2/gc.properties
 
 FROM tomcat-base
 

@@ -1,5 +1,6 @@
 ARG BUILDPLATFORM=linux/amd64
-FROM --platform=${BUILDPLATFORM} gradle:7-jdk11 AS builder
+FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
+
 
 # ARG VERSION=2.1.5
 # ARG SOURCE=https://github.com/AtlasOfLivingAustralia/spatial-service.git
@@ -13,15 +14,11 @@ RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} .
 COPY ./i18n/ ./grails-app/i18n/
 
 
-ENV GRADLE_RO_DEP_CACHE=/gradle-cache
-
 RUN --mount=type=cache,target=/gradle-cache,ro \
-    ls -la /gradle-cache && \
     gradle \
+        --info \
         build assemble \
-        -x test -x integrationTest \
-        --no-daemon \
-        --parallel
+        -x test -x integrationTest
 
 
 FROM tomcat-base

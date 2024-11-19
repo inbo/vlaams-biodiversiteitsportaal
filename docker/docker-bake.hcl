@@ -2,6 +2,11 @@ variable "TAG" {
   default = "dev"
 }
 
+target "custom-gradle" {
+  context = "./gradle"
+  tags = ["custom-gradle:${TAG}"]
+}
+
 target "tomcat-base" {
   context = "./tomcat"
   tags = ["tomcat:${TAG}"]
@@ -35,7 +40,8 @@ target "portal-full" {
 target "alerts" {
   context = "./alerts"
   contexts = {
-    "tomcat-base" = "target:tomcat-base"
+    "custom-gradle" = "target:custom-gradle"
+    "tomcat-base"   = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/alerts:${TAG}"]
 }
@@ -43,7 +49,8 @@ target "alerts" {
 target "apikey" {
   context = "./apikey"
   contexts = {
-    "tomcat-base" = "target:tomcat-base"
+    "custom-gradle" = "target:custom-gradle"
+    "tomcat-base"   = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/apikey:${TAG}"]
 }
@@ -51,7 +58,8 @@ target "apikey" {
 target "bie-hub" {
   context = "./bie-hub"
   contexts = {
-    "tomcat-base" = "target:tomcat-base"
+    "custom-gradle" = "target:custom-gradle"
+    "tomcat-base"   = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/bie-hub:${TAG}"]
 }
@@ -59,7 +67,8 @@ target "bie-hub" {
 target "bie-index" {
   context = "./bie-index"
   contexts = {
-    "tomcat-base" = "target:tomcat-base"
+    "custom-gradle" = "target:custom-gradle"
+    "tomcat-base"   = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/bie-index:${TAG}"]
 }
@@ -67,7 +76,8 @@ target "bie-index" {
 target "biocache-hub" {
   context = "./biocache-hub"
   contexts = {
-    "tomcat-base" = "target:tomcat-base"
+    "custom-gradle" = "target:custom-gradle"
+    "tomcat-base"   = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/biocache-hub:${TAG}"]
 }
@@ -75,7 +85,8 @@ target "biocache-hub" {
 target "biocache-service" {
   context = "./biocache-service"
   contexts = {
-    "tomcat-base" = "target:tomcat-base"
+    "custom-gradle" = "target:custom-gradle"
+    "tomcat-base"   = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/biocache-service:${TAG}"]
 }
@@ -83,7 +94,8 @@ target "biocache-service" {
 target "collectory" {
   context = "./collectory"
   contexts = {
-    "tomcat-base" = "target:tomcat-base"
+    "custom-gradle" = "target:custom-gradle"
+    "tomcat-base"   = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/collectory:${TAG}"]
 }
@@ -91,7 +103,8 @@ target "collectory" {
 target "doi-service" {
   context = "./doi-service"
   contexts = {
-    "tomcat-base" = "target:tomcat-base"
+    "custom-gradle" = "target:custom-gradle"
+    "tomcat-base"   = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/doi-service:${TAG}"]
 }
@@ -99,7 +112,8 @@ target "doi-service" {
 target "image-service" {
   context = "./image-service"
   contexts = {
-    "tomcat-base" = "target:tomcat-base"
+    "custom-gradle" = "target:custom-gradle"
+    "tomcat-base"   = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/image-service:${TAG}"]
 }
@@ -107,7 +121,8 @@ target "image-service" {
 target "logger" {
   context = "./logger"
   contexts = {
-    "tomcat-base" = "target:tomcat-base"
+    "custom-gradle" = "target:custom-gradle"
+    "tomcat-base"   = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/logger:${TAG}"]
 }
@@ -115,7 +130,8 @@ target "logger" {
 target "regions" {
   context = "./regions"
   contexts = {
-    "tomcat-base" = "target:tomcat-base"
+    "custom-gradle" = "target:custom-gradle"
+    "tomcat-base"   = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/regions:${TAG}"]
 }
@@ -123,7 +139,8 @@ target "regions" {
 target "spatial-hub" {
   context = "./spatial-hub"
   contexts = {
-    "tomcat-base" = "target:tomcat-base"
+    "custom-gradle" = "target:custom-gradle"
+    "tomcat-base"   = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/spatial-hub:${TAG}"]
 }
@@ -131,7 +148,8 @@ target "spatial-hub" {
 target "spatial-service" {
   context = "./spatial-service"
   contexts = {
-    "tomcat-base" = "target:tomcat-base"
+    "custom-gradle" = "target:custom-gradle"
+    "tomcat-base"   = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/spatial-service:${TAG}"]
 }
@@ -139,7 +157,8 @@ target "spatial-service" {
 target "species-list" {
   context = "./species-list"
   contexts = {
-    "tomcat-base" = "target:tomcat-base"
+    "custom-gradle" = "target:custom-gradle"
+    "tomcat-base"   = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/species-list:${TAG}"]
 }
@@ -147,7 +166,8 @@ target "species-list" {
 target "userdetails" {
   context = "./userdetails"
   contexts = {
-    "tomcat-base" = "target:tomcat-base"
+    "custom-gradle" = "target:custom-gradle"
+    "tomcat-base"   = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/userdetails:${TAG}"]
 }
@@ -158,7 +178,7 @@ target "pipelines" {
     "tomcat-base" = "target:tomcat-base"
     "alerts"      = "target:alerts"
   }
-  tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/pipelines:${TAG}"]
+  tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/la-pipelines:${TAG}"]
 }
 
 group "all" {

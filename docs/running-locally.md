@@ -12,9 +12,10 @@ Next, to build the portal-full image, you can use the following command:
 cd docker && docker buildx bake portal-full --load
 ```
 
-Be aware this can take quite a while the first time.  
-It requires checking out all the services one-by-one and building them from scratch.
-(one-by-one because of the shared gradle cache)
+Be aware this can take a while, especially the first time.  
+In order to speed up the build process, we customize the gradle builder image.  
+Mostly so we can override the maven repositories used by the australian projects.  
+Details can be found in the [gradle docker folder](./docker/gradle).
 
 ### 2. Add hostname
 The platform requires a hostname that resolves to the same thing by both the services, running inside docker containers and the client browser.

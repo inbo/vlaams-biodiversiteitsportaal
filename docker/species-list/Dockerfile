@@ -1,5 +1,6 @@
 ARG BUILDPLATFORM=linux/amd64
-FROM --platform=${BUILDPLATFORM} gradle:7-jdk11 AS builder
+FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
+
 
 ARG VERSION=4.5.3
 ARG SOURCE=https://github.com/AtlasOfLivingAustralia/specieslist-webapp.git
@@ -10,13 +11,9 @@ RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} .
 COPY ./i18n/ ./grails-app/i18n/
 
 
-ENV GRADLE_RO_DEP_CACHE=/gradle-cache
-
 RUN --mount=type=cache,target=/gradle-cache,ro \
-    ls -la /gradle-cache && \
-    gradle build assemble --no-daemon \
-    -x test -x integrationTest \
-    --parallel
+    gradle build assemble \
+    -x test -x integrationTest
 
 
 FROM tomcat-base

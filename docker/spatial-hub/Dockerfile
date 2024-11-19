@@ -1,5 +1,6 @@
 ARG BUILDPLATFORM=linux/amd64
-FROM --platform=${BUILDPLATFORM} gradle:7-jdk11 AS builder
+FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
+
 
 ARG VERSION=2.1.0
 ARG SOURCE=https://github.com/AtlasOfLivingAustralia/spatial-hub.git
@@ -17,15 +18,10 @@ COPY ./i18n/ ./grails-app/i18n/
 COPY ./layouts/* ./grails-app/views/layouts/
 
 
-ENV GRADLE_RO_DEP_CACHE=/gradle-cache
-
 RUN --mount=type=cache,target=/gradle-cache,ro \
-    ls -la /gradle-cache && \
     gradle \
         build assemble \
-        -x test -x integrationTest \
-        --no-daemon \
-        --parallel
+        -x test -x integrationTest
 
 
 FROM tomcat-base
