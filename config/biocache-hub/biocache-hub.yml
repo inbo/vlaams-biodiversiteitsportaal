@@ -130,12 +130,14 @@ map:
   defaultLatitude: 51.0
   defaultLongitude: 4.4
   defaultZoom: 9
+  pointColour: a83d7a
 #  height: 600
 #  minimal:
 #    url: https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png
 #  overlay:
 #    url: ${common.protocol}://${common.domain}/spatial-hub/geoserver/gwc/service/wms
 #  pointColour: df4a21
+#    url: ${common.protocol}://spatial.${common.domain}/geoserver/gwc/service/wms
 #  zoomOutsideScopedRegion: true
 #mapdownloads:
 #  baseLayers:
