@@ -115,56 +115,58 @@
     "excluded": [],
     "parent": "Plants"
   },
+  
+  
   {
     "name": "Gymnosperms",
-    "rank": "subclass",
+    "rank": "classs",
     "included": [
-      "Pinidae",
-      "Cycadidae"
+      "Pinopsida",
+      "Cycadopsida"
     ],
     "excluded": [],
     "parent": "Plants"
   },
   {
-    "name": "FernsAndAllies",
-    "rank": "subclass",
+    "name": "fernsAndAllies",
+    "rank": "phylum",
     "included": [
-      "Equisetidae",
-      "Lycopodiidae",
-      "Marattiidae",
-      "Ophioglossidae",
-      "Polypodiidae",
-      "Psilotidae"
+      "Equisetophyta",
+      "Lycopodiophyta",
+      "Polypodiophyta",
+      "Psilophyta"
     ],
     "excluded": [],
     "parent": "Plants"
   },
   {
     "name": "Angiosperms",
-    "rank": "subclass",
+    "rank": "phylum",
     "included": [
-      "Magnoliidae"
+      "Magnoliophyta"
     ],
     "excluded": [],
     "parent": "Plants"
   },
   {
     "name": "Monocots",
-    "rank": "superorder",
+    "rank": "class",
     "included": [
-      "Lilianae"
+      "Liliopsida"
     ],
     "excluded": [],
     "parent": "Angiosperms"
   },
   {
     "name": "Dicots",
-    "rank": "subclass",
+    "rank": "classs",
     "included": [
-      "Magnoliidae"
+      "Eudicotidae",
+      "Eudicotyledonae",
+      "Eudicotyledons"
     ],
     "excluded": [
-      "Lilianae"
+      "Liliopsida"
     ],
     "parent": "Angiosperms"
   },
