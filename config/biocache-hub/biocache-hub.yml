@@ -1,0 +1,199 @@
+---
+### OIDC Credentials ###
+security:
+  jwt:
+    clientId: ala_hub
+  oidc:
+    clientId: "ala_hub"
+    secret: "ala_hub-oidc-super-secret"
+webservice:
+  client-id: "ala_hub"
+  client-secret: "ala_hub-oidc-super-secret"
+
+advancedTaxaField: taxa
+#alerts:
+#  apiKey: a5c2e4d1-324c-4bc2-8770-2a2aa092df49
+#  baseUrl: ''
+#  myannotation:
+#    enabled: false
+allowedImageEditingRoles: ROLE_ADMIN
+alwaysshow:
+  imagetab: true
+authenticateOnlyIfLoggedInFilterPattern: /occurrences/*,/explore/your-area,/query,/proxy/download/*
+authorise:
+  roles: ROLE_ADMIN,ROLE_COLLECTION_ADMIN
+bie:
+  baseUrl: ${common.protocol}://${common.domain}/bie-hub
+  searchPath: /search
+bieService:
+  baseUrl: ${common.protocol}://${common.domain}/bie-index
+biocache:
+  ajax:
+    useProxy: false
+  baseUrl: ${common.protocol}://${common.domain}/biocache-service
+  downloads:
+    extra: dataResourceUid,dataResourceName.p
+  groupedFacetsUrl: file:///data/ala-hub/config/grouped_facets_default.json
+  indexedFieldsUrl: ${common.protocol}://${common.domain}/biocache-service/index/fields
+  queryContext: -_nest_parent_:*
+  url: ${common.protocol}://${common.domain}/biocache-hub
+biocacheServiceUrl: ${common.protocol}://${common.domain}/biocache-service
+biocacheServicesUrl: ${common.protocol}://${common.domain}/biocache-service
+clubRoleForHub: ROLE_ADMIN
+collections:
+  baseUrl: ${common.protocol}://${common.domain}/collectory
+collectory:
+  baseUrl: ${common.protocol}://${common.domain}/collectory
+  resources: ${common.protocol}://${common.domain}/collectory/public/resources.json
+dataQualityChecksUrl: https://docs.google.com/spreadsheet/pub?key=0AjNtzhUIIHeNdHJOYk1SYWE4dU1BMWZmb2hiTjlYQlE&single=true&gid=0&output=csv
+dataquality:
+  enabled: false
+defaultLocale: nl
+disableCAS: true
+doi:
+  mintDoi: true
+doiService:
+  baseUrl: ${common.protocol}://${common.domain}/doi-service
+downloads:
+  checklistDownloadUrl: ${common.protocol}://${common.domain}/biocache-service/occurrences/facets/download
+  customSections:
+    misc: qualityAssertions,miscellaneousFields
+  defaultDownloadFormat: dwc
+  dwcExtraFields: data_resource_uid
+  fieldguideDownloadUrl: ''
+  indexedDownloadUrl: ${common.protocol}://${common.domain}/biocache-service/occurrences/offline/download
+  indexedFieldsUrl: ${common.protocol}://${common.domain}/biocache-service/index/fields
+  legacy:
+    defaultFields: id,data_resource_uid,data_resource,license,catalogue_number,taxon_concept_lsid,raw_taxon_name,raw_common_name,taxon_name,rank,common_name,kingdom,phylum,class,order,family,genus,species,subspecies,institution_code,collection_code,locality,raw_latitude,raw_longitude,raw_datum,latitude,longitude,datum,coordinate_precision,coordinate_uncertainty,country,state,cl959,min_elevation_d,max_elevation_d,min_depth_d,max_depth_d,individual_count,recorded_by,year,month,day,verbatim_event_date,basis_of_record,raw_basis_of_record,sex,preparations,information_withheld,data_generalizations,outlier_layer,taxonomic_kosher,geospatial_kosher"
+  staticDownloadsUrl: ''
+  termsOfUseUrl: ''
+ecodata:
+  baseURL: ''
+endpoints:
+  enabled: false
+events:
+  enabled: false
+  eventUrl: https://events.${common.domain}/?view=EVENTS&eventHierarchy=
+  graphql: https://api.${common.domain}/event/graphql
+exploreYourArea:
+  lat: 51.0
+  lng: 4.4
+  location: Vlaanderen
+#facets:
+#  cached: species_group,species_subgroup,state,country,institution_uid,collection_uid,data_resource_uid
+#  customOrder: ''
+#  defaultColourBy: ''
+#  defaultSelected: basis_of_record,taxon_name,collection_uid,data_resource_uid,year,species_group
+#  exclude: ''
+#  hide: ''
+#  include: ''
+#  includeDynamicFacets: false
+#  limit: 100
+#  max: 32
+fieldguide:
+  url: ''
+filetype:
+  shapefile:
+    hidden: false
+geocode:
+  region: BE
+google:
+  apikey: get-a-google-api-key
+grails:
+  resources:
+    work:
+      dir: /data/ala-hub/cache
+  serverURL: ${common.protocol}://${common.domain}/biocache-hub
+image:
+  baseUrl: ${common.protocol}://${common.domain}/image-service
+images:
+  baseUrl: ${common.protocol}://${common.domain}/image-service
+  images:
+    metadataUrl: ''
+  metadataUrl: ${common.protocol}://${common.domain}/image-service/image/details?imageId=
+  viewerUrl: ${common.protocol}://${common.domain}/image-service/image/viewer?imageId=
+info:
+  app:
+    description: Vlaams Biodiversiteitsportaal
+largeDownloadRole: ROLE_LARGE_DOWNLOAD
+layersservice:
+  baseUrl: ${common.protocol}://${common.domain}/spatial-service
+  url: ${common.protocol}://${common.domain}/spatial-service
+logger:
+  baseUrl: ${common.protocol}://${common.domain}/logger/service
+loggerURL: ${common.protocol}://${common.domain}/logger/service
+
+map:
+  #  cloudmade:
+  #    key: BC9A493B41014CAABB98F0471D759707
+  #  defaultFacetMapColourBy: ''
+  defaultLatitude: 51.0
+  defaultLongitude: 4.4
+  defaultZoom: 9
+  pointColour: a83d7a
+#  height: 600
+#  minimal:
+#    url: https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png
+#  overlay:
+#    url: ${common.protocol}://${common.domain}/spatial-hub/geoserver/gwc/service/wms
+#  pointColour: df4a21
+#    url: ${common.protocol}://spatial.${common.domain}/geoserver/gwc/service/wms
+#  zoomOutsideScopedRegion: true
+#mapdownloads:
+#  baseLayers:
+#    provincies:
+#      displayName: Provincies
+##      i18nCode: baselayer.states
+#      name: provincies_wgs84
+maxDownloadRecords: ''
+
+organisation:
+  baseUrl: ${common.homepage}
+pdfgen:
+  baseURL: ${common.protocol}://pdfgen.ala.org.au
+privacyPolicy: ''
+serverName: ${common.protocol}://${common.domain}/biocache-hub
+sightings:
+  baseUrl: ''
+skin:
+  attribution: ''
+  dataQualityLink:
+    show: false
+    text: not set
+    url: ''
+  exploreUrl: ${common.protocol}://${common.domain}/regions/explore-by-location/
+  fluidLayout: true
+  layout: ala
+  taxaLinks:
+    baseUrl: ${common.protocol}://${common.domain}/bie-hub/species/
+  useAlaBie: true
+  useAlaImageService: true
+  useAlaSpatialPortal: true
+spatial:
+  baseUrl: ${common.protocol}://${common.domain}/spatial-hub
+speciesList:
+  baseURL: ${common.protocol}://${common.domain}/species-list
+#  preferredListName: ALA Preferred Species Images
+#  preferredSpeciesListDruid: dr4778
+speciesListToolUrl: ${common.protocol}://${common.domain}/species-list/speciesListItem/list/
+specieslist:
+  baseUrl: ${common.protocol}://${common.domain}/species-list/ws
+#stateConservationListPath:
+#  AustralianCapitalTerritory: /speciesListItem/list/dr649
+#  NewSouthWales: /speciesListItem/list/dr650
+#  NorthernTerritory: /speciesListItem/list/dr651
+#  Queensland: /speciesListItem/list/dr652
+#  SouthAustralia: /speciesListItem/list/dr653
+#  Tasmania: /speciesListItem/list/dr654
+#  Victoria: /speciesListItem/list/dr655
+#  WesternAustralia: /speciesListItem/list/dr2201
+supportEmail: ${common.supportEmail}
+table:
+  displayDynamicProperties: false
+uriExclusionFilterPattern: /occurrences/shapeUpload,/images.*,/css.*,/js.*,.*json,/help/.*
+uriFilterPattern: /admin/*,/alaAdmin/*,/download/*
+useDownloadPlugin: true
+userCharts: false
+userdetails:
+  url: ${common.protocol}://${common.domain}/userdetails/
+

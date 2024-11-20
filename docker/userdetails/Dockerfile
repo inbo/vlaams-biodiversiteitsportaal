@@ -1,40 +1,27 @@
 ARG BUILDPLATFORM=linux/amd64
-FROM --platform=${BUILDPLATFORM} gradle:7-jdk11 AS builder
+FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
-WORKDIR /project
 
 ARG VERSION=v3.2.0
-RUN git clone --branch ${VERSION} --depth 1 https://github.com/AtlasOfLivingAustralia/userdetails.git /project
+ARG SOURCE=https://github.com/AtlasOfLivingAustralia/userdetails.git
 
-# ARG test=1
-# ARG VERSION=66-fix-dwca-download
-# RUN git clone --branch ${VERSION} --depth 1 https://github.com/StefanVanDyck/userdetails.git /project
+WORKDIR /project
+RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} .
 
-RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
-    gradle build assemble --no-daemon \
-    -x test -x integrationTest \
-    # -Dorg.gradle.debug=true -Dorg.gradle.debug.suspend=no --debug \
-    --parallel
 
-RUN ls -la build/libs
+RUN --mount=type=cache,target=/gradle-cache,ro \
+    gradle build assemble \
+    -x test -x integrationTest
 
-FROM openjdk:11
+# Copy dependencies to shared read-only cache
+RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
+    rsync -a /home/gradle/.gradle/caches/modules-2 /gradle-cache \
+    && rm /gradle-cache/modules-2/*.lock && rm /gradle-cache/modules-2/gc.properties
+
+FROM tomcat-base
 
 ARG VERSION=3.2.0
-
-# Create the user
-RUN groupadd --gid 1000 app \
-    && useradd --uid 1000 --gid 1000 -m -d /app app
-
-RUN mkdir /data && chown app:app /data
-VOLUME /data
-
-USER app
-WORKDIR /app
-
-COPY --from=builder --chown=app \
-    /project/build/libs/userdetails-${VERSION}-exec.war /app/app.war
-
-ENTRYPOINT ["java", "-jar", "/app/app.war"]
+COPY --from=builder /project/build/libs/userdetails-${VERSION}-plain.war ${CATALINA_HOME}/webapps/userdetails.war
+COPY userdetails.xml ${CATALINA_HOME}/conf/portal/localhost/userdetails.xml
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/userdetails/actuator/health || exit 1

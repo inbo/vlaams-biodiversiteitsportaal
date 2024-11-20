@@ -1,0 +1,50 @@
+// Override the default repositories to make sure we only use Austraian Nexus as a last resort
+allprojects {
+  buildscript {
+    repositories {
+        mavenCentral().content {
+            excludeGroup("au.org.ala")
+        }
+        maven {
+            url "https://repo.grails.org/grails/core/"
+            content {
+                excludeGroup("au.org.ala")
+            }
+        }
+        maven { url "https://nexus.ala.org.au/content/groups/public/" }
+    }
+  }
+    repositories {
+        mavenCentral().content {
+            excludeModule("javax.media", "jai_core")
+            excludeModule("net.sf.json-lib", "json-lib")
+        }
+        maven {
+            url "https://repo.grails.org/grails/core/"
+            content {
+                excludeGroup("au.org.ala")
+                excludeModule("javax.media", "jai_core")
+                excludeModule("net.sf.json-lib", "json-lib")
+            }
+        }
+        maven {
+            url "https://repository.jboss.org/"
+            content {
+                excludeGroup("au.org.ala")
+            }
+        }
+        maven {
+            url "https://repo.osgeo.org/repository/release/"
+            content {
+                excludeGroup("au.org.ala")
+            }
+        }
+        maven {
+            url "https://maven.geo-solutions.it/"
+            content {
+                excludeGroup("au.org.ala")
+            }
+        }
+        maven { url "https://nexus.ala.org.au/content/groups/public/" }
+    }
+}

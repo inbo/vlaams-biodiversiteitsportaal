@@ -9,7 +9,7 @@ support:
   email: ${common.supportEmail}
 
 grails:
-  serverURL: ${common.protocol}://doi.${common.domain}
+  serverURL: ${common.protocol}://${common.domain}/doi-service
 
 #ands:
 #    doi:
@@ -40,16 +40,16 @@ management:
 
 ala:
   base:
-    url: ${common.protocol}://www.${common.domain}
+    url: ${common.protocol}://${common.domain}
   contact:
-    form: ${common.protocol}://www.${common.domain}/contact-todo
+    form: ${common.protocol}://${common.domain}/contact-todo
 doi:
   service:
     mock: true # TODO
     provider:
       #            # define mapping from provider name to a valid DoiProvider (ANDS or DATACITE)
       #      mapping: { ALA: 'DATACITE' }
-      mapping: {  }
+      mapping: { }
 
   storage:
     provider: S3
@@ -62,7 +62,7 @@ doi:
     - "phylolink"
     - "csdm"
   publicationLang: "en"
-  supportContact: https://www.ala.org.au/about-the-atlas/communications-centre/
+  supportContact: https://${common.domain}/about-the-atlas/communications-centre/
 file:
   store: /data/doi-service/files
 
@@ -80,7 +80,7 @@ elasticSearch:
   client:
     mode: transport
     hosts:
-      - { host: elasticsearch.biodiversiteitsportaal.dev.internal, port: 9200 }
+      - { host: elasticsearch, port: 9200 }
   cluster.name: elasticsearch
   disableAutoIndex: false
   bulkIndexOnStartup: false
@@ -88,61 +88,8 @@ elasticSearch:
 s3:
   temporaryurl:
     duration: 6 # hours
-#
-#---
-#hibernate:
-#    allow_update_outside_transaction: true # Hibernate 5 made transactions required to flush changes, set to true for backwards compat but should be set to false and bugs fixed in the future
-#    show_sql: false
-#    cache:
-#        queries: false
-#        use_second_level_cache: false
-#        use_query_cache: false
-#        region:
-#            factory_class: org.hibernate.cache.jcache.internal.JCacheRegionFactory
-#    dialect: au.org.ala.doi.PostgresqlExtensionsDialect
-#
-#dataSource:
-#    dbCreate: validate
-#    pooled: true
-#    jmxExport: true
-#    driverClassName: org.postgresql.Driver
-#    username: root
-#    password: password
-#    loggingSql: true
-#
-#environments:
-#    development:
-#        dataSource:
-#            dbCreate: validate
-#            url: jdbc:postgresql://localhost/doi
-#            username: "postgres"
-#            passowrd: "password"
-#            logSql: false
-#    test:
-#        dataSource:
-#            dbCreate: validate
-#    production:
-#        dataSource:
-#            dbCreate: validate
-#            properties:
-#                jmxEnabled: true
-#                initialSize: 5
-#                maxActive: 50
-#                minIdle: 5
-#                maxIdle: 25
-#                maxWait: 10000
-#                maxAge: 600000
-#                timeBetweenEvictionRunsMillis: 5000
-#                minEvictableIdleTimeMillis: 60000
-#                validationQuery: SELECT 1
-#                validationQueryTimeout: 3
-#                validationInterval: 15000
-#                testOnBorrow: true
-#                testWhileIdle: true
-#                testOnReturn: false
-#                jdbcInterceptors: ConnectionState;StatementCache(max=200);SlowQueryReport(logFailed=true)
-#                defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
-#                abandonWhenPercentageFull: 100
-#                removeAbandonedTimeout: 120
-#                removeAbandoned: true
-#                logAbandoned: false
+
+dataSource:
+  url: jdbc:postgresql://postgis:5432/doi
+  username: doi
+  password: my-super-secret-password

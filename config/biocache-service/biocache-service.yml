@@ -18,7 +18,7 @@ allow:
 auth:
   user:
     details:
-      url: ${common.protocol}://auth.${common.domain}/userdetails/userDetails/
+      url: ${common.protocol}://${common.domain}/userdetails/userDetails/
     names:
       id:
         path: getUserList
@@ -42,7 +42,7 @@ autocomplete:
       url: /config/config/biocache-service/subgroups.json
 biocache:
   ui:
-    url: ${common.protocol}://records.${common.domain}
+    url: ${common.protocol}://${common.domain}/biocache-hub
 caches:
   auth:
     enabled: false
@@ -63,7 +63,7 @@ citations:
   enabled: false
 collection:
   contacts:
-    url: ${common.protocol}://collections.${common.domain}/ws/collection
+    url: ${common.protocol}://${common.domain}/collectory/ws/collection
 concurrent:
   downloads:
     json: '[{"label": "smallSolr", "threads": 4, "maxRecords": 50000, "type":
@@ -82,10 +82,10 @@ deleted:
   file:
     store: /data/biocache-delete/
 download:
-  url: ${common.protocol}://records.${common.domain}/biocache-download
+  url: ${common.protocol}://${common.domain}/biocache-download
   offline:
     max:
-      url: ${common.protocol}://records.${common.domain}/biocache-download/
+      url: ${common.protocol}://${common.domain}/biocache-download/
   batch:
     size: 500
   internal:
@@ -107,22 +107,22 @@ download:
       error: "Jouw [hubName] download is mislukt."
     template: /config/config/biocache-service/templates/email.html
   doi:
-    resolver: ${common.protocol}://doi.${common.domain}
+    resolver: ${common.protocol}://${common.domain}/doi-service
     email:
       template: /config/config/biocache-service/templates/email.html
     title:
       prefix: "Waarnemingen download"
     landing:
-        page: ${common.protocol}://doi.${common.domain}/
+        page: ${common.protocol}://${common.domain}/doi-service/
     readme:
       template: /config/config/biocache-service/templates/readme.html
   readme:
     template:
-      url: ${common.protocol}://doi.${common.domain}/
+      url: ${common.protocol}://${common.domain}/doi-service/
 my:
   download:
     doi:
-      baseUrl: ${common.protocol}://doi.${common.domain}/myDownloads
+      baseUrl: ${common.protocol}://${common.domain}/doi-service/myDownloads
 dwc:
   url: http://rs.tdwg.org/dwc/terms/
 endemic:
@@ -145,20 +145,20 @@ heatmap:
     dir: /data/output/heatmap
 layers:
   service:
-    url: ${common.protocol}://spatial.${common.domain}/ws
+    url: ${common.protocol}://${common.domain}/spatial-service
 list:
   tool:
-    url: ${common.protocol}://lists.${common.domain}
+    url: ${common.protocol}://${common.domain}/species-list
 media:
   dir: /data/biocache-media/
-  url: ${common.protocol}://images.${common.domain}
+  url: ${common.protocol}://${common.domain}/image-service
   store:
-    url: ${common.protocol}://images.${common.domain}
+    url: ${common.protocol}://${common.domain}/image-service
 name:
   index:
     dir: /data/lucene/namematching_v13
 namesearch:
-  url: http://namematching2:9179
+  url: http://host.docker.internal:9179
 qid:
   cache:
     largestCacheableSize: 5242880
@@ -168,7 +168,7 @@ qid:
   wkt:
     maxPoints: 5000
 registry:
-  url: ${common.protocol}://collections.${common.domain}/ws
+  url: ${common.protocol}://${common.domain}/collectory/ws
 sample:
   fields: none
 sds:
@@ -177,9 +177,9 @@ service:
   bie:
     enabled: true
     ui:
-      url: ${common.protocol}://species.${common.domain}
+      url: ${common.protocol}://${common.domain}/bie-hub
     ws:
-      url: ${common.protocol}://species-ws.${common.domain}/ws
+      url: ${common.protocol}://${common.domain}/bie-index/ws
 shapefile:
   tmp:
     dir: /data/biocache-download/tmp
@@ -188,7 +188,7 @@ solr:
     busywaitsleep: 100
     maxthreads: 30
     writertimeout: 60000
-  home: ${common.protocol}://index.${common.domain}:8983/solr/biocache
+  home: http://host.docker.internal:8983/solr/biocache
   server:
     indexVersion:
       refresh: 300000
@@ -209,7 +209,7 @@ upload:
   temp: /data/biocache-upload/temp
 
 webservices:
-  root: ${common.protocol}://records-ws.${common.domain}
+  root: ${common.protocol}://${common.domain}/biocache-service
   cache-tokens: false
 
 wms:
@@ -234,15 +234,15 @@ cors:
   allowedOrigins: ["*"]
 
 userdetails:
-  url: ${common.protocol}://auth.${common.domain}/userdetails
+  url: ${common.protocol}://${common.domain}/userdetails
   web:
-    url: ${common.protocol}://auth.${common.domain}/userdetails/
+    url: ${common.protocol}://${common.domain}/userdetails/
   api:
-    url: ${common.protocol}://auth.${common.domain}/userdetails/
+    url: ${common.protocol}://${common.domain}/userdetails/
 
 doi:
   service:
-    url: ${common.protocol}://doi.${common.domain}
+    url: ${common.protocol}://${common.domain}/doi-service/
   provider: VBP
 
 

@@ -1,24 +1,17 @@
-environment:
-  local:
-    common:
-      protocol: http
-      domain: la-flanders.org
-  production:
-    common:
-      protocol: https
-      domain: biodiversiteitsportaal.dev.svdev.be
-
+# Custom common config values, used to template others
 common:
   protocol: https
   domain: biodiversiteitsportaal.dev.svdev.be
-  homepage: ${common.protocol}://www.${common.domain}
+  homepage: ${common.protocol}://${common.domain}
   supportEmail: support.natuurdata@inbo.be
+
+# Common ala config values
 ala:
   baseURL: ${common.homepage}
 
 # Header and footer
 headerAndFooter:
-  baseURL: ${common.protocol}://branding.${common.domain}
+  baseURL: ${common.protocol}://${common.domain}
   version: 2
 
 # Skin and layout
@@ -27,7 +20,7 @@ skin:
   orgNameLong: Vlaams Biodiversiteitsportaal
   orgNameShort: VBP
   fluidLayout: true
-  favicon: '${common.protocol}://branding.${common.domain}/favicon.ico'
+  favicon: '${common.protocol}://${common.domain}/favicon.ico'
 
 # Healthcheck endpoint
 management:
@@ -42,27 +35,23 @@ management:
 logging:
   config: /config/config/common/logback.xml
 
-server:
-  use-forward-headers: true
-
+# CORS is managed by cloudfront and nginx
+grails:
+  cors:
+    enabled: false
 
 security:
   cors:
-    enable: true
-    authenticated:
-      allowedOriginPatterns: [ "https://.*.${common.domain}" ]
-    unauthenticated:
-      allowedOriginPatterns: [ "https://.*.${common.domain}" ]
-      allowCredentials: false
+    enable: false
 
   apikey:
     enabled: true
     auth:
-      serviceUrl: ${common.protocol}://auth.${common.domain}/apikey/
+      serviceUrl: ${common.protocol}://${common.domain}/apikey/
     check:
-      serviceUrl: ${common.protocol}://auth.${common.domain}/apikey/ws/check?apikey=
+      serviceUrl: ${common.protocol}://${common.domain}/apikey/ws/check?apikey=
     userdetails:
-      serviceUrl: ${common.protocol}://auth.${common.domain}/userdetails/
+      serviceUrl: ${common.protocol}://${common.domain}/userdetails/
   cas:
     enabled: false
   jwt:
@@ -82,18 +71,3 @@ security:
 webservice:
   jwt: true
   jwt-scopes: openid users/read
-
-grails:
-  cors:
-    enabled: true
-    allowCredentials: true
-    allowedMethods:
-        - '*'
-    allowedHeaders:
-        - '*'
-    allowedOrigins: [ ]
-    allowedOriginPatterns: [ "https://*.biodiversiteitsportaal.dev.svdev.be" ]
-    # Especially needed to override bad default in species list, but might as well make it common
-    mappings:
-        '[/**]': inherit
-        '[/ws/**]': inherit

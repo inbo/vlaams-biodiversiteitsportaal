@@ -3,7 +3,10 @@
 security:
   jwt:
     clientId: userdetails
+  cas:
+    enabled: false
   oidc:
+    enabled: true
     clientId: userdetails
     secret: userdetails-oidc-super-secret
 webservice:
@@ -37,23 +40,20 @@ endpoints:
   enabled: true
   health:
     sensitive: false
-serverURL: ${common.protocol}://auth.${common.domain}
-serverName: ${common.protocol}://auth.${common.domain}
+serverURL: ${common.protocol}://${common.domain}/userdetails
+serverName: ${common.protocol}://${common.domain}/userdetails
 grails:
-  serverURL: ${common.protocol}://auth.${common.domain}/userdetails
+  serverURL: ${common.protocol}://${common.domain}/userdetails
   mail:
     host: mail.${common.domain}
     port: 1025
     username: userdetails
     password: my-super-secret-password
-server:
-  port: 8080
-  servlet:
-    contextPath: /userdetails
 redirectAfterFirstLogin: ${grails.serverURL}/myprofile
 dataSource:
-  dbCreate: none
-  url: jdbc:mysql://cas:my-super-secret-password@mysql:3306/cas?serverTimezone=Europe/Brussels&zeroDateTimeBehavior=convertToNull&characterEncoding=UTF-8&useSSL=False&allowPublicKeyRetrieval=true
+  dbCreate: update
+  driverClassName: com.mysql.jdbc.Driver
+  url: jdbc:mysql://userdetails:my-super-secret-password@mysql:3306/cas?serverTimezone=Europe/Brussels&zeroDateTimeBehavior=convertToNull&characterEncoding=UTF-8&useSSL=False&allowPublicKeyRetrieval=true
 oauth:
   providers:
     flickr:
@@ -82,37 +82,30 @@ emailSender: ${common.supportEmail}
 sightings:
   url: null
 spatial:
-  url: ${common.protocol}://spatial.${common.domain}?tool=log
+  url: ${common.protocol}://${common.domain}/spatial-hub?tool=log
 volunteer:
   url: /user/myStats
 lists:
-  url: ${common.protocol}://lists.${common.domain}/speciesList/list
+  url: ${common.protocol}://${common.domain}/species-list/speciesList/list
 biocache:
   search:
-    baseUrl: ${common.protocol}://records.${common.domain}/occurrences/search
+    baseUrl: ${common.protocol}://${common.domain}/biocache-hub/occurrences/search
   myDownloads:
-    url: ${common.protocol}://records.${common.domain}/download/myDownloads/
+    url: ${common.protocol}://${common.domain}/biocache-hub/download/myDownloads/
 myData:
-  url: ${common.protocol}://www.${common.domain}/tempDataResource/myData
+  url: ${common.protocol}://${common.domain}/tempDataResource/myData
 alerts:
   url: null
 userDetails:
-  url: ${common.protocol}://auth.${common.domain}/userdetails/
-headerAndFooter:
-  baseURL: ${common.protocol}://branding.${common.domain}
-  version: 2
+  url: ${common.protocol}://${common.domain}/userdetails/
 ala:
   baseURL: ${common.homepage}
 bie:
-  baseURL: ${common.protocol}://species.${common.domain}
+  baseURL: ${common.protocol}://${common.domain}/bie-hub
   searchPath: /search
 skin:
   layout: ala-main
   fluidLayout: true
-  orgNameLong: Vlaams Biodiversiteitsportaal
-  orgNameShort: VBP
-  favicon: ${common.protocol}://branding.${common.domain}/favicon.ico
-  homeUrl: ${common.protocol}://branding.${common.domain}
 attributes:
   affiliations:
     enabled: false

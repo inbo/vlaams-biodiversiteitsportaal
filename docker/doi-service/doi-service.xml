@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- doi-service -->
+<Context reloadable="false">
+
+    <Parameter name="spring.config.additional-location"
+               value="file:/config/config/common/common.yml,file:/config/config/doi-service/doi-service.yml,${ADDITIONAL_SPRING_CONFIG_LOCATIONS}"
+               override="false"/>
+
+
+    <!-- Logging config -->
+    <Parameter name="appName"
+               value="%white(doi-service)"
+               override="false"/>
+</Context>
