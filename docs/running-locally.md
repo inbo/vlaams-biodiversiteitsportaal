@@ -44,6 +44,27 @@ Finally, we can start the services using the following command:
 docker-compose -f docker/docker-compose.yml up
 ```
 
+## Data
+The portal uses local databases, all initialized correctly, but entirely empty.
+[We are still working on a way to provide a local database with some test data.](https://github.com/inbo/vlaams-biodiversiteitsportaal/issues/53)
+
+Alternatively, you can use port-forwarding to use remote databases.
+Especially for solr, this can be useful, as it can take a long time to index all the data.  
+Simply comment out the solr docker instances and start a port-forwarding process:
+```commandline
+ssh ubuntu@<ip of bastion server> -N -L 0.0.0.0:8983:solr.biodiversiteitsportaal.dev.internal:8983
+```
+
+## Authentication
+We use mock-oauth2 to simulate an openid-connect service.  
+Simply use whatever name you want went prompted for a login.  
+On order to access the platform as admin, simply adding the json below should work (But it does not as of now :( ):
+```json
+{
+  "ala-role": "ADMIN"
+}
+```
+
 ## Debugging
 To allow easy debugging, the portal image can be started with `REMOTE_DEBUGGER_PORT: 5005` as environment variable.
 This make it possible to attach a remote JVM debugger to the 5005 port.  

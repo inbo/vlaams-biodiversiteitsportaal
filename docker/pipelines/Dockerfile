@@ -1,7 +1,7 @@
 ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-maven AS builder
 
-ARG VERSION=fix-multimedia-record
+ARG VERSION=fixed-stuff
 RUN git clone --branch ${VERSION} --depth 1 https://github.com/StefanVanDyck/pipelines.git /app
 WORKDIR /app
 
@@ -19,7 +19,7 @@ RUN --mount=type=cache,target=/root/.m2/repository \
 # ARG test=2
 # RUN ls -la livingatlas/pipelines/target/pipelines-2.18.6-SNAPSHOT.jar
 #
-# FROM openjdk:8
+FROM openjdk:8
 #
 # ARG VERSION=2.18.6-SNAPSHOT
 RUN rm -f /etc/apt/apt.conf.d/docker-clean; echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/keep-cache
@@ -47,15 +47,12 @@ RUN chmod +x /usr/bin/docopts
 
 RUN if [ $TARGETARCH = "amd64" ] ; then curl https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o "awscliv2.zip" ; fi
 RUN if [ $TARGETARCH = "arm64" ] ; then curl https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip -o "awscliv2.zip" ; fi
-RUN unzip awscliv2.zip && \
+RUN unzip -q awscliv2.zip && \
     ./aws/install
 
-
-COPY config/la-pipelines.yaml /app/livingatlas/configs/la-pipelines.yaml
-
-RUN chown -Rv app:app /app
-
 USER app
+
+COPY --from=builder --chown=app:app /app /app
 
 WORKDIR /app/livingatlas/scripts
 

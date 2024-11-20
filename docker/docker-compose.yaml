@@ -7,6 +7,7 @@ services:
       - "8080:8080"
     volumes:
       - ../config:/config/config:ro
+      - ../config/biocache-hub:/data/ala-hub/config/ # Hardcoded paths in the biocache-hub
       - ./tomcat/tomcat-manager-ui/host-manager:/usr/local/tomcat/webapps/host-manager
       - ./tomcat/tomcat-manager-ui/manager:/usr/local/tomcat/webapps/manager
       - vbp-data:/data
@@ -14,9 +15,11 @@ services:
       LOG_LEVEL: "INFO"
       JAVA_OPTS: "-Xmx6g"
       ADDITIONAL_SPRING_CONFIG_LOCATIONS: "file:/config/config/common/common-docker.yml"
-#      REMOTE_DEBUGGER_PORT: 5005
+      REMOTE_DEBUGGER_PORT: 5005
     extra_hosts:
       - "host.docker.internal:host-gateway"
+      # Use host, so we can easily swap in port-forwarded version of solr
+      - "solr:host-gateway"
     networks:
       default:
         aliases:
@@ -159,7 +162,7 @@ services:
         set -e -x
         ./server/scripts/cloud-scripts/zkcli.sh -zkhost solr:9983 -cmd upconfig -confdir /var/solr/init/docker/solr-data/bie/ -confname bie
         ./server/scripts/cloud-scripts/zkcli.sh -zkhost solr:9983 -cmd upconfig -confdir /var/solr/init/docker/solr-data/biocache/ -confname biocache
-  
+
         curl -X POST --fail 'http://solr:8983/solr/admin/collections?action=CREATE&name=biocache&collection.configName=biocache&numShards=1' || curl -X POST --fail 'http://solr:8983/solr/admin/collections?action=RELOAD&name=biocache'
         curl -X POST --fail 'http://solr:8983/solr/admin/collections?action=CREATE&name=bie&collection.configName=bie&numShards=1' || curl -X POST --fail 'http://solr:8983/solr/admin/collections?action=RELOAD&name=bie'
         curl -X POST --fail 'http://solr:8983/solr/admin/collections?action=CREATE&name=bie-offline&collection.configName=bie&numShards=1' || curl -X POST --fail 'http://solr:8983/solr/admin/collections?action=RELOAD&name=bie-offline'
@@ -206,9 +209,7 @@ services:
       retries: 5
 
   namematching:
-    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/namematching-service:2024-11-12
-#    build:
-#      context: namematching
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/namematching-service:dev
     ports:
       - "9179:9179"
 
@@ -239,6 +240,7 @@ services:
       - "9999:9999"
     environment:
       SERVER_PORT: 9999
+
 
 networks:
   default:
