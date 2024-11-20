@@ -9,7 +9,7 @@ This is to reduce the amount of resources needed, making it possible to run ever
 
 Next, to build the portal-full image, you can use the following command:
 ```commandline
-cd docker && docker buildx bake portal-full --load
+cd docker && docker buildx bake local-dev --load
 ```
 
 Be aware this can take a while, especially the first time.  

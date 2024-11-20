@@ -7,6 +7,12 @@ target "custom-gradle" {
   tags = ["custom-gradle:${TAG}"]
 }
 
+target "custom-maven" {
+  context = "./maven"
+  tags = ["custom-maven:${TAG}"]
+}
+
+
 target "tomcat-base" {
   context = "./tomcat"
   tags = ["tomcat:${TAG}"]
@@ -127,6 +133,24 @@ target "logger" {
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/logger:${TAG}"]
 }
 
+target "namematching-service" {
+  context = "./namematching-service"
+  contexts = {
+    "custom-maven" = "target:custom-maven"
+    "tomcat-base"  = "target:tomcat-base"
+  }
+  tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/namematching-service:${TAG}"]
+}
+
+target "pipelines" {
+  context = "./pipelines"
+  contexts = {
+    "custom-maven" = "target:custom-maven"
+    "tomcat-base"  = "target:tomcat-base"
+  }
+  tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/la-pipelines:${TAG}"]
+}
+
 target "regions" {
   context = "./regions"
   contexts = {
@@ -172,15 +196,6 @@ target "userdetails" {
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/userdetails:${TAG}"]
 }
 
-target "pipelines" {
-  context = "./pipelines"
-  contexts = {
-    "tomcat-base" = "target:tomcat-base"
-    "alerts"      = "target:alerts"
-  }
-  tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/la-pipelines:${TAG}"]
-}
-
 group "all" {
   targets = [
     "alerts",
@@ -193,13 +208,14 @@ group "all" {
     "doi-service",
     "image-service",
     "logger",
+    "namematching-service",
+    "pipelines",
     "regions",
     "spatial-hub",
     "spatial-service",
     "species-list",
     "userdetails",
     "portal-full",
-    #     "pipelines"
   ]
 }
 
@@ -215,10 +231,18 @@ group "services" {
     "doi-service",
     "image-service",
     "logger",
+    "namematching-service",
     "regions",
     "spatial-hub",
     "spatial-service",
     "species-list",
     "userdetails",
+  ]
+}
+
+group "local-dev" {
+  targets = [
+    "namematching-service",
+    "portal-full",
   ]
 }

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.2.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.2.0 https://maven.apache.org/xsd/settings-1.2.0.xsd">
+    <!-- Fixed needed by pipelines build -->
+    <mirrors>
+        <mirror>
+            <id>maven-default-http-blocker</id>
+            <url>http://127.0.0.1/dont-go-here</url>
+            <mirrorOf>dummy</mirrorOf>
+            <blocked>false</blocked>
+        </mirror>
+        <mirror>
+            <id>conjars</id>
+            <url>https://conjars.wensel.net/repo/</url>
+            <mirrorOf>conjars</mirrorOf>
+            <blocked>false</blocked>
+        </mirror>
+    </mirrors>
+
+    <profiles>
+        <profile>
+            <id>vbp</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <!-- Preference of repos is determined alphabetically using the id field, hence the numbers -->
+            <repositories>
+                <repository>
+                    <id>1_central</id>
+                    <url>https://repo1.maven.org/maven2</url>
+                </repository>
+                <repository>
+                    <id>2_jboss</id>
+                    <url>https://repository.jboss.org</url>
+                </repository>
+                <repository>
+                    <id>3_osgeo</id>
+                    <url>https://repo.osgeo.org/repository/release</url>
+                </repository>
+                <repository>
+                  <id>4_cloudera-release</id>
+                  <url>https://repository.cloudera.com/artifactory/cloudera-repos/</url>
+                  <snapshots>
+                    <enabled>false</enabled>
+                  </snapshots>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>1_central</id>
+                    <url>https://repo1.maven.org/maven2</url>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+    </profiles>
+</settings>
