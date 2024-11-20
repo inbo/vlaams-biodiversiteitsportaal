@@ -44,7 +44,7 @@ sds:
   wsUrl: http://sensitivedataservice.biodiversiteitsportaal.dev.internal:9189
   timeoutSec: 300
 collectory:
-  wsUrl: http://collectory.biodiversiteitsportaal.dev.internal:8080/ws/
+  wsUrl: http://collectory.biodiversiteitsportaal.dev.internal:8080/collectory/ws/
   timeoutSec: 300
   retryConfig:
     maxAttempts: 10
@@ -53,24 +53,33 @@ collectory:
     Authorization: 02b8538a-4910-45a0-99de-1fc5175dd015
     apiKey: 02b8538a-4910-45a0-99de-1fc5175dd015
 imageService:
-  wsUrl: http://image-service.biodiversiteitsportaal.dev.internal:8080
+  wsUrl: http://image-service.biodiversiteitsportaal.dev.internal:8080/image-service/
   timeoutSec: 300
   httpHeaders:
     apiKey: 02b8538a-4910-45a0-99de-1fc5175dd015
+  retryConfig:
+    maxAttempts: 5
+    initialIntervalMillis: 1000
 speciesListService:
-  wsUrl: http://species-list.biodiversiteitsportaal.dev.internal:8080
-  timeoutSec: 600
+  wsUrl: http://species-list.biodiversiteitsportaal.dev.internal:8080/species-list/
+  timeoutSec: 900
+  retryConfig:
+    maxAttempts: 5
+    initialIntervalMillis: 1000
 samplingService:
-  wsUrl: http://spatial-service.biodiversiteitsportaal.dev.internal:8080/ws/
+  wsUrl: http://spatial-service.biodiversiteitsportaal.dev.internal:8080/spatial-service/
   timeoutSec: 600
   batchSize: 25000
   batchStatusSleepTime: 1000
   downloadRetries: 5
+  retryConfig:
+    maxAttempts: 10
+    initialIntervalMillis: 1000
 geocodeConfig:
   country:
     path: /data/pipelines-shp/political
     field: ISO_A2
-    intersectBuffer:  0.135
+    intersectBuffer: 0.135
     intersectMapping:
       CX: AU
       CC: AU
@@ -79,7 +88,7 @@ geocodeConfig:
   eez:
     path: /data/pipelines-shp/eez
     field: ISO2
-    intersectBuffer:  0.135
+    intersectBuffer: 0.135
   stateProvince:
     path: /data/pipelines-shp/cw_state_poly
     field: FEATURE
@@ -183,7 +192,7 @@ images:
   inputPath: '{fsPath}/pipelines-data'
   tempLocation: /tmp
   # pipe separated list (note: YAML list not coming through correctly)
-  recognisedPaths: "https://images.ala.org.au"
+  recognisedPaths: "https://natuurdata.dev.inbo.be/images"
 
 speciesLists:
   runner: SparkRunner
@@ -206,7 +215,7 @@ sampling:
 # class:au.org.ala.pipelines.beam.DistributionOutlierPipeline
 outlier:
   appName: Expert distribution outliers for {datasetId}
-  baseUrl: https://spatial-test.ala.org.au/ws/
+  baseUrl: https://spatial-service.biodiversiteitsportaal.dev.internal:8080/spatial-service/
   targetPath: '{fsPath}/pipelines-outlier'
   allDatasetsInputPath: '{fsPath}/pipelines-all-datasets'
   runner: SparkRunner
@@ -228,7 +237,7 @@ index:
   appName: IndexRecord generation for {datasetId}
   inputPath: '{fsPath}/pipelines-data'
   targetPath: '{fsPath}/pipelines-data'
-  includeImages: false
+  includeImages: true
   includeSpeciesLists: true
   # set this to false to avoid SDS requirement
   includeSensitiveDataChecks: false
@@ -273,7 +282,7 @@ export:
   targetPath: '{fsPath}/pipelines-data'
   localExportPath: /tmp/pipelines-export
   allDatasetsInputPath: '{fsPath}/pipelines-all-datasets'
-  imageServicePath: "https://images.ala.org.au/image/proxyImageThumbnailLarge?imageId={0}"
+  imageServicePath: "https://images.biodiversiteitsportaal/image/proxyImageThumbnailLarge?imageId={0}"
   runner: SparkRunner
   predicateExportEnabled: true
 

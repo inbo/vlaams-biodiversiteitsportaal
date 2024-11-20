@@ -11,15 +11,12 @@ webservice:
   client-secret: xxx
 
 grails:
-  serverURL: ${common.protocol}://spatial.${common.domain}/ws
-server:
-  servlet:
-    contextPath: '/ws'
+  serverURL: ${common.protocol}://${common.domain}/spatial-service
 google:
   apikey: 'AIzaSyAJDtEeoy7Sc9pij2TAoVnmTwA34Q-2VHk'
 
 api_key: xxxxxxxxxxxxx
-spatialHubUrl: ${common.protocol}://spatial.${common.domain}/
+spatialHubUrl: ${common.protocol}://${common.domain}/spatial-hub/
 
 #distributions:
 #  geoserver:
@@ -28,7 +25,7 @@ spatialHubUrl: ${common.protocol}://spatial.${common.domain}/
 #
 
 geoserver:
-  url: '${common.protocol}://spatial.${common.domain}/geoserver'
+  url: '${common.protocol}://${common.domain}/geoserver'
   username: 'admin'
   password: 'geoserver'
   canDeploy: true
@@ -44,6 +41,8 @@ dataSource:
   driverClassName: org.postgresql.Driver
   dialect: org.hibernate.spatial.dialect.postgis.PostgisPG9Dialect
   url: 'jdbc:postgresql://postgis:5432/layersdb'
+  username: 'spatial'
+  password: 'my-super-secret-password'
   pooled: true
   jmxExport: true
   dbCreate: update
@@ -68,7 +67,7 @@ dataSource:
 
 batch_sampling_passwords: ""
 
-ala.baseURL: '${common.protocol}://www.${common.domain}'
+ala.baseURL: '${common.protocol}://${common.domain}'
 bie.baseURL: '${common.protocol}://bie.${common.domain}'
 bie.searchPath: '/search'
 
@@ -76,15 +75,15 @@ namematching.url: http://namematching.biodiversiteitsportaal.dev.internal:9180
 
 records.url: '${common.protocol}://archives.${common.domain}/archives/exports/lat_lon_taxon.zip'
 
-lists.url: '${common.protocol}://lists.${common.domain}'
-collections.url: '${common.protocol}://collections.${common.domain}'
+lists.url: '${common.protocol}://${common.domain}/species-list'
+collections.url: '${common.protocol}://${common.domain}/collectory'
 sandboxHubUrl: '${common.protocol}://sandbox.${common.domain}/ala-hub'
 sandboxBiocacheServiceUrl: '${common.protocol}://sandbox.${common.domain}/biocache-service'
 phyloServiceUrl: '${common.protocol}://phylolink.${common.domain}'
 
 
 # au.org.ala.spatial.process config
-spatialService.url: "${common.protocol}://spatial.${common.domain}/ws"
+spatialService.url: "${common.protocol}://${common.domain}/spatial-service"
 shp2pgsql.path: "/usr/bin/shp2pgsql"
 gdal.dir: "/usr/bin/"
 
@@ -92,12 +91,12 @@ slaveKey: "xxxxxxxxxxxxxx"
 serviceKey: "xxxxxxxxxxxxxx"
 
 layers_store:
-  GEONETWORK_URL: '${common.protocol}://spatial.${common.domain}/geonetwork'
-  LAYER_INDEX_URL: ${common.protocol}://spatial.${common.domain}/layers-service
+  GEONETWORK_URL: '${common.protocol}://${common.domain}/spatial-hub/geonetwork'
+  LAYER_INDEX_URL: ${common.protocol}://${common.domain}/spatial-hub/layers-service
 
-apiKeyCheckUrlTemplate: '${common.protocol}://auth.${common.domain}/apikey/ws/check?apikey={0}'
+apiKeyCheckUrlTemplate: '${common.protocol}://${common.domain}/apikey/ws/check?apikey={0}'
 spatialService:
-  remote: "${common.protocol}://spatial.${common.domain}/ws"
+  remote: "${common.protocol}://${common.domain}/spatial-service"
 
 management:
   endpoint:

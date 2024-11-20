@@ -1,0 +1,23 @@
+common:
+  protocol: http
+  domain: localhost
+  homepage: ${common.protocol}://${common.domain}
+
+logging:
+  config: /config/config/common/logback-docker.xml
+
+grails:
+  cors:
+    allowedOriginPatterns: [ "http://localhost" ]
+
+# Need to use host.docker.internal because these urls are use both by the client browser, and the services themselves
+# So it is important they resolve to the same thing
+security:
+  jwt:
+    discoveryUri: http://host.docker.internal/mock-oauth2/.well-known/openid-configuration
+  oidc:
+    discoveryUri: http://host.docker.internal/mock-oauth2/.well-known/openid-configuration
+
+# Header and footer
+headerAndFooter:
+  baseURL: ${common.protocol}://host.docker.internal

@@ -1,8 +1,5 @@
-FROM maven:3.8-openjdk-8 AS builder
-
-
-RUN mkdir ~/.m2
-COPY settings.xml /root/.m2/settings.xml
+ARG BUILDPLATFORM=linux/amd64
+FROM --platform=${BUILDPLATFORM} custom-maven AS builder
 
 ARG VERSION=fix-multimedia-record
 RUN git clone --branch ${VERSION} --depth 1 https://github.com/StefanVanDyck/pipelines.git /app
@@ -25,8 +22,10 @@ RUN --mount=type=cache,target=/root/.m2/repository \
 # FROM openjdk:8
 #
 # ARG VERSION=2.18.6-SNAPSHOT
-
-RUN apt-get update && apt-get -y install \
+RUN rm -f /etc/apt/apt.conf.d/docker-clean; echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/keep-cache
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,target=/var/lib/apt,sharing=locked \
+    apt-get update && apt-get install -y --no-install-recommends \
     nano \
     file
 
@@ -36,9 +35,6 @@ RUN groupadd --gid 1000 app \
 
 RUN mkdir /data && chown app:app /data
 VOLUME /data
-#
-# RUN apt-get update &&\
-#     apt-get install -y yq
 
 ARG TARGETARCH
 

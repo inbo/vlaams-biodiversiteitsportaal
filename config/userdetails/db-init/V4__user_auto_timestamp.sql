@@ -1,0 +1,6 @@
+ALTER TABLE `users` CHANGE `created` `created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;
+ALTER TABLE `users` ADD `date_created` TIMESTAMP NULL;
+UPDATE `users` SET `date_created` = `created`;
+ALTER TABLE `users` CHANGE `date_created` `date_created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;
+ALTER TABLE `users` CHANGE `created` `last_updated` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;
+ALTER TABLE `users` ADD `last_login` TIMESTAMP NULL;

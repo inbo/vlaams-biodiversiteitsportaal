@@ -14,7 +14,7 @@ const backOpts = {
   loadPath: "$_LOCALES_URL/locales/{{lng}}/{{ns}}", // in the original .json
 
   // allow cross domain requests
-  crossDomain: true,
+  crossDomain: false,
 }
 
 var currentUrl  = new Url;
