@@ -115,8 +115,6 @@
     "excluded": [],
     "parent": "Plants"
   },
-  
-  
   {
     "name": "Gymnosperms",
     "rank": "classs",
@@ -208,12 +206,10 @@
     "included": [
       "Bacillariophyta",
       "Chlorophyta",
-      "Cyanidiophyta",
       "Prasinophyta",
       "Rhodophyta",
       "Cryptophyta",
       "Ochrophyta",
-      "Sagenista",
       "Cercozoa",
       "Euglenozoa",
       "Cyanobacteria"
