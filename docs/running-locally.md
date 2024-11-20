@@ -18,9 +18,8 @@ Mostly so we can override the maven repositories used by the australian projects
 Details can be found in the [gradle docker folder](./docker/gradle).
 
 ### 2. Add hostname
-The platform requires a hostname that resolves to the same thing by both the services, running inside docker containers and the client browser.
-On linux you need to add the following lines to your `/etc/hosts` file.
-
+The platform requires a hostname that resolves to the same thing by both the services, running inside docker containers and the client browser.  
+On linux you can edit your `/etc/hosts` file to look something like this:  
 ```commandline
 127.0.0.1 localhost host.docker.internal
 ```
