@@ -47,11 +47,12 @@
     "name": "Fishes",
     "rank": "classs",
     "included": [
-      "Agnatha",
-      "Chondrichthyes",
-      "Osteichthyes",
-      "Actinopterygii",
-      "Sarcopterygii"
+      "Coelacanthi",
+      "Dipneusti",
+      "Elasmobranchii",
+      "Holocephali",
+      "Myxini",
+      "Petromyzonti",
     ],
     "excluded": [],
     "parent": "Animals"
