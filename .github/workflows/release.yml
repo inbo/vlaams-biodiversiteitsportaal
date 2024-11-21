@@ -10,11 +10,8 @@ jobs:
     runs-on: [ self-hosted ]
     steps:
     - uses: actions/checkout@v4
-      if: github.ref == 'refs/heads/main'
     - uses: actions/setup-node@v4
-      if: github.ref == 'refs/heads/main'
     - name: Semantic Release
-      if: github.ref == 'refs/heads/main'
       id: semantic
       uses: cycjimmy/semantic-release-action@v4
       with:
