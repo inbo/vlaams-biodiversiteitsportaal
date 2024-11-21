@@ -1,28 +1,72 @@
-#name: Release new version of the portal
-#run-name: ${{ github.actor }} is releasing a new version
-#on:
-#  push:
-#    branches:
-#      - 'main'
-#      - 'build-and-publish-docker-images'
-#jobs:
-#  upload-branding-to-s3:
-#    runs-on: [ self-hosted ]
-#    steps:
-#      - uses: actions/checkout@v4
-#      - name: Build branding website S3
-#        run: |
-#          cd branding && npm install && ./deploy-to-s3.sh
-#        env:
-#          AWS_S3_BUCKET: biodiversiteitsportaal-dev-branding
-#          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-#          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-#          AWS_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
-#
-#  build-and-push-docker-images:
-#    runs-on: [ self-hosted ]
-#    steps:
-#      - uses: actions/checkout@v4
-#      - name: Build and push docker images
-#        run: |
-#          docker buildx bake --push
+name: Release new version of the portal
+run-name: ${{ github.actor }} is releasing a new version
+on:
+  push:
+    branches:
+      - 'main'
+      - 'dev'
+jobs:
+  semantic-release:
+    runs-on: [ self-hosted ]
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Semantic Release
+      id: semantic
+      uses: cycjimmy/semantic-release-action@v4
+      with:
+        dry_run: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Do something when a new release published
+      if: steps.semantic.outputs.new_release_published == 'true'
+      run: |
+        echo ${{ steps.semantic.outputs.new_release_version }}
+        echo ${{ steps.semantic.outputs.new_release_major_version }}
+        echo ${{ steps.semantic.outputs.new_release_minor_version }}
+        echo ${{ steps.semantic.outputs.new_release_patch_version }}
+    outputs:
+      version: ${{ steps.semantic.outputs.new_release_version }}
+
+  upload-branding-to-s3:
+    runs-on: [ self-hosted ]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/cache@v4
+        id: npm-cache
+        with:
+          path: ./branding/node_modules
+          key: ${{ runner.os }}-npm-${{ hashFiles('./branding/package-lock.json') }}
+          restore-keys: ${{ runner.os }}-npm-
+
+      - name: Build branding website S3
+        working-directory: ./branding
+        env:
+          VERSION: ${{needs.semantic-release.outputs.version}}
+          AWS_S3_BUCKET: biodiversiteitsportaal-dev-branding
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+        run: |
+          set -e
+          cd branding
+          
+          npm install
+          ./deploy-to-s3.sh
+
+  build-and-push-docker-images:
+    runs-on: [ self-hosted ]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build and push docker images
+        working-directory: ./docker
+        env:
+          VERSION: ${{needs.semantic-release.outputs.version}}
+        run: |
+          set -e
+          
+          export TAG="${VERSION}"
+          docker buildx bake --push all
