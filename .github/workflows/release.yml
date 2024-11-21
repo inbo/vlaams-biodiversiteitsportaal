@@ -52,13 +52,35 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Cache
+        uses: actions/cache@v4
+        id: cache
+        with:
+          path: |
+            var-cache-apt
+            var-lib-apt
+            gradle-cache
+            maven-cache
+          key: cache-${{ hashFiles('docker/**/Dockerfile') }}
+
+      - name: inject cache into docker
+        uses: reproducible-containers/buildkit-cache-dance@v3.1.0
+        with:
+          cache-map: |
+            {
+              "var-cache-apt": "/var/cache/apt",
+              "var-lib-apt": "/var/lib/apt",
+              "gradle-cache": "/gradle-cache",
+              "maven-cache": "/root/.m2/repository"
+            }
+          skip-extraction: ${{ steps.cache.outputs.cache-hit }}
+
       - name: Build and push docker images
         working-directory: ./docker
         env:
           TAG: ${{needs.get-next-version.outputs.version}}
         run: |
           docker buildx bake --push all --set='*.args=BUILDPLATFORM=linux/arm64' --set='*.platform=linux/amd64,linux/arm64'
-
 
   release:
     needs:
