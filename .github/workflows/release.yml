@@ -22,6 +22,10 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+    - name: Debug
+      run: |
+          echo "${{ steps.output-version.outputs }}"
+
     - name: Do something when a new release published
       id: output-version
       run: |
