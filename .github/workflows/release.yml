@@ -58,7 +58,7 @@ jobs:
       - name: Build and push docker images
         working-directory: ./docker
         env:
-          TAG: ${{ (github.ref == 'refs/heads/main' && steps.output-version.outputs.version) || 'dev' }}
+          TAG: ${{ (github.ref == 'refs/heads/main' && steps.output-version.outputs.new-release-version) || 'dev' }}
         run: |
           docker buildx bake --push all
 
