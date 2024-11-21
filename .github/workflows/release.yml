@@ -24,7 +24,7 @@ jobs:
 
     - name: Debug
       run: |
-          echo "${{ steps.output-version.outputs }}"
+          echo "${{ steps.semantic.outputs }}"
 
     - name: Do something when a new release published
       id: output-version
