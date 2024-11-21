@@ -6,7 +6,7 @@ on:
       - 'main'
       - 'dev'
 jobs:
-  get-version:
+  get-next-version:
     runs-on: [ self-hosted ]
     steps:
     - uses: actions/checkout@v4
@@ -22,11 +22,14 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     outputs:
-      version: ${{ (github.ref == 'refs/heads/main' && steps.output-version.outputs.version) || 'dev' }}
+      new-release-published: ${{ steps.semantic.outputs.new-release-published }}
+      new-release-version: ${{ steps.semantic.outputs.new-release-version }}
+      new-release-git-tag: ${{ steps.semantic.outputs.new-release-git-tag }}
 
   upload-branding-to-s3:
+    needs: get-next-version
+    if: needs.get-next-version.outputs.new-release-published == 'true'
     runs-on: [ self-hosted ]
-    needs: get-version
     steps:
       - uses: actions/checkout@v4
 
@@ -40,7 +43,7 @@ jobs:
       - name: Build branding website S3
         working-directory: ./branding
         env:
-          VERSION: ${{needs.get-version.outputs.version}}
+          VERSION: ${{needs.get-next-version.outputs.version}}
           AWS_S3_BUCKET: biodiversiteitsportaal-dev-branding
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -53,15 +56,16 @@ jobs:
           ./deploy-to-s3.sh
 
   build-and-push-docker-images:
+    needs: get-next-version
+    if: needs.get-next-version.outputs.new-release-published == 'true'
     runs-on: [ self-hosted ]
-    needs: get-version
     steps:
       - uses: actions/checkout@v4
 
       - name: Build and push docker images
         working-directory: ./docker
         env:
-          VERSION: ${{needs.get-version.outputs.version}}
+          VERSION: ${{needs.get-next-version.outputs.version}}
         run: |
           set -e
           
@@ -69,11 +73,11 @@ jobs:
           docker buildx bake --push all
 
   release:
-    if: github.ref == 'refs/heads/main'
     needs:
-      - get-version
+      - get-next-version
       - upload-branding-to-s3
       - build-and-push-docker-images
+    if: github.ref == 'refs/heads/main' && needs.get-next-version.outputs.new-release-published == 'true'
     runs-on: [ self-hosted ]
     steps:
       - uses: actions/checkout@v4
