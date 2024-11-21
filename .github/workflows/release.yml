@@ -21,24 +21,8 @@ jobs:
         dry_run: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Debug
-      run: |
-          echo "${{ join(steps.semantic.outputs.*, '\n') }}"
-
-    - name: Do something when a new release published
-      id: output-version
-      run: |
-          if [ "${{ github.ref }}" == "refs/heads/main" ]; then
-              echo "version=${{ steps.semantic.outputs.new_release_version }}" >> "$GITHUB_OUTPUT"
-          elif [ "${{ github.ref }}" == "refs/heads/dev" ]; then
-              echo "version=dev" >> "$GITHUB_OUTPUT"
-          else
-              echo "Branch has no environment"
-              exit 1
-          fi
     outputs:
-      version: ${{ steps.output-version.outputs.version }}
+      version: ${{ (github.ref == 'refs/heads/main' && steps.output-version.outputs.version) || 'dev' }}
 
   upload-branding-to-s3:
     runs-on: [ self-hosted ]
