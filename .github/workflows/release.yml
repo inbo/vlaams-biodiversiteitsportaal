@@ -49,11 +49,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
         run: |
-          set -e
-          cd branding
-          
-          npm install
-          ./deploy-to-s3.sh
+          npm install && ./deploy-to-s3.sh
 
   build-and-push-docker-images:
     needs: get-next-version
@@ -65,11 +61,8 @@ jobs:
       - name: Build and push docker images
         working-directory: ./docker
         env:
-          VERSION: ${{needs.get-next-version.outputs.version}}
+          TAG: ${{ (github.ref == 'refs/heads/main' && steps.output-version.outputs.version) || 'dev' }}
         run: |
-          set -e
-          
-          export TAG="${VERSION}"
           docker buildx bake --push all
 
   release:
