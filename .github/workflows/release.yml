@@ -30,13 +30,10 @@ jobs:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
-
-      - uses: actions/cache@v4
-        id: npm-cache
         with:
-          path: ./branding/node_modules
-          key: ${{ runner.os }}-npm-${{ hashFiles('./branding/package-lock.json') }}
-          restore-keys: ${{ runner.os }}-npm-
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: branding/package-lock.json
 
       - name: Build branding website S3
         working-directory: ./branding
