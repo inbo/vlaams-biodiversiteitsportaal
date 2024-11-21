@@ -16,6 +16,9 @@ jobs:
       - name: Git Version
         id: version
         uses: codacy/git-version@2.7.1
+        with:
+          release-branch: main
+          dev-branch: dev
     outputs:
       version: ${{ steps.version.outputs.version }}
 
@@ -65,9 +68,13 @@ jobs:
       - build-and-push-docker-images
     runs-on: [ self-hosted ]
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Semantic Release
-        uses: cycjimmy/semantic-release-action@v4
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create tag
+        uses: actions/github-script@v5
+        with:
+          script: |
+            github.rest.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: 'refs/tags/${{needs.get-next-version.outputs.version}}',
+              sha: context.sha
+            })
