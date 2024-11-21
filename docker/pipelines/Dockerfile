@@ -6,8 +6,11 @@ RUN git clone --branch ${VERSION} --depth 1 https://github.com/StefanVanDyck/pip
 WORKDIR /app
 
 RUN --mount=type=cache,target=/root/.m2/repository \
-    mvn clean install -DskipTests -DskipITs -T 10 -U && \
-    cd livingatlas && mvn clean package -P livingatlas-artifacts -DskipTests -DskipITs -T 10 -U
+    mvn --batch-mode --no-transfer-progress \
+        clean install -DskipTests -DskipITs -T 10 -U \
+    && cd livingatlas \
+    && mvn --batch-mode --no-transfer-progress \
+        clean package -P livingatlas-artifacts -DskipTests -DskipITs -T 10 -U
 
 # ARG VERSION=pipelines-parent-2.18.5
 # RUN git clone --branch ${VERSION} --depth 1 https://github.com/gbif/pipelines.git /app

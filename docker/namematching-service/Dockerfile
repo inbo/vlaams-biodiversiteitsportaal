@@ -5,7 +5,8 @@ RUN git clone --depth 1 https://github.com/AtlasOfLivingAustralia/ala-namematchi
 WORKDIR /project
 
 RUN --mount=type=cache,target=/root/.m2/repository \
-    mvn clean package -DskipTests -T 4 -U
+    mvn --batch-mode --no-transfer-progress \
+        clean package -DskipTests -T 4 -U
 
 FROM openjdk:11
 
