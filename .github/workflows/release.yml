@@ -96,8 +96,8 @@ jobs:
       - name: Set up QEMU
         if: ${{ steps.version.outputs.number_of_changes_since_last_tag != '0' }}
         uses: docker/setup-qemu-action@v3
-        with:
-          image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/docker-hub/tonistiigi/binfmt:latest
+#        with:
+#          image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/docker-hub/tonistiigi/binfmt:latest
 
 
       - name: Cache
