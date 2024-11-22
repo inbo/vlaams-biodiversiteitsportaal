@@ -99,7 +99,7 @@ jobs:
             var-lib-apt
             gradle-cache
             maven-cache
-          key: cache-docker-${{ matrix.name }}-${{ hashFiles('docker/' + matrix.name + '/Dockerfile') }}
+          key: cache-docker-${{ matrix.name }}-${{ hashFiles(format('docker/{0}/Dockerfile')) }}
 
       - name: inject cache into docker
         uses: reproducible-containers/buildkit-cache-dance@v3.1.0
