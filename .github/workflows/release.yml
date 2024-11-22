@@ -56,6 +56,13 @@ jobs:
           - "userdetails"
           - "portal-full"
     steps:
+      - name: Install git
+        run: |
+          id
+          whoami
+          apt-get update
+          apt-get install -y git
+
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
