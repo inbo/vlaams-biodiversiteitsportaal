@@ -128,6 +128,7 @@ jobs:
     needs: get-next-versions
     strategy:
       fail-fast: false
+      max-parallel: 1
       matrix:
         name:
           - "alerts"
