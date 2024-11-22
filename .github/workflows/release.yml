@@ -73,7 +73,7 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
-          role-to-assume: ${{ secrets.AWS_SHARED_INFRA_ROLE_ARN }}
+          role-to-assume: arn:aws:iam::632683202044:role/inbo-developers-role
       - name: Docker login to Amazon ECR
         if: ${{ steps.version.outputs.number_of_changes_since_last_tag != '0' }}
         run: |
