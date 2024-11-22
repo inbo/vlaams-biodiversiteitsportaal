@@ -77,7 +77,14 @@ jobs:
       - name: Docker login to Amazon ECR
         if: ${{ steps.version.outputs.number_of_changes_since_last_tag != '0' }}
         run: |
-          aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin 632683202044.dkr.ecr.eu-west-1.amazonaws.com
+          aws ecr get-login-password --region ${{ secrets.AWS_REGION }} \
+            | docker login --username AWS --password-stdin 632683202044.dkr.ecr.eu-west-1.amazonaws.com
+
+      - name: Pull docker build images
+        if: ${{ steps.version.outputs.number_of_changes_since_last_tag != '0' }}
+        run: |
+          docker pull 632683202044.dkr.ecr.eu-west-1.amazonaws.com/docker-hub/moby/buildkit:buildx-stable-1
+          docker pull 632683202044.dkr.ecr.eu-west-1.amazonaws.com/docker-hub/tonistiigi/binfmt:latest
 
       - name: Set up Docker Buildx
         if: ${{ steps.version.outputs.number_of_changes_since_last_tag != '0' }}
