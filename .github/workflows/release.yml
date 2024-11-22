@@ -74,6 +74,16 @@ jobs:
           - "portal-full"
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Git Version
+        id: version
+        uses: codacy/git-version@2.7.1
+        with:
+          release-branch: main
+          dev-branch: dev
+          prefix: ${{ matrix.name }}
+          log-paths: ./docker/${{ matrix.name }}
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -99,7 +109,7 @@ jobs:
             var-lib-apt
             gradle-cache
             maven-cache
-          key: cache-docker-${{ matrix.name }}-${{ hashFiles(format('docker/{0}/Dockerfile')) }}
+          key: cache-docker-${{ matrix.name }}-${{ hashFiles(format('docker/{0}/Dockerfile', matrix.name)) }}
 
       - name: inject cache into docker
         uses: reproducible-containers/buildkit-cache-dance@v3.1.0
@@ -116,11 +126,23 @@ jobs:
       - name: Build and push docker images
         working-directory: ./docker
         env:
-          TAG: ${{ inputs.tag }}
+          TAG: ${{ steps.version.outputs.version }}
         #        run: |
         #          docker buildx bake --push ${{ name }} --set='*.args.BUILDPLATFORM=linux/arm64' --set='*.platform=linux/amd64,linux/arm64'
         run: |
           docker buildx bake --load ${{ matrix.name }} --set='*.args.BUILDPLATFORM=linux/arm64' --set='*.platform=linux/arm64'
+          
+
+      - name: Create tag
+        uses: actions/github-script@v5
+        with:
+          script: |
+            github.rest.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: 'refs/tags/${{matrix.name}}-${{steps.version.outputs.version}}',
+              sha: context.sha
+            })
 
   release:
     needs:
