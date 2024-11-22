@@ -212,20 +212,20 @@ jobs:
               sha: context.sha
             })
 
-  release:
-    needs:
-      - get-next-version
-      - upload-branding-to-s3
-      - build-and-push-docker-images
-    runs-on: [ self-hosted ]
-    steps:
-      - name: Create tag
-        uses: actions/github-script@v5
-        with:
-          script: |
-            github.rest.git.createRef({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              ref: 'refs/tags/${{needs.get-next-version.outputs.version}}',
-              sha: context.sha
-            })
+#  release:
+#    needs:
+#      - get-next-version
+#      - upload-branding-to-s3
+#      - build-and-push-docker-images
+#    runs-on: [ self-hosted ]
+#    steps:
+#      - name: Create tag
+#        uses: actions/github-script@v5
+#        with:
+#          script: |
+#            github.rest.git.createRef({
+#              owner: context.repo.owner,
+#              repo: context.repo.repo,
+#              ref: 'refs/tags/${{needs.get-next-version.outputs.version}}',
+#              sha: context.sha
+#            })
