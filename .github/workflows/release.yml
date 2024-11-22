@@ -133,7 +133,7 @@ jobs:
         #        run: |
         #          docker buildx bake --push ${{ name }} --set='*.args.BUILDPLATFORM=linux/arm64' --set='*.platform=linux/amd64,linux/arm64'
         run: |
-          docker buildx bake --load ${{ matrix.name }} --set='*.args.BUILDPLATFORM=linux/arm64' --set='*.platform=linux/arm64'
+          docker buildx bake --push ${{ matrix.name }} --set='*.args.BUILDPLATFORM=linux/arm64' --set='*.platform=linux/amd64,linux/arm64'
 
       - name: Create tag
         if: ${{ steps.version.outputs.number_of_changes_since_last_tag != '0' }}
