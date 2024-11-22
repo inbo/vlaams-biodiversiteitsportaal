@@ -49,8 +49,29 @@ jobs:
           npm install && ./deploy-to-s3.sh
 
   build-and-push-docker-images:
-    needs: get-next-version
     runs-on: [ self-hosted ]
+    strategy:
+      fail-fast: false
+      matrix:
+        name:
+          - "alerts"
+          - "apikey"
+          - "bie-hub"
+          - "bie-index"
+          - "biocache-hub"
+          - "biocache-service"
+          - "collectory"
+          - "doi-service"
+          - "image-service"
+          - "logger"
+          - "namematching-service"
+          - "pipelines"
+          - "regions"
+          - "spatial-hub"
+          - "spatial-service"
+          - "species-list"
+          - "userdetails"
+          - "portal-full"
     steps:
       - uses: actions/checkout@v4
 
@@ -58,10 +79,6 @@ jobs:
         uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-        with:
-          buildkitd-config-inline: |
-            [worker.oci]
-              max-parallelism = 1
 
       - name: Login to AWS
         uses: aws-actions/configure-aws-credentials@v4
@@ -82,7 +99,7 @@ jobs:
             var-lib-apt
             gradle-cache
             maven-cache
-          key: cache-${{ hashFiles('docker/**/Dockerfile') }}
+          key: cache-docker-${{ matrix.name }}-${{ hashFiles('docker/' + matrix.name + '/Dockerfile') }}
 
       - name: inject cache into docker
         uses: reproducible-containers/buildkit-cache-dance@v3.1.0
@@ -99,11 +116,11 @@ jobs:
       - name: Build and push docker images
         working-directory: ./docker
         env:
-          TAG: ${{needs.get-next-version.outputs.version}}
-#        run: |
-#          docker buildx bake --push all --set='*.args.BUILDPLATFORM=linux/arm64' --set='*.platform=linux/amd64,linux/arm64'
+          TAG: ${{ inputs.tag }}
+        #        run: |
+        #          docker buildx bake --push ${{ name }} --set='*.args.BUILDPLATFORM=linux/arm64' --set='*.platform=linux/amd64,linux/arm64'
         run: |
-          docker buildx bake --load all --set='*.args.BUILDPLATFORM=linux/arm64' --set='*.platform=linux/arm64'
+          docker buildx bake --load ${{ matrix.name }} --set='*.args.BUILDPLATFORM=linux/arm64' --set='*.platform=linux/arm64'
 
   release:
     needs:
