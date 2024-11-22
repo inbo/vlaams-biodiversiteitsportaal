@@ -6,22 +6,98 @@ on:
       - 'main'
       - 'dev'
 jobs:
-  get-next-version:
+  get-next-versions:
     # runs-on: [ self-hosted ] # does not support arm64
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        name:
+          - "alerts"
+          - "apikey"
+          - "bie-hub"
+          - "bie-index"
+          - "biocache-hub"
+          - "biocache-service"
+          - "collectory"
+          - "doi-service"
+          - "image-service"
+          - "logger"
+          - "namematching-service"
+          - "pipelines"
+          - "regions"
+          - "spatial-hub"
+          - "spatial-service"
+          - "species-list"
+          - "userdetails"
+          - "portal-full"
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
       - name: Git Version
-        id: version
+        id: config_version
         uses: codacy/git-version@2.7.1
         with:
           release-branch: main
           dev-branch: dev
+          prefix: config-${{ matrix.name }}
+          log-paths: ./config/${{ matrix.name }}
+
+      - name: Git Version
+        id: docker_version
+        uses: codacy/git-version@2.7.1
+        with:
+          release-branch: main
+          dev-branch: dev
+          prefix: docker-${{ matrix.name }}
+          log-paths: ./docker/${{ matrix.name }}
+
+      - name: Generate output
+        id: gen_output
+        run: |
+          echo "config_version_${{matrix.name}}=${{ steps.config_version.outputs.version }}" >> "$GITHUB_OUTPUT"
+          echo "docker_version_${{matrix.name}}=${{ steps.docker_version.outputs.version }}" >> "$GITHUB_OUTPUT"
+
     outputs:
-      version: ${{ steps.version.outputs.version }}
+      alerts_config: ${{steps.gen_output.config_version_alerts}}
+      alerts_docker: ${{steps.gen_output.docker_version_alerts}}
+      apikey_config: ${{steps.gen_output.config_version_apikey}}
+      apikey_docker: ${{steps.gen_output.docker_version_apikey}}
+      bie-hub_config: ${{steps.gen_output.config_version_bie-hub}}
+      bie-hub_docker: ${{steps.gen_output.docker_version_bie-hub}}
+      bie-index_config: ${{steps.gen_output.config_version_bie-index}}
+      bie-index_docker: ${{steps.gen_output.docker_version_bie-index}}
+      biocache-hub_config: ${{steps.gen_output.config_version_biocache-hub}}
+      biocache-hub_docker: ${{steps.gen_output.docker_version_biocache-hub}}
+      biocache-service_config: ${{steps.gen_output.config_version_biocache-service}}
+      biocache-service_docker: ${{steps.gen_output.docker_version_biocache-service}}
+      collectory_config: ${{steps.gen_output.config_version_collectory}}
+      collectory_docker: ${{steps.gen_output.docker_version_collectory}}
+      doi-service_config: ${{steps.gen_output.config_version_doi-service}}
+      doi-service_docker: ${{steps.gen_output.docker_version_doi-service}}
+      image-service_config: ${{steps.gen_output.config_version_image-service}}
+      image-service_docker: ${{steps.gen_output.docker_version_image-service}}
+      logger_config: ${{steps.gen_output.config_version_logger}}
+      logger_docker: ${{steps.gen_output.docker_version_logger}}
+      namematching-service_config: ${{steps.gen_output.config_version_namematching-service}}
+      namematching-service_docker: ${{steps.gen_output.docker_version_namematching-service}}
+      pipelines_config: ${{steps.gen_output.config_version_pipelines}}
+      pipelines_docker: ${{steps.gen_output.docker_version_pipelines}}
+      regions_config: ${{steps.gen_output.config_version_regions}}
+      regions_docker: ${{steps.gen_output.docker_version_regions}}
+      spatial-hub_config: ${{steps.gen_output.config_version_spatial-hub}}
+      spatial-hub_docker: ${{steps.gen_output.docker_version_spatial-hub}}
+      spatial-service_config: ${{steps.gen_output.config_version_spatial-service}}
+      spatial-service_docker: ${{steps.gen_output.docker_version_spatial-service}}
+      species-list_config: ${{steps.gen_output.config_version_species-list}}
+      species-list_docker: ${{steps.gen_output.docker_version_species-list}}
+      userdetails_config: ${{steps.gen_output.config_version_userdetails}}
+      userdetails_docker: ${{steps.gen_output.docker_version_userdetails}}
+      portal-full_config: ${{steps.gen_output.config_version_portal-full}}
+      portal-full_docker: ${{steps.gen_output.docker_version_portal-full}}
 
   upload-branding-to-s3:
     needs: get-next-version
@@ -50,6 +126,7 @@ jobs:
 
   build-and-push-docker-images:
     runs-on: [ self-hosted ]
+    needs: get-next-versions
     strategy:
       fail-fast: false
       matrix:
@@ -76,14 +153,6 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Git Version
-        id: version
-        uses: codacy/git-version@2.7.1
-        with:
-          release-branch: main
-          dev-branch: dev
-          prefix: ${{ matrix.name }}
-          log-paths: ./docker/${{ matrix.name }}
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -126,12 +195,12 @@ jobs:
       - name: Build and push docker images
         working-directory: ./docker
         env:
-          TAG: ${{ steps.version.outputs.version }}
+          TAG: ${{ needs.get-next-version.outputs[format('{0}_docker_version', matrix.name)] }}
         #        run: |
         #          docker buildx bake --push ${{ name }} --set='*.args.BUILDPLATFORM=linux/arm64' --set='*.platform=linux/amd64,linux/arm64'
         run: |
           docker buildx bake --load ${{ matrix.name }} --set='*.args.BUILDPLATFORM=linux/arm64' --set='*.platform=linux/arm64'
-          
+
 
       - name: Create tag
         uses: actions/github-script@v5
@@ -140,7 +209,7 @@ jobs:
             github.rest.git.createRef({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              ref: 'refs/tags/${{matrix.name}}-${{steps.version.outputs.version}}',
+              ref: 'refs/tags/docker-${{matrix.name}}-${{ needs.get-next-version.outputs[format('{0}_docker_version', matrix.name)] }}',
               sha: context.sha
             })
 
