@@ -34,10 +34,8 @@ COPY --from=builder --chown=app \
     /project/server/config.yml /app/config.yml
 
 RUN mkdir /data/ala-namematching-service && mkdir /data/ala-namematching-service/config
-COPY --from=builder --chown=app \
-    /project/server/src/main/resources/groups.json /data/ala-namematching-service/config/groups.json
-COPY --from=builder --chown=app \
-    /project/server/src/main/resources/subgroups.json /data/ala-namematching-service/config/subgroups.json
+COPY groups.json /data/ala-namematching-service/config/groups.json
+COPY subgroups.json /data/ala-namematching-service/config/subgroups.json
 
 ENTRYPOINT ["java", "-jar", "/app/app.jar", "server", "config.yml"]
 

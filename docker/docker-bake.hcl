@@ -137,7 +137,6 @@ target "namematching-service" {
   context = "./namematching-service"
   contexts = {
     "custom-maven" = "target:custom-maven"
-    "tomcat-base"  = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/namematching-service:${TAG}"]
 }
@@ -146,7 +145,6 @@ target "pipelines" {
   context = "./pipelines"
   contexts = {
     "custom-maven" = "target:custom-maven"
-    "tomcat-base"  = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/la-pipelines:${TAG}"]
 }

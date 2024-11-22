@@ -40,7 +40,7 @@ NODE_ENV=docker npx brunch build
 Finally, we can start the services using the following command:
 
 ```commandline
-docker-compose -f docker/docker-compose.yml up
+docker-compose -f docker/docker-compose.yaml up
 ```
 
 ## Data
@@ -57,10 +57,10 @@ ssh ubuntu@<ip of bastion server> -N -L 0.0.0.0:8983:solr.biodiversiteitsportaal
 ## Authentication
 We use mock-oauth2 to simulate an openid-connect service.  
 Simply use whatever name you want went prompted for a login.  
-On order to access the platform as admin, simply adding the json below should work (But it does not as of now :( ):
+On order to access the platform as admin, simply adding the json below should work
 ```json
 {
-  "ala-role": "ADMIN"
+  "role": "ROLE_ADMIN"
 }
 ```
 
