@@ -75,13 +75,9 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
           role-to-assume: ${{ secrets.AWS_SHARED_INFRA_ROLE_ARN }}
       - name: Docker login to Amazon ECR
-        uses: aws-actions/amazon-ecr-login@v2
-
-      - name: Pull docker build images
         if: ${{ steps.version.outputs.number_of_changes_since_last_tag != '0' }}
         run: |
-          docker pull 632683202044.dkr.ecr.eu-west-1.amazonaws.com/docker-hub/moby/buildkit:buildx-stable-1
-          docker pull 632683202044.dkr.ecr.eu-west-1.amazonaws.com/docker-hub/tonistiigi/binfmt:latest
+          aws ecr get-login-password --region | docker login --username AWS --password-stdin 632683202044.dkr.ecr.eu-west-1.amazonaws.com
 
       - name: Set up Docker Buildx
         if: ${{ steps.version.outputs.number_of_changes_since_last_tag != '0' }}
