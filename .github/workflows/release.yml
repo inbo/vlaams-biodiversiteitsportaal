@@ -100,7 +100,6 @@ jobs:
       portal-full_docker: ${{steps.gen_output.docker_version_portal-full}}
 
   upload-branding-to-s3:
-    needs: get-next-version
     runs-on: [ self-hosted ]
     steps:
       - uses: actions/checkout@v4
