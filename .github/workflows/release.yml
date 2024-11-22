@@ -13,23 +13,23 @@ jobs:
       fail-fast: false
       matrix:
         name:
-          - "alerts"
-          - "apikey"
-          - "bie-hub"
-          - "bie-index"
-          - "biocache-hub"
-          - "biocache-service"
-          - "collectory"
-          - "doi-service"
-          - "image-service"
-          - "logger"
-          - "namematching-service"
-          - "pipelines"
-          - "regions"
-          - "spatial-hub"
-          - "spatial-service"
-          - "species-list"
-          - "userdetails"
+#          - "alerts"
+#          - "apikey"
+#          - "bie-hub"
+#          - "bie-index"
+#          - "biocache-hub"
+#          - "biocache-service"
+#          - "collectory"
+#          - "doi-service"
+#          - "image-service"
+#          - "logger"
+#          - "namematching-service"
+#          - "pipelines"
+#          - "regions"
+#          - "spatial-hub"
+#          - "spatial-service"
+#          - "species-list"
+#          - "userdetails"
           - "portal-full"
     steps:
       - name: Checkout
@@ -43,7 +43,7 @@ jobs:
         with:
           release-branch: main
           dev-branch: dev
-          prefix: config-${{ matrix.name }}
+          prefix: config-${{ matrix.name }}-v
           log-paths: ./config/${{ matrix.name }}
 
       - name: Git Version
@@ -52,7 +52,7 @@ jobs:
         with:
           release-branch: main
           dev-branch: dev
-          prefix: docker-${{ matrix.name }}
+          prefix: docker-${{ matrix.name }}-v
           log-paths: ./docker/${{ matrix.name }}
 
       - name: Generate output
@@ -131,23 +131,23 @@ jobs:
       max-parallel: 1
       matrix:
         name:
-          - "alerts"
-          - "apikey"
-          - "bie-hub"
-          - "bie-index"
-          - "biocache-hub"
-          - "biocache-service"
-          - "collectory"
-          - "doi-service"
-          - "image-service"
-          - "logger"
-          - "namematching-service"
-          - "pipelines"
-          - "regions"
-          - "spatial-hub"
-          - "spatial-service"
-          - "species-list"
-          - "userdetails"
+#          - "alerts"
+#          - "apikey"
+#          - "bie-hub"
+#          - "bie-index"
+#          - "biocache-hub"
+#          - "biocache-service"
+#          - "collectory"
+#          - "doi-service"
+#          - "image-service"
+#          - "logger"
+#          - "namematching-service"
+#          - "pipelines"
+#          - "regions"
+#          - "spatial-hub"
+#          - "spatial-service"
+#          - "species-list"
+#          - "userdetails"
           - "portal-full"
     steps:
       - uses: actions/checkout@v4
@@ -209,7 +209,7 @@ jobs:
             github.rest.git.createRef({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              ref: 'refs/tags/docker-${{matrix.name}}-${{ needs.get-next-version.outputs[format('{0}_docker_version', matrix.name)] }}',
+              ref: 'refs/tags/docker-${{matrix.name}}-v${{ needs.get-next-version.outputs[format('{0}_docker_version', matrix.name)] }}',
               sha: context.sha
             })
 
