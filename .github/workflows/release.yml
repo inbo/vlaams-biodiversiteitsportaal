@@ -93,32 +93,32 @@ jobs:
           component: ${{ matrix.name }}
           paths: ./docker/${{ matrix.name }}
 
-#      - name: Login to AWS
-#        if: ${{ steps.version.outputs.number_of_changes_since_last_tag != '0' }}
-#        uses: aws-actions/configure-aws-credentials@v4
-#        with:
-#          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-#          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-#          aws-region: ${{ secrets.AWS_REGION }}
-#          role-to-assume: ${{ secrets.AWS_SHARED_INFRA_ROLE_ARN }}
-
-      - name: Docker login to Amazon ECR
+      - name: Login to AWS
         if: ${{ steps.version.outputs.number_of_changes_since_last_tag != '0' }}
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: ${{ secrets.AWS_REGION }}
-        run: |
-          export $(printf "AWS_ACCESS_KEY_ID=%s AWS_SECRET_ACCESS_KEY=%s AWS_SESSION_TOKEN=%s" \
-          $(aws sts assume-role \
-            --role-arn arn:aws:iam::632683202044:role/inbo-developers-role \
-            --role-session-name MySessionName \
-            --query "Credentials.[AccessKeyId,SecretAccessKey,SessionToken]" \
-            --output text))
-          aws sts get-caller-identity
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+          role-to-assume: ${{ secrets.AWS_SHARED_INFRA_ROLE_ARN }}
 
-          aws ecr get-login-password --region ${{ secrets.AWS_REGION }} \
-            | docker login --username AWS --password-stdin 632683202044.dkr.ecr.eu-west-1.amazonaws.com
+#      - name: Docker login to Amazon ECR
+#        if: ${{ steps.version.outputs.number_of_changes_since_last_tag != '0' }}
+#        env:
+#          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#          AWS_REGION: ${{ secrets.AWS_REGION }}
+#        run: |
+#          export $(printf "AWS_ACCESS_KEY_ID=%s AWS_SECRET_ACCESS_KEY=%s AWS_SESSION_TOKEN=%s" \
+#          $(aws sts assume-role \
+#            --role-arn arn:aws:iam::632683202044:role/inbo-developers-role \
+#            --role-session-name MySessionName \
+#            --query "Credentials.[AccessKeyId,SecretAccessKey,SessionToken]" \
+#            --output text))
+#          aws sts get-caller-identity
+#
+#          aws ecr get-login-password --region ${{ secrets.AWS_REGION }} \
+#            | docker login --username AWS --password-stdin 632683202044.dkr.ecr.eu-west-1.amazonaws.com
 
 #      - name: Pull docker build images
 #        if: ${{ steps.version.outputs.number_of_changes_since_last_tag != '0' }}
