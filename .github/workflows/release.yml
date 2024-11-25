@@ -33,7 +33,21 @@ jobs:
         id: output
         env:
           COMPONENTS: "alerts apikey"
-        run: |
+        run: |   
+          # Branding
+          COMPONENT=branding
+          
+          PATHS=./branding    
+          export $(bash <(curl -fsS "https://raw.githubusercontent.com/StefanVanDyck/git-semantic-version/refs/heads/main/version.sh") | xargs)
+
+          if [ "${number_of_changes_since_last_tag}" != "0" ]; then
+            echo "Setting new version for branding ${component} to ${new_version}"
+            echo "branding_version=${new_version}" >> "$GITHUB_OUTPUT"
+          fi
+          
+          # Services
+          CONFIG_VERSIONS=""
+          DOCKER_VERSIONS=""
           for component in ${COMPONENTS}; do
             COMPONENT=${component}
           
@@ -42,7 +56,7 @@ jobs:
 
             if [ "${number_of_changes_since_last_tag}" != "0" ]; then
               echo "Setting new version for config ${component} to ${new_version}"
-              echo "config_${component}=${new_version}" >> "$GITHUB_OUTPUT"
+              CONFIG_VERSIONS="${CONFIG_VERSIONS} ${component}=${new_version}"
             fi
           
             PATHS=./docker/${component}
@@ -50,13 +64,21 @@ jobs:
 
             if [ "${number_of_changes_since_last_tag}" != "0" ]; then
               echo "Setting new version for docker ${component} to ${new_version}"
-              echo "docker_${component}=${new_version}" >> "$GITHUB_OUTPUT"
+              DOCKER_VERSIONS="${DOCKER_VERSIONS} ${component}=${new_version}"
             fi
           done
+          
+          echo "config_versions=${CONFIG_VERSIONS}" >> "$GITHUB_OUTPUT"
+          echo "docker_versions=${DOCKER_VERSIONS}" >> "$GITHUB_OUTPUT"
+    outputs:
+      branding_version: ${{ steps.output.outputs.branding_version }}
+      config_versions: ${{ steps.output.outputs.config_versions }}
+      docker_versions: ${{ steps.output.outputs.docker_versions }}
 
   upload-branding-to-s3:
     runs-on: [ stefan ]
     needs: get_versions
+    if: ${{ needs.get_versions.outputs.branding_version != '' }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -79,6 +101,17 @@ jobs:
         run: |
           npm install && ./deploy-to-s3.sh
 
+      - name: Create tag
+        if: ${{ steps.version.outputs.number_of_changes_since_last_tag != '0' }}
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: 'refs/tags/branding-v${{ steps.version.outputs.new_version }}',
+              sha: context.sha
+            })
   build-and-push-docker-images:
     runs-on: [ stefan ]
     needs: get_versions
@@ -171,14 +204,13 @@ jobs:
         #        run: |
         #          docker buildx bake --push ${{ name }} --set='*.args.BUILDPLATFORM=linux/arm64' --set='*.platform=linux/amd64,linux/arm64'
         run: |
-          docker_versions=$(echo "${{ needs.get_versions.outputs }}" | grep "docker_")
-          for dv in ${docker_versions}; do
-            echo "${dv}"
-            docker_name=$(echo $dv | cut -d'=' -f1 | cut -d'_' -f2)
-            version=$(echo $dv | cut -d'=' -f2)
+          for component_version in ${{ needs.get-versions.outputs.docker_versions }}; do
+            echo "${component_version}"
+            docker_name=$(echo {component_version} | cut -d'=' -f1)
+            version=$(echo {component_version} | cut -d'=' -f2)
             echo "${docker_name}"
             echo "${version}"
-            docker buildx bake --push ${docker_name} --set='*.args.BUILDPLATFORM=linux/arm64' --set='*.platform=linux/amd64,linux/arm64'
+            TAG=${version} docker buildx bake --push ${docker_name} --set='*.args.BUILDPLATFORM=linux/arm64' --set='*.platform=linux/amd64,linux/arm64'
           done
 
       - name: Create tag
