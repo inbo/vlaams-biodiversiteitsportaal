@@ -30,7 +30,7 @@ jobs:
           fetch-depth: 0
 
       - name: Generate output
-        id: output
+        id: versions
         env:
           COMPONENTS: "alerts apikey"
         run: |
@@ -75,9 +75,9 @@ jobs:
           echo "config_versions='${CONFIG_VERSIONS}" >> "$GITHUB_OUTPUT'"
           echo "docker_versions='${DOCKER_VERSIONS}" >> "$GITHUB_OUTPUT'"
     outputs:
-      branding_version: ${{ steps.output.outputs.branding_version }}
-      config_versions: ${{ steps.output.outputs.config_versions }}
-      docker_versions: ${{ steps.output.outputs.docker_versions }}
+      branding_version: ${{ steps.versions.outputs.branding_version }}
+      config_versions: ${{ steps.versions.outputs.config_versions }}
+      docker_versions: ${{ steps.versions.outputs.docker_versions }}
 
   upload-branding-to-s3:
     runs-on: [ stefan ]
