@@ -16,6 +16,7 @@ jobs:
         run: |
           rm -rf -v ./*
           rm -rf -v ./.git
+          rm -rf -v /home/github-runner/_work/vlaams-biodiversiteitsportaal/
 
 
   get_versions:
