@@ -201,12 +201,11 @@ jobs:
         #        run: |
         #          docker buildx bake --push ${{ name }} --set='*.args.BUILDPLATFORM=linux/arm64' --set='*.platform=linux/amd64,linux/arm64'
         run: |
-          for component_version in ${{ needs.get-versions.outputs.docker_versions }}; do
-            echo "${component_version}"
-            docker_name=$(echo {component_version} | cut -d'=' -f1)
-            version=$(echo {component_version} | cut -d'=' -f2)
-            echo "${docker_name}"
-            echo "${version}"
+          for component_version in $(jq '. | to_entries' <<< '${{ needs.get-versions.outputs.docker_versions }}'); do
+            echo ${component_version}
+            docker_name=$(jq '.key' << ${component_version})
+            version=$(jq '.value' << ${component_version})
+            echo " Releasing ${docker_name} version ${version}"
             TAG=${version} docker buildx bake --push ${docker_name} --set='*.args.BUILDPLATFORM=linux/arm64' --set='*.platform=linux/amd64,linux/arm64'
           done
 
