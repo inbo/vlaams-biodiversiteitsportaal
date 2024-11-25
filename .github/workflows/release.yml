@@ -32,20 +32,25 @@ jobs:
       - name: Generate output
         id: output
         env:
-          COMPONENTS: "alerts"
+          COMPONENTS: "alerts apikey"
         run: |
           for component in ${COMPONENTS}; do
-            export COMPONENT=${component}
+            COMPONENT=${component}
           
+            PATHS=./config/${component}      
             export $(bash <(curl -fsS "https://raw.githubusercontent.com/StefanVanDyck/git-semantic-version/refs/heads/main/version.sh") | xargs)
-            echo "$component"
-            echo "$number_of_changes_since_last_tag"
-            echo "$previous_version"
-            echo "$new_version"
-          
+
             if [ "${number_of_changes_since_last_tag}" != "0" ]; then
               echo "Setting new version for config ${component} to ${new_version}"
               echo "config_${component}=${new_version}" >> "$GITHUB_OUTPUT"
+            fi
+          
+            PATHS=./docker/${component}
+            export $(bash <(curl -fsS "https://raw.githubusercontent.com/StefanVanDyck/git-semantic-version/refs/heads/main/version.sh") | xargs)
+
+            if [ "${number_of_changes_since_last_tag}" != "0" ]; then
+              echo "Setting new version for docker ${component} to ${new_version}"
+              echo "docker_${component}=${new_version}" >> "$GITHUB_OUTPUT"
             fi
           done
 
