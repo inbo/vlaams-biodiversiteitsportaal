@@ -39,7 +39,7 @@ jobs:
           fetch-depth: 0
       - name: Fix safe dir
         run: |
-          git config --global --add safe.directory '*'1
+          git config --global --add safe.directory '*'
       - name: Get docker version
         id: config-version
         uses: StefanVanDyck/git-semantic-version@main
@@ -57,11 +57,17 @@ jobs:
         id: output
         run: |
           # Debug
+          echo "config_${{ matrix.name }}=${{ steps.config-version.outputs.number_of_changes_since_last_tag }}"
           echo "config_${{ matrix.name }}=${{ steps.config-version.outputs.new_version }}"
+          echo "docker_${{ matrix.name }}=${{ steps.docker-version.outputs.number_of_changes_since_last_tag }}"
           echo "docker_${{ matrix.name }}=${{ steps.docker-version.outputs.new_version }}"
           
-          echo "config_${{ matrix.name }}=${{ steps.config-version.outputs.new_version }}" >> "$GITHUB_OUTPUT"
-          echo "docker_${{ matrix.name }}=${{ steps.docker-version.outputs.new_version }}" >> "$GITHUB_OUTPUT"
+          if [" ${{ steps.config-version.outputs.number_of_changes_since_last_tag }} " != " 0 "]; then
+            echo "config_${{ matrix.name }}=${{ steps.config-version.outputs.new_version }}" >> "$GITHUB_OUTPUT"
+          fi
+          if [" ${{ steps.docker-version.outputs.number_of_changes_since_last_tag }} " != " 0 "]; then
+            echo "docker_${{ matrix.name }}=${{ steps.docker-version.outputs.new_version }}" >> "$GITHUB_OUTPUT"
+          fi
 
   upload-branding-to-s3:
     runs-on: [ self-hosted ]
