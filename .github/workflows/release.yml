@@ -43,9 +43,9 @@ jobs:
             echo "$previous_version"
             echo "$new_version"
           
-            if [ "${$number_of_changes_since_last_tag}" != "0" ]; then
-              echo "Setting new version for config ${{ matrix.name }} to ${{ steps.config-version.outputs.new_version }}"
-              echo "config_${{ matrix.name }}=${{ steps.config-version.outputs.new_version }}" >> "$GITHUB_OUTPUT"
+            if [ "${number_of_changes_since_last_tag}" != "0" ]; then
+              echo "Setting new version for config ${component} to ${new_version}"
+              echo "config_${component}=${new_version}" >> "$GITHUB_OUTPUT"
             fi
           done
 
