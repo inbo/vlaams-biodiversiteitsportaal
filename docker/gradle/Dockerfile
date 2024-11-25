@@ -1,9 +1,6 @@
 ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} gradle:7-jdk11 AS builder
 
-# Force use of ftp (Github action runners do not allow egress on port 80)
-COPY sources.list /etc/apt/sources.list
-
 COPY gradle.properties /home/gradle/.gradle/gradle.properties
 COPY init.gradle /home/gradle/.gradle/init.gradle
 
