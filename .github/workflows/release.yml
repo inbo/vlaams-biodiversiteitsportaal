@@ -29,7 +29,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Generate output
+      - name: Get all component versions
         id: versions
         env:
           COMPONENTS: "alerts apikey"
@@ -199,10 +199,10 @@ jobs:
         run: |
           echo ${{ needs.get-versions.outputs.docker_versions }}
           
-          for component_version in $(jq -r '. | to_entries | .[]' <<< ${{ needs.get-versions.outputs.docker_versions }}); do
-            echo ${component_version}
-            docker_name=$(jq '.key' << ${component_version})
-            version=$(jq '.value' << ${component_version})
+          for component_version in $(jq -c '. | to_entries | .[]' <<< "{\"alerts\":\"0.0.1\",\"apikey\":\"0.0.1\"}"); do
+            echo "${component_version}"
+            docker_name=$(jq -r '.key' <<< "${component_version}")
+            version=$(jq -r '.value' <<< "${component_version}")
             echo " Releasing ${docker_name} version ${version}"
             TAG=${version} docker buildx bake --push ${docker_name} --set='*.args.BUILDPLATFORM=linux/arm64' --set='*.platform=linux/amd64,linux/arm64'
           done
