@@ -1,2 +1,2 @@
-deb https://ftp.heanet.ie/pub/ubuntu/ jammy main
-deb-src https://ftp.heanet.ie/pub/ubuntu/ jammy main
+deb https://ftp.heanet.ie/pub/ubuntu/ jammy main restricted
+deb-src https://ftp.heanet.ie/pub/ubuntu/ jammy main restricted
