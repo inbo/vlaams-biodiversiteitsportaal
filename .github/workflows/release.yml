@@ -8,68 +8,32 @@ on:
 jobs:
   get_versions:
     runs-on: [ self-hosted ]
-    container:
-      image: bitnami/git
-    strategy:
-      fail-fast: false
-      max-parallel: 1
-      matrix:
-        name:
-          - "alerts"
-          - "apikey"
-          - "bie-hub"
-          - "bie-index"
-          - "biocache-hub"
-          - "biocache-service"
-          - "collectory"
-          - "doi-service"
-          - "image-service"
-          - "logger"
-          - "namematching-service"
-          - "pipelines"
-          - "regions"
-          - "spatial-hub"
-          - "spatial-service"
-          - "species-list"
-          - "userdetails"
-          - "portal-full"
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Fix safe dir
-        run: |
-          git config --global --add safe.directory '*'
-      - name: Get docker version
-        id: config-version
-        uses: StefanVanDyck/git-semantic-version@main
-        with:
-          component: ${{ matrix.name }}
-          paths: ./config/${{ matrix.name }}
-      - name: Get config version
-        id: docker-version
-        uses: StefanVanDyck/git-semantic-version@main
-        with:
-          component: ${{ matrix.name }}
-          paths: ./docker/${{ matrix.name }}
 
       - name: Generate output
         id: output
+        env:
+          COMPONENTS: "alerts"
         run: |
-          # Debug
-          echo "config_${{ matrix.name }}=${{ steps.config-version.outputs.number_of_changes_since_last_tag }}"
-          echo "config_${{ matrix.name }}=${{ steps.config-version.outputs.new_version }}"
-          echo "docker_${{ matrix.name }}=${{ steps.docker-version.outputs.number_of_changes_since_last_tag }}"
-          echo "docker_${{ matrix.name }}=${{ steps.docker-version.outputs.new_version }}"
+          https://github.com/StefanVanDyck/git-semantic-version/raw/refs/heads/main/version.sh
           
-          if [ "${{ steps.config-version.outputs.number_of_changes_since_last_tag }}" != "0" ]; then
-            echo "Setting new version for config {{ matrix.name }} to ${{ steps.config-version.outputs.new_version }}"
-            echo "config_${{ matrix.name }}=${{ steps.config-version.outputs.new_version }}" >> "$GITHUB_OUTPUT"
-          fi
-          if [ "${{ steps.docker-version.outputs.number_of_changes_since_last_tag }}" != "0" ]; then
-            echo "Setting new version for docker {{ matrix.name }} to ${{ steps.docker-version.outputs.new_version }}"
-            echo "docker_${{ matrix.name }}=${{ steps.docker-version.outputs.new_version }}" >> "$GITHUB_OUTPUT"
-          fi
+          for component in ${COMPONENTS}; do
+            export COMPONENT=${component}
+          
+            source $(bash <(curl -fsS "${NEXUS_URL}/repository/shell-scripts/version-v1"))
+            echo "$component"
+            echo "$number_of_changes_since_last_tag"
+            echo "$previous_version"
+            echo "$new_version"
+          
+            if [ "${$number_of_changes_since_last_tag}" != "0" ]; then
+              echo "Setting new version for config ${{ matrix.name }} to ${{ steps.config-version.outputs.new_version }}"
+              echo "config_${{ matrix.name }}=${{ steps.config-version.outputs.new_version }}" >> "$GITHUB_OUTPUT"
+            fi
+          done
 
   upload-branding-to-s3:
     runs-on: [ self-hosted ]
