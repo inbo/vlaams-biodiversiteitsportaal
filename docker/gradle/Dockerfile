@@ -1,8 +1,8 @@
 ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} gradle:7-jdk11 AS builder
 
-# Force use of https over http (Github action runners onlu allow 443 egress)
-RUN sed -i 's/http:/https:/g' /etc/apt/sources.list
+# Force use of ftp (Github action runners do not allow egress on port 80)
+COPY sources.list /etc/apt/sources.list
 
 COPY gradle.properties /home/gradle/.gradle/gradle.properties
 COPY init.gradle /home/gradle/.gradle/init.gradle
