@@ -63,9 +63,11 @@ jobs:
           echo "docker_${{ matrix.name }}=${{ steps.docker-version.outputs.new_version }}"
           
           if [ "${{ steps.config-version.outputs.number_of_changes_since_last_tag }}" != "0" ]; then
+            echo "Setting new version for config {{ matrix.name }} to ${{ steps.config-version.outputs.new_version }}"
             echo "config_${{ matrix.name }}=${{ steps.config-version.outputs.new_version }}" >> "$GITHUB_OUTPUT"
           fi
           if [ "${{ steps.docker-version.outputs.number_of_changes_since_last_tag }}" != "0" ]; then
+            echo "Setting new version for docker {{ matrix.name }} to ${{ steps.docker-version.outputs.new_version }}"
             echo "docker_${{ matrix.name }}=${{ steps.docker-version.outputs.new_version }}" >> "$GITHUB_OUTPUT"
           fi
 
