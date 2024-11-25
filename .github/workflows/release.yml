@@ -76,8 +76,8 @@ jobs:
           echo "docker_versions='${DOCKER_VERSIONS}" >> "$GITHUB_OUTPUT'"
     outputs:
       branding_version: ${{ steps.versions.outputs.branding_version }}
-      config_versions: ${{ steps.versions.outputs.config_versions }}
-      docker_versions: ${{ steps.versions.outputs.docker_versions }}
+      config_versions: ${{ toJSON(steps.versions.outputs.config_versions) }}
+      docker_versions: ${{ toJSON(steps.versions.outputs.docker_versions) }}
 
   upload-branding-to-s3:
     runs-on: [ stefan ]
