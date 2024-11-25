@@ -18,7 +18,7 @@ jobs:
       - name: cleanup
         id: output
         run: |
-          rm -rf .
+          rm -rf ./*
 
 
   get_versions:
