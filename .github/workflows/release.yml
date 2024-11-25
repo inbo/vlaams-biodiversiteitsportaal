@@ -123,7 +123,7 @@ jobs:
   build-and-push-docker-images:
     runs-on: [ stefan ]
     needs: get_versions
-    if: ${{ needs.get_versions.outputs.docker_version != '{}' }}
+    if: ${{ needs.get_versions.outputs.docker_versions != '{}' }}
     steps:
       - uses: actions/checkout@v4
         with:
