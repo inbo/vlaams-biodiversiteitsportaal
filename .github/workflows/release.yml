@@ -37,7 +37,7 @@ jobs:
           for component in ${COMPONENTS}; do
             export COMPONENT=${component}
           
-            source $(bash <(curl -fsS "https://raw.githubusercontent.com/StefanVanDyck/git-semantic-version/refs/heads/main/version.sh"))
+            export $(bash <(curl -fsS "https://raw.githubusercontent.com/StefanVanDyck/git-semantic-version/refs/heads/main/version.sh") | xargs)
             echo "$component"
             echo "$number_of_changes_since_last_tag"
             echo "$previous_version"
