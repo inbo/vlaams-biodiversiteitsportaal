@@ -33,7 +33,7 @@ jobs:
         id: output
         env:
           COMPONENTS: "alerts apikey"
-        run: |   
+        run: |
           # Branding
           COMPONENT=branding
           
@@ -67,6 +67,10 @@ jobs:
               DOCKER_VERSIONS="${DOCKER_VERSIONS} ${component}=${new_version}"
             fi
           done
+          
+          # Debug
+          echo "config_versions=${CONFIG_VERSIONS}"
+          echo "docker_versions=${DOCKER_VERSIONS}"
           
           echo "config_versions=${CONFIG_VERSIONS}" >> "$GITHUB_OUTPUT"
           echo "docker_versions=${DOCKER_VERSIONS}" >> "$GITHUB_OUTPUT"
@@ -115,9 +119,11 @@ jobs:
               ref: 'refs/tags/branding-v${{ needs.get_versions.outputs.branding_version }}',
               sha: context.sha
             })
+
   build-and-push-docker-images:
     runs-on: [ stefan ]
     needs: get_versions
+    if: ${{ needs.get_versions.outputs.docker_version != '' }}
     steps:
       - uses: actions/checkout@v4
         with:
