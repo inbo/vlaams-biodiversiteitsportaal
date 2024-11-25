@@ -199,7 +199,7 @@ jobs:
         run: |
           echo ${{ needs.get-versions.outputs.docker_versions }}
           
-          for component_version in $(jq '. | to_entries' <<< '${{ needs.get-versions.outputs.docker_versions }}'); do
+          for component_version in $(jq '. | to_entries' <<< ${{ needs.get-versions.outputs.docker_versions }}); do
             echo ${component_version}
             docker_name=$(jq '.key' << ${component_version})
             version=$(jq '.value' << ${component_version})
