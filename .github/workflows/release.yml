@@ -6,8 +6,24 @@ on:
       - 'main'
       - 'dev'
 jobs:
+  cleanup:
+    runs-on: [ stefan ]
+    container:
+      image: bitnami/git
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: cleanup
+        id: output
+        run: |
+          rm -rf .
+
+
   get_versions:
     runs-on: [ stefan ]
+    needs: cleanup
     steps:
       - uses: actions/checkout@v4
         with:
