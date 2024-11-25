@@ -62,10 +62,10 @@ jobs:
           echo "docker_${{ matrix.name }}=${{ steps.docker-version.outputs.number_of_changes_since_last_tag }}"
           echo "docker_${{ matrix.name }}=${{ steps.docker-version.outputs.new_version }}"
           
-          if [" ${{ steps.config-version.outputs.number_of_changes_since_last_tag }} " != " 0 "]; then
+          if [ "${{ steps.config-version.outputs.number_of_changes_since_last_tag }}" != "0" ]; then
             echo "config_${{ matrix.name }}=${{ steps.config-version.outputs.new_version }}" >> "$GITHUB_OUTPUT"
           fi
-          if [" ${{ steps.docker-version.outputs.number_of_changes_since_last_tag }} " != " 0 "]; then
+          if [ "${{ steps.docker-version.outputs.number_of_changes_since_last_tag }}" != "0" ]; then
             echo "docker_${{ matrix.name }}=${{ steps.docker-version.outputs.new_version }}" >> "$GITHUB_OUTPUT"
           fi
 
