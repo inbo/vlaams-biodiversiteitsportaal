@@ -21,7 +21,7 @@ jobs:
 #          rm -rf -v /home/github-runner/_work/vlaams-biodiversiteitsportaal/
 #          rm -rf -v /runner/_work/vlaams-biodiversiteitsportaal/
 
-  get_versions:
+  get-versions:
     runs-on: [ stefan ]
 #    needs: cleanup
     steps:
@@ -81,8 +81,8 @@ jobs:
 
   upload-branding-to-s3:
     runs-on: [ stefan ]
-    needs: get_versions
-    if: ${{ needs.get_versions.outputs.branding_version != '' }}
+    needs: get-versions
+    if: ${{ needs.get-versions.outputs.branding_version != '' }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -105,7 +105,7 @@ jobs:
       - name: Build branding website S3
         working-directory: ./branding
         env:
-          VERSION: ${{ needs.get_versions.outputs.branding_version }}
+          VERSION: ${{ needs.get-versions.outputs.branding_version }}
         run: |
           npm install && ./deploy-to-s3.sh
 
@@ -116,14 +116,14 @@ jobs:
             github.rest.git.createRef({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              ref: 'refs/tags/branding-v${{ needs.get_versions.outputs.branding_version }}',
+              ref: 'refs/tags/branding-v${{ needs.get-versions.outputs.branding_version }}',
               sha: context.sha
             })
 
   build-and-push-docker-images:
     runs-on: [ stefan ]
-    needs: get_versions
-    if: ${{ needs.get_versions.outputs.docker_versions != '{}' }}
+    needs: get-versions
+    if: ${{ needs.get-versions.outputs.docker_versions != '{}' }}
     steps:
       - uses: actions/checkout@v4
         with:
