@@ -56,7 +56,7 @@ jobs:
 
             if [ "${number_of_changes_since_last_tag}" != "0" ]; then
               echo "Setting new version for config ${component} to ${new_version}"
-              CONFIG_VERSIONS=$(jq -c ".config += {\"${component}\": \"${new_version}\"}" <<< ${CONFIG_VERSIONS})
+              CONFIG_VERSIONS=$(jq -c ". += {\"${component}\": \"${new_version}\"}" <<< ${CONFIG_VERSIONS})
             fi
           
             PATHS=./docker/${component}
@@ -64,7 +64,7 @@ jobs:
 
             if [ "${number_of_changes_since_last_tag}" != "0" ]; then
               echo "Setting new version for docker ${component} to ${new_version}"
-              DOCKER_VERSIONS=$(jq -c ".docker += {\"${component}\": \"${new_version}\"}" <<< ${DOCKER_VERSIONS})
+              DOCKER_VERSIONS=$(jq -c ". += {\"${component}\": \"${new_version}\"}" <<< ${DOCKER_VERSIONS})
             fi
           done
           
