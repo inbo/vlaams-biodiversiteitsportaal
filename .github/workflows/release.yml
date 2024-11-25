@@ -8,7 +8,10 @@ on:
 jobs:
   get_versions:
     runs-on: [ self-hosted ]
-    container: bitnami/git
+    container:
+      image: bitnami/git
+      options: |
+        --user 1001
     strategy:
       fail-fast: false
       max-parallel: 1
