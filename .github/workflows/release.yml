@@ -60,12 +60,8 @@ jobs:
           echo "config_${{ matrix.name }}=${{ steps.config-version.outputs.new_version }}"
           echo "docker_${{ matrix.name }}=${{ steps.docker-version.outputs.new_version }}"
           
-          echo "$GITHUB_OUTPUT" 
-          
-          echo "$GITHUB_OUTPUT" | jq '.config.${{ matrix.name }} = "${{ steps.config-version.outputs.new_version }}"' >> "$GITHUB_OUTPUT"
-          echo "$GITHUB_OUTPUT" | jq '.docker.${{ matrix.name }} = "${{ steps.docker-version.outputs.new_version }}"' >> "$GITHUB_OUTPUT"
-          
-          echo "$GITHUB_OUTPUT"
+          echo "config_${{ matrix.name }}=${{ steps.config-version.outputs.new_version }}" >> "$GITHUB_OUTPUT"
+          echo "docker_${{ matrix.name }}=${{ steps.docker-version.outputs.new_version }}" >> "$GITHUB_OUTPUT"
 
   upload-branding-to-s3:
     runs-on: [ self-hosted ]
@@ -172,7 +168,15 @@ jobs:
         #        run: |
         #          docker buildx bake --push ${{ name }} --set='*.args.BUILDPLATFORM=linux/arm64' --set='*.platform=linux/amd64,linux/arm64'
         run: |
-          docker buildx bake --push ${{ matrix.name }} --set='*.args.BUILDPLATFORM=linux/arm64' --set='*.platform=linux/amd64,linux/arm64'
+          docker_versions=$(echo "${{ needs.get_versions.outputs }}" | grep "docker_")
+          for dv in ${docker_versions}; do
+            echo "${dv}"
+            docker_name=$(echo $dv | cut -d'=' -f1 | cut -d'_' -f2)
+            version=$(echo $dv | cut -d'=' -f2)
+            echo "${docker_name}"
+            echo "${version}"
+            docker buildx bake --push ${docker_name} --set='*.args.BUILDPLATFORM=linux/arm64' --set='*.platform=linux/amd64,linux/arm64'
+          done
 
       - name: Create tag
         if: ${{ steps.version.outputs.number_of_changes_since_last_tag != '0' }}
@@ -185,78 +189,6 @@ jobs:
               ref: 'refs/tags/docker-${{matrix.name}}-v${{ steps.version.outputs.new_version }}',
               sha: context.sha
             })
-      - name: Generate output
-        id: output
-        run: |
-          echo "${{ matrix.name }}=${{ steps.version.outputs.new_version }}" >> "$GITHUB_OUTPUT"
-
-    outputs:
-      version_docker_alerts: ${{ steps.output.outputs.alerts }}
-      version_docker_apikey: ${{ steps.output.outputs.apikey }}
-      version_docker_bie-hub: ${{ steps.output.outputs.bie-hub }}
-      version_docker_bie-index: ${{ steps.output.outputs.bie-index }}
-      version_docker_biocache-hub: ${{ steps.output.outputs.biocache-hub }}
-      version_docker_biocache-service: ${{ steps.output.outputs.biocache-service }}
-      version_docker_collectory: ${{ steps.output.outputs.collectory }}
-      version_docker_doi-service: ${{ steps.output.outputs.doi-service }}
-      version_docker_image-service: ${{ steps.output.outputs.image-service }}
-      version_docker_logger: ${{ steps.output.outputs.logger }}
-      version_docker_namematching-service: ${{ steps.output.outputs.namematching-service }}
-      version_docker_pipelines: ${{ steps.output.outputs.pipelines }}
-      version_docker_regions: ${{ steps.output.outputs.regions }}
-      version_docker_spatial-hub: ${{ steps.output.outputs.spatial-hub }}
-      version_docker_spatial-service: ${{ steps.output.outputs.spatial-service }}
-      version_docker_species-list: ${{ steps.output.outputs.species-list }}
-      version_docker_userdetails: ${{ steps.output.outputs.userdetails }}
-      version_docker_portal-full: ${{ steps.output.outputs.portal-full }}
-
-  version-config:
-    runs-on: [ self-hosted ]
-    needs: get_versions
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Get version info
-        id: version
-        uses: StefanVanDyck/git-semantic-version@main
-        with:
-          component: ${{ matrix.name }}
-          paths: ./config/${{ matrix.name }}
-      - name: Create tag
-        if: ${{ steps.version.outputs.number_of_changes_since_last_tag != '0' }}
-        uses: actions/github-script@v7
-        with:
-          script: |
-            github.rest.git.createRef({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              ref: 'refs/tags/docker-${{matrix.name}}-v${{ steps.version.outputs.new_version }}',
-              sha: context.sha
-            })
-      - name: Generate output
-        id: output
-        run: |
-          echo "${{ matrix.name }}=${{ steps.version.outputs.new_version }}" >> "$GITHUB_OUTPUT"
-    outputs:
-      version_config_alerts: ${{ steps.output.outputs.alerts }}
-      version_config_apikey: ${{ steps.output.outputs.apikey }}
-      version_config_bie-hub: ${{ steps.output.outputs.bie-hub }}
-      version_config_bie-index: ${{ steps.output.outputs.bie-index }}
-      version_config_biocache-hub: ${{ steps.output.outputs.biocache-hub }}
-      version_config_biocache-service: ${{ steps.output.outputs.biocache-service }}
-      version_config_collectory: ${{ steps.output.outputs.collectory }}
-      version_config_doi-service: ${{ steps.output.outputs.doi-service }}
-      version_config_image-service: ${{ steps.output.outputs.image-service }}
-      version_config_logger: ${{ steps.output.outputs.logger }}
-      version_config_namematching-service: ${{ steps.output.outputs.namematching-service }}
-      version_config_pipelines: ${{ steps.output.outputs.pipelines }}
-      version_config_regions: ${{ steps.output.outputs.regions }}
-      version_config_spatial-hub: ${{ steps.output.outputs.spatial-hub }}
-      version_config_spatial-service: ${{ steps.output.outputs.spatial-service }}
-      version_config_species-list: ${{ steps.output.outputs.species-list }}
-      version_config_userdetails: ${{ steps.output.outputs.userdetails }}
-      version_config_portal-full: ${{ steps.output.outputs.portal-full }}
 
   deploy:
     needs:
