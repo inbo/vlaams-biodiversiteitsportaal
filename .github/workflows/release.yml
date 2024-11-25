@@ -72,8 +72,8 @@ jobs:
           echo "config_versions=${CONFIG_VERSIONS}"
           echo "docker_versions=${DOCKER_VERSIONS}"
           
-          echo "config_versions=${CONFIG_VERSIONS}" >> "$GITHUB_OUTPUT"
-          echo "docker_versions=${DOCKER_VERSIONS}" >> "$GITHUB_OUTPUT"
+          echo "config_versions='${CONFIG_VERSIONS}" >> "$GITHUB_OUTPUT'"
+          echo "docker_versions='${DOCKER_VERSIONS}" >> "$GITHUB_OUTPUT'"
     outputs:
       branding_version: ${{ steps.output.outputs.branding_version }}
       config_versions: ${{ steps.output.outputs.config_versions }}
