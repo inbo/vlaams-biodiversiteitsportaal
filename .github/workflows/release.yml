@@ -6,24 +6,24 @@ on:
       - 'main'
       - 'dev'
 jobs:
-  cleanup:
-    runs-on: [ stefan ]
-    container:
-      image: bitnami/git
-      volumes:
-        - /home/github-runner:/runner/_work/vlaams-biodiversiteitsportaal/
-    steps:
-      - name: cleanup
-        id: output
-        run: |
-          rm -rf -v ./*
-          rm -rf -v ./.git
-          rm -rf -v /home/github-runner/_work/vlaams-biodiversiteitsportaal/
-          rm -rf -v /runner/_work/vlaams-biodiversiteitsportaal/
+#  cleanup:
+#    runs-on: [ stefan ]
+#    container:
+#      image: bitnami/git
+#      volumes:
+#        - /home/github-runner:/runner/_work/vlaams-biodiversiteitsportaal/
+#    steps:
+#      - name: cleanup
+#        id: output
+#        run: |
+#          rm -rf -v ./*
+#          rm -rf -v ./.git
+#          rm -rf -v /home/github-runner/_work/vlaams-biodiversiteitsportaal/
+#          rm -rf -v /runner/_work/vlaams-biodiversiteitsportaal/
 
   get_versions:
     runs-on: [ stefan ]
-    needs: cleanup
+#    needs: cleanup
     steps:
       - uses: actions/checkout@v4
         with:
