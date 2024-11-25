@@ -196,11 +196,9 @@ jobs:
 
       - name: Build and push docker images
         working-directory: ./docker
-        env:
-          TAG: ${{ steps.version.outputs.new_version }}
-        #        run: |
-        #          docker buildx bake --push ${{ name }} --set='*.args.BUILDPLATFORM=linux/arm64' --set='*.platform=linux/amd64,linux/arm64'
         run: |
+          echo ${{ needs.get-versions.outputs.docker_versions }}
+          
           for component_version in $(jq '. | to_entries' <<< '${{ needs.get-versions.outputs.docker_versions }}'); do
             echo ${component_version}
             docker_name=$(jq '.key' << ${component_version})
