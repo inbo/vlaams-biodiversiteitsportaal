@@ -138,7 +138,6 @@ jobs:
           role-to-assume: ${{ secrets.AWS_SHARED_INFRA_ROLE_ARN }}
 
       - name: Docker login to Amazon ECR
-        if: ${{ steps.version.outputs.number_of_changes_since_last_tag != '0' }}
         env:
           AWS_REGION: ${{ secrets.AWS_REGION }}
         run: |
