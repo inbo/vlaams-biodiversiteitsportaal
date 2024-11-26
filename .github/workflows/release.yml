@@ -230,12 +230,15 @@ jobs:
       - version-config-files
       - build-and-push-docker-images
     runs-on: [ self-hosted ]
+    permissions:
+      contents: write
     steps:
       - name: Checkout terraform repository
         uses: actions/checkout@v4
         with:
           repository: 'inbo/inbo-aws-biodiversiteitsportaal-terraform'
-          token: ${{ secrets.GIT_PAT_TOKEN }}
+          ref: 'automated-version-update'
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Update versions in dev deployment
         run: |
