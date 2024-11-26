@@ -34,7 +34,7 @@ jobs:
           CONFIG_VERSIONS="{}"
           for component in ${CONFIG_COMPONENTS}; do
             export COMPONENT=config-${component}
-            export PATHS="./config/common/**,./config/${component}/**"      
+            export PATHS="./config/common/** ./config/${component}/**"      
             export $(bash <(curl -fsS "https://raw.githubusercontent.com/StefanVanDyck/git-semantic-version/refs/heads/main/version.sh") | xargs)
 
             if [ "${number_of_changes_since_last_tag}" != "0" ]; then
@@ -48,7 +48,7 @@ jobs:
           DOCKER_VERSIONS="{}"
           for component in ${DOCKER_COMPONENTS}; do          
             export COMPONENT=docker-${component}
-            export PATHS="./docker/${component}/**"
+            export PATHS="./docker/docker-bake.hcl ./docker/${component}/**"
             export $(bash <(curl -fsS "https://raw.githubusercontent.com/StefanVanDyck/git-semantic-version/refs/heads/main/version.sh") | xargs)
 
             if [ "${number_of_changes_since_last_tag}" != "0" ]; then
@@ -192,7 +192,16 @@ jobs:
             docker_name=$(jq -r '.key' <<< "${component_version}")
             version=$(jq -r '.value' <<< "${component_version}")
             echo " Releasing ${docker_name} version ${version}"
-            TAG=${version} docker buildx bake --push ${docker_name} --set='*.args.BUILDPLATFORM=linux/arm64' --set='*.platform=linux/amd64,linux/arm64'
+            export TAG=${version} 
+            docker buildx bake --push \
+              ${docker_name} \
+              --set="*.args.BUILDPLATFORM=linux/arm64" \
+              --set="*.platform=linux/amd64,linux/arm64" \
+              --set="*.labels.build_date=$(date +'%Y-%m-%dT%H:%M:%S')" \
+              --set="*.labels.build_url=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
+              --set="*.labels.git_hash=${{ github.sha }}" \
+              --set="*.labels.version=${version}"
+            
           done
 
       - name: Create tags
