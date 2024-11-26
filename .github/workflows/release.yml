@@ -98,7 +98,12 @@ jobs:
         working-directory: ./branding
         run: |
           set -e
-          git submodule update --init --recursive
+          
+          cd commonui-bs3-2019
+          yarn install
+          npx gulp build
+          
+          cd ..
           npm install
           npx brunch build --production
           tar -cvzf branding-${{ needs.get-versions.outputs.branding_version }}.tar.gz ./public
