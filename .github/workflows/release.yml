@@ -100,7 +100,7 @@ jobs:
           set -e
           
           cd commonui-bs3-2019
-          yarn install
+          npm install
           npx gulp build
           
           cd ..
