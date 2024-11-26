@@ -37,7 +37,7 @@ jobs:
           # Branding
           COMPONENT=branding
           
-          PATHS=./branding    
+          PATHS="./branding/**"    
           export $(bash <(curl -fsS "https://raw.githubusercontent.com/StefanVanDyck/git-semantic-version/refs/heads/main/version.sh") | xargs)
 
           if [ "${number_of_changes_since_last_tag}" != "0" ]; then
@@ -130,17 +130,6 @@ jobs:
           asset_path: ./branding-${{ needs.get-versions.outputs.branding_version }}.tar.gz
           asset_name: branding-${{ needs.get-versions.outputs.branding_version }}.tar.gz
           asset_content_type: application/gzip
-
-      - name: Create tag
-        uses: actions/github-script@v7
-        with:
-          script: |
-            github.rest.git.createRef({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              ref: 'refs/tags/branding-v${{ needs.get-versions.outputs.branding_version }}',
-              sha: context.sha
-            })
 
   build-and-push-docker-images:
     runs-on: [ self-hosted ]
