@@ -216,9 +216,11 @@ jobs:
               --set="${docker_name}.cache-to=type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=${docker_name},mode=max" \
               --set="${docker_name}.cache-from=type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=${docker_name}"
           
-              # Create Git Tag
-              git tag docker-${docker_name}-v${version}
-              git push origin tag docker-${docker_name}-v${version}
+            # Create Git Tag
+            GIT_TAG="docker-${docker_name}-v${version}"
+            echo "Creating Git Tag: ${GIT_TAG}"
+            git tag "${GIT_TAG}"
+            git push origin tag "${GIT_TAG}"
           done
 
   deploy:
