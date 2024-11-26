@@ -208,11 +208,11 @@ jobs:
               --set="*.labels.git_hash=${{ github.sha }}" \
               --set="*.labels.version=${version}" \
               --set="custom-gradle.cache-to=type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=custom-gradle,mode=max" \
-              --set="custom-gradle.cache-from=type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=custom-gradle"
+              --set="custom-gradle.cache-from=type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=custom-gradle" \
               --set="custom-maven.cache-to=type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=custom-maven,mode=max" \
-              --set="custom-maven.cache-from=type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=custom-maven"
+              --set="custom-maven.cache-from=type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=custom-maven" \
               --set="tomcat-base.cache-to=type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=tomcat-base,mode=max" \
-              --set="tomcat-base.cache-from=type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=tomcat-base"
+              --set="tomcat-base.cache-from=type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=tomcat-base" \
               --set="${docker_name}.cache-to=type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=${docker_name},mode=max" \
               --set="${docker_name}.cache-from=type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=${docker_name}"
           
