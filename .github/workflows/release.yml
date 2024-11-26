@@ -5,6 +5,12 @@ on:
     branches:
       - 'main'
       - 'dev'
+
+# Only allow one workflow to run at a time
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+
 jobs:
   get-versions:
     runs-on: [ self-hosted ]
