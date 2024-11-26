@@ -106,7 +106,7 @@ jobs:
           cd ..
           npm install
           npx brunch build --production
-          tar -cvzf branding-${{ needs.get-versions.outputs.branding_version }}.tar.gz -C "$(pwd)/public" ./public
+          tar -cvzf branding-${{ needs.get-versions.outputs.branding_version }}.tar.gz -C "$(pwd)/public" ./
 
       - name: Create Release
         id: create_release
@@ -178,7 +178,7 @@ jobs:
             var-lib-apt
             gradle-cache
             maven-cache
-          key: cache-docker-${{ matrix.name }}-${{ hashFiles(format('docker/{0}/Dockerfile', matrix.name)) }}
+          key: cache-docker
 
       - name: inject cache into docker
         uses: reproducible-containers/buildkit-cache-dance@v3.1.0
