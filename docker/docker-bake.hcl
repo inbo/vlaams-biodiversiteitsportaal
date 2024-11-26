@@ -2,12 +2,6 @@ variable "TAG" {
   default = "dev"
 }
 
-target "default" {
-  labels = {
-    "maintainer" = "support.natuurdata@inbo.be"
-  }
-}
-
 target "custom-gradle" {
   context = "./gradle"
   tags = ["custom-gradle:${TAG}"]
