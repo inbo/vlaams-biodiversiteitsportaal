@@ -211,25 +211,10 @@ jobs:
               --set="*.cache-to=type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache" \
               --set="*.cache-from=type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache"
           
-              --cache-to type=s3,region=<region>,bucket=<bucket>,name=<cache-image>[,parameters...] \
-              --cache-from type=s3,region=<region>,bucket=<bucket>,name=<cache-image> .
-            
+              git tag docker-${docker_name}-v${version}
+              git push origin docker-${docker_name}-${version}
           done
 
-      - name: Create tags
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const versions = ${{ fromJSON(needs.get-versions.outputs.docker_versions) }};
-            console.log(versions);
-            for (const [component, version] of Object.entries(versions)) {
-              github.rest.git.createRef({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                ref: `refs/tags/docker-${component}-v${version}`,
-                sha: context.sha
-              })
-            }
   deploy:
     needs:
       - build-and-release-branding
