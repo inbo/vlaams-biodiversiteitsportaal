@@ -191,7 +191,7 @@ jobs:
       - name: Build and push docker images
         working-directory: ./docker
         run: |
-          set -e -o pipefail
+          set -e -o pipefail -x
 
           for component_version in $(jq -c '. | to_entries | .[]' <<< ${{ needs.get-versions.outputs.docker_versions }}); do
             docker_name=$(jq -r '.key' <<< "${component_version}")
