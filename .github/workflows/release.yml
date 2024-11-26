@@ -210,13 +210,9 @@ jobs:
         with:
           script: |
             const versions = ${{ needs.get-versions.outputs.docker_versions }};
+            console.log(versions);
             for (const [component, version] of Object.entries(versions)) {
-              github.rest.git.createRef({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                ref: `refs/tags/docker-${component}-v${version}`,
-                sha: context.sha
-              });
+              console.log(component, version);
             }
   deploy:
     needs:
