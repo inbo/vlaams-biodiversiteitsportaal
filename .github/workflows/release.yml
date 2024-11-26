@@ -225,33 +225,11 @@ jobs:
             git push origin "${GIT_TAG}"
           done
 
-  release-pipeline-jar:
-    runs-on: [ self-hosted ]
-    needs:
-      - get-versions
-      - build-and-push-docker-images
-    if: fromJSON(needs.get-versions.outputs.docker_versions).pipelines != ''
-    steps:
-      - name: Release pipeline jar
-        run: |
-          set -e -o pipefail
-          
-          id=$(docker create 632683202044.dkr.ecr.eu-west-1.amazonaws.com/la-pipelines:${{ fromJSON(needs.get-versions.outputs.docker_versions).pipelines }})
-          docker cp $id:/app/livingatlas/pipelines/target/pipelines-2.18.6-SNAPSHOT-shaded.jar ./pipelines-${{ fromJSON(needs.get-versions.outputs.docker_versions).pipelines }}.jar
-          docker rm -v $id
-
-      - name: Create release
-        uses: ncipollo/release-action@v1
-        with:
-          tag: docker-pipelines-v${{ fromJSON(needs.get-versions.outputs.docker_versions).pipelines }}
-          artifacts: "./pipelines-${{ fromJSON(needs.get-versions.outputs.docker_versions).pipelines }}.jar"
-
   deploy:
     needs:
       - build-and-release-branding
       - version-config-files
       - build-and-push-docker-images
-      - release-pipeline-jar
     runs-on: [ self-hosted ]
     permissions:
       contents: write
