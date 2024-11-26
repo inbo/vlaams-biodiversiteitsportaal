@@ -7,7 +7,7 @@ on:
       - 'dev'
 jobs:
 #  cleanup:
-#    runs-on: [ stefan ]
+#    runs-on: [ self-hosted ]
 #    container:
 #      image: bitnami/git
 #      volumes:
@@ -22,7 +22,7 @@ jobs:
 #          rm -rf -v /runner/_work/vlaams-biodiversiteitsportaal/
 
   get-versions:
-    runs-on: [ stefan ]
+    runs-on: [ self-hosted ]
 #    needs: cleanup
     steps:
       - uses: actions/checkout@v4
@@ -80,7 +80,7 @@ jobs:
       docker_versions: ${{ toJSON(steps.versions.outputs.docker_versions) }}
 
   upload-branding-to-s3:
-    runs-on: [ stefan ]
+    runs-on: [ self-hosted ]
     needs: get-versions
     if: ${{ needs.get-versions.outputs.branding_version != '' }}
     steps:
@@ -121,7 +121,7 @@ jobs:
             })
 
   build-and-push-docker-images:
-    runs-on: [ stefan ]
+    runs-on: [ self-hosted ]
     needs: get-versions
     if: ${{ needs.get-versions.outputs.docker_versions != '{}' }}
     steps:
@@ -224,7 +224,7 @@ jobs:
     needs:
       - upload-branding-to-s3
       - build-and-push-docker-images
-    runs-on: [ stefan ]
+    runs-on: [ self-hosted ]
     steps:
       - name: Create tag
         uses: actions/github-script@v5
