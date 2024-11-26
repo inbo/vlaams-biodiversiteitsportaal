@@ -98,6 +98,7 @@ jobs:
         working-directory: ./branding
         run: |
           set -e
+          git submodule update --init --recursive
           npm install
           npx brunch build --production
           tar -cvzf branding-${{ needs.get-versions.outputs.branding_version }}.tar.gz ./public
