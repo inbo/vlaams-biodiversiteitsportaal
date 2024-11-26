@@ -137,6 +137,7 @@ jobs:
         with:
           fetch-depth: 0
 
+
       - name: Login to AWS
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -211,7 +212,7 @@ jobs:
           
               # Create Git Tag
               git tag docker-${docker_name}-v${version}
-              git push origin docker-${docker_name}-v${version}
+              git push origin tag docker-${docker_name}-v${version}
           done
 
   deploy:
