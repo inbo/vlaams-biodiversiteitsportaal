@@ -35,9 +35,9 @@ jobs:
           COMPONENTS: "alerts apikey"
         run: |
           # Branding
-          COMPONENT=branding
+          export COMPONENT=branding
           
-          PATHS="./branding/**"    
+          export PATHS="./branding/**"    
           export $(bash <(curl -fsS "https://raw.githubusercontent.com/StefanVanDyck/git-semantic-version/refs/heads/main/version.sh") | xargs)
 
           if [ "${number_of_changes_since_last_tag}" != "0" ]; then
@@ -49,9 +49,9 @@ jobs:
           CONFIG_VERSIONS="{}"
           DOCKER_VERSIONS="{}"
           for component in ${COMPONENTS}; do
-            COMPONENT=${component}
+            export COMPONENT=${component}
           
-            PATHS="./config/common/**,./config/${component}/**"      
+            export PATHS="./config/common/**,./config/${component}/**"      
             export $(bash <(curl -fsS "https://raw.githubusercontent.com/StefanVanDyck/git-semantic-version/refs/heads/main/version.sh") | xargs)
 
             if [ "${number_of_changes_since_last_tag}" != "0" ]; then
@@ -59,7 +59,7 @@ jobs:
               CONFIG_VERSIONS=$(jq -c ". += {\"${component}\": \"${new_version}\"}" <<< ${CONFIG_VERSIONS})
             fi
           
-            PATHS="./docker/${component}/**"
+            export PATHS="./docker/${component}/**"
             export $(bash <(curl -fsS "https://raw.githubusercontent.com/StefanVanDyck/git-semantic-version/refs/heads/main/version.sh") | xargs)
 
             if [ "${number_of_changes_since_last_tag}" != "0" ]; then
