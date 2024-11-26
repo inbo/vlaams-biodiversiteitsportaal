@@ -207,7 +207,12 @@ jobs:
               --set="*.labels.build_date=$(date +'%Y-%m-%dT%H:%M:%S')" \
               --set="*.labels.build_url=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
               --set="*.labels.git_hash=${{ github.sha }}" \
-              --set="*.labels.version=${version}"
+              --set="*.labels.version=${version}" \
+              --set="*.cache-to=type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache" \
+              --set="*.cache-from=type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache"
+          
+              --cache-to type=s3,region=<region>,bucket=<bucket>,name=<cache-image>[,parameters...] \
+              --cache-from type=s3,region=<region>,bucket=<bucket>,name=<cache-image> .
             
           done
 
