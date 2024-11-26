@@ -207,7 +207,7 @@ jobs:
               --set="*.labels.build_url=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
               --set="*.labels.git_hash=${{ github.sha }}" \
               --set="*.labels.version=${version}" \
-              --set="*.cache-to=type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache" \
+              --set="*.cache-to=type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,mode=max" \
               --set="*.cache-from=type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache"
           
               # Create Git Tag
