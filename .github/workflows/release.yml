@@ -49,8 +49,7 @@ jobs:
           CONFIG_VERSIONS="{}"
           DOCKER_VERSIONS="{}"
           for component in ${COMPONENTS}; do
-            export COMPONENT=${component}
-          
+            export COMPONENT=config-${component}
             export PATHS="./config/common/**,./config/${component}/**"      
             export $(bash <(curl -fsS "https://raw.githubusercontent.com/StefanVanDyck/git-semantic-version/refs/heads/main/version.sh") | xargs)
 
@@ -59,6 +58,7 @@ jobs:
               CONFIG_VERSIONS=$(jq -c ". += {\"${component}\": \"${new_version}\"}" <<< ${CONFIG_VERSIONS})
             fi
           
+            export COMPONENT=docker-${component}
             export PATHS="./docker/${component}/**"
             export $(bash <(curl -fsS "https://raw.githubusercontent.com/StefanVanDyck/git-semantic-version/refs/heads/main/version.sh") | xargs)
 
