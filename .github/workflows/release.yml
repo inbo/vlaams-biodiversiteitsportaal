@@ -32,7 +32,8 @@ jobs:
       - name: Get all component versions
         id: versions
         env:
-          COMPONENTS: "alerts apikey"
+          CONFIG_COMPONENTS: "ala-hub alerts apikey bie-hub bie-index biocache-hub biocache-service collectory doi-service grafana image-service logger namematching-service regions solr spatial-hub spatial-service species-list userdetails"
+          DOCKER_COMPONENTS: " ala-hub alerts apikey bie-hub bie-index biocache-hub biocache-service collectory doi-service image-service pipelines logger namematching-service regions sensitive-data-service spatial-hub spatial-service species-list userdetails"
         run: |
           # Branding
           export COMPONENT=branding
@@ -47,10 +48,9 @@ jobs:
             echo "branding_version=${new_version}" >> "$GITHUB_OUTPUT"
           fi
           
-          # Services
+          # Configs
           CONFIG_VERSIONS="{}"
-          DOCKER_VERSIONS="{}"
-          for component in ${COMPONENTS}; do
+          for component in ${CONFIG_COMPONENTS}; do
             export COMPONENT=config-${component}
             export PATHS="./config/common/**,./config/${component}/**"      
             export $(bash <(curl -fsS "https://raw.githubusercontent.com/StefanVanDyck/git-semantic-version/refs/heads/main/version.sh") | xargs)
@@ -59,7 +59,12 @@ jobs:
               echo "Setting new version for config ${component} to ${new_version} with ${number_of_changes_since_last_tag} changes"
               CONFIG_VERSIONS=$(jq -c ". += {\"${component}\": \"${new_version}\"}" <<< ${CONFIG_VERSIONS})
             fi
+          done
+          echo "config_versions=${CONFIG_VERSIONS}" >> "$GITHUB_OUTPUT"
           
+          # Docker images
+          DOCKER_VERSIONS="{}"
+          for component in ${DOCKER_COMPONENTS}; do          
             export COMPONENT=docker-${component}
             export PATHS="./docker/${component}/**"
             export $(bash <(curl -fsS "https://raw.githubusercontent.com/StefanVanDyck/git-semantic-version/refs/heads/main/version.sh") | xargs)
@@ -69,13 +74,8 @@ jobs:
               DOCKER_VERSIONS=$(jq -c ". += {\"${component}\": \"${new_version}\"}" <<< ${DOCKER_VERSIONS})
             fi
           done
-          
-          # Debug
-          echo "config_versions=${CONFIG_VERSIONS}"
-          echo "docker_versions=${DOCKER_VERSIONS}"
-          
-          echo "config_versions=${CONFIG_VERSIONS}" >> "$GITHUB_OUTPUT"
           echo "docker_versions=${DOCKER_VERSIONS}" >> "$GITHUB_OUTPUT"
+
     outputs:
       branding_version: ${{ steps.versions.outputs.branding_version }}
       config_versions: ${{ toJSON(steps.versions.outputs.config_versions) }}
