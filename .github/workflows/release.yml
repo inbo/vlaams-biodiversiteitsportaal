@@ -75,7 +75,7 @@ jobs:
   build-and-release-branding:
     runs-on: [ self-hosted ]
     needs: get-versions
-    if: ${{ needs.get-versions.outputs.branding_version != '' }}
+    if: needs.get-versions.outputs.branding_version != ''
     steps:
       - uses: actions/checkout@v4
         with:
@@ -112,7 +112,7 @@ jobs:
   version-config-files:
     runs-on: [ self-hosted ]
     needs: get-versions
-    if: ${{ toJSON(needs.get-versions.outputs.config_versions) != '{}' }}
+    if: fromJSON(needs.get-versions.outputs.config_versions) != '{}'
     steps:
       - name: Create tags
         uses: actions/github-script@v7
@@ -132,7 +132,7 @@ jobs:
   build-and-push-docker-images:
     runs-on: [ self-hosted ]
     needs: get-versions
-    if: ${{ toJSON(needs.get-versions.outputs.docker_versions) != '{}' }}
+    if: fromJSON(needs.get-versions.outputs.docker_versions) != '{}'
     steps:
       - uses: actions/checkout@v4
         with:
