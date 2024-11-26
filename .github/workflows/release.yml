@@ -11,9 +11,6 @@ concurrency:
   group: ${{ github.workflow }}
   cancel-in-progress: false
 
-permissions:
-  contents: write
-
 jobs:
   get-versions:
     runs-on: [ self-hosted ]
@@ -133,6 +130,8 @@ jobs:
     runs-on: [ self-hosted ]
     needs: get-versions
     if: fromJSON(needs.get-versions.outputs.docker_versions) != '{}'
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
         with:
