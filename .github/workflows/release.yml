@@ -224,13 +224,23 @@ jobs:
       - build-and-push-docker-images
     runs-on: [ self-hosted ]
     steps:
-      - name: Create tag
-        uses: actions/github-script@v5
-        with:
-          script: |
-            github.rest.git.createRef({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              ref: 'refs/tags/${{needs.get-next-version.outputs.version}}',
-              sha: context.sha
-            })
+      - name: Update versions in dev deployment
+        run: |
+          set -e -x
+          git clone --branch=60-setup-deployment-pipeline git@github.com:inbo/inbo-aws-biodiversiteitsportaal-terraform.git
+          
+          if [ -z "${{ needs.get-versions.outputs.branding_version }}" ]; then
+            cat region/inbo-dev/eu-west-1/versions.json | jq -c ". += {\"branding\": \"${{ needs.get-versions.outputs.branding_version }}\"}" > region/inbo-dev/eu-west-1/versions.json
+          fi
+          
+          if [ -z "${{ needs.get-versions.outputs.config_versions }}" ]; then
+            cat region/inbo-dev/eu-west-1/versions.json | jq -c ". += {\"config\": ${{ needs.get-versions.outputs.config_versions }}}" > region/inbo-dev/eu-west-1/versions.json
+          fi
+          
+          if [ -z "${{ needs.get-versions.outputs.docker_versions }}" ]; then
+            cat region/inbo-dev/eu-west-1/versions.json | jq -c ". += {\"docker\": ${{ needs.get-versions.outputs.docker_versions }}}" > region/inbo-dev/eu-west-1/versions.json
+          fi
+          
+          git add region/inbo-dev/eu-west-1/versions.json
+          git commit -m "Github actions: automated update of versions"
+          git push
