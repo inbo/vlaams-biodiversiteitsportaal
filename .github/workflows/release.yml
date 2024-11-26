@@ -223,7 +223,7 @@ jobs:
             # Create Git Tag
             echo "Creating Git Tag: ${GIT_TAG}"
             git tag "${GIT_TAG}"
-            git push origin tag "${GIT_TAG}"
+            git push origin "${GIT_TAG}"
           done
 
   deploy:
