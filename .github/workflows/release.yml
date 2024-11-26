@@ -251,6 +251,7 @@ jobs:
       - build-and-release-branding
       - version-config-files
       - build-and-push-docker-images
+      - release-pipeline-jar
     runs-on: [ self-hosted ]
     permissions:
       contents: write
