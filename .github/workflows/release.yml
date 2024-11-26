@@ -222,7 +222,7 @@ jobs:
             }
   deploy:
     needs:
-      - upload-branding-to-s3
+      - build-and-release-branding
       - build-and-push-docker-images
     runs-on: [ self-hosted ]
     steps:
