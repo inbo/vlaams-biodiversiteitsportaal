@@ -196,6 +196,7 @@ jobs:
             version=$(jq -r '.value' <<< "${component_version}")
             echo " Releasing ${docker_name} version ${version}"
             export TAG=${version} 
+            export GIT_TAG="docker-${docker_name}-v${version}"
           
             # Build and push a single image
             docker buildx bake --push \
@@ -205,6 +206,7 @@ jobs:
               --set="*.labels.maintainer=support.natuurdata@inbo.be" \
               --set="*.labels.build_date=$(date +'%Y-%m-%dT%H:%M:%S')" \
               --set="*.labels.build_url=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
+              --set="*.labels.git_tag=${GIT_TAG}" \
               --set="*.labels.git_hash=${{ github.sha }}" \
               --set="*.labels.version=${version}" \
               --set="custom-gradle.cache-to=type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=custom-gradle,mode=max" \
@@ -217,7 +219,6 @@ jobs:
               --set="${docker_name}.cache-from=type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=${docker_name}"
           
             # Create Git Tag
-            GIT_TAG="docker-${docker_name}-v${version}"
             echo "Creating Git Tag: ${GIT_TAG}"
             git tag "${GIT_TAG}"
             git push origin tag "${GIT_TAG}"
