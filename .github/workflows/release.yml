@@ -106,7 +106,7 @@ jobs:
           cd ..
           npm install
           npx brunch build --production
-          tar -cvzf branding-${{ needs.get-versions.outputs.branding_version }}.tar.gz ./public
+          tar -cvzf branding-${{ needs.get-versions.outputs.branding_version }}.tar.gz -C "$(pwd)/public" ./public
 
       - name: Create Release
         id: create_release
@@ -125,7 +125,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./branding-${{ needs.get-versions.outputs.branding_version }}.tar.gz
+          asset_path: ./branding/branding-${{ needs.get-versions.outputs.branding_version }}.tar.gz
           asset_name: branding-${{ needs.get-versions.outputs.branding_version }}.tar.gz
           asset_content_type: application/gzip
 
