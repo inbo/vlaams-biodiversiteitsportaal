@@ -256,12 +256,12 @@ jobs:
       contents: write
       pull-requests: write
     steps:
-      - name: Checkout terraform repository
-        uses: actions/checkout@v4
-        with:
-          repository: 'inbo/inbo-aws-biodiversiteitsportaal-terraform'
-          ref: '60-setup-deployment-pipeline'
-          token: ${{ secrets.GIT_PAT_TOKEN }}
+#      - name: Checkout terraform repository
+#        uses: actions/checkout@v4
+#        with:
+#          repository: 'inbo/inbo-aws-biodiversiteitsportaal-terraform'
+#          ref: '60-setup-deployment-pipeline'
+#          token: ${{ secrets.GIT_PAT_TOKEN }}
 
       - name: Update versions in dev deployment
         run: |
