@@ -139,7 +139,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GIT_PAT_TOKEN }}
 #
 #      - name: Login to AWS
 #        uses: aws-actions/configure-aws-credentials@v4
@@ -245,7 +245,7 @@ jobs:
         with:
           repository: 'inbo/inbo-aws-biodiversiteitsportaal-terraform'
           ref: '60-setup-deployment-pipeline'
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GIT_PAT_TOKEN }}
 
       - name: Update versions in dev deployment
         run: |
