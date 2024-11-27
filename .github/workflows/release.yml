@@ -7,9 +7,9 @@ on:
       - 'dev'
 
 # Only allow one workflow to run at a time
-#concurrency:
-#  group: ${{ github.workflow }}
-#  cancel-in-progress: false
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
 
 permissions:
   contents: write
@@ -81,32 +81,32 @@ jobs:
         with:
           submodules: 'true'
 
-#      - uses: actions/setup-node@v4
-#        with:
-#          node-version: 20
-#          cache: 'npm'
-#          cache-dependency-path: branding/package-lock.json
-#
-#      - name: Build branding website S3
-#        working-directory: ./branding
-#        run: |
-#          set -e
-#
-#          cd commonui-bs3-2019
-#          npm install
-#          npx gulp build
-#
-#          cd ..
-#          npm install
-#          npx brunch build --production
-#          tar -cvzf branding-${{ needs.get-versions.outputs.branding_version }}.tar.gz -C "$(pwd)/public" ./
-#
-#      - name: Create release
-#        uses: ncipollo/release-action@v1
-#        with:
-#          commit: ${{ github.sha }}
-#          tag: branding-v${{ needs.get-versions.outputs.branding_version }}
-#          artifacts: "branding/branding-${{ needs.get-versions.outputs.branding_version }}.tar.gz"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: branding/package-lock.json
+
+      - name: Build branding website S3
+        working-directory: ./branding
+        run: |
+          set -e
+
+          cd commonui-bs3-2019
+          npm install
+          npx gulp build
+
+          cd ..
+          npm install
+          npx brunch build --production
+          tar -cvzf branding-${{ needs.get-versions.outputs.branding_version }}.tar.gz -C "$(pwd)/public" ./
+
+      - name: Create release
+        uses: ncipollo/release-action@v1
+        with:
+          commit: ${{ github.sha }}
+          tag: branding-v${{ needs.get-versions.outputs.branding_version }}
+          artifacts: "branding/branding-${{ needs.get-versions.outputs.branding_version }}.tar.gz"
 
   version-config-files:
     runs-on: [ self-hosted ]
