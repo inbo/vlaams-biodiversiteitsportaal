@@ -194,6 +194,19 @@ jobs:
           SOURCE_DATE_EPOCH: 0
         run: |
           set -e -o pipefail -x
+          
+          arch=$(uname -m)
+          if [ "${arch}" == "aarch64" ]; then
+            echo "Building for arm64"
+            export BUILDPLATFORM=linux/arm64
+          
+          elif[ "${arch}" == "x86_64" ]; then
+            echo "Building for amd64"
+            export BUILDPLATFORM=linux/amd64
+          else
+            echo "Cannot build for unknown architecture: ${arch}"
+            exit 1
+          fi
 
           for component_version in $(jq -c '. | to_entries | .[]' <<< ${{ needs.get-versions.outputs.docker_versions }}); do
             docker_name=$(jq -r '.key' <<< "${component_version}")
@@ -206,7 +219,7 @@ jobs:
             # Build and push a single image
             docker buildx bake --push \
               ${docker_name} \
-              --set="*.args.BUILDPLATFORM=linux/arm64" \
+              --set="*.args.BUILDPLATFORM=${BUILDPLATFORM}" \
               --set="*.platform=linux/amd64,linux/arm64" \
               --set="*.labels.maintainer=support.natuurdata@inbo.be" \
               --set="*.labels.build_date=$(date +'%Y-%m-%dT%H:%M:%S')" \
