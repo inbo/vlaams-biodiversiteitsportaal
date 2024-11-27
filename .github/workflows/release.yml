@@ -198,11 +198,10 @@ jobs:
           arch=$(uname -m)
           if [ "${arch}" == "aarch64" ]; then
             echo "Building for arm64"
-            export BUILDPLATFORM=linux/arm64
-          
-          elif[ "${arch}" == "x86_64" ]; then
+            export BUILDPLATFORM="linux/arm64"
+          elif [ "${arch}" == "x86_64" ]; then
             echo "Building for amd64"
-            export BUILDPLATFORM=linux/amd64
+            export BUILDPLATFORM="linux/amd64"
           else
             echo "Cannot build for unknown architecture: ${arch}"
             exit 1
