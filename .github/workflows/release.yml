@@ -210,14 +210,14 @@ jobs:
               --set="*.labels.git_tag=${GIT_TAG}" \
               --set="*.labels.git_hash=${{ github.sha }}" \
               --set="*.labels.version=${version}" \
-              --set="custom-gradle.cache-to=type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/custom-gradle:${CACHE_TAG},mode=max" \
-              --set="custom-gradle.cache-from=type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/custom-gradle:${CACHE_TAG}" \
-              --set="custom-maven.cache-to=type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/custom-maven:${CACHE_TAG},mode=max" \
-              --set="custom-maven.cache-from=type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/custom-maven:${CACHE_TAG}" \
-              --set="tomcat-base.cache-to=type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/tomcat-base:${CACHE_TAG},mode=max" \
-              --set="tomcat-base.cache-from=type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/tomcat-base:${CACHE_TAG}" \
-              --set="${docker_name}.cache-to=type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/${docker_name}:${CACHE_TAG},mode=max" \
-              --set="${docker_name}.cache-from=type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/${docker_name}:${CACHE_TAG}"
+              --set="custom-gradle.cache-to=type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/custom-gradle:${CACHE_TAG},image-manifest=true,mode=max" \
+              --set="custom-gradle.cache-from=type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/custom-gradle:${CACHE_TAG},image-manifest=true" \
+              --set="custom-maven.cache-to=type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/custom-maven:${CACHE_TAG},image-manifest=true,mode=max" \
+              --set="custom-maven.cache-from=type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/custom-maven:${CACHE_TAG},image-manifest=true" \
+              --set="tomcat-base.cache-to=type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/tomcat-base:${CACHE_TAG},image-manifest=true,mode=max" \
+              --set="tomcat-base.cache-from=type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/tomcat-base:${CACHE_TAG},image-manifest=true" \
+              --set="${docker_name}.cache-to=type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/${docker_name}:${CACHE_TAG},image-manifest=true,mode=max" \
+              --set="${docker_name}.cache-from=type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/${docker_name}:${CACHE_TAG},image-manifest=true"
               --set="*.labels.version=${version}"
           
             # Create Git Tag
