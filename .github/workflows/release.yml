@@ -256,21 +256,16 @@ jobs:
       contents: write
       pull-requests: write
     steps:
-#      - name: Checkout terraform repository
-#        uses: actions/checkout@v4
-#        with:
-#          repository: 'inbo/inbo-aws-biodiversiteitsportaal-terraform'
-#          ref: '60-setup-deployment-pipeline'
-#          token: ${{ secrets.GIT_PAT_TOKEN }}
+      - name: Checkout terraform repository
+        uses: actions/checkout@v4
+        with:
+          repository: 'inbo/inbo-aws-biodiversiteitsportaal-terraform'
+          ref: '60-setup-deployment-pipeline'
+          ssh-key: ${{ secrets.PUSH_KEY }}
 
       - name: Update versions in dev deployment
         run: |
           set -e -x
-          
-          echo "${{ secrets.PUSH_KEY }}" > ./id_ed25519
-          chmod 600 ./id_ed25519
-          
-          git clone --branch 60-setup-deployment-pipeline -i ./id_ed25519 git@github.com:inbo/inbo-aws-biodiversiteitsportaal-terraform.git .
           git checkout -b automated-version-update
 
           if [ -z "${{ needs.get-versions.outputs.branding_version }}" ]; then
