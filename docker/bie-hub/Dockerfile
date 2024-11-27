@@ -7,7 +7,7 @@ WORKDIR /project
 # ARG SOURCE=https://github.com/AtlasOfLivingAustralia/ala-bie-hub.git
 
 ARG VERSION=develop
-ARG COMMIT=4ed3a2a7712e62cd1e90a00796795dcc8a220edf
+ARG COMMIT=15ad276721bb4c970c87933ff4edaf7128bc0e59
 ARG SOURCE=https://github.com/inbo/ala-bie-hub.git
 LABEL ala.version=inbo-${COMMIT}
 
@@ -28,7 +28,7 @@ RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
 FROM tomcat-base
 
 ARG VERSION=4.2.0-SNAPSHOT
-ARG COMMIT=4ed3a2a7712e62cd1e90a00796795dcc8a220edf
+ARG COMMIT=15ad276721bb4c970c87933ff4edaf7128bc0e59
 LABEL ala.version=inbo-${COMMIT}
 
 COPY --from=builder /project/build/libs/ala-bie-hub-${VERSION}-plain.war ${CATALINA_HOME}/webapps/bie-hub.war
