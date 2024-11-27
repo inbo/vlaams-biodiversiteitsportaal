@@ -193,7 +193,7 @@ jobs:
         env:
           SOURCE_DATE_EPOCH: 0
         run: |
-          set -e -o pipefail -x
+          set -e -o pipefail
           
           arch=$(uname -m)
           if [ "${arch}" == "aarch64" ]; then
