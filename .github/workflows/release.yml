@@ -196,6 +196,7 @@ jobs:
             version=$(jq -r '.value' <<< "${component_version}")
             echo " Releasing ${docker_name} version ${version}"
             export TAG=${version} 
+            export CACHE_TAG="cache-github"
             export GIT_TAG="docker-${docker_name}-v${version}"
           
             # Build and push a single image
