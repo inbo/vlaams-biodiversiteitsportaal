@@ -175,6 +175,8 @@ jobs:
             gradle-cache
             maven-cache
           key: cache-docker-${{ hashFiles('./docker/**/Dockerfile') }}
+          restore-keys: |
+            cache-docker-
 
       - name: inject cache into docker
         uses: reproducible-containers/buildkit-cache-dance@v3.1.0
