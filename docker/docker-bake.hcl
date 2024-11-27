@@ -5,11 +5,15 @@ variable "TAG" {
 target "custom-gradle" {
   context = "./gradle"
   tags = ["custom-gradle:${TAG}"]
+  cache-to = ["type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=custom-gradle,prefix=custom-gradle/,mode=max"]
+  cache-from = ["type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=custom-gradle,prefix=custom-gradle/"]
 }
 
 target "custom-maven" {
   context = "./maven"
   tags = ["custom-maven:${TAG}"]
+  cache-to = ["type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=custom-maven,prefix=custom-maven/,mode=max"]
+  cache-from = ["type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=custom-maven,prefix=custom-maven/"]
 }
 
 
@@ -17,6 +21,8 @@ target "tomcat-base" {
   context = "./tomcat"
   tags = ["tomcat:${TAG}"]
   target  = "base"
+  cache-to = ["type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=tomcat-base,prefix=tomcat-base/,mode=max"]
+  cache-from = ["type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=tomcat-base,prefix=tomcat-base/"]
 }
 
 target "portal-full" {
@@ -50,6 +56,8 @@ target "alerts" {
     "tomcat-base"   = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/alerts:${TAG}"]
+  cache-to = ["type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=alerts,prefix=alerts/,mode=max"]
+  cache-from = ["type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=alerts,prefix=alerts/"]
 }
 
 target "apikey" {
@@ -59,6 +67,8 @@ target "apikey" {
     "tomcat-base"   = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/apikey:${TAG}"]
+  cache-to = ["type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=apikey,prefix=apikey/,mode=max"]
+  cache-from = ["type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=apikey,prefix=apikey/"]
 }
 
 target "bie-hub" {
@@ -68,6 +78,8 @@ target "bie-hub" {
     "tomcat-base"   = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/bie-hub:${TAG}"]
+  cache-to = ["type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=bie-hub,prefix=bie-hub/,mode=max"]
+  cache-from = ["type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=bie-hub,prefix=bie-hub/"]
 }
 
 target "bie-index" {
@@ -77,6 +89,8 @@ target "bie-index" {
     "tomcat-base"   = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/bie-index:${TAG}"]
+  cache-to = ["type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=bie-index,prefix=bie-index/,mode=max"]
+  cache-from = ["type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=bie-index,prefix=bie-index/"]
 }
 
 target "biocache-hub" {
@@ -86,6 +100,8 @@ target "biocache-hub" {
     "tomcat-base"   = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/biocache-hub:${TAG}"]
+  cache-to = ["type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=biocache-hub,prefix=biocache-hub/,mode=max"]
+  cache-from = ["type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=biocache-hub,prefix=biocache-hub/"]
 }
 
 target "biocache-service" {
@@ -95,6 +111,8 @@ target "biocache-service" {
     "tomcat-base"   = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/biocache-service:${TAG}"]
+  cache-to = ["type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=biocache-service,prefix=biocache-service/,mode=max"]
+  cache-from = ["type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=biocache-service,prefix=biocache-service/"]
 }
 
 target "collectory" {
@@ -104,6 +122,8 @@ target "collectory" {
     "tomcat-base"   = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/collectory:${TAG}"]
+  cache-to = ["type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=collectory,prefix=collectory/,mode=max"]
+  cache-from = ["type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=collectory,prefix=collectory/"]
 }
 
 target "doi-service" {
@@ -113,6 +133,8 @@ target "doi-service" {
     "tomcat-base"   = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/doi-service:${TAG}"]
+  cache-to = ["type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=doi-service,prefix=doi-service/,mode=max"]
+  cache-from = ["type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=doi-service,prefix=doi-service/"]
 }
 
 target "image-service" {
@@ -122,6 +144,8 @@ target "image-service" {
     "tomcat-base"   = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/image-service:${TAG}"]
+  cache-to = ["type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=image-service,prefix=image-service/,mode=max"]
+  cache-from = ["type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=image-service,prefix=image-service/"]
 }
 
 target "logger" {
@@ -131,6 +155,8 @@ target "logger" {
     "tomcat-base"   = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/logger:${TAG}"]
+  cache-to = ["type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=logger,prefix=logger/,mode=max"]
+  cache-from = ["type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=logger,prefix=logger/"]
 }
 
 target "namematching-service" {
@@ -140,6 +166,8 @@ target "namematching-service" {
     "tomcat-base"  = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/namematching-service:${TAG}"]
+  cache-to = ["type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=namematching-service,prefix=namematching-service/,mode=max"]
+  cache-from = ["type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=namematching-service,prefix=namematching-service/"]
 }
 
 target "pipelines" {
@@ -149,6 +177,8 @@ target "pipelines" {
     "tomcat-base"  = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/la-pipelines:${TAG}"]
+  cache-to = ["type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=pipelines,prefix=pipelines/,mode=max"]
+  cache-from = ["type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=pipelines,prefix=pipelines/"]
 }
 
 target "regions" {
@@ -158,6 +188,8 @@ target "regions" {
     "tomcat-base"   = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/regions:${TAG}"]
+  cache-to = ["type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=regions,prefix=regions/,mode=max"]
+  cache-from = ["type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=regions,prefix=regions/"]
 }
 
 target "spatial-hub" {
@@ -167,6 +199,8 @@ target "spatial-hub" {
     "tomcat-base"   = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/spatial-hub:${TAG}"]
+  cache-to = ["type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=spatial-hub,prefix=spatial-hub/,mode=max"]
+  cache-from = ["type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=spatial-hub,prefix=spatial-hub/"]
 }
 
 target "spatial-service" {
@@ -176,6 +210,8 @@ target "spatial-service" {
     "tomcat-base"   = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/spatial-service:${TAG}"]
+  cache-to = ["type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=spatial-service,prefix=spatial-service/,mode=max"]
+  cache-from = ["type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=spatial-service,prefix=spatial-service/"]
 }
 
 target "species-list" {
@@ -185,6 +221,8 @@ target "species-list" {
     "tomcat-base"   = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/species-list:${TAG}"]
+  cache-to = ["type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=species-list,prefix=species-list/,mode=max"]
+  cache-from = ["type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=species-list,prefix=species-list/"]
 }
 
 target "userdetails" {
@@ -194,6 +232,8 @@ target "userdetails" {
     "tomcat-base"   = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/userdetails:${TAG}"]
+  cache-to = ["type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=userdetails,prefix=userdetails/,mode=max"]
+  cache-from = ["type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=userdetails,prefix=userdetails/"]
 }
 
 group "all" {

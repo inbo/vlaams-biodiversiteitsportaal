@@ -209,15 +209,7 @@ jobs:
               --set="*.labels.build_url=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
               --set="*.labels.git_tag=${GIT_TAG}" \
               --set="*.labels.git_hash=${{ github.sha }}" \
-              --set="*.labels.version=${version}" \
-              --set="custom-gradle.cache-to=type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=custom-gradle,mode=max" \
-              --set="custom-gradle.cache-from=type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=custom-gradle" \
-              --set="custom-maven.cache-to=type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=custom-maven,mode=max" \
-              --set="custom-maven.cache-from=type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=custom-maven" \
-              --set="tomcat-base.cache-to=type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=tomcat-base,mode=max" \
-              --set="tomcat-base.cache-from=type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=tomcat-base" \
-              --set="${docker_name}.cache-to=type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=${docker_name},mode=max" \
-              --set="${docker_name}.cache-from=type=s3,region=eu-west-1,bucket=biodiversiteitsportaal-docker-build-cache,name=${docker_name}"
+              --set="*.labels.version=${version}"
           
             # Create Git Tag
             echo "Creating Git Tag: ${GIT_TAG}"
@@ -256,6 +248,8 @@ jobs:
           if [ -z "${{ needs.get-versions.outputs.docker_versions }}" ]; then
             cat region/inbo-dev/eu-west-1/versions.json | jq -c ". += {\"docker\": ${{ needs.get-versions.outputs.docker_versions }}}" > region/inbo-dev/eu-west-1/versions.json
           fi
+          
+          cat region/inbo-dev/eu-west-1/versions.json 
           
           git add region/inbo-dev/eu-west-1/versions.json
           git commit -m "Github actions: automated update of versions"
