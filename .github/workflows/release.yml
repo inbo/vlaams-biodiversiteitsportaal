@@ -230,12 +230,14 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: 'inbo/inbo-aws-biodiversiteitsportaal-terraform'
-          ref: 'automated-version-update'
+          ref: '60-setup-deployment-pipeline'
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Update versions in dev deployment
         run: |
           set -e -x
+          
+          git checkout -b automated-version-update
           
           if [ -z "${{ needs.get-versions.outputs.branding_version }}" ]; then
             cat region/inbo-dev/eu-west-1/versions.json | jq -c ". += {\"branding\": \"${{ needs.get-versions.outputs.branding_version }}\"}" > region/inbo-dev/eu-west-1/versions.json
@@ -253,4 +255,4 @@ jobs:
           
           git add region/inbo-dev/eu-west-1/versions.json
           git commit -m "Github actions: automated update of versions"
-          git push
+          git push --set-upstream origin automated-version-update --force
