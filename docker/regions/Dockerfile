@@ -6,10 +6,12 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 # ARG SOURCE=https://github.com/AtlasOfLivingAustralia/regions.git
 
 ARG VERSION=inbo/vlaams-biodiversiteitsportaal-26-fix-error-when-showing-timelapse
+ARG COMMIT=a1a58634cdd1d8c4383dc6b49c25ac4cf8062c9b
 ARG SOURCE=https://github.com/StefanVanDyck/regions.git
+LABEL ala.version=inbo-${COMMIT}
 
 WORKDIR /project
-RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} .
+RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} . && git checkout ${COMMIT}
 
 COPY ./i18n/ ./grails-app/i18n/
 
@@ -26,6 +28,9 @@ FROM tomcat-base
 
 # ARG VERSION=4.0.0
 ARG VERSION=4.1.0-SNAPSHOT
+ARG COMMIT=a1a58634cdd1d8c4383dc6b49c25ac4cf8062c9b
+LABEL ala.version=inbo-${COMMIT}
+
 COPY --from=builder /project/build/libs/regions-${VERSION}-plain.war ${CATALINA_HOME}/webapps/regions.war
 COPY regions.xml ${CATALINA_HOME}/conf/portal/localhost/regions.xml
 

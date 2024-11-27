@@ -4,6 +4,7 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 ARG VERSION=7.1.1
 ARG SOURCE=https://github.com/AtlasOfLivingAustralia/ala-hub.git
+LABEL ala.version=${VERSION}
 
 WORKDIR /project
 RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} .
@@ -30,6 +31,7 @@ RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
 FROM tomcat-base
 
 ARG VERSION=7.1.1
+LABEL ala.version=${VERSION}
 
 COPY --from=builder /project/build/libs/ala-hub-${VERSION}-plain.war ${CATALINA_HOME}/webapps/biocache-hub.war
 COPY biocache-hub.xml ${CATALINA_HOME}/conf/portal/localhost/biocache-hub.xml

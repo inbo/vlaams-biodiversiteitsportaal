@@ -2,8 +2,12 @@ ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-maven AS builder
 
 ARG VERSION=fixed-stuff
-RUN git clone --branch ${VERSION} --depth 1 https://github.com/StefanVanDyck/pipelines.git /app
+ARG COMMIT=3b99dedb91cd8a9ed3b8dc0af3b6028d9d138e24
+ARG SOURCE=https://github.com/StefanVanDyck/pipelines.git
+LABEL ala.version=inbo-${COMMIT}
+
 WORKDIR /app
+RUN git clone --branch v${VERSION} --depth 1 ${SOURCE} . && git checkout ${COMMIT}
 
 RUN --mount=type=cache,target=/root/.m2/repository \
     mvn --batch-mode --no-transfer-progress \
@@ -23,6 +27,9 @@ RUN --mount=type=cache,target=/root/.m2/repository \
 # RUN ls -la livingatlas/pipelines/target/pipelines-2.18.6-SNAPSHOT.jar
 #
 FROM openjdk:8
+
+ARG COMMIT=3b99dedb91cd8a9ed3b8dc0af3b6028d9d138e24
+LABEL ala.version=inbo-${COMMIT}
 #
 # ARG VERSION=2.18.6-SNAPSHOT
 RUN rm -f /etc/apt/apt.conf.d/docker-clean; echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/keep-cache

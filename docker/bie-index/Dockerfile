@@ -2,8 +2,10 @@ ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 
-ARG VERSION=fix-admin-index-page
-ARG SOURCE=https://github.com/StefanVanDyck/bie-index.git
+ARG VERSION=master
+ARG COMMIT=cdcce55581b5d37173d6536431d92defeb2d7266
+ARG SOURCE=https://github.com/inbo/bie-index.git
+LABEL ala.version=inbo-${COMMIT}
 
 WORKDIR /project
 RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} .
@@ -23,6 +25,8 @@ RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
 FROM tomcat-base
 
 ARG VERSION=3.1.0
+ARG COMMIT=cdcce55581b5d37173d6536431d92defeb2d7266
+LABEL ala.version=inbo-${COMMIT}
 
 COPY --from=builder /project/build/libs/bie-index-${VERSION}-plain.war ${CATALINA_HOME}/webapps/bie-index.war
 COPY bie-index.xml ${CATALINA_HOME}/conf/portal/localhost/bie-index.xml

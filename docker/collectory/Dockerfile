@@ -9,8 +9,10 @@ WORKDIR /project
 
 ARG VERSION=fix-use-occurenceid-as-default-unique-id-when-scanning-ipt
 ARG SOURCE=https://github.com/StefanVanDyck/collectory
+ARG COMMIT=29e12de13c5820b672a6b2dd46bba83c5f74eac6
+LABEL ala.version=inbo-${COMMIT}
 
-RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} .
+RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} . && git checkout ${COMMIT}
 
 COPY ./i18n/ ./grails-app/i18n/
 
@@ -26,6 +28,8 @@ RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
 FROM tomcat-base
 
 ARG VERSION=5.2.0-SNAPSHOT
+ARG COMMIT=29e12de13c5820b672a6b2dd46bba83c5f74eac6
+LABEL ala.version=inbo-${COMMIT}
 
 COPY --from=builder /project/build/libs/collectory-${VERSION}-plain.war ${CATALINA_HOME}/webapps/collectory.war
 COPY collectory.xml ${CATALINA_HOME}/conf/portal/localhost/collectory.xml

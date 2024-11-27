@@ -209,7 +209,6 @@ jobs:
               --set="*.labels.build_url=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
               --set="*.labels.git_tag=${GIT_TAG}" \
               --set="*.labels.git_hash=${{ github.sha }}" \
-              --set="*.labels.version=${version}" \
               --set="custom-gradle.cache-to=type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/custom-gradle:${CACHE_TAG},image-manifest=true,mode=max" \
               --set="custom-gradle.cache-from=type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/custom-gradle:${CACHE_TAG},image-manifest=true" \
               --set="custom-maven.cache-to=type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/custom-maven:${CACHE_TAG},image-manifest=true,mode=max" \
