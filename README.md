@@ -53,58 +53,19 @@ To build them and release them to the AWS Elastic Container Registry, you can us
 aws ecr get-login-password --profile <aws profile name> | docker login --username AWS --password-stdin 632683202044.dkr.ecr.eu-west-1.amazonaws.com
 
 # Build and push the images
-cd docker && DOCKER_BUILDKIT=1 COMPOSE_PARALLEL_LIMIT=1 docker-compose build --push
+cd docker && docker buildx bake --push <optional_name_of_container>
 ```
 
-The `COMPOSE_PARALLEL_LIMIT` is needed because most of the images share a single gradle cache.   
-Most of the projects have the Australian gradle repo hard coded and this makes downloading the dependencies very slow.
-Unfortunately it is not possible to share a gradle between different instances of gradle.  
-That means we can only build a single image at a time.
-
-Additionally a specific buildx builder might be required to build the images.
-Again to limit the amount of concurrent gradle instances.
-```commandline
-docker buildx create --use \                                                                                                                            ✔  09:23:28 ▓▒░
-  --name living-atlas \
-  --driver docker-container \
-  --config ./buildkitd.toml
-```
+Be aware that the first time building the images can take a long time.
+All the services need to be built form scratch.  
+Additionally, because of the use of the Australian repositories, we opted to add a shared gradle cache.  
+This prevents slow downloading of the same dependencies over and over again.  
+But it prevents us running the builds in parallel, as this cache cannot be shared between concurrent gradle builds.
 
 
 ### Local
-To run the portal locally, you can use the docker-compose files in the [/docker folder](/docker).
 
-```commandline
-cd docker && docker-compose up
-```
-
-Be aware that running the entire platform requires a lot of resources.  
-[(We are currently working on a hopefully more lightweight version)](https://github.com/orgs/inbo/projects/15?pane=issue&itemId=72746951&issue=inbo%7Cvlaams-biodiversiteitsportaal%7C61)  
-
-The platform currently uses subdomains to differentiate between the different services.
-To make this work locally, you need to add the following lines to your `/etc/hosts` file.
-
-```commandline
-127.0.0.1 localhost branding.la-flanders.org collections.la-flanders.org records.la-flanders.org records-ws.la-flanders.org species-ws.la-flanders.org auth.la-flanders.org logger.la-flanders.org images.la-flanders.org lists.la-flanders.org regions.la-flanders.org species.la-flanders.org la-flanders.org spatial.la-flanders.org index.la-flanders.org mock-oauth2-server
-```
-
-To generate the static pages like the homepage and styling, you also need to run the following command in the [branding folder](./branding)
-```commandline
-cd branding
-git submodule update --init --recursive
-npm install
-npx brunch build --production
-```
-
-#### Differences with the cloud environments
-Because some AWS Cloud services are not available locally, alternatives are used in the local environment.
-These are:
-- **nginx**   
-Instead of the AWS Application Load Balancer and the AWS CloudFront distribution with static pages.
-- **mock-oauth2**  
-Instead of AWS Cognito for user authentication and authorization.
-- **mailhog**  
-Instead of SES a smtp server.
+Please refer to the [running locally documentation](docs/running-locally.md) for more information on how to run the portal locally.
 
 ## Making changes to the actual code
 This project only contains the things needed to build and configure the platform.  

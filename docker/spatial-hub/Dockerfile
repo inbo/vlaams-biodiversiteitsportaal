@@ -1,42 +1,37 @@
 ARG BUILDPLATFORM=linux/amd64
-FROM --platform=${BUILDPLATFORM} gradle:7-jdk11 AS builder
+FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
+
 
 ARG VERSION=2.1.0
+ARG SOURCE=https://github.com/AtlasOfLivingAustralia/spatial-hub.git
 
-RUN apt-get update && apt-get -y install \
+RUN rm -f /etc/apt/apt.conf.d/docker-clean; echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/keep-cache
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,target=/var/lib/apt,sharing=locked \
+    apt-get update && apt-get -y install --no-install-recommends \
     npm
 
 WORKDIR /project
-RUN git clone --branch ${VERSION} --depth 1 https://github.com/AtlasOfLivingAustralia/spatial-hub.git /project
+RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} .
+
 COPY ./i18n/ ./grails-app/i18n/
 COPY ./layouts/* ./grails-app/views/layouts/
 
-RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
+
+RUN --mount=type=cache,target=/gradle-cache,ro \
     gradle \
         build assemble \
-        -x test -x integrationTest \
-        --no-daemon \
-        # -Dorg.gradle.debug=true -Dorg.gradle.debug.suspend=no --debug \
-        --parallel
+        -x test -x integrationTest
 
+# Copy dependencies to shared read-only cache
+RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
+    rsync -a /home/gradle/.gradle/caches/modules-2 /gradle-cache \
+    && rm /gradle-cache/modules-2/*.lock && rm /gradle-cache/modules-2/gc.properties
 
-FROM openjdk:11
+FROM tomcat-base
 
 ARG VERSION=2.1.0
+COPY --from=builder /project/build/libs/project-${VERSION}-plain.war ${CATALINA_HOME}/webapps/spatial-hub.war
+COPY spatial-hub.xml ${CATALINA_HOME}/conf/portal/localhost/spatial-hub.xml
 
-# Create the user
-RUN groupadd --gid 1000 app \
-    && useradd --uid 1000 --gid 1000 -m -d /app app
-
-RUN mkdir /data && chown app:app /data
-VOLUME /data
-
-USER app
-WORKDIR /app
-
-COPY --from=builder --chown=app \
-    /project/build/libs/project-${VERSION}.war /app/app.war
-
-ENTRYPOINT ["java", "-jar", "/app/app.war"]
-
-HEALTHCHECK CMD curl --fail --silent http://localhost:8080/actuator/health || exit 1
+HEALTHCHECK CMD curl --fail --silent http://localhost:8080/spatial-hub/actuator/health || exit 1

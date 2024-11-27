@@ -1,36 +1,28 @@
 ARG BUILDPLATFORM=linux/amd64
-FROM --platform=${BUILDPLATFORM} gradle:7-jdk11 AS builder
+FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
+
 
 ARG VERSION=3.0.0
+ARG SOURCE=https://github.com/AtlasOfLivingAustralia/image-service.git
+
 WORKDIR /project
-RUN git clone --branch v${VERSION} --depth 1 https://github.com/AtlasOfLivingAustralia/image-service.git /project
+RUN git clone --branch v${VERSION} --depth 1 ${SOURCE} /project
 COPY build.gradle /project/build.gradle
-RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
-    gradle build assetCompile assemble --no-daemon \
-    -x test -x integrationTest \
-    # -Dorg.gradle.debug=true -Dorg.gradle.debug.suspend=no --debug \
-    --parallel
 
-ARG t=5
-RUN ls -la  /project/build/libs/
+RUN --mount=type=cache,target=/gradle-cache,ro \
+    gradle build assetCompile assemble \
+    -x test -x integrationTest
 
+# Copy dependencies to shared read-only cache
+RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
+    rsync -a /home/gradle/.gradle/caches/modules-2 /gradle-cache \
+    && rm /gradle-cache/modules-2/*.lock && rm /gradle-cache/modules-2/gc.properties
 
-FROM openjdk:11
+FROM tomcat-base
 
 ARG VERSION=3.1.0-SNAPSHOT
-# Create the user
-RUN groupadd --gid 1000 app \
-    && useradd --uid 1000 --gid 1000 -m -d /app app
 
-RUN mkdir /data && chown app:app /data
-VOLUME /data
+COPY --from=builder /project/build/libs/image-service-${VERSION}-plain.war ${CATALINA_HOME}/webapps/image-service.war
+COPY image-service.xml ${CATALINA_HOME}/conf/portal/localhost/image-service.xml
 
-USER app
-WORKDIR /app
-
-COPY --from=builder --chown=app \
-    /project/build/libs/image-service-${VERSION}.war /app/app.war
-
-ENTRYPOINT ["java", "-jar", "/app/app.war"]
-
-HEALTHCHECK CMD curl --fail --silent http://localhost:8080/actuator/health || exit 1
+HEALTHCHECK CMD curl --fail --silent http://localhost:8080/image-service/actuator/health || exit 1

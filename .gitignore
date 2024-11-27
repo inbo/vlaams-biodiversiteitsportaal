@@ -4,5 +4,8 @@
 node_modules
 *.log
 generated
+
 .Rproj.user
 vlaams-biodiversiteitsportaal.Rproj
+
+.DS_Store

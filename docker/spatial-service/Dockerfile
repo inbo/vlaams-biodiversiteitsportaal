@@ -1,47 +1,40 @@
 ARG BUILDPLATFORM=linux/amd64
-FROM --platform=${BUILDPLATFORM} gradle:7-jdk11 AS builder
+FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
-
-WORKDIR /spatial-service
-
-ARG VERSION=vbp-develop
-RUN git clone --branch ${VERSION} --depth 1 https://github.com/StefanVanDyck/spatial-service.git /spatial-service
 
 # ARG VERSION=2.1.5
-# RUN git clone --branch ${VERSION} --depth 1 https://github.com/AtlasOfLivingAustralia/spatial-service.git /spatial-service
+# ARG SOURCE=https://github.com/AtlasOfLivingAustralia/spatial-service.git
+
+ARG VERSION=vbp-develop
+ARG SOURCE=https://github.com/StefanVanDyck/spatial-service.git
+
+WORKDIR /project
+RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} .
 
 COPY ./i18n/ ./grails-app/i18n/
 
-RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
+RUN --mount=type=cache,target=/gradle-cache,ro \
     gradle \
         build assemble \
-        -x test -x integrationTest \
-        --no-daemon \
-        # -Dorg.gradle.debug=true -Dorg.gradle.debug.suspend=no --debug \
-        --parallel
+        -x test -x integrationTest
 
-FROM openjdk:11
+# Copy dependencies to shared read-only cache
+RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
+    rsync -a /home/gradle/.gradle/caches/modules-2 /gradle-cache/ \
+    && rm /gradle-cache/modules-2/*.lock && rm /gradle-cache/modules-2/gc.properties
 
-ARG VERSION=2.1.6-SNAPSHOT
-# ARG VERSION=2.1.5
+FROM tomcat-base
 
-RUN apt-get update && apt-get install -y \
+RUN rm -f /etc/apt/apt.conf.d/docker-clean; echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/keep-cache
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,target=/var/lib/apt,sharing=locked \
+    apt-get update && apt-get install -y --no-install-recommends \
     gettext-base \
     gdal-bin
 
-# Create the user
-RUN groupadd --gid 1000 app \
-    && useradd --uid 1000 --gid 1000 -m -d /app app
+# ARG VERSION=2.1.5
+ARG VERSION=2.1.6-SNAPSHOT
+COPY --from=builder /project/build/libs/project-${VERSION}-plain.war ${CATALINA_HOME}/webapps/spatial-service.war
+COPY spatial-service.xml ${CATALINA_HOME}/conf/portal/localhost/spatial-service.xml
 
-RUN mkdir /data && chown app:app /data
-VOLUME /data
-
-USER app
-WORKDIR /app
-
-COPY --from=builder --chown=app \
-    /spatial-service/build/libs/spatial-service-${VERSION}.war /app/app.war
-
-ENTRYPOINT ["java", "-jar", "/app/app.war"]
-
-HEALTHCHECK CMD curl --fail --silent http://localhost:8080/ws/actuator/health || exit 1
+HEALTHCHECK CMD curl --fail --silent http://localhost:8080/spatial-service/actuator/health || exit 1

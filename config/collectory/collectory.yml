@@ -5,7 +5,6 @@ security:
     clientId: collections
   oidc:
     clientId: collections
-    discoveryUri: ${common.protocol}://auth.${common.domain}/cas/oidc/.well-known
 webservice:
   client-id: collections
   client-secret: xxx
@@ -17,10 +16,10 @@ ala:
 alertUrl: ""
 alertsUrl: ""
 bie:
-  baseURL: ${common.protocol}://species.${common.domain}
+  baseURL: ${common.protocol}://${common.domain}/bie-hub
   searchPath: /search
-biocacheServicesUrl: ${common.protocol}://records-ws.${common.domain}
-biocacheUiURL: ${common.protocol}://records.${common.domain}
+biocacheServicesUrl: ${common.protocol}://${common.domain}/biocache-service
+biocacheUiURL: ${common.protocol}://${common.domain}/biocache-hub
 citation:
   link:
     template: "For more information: @link@"
@@ -32,7 +31,7 @@ collectionsMap:
   centreMapLon: 4.4
   defaultZoom: 9
 dataSource:
-  url: jdbc:mysql://root:my-super-secret-password@mysql:3306/collectory?autoReconnect=true&connectTimeout=0&useUnicode=true&characterEncoding=UTF-8&allowPublicKeyRetrieval=true&useSSL=False&serverTimezone=Europe/Paris
+  url: jdbc:mysql://collectory:my-super-secret-password@mysql:3306/collectory?autoReconnect=true&connectTimeout=0&useUnicode=true&characterEncoding=UTF-8&allowPublicKeyRetrieval=true&useSSL=False&serverTimezone=Europe/Paris
 defaultLocale: en
 disableAlertLinks: true
 disableCAS: false
@@ -72,12 +71,9 @@ grails:
       patterns:
         "['/images/*', '/data/*', '/img/*', '/theme/default/*', '/css/*',
                 '/js/*', '/plugins/*' ]"
-  serverURL: ${common.protocol}://collections.${common.domain}
-headerAndFooter:
-  baseURL: ${common.protocol}://branding.${common.domain}
-  version: 2
+  serverURL: ${common.protocol}://${common.domain}/collectory
 isPipelinesCompatible: false
-loggerURL: ${common.protocol}://logger.${common.domain}/service
+loggerURL: ${common.protocol}://${common.domain}/logger/service
 management:
   endpoint:
     health:
@@ -105,29 +101,24 @@ repository:
 resource:
   gbifExport:
     url:
-      template: ${common.protocol}://records.${common.domain}/archives/gbif/@UID@/@UID@.zip
+      template: ${common.protocol}://${common.domain}/biocache-hub/archives/gbif/@UID@/@UID@.zip
   publicArchive:
     url:
-      template: ${common.protocol}://records.${common.domain}/archives/gbif/@UID@/@UID@.zip
+      template: ${common.protocol}://${common.domain}/biocache-hub/archives/gbif/@UID@/@UID@.zip
 rifcs:
   excludeBounds: true
-serverName: ${common.protocol}://collections.${common.domain}
+serverName: ${common.protocol}://${common.domain}/collectory
 
 
 showExtraInfoInDataSetsView:
   enabled: "true "
   relativeTime: true
 skin:
-  favicon: ${common.protocol}://branding.${common.domain}/
-  homeUrl: ${common.protocol}://www.${common.domain}
-  orgNameLong: Vlaams Biodiversiteitsportaal
-  orgNameShort: VBP
-  orgSupportEmail: ${common.supportEmail}
   taxaLinks:
-    baseUrl: ${common.protocol}://species.${common.domain}/species/
+    baseUrl: ${common.protocol}://${common.domain}/bie-hub/species/
 spatial:
-  baseURL: ${common.protocol}://spatial.${common.domain}
-speciesListToolUrl: ${common.protocol}://lists.${common.domain}/speciesListItem/list/
+  baseURL: ${common.protocol}://${common.domain}/spatial-hub
+speciesListToolUrl: ${common.protocol}://${common.domain}/species-list/speciesListItem/list/
 suitableFor: '[{"spListNational":"Species list national"}, {"spListState":
     "Species list state"}, {"spListGreaterThan1000": "Species list >1000km
     radius"}, {"spList100to1000": "Species list 100-1000km radius"},
@@ -140,13 +131,13 @@ uploadExternalUrlPath: /upload/
 uploadFilePath: /data/collectory/upload/
 useGbifDoi: false
 userDetails:
-  url: ${common.protocol}://auth.${common.domain}/userdetails/
+  url: ${common.protocol}://${common.domain}/userdetails/
 userdetails:
   api:
-    url: ${common.protocol}://auth.${common.domain}/userdetails/
-  url: ${common.protocol}://auth.${common.domain}/userdetails/
+    url: ${common.protocol}://${common.domain}/userdetails/
+  url: ${common.protocol}://${common.domain}/userdetails/
   web:
-    url: ${common.protocol}://auth.${common.domain}/userdetails/
+    url: ${common.protocol}://${common.domain}/userdetails/
 
 dataResource:
   resourceTypeList:

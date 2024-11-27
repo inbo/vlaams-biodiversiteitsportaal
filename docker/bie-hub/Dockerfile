@@ -1,40 +1,33 @@
 ARG BUILDPLATFORM=linux/amd64
-FROM --platform=${BUILDPLATFORM} gradle:7-jdk11 AS builder
-
+FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 WORKDIR /project
 
 # ARG VERSION=4.1.0
-# RUN git clone --branch ${VERSION} --depth 1 https://github.com/AtlasOfLivingAustralia/ala-bie-hub.git /project
+# ARG SOURCE=https://github.com/AtlasOfLivingAustralia/ala-bie-hub.git
 
-ARG VERSION=fix-search-page-not-showing-refine-results
-RUN git clone --branch ${VERSION} --depth 1 https://github.com/StefanVanDyck/ala-bie-hub.git /project
+ARG VERSION=fix-wolf-wiki-page
+ARG SOURCE=https://github.com/StefanVanDyck/ala-bie-hub.git
+
+RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} .
 
 COPY ./i18n/ ./grails-app/i18n/
 
-RUN --mount=type=cache,target=/home/gradle/.gradle/caches \
-    gradle build assemble --no-daemon \
-    -x test -x integrationTest \
-    # -Dorg.gradle.debug=true -Dorg.gradle.debug.suspend=no --debug \
-    --parallel
 
-FROM openjdk:11
+RUN --mount=type=cache,target=/gradle-cache,ro \
+    gradle build assemble \
+    -x test -x integrationTest
+
+# Copy dependencies to shared read-only cache
+RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
+    rsync -a /home/gradle/.gradle/caches/modules-2 /gradle-cache \
+    && rm /gradle-cache/modules-2/*.lock && rm /gradle-cache/modules-2/gc.properties
+
+FROM tomcat-base
 
 ARG VERSION=4.2.0-SNAPSHOT
 
-# Create the user
-RUN groupadd --gid 1000 app \
-    && useradd --uid 1000 --gid 1000 -m -d /app app
+COPY --from=builder /project/build/libs/ala-bie-hub-${VERSION}-plain.war ${CATALINA_HOME}/webapps/bie-hub.war
+COPY bie-hub.xml ${CATALINA_HOME}/conf/portal/localhost/bie-hub.xml
 
-RUN mkdir /data && chown app:app /data
-VOLUME /data
-
-USER app
-WORKDIR /app
-
-COPY --from=builder --chown=app \
-    /project/build/libs/ala-bie-hub-${VERSION}.war /app/app.war
-
-ENTRYPOINT ["java", "-jar", "/app/app.war"]
-
-HEALTHCHECK CMD curl --fail --silent http://localhost:8080/actuator/health || exit 1
+HEALTHCHECK CMD curl --fail --silent http://localhost:8080/apikey/actuator/health || exit 1
