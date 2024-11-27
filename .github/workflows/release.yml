@@ -236,6 +236,7 @@ jobs:
     runs-on: [ self-hosted ]
     permissions:
       contents: write
+      pull-requests: write
     steps:
       - name: Checkout terraform repository
         uses: actions/checkout@v4
