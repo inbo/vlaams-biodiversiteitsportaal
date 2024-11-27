@@ -1,22 +1,15 @@
 variable "TAG" {
   default = "dev"
 }
-variable "CACHE_TAG" {
-  default = "cache-${TAG}"
-}
 
 target "custom-gradle" {
   context = "./gradle"
   tags = ["custom-gradle:${TAG}"]
-  cache-to = ["type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/custom-gradle:${CACHE_TAG},image-manifest=true,mode=max"]
-  cache-from = ["type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/custom-gradle:${CACHE_TAG}"]
 }
 
 target "custom-maven" {
   context = "./maven"
   tags = ["custom-maven:${TAG}"]
-  cache-to = ["type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/custom-maven:${CACHE_TAG},image-manifest=true,mode=max"]
-  cache-from = ["type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/custom-maven:${CACHE_TAG}"]
 }
 
 
@@ -24,8 +17,6 @@ target "tomcat-base" {
   context = "./tomcat"
   tags = ["tomcat:${TAG}"]
   target  = "base"
-  cache-to = ["type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/tomcat-base:${CACHE_TAG},image-manifest=true,mode=max"]
-  cache-from = ["type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/tomcat-base:${CACHE_TAG}"]
 }
 
 target "portal-full" {
@@ -59,8 +50,6 @@ target "alerts" {
     "tomcat-base"   = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/alerts:${TAG}"]
-  cache-to = ["type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/alerts:${CACHE_TAG},image-manifest=true,mode=max"]
-  cache-from = ["type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/alerts:${CACHE_TAG}"]
 }
 
 target "apikey" {
@@ -70,8 +59,6 @@ target "apikey" {
     "tomcat-base"   = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/apikey:${TAG}"]
-  cache-to = ["type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/apikey:${CACHE_TAG},image-manifest=true,mode=max"]
-  cache-from = ["type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/apikey:${CACHE_TAG}"]
 }
 
 target "bie-hub" {
@@ -81,8 +68,6 @@ target "bie-hub" {
     "tomcat-base"   = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/bie-hub:${TAG}"]
-  cache-to = ["type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/bie-hub:${CACHE_TAG},image-manifest=true,mode=max"]
-  cache-from = ["type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/bie-hub:${CACHE_TAG}"]
 }
 
 target "bie-index" {
@@ -92,8 +77,6 @@ target "bie-index" {
     "tomcat-base"   = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/bie-index:${TAG}"]
-  cache-to = ["type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/bie-index:${CACHE_TAG},image-manifest=true,mode=max"]
-  cache-from = ["type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/bie-index:${CACHE_TAG}"]
 }
 
 target "biocache-hub" {
@@ -103,8 +86,6 @@ target "biocache-hub" {
     "tomcat-base"   = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/biocache-hub:${TAG}"]
-  cache-to = ["type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/biocache-hub:${CACHE_TAG},image-manifest=true,mode=max"]
-  cache-from = ["type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/biocache-hub:${CACHE_TAG}"]
 }
 
 target "biocache-service" {
@@ -114,8 +95,6 @@ target "biocache-service" {
     "tomcat-base"   = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/biocache-service:${TAG}"]
-  cache-to = ["type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/biocache-service:${CACHE_TAG},image-manifest=true,mode=max"]
-  cache-from = ["type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/biocache-service:${CACHE_TAG}"]
 }
 
 target "collectory" {
@@ -125,8 +104,6 @@ target "collectory" {
     "tomcat-base"   = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/collectory:${TAG}"]
-  cache-to = ["type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/collectory:${CACHE_TAG},image-manifest=true,mode=max"]
-  cache-from = ["type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/collectory:${CACHE_TAG}"]
 }
 
 target "doi-service" {
@@ -136,8 +113,6 @@ target "doi-service" {
     "tomcat-base"   = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/doi-service:${TAG}"]
-  cache-to = ["type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/doi-service:${CACHE_TAG},image-manifest=true,mode=max"]
-  cache-from = ["type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/doi-service:${CACHE_TAG}"]
 }
 
 target "image-service" {
@@ -147,8 +122,6 @@ target "image-service" {
     "tomcat-base"   = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/image-service:${TAG}"]
-  cache-to = ["type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/image-service:${CACHE_TAG},image-manifest=true,mode=max"]
-  cache-from = ["type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/image-service:${CACHE_TAG}"]
 }
 
 target "logger" {
@@ -158,8 +131,6 @@ target "logger" {
     "tomcat-base"   = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/logger:${TAG}"]
-  cache-to = ["type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/logger:${CACHE_TAG},image-manifest=true,mode=max"]
-  cache-from = ["type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/logger:${CACHE_TAG}"]
 }
 
 target "namematching-service" {
@@ -169,8 +140,6 @@ target "namematching-service" {
     "tomcat-base"  = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/namematching-service:${TAG}"]
-  cache-to = ["type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/namematching-service:${CACHE_TAG},image-manifest=true,mode=max"]
-  cache-from = ["type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/namematching-service:${CACHE_TAG}"]
 }
 
 target "pipelines" {
@@ -180,8 +149,6 @@ target "pipelines" {
     "tomcat-base"  = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/la-pipelines:${TAG}"]
-  cache-to = ["type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/pipelines:${CACHE_TAG},image-manifest=true,mode=max"]
-  cache-from = ["type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/pipelines:${CACHE_TAG}"]
 }
 
 target "regions" {
@@ -191,8 +158,6 @@ target "regions" {
     "tomcat-base"   = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/regions:${TAG}"]
-  cache-to = ["type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/regions:${CACHE_TAG},image-manifest=true,mode=max"]
-  cache-from = ["type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/regions:${CACHE_TAG}"]
 }
 
 target "spatial-hub" {
@@ -202,8 +167,6 @@ target "spatial-hub" {
     "tomcat-base"   = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/spatial-hub:${TAG}"]
-  cache-to = ["type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/spatial-hub:${CACHE_TAG},image-manifest=true,mode=max"]
-  cache-from = ["type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/spatial-hub:${CACHE_TAG}"]
 }
 
 target "spatial-service" {
@@ -213,8 +176,6 @@ target "spatial-service" {
     "tomcat-base"   = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/spatial-service:${TAG}"]
-  cache-to = ["type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/spatial-service:${CACHE_TAG},image-manifest=true,mode=max"]
-  cache-from = ["type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/spatial-service:${CACHE_TAG}"]
 }
 
 target "species-list" {
@@ -224,8 +185,6 @@ target "species-list" {
     "tomcat-base"   = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/species-list:${TAG}"]
-  cache-to = ["type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/species-list:${CACHE_TAG},image-manifest=true,mode=max"]
-  cache-from = ["type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/species-list:${CACHE_TAG}"]
 }
 
 target "userdetails" {
@@ -235,8 +194,6 @@ target "userdetails" {
     "tomcat-base"   = "target:tomcat-base"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/userdetails:${TAG}"]
-  cache-to = ["type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/userdetails:${CACHE_TAG},image-manifest=true,mode=max"]
-  cache-from = ["type=registry,ref=632683202044.dkr.ecr.eu-west-1.amazonaws.com/userdetails:${CACHE_TAG}"]
 }
 
 group "all" {
