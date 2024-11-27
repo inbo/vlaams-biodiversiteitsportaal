@@ -229,6 +229,10 @@ jobs:
       - build-and-release-branding
       - version-config-files
       - build-and-push-docker-images
+    if: |
+      always() 
+        && !contains(needs.*.result, 'failure')
+        && !contains(needs.*.result, 'cancelled')
     runs-on: [ self-hosted ]
     permissions:
       contents: write
