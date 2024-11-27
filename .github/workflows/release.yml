@@ -261,55 +261,32 @@ jobs:
         with:
           repository: 'inbo/inbo-aws-biodiversiteitsportaal-terraform'
           ref: '60-setup-deployment-pipeline'
-          ssh-key: ${{ secrets.PUSH_KEY }}
+          token: ${{ secrets.GIT_PAT_TOKEN }}
 
       - name: Update versions in dev deployment
         run: |
           set -e -x
+          
           git checkout -b automated-version-update
-
+          
           if [ -z "${{ needs.get-versions.outputs.branding_version }}" ]; then
             cat region/inbo-dev/eu-west-1/versions.json | jq -c ". += {\"branding\": \"${{ needs.get-versions.outputs.branding_version }}\"}" > region/inbo-dev/eu-west-1/versions.json
           fi
-
+          
           if [ -z "${{ needs.get-versions.outputs.config_versions }}" ]; then
             cat region/inbo-dev/eu-west-1/versions.json | jq -c ". += {\"config\": ${{ needs.get-versions.outputs.config_versions }}}" > region/inbo-dev/eu-west-1/versions.json
           fi
-
+          
           if [ -z "${{ needs.get-versions.outputs.docker_versions }}" ]; then
             cat region/inbo-dev/eu-west-1/versions.json | jq -c ". += {\"docker\": ${{ needs.get-versions.outputs.docker_versions }}}" > region/inbo-dev/eu-west-1/versions.json
           fi
-
-          cat region/inbo-dev/eu-west-1/versions.json
-
+          
+          cat region/inbo-dev/eu-west-1/versions.json 
+          
           git add region/inbo-dev/eu-west-1/versions.json
           git commit -m "Github actions: automated update of versions"
           git push --set-upstream origin automated-version-update --force
 
-#      - name: Update versions in dev deployment
-#        run: |
-#          set -e -x
-#
-#          git checkout -b automated-version-update
-#
-#          if [ -z "${{ needs.get-versions.outputs.branding_version }}" ]; then
-#            cat region/inbo-dev/eu-west-1/versions.json | jq -c ". += {\"branding\": \"${{ needs.get-versions.outputs.branding_version }}\"}" > region/inbo-dev/eu-west-1/versions.json
-#          fi
-#
-#          if [ -z "${{ needs.get-versions.outputs.config_versions }}" ]; then
-#            cat region/inbo-dev/eu-west-1/versions.json | jq -c ". += {\"config\": ${{ needs.get-versions.outputs.config_versions }}}" > region/inbo-dev/eu-west-1/versions.json
-#          fi
-#
-#          if [ -z "${{ needs.get-versions.outputs.docker_versions }}" ]; then
-#            cat region/inbo-dev/eu-west-1/versions.json | jq -c ". += {\"docker\": ${{ needs.get-versions.outputs.docker_versions }}}" > region/inbo-dev/eu-west-1/versions.json
-#          fi
-#
-#          cat region/inbo-dev/eu-west-1/versions.json
-#
-#          git add region/inbo-dev/eu-west-1/versions.json
-#          git commit -m "Github actions: automated update of versions"
-#          git push --set-upstream origin automated-version-update --force
-#
       - name: Create Pull Request
         uses: actions/github-script@v7
         with:
