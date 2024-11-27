@@ -245,7 +245,7 @@ jobs:
         with:
           repository: 'inbo/inbo-aws-biodiversiteitsportaal-terraform'
           ref: '60-setup-deployment-pipeline'
-          token: ${{ secrets.GIT_PAT_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Update versions in dev deployment
         run: |
