@@ -112,6 +112,8 @@ jobs:
     runs-on: [ self-hosted ]
     needs: get-versions
     if: fromJSON(needs.get-versions.outputs.config_versions) != '{}'
+    permissions:
+      contents: write
     steps:
       - name: Create tags
         uses: actions/github-script@v7
