@@ -16,8 +16,8 @@ You can find the Dockerfiles in the [/docker folder](/docker).
 Internet access to the services is managed by an AWS Application Load Balancer.
 
 Config files are stored separately in the [/config folder](/config).  
-This keeps us from needing to rebuild the docker images every time the configuration or environment of a service is changed.
-On special config folder is [/config/common](/config/common), which contains configuration shared between most of the services.
+This keeps us from needing to rebuild the docker images every time the configuration or environment of a service is changed.  
+One special config folder is [/config/common](/config/common), which contains common configuration shared between most of the services.
 
 Finally, the static landing page, together with the custom UI Theming is stored in the [/branding folder](/branding).  
 These files are served by an S3 bucket together with an AWS CloudFront distribution.
@@ -56,12 +56,8 @@ aws ecr get-login-password --profile <aws profile name> | docker login --usernam
 cd docker && docker buildx bake --push <optional_name_of_container>
 ```
 
-Be aware that the first time building the images can take a long time.
-All the services need to be built form scratch.  
-Additionally, because of the use of the Australian repositories, we opted to add a shared gradle cache.  
-This prevents slow downloading of the same dependencies over and over again.  
-But it prevents us running the builds in parallel, as this cache cannot be shared between concurrent gradle builds.
-
+Be aware that the first time building the images can take a long time, 
+as all the services need to be built form scratch. 
 
 ### Local
 

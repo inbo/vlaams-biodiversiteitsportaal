@@ -318,7 +318,7 @@ services:
       retries: 5
 
   namematching:
-    image: atlasoflivingaustralia/ala-namematching-service:v20210811-3
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/namematching-service:dev
     ports:
       - "9179:9179"
 
