@@ -29,7 +29,10 @@
     "name": "Reptiles",
     "rank": "classs",
     "included": [
-      "Reptilia"
+      "Testudines",
+      "Crocodylia",
+      "Sphenodontia",
+      "Squamata"
     ],
     "excluded": [],
     "parent": "Animals"
@@ -78,7 +81,6 @@
         "CHIMAERIFORMES",
         "CERATODONTIFORMES",
         "CLUPEIFORMES",
-        "Anchovies ",
         "ALBULIFORMES",
         "ANGUILLIFORMES",
         "ELOPIFORMES",
@@ -110,10 +112,10 @@
         "ARGENTINIFORMES",
         "SALMONIFORMES",
         "MYCTOPHIFORMES",
-        "Latern Fishes, Neoscopelids",
         "ATELEOPODIFORMES",
         "STOMIIFORMES",
-        "OSTEOGLOSSIFORMES"
+        "OSTEOGLOSSIFORMES",
+        "Acipenseriformes"
         ],
     "excluded": [],
     "parent": "Animals"
