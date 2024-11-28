@@ -287,7 +287,7 @@ jobs:
           git config --global user.email "support.natuurdata@inbo.be"
           git config --global user.name "Github Actions"
                 
-          jq <<< '${{ fromJSON(needs.get-versions.outputs.all_versions) }}' > region/inbo-dev/eu-west-1/versions.json
+          jq <<< '${{ fromJSON(needs.get-versions.outputs.all_versions) }}' > ./region/inbo-dev/eu-west-1/versions.json
                   
           if [ -n "$(git status --porcelain)" ]; then
             git add region/inbo-dev/eu-west-1/versions.json
@@ -305,6 +305,18 @@ jobs:
         with:
           github-token: ${{ secrets.GIT_PAT_TOKEN }}
           script: |
+            const openPrs = await github.rest.pulls.list({
+              owner: 'inbo',
+              repo: 'inbo-aws-biodiversiteitsportaal-terraform',
+              state: 'open',
+              head: 'automated-version-update'
+              base: 'master'
+            });
+            console.log(openPrs);
+            if (openPrs.data.length > 0) {
+              console.log('PR already exists');
+              return;
+            }
             const result = await github.rest.pulls.create({
               title: 'Automated version update',
               owner: 'inbo',
