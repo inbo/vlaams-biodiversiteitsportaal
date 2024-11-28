@@ -89,8 +89,6 @@ jobs:
     if: needs.get-versions.outputs.branding_version != ''
     steps:
       - uses: actions/checkout@v4
-        with:
-          submodules: 'true'
 
       - uses: actions/setup-node@v4
         with:
@@ -103,6 +101,22 @@ jobs:
         run: |
           set -e -x -o pipefail
 
+          git submodule update --init --recursive
+          git submodule foreach --recursive 'git checkout commonui-bs3-2019'
+          
+          cd commonui-bs3-2019
+          
+          ls -la 
+          ls -la ./ala-wordpress-2019/
+          
+          ls -la 
+          ls -la ./ala-wordpress-2019/
+          ls -la ./ala-wordpress-2019/web/app/themes/understrap/sass/assets/
+          
+          npm install
+          ./node_modules/.bin/gulp build
+
+          cd ..
           npm install
           npx brunch build --production
           tar -cvzf branding-${{ needs.get-versions.outputs.branding_version }}.tar.gz -C "$(pwd)/public" ./
