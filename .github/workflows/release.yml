@@ -282,7 +282,7 @@ jobs:
         run: |
           set -e -x
           
-          if [ -z "$(git ls-remote --heads refs/heads/automated-version-update)" ]; then
+          if [ -z "$(git branch -r | grep 'automated-version-update')" ]; then
             git checkout -b automated-version-update
           else
             git checkout automated-version-update
