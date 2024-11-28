@@ -289,6 +289,8 @@ jobs:
           git config --global user.name "Github Actions"
                 
           jq <<< '${{ fromJSON(needs.get-versions.outputs.all_versions) }}' > ./region/inbo-dev/eu-west-1/versions.json
+          
+          git status --porcelain
                   
           if [ -n "$(git status --porcelain)" ]; then
             git add region/inbo-dev/eu-west-1/versions.json
