@@ -286,7 +286,7 @@ jobs:
           git config --global user.email "support.natuurdata@inbo.be"
           git config --global user.name "Github Actions"
                 
-          echo "${{ fromJSON(needs.get-versions.outputs.all_versions) }}" \
+          echo "${{ needs.get-versions.outputs.all_versions }}" \
             | jq \
             > region/inbo-dev/eu-west-1/versions.json
                   
