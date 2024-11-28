@@ -315,6 +315,11 @@ jobs:
             console.log(openPrs);
             if (openPrs.data.length > 0) {
               console.log('PR already exists');
+              for (const pr of openPrs.data) {
+                console.log(pr.owner);
+                console.log(pr.head);
+                console.log(pr.base);
+              }
               return;
             }
             const result = await github.rest.pulls.create({
