@@ -312,7 +312,7 @@ jobs:
               state: 'open',
               head: 'inbo:automated-version-update'
             });
-            if (openPrs.data.length ==- 1) {
+            if (openPrs.data.length === 1) {
               console.log(`PR already exists: ${openPrs.data[0].html_url}`);
               return;
             }
