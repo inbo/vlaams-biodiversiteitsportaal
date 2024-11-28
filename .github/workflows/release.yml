@@ -104,6 +104,7 @@ jobs:
           set -e
 
           cd commonui-bs3-2019
+          git submodule foreach --recursive 'git checkout commonui-bs3-2019'
           npm install
           npx gulp build
 
