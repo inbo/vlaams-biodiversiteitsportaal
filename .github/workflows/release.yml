@@ -311,14 +311,8 @@ jobs:
               state: 'open',
               head: 'inbo:automated-version-update'
             });
-            console.log(openPrs);
-            if (openPrs.data.length > 0) {
-              console.log('PR already exists');
-              for (const pr of openPrs.data) {
-                console.log(pr.owner);
-                console.log(pr.head);
-                console.log(pr.base);
-              }
+            if (openPrs.data.length ==- 1) {
+              console.log(`PR already exists: ${openPrs.data[0].html_url}`);
               return;
             }
             const result = await github.rest.pulls.create({
