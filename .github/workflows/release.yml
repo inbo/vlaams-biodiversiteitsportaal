@@ -282,11 +282,7 @@ jobs:
         run: |
           set -e -o pipefail -x
           
-          if [ -z "$(git branch -r | grep 'automated-version-update')" ]; then
-            git checkout -b automated-version-update
-          else
-            git checkout automated-version-update
-          fi
+          git checkout automated-version-update || git checkout -b automated-version-update
           
           git config --global user.email "support.natuurdata@inbo.be"
           git config --global user.name "Github Actions"
