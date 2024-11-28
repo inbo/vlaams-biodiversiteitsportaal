@@ -106,9 +106,12 @@ jobs:
           cd commonui-bs3-2019
           
           ls -la 
-          ls -la ./ala-wordpress-2019/web/app/themes/understrap/sass/assets/
+          ls -la ./ala-wordpress-2019/
           
           git submodule foreach --recursive 'git checkout commonui-bs3-2019'
+          ls -la 
+          ls -la ./ala-wordpress-2019/
+          ls -la ./ala-wordpress-2019/web/app/themes/understrap/sass/assets/
           
           npm install
           ./node_modules/.bin/gulp build
