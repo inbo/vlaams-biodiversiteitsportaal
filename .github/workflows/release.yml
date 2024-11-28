@@ -309,8 +309,8 @@ jobs:
               owner: 'inbo',
               repo: 'inbo-aws-biodiversiteitsportaal-terraform',
               state: 'open',
-              head: 'automated-version-update',
-              base: 'master'
+              head: 'inbo:automated-version-update',
+              base: 'inbo:master'
             });
             console.log(openPrs);
             if (openPrs.data.length > 0) {
