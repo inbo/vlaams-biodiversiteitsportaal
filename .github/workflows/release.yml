@@ -280,7 +280,7 @@ jobs:
       - name: Update versions in dev deployment
         id: update-versions
         run: |
-          set -e -o pipefail -x
+          set -e -o pipefail
           
           git checkout automated-version-update || git checkout -b automated-version-update
           
