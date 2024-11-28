@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - 'main'
-      - 'dev'
 
 # Only allow one workflow to run at a time
 concurrency:
