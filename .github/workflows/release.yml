@@ -276,6 +276,7 @@ jobs:
         with:
           repository: 'inbo/inbo-aws-biodiversiteitsportaal-terraform'
           token: ${{ secrets.GIT_PAT_TOKEN }}
+          fetch-depth: 0
 
       - name: Update versions in dev deployment
         id: update-versions
