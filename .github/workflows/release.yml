@@ -102,9 +102,9 @@ jobs:
           set -e -x -o pipefail
 
           git submodule update --init --recursive
-          git submodule foreach --recursive 'git checkout commonui-bs3-2019'
-          
+          ls -la
           cd commonui-bs3-2019
+          git submodule foreach --recursive 'git checkout commonui-bs3-2019'
           
           ls -la 
           ls -la ./ala-wordpress-2019/
