@@ -6,10 +6,12 @@ WORKDIR /project
 # ARG VERSION=4.1.0
 # ARG SOURCE=https://github.com/AtlasOfLivingAustralia/ala-bie-hub.git
 
-ARG VERSION=fix-wolf-wiki-page
-ARG SOURCE=https://github.com/StefanVanDyck/ala-bie-hub.git
+ARG VERSION=develop
+ARG COMMIT=15ad276721bb4c970c87933ff4edaf7128bc0e59
+ARG SOURCE=https://github.com/inbo/ala-bie-hub.git
+LABEL ala.version=inbo-${COMMIT}
 
-RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} .
+RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} . && git checkout ${COMMIT}
 
 COPY ./i18n/ ./grails-app/i18n/
 
@@ -26,6 +28,8 @@ RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
 FROM tomcat-base
 
 ARG VERSION=4.2.0-SNAPSHOT
+ARG COMMIT=15ad276721bb4c970c87933ff4edaf7128bc0e59
+LABEL ala.version=inbo-${COMMIT}
 
 COPY --from=builder /project/build/libs/ala-bie-hub-${VERSION}-plain.war ${CATALINA_HOME}/webapps/bie-hub.war
 COPY bie-hub.xml ${CATALINA_HOME}/conf/portal/localhost/bie-hub.xml

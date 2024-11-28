@@ -1,15 +1,21 @@
 ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-maven AS builder
 
-RUN git clone --depth 1 https://github.com/AtlasOfLivingAustralia/ala-namematching-service.git /project
+ARG VERSION=1.8.1
+ARG SOURCE=https://github.com/AtlasOfLivingAustralia/ala-namematching-service.git
+LABEL ala.version=${VERSION}
+
 WORKDIR /project
+RUN git clone --branch v${VERSION} --depth 1 ${SOURCE} .
 
 RUN --mount=type=cache,target=/root/.m2/repository \
-    mvn clean package -DskipTests -T 4 -U
+    mvn --batch-mode --no-transfer-progress \
+        clean package -DskipTests -T 4 -U
 
 FROM openjdk:11
 
 ARG VERSION=1.8.1
+LABEL ala.version=${VERSION}
 
 # Create the user
 RUN groupadd --gid 1000 app \

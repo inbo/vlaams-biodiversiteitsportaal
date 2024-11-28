@@ -4,6 +4,7 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 ARG VERSION=v3.2.0
 ARG SOURCE=https://github.com/AtlasOfLivingAustralia/userdetails.git
+LABEL ala.version=${VERSION}
 
 WORKDIR /project
 RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} .
@@ -21,6 +22,8 @@ RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
 FROM tomcat-base
 
 ARG VERSION=3.2.0
+LABEL ala.version=${VERSION}
+
 COPY --from=builder /project/build/libs/userdetails-${VERSION}-plain.war ${CATALINA_HOME}/webapps/userdetails.war
 COPY userdetails.xml ${CATALINA_HOME}/conf/portal/localhost/userdetails.xml
 

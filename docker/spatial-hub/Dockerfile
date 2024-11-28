@@ -4,6 +4,7 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 ARG VERSION=2.1.0
 ARG SOURCE=https://github.com/AtlasOfLivingAustralia/spatial-hub.git
+LABEL ala.version=${VERSION}
 
 RUN rm -f /etc/apt/apt.conf.d/docker-clean; echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/keep-cache
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
@@ -31,6 +32,8 @@ RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
 FROM tomcat-base
 
 ARG VERSION=2.1.0
+LABEL ala.version=${VERSION}
+
 COPY --from=builder /project/build/libs/project-${VERSION}-plain.war ${CATALINA_HOME}/webapps/spatial-hub.war
 COPY spatial-hub.xml ${CATALINA_HOME}/conf/portal/localhost/spatial-hub.xml
 
