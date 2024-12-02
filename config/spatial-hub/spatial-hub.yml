@@ -182,6 +182,7 @@ google:
   apikey: "get-a-google-api-key"
 
 apiKeyCheckUrlTemplate: "${common.protocol}://${common.domain}/apikey/ws/check?apikey={0}"
+api_key: "dummy"
 autocompleteUrl: "${common.protocol}://${common.domain}/bie-index/search/auto.jsonp"
 
 auth:
