@@ -11,11 +11,8 @@ webservice:
   client-secret: "ala_hub-oidc-super-secret"
 
 advancedTaxaField: taxa
-#alerts:
-#  apiKey: a5c2e4d1-324c-4bc2-8770-2a2aa092df49
-#  baseUrl: ''
-#  myannotation:
-#    enabled: false
+alerts:
+  baseUrl: '${common.protocol}://${common.domain}/alerts'
 allowedImageEditingRoles: ROLE_ADMIN
 alwaysshow:
   imagetab: true
