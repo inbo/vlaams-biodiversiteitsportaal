@@ -10,9 +10,9 @@ mail:
   ses:
     enabled: false
   details:
-    sender: "alerts@${common.domain}"
+    sender: "${common.supportEmail}"
     alertAddressTitle: "Atlas alerts"
-    infoSender: "alerts@${common.domain}"
+    infoSender: "${common.supportEmail}"
     infoAddressTitle: "Atlas of Living Australia"
     defaultResourceName: "Atlas of Living Australia"
     # forceAllAlertsGetSent results in emails getting sent regardless if data has changed - only use in DEV env
