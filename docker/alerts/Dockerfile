@@ -1,8 +1,11 @@
 ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
-ARG VERSION=4.2.1
-ARG SOURCE=https://github.com/AtlasOfLivingAustralia/alerts.git
+#ARG VERSION=4.2.1
+#ARG SOURCE=https://github.com/AtlasOfLivingAustralia/alerts.git
+
+ARG VERSION=fix-invalid-characters-in-biocache-query-urls
+ARG SOURCE=https://github.com/StefanVanDyck/alerts.git
 
 LABEL ala.version=${VERSION}
 
@@ -14,6 +17,8 @@ RUN --mount=type=cache,target=/gradle-cache,ro \
         build assemble \
         -x test -x integrationTest
 
+RUN ls -la /project/build/libs
+
 # Copy dependencies to shared read-only cache
 RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
     rsync -a /home/gradle/.gradle/caches/modules-2 /gradle-cache \
@@ -21,7 +26,7 @@ RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
 
 FROM tomcat-base
 
-ARG VERSION=4.2.1
+ARG VERSION=4.3.0-SNAPSHOT
 
 LABEL ala.version=${VERSION}
 
