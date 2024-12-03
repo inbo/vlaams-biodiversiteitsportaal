@@ -25,6 +25,14 @@ grails:
     port: 25
     server: mailhog
 
+  plugin:
+    awssdk:
+      region: eu-west-1
+      s3:
+        bucket: ala-alerts-test
+        region: eu-west-1
+
+security:
 skin:
   layout: "ala-main"
   orgSupportEmail: ${common.supportEmail}
