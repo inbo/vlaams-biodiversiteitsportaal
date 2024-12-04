@@ -23,7 +23,18 @@ Some Data Resource settings in the _collectory_ service the must be set correctl
 
 ### Data Processing
 The pipeline uses AWS step functions to manage the processing of the data.  
-[It's definition is currently maintained in the terraform project](https://github.com/inbo/inbo-aws-biodiversiteitsportaal-terraform/blob/master/region/common-region/la-pipelines-deployment/step-function-rule-them-all.tf).
+[It's definition is currently maintained in the terraform project](https://github.com/inbo/inbo-aws-biodiversiteitsportaal-terraform/blob/master/region/common-region/la-pipelines-deployment/step-function/pipeline.json).
+
+You can launch a new round of processing by starting a new execution of the step function.
+[This can be done from the AWS console](https://eu-west-1.console.aws.amazon.com/states/home?region=eu-west-1#/statemachines/view/arn%3Aaws%3Astates%3Aeu-west-1%3A632683202044%3AstateMachine%3Abiodiversiteitsportaal-dev-pipeline?type=standard), or by using the AWS CLI:
+```commandline
+aws stepfunctions start-execution \
+    --state-machine-arn 'arn:aws:states:eu-west-1:632683202044:stateMachine:biodiversiteitsportaal-dev-pipeline' \
+    --input '{"SolrCollection" : "pipeline-20241203"}'
+```
+
+Be aware that running the pipeline multiple times on the same solr collection will result in duplicate data.
+Better to create a new collection for each run, through [the SOLR management interface](https://index.natuurdata.dev.inbo.be).
 
 #### Inputs
 The step function can be executed from the AWS console.
@@ -35,6 +46,7 @@ It requires the following inputs, passed as json keys:
 - **DataResources**  _(Optional)_  
   A list of the Data Resource IDs to process.  
   If not provided, all Data Resources, registered in the collectory service, will be processed.
+  Providing an empty list will result in the "interpretation" step for all dataresource being skipped.
   
 Example:
 ```json
@@ -55,7 +67,7 @@ The threshold is currently set at 10MB.
 
 #### Monitoring
 The progress of the pipeline can be monitored in the AWS console.  
-Additionally, the logs of the EMR steps for large data resources and the batch processing for smaller ones can be consulted using [grafana dashboards](https://monitoring.biodiversiteitsportaal.dev.svdev.be/dashboards/).
+Additionally, the logs of the EMR steps for large data resources and the batch processing for smaller ones can be consulted using [grafana dashboards](https://monitoring.natuurdata.dev.inbo.be/d/edvde1ewzfitcd/emr-logs).
 
 ### Data
 The data, used to process the DwC-A, is stored on a single AWS EFS volume.  
