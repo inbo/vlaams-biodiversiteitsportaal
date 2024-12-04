@@ -4,7 +4,7 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 #ARG VERSION=4.2.1
 #ARG SOURCE=https://github.com/AtlasOfLivingAustralia/alerts.git
 
-ARG VERSION=fix-invalid-characters-in-biocache-query-urls
+ARG VERSION=fix-biocache-query-invalid-characters
 ARG SOURCE=https://github.com/StefanVanDyck/alerts.git
 
 LABEL ala.version=${VERSION}
