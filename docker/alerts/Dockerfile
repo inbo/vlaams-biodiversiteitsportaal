@@ -26,7 +26,7 @@ RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
 
 FROM tomcat-base
 
-ARG VERSION=4.3.0-SNAPSHOT
+ARG VERSION=4.4.0-SNAPSHOT
 
 LABEL ala.version=${VERSION}
 
