@@ -6,6 +6,8 @@ security:
   oidc:
     clientId: "ala_hub"
     secret: "ala_hub-oidc-super-secret"
+  core:
+    uri-filter-pattern: /download/*
 webservice:
   client-id: "ala_hub"
   client-secret: "ala_hub-oidc-super-secret"
