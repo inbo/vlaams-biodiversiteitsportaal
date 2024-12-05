@@ -1,57 +1,57 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36" version="24.8.0">
   <diagram name="Pagina-1" id="hAarfXw_meTYoNTCz8BX">
-    <mxGraphModel>
+    <mxGraphModel dx="1434" dy="746" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="2" value="authenticatie_te_veilig" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
-          <mxGeometry x="8" y="8" width="606" height="241" as="geometry" />
+        <mxCell id="2" value="authenticatie_te_veilig" style="whiteSpace=wrap;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="33" y="30" width="606" height="241" as="geometry" />
         </mxCell>
-        <mxCell id="3" value="Gebruiker" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+        <mxCell id="3" value="Gebruiker" style="whiteSpace=wrap;strokeWidth=2;" parent="1" vertex="1">
           <mxGeometry x="33" y="124" width="132" height="49" as="geometry" />
         </mxCell>
-        <mxCell id="4" value="Inloggen" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
-          <mxGeometry x="436" y="284" width="120" height="49" as="geometry" />
+        <mxCell id="4" value="Inloggen" style="whiteSpace=wrap;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="490" y="440" width="120" height="49" as="geometry" />
         </mxCell>
-        <mxCell id="5" value="Geldig" style="rhombus;strokeWidth=2;whiteSpace=wrap;" vertex="1" parent="1">
+        <mxCell id="5" value="Geldig" style="rhombus;strokeWidth=2;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="835" y="261" width="95" height="95" as="geometry" />
         </mxCell>
-        <mxCell id="6" value="Genereert JWT token" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+        <mxCell id="6" value="Genereert JWT token" style="whiteSpace=wrap;strokeWidth=2;" parent="1" vertex="1">
           <mxGeometry x="1012" y="150" width="214" height="49" as="geometry" />
         </mxCell>
-        <mxCell id="7" value="Toont foutmelding" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+        <mxCell id="7" value="Toont foutmelding" style="whiteSpace=wrap;strokeWidth=2;" parent="1" vertex="1">
           <mxGeometry x="1023" y="305" width="192" height="49" as="geometry" />
         </mxCell>
-        <mxCell id="8" value="Authenticatie API" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+        <mxCell id="8" value="Authenticatie API" style="whiteSpace=wrap;strokeWidth=2;" parent="1" vertex="1">
           <mxGeometry x="403" y="54" width="185" height="49" as="geometry" />
         </mxCell>
-        <mxCell id="9" value="Voert gebruikersnaam en wachtwoord in" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.93;entryX=0.07;entryY=0;" edge="1" parent="1" source="3" target="4">
+        <mxCell id="9" value="Voert gebruikersnaam en wachtwoord in" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.93;entryX=0.07;entryY=0;" parent="1" source="3" target="4" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="284" y="209" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="10" value="Controleert gebruikersgegevens" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="4" target="5">
+        <mxCell id="10" value="Controleert gebruikersgegevens" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" parent="1" source="4" target="5" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="11" value="Ja" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.19;entryX=0.29;entryY=1;" edge="1" parent="1" source="5" target="6">
+        <mxCell id="11" value="Ja" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.19;entryX=0.29;entryY=1;" parent="1" source="5" target="6" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="971" y="254" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="12" value="Nee" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.62;entryX=0;entryY=0.51;" edge="1" parent="1" source="5" target="7">
+        <mxCell id="12" value="Nee" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.62;entryX=0;entryY=0.51;" parent="1" source="5" target="7" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="971" y="330" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="13" value="Stuurt JWT token terug" style="curved=1;startArrow=none;endArrow=block;exitX=0;exitY=0.41;entryX=1;entryY=0.64;" edge="1" parent="1" source="6" target="3">
+        <mxCell id="13" value="Stuurt JWT token terug" style="curved=1;startArrow=none;endArrow=block;exitX=0;exitY=0.41;entryX=1;entryY=0.64;" parent="1" source="6" target="3" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="971" y="168" />
@@ -59,14 +59,14 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="14" value="Genereert authenticatie token" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.28;entryX=0;entryY=0.86;" edge="1" parent="1" source="3" target="8">
+        <mxCell id="14" value="Genereert authenticatie token" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.28;entryX=0;entryY=0.86;" parent="1" source="3" target="8" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="284" y="118" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="15" value="Controleert authenticatie token" style="curved=1;startArrow=none;endArrow=block;exitX=0;exitY=0.32;entryX=0.88;entryY=-0.01;" edge="1" parent="1" source="8" target="3">
+        <mxCell id="15" value="Controleert authenticatie token" style="curved=1;startArrow=none;endArrow=block;exitX=0;exitY=0.32;entryX=0.88;entryY=-0.01;" parent="1" source="8" target="3" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="284" y="58" />
