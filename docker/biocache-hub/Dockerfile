@@ -1,13 +1,25 @@
 ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
+ARG VERSION=102_add_search_by_occurrence_id
+ARG COMMIT=3b7b16b8ef53c46b335b757d50068d393a4f79a1
+ARG SOURCE=https://github.com/inbo/biocache-hubs.git
+LABEL ala.version=inbo-${COMMIT}
 
-ARG VERSION=7.1.1
-ARG SOURCE=https://github.com/AtlasOfLivingAustralia/ala-hub.git
-LABEL ala.version=${VERSION}
+WORKDIR /project/biocache-hubs
+RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} . && git checkout ${COMMIT}
 
-WORKDIR /project
-RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} .
+RUN --mount=type=cache,target=/gradle-cache,ro \
+    gradle build publishToMavenLocal \
+    -x test
+
+ARG VERSION=102_add_search_by_occurrence_id
+ARG COMMIT=d56989cda0b1234b2818f22d916534e01a13b254
+ARG SOURCE=https://github.com/inbo/ala-hub.git
+LABEL ala.version=inbo-${COMMIT}
+
+WORKDIR /project/ala-hub
+RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} . && git checkout ${COMMIT}
 
 # # TODO: ugly fix for config values being overwritten by ala defaults
 RUN sed -i '10d' grails-app/conf/application.yml
@@ -17,7 +29,6 @@ RUN cat grails-app/conf/application.yml
 COPY alaBs.js ./grails-app/assets/javascripts/alaBs.js
 
 COPY ./i18n/ ./grails-app/i18n/
-
 
 RUN --mount=type=cache,target=/gradle-cache,ro \
     gradle build assemble \
@@ -31,9 +42,10 @@ RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
 FROM tomcat-base
 
 ARG VERSION=7.1.1
-LABEL ala.version=${VERSION}
+ARG COMMIT=6a473fbb17deeebcadecc28dbe3d0b05740816f5
+LABEL ala.version=inbo-${COMMIT}
 
-COPY --from=builder /project/build/libs/ala-hub-${VERSION}-plain.war ${CATALINA_HOME}/webapps/biocache-hub.war
+COPY --from=builder /project/ala-hub/build/libs/ala-hub-${VERSION}-plain.war ${CATALINA_HOME}/webapps/biocache-hub.war
 COPY biocache-hub.xml ${CATALINA_HOME}/conf/portal/localhost/biocache-hub.xml
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/biocache-hub/actuator/health || exit 1
