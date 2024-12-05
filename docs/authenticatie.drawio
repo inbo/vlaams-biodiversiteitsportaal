@@ -5,7 +5,10 @@
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="4" value="Keycloak&#xa;inloggen" style="whiteSpace=wrap;strokeWidth=2;" parent="1" vertex="1">
-          <mxGeometry x="990" y="595.5" width="120" height="49" as="geometry" />
+          <mxGeometry x="1015" y="641" width="120" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="3wPm9dcY4KfJVksnPoh3-55" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="5" target="3wPm9dcY4KfJVksnPoh3-50">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="5" value="Geldig" style="rhombus;strokeWidth=2;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="1015" y="435" width="95" height="95" as="geometry" />
@@ -13,8 +16,11 @@
         <mxCell id="3wPm9dcY4KfJVksnPoh3-51" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="6" target="3wPm9dcY4KfJVksnPoh3-50">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="6" value="naar VBP" style="whiteSpace=wrap;strokeWidth=2;" parent="1" vertex="1">
+        <mxCell id="6" value="naar VBP Hoge resolutie" style="whiteSpace=wrap;strokeWidth=2;" parent="1" vertex="1">
           <mxGeometry x="810" y="250" width="214" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="3wPm9dcY4KfJVksnPoh3-53" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="7" target="3wPm9dcY4KfJVksnPoh3-52">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="7" value="Toont foutmelding" style="whiteSpace=wrap;strokeWidth=2;" parent="1" vertex="1">
           <mxGeometry x="1120" y="370" width="192" height="49" as="geometry" />
@@ -27,15 +33,17 @@
         <mxCell id="11" value="Ja" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.19;entryX=0.29;entryY=1;" parent="1" source="5" target="6" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
+              <mxPoint x="830" y="450" />
               <mxPoint x="971" y="254" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="12" value="Nee" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.62;entryX=0;entryY=0.51;" parent="1" source="5" target="7" edge="1">
-          <mxGeometry relative="1" as="geometry">
+          <mxGeometry x="0.5279" relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="971" y="330" />
             </Array>
+            <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="3wPm9dcY4KfJVksnPoh3-15" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
@@ -158,8 +166,48 @@
         <mxCell id="3wPm9dcY4KfJVksnPoh3-49" value="&lt;span style=&quot;color: rgb(0, 0, 0); font-family: Helvetica; font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: nowrap; background-color: rgb(251, 251, 251); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;&quot;&gt;Gebruikersnaam &amp;amp; wachtwoord &amp;amp; token?&lt;/span&gt;" style="text;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="770" y="620" width="250" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="3wPm9dcY4KfJVksnPoh3-50" value="naar spatial portal" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="3wPm9dcY4KfJVksnPoh3-50" value="naar spatial portal hoge resolutie" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="590" y="60" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="3wPm9dcY4KfJVksnPoh3-52" value="VBP zonder in te loggen" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1210" y="525" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="3wPm9dcY4KfJVksnPoh3-54" value="OF" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="1260" y="448" width="40" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="3wPm9dcY4KfJVksnPoh3-63" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="3wPm9dcY4KfJVksnPoh3-56" target="3wPm9dcY4KfJVksnPoh3-62">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="3wPm9dcY4KfJVksnPoh3-56" value="Keycloak&#xa;inloggen" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="80" width="120" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="3wPm9dcY4KfJVksnPoh3-57" value="Keycloak&#xa;inloggen" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="580" y="140" width="120" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="3wPm9dcY4KfJVksnPoh3-58" value="Ja" style="curved=1;startArrow=none;endArrow=block;exitX=0;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="960" y="266" />
+              <mxPoint x="1090" y="380" />
+            </Array>
+            <mxPoint x="1222" y="280" as="sourcePoint" />
+            <mxPoint x="1039" y="220" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3wPm9dcY4KfJVksnPoh3-59" value="naar VBP Lage resolutie" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="950" y="170" width="214" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="3wPm9dcY4KfJVksnPoh3-60" value="Keycloak&#xa;inloggen" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="717" y="150" width="120" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="3wPm9dcY4KfJVksnPoh3-61" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="3wPm9dcY4KfJVksnPoh3-59" target="3wPm9dcY4KfJVksnPoh3-56">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="3wPm9dcY4KfJVksnPoh3-62" value="naar spatial lage resolutie" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1170" y="69" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="3wPm9dcY4KfJVksnPoh3-64" value="????" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="1065" y="48" width="50" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
