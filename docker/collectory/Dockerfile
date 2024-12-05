@@ -12,7 +12,7 @@ ARG SOURCE=https://github.com/StefanVanDyck/collectory
 ARG COMMIT=29e12de13c5820b672a6b2dd46bba83c5f74eac6
 LABEL ala.version=inbo-${COMMIT}
 
-RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} . && git checkout ${COMMIT}
+RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
 
 COPY ./i18n/ ./grails-app/i18n/
 
