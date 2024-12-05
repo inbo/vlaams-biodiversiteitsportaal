@@ -47,8 +47,7 @@ images:
 layersService:
   baseURL: ${common.protocol}://${common.domain}/spatial-service
 alerts:
-#  baseURL: ${common.protocol}://${common.domain}/alerts
-  baseURL: ''
+  baseURL: ${common.protocol}://${common.domain}/alerts
 bieService:
   baseURL: ${common.protocol}://${common.domain}/bie-index
 geoserver:

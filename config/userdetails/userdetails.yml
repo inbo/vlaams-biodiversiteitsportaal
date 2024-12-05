@@ -95,7 +95,7 @@ biocache:
 myData:
   url: ${common.protocol}://${common.domain}/tempDataResource/myData
 alerts:
-  url: null
+  url: ${common.protocol}://${common.domain}/alerts
 userDetails:
   url: ${common.protocol}://${common.domain}/userdetails/
 ala:
