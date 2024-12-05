@@ -120,7 +120,10 @@
         <mxCell id="3wPm9dcY4KfJVksnPoh3-25" value="Natuurverenigingen Lage solutie" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="40" y="970" width="200" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="3wPm9dcY4KfJVksnPoh3-26" value="IDM&lt;div&gt;Gebruikersbeheer aan gebruikerskant&lt;/div&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+        <mxCell id="3wPm9dcY4KfJVksnPoh3-43" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="3wPm9dcY4KfJVksnPoh3-26" target="3wPm9dcY4KfJVksnPoh3-42">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="3wPm9dcY4KfJVksnPoh3-26" value="IDM&lt;div&gt;Gebruikersbeheer aan gebruikerskant&lt;/div&gt;&lt;div&gt;~rollen toewijzen&lt;/div&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
           <mxGeometry x="400" y="540" width="160" height="160" as="geometry" />
         </mxCell>
         <mxCell id="3wPm9dcY4KfJVksnPoh3-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="3wPm9dcY4KfJVksnPoh3-18" target="3wPm9dcY4KfJVksnPoh3-26">
@@ -134,7 +137,7 @@
         <mxCell id="3wPm9dcY4KfJVksnPoh3-35" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.55;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="3wPm9dcY4KfJVksnPoh3-23" target="3wPm9dcY4KfJVksnPoh3-26">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="3wPm9dcY4KfJVksnPoh3-36" value="IDM&lt;div&gt;Gebruikersbeheer aan&amp;nbsp;&lt;/div&gt;&lt;div&gt;VBP kant&lt;/div&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+        <mxCell id="3wPm9dcY4KfJVksnPoh3-36" value="IDM&lt;div&gt;Gebruikersbeheer aan&amp;nbsp;&lt;/div&gt;&lt;div&gt;VBP kant&lt;/div&gt;&lt;div&gt;~rollen toewijzen&lt;/div&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
           <mxGeometry x="400" y="930" width="160" height="160" as="geometry" />
         </mxCell>
         <mxCell id="3wPm9dcY4KfJVksnPoh3-38" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.094;entryY=1.013;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="3wPm9dcY4KfJVksnPoh3-24" target="3wPm9dcY4KfJVksnPoh3-26">
@@ -156,6 +159,9 @@
               <mxPoint x="318" y="1074" />
             </Array>
           </mxGeometry>
+        </mxCell>
+        <mxCell id="3wPm9dcY4KfJVksnPoh3-42" value="ACM&lt;div&gt;Toegangsbeheer&lt;/div&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="620" y="540" width="160" height="160" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
