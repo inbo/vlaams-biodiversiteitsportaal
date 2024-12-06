@@ -46,14 +46,14 @@ Look there for more information on how to make changes to the cloud environments
 
 #### Docker images
 The definition of the docker images can be found in the [/docker folder](/docker).
-To build them and release them to the AWS Elastic Container Registry, you can use the [build.sh script](/docker/build.sh).
+To build them and release them to the AWS Elastic Container Registry, simply run the command below:
 
 ```commandline
 # Get AWS ECR authorization token
 aws ecr get-login-password --profile <aws profile name> | docker login --username AWS --password-stdin 632683202044.dkr.ecr.eu-west-1.amazonaws.com
 
 # Build and push the images
-cd docker && docker buildx bake --push <optional_name_of_container>
+cd docker && docker buildx bake --push all
 ```
 
 Be aware that the first time building the images can take a long time, 
