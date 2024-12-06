@@ -8,7 +8,7 @@ security:
     secret: apikey-oidc-super-secret
   core:
     uri-filter-pattern: /*
-    uri-exclusion-filter-pattern: /actuator/health
+    uri-exclusion-filter-pattern: '*/actuator/health'
 management:
   health:
     mongo:
