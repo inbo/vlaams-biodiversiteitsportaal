@@ -57,11 +57,11 @@ exports.files = {
 exports.plugins = {
   // TODO add eslint
   // This do some var substition in js code:
-  jscc: {
-    values: {
-      _LOCALES_URL: process.env.NODE_ENV === 'development' ? 'http://localhost:3333' : settings.baseFooterUrl
-    }
-  },
+//  jscc: {
+//    values: {
+//      _LOCALES_URL: process.env.NODE_ENV === 'development' ? 'http://localhost:3333' : settings.baseFooterUrl
+//    }
+//  },
   babel: { presets: ['latest'] },
   copycat: {
     // just copy ALA default builded files to our build

@@ -11,7 +11,7 @@ var Cookies = require('js-cookie');
 const backOpts = {
   // Something like: https://vtatlasoflife.org/basic-brand-2020//locales/es/common
   // More options: https://github.com/i18next/i18next-http-backend
-  loadPath: "$_LOCALES_URL/locales/{{lng}}/{{ns}}", // in the original .json
+  loadPath: "/locales/{{lng}}/{{ns}}", // in the original .json
 
   // allow cross domain requests
   crossDomain: false,

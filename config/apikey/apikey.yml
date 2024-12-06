@@ -6,9 +6,6 @@ security:
   oidc:
     clientId: apikey
     secret: apikey-oidc-super-secret
-  core:
-    uri-filter-pattern: /*
-    uri-exclusion-filter-pattern: '*/actuator/health'
 management:
   health:
     mongo:
@@ -37,7 +34,7 @@ spatial.url: ${common.protocol}://${common.domain}/spatial-hub?tool=log
 volunteer.url: /user/myStats
 lists.url: ${common.protocol}://${common.domain}/species-list/speciesList/list
 biocache.search.url: ${common.protocol}://${common.domain}/biocache-hub/occurrences/search
-alerts.url:
+alerts.url: ${common.protocol}://${common.domain}/alerts
 
 # this property is read/used by ala-auth-plugin (included by apikey)
 userDetails:

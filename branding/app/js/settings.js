@@ -5,7 +5,7 @@ let domain = "natuurdata.dev.inbo.be"
 let loginUrl = "https://biodiversiteitsportaal-dev.auth.eu-west-1.amazoncognito.com/login?client_id=7072p1h0hnf2hiu7172iuqjsbb&response_type=code&scope=openid&redirect_uri=https%3A%2F%2Fnatuurdata.dev.inbo.be?auth-cookie-action=set"
 let logoutUrl = "https://biodiversiteitsportaal-dev.auth.eu-west-1.amazoncognito.com/logout?client_id=7072p1h0hnf2hiu7172iuqjsbb&logout_uri=https%3A%2F%2Fnatuurdata.dev.inbo.be?auth-cookie-action=remove"
 
-if (process.env.NODE_ENV === 'docker') {
+if (process.env.NODE_ENV === 'development') {
     protocol = "http"
     domain = "localhost"
     loginUrl = "http://localhost:9999/default/authorize?client_id=7072p1h0hnf2hiu7172iuqjsbb&response_type=code&scope=openid&redirect_uri=http%3A%2F%2Flocalhost?auth-cookie-action=remove"
