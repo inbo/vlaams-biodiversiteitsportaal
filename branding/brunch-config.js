@@ -17,17 +17,21 @@ const theme = settings.theme;
 const cleanBased = theme == 'flatly' || theme == 'superhero' || theme == 'yeti' || theme == 'cosmo' || theme == 'darkly' || theme == 'paper' || theme == 'sandstone' || theme == 'simplex' || theme == 'slate';
 const themeAssets = cleanBased || theme == 'clean' ? 'clean' : theme;
 
-const toReplace = [/index\.html$/,      // index can be used as your main LA page
+const toReplace = [
+  /index\.html$/,      // index can be used as your main LA page
+  /pagesLayout\.html$/,      // index can be used as your main LA page
   /errorPage\.html/,   // An error page that can be used in your infrastructure
   /testPage\.html$/,   // testPate is just for text some headings, buttons, etc
   /testSmall\.html$/]; // testSmall is for test the footer with small contents
 
-const toReplaceOthers = [/banner\.html$/,
+const toReplaceOthers = [
+  /banner\.html$/,
   /footer\.html$/,
   /index\.html$/,      // index can be used as your main LA page
   /errorPage\.html/,   // An error page that can be used in your infrastructure
   /testPage\.html$/,   // testPate is just for text some headings, buttons, etc
-  /testSmall\.html$/]; // testSmall is for test the footer with small contents
+  /testSmall\.html$/,  // testSmall is for test the footer with small contents
+]; 
 
 // Don't add head.html above because this replacement is done by ala-boostrap
 exports.files = {
@@ -73,6 +77,20 @@ exports.plugins = {
     'fonts': 'commonui-bs3-2019/build/fonts/',
     verbose: false, // shows each file that is copied to the destination directory
     onlyChanged: true // only copy a file if it's modified time has changed (only effective when using brunch watch)
+  },
+  static: {
+    partials: 'app/themes/vlaanderen/assets/*.html',
+    // partials: 'public/*.html',
+    processors: [
+      require('html-brunch-static')({
+        processors: [
+          require('marked-brunch-static') ({
+            fileMatch: 'app/pages/**/*.md',
+            fileTransform: (filename) => filename.replace(/\.md$/, '.html').replace(/^app\/pages\//, 'pages/'),
+          })
+        ]
+      })
+    ]
   },
   // Maybe replace this plugin by: https://github.com/bmatcuk/html-brunch-static
   replacement: {
@@ -198,7 +216,8 @@ exports.server = {
 // FIXME, document this
 exports.paths = {
   watched: ['app/js', 'app/css', 'app/assets', `app/themes/${theme}/assets`, `app/themes/${theme}/css`,
-    `app/themes/${themeAssets}/assets`, `app/themes/${themeAssets}/css`
+    `app/themes/${themeAssets}/assets`, `app/themes/${themeAssets}/css`, 
+    'app/pages'
   ]
 };
 

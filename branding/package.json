@@ -29,10 +29,13 @@
     "babel-preset-latest": "^6",
     "browser-sync-brunch": "^0.0.9",
     "brunch": "^2",
+    "brunch-static": "^1.2.4",
     "clean-css-brunch": "^2",
     "copycat-brunch": "^1.1.1",
     "fs": "^0.0.1-security",
+    "html-brunch-static": "^1.4.3",
     "jscc-brunch": "^2.10.0",
+    "marked-brunch-static": "^1.1.2",
     "replacement-brunch": "^2.0.5",
     "uglify-js-brunch": "^2"
   },
