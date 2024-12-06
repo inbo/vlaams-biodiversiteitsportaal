@@ -2,7 +2,7 @@ ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 ARG VERSION=102_add_search_by_occurrence_id
-ARG COMMIT=3b7b16b8ef53c46b335b757d50068d393a4f79a1
+ARG COMMIT=f99784c5de2af188b735e358976c81abbe9d315b
 ARG SOURCE=https://github.com/inbo/biocache-hubs.git
 LABEL ala.version=inbo-${COMMIT}
 
