@@ -6,7 +6,9 @@ security:
   oidc:
     clientId: apikey
     secret: apikey-oidc-super-secret
-
+  core:
+    uri-filter-pattern: /*
+    uri-exclusion-filter-pattern: '*/actuator/health'
 management:
   health:
     mongo:
