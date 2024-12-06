@@ -65,6 +65,7 @@ security:
     affiliation-survey:
       enabled: false
     authCookieName: VBP-AUTH
+    default-logout-redirect-uri: ${common.protocol}://${common.domain}
   cookie:
     enabled: true
     domain: .${common.domain}
