@@ -15,10 +15,12 @@ var loginStatusInIndex = () => {
     const authCookieAction = urlParams.get('auth-cookie-action');
     if(authCookieAction === 'set') {
       console.log("Set auth cookie");
-      Cookies.set(authCookieName, "/", { expires: in15Minutes });
+      Cookies.set(authCookieName, "/", { expires: in15Minutes, sameSite: 'strict', secure: settings.mainLAUrl.startsWith('https') });
     } else if(authCookieAction === 'remove') {
       console.log("Remove auth cookie");
       Cookies.remove(authCookieName);
+      // Clear Grails sessions
+      Cookies.remove("JSESSIONID");
     }
 
     let authCookie = Cookies.get(authCookieName, {
