@@ -1,8 +1,8 @@
 ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
-ARG VERSION=102_add_search_by_occurrence_id
-ARG COMMIT=3b7b16b8ef53c46b335b757d50068d393a4f79a1
+ARG VERSION=develop-vbp
+ARG COMMIT=5dd41e897a4ff2b1939383b9365b116a7d978dc1
 ARG SOURCE=https://github.com/inbo/biocache-hubs.git
 LABEL ala.version=inbo-${COMMIT}
 
@@ -13,8 +13,8 @@ RUN --mount=type=cache,target=/gradle-cache,ro \
     gradle build publishToMavenLocal \
     -x test
 
-ARG VERSION=102_add_search_by_occurrence_id
-ARG COMMIT=d56989cda0b1234b2818f22d916534e01a13b254
+ARG VERSION=develop
+ARG COMMIT=8af1cfe2a61e39ba69f8ee534d32e20a36acfc7f
 ARG SOURCE=https://github.com/inbo/ala-hub.git
 LABEL ala.version=inbo-${COMMIT}
 
