@@ -17,17 +17,21 @@ const theme = settings.theme;
 const cleanBased = theme == 'flatly' || theme == 'superhero' || theme == 'yeti' || theme == 'cosmo' || theme == 'darkly' || theme == 'paper' || theme == 'sandstone' || theme == 'simplex' || theme == 'slate';
 const themeAssets = cleanBased || theme == 'clean' ? 'clean' : theme;
 
-const toReplace = [/index\.html$/,      // index can be used as your main LA page
+const toReplace = [
+  /index\.html$/,      // index can be used as your main LA page
+  /pagesLayout\.html$/, // Layout, usable by markdown pages
   /errorPage\.html/,   // An error page that can be used in your infrastructure
   /testPage\.html$/,   // testPate is just for text some headings, buttons, etc
   /testSmall\.html$/]; // testSmall is for test the footer with small contents
 
-const toReplaceOthers = [/banner\.html$/,
+const toReplaceOthers = [
+  /banner\.html$/,
   /footer\.html$/,
   /index\.html$/,      // index can be used as your main LA page
   /errorPage\.html/,   // An error page that can be used in your infrastructure
   /testPage\.html$/,   // testPate is just for text some headings, buttons, etc
-  /testSmall\.html$/]; // testSmall is for test the footer with small contents
+  /testSmall\.html$/,  // testSmall is for test the footer with small contents
+]; 
 
 // Don't add head.html above because this replacement is done by ala-boostrap
 exports.files = {
@@ -167,6 +171,18 @@ exports.plugins = {
 
     ]
   },
+  static: {
+    processors: [
+      require('html-brunch-static')({
+        processors: [
+          require('marked-brunch-static') ({
+            fileMatch: 'app/pages/**/*.md',
+            fileTransform: (filename) => filename.replace(/\.md$/, '.html').replace(/^app\/pages\//, 'pages/'),
+          })
+        ]
+      })
+    ]
+  },
   // Using:
   // https://github.com/ocombe/browser-sync-brunch
   // instead of auto-reload-brunch and just `brunch watch`
@@ -198,7 +214,8 @@ exports.server = {
 // FIXME, document this
 exports.paths = {
   watched: ['app/js', 'app/css', 'app/assets', `app/themes/${theme}/assets`, `app/themes/${theme}/css`,
-    `app/themes/${themeAssets}/assets`, `app/themes/${themeAssets}/css`
+    `app/themes/${themeAssets}/assets`, `app/themes/${themeAssets}/css`, 
+    'app/pages'
   ]
 };
 
