@@ -37,12 +37,25 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-left">
+            <!-- Main buttons -->
             <li><a data-i18n="nav.species" href="::bieURL::"></a></li>
             <li><a data-i18n="nav.spatial" href="::spatialURL::"></a></li>
             <li><a data-i18n="nav.participate" href="https://www.vlaanderen.be/inbo/vacatures/"></a></li>
-            <li><a data-i18n="nav.halowtjes" href="/pages/halowtjes.html"></a></li>
-            <li><a data-i18n="nav.news" href="https://www.vlaanderen.be/inbo/nieuws/"></a></li>
             <li><a data-i18n="nav.dataandpartners" href="https://www.vlaanderen.be/inbo/datasets/"></a></li>
+
+            <!-- News dropdown -->
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                aria-expanded="false"><span data-i18n="nav.news"></span> <span class="caret"></span></a>
+              <ul id="dropdown-news-menu" class="dropdown-menu">
+                <li><a data-i18n="nav.halowtjes" href="/pages/halowtjes.html"></a></li>
+                <li role="separator" class="divider"></li>
+                <li><a data-i18n="nav.halowtjes" href="/pages/halowtjes.html"></a></li>
+                <li><a data-i18n="nav.halowtjes" href="/pages/halowtjes.html"></a></li>
+              </ul>
+            </li>
+
+            <!-- More dropdown -->
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                 aria-expanded="false"><span data-i18n="nav.more"></span> <span class="caret"></span></a>
