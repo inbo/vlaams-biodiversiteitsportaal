@@ -1,7 +1,7 @@
 {
   "scripts": {
     "start": "brunch watch --server",
-    "build": "brunch build --production"
+    "build": "rm -rf public && brunch build || brunch build"
   },
   "dependencies": {
     "@govflanders/vl-widget-core": "^1.4.1",
@@ -33,10 +33,10 @@
     "clean-css-brunch": "^2",
     "copycat-brunch": "^1.1.1",
     "fs": "^0.0.1-security",
-    "html-brunch-static": "^1.4.3",
     "jscc-brunch": "^2.10.0",
-    "marked-brunch-static": "^1.1.2",
     "replacement-brunch": "^2.0.5",
+    "html-brunch-static": "^1.4.3",
+    "marked-brunch-static": "^1.1.2",
     "uglify-js-brunch": "^2"
   },
   "eslintConfig": {

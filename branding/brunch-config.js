@@ -19,7 +19,7 @@ const themeAssets = cleanBased || theme == 'clean' ? 'clean' : theme;
 
 const toReplace = [
   /index\.html$/,      // index can be used as your main LA page
-  /pagesLayout\.html$/,      // index can be used as your main LA page
+  /pagesLayout\.html$/, // Layout, usable by markdown pages
   /errorPage\.html/,   // An error page that can be used in your infrastructure
   /testPage\.html$/,   // testPate is just for text some headings, buttons, etc
   /testSmall\.html$/]; // testSmall is for test the footer with small contents
@@ -77,20 +77,6 @@ exports.plugins = {
     'fonts': 'commonui-bs3-2019/build/fonts/',
     verbose: false, // shows each file that is copied to the destination directory
     onlyChanged: true // only copy a file if it's modified time has changed (only effective when using brunch watch)
-  },
-  static: {
-    partials: 'app/themes/vlaanderen/assets/*.html',
-    // partials: 'public/*.html',
-    processors: [
-      require('html-brunch-static')({
-        processors: [
-          require('marked-brunch-static') ({
-            fileMatch: 'app/pages/**/*.md',
-            fileTransform: (filename) => filename.replace(/\.md$/, '.html').replace(/^app\/pages\//, 'pages/'),
-          })
-        ]
-      })
-    ]
   },
   // Maybe replace this plugin by: https://github.com/bmatcuk/html-brunch-static
   replacement: {
@@ -183,6 +169,18 @@ exports.plugins = {
       // And just for testing:
       { files: toReplace, match: { find: '::loginStatus::', replace: process.env.NODE_ENV === 'development' ? 'signedIn' : '::loginStatus::' } }
 
+    ]
+  },
+  static: {
+    processors: [
+      require('html-brunch-static')({
+        processors: [
+          require('marked-brunch-static') ({
+            fileMatch: 'app/pages/**/*.md',
+            fileTransform: (filename) => filename.replace(/\.md$/, '.html').replace(/^app\/pages\//, 'pages/'),
+          })
+        ]
+      })
     ]
   },
   // Using:

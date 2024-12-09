@@ -109,7 +109,7 @@ jobs:
 
           cd ..
           npm install
-          npx brunch build --production
+          npm run build -- --production
           tar -cvzf branding-${{ needs.get-versions.outputs.branding_version }}.tar.gz -C "$(pwd)/public" ./
 
       - name: Create release

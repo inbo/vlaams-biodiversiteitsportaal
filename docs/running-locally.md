@@ -33,7 +33,7 @@ To do this, you need to run the following command in the [branding folder](./bra
 cd branding
 git submodule update --init --recursive
 npm install
-NODE_ENV=docker npx brunch build
+npm run build
 ```
 
 ### 4. Start the services

@@ -9,7 +9,7 @@ var loginStatusInIndex = () => {
   if (
     (document.location.origin === settings.mainLAUrl ||
       document.location.host === "localhost:3333") &&
-    document.location.pathname === "/"
+    (document.location.pathname === "/" || document.location.pathname.startsWith("/pages"))
   ) {
     const urlParams = new URLSearchParams(window.location.search);
     const authCookieAction = urlParams.get('auth-cookie-action');
