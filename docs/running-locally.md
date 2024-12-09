@@ -32,6 +32,12 @@ To do this, you need to run the following command in the [branding folder](./bra
 ```commandline
 cd branding
 git submodule update --init --recursive
+
+cd commonui-bs3-2019
+npm install
+npx gulp build
+
+cd ..
 npm install
 npm run build
 ```
