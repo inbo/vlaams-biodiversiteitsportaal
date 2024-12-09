@@ -28,6 +28,7 @@ const toReplaceOthers = [
   /banner\.html$/,
   /footer\.html$/,
   /index\.html$/,      // index can be used as your main LA page
+  /pagesLayout\.html$/, // Layout, usable by markdown pages
   /errorPage\.html/,   // An error page that can be used in your infrastructure
   /testPage\.html$/,   // testPate is just for text some headings, buttons, etc
   /testSmall\.html$/,  // testSmall is for test the footer with small contents
