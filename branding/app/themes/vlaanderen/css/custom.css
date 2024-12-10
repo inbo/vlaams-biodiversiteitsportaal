@@ -1,4 +1,5 @@
 .bg-pattern {
+    display: inline-block;
     position: relative;
     width: 100%;
     min-height: calc(100vh - 101px);
