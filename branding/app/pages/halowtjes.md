@@ -3,19 +3,157 @@ title: html-brunch-static's awesome test page
 _options:
   layout: public/pagesLayout.html
 ---
-# Hello
 
-## Lorem Ipsum
+## Beknopte Handleiding voor het Vlaams Biodiversiteitsportaal
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum pharetra enim sed nunc vulputate, ac faucibus mauris condimentum. In elit orci, porta id sollicitudin fermentum, eleifend ac odio. Nunc ac dictum orci. Maecenas dictum tempus felis in lobortis. Nam id ultricies nibh. Donec sed accumsan nunc, dictum vehicula nunc. Fusce vel semper est, at vulputate orci. Phasellus ipsum nulla, ultricies semper blandit vitae, scelerisque eu orci. Vivamus vitae tellus non dui congue tincidunt ut at lorem. Sed sit amet elit non odio venenatis dapibus. Curabitur ac tortor convallis, eleifend lectus vel, venenatis ipsum. Duis sit amet lacus in arcu eleifend efficitur vulputate id mauris. Nunc id risus id justo auctor luctus. Etiam tincidunt nibh et orci gravida bibendum.
+Welkom bij het Vlaams Biodiversiteitsportaal\! Deze handleiding biedt een beknopt overzicht van de belangrijkste functionaliteiten van het portaal. Volg de onderstaande stappen om optimaal gebruik te maken van het portaal.
 
-Phasellus nec neque sed ipsum molestie elementum sed at nibh. Fusce pretium aliquet lacinia. Suspendisse id nunc eget odio consequat accumsan. Phasellus urna ante, aliquet sed mi eu, maximus pretium lectus. Nunc finibus mauris vitae scelerisque consequat. Suspendisse sed massa quam. Etiam malesuada nisi nec ante feugiat rutrum. Maecenas viverra ligula nec tristique auctor.
+---
 
-Aliquam quis gravida ex, non tempor arcu. Proin vel suscipit lectus. Donec a interdum risus. In nisl dui, interdum quis neque in, fermentum porttitor ante. Fusce vulputate, eros nec iaculis iaculis, lorem dolor fermentum orci, sit amet interdum nunc arcu non augue. Sed ante purus, egestas vel maximus vel, feugiat a lacus. Curabitur rhoncus, odio ut tincidunt lobortis, quam dolor ultrices lacus, nec ullamcorper nibh velit ut lorem. Quisque euismod, eros vel ullamcorper fermentum, metus quam tristique arcu, eu ultricies massa tortor nec augue.
+### 1\. Toegang tot het Portaal
 
-Donec quis tellus et est rutrum ornare. Maecenas quis suscipit nisi. Etiam lorem felis, ullamcorper ut sapien eget, laoreet rutrum nisl. Morbi dui erat, suscipit ut mi a, pretium sodales est. Donec congue iaculis enim a lacinia. Nam auctor erat ligula, eget eleifend nulla hendrerit vitae. Suspendisse potenti.
+**URL:** [Vlaams Biodiversiteitsportaal UAT](#) *(URL nog invullen)*
 
-Curabitur venenatis dui sit amet urna gravida lobortis. Ut lectus arcu, vehicula sit amet congue in, hendrerit vel leo. Cras in purus vitae magna luctus fermentum. Proin vestibulum, sem id eleifend aliquam, orci ante fringilla nisi, non tincidunt urna urna quis nulla. Ut lacinia justo eros, in ultricies purus aliquet sit amet. Quisque lacinia sagittis justo in egestas. In pharetra metus sed nibh egestas vulputate. Sed eleifend rhoncus velit, quis facilisis massa cursus eget. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla eu tristique tellus. Sed varius ut mi sit amet aliquet. Sed ut lectus vel augue tincidunt mattis quis sit amet felis. Sed dictum, tellus sed tincidunt aliquet, quam odio cursus ex, sit amet lobortis purus ligula sed augue. Nulla ac diam varius massa fringilla maximus. Maecenas pretium ante eget sem vehicula elementum. 
+**Inloggen / Registreren:**
+
+- **Registreren:** Als u nog geen account heeft, mail naar [support.natuurdata@inbo.be](mailto:support@natuurdata.inbo.be) U ontvangt een mail met de informatie om uw registratie te voltooien.  
+    
+- **Inloggen:** Klik op de knop **"Inloggen"** rechtsboven op de startpagina. Voer uw gebruikersnaam en wachtwoord in.
+
+---
+
+### 2\. Navigatie
+
+Het portaal is ingedeeld in verschillende secties:
+
+- **Home:** Homepage en toegang tot de verschillende modules.  
+- **Soorten:** Informatie over verschillende plant- en diersoorten en hun voorkomen  
+- **Geografisch portaal:** onderzoeksinterface van het VBP  
+- **Doe mee, Nieuws, Data & partners:** (enkel placeholders)  
+- **Help** (eerste hulp bij het VBP; placeholder op dit moment))  
+- **Meer:** Geavanceerde zoekfunctie voor het vinden van biodiversiteitsdata.  
+  - **Login:**  Inloggen in het VBP, beheer uw persoonlijke instellingen en voorkeuren.  
+  - **Verzamelingen:** Module rond *collectiedata*  
+  - **Waarnemingen**: Module rond *waarnemingsdata*  
+  - **Soorten**: Module rond *soorten*  
+  - **Soortenlijsten**: Module rond  *soortenlijsten*  
+  - **Geografisch portaal**: uitgebreide *onderzoeksmodule*  
+  - **Regio’s**: Snel informatie uit vooraf gedefiniëerde gebieden  
+  - **Afbeeldingen**: Afbeeldingen in het VBP  
+  - **In je buurt**: Snel informatie over wat er in je omgeving te vinden is  
+  - **Datasets**: De module *datasets*
+
+Gebruik het hoofdmenu bovenaan de pagina om snel tussen deze secties te navigeren. Klik op de bug om snel issues te rapporteren. Klik op de taalknop om je voorkeurstaal te selecteren.
+
+---
+
+### 3\. **Belangrijkste Modules**
+
+Hieronder vindt u een overzicht van de belangrijkste modules die u vanuit de homepage kunt benaderen:
+
+#### **Verzamelingen (Natuurhistorische collecties)**
+
+- Bekijk en beheer collectie data.  
+- Toegang tot gedigitaliseerde collecties.
+
+---
+
+#### **Waarnemingen**
+
+- Doorzoek en analyseer waarnemingsdata van soorten of informele groepen.  
+- Zoek eenvoudig of geavanceerd.  
+- Zoek naar events of surveys of datasets  
+- Ontvang gedetailleerde informatie over de locatie en tijd van observaties.  
+- Stel je alerts in (ontvang een melding wanneer er nieuwe records worden toegevoegd)
+
+---
+
+#### **Soorten**
+
+- Zoek informatie over specifieke soorten, inclusief beschrijvingen, naamgeving, status en waarnemingsrecords...  
+- Lijsten waarin de soort voorkomt  
+- Traits, als deze beschikbaar zijn.  
+- Klik door naar het geografisch portaal of bekijk en download waarnemingsrecords
+
+---
+
+#### **Soortenlijsten**
+
+- Beheer en doorzoek lijsten van soorten, bijvoorbeeld per regio of thema.  
+- Verfijn de resultaten  
+- Creëer uw eigen lijsten voor specifieke projecten.  
+- Navigeer direct naar waarnemingen uit één enkele soortenlijst. Bijvoorbeeld alle records van de ‘Vlaamse prioritaire soorten’. Of navigeer naar een subset uit een lijst en bekijk alle waarnemingen van bijvoorbeeld ‘Klein wild’ uit de checklist ‘Jachtbesluit’
+
+---
+
+#### **Geografisch Portaal**
+
+- Visualiseer gegevens op interactieve kaarten.  
+- Werk met zowel waarnemingen, rasterdata en vectordata en analyseer  
+- Importeer kaartlagen, soorten, soortengroepen, specifieke data, gebieden, analyseer observatiepatronen en exporteer de resultaten.  
+- Gebruik verschillende analysetools  
+  - Exporteer een checklist of soortenlijst van een bepaald gebied  
+  - Exporteer een zelf gedefinieerd gebied als shapefile  
+  - Vind uitgebreide informatie ivm het Geografisch portaal via het help menu (enkel in het Engels)
+  
+---
+  
+#### **Regio’s**
+
+- Snel toegang tot biodiversiteitsdata van vooraf gedefinieerde gebieden, zoals natuurreservaten, wildbeheereenheden… of administratieve regio's (Gemeenten, provincies…).  
+- Verken op soortengroepen en of taxonomie  
+- Navigeer doorheen de tijd
+
+---
+
+#### **Afbeeldingen**
+
+- Bekijk afbeeldingen die gekoppeld zijn aan soorten, locaties of waarnemingen.  
+- Geschikt voor identificatie en educatie.
+
+---
+
+#### **In je buurt**
+
+- Ontvang een overzicht van soorten en waarnemingen in uw directe omgeving.  
+- Gebruik uw locatie voor gerichte informatie.
+
+---
+
+#### **Datasets**
+
+- Doorzoek en download uitgebreide datasets over biodiversiteit.  
+- Bekijk metadata en licentievoorwaarden voor hergebruik.  
+- Navigeer naar records  
+- Bekijk de data op GBIF  
+- Contacteer de betrokkenen
+
+  
+---
+
+### 4\. **Tips voor Gebruik**
+
+- **Gebruik de Geavanceerde Zoekfunctie:** Vind snel specifieke gegevens of soorten via de **zoekbalk**.  
+- **Jouw profiel:** Log in om uw voorkeuren op te slaan en uitgebreide functionaliteiten te gebruiken. Beheer je downloads, alerts, soortenlijsten en annotaties
+- **Geografische Analyse:** Gebruik het **Geografisch Portaal** voor diepgaande ruimtelijke analyses. Bewaar je worksflows en zoekopdrachten
+
+---
+
+
+We nodigen u uit om het portaal te verkennen en al uw vragen of opmerkingen te delen via de [GitHub Issue Tracker](https://github.com/inbo/vlaams-biodiversiteitsportaal/issues). Uw feedback helpt ons om het Vlaams Biodiversiteitsportaal verder te verbeteren\!
+
+**Het VBP Team**
+
+---
+
+We hopen dat deze handleiding u helpt om het meeste uit het Vlaams Biodiversiteitsportaal te halen. Voor verdere vragen of ondersteuning staan wij altijd voor u klaar.
+
+**Vriendelijke groet,**  
+**Het Vlaams Biodiversiteitsportaal Team**
+
+
+### 
+
 
 ## Nog iets
 
