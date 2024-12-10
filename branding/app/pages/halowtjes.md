@@ -20,25 +20,30 @@ Welkom bij het Vlaams Biodiversiteitsportaal\! Deze handleiding biedt een beknop
     
 - **Inloggen:** Klik op de knop **"Inloggen"** rechtsboven op de startpagina. Voer uw gebruikersnaam en wachtwoord in.
 
-![image1]('/images/Afbeelding1.png')
+![image1](/images/Afbeelding1.png)
+![image1](/images/Afbeelding2.png)
 
-![test](/images/more-from-4.png)
-
-
-<p class="d-flex justify-content-around align-items-center">
-  <a href="https://www.natuurdata.dev.inbo.be/?lang=nl">
-    <img src="{{ '/assets/images/Afbeelding1.png' | relative_url }}" alt="Afbeelding1" width="180">
-  </a>
-  <a href="https://www.natuurdata.dev.inbo.be/?lang=nl">
-    <img src="{{ '/assets/images/Afbeelding2.png' | relative_url }}" alt="Afbeelding2" width="180">
-  </a>
+<!---
+<p align="center">
+  <img src="https://github.com/inbo/vlaams-biodiversiteitsportaal/blob/branding-homepage/branding/app/assets/images/Afbeelding1.png?raw=true" />
+  <img src="https://github.com/inbo/vlaams-biodiversiteitsportaal/blob/branding-homepage/branding/app/assets/images/Afbeelding2.png?raw=true" />
 </p>
+
+
+<p align="left">
+  <img src="/images/Afbeelding1.png" />
+  <img src="/images/Afbeelding2.png" />
+</p>
+
+-->
 
 ---
 
 ### 2\. Navigatie
 
 Het portaal is ingedeeld in verschillende secties:
+
+![image1](/images/Afbeelding3.png)
 
 - **Home:** Homepage en toegang tot de verschillende modules.  
 - **Soorten:** Informatie over verschillende plant- en diersoorten en hun voorkomen  
@@ -80,6 +85,8 @@ Hieronder vindt u een overzicht van de belangrijkste modules die u vanuit de hom
 - Ontvang gedetailleerde informatie over de locatie en tijd van observaties.  
 - Stel je alerts in (ontvang een melding wanneer er nieuwe records worden toegevoegd)
 
+
+![image1](/images/Afbeelding4.png)
 ---
 
 #### **Soorten**
@@ -88,6 +95,8 @@ Hieronder vindt u een overzicht van de belangrijkste modules die u vanuit de hom
 - Lijsten waarin de soort voorkomt  
 - Traits, als deze beschikbaar zijn.  
 - Klik door naar het geografisch portaal of bekijk en download waarnemingsrecords
+
+![image1](/images/Afbeelding5.png)
 
 ---
 
@@ -98,6 +107,9 @@ Hieronder vindt u een overzicht van de belangrijkste modules die u vanuit de hom
 - Creëer uw eigen lijsten voor specifieke projecten.  
 - Navigeer direct naar waarnemingen uit één enkele soortenlijst. Bijvoorbeeld alle records van de ‘Vlaamse prioritaire soorten’. Of navigeer naar een subset uit een lijst en bekijk alle waarnemingen van bijvoorbeeld ‘Klein wild’ uit de checklist ‘Jachtbesluit’
 
+
+![image1](/images/Afbeelding6.png)
+![image1](/images/Afbeelding7.png)
 ---
 
 #### **Geografisch Portaal**
@@ -110,6 +122,8 @@ Hieronder vindt u een overzicht van de belangrijkste modules die u vanuit de hom
   - Exporteer een zelf gedefinieerd gebied als shapefile  
   - Vind uitgebreide informatie ivm het Geografisch portaal via het help menu (enkel in het Engels)
   
+![image1](/images/Afbeelding8.png)
+
 ---
   
 #### **Regio’s**
@@ -118,6 +132,8 @@ Hieronder vindt u een overzicht van de belangrijkste modules die u vanuit de hom
 - Verken op soortengroepen en of taxonomie  
 - Navigeer doorheen de tijd
 
+![image1](/images/Afbeelding9.png)
+
 ---
 
 #### **Afbeeldingen**
@@ -125,12 +141,16 @@ Hieronder vindt u een overzicht van de belangrijkste modules die u vanuit de hom
 - Bekijk afbeeldingen die gekoppeld zijn aan soorten, locaties of waarnemingen.  
 - Geschikt voor identificatie en educatie.
 
+![image1](/images/Afbeelding10.png)
+
 ---
 
 #### **In je buurt**
 
 - Ontvang een overzicht van soorten en waarnemingen in uw directe omgeving.  
 - Gebruik uw locatie voor gerichte informatie.
+
+![image1](/images/Afbeelding11.png)
 
 ---
 
@@ -142,6 +162,8 @@ Hieronder vindt u een overzicht van de belangrijkste modules die u vanuit de hom
 - Bekijk de data op GBIF  
 - Contacteer de betrokkenen
 
+![image1](/images/Afbeelding12.png)
+
   
 ---
 
@@ -149,8 +171,12 @@ Hieronder vindt u een overzicht van de belangrijkste modules die u vanuit de hom
 
 - **Gebruik de Geavanceerde Zoekfunctie:** Vind snel specifieke gegevens of soorten via de **zoekbalk**.  
 - **Jouw profiel:** Log in om uw voorkeuren op te slaan en uitgebreide functionaliteiten te gebruiken. Beheer je downloads, alerts, soortenlijsten en annotaties
+
+![image1](/images/Afbeelding13.png)
+
 - **Geografische Analyse:** Gebruik het **Geografisch Portaal** voor diepgaande ruimtelijke analyses. Bewaar je worksflows en zoekopdrachten
 
+![image1](/images/Afbeelding14.png)
 ---
 
 
