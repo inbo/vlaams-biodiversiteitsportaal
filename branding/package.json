@@ -1,7 +1,8 @@
 {
   "scripts": {
     "start": "brunch watch --server",
-    "build": "rm -rf public && brunch build || brunch build"
+    "build": "rm -rf public && brunch build || brunch build",
+    "build:prod": "rm -rf public && brunch build --production || brunch build --production"
   },
   "dependencies": {
     "@govflanders/vl-widget-core": "^1.4.1",
