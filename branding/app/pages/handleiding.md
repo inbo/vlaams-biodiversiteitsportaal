@@ -1,5 +1,5 @@
 ---
-title: html-brunch-static's awesome test page
+title: VBP_beknopte handleiding
 _options:
   layout: public/pagesLayout.html
 ---
