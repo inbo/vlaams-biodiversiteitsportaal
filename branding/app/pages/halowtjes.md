@@ -1,5 +1,5 @@
 ---
-title: html-brunch-static's awesome test page
+title: VBP | Test pagina
 _options:
   layout: public/pagesLayout.html
 ---
@@ -26,3 +26,5 @@ function test() {
 ```
 
 [Een link](https://natuurdata.dev.inbo.be)
+
+![test](/images/more-from-4.png)
