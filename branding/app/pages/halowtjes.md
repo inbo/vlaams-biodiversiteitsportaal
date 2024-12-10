@@ -22,7 +22,7 @@ Welkom bij het Vlaams Biodiversiteitsportaal! Deze handleiding biedt een beknopt
 
 ![image1](/images/Afbeelding1.png) ![image1](/images/Afbeelding2.png)
 
-```{=html}
+
 <!---
 <p align="center">
   <img src="https://github.com/inbo/vlaams-biodiversiteitsportaal/blob/branding-homepage/branding/app/assets/images/Afbeelding1.png?raw=true" />
@@ -36,7 +36,7 @@ Welkom bij het Vlaams Biodiversiteitsportaal! Deze handleiding biedt een beknopt
 </p>
 
 -->
-```
+
 
 ------------------------------------------------------------------------
 
