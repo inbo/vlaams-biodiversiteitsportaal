@@ -20,6 +20,20 @@ Welkom bij het Vlaams Biodiversiteitsportaal\! Deze handleiding biedt een beknop
     
 - **Inloggen:** Klik op de knop **"Inloggen"** rechtsboven op de startpagina. Voer uw gebruikersnaam en wachtwoord in.
 
+![image1]('/images/Afbeelding1.png')
+
+![test](/images/more-from-4.png)
+
+
+<p class="d-flex justify-content-around align-items-center">
+  <a href="https://www.natuurdata.dev.inbo.be/?lang=nl">
+    <img src="{{ '/assets/images/Afbeelding1.png' | relative_url }}" alt="Afbeelding1" width="180">
+  </a>
+  <a href="https://www.natuurdata.dev.inbo.be/?lang=nl">
+    <img src="{{ '/assets/images/Afbeelding2.png' | relative_url }}" alt="Afbeelding2" width="180">
+  </a>
+</p>
+
 ---
 
 ### 2\. Navigatie
