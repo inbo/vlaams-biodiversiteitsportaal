@@ -8,6 +8,6 @@
         <property name="cookieName" value="vbp-lang"/>
         <property name="cookieMaxAge" value="525600"/>
         <property name="cookieHttpOnly" value="false" />
-        <property name="cookieSecure" value="false" />
+        <property name="cookieSecure" value="true" />
     </bean>
 </beans>
