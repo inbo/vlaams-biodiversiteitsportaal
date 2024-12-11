@@ -3,28 +3,20 @@ var i18n = require('i18next');
 var jqueryI18next = require('jquery-i18next');
 var backend = require("i18next-http-backend");
 var lngDetector = require('i18next-browser-languagedetector');
-var cache = require('i18next-localstorage-cache');
 var Url = require('domurl');
 var Cookies = require('js-cookie');
 
-// We use this backend as remote because subdomains.l-a.site should request to l-a.site domain
-const backOpts = {
-  // Something like: https://vtatlasoflife.org/basic-brand-2020//locales/es/common
-  // More options: https://github.com/i18next/i18next-http-backend
-  loadPath: "/locales/{{lng}}/{{ns}}", // in the original .json
-
-  // allow cross domain requests
-  crossDomain: false,
-}
-
-var currentUrl  = new Url;
-
-const laSessionCookie = 'la-lang-session';
-
 const i18nOpts = {
-  backend: backOpts,
-  // lng: 'nl',
+  backend: {
+      loadPath: "/locales/{{lng}}/{{ns}}",
+      crossDomain: false,
+      initImmediate: false,
+    },
+  // lng: 'nl',  cookieOptions: { path: '/', sameSite: 'strict' },
+  supportedLngs: [settings.enabledLangs],
   fallbackLng: {
+    "en-US": ['en'],
+    "nl-NL": ['nl'],
     "nl-BE": ['nl'],
     default: ['nl']
   },
@@ -55,16 +47,17 @@ const i18nOpts = {
 
 const detectorOptions = {
   // order and from where user language should be detected
-  order: ['querystring', 'cookie', 'navigator', 'localStorage', 'htmlTag'],
+  order: ['querystring', 'cookie', 'navigator'],
 
   // keys or params to lookup language from
   lookupQuerystring: 'lang',
-  lookupCookie: 'i18next',
-  lookupLocalStorage: 'i18nextLng',
+  lookupCookie: 'vbp-lang',
   cookieMinutes: 525600, // a year
-  // cache user language on
+  cookiePath: '/',
+  cookieDomain: settings.mainDomain,
+  cookieOptions: { path: '/', sameSite: 'strict', secure: settings.mainLAUrl.startsWith('https') },
   caches: ['cookie'],
-  excludeCacheFor: ['cimode'] // languages to not persist (cookie, localStorage)
+  excludeCacheFor: ['cimode']
 };
 
 if (document.location.host !== 'localhost:3333') {
@@ -72,18 +65,6 @@ if (document.location.host !== 'localhost:3333') {
   detectorOptions.cookieDomain = settings.mainDomain;
 }
 
-const cacheOptions = {
-  // turn on or off
-  enabled: false,
-  // prefix for stored languages
-  prefix: 'i18next_res_',
-  // expiration
-  expirationTime: 7 * 24 * 60 * 60 * 1000,
-  // language versions
-  versions: {}
-};
-
-i18nOpts.cache = cacheOptions;
 i18nOpts.detection = detectorOptions;
 
 i18nOpts.sendMissing = false;
@@ -103,7 +84,6 @@ i18n.on('languageChanged', function (lng) {
 (function($) {
 i18n.use(backend)
     .use(lngDetector)
-    .use(cache)
     .init(i18nOpts, (err, t) => {
       // initialized and ready to
       if (err) {
@@ -123,6 +103,7 @@ i18n.use(backend)
         i18n.changeLanguage(lang);
 
         // Change ?lang param and reload
+        var currentUrl  = new Url;
         currentUrl.query.lang = lang;
         document.location.search = currentUrl.query;
       });
@@ -130,31 +111,5 @@ i18n.use(backend)
       if( $('#dropdown-lang').length ) {
         $('#dropdown-lang').find('.dropdown-toggle').html(i18n.language + ' <span class="caret"></span>');
       }
-
-      if (typeof Cookies.get(laSessionCookie) === 'undefined' && typeof currentUrl.query.lang === 'undefined') {
-        // Workaround to set grails locale
-        // This will use to do a unique lang redirect (to force grails to set the lang for the session)
-        var in30Minutes = 1/48;
-        // grails default session lifetime is 30min
-        Cookies.set(laSessionCookie, '/', { expires: in30Minutes });
-        currentUrl.query.lang = i18n.language;
-        document.location.search = currentUrl.query;
-      }
-
-      // cookies eu consent
-      /* const cookiesOpt = {
-       *   cookieTitle: t('Uso de Cookies'),
-       *   cookieMessage: t('Utilizamos cookies para asegurar un mejor uso de nuestra web. Si continúas navegando, consideramos que aceptas su uso'),
-       *   showLink: false,
-       *   position: 'bottom',
-       *   linkText: 'Lee más',
-       *   linkRouteName: '/privacy',
-       *   acceptButtonText: t('Aceptar'),
-       *   html: false,
-       *   expirationInDays: 70,
-       *   forceShow: false
-       * };
-       */
-      // CookieConsent.init(cookiesOpt);
     });
 }(jQuery));

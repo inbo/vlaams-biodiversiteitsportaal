@@ -8,7 +8,9 @@ LABEL ala.version=${VERSION}
 
 WORKDIR /project
 RUN git clone --branch v${VERSION} --depth 1 ${SOURCE} /project
+
 COPY build.gradle /project/build.gradle
+COPY resources.xml ./grails-app/conf/spring/resources.xml
 
 RUN --mount=type=cache,target=/gradle-cache,ro \
     gradle build assetCompile assemble \

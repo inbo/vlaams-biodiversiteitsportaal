@@ -12,6 +12,7 @@ RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} .
 # Remove absolutely ridiculous and annoying "security" check
 RUN rm /project/grails-app/controllers/au/org/ala/logger/IpAddressInterceptor.groovy
 
+COPY resources.xml ./grails-app/conf/spring/resources.xml
 
 RUN --mount=type=cache,target=/gradle-cache,ro \
     gradle build assemble \

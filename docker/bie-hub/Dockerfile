@@ -13,6 +13,8 @@ LABEL ala.version=inbo-${COMMIT}
 
 RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
 
+COPY resources.xml ./grails-app/conf/spring/resources.xml
+
 COPY ./i18n/ ./grails-app/i18n/
 
 

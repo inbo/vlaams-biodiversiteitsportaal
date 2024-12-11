@@ -72,3 +72,10 @@ security:
 webservice:
   jwt: true
   jwt-scopes: openid users/read
+
+server:
+  servlet:
+    session:
+      cookie:
+        secure: true
+        same-site: "none"
