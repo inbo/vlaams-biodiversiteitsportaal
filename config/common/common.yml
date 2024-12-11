@@ -78,4 +78,4 @@ server:
     session:
       cookie:
         secure: true
-        same-site: "none"
+        same-site: "strict"
