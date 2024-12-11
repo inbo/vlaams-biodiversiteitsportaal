@@ -5,4 +5,5 @@ var bieService = settings.services.bieService.url;
 // and options
 
 window.BC_CONF = window.BC_CONF || {};
+BC_CONF.autoCompleteSelector = `#search`
 BC_CONF.autocompleteURL = `${bieService}/search/auto.json`
