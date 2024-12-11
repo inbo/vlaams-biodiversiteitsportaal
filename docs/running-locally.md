@@ -17,6 +17,22 @@ In order to speed up the build process, we customize the gradle builder image.
 Mostly so we can override the maven repositories used by the australian projects.  
 Details can be found in the [gradle docker folder](./docker/gradle).
 
+#### Limit resources needed for building the docker images
+Building all these images, all at once can use a large amount of resources.
+If you want to be able to do other things while building, you might want to limit the required reousrces.
+That way your computer does not risk becoming entirely unresponsive.
+
+To do this, create and use a custom buildx builder based on the builkitd config provided in the docker folder.
+Like so:
+```commandline
+docker buildx create --use --bootstrap \
+  --name vbp-builder \
+  --driver docker-container \
+  --config ./docker/buildkitd.toml
+```
+This limits the amount of tasks the builder will run in parallel to avoid overloading your computer.
+(especially you memory)
+
 ### 2. Add hostname
 The platform requires a hostname that resolves to the same thing by both the services, running inside docker containers and the client browser.  
 On linux you can edit your `/etc/hosts` file to look something like this:  

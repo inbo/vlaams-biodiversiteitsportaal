@@ -10,6 +10,8 @@ LABEL ala.version=${VERSION}
 WORKDIR /project
 RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} .
 
+COPY resources.xml ./grails-app/conf/spring/resources.xml
+
 RUN --mount=type=cache,target=/gradle-cache,ro \
     gradle build assemble \
     -x test -x integrationTest

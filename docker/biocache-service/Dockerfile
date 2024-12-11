@@ -9,7 +9,7 @@ LABEL ala.version=${VERSION}
 WORKDIR /project
 RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} .
 
-COPY ./i18n/messages-nl.properties ./src/main/webapp/WEB-INF/messages.properties
+COPY ./i18n/messages-nl.properties ./src/main/webapp/WEB-INF/messages_nl.properties
 
 RUN --mount=type=cache,target=/gradle-cache,ro \
     gradle build assemble \

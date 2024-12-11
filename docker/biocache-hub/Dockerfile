@@ -9,6 +9,8 @@ LABEL ala.version=inbo-${COMMIT}
 WORKDIR /project/biocache-hubs
 RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
 
+COPY resources.xml ./grails-app/conf/spring/resources.xml
+
 RUN --mount=type=cache,target=/gradle-cache,ro \
     gradle build publishToMavenLocal \
     -x test
