@@ -35,7 +35,9 @@ COPY --from=builder /project/build/libs/collectory-${VERSION}-plain.war ${CATALI
 COPY collectory.xml ${CATALINA_HOME}/conf/portal/localhost/collectory.xml
 
 # Symlink to i18n files location
-RUN ln -s /opt/atlas/i18n/collectory-plugin/messages /config/config/collectory/i18n
-RUN ln -s /var/opt/atlas/i18n/collectory-plugin/messages /config/config/collectory/i18n/override
+RUN mkdir -p /opt/atlas/i18n/collectory-plugin \
+  && ln -s /config/config/collectory/i18n /opt/atlas/i18n/collectory-plugin/messages
+RUN mkdir -p /var/opt/atlas/i18n/collectory-plugin \
+  && ln -s /config/config/collectory/i18n/override /var/opt/atlas/i18n/collectory-plugin/messages
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/collectory/actuator/health || exit 1

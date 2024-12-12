@@ -38,7 +38,9 @@ COPY --from=builder /project/build/libs/project-${VERSION}-plain.war ${CATALINA_
 COPY spatial-hub.xml ${CATALINA_HOME}/conf/portal/localhost/spatial-hub.xml
 
 # Symlink to i18n files location
-RUN ln -s /opt/atlas/i18n/spatial-hub/messages /config/config/spatial-hub/i18n
-RUN ln -s /var/opt/atlas/i18n/spatial-hub/messages /config/config/spatial-hub/i18n/override
+RUN mkdir -p /opt/atlas/i18n/spatial-hub \
+  && ln -s /config/config/spatial-hub/i18n /opt/atlas/i18n/spatial-hub/messages
+RUN mkdir -p /var/opt/atlas/i18n/spatial-hub \
+  && ln -s /config/config/spatial-hub/i18n/override /var/opt/atlas/i18n/spatial-hub/messages
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/spatial-hub/actuator/health || exit 1

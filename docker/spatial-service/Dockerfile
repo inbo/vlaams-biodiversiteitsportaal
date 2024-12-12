@@ -41,7 +41,9 @@ COPY --from=builder /project/build/libs/project-${VERSION}-plain.war ${CATALINA_
 COPY spatial-service.xml ${CATALINA_HOME}/conf/portal/localhost/spatial-service.xml
 
 # Symlink to i18n files location
-RUN ln -s /opt/atlas/i18n/spatial-service/messages /config/config/spatial-service/i18n
-RUN ln -s /var/opt/atlas/i18n/spatial-service/messages /config/config/spatial-service/i18n/override
+RUN mkdir -p /opt/atlas/i18n/spatial-service \
+  && ln -s /config/config/spatial-service/i18n /opt/atlas/i18n/spatial-service/messages
+RUN mkdir -p /var/opt/atlas/i18n/spatial-service \
+  && ln -s /config/config/spatial-service/i18n/override /var/opt/atlas/i18n/spatial-service/messages
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/spatial-service/actuator/health || exit 1

@@ -49,9 +49,13 @@ COPY --from=builder /project/ala-hub/build/libs/ala-hub-${VERSION}-plain.war ${C
 COPY biocache-hub.xml ${CATALINA_HOME}/conf/portal/localhost/biocache-hub.xml
 
 # Symlink to i18n files location
-RUN ln -s /opt/atlas/i18n/downloads-plugin/messages /config/config/biocache-hub/i18n/downloads-plugin
-RUN ln -s /var/opt/atlas/i18n/downloads-plugin/messages /config/config/biocache-hub/i18n/downloads-plugin/override
-RUN ln -s /opt/atlas/i18n/biocache-hubs/messages /config/config/biocache-hub/i18n
-RUN ln -s /var/opt/atlas/i18n/biocache-hubs/messages /config/config/biocache-hub/i18n/override
+RUN mkdir -p /opt/atlas/i18n/downloads-plugin \
+  && ln -s /config/config/biocache-hub/i18n/downloads-plugin /opt/atlas/i18n/downloads-plugin/messages
+RUN mkdir -p /var/opt/atlas/i18n/downloads-plugin \
+  && ln -s /config/config/biocache-hub/i18n/downloads-plugin/override /var/opt/atlas/i18n/downloads-plugin/messages
+RUN mkdir -p /opt/atlas/i18n/biocache-hubs \
+  && ln -s /config/config/biocache-hub/i18n /opt/atlas/i18n/biocache-hubs/messages
+RUN mkdir -p /var/opt/atlas/i18n/biocache-hubs \
+  && ln -s /config/config/biocache-hub/i18n/override /var/opt/atlas/i18n/biocache-hubs/messages
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/biocache-hub/actuator/health || exit 1

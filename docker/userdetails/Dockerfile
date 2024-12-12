@@ -29,7 +29,9 @@ COPY --from=builder /project/build/libs/userdetails-${VERSION}-plain.war ${CATAL
 COPY userdetails.xml ${CATALINA_HOME}/conf/portal/localhost/userdetails.xml
 
 # Symlink to i18n files location
-RUN ln -s /opt/atlas/i18n/userdetails/messages /config/config/userdetails/i18n
-RUN ln -s /var/opt/atlas/i18n/userdetails/messages /config/config/userdetails/i18n/override
+RUN mkdir -p /opt/atlas/i18n/userdetails \
+  && ln -s /config/config/userdetails/i18n /opt/atlas/i18n/userdetails/messages
+RUN mkdir -p /var/opt/atlas/i18n/userdetails \
+  && ln -s /config/config/userdetails/i18n/override /var/opt/atlas/i18n/userdetails/messages
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/userdetails/actuator/health || exit 1

@@ -31,7 +31,9 @@ COPY --from=builder /project/build/libs/apikey-${VERSION}-plain.war ${CATALINA_H
 COPY apikey.xml ${CATALINA_HOME}/conf/portal/localhost/apikey.xml
 
 # Symlink to i18n files location
-RUN ln -s /opt/atlas/i18n/apikey/messages /config/config/apikey/i18n
-RUN ln -s /var/opt/atlas/i18n/apikey/messages /config/config/apikey/i18n/override
+RUN mkdir -p /opt/atlas/i18n/apikey \
+  && ln -s /config/config/apikey/i18n /opt/atlas/i18n/apikey/messages
+RUN mkdir -p /var/opt/atlas/i18n/apikey \
+  && ln -s /config/config/apikey/i18n/override /var/opt/atlas/i18n/apikey/messages
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/apikey/actuator/health || exit 1
