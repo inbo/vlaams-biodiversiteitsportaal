@@ -28,4 +28,7 @@ LABEL ala.version=${VERSION}
 COPY --from=builder /project/build/libs/userdetails-${VERSION}-plain.war ${CATALINA_HOME}/webapps/userdetails.war
 COPY userdetails.xml ${CATALINA_HOME}/conf/portal/localhost/userdetails.xml
 
+# Symlink to i18n files location
+RUN ln -s /opt/atlas/i18n/userdetails/messages /config/config/userdetails/i18n
+
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/userdetails/actuator/health || exit 1

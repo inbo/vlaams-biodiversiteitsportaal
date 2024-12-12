@@ -50,4 +50,8 @@ LABEL ala.version=inbo-${COMMIT}
 COPY --from=builder /project/ala-hub/build/libs/ala-hub-${VERSION}-plain.war ${CATALINA_HOME}/webapps/biocache-hub.war
 COPY biocache-hub.xml ${CATALINA_HOME}/conf/portal/localhost/biocache-hub.xml
 
+# Symlink to i18n files location
+RUN ln -s /opt/atlas/i18n/downloads-plugin/messages /config/config/biocache-hub/i18n/downloads-plugin
+RUN ln -s /opt/atlas/i18n/biocache-hubs/messages /config/config/biocache-hub/i18n
+
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/biocache-hub/actuator/health || exit 1

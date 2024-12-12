@@ -9,7 +9,6 @@ LABEL ala.version=${VERSION}
 WORKDIR /project
 RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} .
 
-COPY ./i18n/ ./grails-app/i18n/
 COPY resources.xml ./grails-app/conf/spring/resources.xml
 
 RUN --mount=type=cache,target=/gradle-cache,ro \
@@ -28,5 +27,8 @@ LABEL ala.version=${VERSION}
 
 COPY --from=builder /project/build/libs/specieslist-webapp-${VERSION}-plain.war ${CATALINA_HOME}/webapps/species-list.war
 COPY species-list.xml ${CATALINA_HOME}/conf/portal/localhost/species-list.xml
+
+# Symlink to i18n files location
+RUN ln -s /opt/atlas/i18n/species-list/messages /config/config/specieslist-webapp/i18n
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/species-list/actuator/health || exit 1

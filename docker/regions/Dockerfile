@@ -13,7 +13,6 @@ LABEL ala.version=inbo-${COMMIT}
 WORKDIR /project
 RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
 
-COPY ./i18n/ ./grails-app/i18n/
 COPY resources.xml ./grails-app/conf/spring/resources.xml
 
 RUN --mount=type=cache,target=/gradle-cache,ro \
@@ -34,5 +33,8 @@ LABEL ala.version=inbo-${COMMIT}
 
 COPY --from=builder /project/build/libs/regions-${VERSION}-plain.war ${CATALINA_HOME}/webapps/regions.war
 COPY regions.xml ${CATALINA_HOME}/conf/portal/localhost/regions.xml
+
+# Symlink to i18n files location
+RUN ln -s /opt/atlas/i18n/regions/messages /config/config/regions/i18n
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/regions/actuator/health || exit 1

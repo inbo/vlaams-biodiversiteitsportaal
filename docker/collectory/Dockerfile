@@ -14,7 +14,6 @@ LABEL ala.version=inbo-${COMMIT}
 
 RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
 
-COPY ./i18n/ ./grails-app/i18n/
 COPY resources.xml ./grails-app/conf/spring/resources.xml
 
 RUN --mount=type=cache,target=/gradle-cache,ro \
@@ -34,5 +33,8 @@ LABEL ala.version=inbo-${COMMIT}
 
 COPY --from=builder /project/build/libs/collectory-${VERSION}-plain.war ${CATALINA_HOME}/webapps/collectory.war
 COPY collectory.xml ${CATALINA_HOME}/conf/portal/localhost/collectory.xml
+
+# Symlink to i18n files location
+RUN ln -s /opt/atlas/i18n/collectory-plugin/messages /config/config/collectory/i18n
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/collectory/actuator/health || exit 1

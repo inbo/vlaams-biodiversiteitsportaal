@@ -27,5 +27,6 @@ LABEL ala.version=${VERSION}
 
 COPY --from=builder /project/build/libs/biocache-service-${VERSION}.war ${CATALINA_HOME}/webapps/biocache-service.war
 COPY biocache-service.xml ${CATALINA_HOME}/conf/portal/localhost/biocache-service.xml
+RUN ln -s /opt/atlas/i18n/biocache-service/messages /config/config/biocache-service/i18n
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/biocache-service/actuator/health || exit 1

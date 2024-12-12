@@ -10,7 +10,6 @@ LABEL ala.version=inbo-${COMMIT}
 WORKDIR /project
 RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} .
 
-COPY ./i18n/ ./grails-app/i18n/
 COPY resources.xml ./grails-app/conf/spring/resources.xml
 
 RUN --mount=type=cache,target=/gradle-cache,ro \
@@ -30,5 +29,8 @@ LABEL ala.version=inbo-${COMMIT}
 
 COPY --from=builder /project/build/libs/bie-index-${VERSION}-plain.war ${CATALINA_HOME}/webapps/bie-index.war
 COPY bie-index.xml ${CATALINA_HOME}/conf/portal/localhost/bie-index.xml
+
+# Symlink to i18n files location
+RUN ln -s /opt/atlas/i18n/bie-index/messages /config/config/bie-index/i18n
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/apikey/actuator/health || exit 1

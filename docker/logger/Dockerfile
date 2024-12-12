@@ -30,5 +30,6 @@ LABEL ala.version=${VERSION}
 
 COPY --from=builder /project/build/libs/logger-service-${VERSION}-plain.war ${CATALINA_HOME}/webapps/logger.war
 COPY logger.xml ${CATALINA_HOME}/conf/portal/localhost/logger.xml
+RUN ln -s /opt/atlas/i18n/logger/messages /config/config/logger/i18n
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/logger/actuator/health || exit 1
