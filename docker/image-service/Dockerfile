@@ -31,5 +31,6 @@ COPY image-service.xml ${CATALINA_HOME}/conf/portal/localhost/image-service.xml
 
 # Symlink to i18n files location
 RUN ln -s /opt/atlas/i18n/image-service/messages /config/config/image-service/i18n
+RUN ln -s /var/opt/atlas/i18n/image-service/messages /config/config/image-service/i18n/override
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/image-service/actuator/health || exit 1

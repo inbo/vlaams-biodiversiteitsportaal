@@ -30,8 +30,6 @@ RUN cat grails-app/conf/application.yml
 # TODO: Fix explore your area not loading properly because of global
 COPY alaBs.js ./grails-app/assets/javascripts/alaBs.js
 
-COPY ./i18n/ ./grails-app/i18n/
-
 RUN --mount=type=cache,target=/gradle-cache,ro \
     gradle build assemble \
     -x test -x integrationTest
@@ -52,6 +50,8 @@ COPY biocache-hub.xml ${CATALINA_HOME}/conf/portal/localhost/biocache-hub.xml
 
 # Symlink to i18n files location
 RUN ln -s /opt/atlas/i18n/downloads-plugin/messages /config/config/biocache-hub/i18n/downloads-plugin
+RUN ln -s /var/opt/atlas/i18n/downloads-plugin/messages /config/config/biocache-hub/i18n/downloads-plugin/override
 RUN ln -s /opt/atlas/i18n/biocache-hubs/messages /config/config/biocache-hub/i18n
+RUN ln -s /var/opt/atlas/i18n/biocache-hubs/messages /config/config/biocache-hub/i18n/override
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/biocache-hub/actuator/health || exit 1

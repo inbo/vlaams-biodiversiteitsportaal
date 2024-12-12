@@ -30,5 +30,6 @@ COPY userdetails.xml ${CATALINA_HOME}/conf/portal/localhost/userdetails.xml
 
 # Symlink to i18n files location
 RUN ln -s /opt/atlas/i18n/userdetails/messages /config/config/userdetails/i18n
+RUN ln -s /var/opt/atlas/i18n/userdetails/messages /config/config/userdetails/i18n/override
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/userdetails/actuator/health || exit 1

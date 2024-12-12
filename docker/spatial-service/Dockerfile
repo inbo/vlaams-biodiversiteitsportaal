@@ -42,5 +42,6 @@ COPY spatial-service.xml ${CATALINA_HOME}/conf/portal/localhost/spatial-service.
 
 # Symlink to i18n files location
 RUN ln -s /opt/atlas/i18n/spatial-service/messages /config/config/spatial-service/i18n
+RUN ln -s /var/opt/atlas/i18n/spatial-service/messages /config/config/spatial-service/i18n/override
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/spatial-service/actuator/health || exit 1

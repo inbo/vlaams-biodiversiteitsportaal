@@ -35,5 +35,6 @@ COPY bie-hub.xml ${CATALINA_HOME}/conf/portal/localhost/bie-hub.xml
 
 # Symlink to i18n files location
 RUN ln -s /opt/atlas/i18n/bie-plugin/messages /config/config/bie-hub/i18n
+RUN ln -s /var/opt/atlas/i18n/bie-plugin/messages /config/config/bie-hub/i18n/override
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/apikey/actuator/health || exit 1
