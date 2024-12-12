@@ -42,9 +42,7 @@ COPY --from=builder --chown=app \
 
 RUN mkdir /data/ala-sensitive-data-service && mkdir /data/ala-sensitive-data-service/config
 
-ENV CONFIG_LOCATION=/app/config.yml
-
 ENTRYPOINT ["java", "-jar", "/app/app.jar", "server"]
-CMD ["${CONFIG_LOCATION}"]
+CMD ["config.yml"]
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:9180 || exit 1
