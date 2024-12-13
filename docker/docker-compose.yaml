@@ -110,7 +110,6 @@ services:
       test: mysqladmin ping -h localhost
 
   mysql-logger-init:
-#    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/docker-hub/library/mysql
     image: mysql
     volumes:
       - ../config/logger:/config/config/logger:ro
