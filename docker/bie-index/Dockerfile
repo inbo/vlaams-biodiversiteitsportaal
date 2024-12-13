@@ -32,7 +32,7 @@ COPY bie-index.xml ${CATALINA_HOME}/conf/portal/localhost/bie-index.xml
 
 # Symlink to i18n files location
 RUN mkdir -p /opt/atlas/i18n/bie-index \
-  && ln -s /config/config/bie-index/i18n /opt/atlas/i18n/bie-index/messages
+  && ln -s /config/config/bie-index/i18n/crowdin /opt/atlas/i18n/bie-index/messages
 RUN mkdir -p /var/opt/atlas/i18n/bie-index \
   && ln -s /config/config/bie-index/i18n/override /var/opt/atlas/i18n/bie-index/messages
 

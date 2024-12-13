@@ -30,7 +30,7 @@ COPY doi-service.xml ${CATALINA_HOME}/conf/portal/localhost/doi-service.xml
 
 # Symlink to i18n files location
 RUN mkdir -p /opt/atlas/i18n/doi \
-  && ln -s /config/config/doi-service/i18n /opt/atlas/i18n/doi/messages
+  && ln -s /config/config/doi/i18n/crowdin /opt/atlas/i18n/doi/messages
 RUN mkdir -p /var/opt/atlas/i18n/doi \
   && ln -s /config/config/doi-service/i18n/override /var/opt/atlas/i18n/doi/messages
 

@@ -42,7 +42,7 @@ COPY spatial-service.xml ${CATALINA_HOME}/conf/portal/localhost/spatial-service.
 
 # Symlink to i18n files location
 RUN mkdir -p /opt/atlas/i18n/spatial-service \
-  && ln -s /config/config/spatial-service/i18n /opt/atlas/i18n/spatial-service/messages
+  && ln -s /config/config/spatial-service/i18n/crowdin /opt/atlas/i18n/spatial-service/messages
 RUN mkdir -p /var/opt/atlas/i18n/spatial-service \
   && ln -s /config/config/spatial-service/i18n/override /var/opt/atlas/i18n/spatial-service/messages
 

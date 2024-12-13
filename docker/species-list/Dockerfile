@@ -30,7 +30,7 @@ COPY species-list.xml ${CATALINA_HOME}/conf/portal/localhost/species-list.xml
 
 # Symlink to i18n files location
 RUN mkdir -p /opt/atlas/i18n/species-list \
-  && ln -s /config/config/specieslist-webapp/i18n /opt/atlas/i18n/species-list/messages
+  && ln -s /config/config/species-list/i18n/crowdin /opt/atlas/i18n/species-list/messages
 RUN mkdir -p /var/opt/atlas/i18n/species-list \
   && ln -s /config/config/specieslist-webapp/i18n/override /var/opt/atlas/i18n/species-list/messages
 

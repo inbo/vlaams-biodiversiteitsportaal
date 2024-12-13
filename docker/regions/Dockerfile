@@ -36,7 +36,7 @@ COPY regions.xml ${CATALINA_HOME}/conf/portal/localhost/regions.xml
 
 # Symlink to i18n files location
 RUN mkdir -p /opt/atlas/i18n/regions \
-  && ln -s /config/config/regions/i18n /opt/atlas/i18n/regions/messages
+  && ln -s /config/config/regions/i18n/crowdin /opt/atlas/i18n/regions/messages
 RUN mkdir -p /var/opt/atlas/i18n/regions \
   && ln -s /config/config/regions/i18n/override /var/opt/atlas/i18n/regions/messages
 

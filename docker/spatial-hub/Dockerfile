@@ -39,7 +39,7 @@ COPY spatial-hub.xml ${CATALINA_HOME}/conf/portal/localhost/spatial-hub.xml
 
 # Symlink to i18n files location
 RUN mkdir -p /opt/atlas/i18n/spatial-hub \
-  && ln -s /config/config/spatial-hub/i18n /opt/atlas/i18n/spatial-hub/messages
+  && ln -s /config/config/spatial-hub/i18n/crowdin /opt/atlas/i18n/spatial-hub/messages
 RUN mkdir -p /var/opt/atlas/i18n/spatial-hub \
   && ln -s /config/config/spatial-hub/i18n/override /var/opt/atlas/i18n/spatial-hub/messages
 
