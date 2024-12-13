@@ -30,4 +30,10 @@ LABEL ala.version=${VERSION}
 COPY --from=builder /project/build/libs/apikey-${VERSION}-plain.war ${CATALINA_HOME}/webapps/apikey.war
 COPY apikey.xml ${CATALINA_HOME}/conf/portal/localhost/apikey.xml
 
+# Symlink to i18n files location
+RUN mkdir -p /opt/atlas/i18n/apikey \
+  && ln -s /config/config/apikey/i18n/crowdin /opt/atlas/i18n/apikey/messages
+RUN mkdir -p /var/opt/atlas/i18n/apikey \
+  && ln -s /config/config/apikey/i18n/override /var/opt/atlas/i18n/apikey/messages
+
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/apikey/actuator/health || exit 1

@@ -30,8 +30,6 @@ RUN cat grails-app/conf/application.yml
 # TODO: Fix explore your area not loading properly because of global
 COPY alaBs.js ./grails-app/assets/javascripts/alaBs.js
 
-COPY ./i18n/ ./grails-app/i18n/
-
 RUN --mount=type=cache,target=/gradle-cache,ro \
     gradle build assemble \
     -x test -x integrationTest
@@ -49,5 +47,15 @@ LABEL ala.version=inbo-${COMMIT}
 
 COPY --from=builder /project/ala-hub/build/libs/ala-hub-${VERSION}-plain.war ${CATALINA_HOME}/webapps/biocache-hub.war
 COPY biocache-hub.xml ${CATALINA_HOME}/conf/portal/localhost/biocache-hub.xml
+
+# Symlink to i18n files location
+RUN mkdir -p /opt/atlas/i18n/downloads-plugin \
+  && ln -s /config/config/biocache-hub/i18n/crowdin/downloads-plugin /opt/atlas/i18n/downloads-plugin/messages
+RUN mkdir -p /var/opt/atlas/i18n/downloads-plugin \
+  && ln -s /config/config/biocache-hub/i18n/downloads-plugin/override /var/opt/atlas/i18n/downloads-plugin/messages
+RUN mkdir -p /opt/atlas/i18n/biocache-hubs \
+  && ln -s /config/config/biocache-hubs/i18n/crowdin /opt/atlas/i18n/biocache-hubs/messages
+RUN mkdir -p /var/opt/atlas/i18n/biocache-hubs \
+  && ln -s /config/config/biocache-hub/i18n/override /var/opt/atlas/i18n/biocache-hubs/messages
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/biocache-hub/actuator/health || exit 1

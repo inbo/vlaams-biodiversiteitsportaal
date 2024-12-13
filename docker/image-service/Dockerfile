@@ -29,4 +29,10 @@ LABEL ala.version=${VERSION}
 COPY --from=builder /project/build/libs/image-service-${VERSION}-plain.war ${CATALINA_HOME}/webapps/image-service.war
 COPY image-service.xml ${CATALINA_HOME}/conf/portal/localhost/image-service.xml
 
+# Symlink to i18n files location
+RUN mkdir -p /opt/atlas/i18n/image-service \
+  && ln -s /config/config/image-service/i18n/crowdin /opt/atlas/i18n/image-service/messages
+RUN mkdir -p /var/opt/atlas/i18n/image-service \
+  && ln -s /config/config/image-service/i18n/override /var/opt/atlas/i18n/image-service/messages
+
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/image-service/actuator/health || exit 1

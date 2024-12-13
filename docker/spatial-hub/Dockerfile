@@ -15,7 +15,6 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
 WORKDIR /project
 RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} .
 
-COPY ./i18n/ ./grails-app/i18n/
 COPY resources.xml ./grails-app/conf/spring/resources.xml
 COPY ./layouts/* ./grails-app/views/layouts/
 
@@ -37,5 +36,11 @@ LABEL ala.version=${VERSION}
 
 COPY --from=builder /project/build/libs/project-${VERSION}-plain.war ${CATALINA_HOME}/webapps/spatial-hub.war
 COPY spatial-hub.xml ${CATALINA_HOME}/conf/portal/localhost/spatial-hub.xml
+
+# Symlink to i18n files location
+RUN mkdir -p /opt/atlas/i18n/spatial-hub \
+  && ln -s /config/config/spatial-hub/i18n/crowdin /opt/atlas/i18n/spatial-hub/messages
+RUN mkdir -p /var/opt/atlas/i18n/spatial-hub \
+  && ln -s /config/config/spatial-hub/i18n/override /var/opt/atlas/i18n/spatial-hub/messages
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/spatial-hub/actuator/health || exit 1
