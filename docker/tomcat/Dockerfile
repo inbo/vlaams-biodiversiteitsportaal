@@ -73,11 +73,17 @@ COPY --from=userdetails ${CATALINA_HOME}/conf/portal/localhost conf/portal/local
 RUN sh -x \
     && mkdir -p /opt/atlas/i18n \
     && mkdir -p /var/opt/atlas/i18n \
-    && for service in alerts apikey bie-hub bie-index biocache-hub biocache-service collectory doi-service image-service logger regions spatial-hub spatial-service userdetails; do \
+    && for service in alerts apikey bie-index biocache-service collectory doi-service image-service logger regions spatial-hub spatial-service userdetails; do \
             ln -s /config/config/${service}/i18n/crowdin /opt/atlas/i18n/${service}; \
             ln -s /config/config/${service}/i18n/override /var/opt/atlas/i18n/${service}; \
         done \
-    && ln -s /config/config/biocache-hub/i18n/crowdin/downloads-plugin /opt/atlas/i18n/downloads-plugin \
+    && ln -s /config/config/bie-hub/i18n/crowdin /opt/atlas/i18n/bie-plugin \
+    && ln -s /config/config/bie-hub/i18n/override /var/opt/atlas/i18n/bie-plugin \
+    && ln -s /config/config/biocache-hub/i18n/crowdin /opt/atlas/i18n/biocache-hubs \
+    && ln -s /config/config/biocache-hub/i18n/override /var/opt/atlas/i18n/biocache-hubs \
+    && ln -s /config/config/collectory/i18n/crowdin /opt/atlas/i18n/collectory-plugin \
+    && ln -s /config/config/collectory/i18n/override /var/opt/atlas/i18n/collectory-plugin \
+    && ln -s /config/config/biocache-hub/i18n/downloads-plugin/crowdin /opt/atlas/i18n/downloads-plugin \
     && ln -s /config/config/biocache-hub/i18n/downloads-plugin/override /var/opt/atlas/i18n/downloads-plugin \
-    && ln -s /config/config/species-list/i18n/crowdin /opt/atlas/i18n/species-list \
-    && ln -s /config/config/specieslist-webapp/i18n/override /var/opt/atlas/i18n/species-list
+    && ln -s /config/config/species-list/i18n/crowdin /opt/atlas/i18n/specieslist-webapp \
+    && ln -s /config/config/species-list/i18n/override /var/opt/atlas/i18n/specieslist-webapp

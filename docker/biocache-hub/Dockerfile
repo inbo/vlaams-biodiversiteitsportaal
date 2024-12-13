@@ -50,10 +50,10 @@ COPY biocache-hub.xml ${CATALINA_HOME}/conf/portal/localhost/biocache-hub.xml
 
 # Symlink to i18n files location
 RUN mkdir -p /opt/atlas/i18n \
+  && ln -s /config/config/biocache-hub/i18n/downloads-plugin/crowdin /opt/atlas/i18n/downloads-plugin \
+  && ln -s /config/config/biocache-hubs/i18/crowdin /opt/atlas/i18n/biocache-hubs \
   && mkdir -p /var/opt/atlas/i18n \
-  && ln -s /config/config/biocache-hub/i18n/crowdin/downloads-plugin /opt/atlas/i18n/downloads-plugin \
   && ln -s /config/config/biocache-hub/i18n/downloads-plugin/override /var/opt/atlas/i18n/downloads-plugin \
-  && ln -s /config/config/biocache-hubs/i18n/crowdin /opt/atlas/i18n/biocache-hubs \
-  && ln -s /config/config/biocache-hubs/i18n/override /var/opt/atlas/i18n/biocache-hubs
+  && ln -s /config/config/biocache-hub/i18n/override /var/opt/atlas/i18n/biocache-hubs
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/biocache-hub/actuator/health || exit 1

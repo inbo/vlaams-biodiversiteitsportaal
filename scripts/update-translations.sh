@@ -21,6 +21,8 @@ for folder in ./config/*/i18n/crowdin; do
   rm -rf \${folder}
   mkdir -p \${folder}
 done
+rm -rf ./config/biocache-hub/i18n/downloads-plugin/crowdin
+mkdir -p ./config/biocache-hub/i18n/downloads-plugin/crowdin
 
 # Download latest crowdin translations
 for lang in ${LANGUAGES}; do
@@ -41,7 +43,7 @@ for lang in ${LANGUAGES}; do
   crowdin file download -l \${lang} --project-id=${PROJECT_ID} --token="${CROWDIN_TOKEN}" biocache-hub/messages_en.properties -d ./config/biocache-hub/i18n/crowdin
   mv ./config/biocache-hub/i18n/crowdin/messages_en.properties ./config/biocache-hub/i18n/crowdin/messages_\${lang//-/_}.properties
   crowdin file download -l \${lang} --project-id=${PROJECT_ID} --token="${CROWDIN_TOKEN}" downloads-plugin/messages.properties -d ./config/biocache-hub/i18n/crowdin/downloads-plugin
-  mv ./config/biocache-hub/i18n/crowdin/downloads-plugin/messages.properties ./config/biocache-hub/i18n/crowdin/downloads-plugin/messages_\${lang//-/_}.properties
+  mv ./config/biocache-hub/i18n/crowdin/downloads-plugin/messages.properties ./config/biocache-hub/i18n/downloads-plugin/crowdin/messages_\${lang//-/_}.properties
 
   # biocache-service
   crowdin file download -l \${lang} --project-id=${PROJECT_ID} --token="${CROWDIN_TOKEN}" biocache-service/messages.properties -d ./config/biocache-service/i18n/crowdin
