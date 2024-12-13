@@ -1,5 +1,5 @@
-name: Release new version of the portal
-run-name: ${{ github.actor }} is releasing a new version
+name: Update translations
+run-name: ${{ github.actor }} is checking for translations updates
 
 on:
   workflow_dispatch:
