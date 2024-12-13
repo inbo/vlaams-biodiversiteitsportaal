@@ -36,8 +36,8 @@ COPY regions.xml ${CATALINA_HOME}/conf/portal/localhost/regions.xml
 
 # Symlink to i18n files location
 RUN mkdir -p /opt/atlas/i18n/regions \
-  && ln -s /config/config/regions/i18n/crowdin /opt/atlas/i18n/regions/messages
+  && ln -s /config/config/regions/i18n/crowdin /opt/atlas/i18n/regions
 RUN mkdir -p /var/opt/atlas/i18n/regions \
-  && ln -s /config/config/regions/i18n/override /var/opt/atlas/i18n/regions/messages
+  && ln -s /config/config/regions/i18n/override /var/opt/atlas/i18n/regions
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/regions/actuator/health || exit 1

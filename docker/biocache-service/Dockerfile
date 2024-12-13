@@ -28,8 +28,8 @@ COPY biocache-service.xml ${CATALINA_HOME}/conf/portal/localhost/biocache-servic
 
 # Symlink to i18n files location
 RUN mkdir -p /opt/atlas/i18n/biocache-service \
-  && ln -s /config/config/biocache-service/i18n/crowdin /opt/atlas/i18n/biocache-service/messages
+  && ln -s /config/config/biocache-service/i18n/crowdin /opt/atlas/i18n/biocache-service
 RUN mkdir -p /var/opt/atlas/i18n/biocache-service \
-  && ln -s /config/config/biocache-service/i18n/override /var/opt/atlas/i18n/biocache-service/messages
+  && ln -s /config/config/biocache-service/i18n/override /var/opt/atlas/i18n/biocache-service
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/biocache-service/actuator/health || exit 1
