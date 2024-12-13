@@ -1,5 +1,5 @@
 ---
-title: VBP_testen
+title: Isue Tracker
 _options:
   layout: public/pagesLayout.html
 ---
@@ -63,16 +63,7 @@ Met de GitHub Issue Tracker kunt u eenvoudig problemen, suggesties en verbeterpu
 
 ### 6\. Hulp en Ondersteuning
 
-Heeft u vragen over het gebruik van de issue tracker? Neem contact op met het BVP-team via [support@vlaamsbiodiversiteit.be](mailto:support@vlaamsbiodiversiteit.be).
+Heeft u vragen over het gebruik van de issue tracker? Neem contact op met het BVP-team via [support@vlaamsbiodiversiteit.be](mailto:support.natuurdata@inbo.be).
 
 Dank u voor uw bijdrage aan de verbetering van het Vlaams Biodiversiteitsportaal\!
 
-## Nog iets
-
-```javascript
-function test() {
-    console.log("Hello")
-}
-```
-
-[Een link](https://natuurdata.dev.inbo.be)
