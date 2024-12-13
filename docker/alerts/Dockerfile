@@ -35,8 +35,8 @@ COPY alerts.xml ${CATALINA_HOME}/conf/portal/localhost/alerts.xml
 
 # Symlink to i18n files location
 RUN mkdir -p /opt/atlas/i18n/alerts \
-  && ln -s /config/config/alerts/i18n/crowdin /opt/atlas/i18n/alerts/messages
+  && ln -s /config/config/alerts/i18n/crowdin /opt/atlas/i18n/alerts
 RUN mkdir -p /var/opt/atlas/i18n/alerts \
-  && ln -s /config/config/alerts/i18n/override /var/opt/atlas/i18n/alerts/messages
+  && ln -s /config/config/alerts/i18n/override /var/opt/atlas/i18n/alerts
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/alerts/actuator/health || exit 1

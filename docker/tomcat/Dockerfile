@@ -73,15 +73,15 @@ COPY --from=userdetails ${CATALINA_HOME}/conf/portal/localhost conf/portal/local
 RUN sh -x \
     && for service in alerts apikey bie-hub bie-index biocache-hub biocache-service collectory doi-service image-service logger regions spatial-hub spatial-service userdetails; do \
             mkdir -p /opt/atlas/i18n/${service}; \
-            ln -s /config/config/${service}/i18n/crowdin /opt/atlas/i18n/${service}/messages; \
+            ln -s /config/config/${service}/i18n/crowdin /opt/atlas/i18n/${service}; \
             mkdir -p /var/opt/atlas/i18n/${service}; \
-            ln -s /config/config/${service}/i18n/override /var/opt/atlas/i18n/${service}/messages; \
+            ln -s /config/config/${service}/i18n/override /var/opt/atlas/i18n/${service}; \
         done \
     && mkdir -p /opt/atlas/i18n/downloads-plugin \
-    && ln -s /config/config/biocache-hub/i18n/crowdin/downloads-plugin /opt/atlas/i18n/downloads-plugin/messages \
+    && ln -s /config/config/biocache-hub/i18n/crowdin/downloads-plugin /opt/atlas/i18n/downloads-plugin \
     && mkdir -p /var/opt/atlas/i18n/downloads-plugin \
-    && ln -s /config/config/biocache-hub/i18n/downloads-plugin/override /var/opt/atlas/i18n/downloads-plugin/messages \
+    && ln -s /config/config/biocache-hub/i18n/downloads-plugin/override /var/opt/atlas/i18n/downloads-plugin \
     && mkdir -p /opt/atlas/i18n/species-list \
-    && ln -s /config/config/species-list/i18n/crowdin /opt/atlas/i18n/species-list/messages \
+    && ln -s /config/config/species-list/i18n/crowdin /opt/atlas/i18n/species-list \
     && mkdir -p /var/opt/atlas/i18n/species-list \
-    && ln -s /config/config/specieslist-webapp/i18n/override /var/opt/atlas/i18n/species-list/messages
+    && ln -s /config/config/specieslist-webapp/i18n/override /var/opt/atlas/i18n/species-list
