@@ -1,5 +1,5 @@
 ---
-title: VBP_beknopte handleiding
+title: Handleiding
 _options:
   layout: public/pagesLayout.html
 ---
@@ -57,12 +57,12 @@ Het portaal is ingedeeld in verschillende secties:
   - **Soorten**: Module rond *soorten*  
   - **Soortenlijsten**: Module rond  *soortenlijsten*  
   - **Geografisch portaal**: uitgebreide *onderzoeksmodule*  
-  - **Regio’s**: Snel informatie uit vooraf gedefiniëerde gebieden  
+  - **Regio’s**: Snel informatie uit vooraf gedefinieerde gebieden  
   - **Afbeeldingen**: Afbeeldingen in het VBP  
   - **In je buurt**: Snel informatie over wat er in je omgeving te vinden is  
   - **Datasets**: De module *datasets*
 
-Gebruik het hoofdmenu bovenaan de pagina om snel tussen deze secties te navigeren. Klik op de bug om snel issues te rapporteren. Klik op de taalknop om je voorkeurstaal te selecteren.
+Gebruik het hoofdmenu bovenaan de pagina om snel tussen deze secties te navigeren. Klik op de bug (rechts bovenaan) om snel issues te rapporteren. Klik op de taalknop om je voorkeurstaal te selecteren.
 
 ---
 
@@ -190,17 +190,3 @@ We hopen dat deze handleiding u helpt om het meeste uit het Vlaams Biodiversitei
 
 **Vriendelijke groet,**  
 **Het Vlaams Biodiversiteitsportaal Team**
-
-
-### 
-
-
-## Nog iets
-
-```javascript
-function test() {
-    console.log("Hello")
-}
-```
-
-[Een link](https://natuurdata.dev.inbo.be)
