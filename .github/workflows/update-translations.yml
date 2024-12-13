@@ -15,6 +15,28 @@ jobs:
         with:
           fetch-depth: 0
 
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Install Crowdin CLI
+        run: |
+          curl -sSLO https://github.com/crowdin/crowdin-cli/releases/latest/download/crowdin-cli.zip -o crowdin-cli.zip
+          unzip -j crowdin-cli.zip '*/crowdin-cli.jar'
+          
+          mkdir $HOME/.bin
+          mv crowdin-cli.jar $HOME/.bin/crowdin-cli.jar
+          
+          cat <<EOF > $HOME/.bin/crowdin
+          #!/bin/bash
+          exec java -jar '$HOME/.bin/crowdin-cli.jar' "\$@"
+          EOF
+          chmod +x $HOME/.bin/crowdin
+          
+          echo "$HOME/.bin" >> $GITHUB_PATH
+
       - name: Create commit
         id: update-translations
         env:
