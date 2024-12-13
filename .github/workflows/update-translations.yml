@@ -33,7 +33,7 @@ jobs:
           
           cat <<EOF > $HOME/.bin/crowdin
           #!/bin/bash
-          exec java -jar '$HOME/.bin/crowdin-cli.jar' "\$@ --no-progress"
+          exec java -jar '$HOME/.bin/crowdin-cli.jar' "\$@" --no-progress
           EOF
           chmod +x $HOME/.bin/crowdin
           
