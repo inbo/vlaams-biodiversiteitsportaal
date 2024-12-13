@@ -37,6 +37,8 @@ WORKDIR /app
 COPY --from=builder --chown=app \
     /project/ala-sensitive-data-server/target/ala-sensitive-data-server-${VERSION}.jar /app/app.jar
 
+RUN ln -s /data/sds/config/sds-config.properties /config/config/sds-config.properties
+
 ENTRYPOINT ["java", "-jar", "/app/app.jar", "server"]
 CMD ["config.yml"]
 
