@@ -89,11 +89,12 @@ sightings:
   url:
 layersService:
   baseURL: ${common.protocol}://${common.domain}/spatial-service
-imageServiceBaseURL: ${common.protocol}://${common.domain}/image-service
+imageServiceBaseUrl: ${common.protocol}://${common.domain}/image-service
 
 image:
   baseUrl: ${common.protocol}://${common.domain}/image-service
   thumbnailUrl: ${common.protocol}://${common.domain}/image-service/image/
+
 ausTraits:
   baseURL: http://traitdata.austraits.cloud.edu.au
   homeURL: https://austraits.org/

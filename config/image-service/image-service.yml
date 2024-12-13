@@ -56,13 +56,15 @@ elasticsearch:
 
 # The URLs to recognise as image service URL for the purposes of recognising incoming
 # URLs for images (to avoid re-downloading the images)
-imageServiceUrls: [ "${common.protocol}://${common.domain}/image-service","http://images.biodiversiteitsportaal.dev.internal" ]
+imageServiceUrls: [ "${common.protocol}://${common.domain}/image-service" ]
 
 # External links
 collectory:
   baseURL: "${common.protocol}://${common.domain}/collectory"
 biocache:
-  baseURL: "${common.protocol}://biocache.${common.domain}"
+  baseURL: "${common.protocol}://${common.domain}/biocache-hub"
+  service:
+      baseURL: "${common.protocol}://${common.domain}/biocache-service"
 
 dataSource:
   driverClassName: org.postgresql.Driver
