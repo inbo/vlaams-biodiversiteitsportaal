@@ -37,11 +37,6 @@ WORKDIR /app
 COPY --from=builder --chown=app \
     /project/ala-sensitive-data-server/target/ala-sensitive-data-server-${VERSION}.jar /app/app.jar
 
-COPY --from=builder --chown=app \
-    /project/ala-sensitive-data-server/docker/config.yml /app/config.yml
-
-RUN mkdir /data/ala-sensitive-data-service && mkdir /data/ala-sensitive-data-service/config
-
 ENTRYPOINT ["java", "-jar", "/app/app.jar", "server"]
 CMD ["config.yml"]
 

@@ -21,11 +21,11 @@ server:
       port: 9190
 conservation:
   index: /data/lucene/namematching
-  speciesUrl: file:///data/sds/sensitive-species-data.xml
-  zonesUrl: file:///data/sds/sensitivity-zones.xml
-  categoriesUrl: file:///data/sds/sensitivity-categories.xml
-  layersUrl: file:///data/sds/layers.json
-  layersServiceUrl: https://spatial.ala.org.au/layers-service
+  speciesUrl: file:///config/config/sensitive-data-service/sensitive-species-data.xml
+  zonesUrl: file:///config/config/sensitive-data-service/sensitivity-zones.xml
+  categoriesUrl: file:///config/config/sensitive-data-service/sensitivity-categories.xml
+  layersUrl: file:///config/config/sensitive-data-service/layers.json
+  layersServiceUrl: ${common.protocol}://${common.domain}/spatial-service
   cache:
     entryCapacity: 10000
     enableJmx: true
