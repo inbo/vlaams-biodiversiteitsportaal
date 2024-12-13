@@ -24,7 +24,7 @@ jobs:
       - name: Install Crowdin CLI
         run: |
           set -e -o pipefail -x
-          curl -s https://github.com/crowdin/crowdin-cli/releases/latest/download/crowdin-cli.zip -nc -o $HOME/crowdin-cli.zip
+          curl https://github.com/crowdin/crowdin-cli/releases/latest/download/crowdin-cli.zip -o $HOME/crowdin-cli.zip
           unzip -j $HOME/crowdin-cli.zip '*/crowdin-cli.jar'
           
           mkdir $HOME/.bin || true
