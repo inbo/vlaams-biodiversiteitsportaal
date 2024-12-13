@@ -37,6 +37,6 @@ COPY bie-hub.xml ${CATALINA_HOME}/conf/portal/localhost/bie-hub.xml
 RUN mkdir -p /opt/atlas/i18n \
   && ln -s /config/config/bie-plugin/i18n/crowdin /opt/atlas/i18n/bie-plugin \
   && mkdir -p /var/opt/atlas/i18n \
-  && ln -s /config/config/bie-plugin/i18n/override /var/opt/atlas/i18n/bie-plugin
+  && ln -s /config/config/bie-hub/i18n/override /var/opt/atlas/i18n/bie-plugin
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/apikey/actuator/health || exit 1
