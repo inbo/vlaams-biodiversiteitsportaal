@@ -30,9 +30,9 @@ LABEL ala.version=${VERSION}
 
 COPY --from=builder /project/build/libs/logger-service-${VERSION}-plain.war ${CATALINA_HOME}/webapps/logger.war
 COPY logger.xml ${CATALINA_HOME}/conf/portal/localhost/logger.xml
-RUN mkdir -p /opt/atlas/i18n/logger \
-  && ln -s /config/config/logger/i18n/crowdin /opt/atlas/i18n/logger
-RUN mkdir -p /var/opt/atlas/i18n/logger \
+RUN mkdir -p /opt/atlas/i18n \
+  && ln -s /config/config/logger/i18n/crowdin /opt/atlas/i18n/logger \
+  && mkdir -p /var/opt/atlas/i18n \
   && ln -s /config/config/logger/i18n/override /var/opt/atlas/i18n/logger
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/logger/actuator/health || exit 1

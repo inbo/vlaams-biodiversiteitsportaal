@@ -23,6 +23,10 @@ RUN groupadd --gid 1000 app \
 
 RUN mkdir /data && mkdir /data/lucene && chown -R app:app /data
 
+# Link to hardcoded config location
+RUN mkdir -p /config/config \
+    && ln -s /data/sds/config/sds-config.properties /config/config/sds-config.properties
+
 USER app
 WORKDIR /data/lucene
 
@@ -36,8 +40,6 @@ WORKDIR /app
 
 COPY --from=builder --chown=app \
     /project/ala-sensitive-data-server/target/ala-sensitive-data-server-${VERSION}.jar /app/app.jar
-
-RUN ln -s /data/sds/config/sds-config.properties /config/config/sds-config.properties
 
 ENTRYPOINT ["java", "-jar", "/app/app.jar", "server"]
 CMD ["config.yml"]

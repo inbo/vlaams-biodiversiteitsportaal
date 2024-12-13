@@ -34,9 +34,9 @@ COPY --from=builder /project/build/libs/ala-bie-hub-${VERSION}-plain.war ${CATAL
 COPY bie-hub.xml ${CATALINA_HOME}/conf/portal/localhost/bie-hub.xml
 
 # Symlink to i18n files location
-RUN mkdir -p /opt/atlas/i18n/bie-plugin \
-  && ln -s /config/config/bie-plugin/i18n/crowdin /opt/atlas/i18n/bie-plugin
-RUN mkdir -p /var/opt/atlas/i18n/bie-plugin \
-  && ln -s /config/config/bie-hub/i18n/override /var/opt/atlas/i18n/bie-plugin
+RUN mkdir -p /opt/atlas/i18n \
+  && ln -s /config/config/bie-plugin/i18n/crowdin /opt/atlas/i18n/bie-plugin \
+  && mkdir -p /var/opt/atlas/i18n \
+  && ln -s /config/config/bie-plugin/i18n/override /var/opt/atlas/i18n/bie-plugin
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/apikey/actuator/health || exit 1

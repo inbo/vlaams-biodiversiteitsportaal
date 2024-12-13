@@ -29,9 +29,9 @@ COPY --from=builder /project/build/libs/doi-service-${VERSION}-plain.war ${CATAL
 COPY doi-service.xml ${CATALINA_HOME}/conf/portal/localhost/doi-service.xml
 
 # Symlink to i18n files location
-RUN mkdir -p /opt/atlas/i18n/doi \
-  && ln -s /config/config/doi/i18n/crowdin /opt/atlas/i18n/doi
-RUN mkdir -p /var/opt/atlas/i18n/doi \
+RUN mkdir -p /opt/atlas/i18n \
+  && ln -s /config/config/doi-service/i18n/crowdin /opt/atlas/i18n/doi \
+  && mkdir -p /var/opt/atlas/i18n \
   && ln -s /config/config/doi-service/i18n/override /var/opt/atlas/i18n/doi
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/doi-service/actuator/health || exit 1

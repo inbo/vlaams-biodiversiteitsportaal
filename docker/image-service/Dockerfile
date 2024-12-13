@@ -30,9 +30,9 @@ COPY --from=builder /project/build/libs/image-service-${VERSION}-plain.war ${CAT
 COPY image-service.xml ${CATALINA_HOME}/conf/portal/localhost/image-service.xml
 
 # Symlink to i18n files location
-RUN mkdir -p /opt/atlas/i18n/image-service \
-  && ln -s /config/config/image-service/i18n/crowdin /opt/atlas/i18n/image-service
-RUN mkdir -p /var/opt/atlas/i18n/image-service \
+RUN mkdir -p /opt/atlas/i18n \
+  && ln -s /config/config/image-service/i18n/crowdin /opt/atlas/i18n/image-service \
+  && mkdir -p /var/opt/atlas/i18n \
   && ln -s /config/config/image-service/i18n/override /var/opt/atlas/i18n/image-service
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/image-service/actuator/health || exit 1

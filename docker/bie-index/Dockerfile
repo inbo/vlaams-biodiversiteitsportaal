@@ -31,9 +31,9 @@ COPY --from=builder /project/build/libs/bie-index-${VERSION}-plain.war ${CATALIN
 COPY bie-index.xml ${CATALINA_HOME}/conf/portal/localhost/bie-index.xml
 
 # Symlink to i18n files location
-RUN mkdir -p /opt/atlas/i18n/bie-index \
-  && ln -s /config/config/bie-index/i18n/crowdin /opt/atlas/i18n/bie-index
-RUN mkdir -p /var/opt/atlas/i18n/bie-index \
+RUN mkdir -p /opt/atlas/i18n \
+  && ln -s /config/config/bie-index/i18n/crowdin /opt/atlas/i18n/bie-index \
+  && mkdir -p /var/opt/atlas/i18n \
   && ln -s /config/config/bie-index/i18n/override /var/opt/atlas/i18n/bie-index
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/apikey/actuator/health || exit 1
