@@ -5,8 +5,8 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 # ARG VERSION=4.0.0
 # ARG SOURCE=https://github.com/AtlasOfLivingAustralia/regions.git
 
-ARG VERSION=inbo/vlaams-biodiversiteitsportaal-26-fix-error-when-showing-timelapse
-ARG COMMIT=a1a58634cdd1d8c4383dc6b49c25ac4cf8062c9b
+ARG VERSION=develop-vbp
+ARG COMMIT=c5e2bc0ab7f1be6571de8e066205dc4f2ad79fe2
 ARG SOURCE=https://github.com/StefanVanDyck/regions.git
 LABEL ala.version=inbo-${COMMIT}
 
