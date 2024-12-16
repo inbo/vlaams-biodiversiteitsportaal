@@ -1,5 +1,5 @@
 var Cookies = require("js-cookie");
-const settings = require("js/settings");
+const settings = require("./settings");
 const authCookieName = "VBP-AUTH";
 const loginClass = "signedIn";
 const logoutClass = "signedOut";

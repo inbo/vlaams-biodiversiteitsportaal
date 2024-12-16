@@ -4,7 +4,6 @@ var jqueryI18next = require('jquery-i18next');
 var backend = require("i18next-http-backend");
 var lngDetector = require('i18next-browser-languagedetector');
 var Url = require('domurl');
-var Cookies = require('js-cookie');
 
 const i18nOpts = {
   backend: {
@@ -12,14 +11,8 @@ const i18nOpts = {
       crossDomain: false,
       initImmediate: false,
     },
-  // lng: 'nl',  cookieOptions: { path: '/', sameSite: 'strict' },
   supportedLngs: [settings.enabledLangs],
-  fallbackLng: {
-    "en-US": ['en'],
-    "nl-NL": ['nl'],
-    "nl-BE": ['nl'],
-    default: ['nl']
-  },
+  fallbackLng: 'nl',
   sendMissingTo: 'en',
   interpolation: {
     escapeValue: false,
@@ -47,23 +40,17 @@ const i18nOpts = {
 
 const detectorOptions = {
   // order and from where user language should be detected
-  order: ['querystring', 'cookie', 'navigator'],
+  order: ['querystring', 'cookie', 'navigator', 'htmlTag'],
 
   // keys or params to lookup language from
   lookupQuerystring: 'lang',
   lookupCookie: 'vbp-lang',
   cookieMinutes: 525600, // a year
   cookiePath: '/',
-  cookieDomain: `.${settings.mainDomain}`,
   cookieOptions: { path: '/', sameSite: 'strict', secure: settings.mainLAUrl.startsWith('https') },
   caches: ['cookie'],
   excludeCacheFor: ['cimode']
 };
-
-if (document.location.host !== 'localhost:3333') {
-  // We set the upper domain in production so all ALA modules get the same locale
-  detectorOptions.cookieDomain = settings.mainDomain;
-}
 
 i18nOpts.detection = detectorOptions;
 
@@ -95,7 +82,9 @@ i18n.use(backend)
       console.log('jquery i18next initialized');
       $("body").localize();
 
+
       $('.locale-link').on('click', function(e) {
+
         e.preventDefault();
         const lang = $(this).data('locale');
         console.log(`Lang clicked ${lang}`);
