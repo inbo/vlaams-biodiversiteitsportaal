@@ -25,7 +25,7 @@ RUN mkdir /data && mkdir /data/lucene && chown -R app:app /data
 
 # Link to hardcoded config location
 RUN mkdir -p /config/config \
-    && ln -s /data/sds/config/sds-config.properties /config/config/sds-config.properties
+    && ln -s /data/sds/config/sds-config.properties /config/config/sensitive-data-service/sds-config.properties
 
 USER app
 WORKDIR /data/lucene

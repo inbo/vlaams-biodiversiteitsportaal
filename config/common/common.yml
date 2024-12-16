@@ -73,6 +73,7 @@ webservice:
   jwt: true
   jwt-scopes: openid users/read
 
+# Failed attempt at making the JSESSESIONID cookie more secure
 server:
   servlet:
     session:

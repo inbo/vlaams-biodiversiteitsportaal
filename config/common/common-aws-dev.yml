@@ -1,6 +1,0 @@
-# Custom common config values, used to template others
-common:
-  protocol: https
-  domain: biodiversiteitsportaal.dev.svdev.be
-  homepage: ${common.protocol}://${common.domain}
-  supportEmail: support.natuurdata@inbo.be
