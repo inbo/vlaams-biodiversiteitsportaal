@@ -24,7 +24,7 @@ RUN groupadd --gid 1000 app \
 RUN mkdir /data && mkdir /data/lucene && chown -R app:app /data
 
 # Link to hardcoded config location
-RUN mkdir -p /config/config \
+RUN mkdir -p /config/config/sensitive-data-service \
     && ln -s /data/sds/config/sds-config.properties /config/config/sensitive-data-service/sds-config.properties
 
 USER app
