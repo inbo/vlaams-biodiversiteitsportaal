@@ -80,7 +80,7 @@ jobs:
               return;
             }
             const result = await github.rest.pulls.create({
-              title: 'Automated version update',
+              title: 'Update crowdin translations',
               owner: 'inbo',
               repo: 'vlaams-biodiversiteitsportaal',
               head: 'update-translations',
