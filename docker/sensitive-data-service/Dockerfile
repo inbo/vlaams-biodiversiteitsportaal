@@ -31,10 +31,10 @@ USER app
 WORKDIR /data/lucene
 
 ARG TAXONOMY_ARCHIVE=https://biodiversiteitsportaal-dev-backups.s3.eu-west-1.amazonaws.com/namematching-gbif-backbone-lucene-8-2024-09-11.tgz
-RUN curl ${TAXONOMY_ARCHIVE} -o namematching-nm.tgz \
-    && tar -xzf namematching-nm.tgz \
-    && mv namematching-gbif-backbone-lucene-8-2024-09-11 namematching-nm \
-    && rm namematching-nm.tgz
+RUN curl ${TAXONOMY_ARCHIVE} -o gbif-backbone.tgz \
+    && tar -xzf gbif-backbone.tgz \
+    && mv namematching-gbif-backbone-lucene-8-2024-09-11 gbif-backbone \
+    && rm gbif-backbone.tgz
 
 WORKDIR /app
 

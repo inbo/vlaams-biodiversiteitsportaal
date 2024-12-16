@@ -20,7 +20,7 @@ server:
     - type: http
       port: 9190
 conservation:
-  index: /data/lucene/namematching
+  index: /data/lucene/gbif-backbone
   speciesUrl: file:///config/config/sensitive-data-service/sensitive-species-data.xml
   zonesUrl: file:///config/config/sensitive-data-service/sensitivity-zones.xml
   categoriesUrl: file:///config/config/sensitive-data-service/sensitivity-categories.xml
