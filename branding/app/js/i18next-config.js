@@ -54,7 +54,7 @@ const detectorOptions = {
   lookupCookie: 'vbp-lang',
   cookieMinutes: 525600, // a year
   cookiePath: '/',
-  cookieDomain: `${settings.mainDomain}`,
+  cookieDomain: `.${settings.mainDomain}`,
   cookieOptions: { path: '/', sameSite: 'strict', secure: settings.mainLAUrl.startsWith('https') },
   caches: ['cookie'],
   excludeCacheFor: ['cimode']
