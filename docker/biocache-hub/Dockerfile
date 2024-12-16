@@ -51,7 +51,7 @@ COPY biocache-hub.xml ${CATALINA_HOME}/conf/portal/localhost/biocache-hub.xml
 # Symlink to i18n files location
 RUN mkdir -p /opt/atlas/i18n \
   && ln -s /config/config/biocache-hub/i18n/downloads-plugin/crowdin /opt/atlas/i18n/downloads-plugin \
-  && ln -s /config/config/biocache-hubs/i18/crowdin /opt/atlas/i18n/biocache-hubs \
+  && ln -s /config/config/biocache-hub/i18/crowdin /opt/atlas/i18n/biocache-hubs \
   && mkdir -p /var/opt/atlas/i18n \
   && ln -s /config/config/biocache-hub/i18n/downloads-plugin/override /var/opt/atlas/i18n/downloads-plugin \
   && ln -s /config/config/biocache-hub/i18n/override /var/opt/atlas/i18n/biocache-hubs
