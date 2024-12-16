@@ -15,6 +15,11 @@ Additionally, you can choose which languages you want to download by providing a
 LANGUAGES="es-ES fr" CROWDIN_TOKEN=this-is-my-crowdin-token ./scripts/update-translations.sh
 ```
 
+### Github actions
+In order to prevent the need for installing the crowdin tooling locally, a github action was provided for the Flemish Biodiversity Portal.
+Simply starting another run of the [`Update translations` workflow](https://github.com/inbo/vlaams-biodiversiteitsportaal/actions/workflows/update-translations.yml) will download the latest translations from crowdin and create a PR containing any updates.
+Once the PR is merged, and the deployed versions updated, the translations should be available in the running version of the portal.
+
 ## Additional customizations
 
 Should you want to override the translations provided by crowdin, you can do so by placing a `messages_<lang-code>.properties` file in a folder `i18n/override` in the relevant component.
