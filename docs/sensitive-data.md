@@ -2,6 +2,9 @@
 
 A running WiP doc to note down some of the ideas regarding sensitive data in the portal
 
+## Examples of other people doing this with solr data
+https://doc.sitecore.com/xp/en/developers/latest/sitecore-experience-manager/use-permissions-for-search.html#use-permissions-when-you-search-from-the-api
+
 ## Approaches
 ### Duplicate Solr collections
 
