@@ -4,20 +4,20 @@ variable "TAG" {
 
 target "custom-gradle" {
   context = "./gradle"
-  cache_from = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/custom-gradle:cache-github"]
+  cache-from = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/custom-gradle:cache-github"]
   tags = ["custom-gradle:${TAG}"]
 }
 
 target "custom-maven" {
   context = "./maven"
-  cache_from = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/custom-maven:cache-github"]
+  cache-from = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/custom-maven:cache-github"]
   tags = ["custom-maven:${TAG}"]
 }
 
 
 target "tomcat-base" {
   context = "./tomcat"
-  cache_from = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/tomcat-base:cache-github"]
+  cache-from = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/tomcat-base:cache-github"]
   tags = ["tomcat:${TAG}"]
   target  = "base"
 }
@@ -52,7 +52,7 @@ target "alerts" {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
   }
-  cache_from = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/alerts:cache-github"]
+  cache-from = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/alerts:cache-github"]
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/alerts:${TAG}"]
 }
 
@@ -62,7 +62,7 @@ target "apikey" {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
   }
-  cache_from = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/apikey:cache-github"]
+  cache-from = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/apikey:cache-github"]
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/apikey:${TAG}"]
 }
 
@@ -72,7 +72,7 @@ target "bie-hub" {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
   }
-  cache_from = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/bie-hub:cache-github"]
+  cache-from = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/bie-hub:cache-github"]
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/bie-hub:${TAG}"]
 }
 
@@ -82,7 +82,7 @@ target "bie-index" {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
   }
-  cache_from = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/bie-index:cache-github"]
+  cache-from = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/bie-index:cache-github"]
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/bie-index:${TAG}"]
 }
 
@@ -92,7 +92,7 @@ target "biocache-hub" {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
   }
-  cache_from = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/biocache-hub:cache-github"]
+  cache-from = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/biocache-hub:cache-github"]
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/biocache-hub:${TAG}"]
 }
 
@@ -102,7 +102,7 @@ target "biocache-service" {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
   }
-  cache_from = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/biocache-service:cache-github"]
+  cache-from = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/biocache-service:cache-github"]
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/biocache-service:${TAG}"]
 }
 
@@ -112,7 +112,7 @@ target "collectory" {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
   }
-  cache_from = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/collectory:cache-github"]
+  cache-from = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/collectory:cache-github"]
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/collectory:${TAG}"]
 }
 
@@ -122,7 +122,7 @@ target "doi-service" {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
   }
-  cache_from = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/doi-service:cache-github"]
+  cache-from = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/doi-service:cache-github"]
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/doi-service:${TAG}"]
 }
 
@@ -132,7 +132,7 @@ target "image-service" {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
   }
-  cache_from = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/image-service:cache-github"]
+  cache-from = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/image-service:cache-github"]
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/image-service:${TAG}"]
 }
 
@@ -142,7 +142,7 @@ target "logger" {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
   }
-  cache_from = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/logger:cache-github"]
+  cache-from = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/logger:cache-github"]
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/logger:${TAG}"]
 }
 
@@ -151,7 +151,7 @@ target "namematching-service" {
   contexts = {
     "custom-maven" = "target:custom-maven"
   }
-  cache_from = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/namematching-service:cache-github"]
+  cache-from = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/namematching-service:cache-github"]
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/namematching-service:${TAG}"]
 }
 
@@ -160,7 +160,7 @@ target "pipelines" {
   contexts = {
     "custom-maven" = "target:custom-maven"
   }
-  cache_from = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/la-pipelines:cache-github"]
+  cache-from = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/la-pipelines:cache-github"]
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/la-pipelines:${TAG}"]
 }
 
@@ -170,7 +170,7 @@ target "regions" {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
   }
-  cache_from = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/regions:cache-github"]
+  cache-from = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/regions:cache-github"]
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/regions:${TAG}"]
 }
 
@@ -188,7 +188,7 @@ target "spatial-hub" {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
   }
-  cache_from = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/spatial-hub:cache-github"]
+  cache-from = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/spatial-hub:cache-github"]
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/spatial-hub:${TAG}"]
 }
 
@@ -198,7 +198,7 @@ target "spatial-service" {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
   }
-  cache_from = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/spatial-service:cache-github"]
+  cache-from = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/spatial-service:cache-github"]
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/spatial-service:${TAG}"]
 }
 
@@ -208,7 +208,7 @@ target "species-list" {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
   }
-  cache_from = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/species-list:cache-github"]
+  cache-from = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/species-list:cache-github"]
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/species-list:${TAG}"]
 }
 
@@ -218,7 +218,7 @@ target "userdetails" {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
   }
-  cache_from = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/userdetails:cache-github"]
+  cache-from = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/userdetails:cache-github"]
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/userdetails:${TAG}"]
 }
 
