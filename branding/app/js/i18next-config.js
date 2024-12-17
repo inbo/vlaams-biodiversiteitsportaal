@@ -40,7 +40,7 @@ const i18nOpts = {
 
 const detectorOptions = {
   // order and from where user language should be detected
-  order: ['querystring', 'cookie', 'navigator', 'htmlTag'],
+  order: ['querystring', 'cookie'],
 
   // keys or params to lookup language from
   lookupQuerystring: 'lang',
