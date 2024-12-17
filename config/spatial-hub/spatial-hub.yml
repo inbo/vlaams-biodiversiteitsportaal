@@ -229,8 +229,8 @@ collections:
   url: "${common.protocol}://${common.domain}/collectory"
 
 sandbox:
-  url: "${common.protocol}://${common.domain}/sandbox"
-  uiUrl: "${common.protocol}://sandbox.${common.domain}/datacheck"
+  url: "${common.protocol}://${common.domain}/spatial-hub/sandbox"
+  uiUrl: "${common.protocol}://${common.domain}/spatial-hub/datacheck" # This is wrong, not sure where to point it to
 
 sandboxService:
   url: "${common.protocol}://sandbox.${common.domain}/biocache-service"
