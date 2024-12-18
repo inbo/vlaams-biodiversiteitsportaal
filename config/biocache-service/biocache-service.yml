@@ -244,8 +244,3 @@ doi:
   service:
     url: ${common.protocol}://${common.domain}/doi-service/
   provider: VBP
-
-
-filetype:
-  shapefile:
-    hidden: true

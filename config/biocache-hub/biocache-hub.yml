@@ -93,7 +93,7 @@ fieldguide:
   url: ''
 filetype:
   shapefile:
-    hidden: false
+    hidden: true
 geocode:
   region: BE
 google:
