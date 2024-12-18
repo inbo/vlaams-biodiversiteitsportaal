@@ -246,3 +246,6 @@ doi:
   provider: VBP
 
 
+filetype:
+  shapefile:
+    hidden: true
