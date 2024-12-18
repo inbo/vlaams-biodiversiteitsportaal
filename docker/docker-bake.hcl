@@ -160,8 +160,8 @@ target "pipelines" {
   contexts = {
     "custom-maven" = "target:custom-maven"
   }
-  cache-from = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/la-pipelines:cache-github"]
-  tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/la-pipelines:${TAG}"]
+  cache-from = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/pipelines:cache-github"]
+  tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/pipelines:${TAG}"]
 }
 
 target "regions" {
