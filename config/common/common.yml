@@ -56,11 +56,11 @@ security:
     enabled: false
   jwt:
     enabled: true
-    discoveryUri: http://mock-oauth2-server:9999/default/.well-known/openid-configuration
+    discoveryUri: http://host.docker.internal:9999/default/.well-known/openid-configuration
     fallbackToLegacyBehaviour: false
   oidc:
     enabled: true
-    discoveryUri: http://mock-oauth2-server:9999/default/.well-known/openid-configuration
+    discoveryUri: http://host.docker.internal:9999/default/.well-known/openid-configuration
   core:
     affiliation-survey:
       enabled: false
