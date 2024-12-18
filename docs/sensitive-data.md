@@ -16,7 +16,7 @@ Next we would simply duplicate the data from the sensitive collection to the non
 
 The biocache-service would then simply be configured to select the correct solr-index based on the role of the current user.
 
-Pros:
+Pros:`
 - Minimal changes to the current code, only biocache-service needs to be modified and some post-processing to duplicate the Solr collections is needed.
 - Queries work on both sensitive and non-sensitive data, no need for the user to explicitly choose which.
 
@@ -53,7 +53,19 @@ But that does mean a user is only allowed a single role :(
 
 
 The same record could then be duplicated in the solr index for the different roles.
-As long as they have 
+
+
+above does not really work.
+But I think we can make it work if we have an access role field that is either:
+- not-existent/empty: all users can always see the record
+- contains a single role that allows to see the record at high-resolution on a record containing duplicate data.
+   a duplicate record is made with low-resolution date, but with that same role negated. (or a separate boolean field sensitive false and the same role in the role field or something)
+
+That way everyone always sees all the data, users can have multiple roles, and no one will see any duplicated.
+But it is important that access to a record is only controlled by a single role.
+  
+
+Then we can simply filter out records that do not have the current user's role in the access role field.
 
 
 ### Use custom fields in the dwc archive
