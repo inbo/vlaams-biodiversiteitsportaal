@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sensitivity-zones>
+    <sensitivity-zone id="BE" name="België" type="COUNTRY"/>
+    <sensitivity-zone id="VL" name="Vlaanderen" type="STATE"/>
 </sensitivity-zones>
