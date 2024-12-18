@@ -28,3 +28,16 @@ A script has been provided in the scripts folder to make this a little easier:
 
 This should allow you to connect to the database locally using your favorite database client.
 To find the correct host, port and DB credentials, you can look at the [AWS console](https://eu-west-1.console.aws.amazon.com/rds/home?region=eu-west-1).
+
+## Remote JVM Debugging
+It is possible to connect to the running Service JVMs using a remote debugger.
+Simply:
+ - [Make sure the service you want to connect to has the necessary security group rule](https://github.com/inbo/inbo-aws-biodiversiteitsportaal-terraform/blob/346bd2f08594f6e6dba6c9265538b39d834c5dd4/region/common-region/debug-bastion.tf#L94).
+ - Set the environment variable `REMOTE_DEBUGGER_PORT` with value 5005 on the service you want to connect to. 
+
+Then you can connect to the JVM using port-forwarding on the bastion.
+
+For example to connect to the biocache-service:
+```commandline
+ssh ubuntu@<bastion ip> -N -L 0.0.0.0:5006:biocache-service.biodiversiteitsportaal.dev.internal:5005
+```
