@@ -39,5 +39,5 @@ Then you can connect to the JVM using port-forwarding on the bastion.
 
 For example to connect to the biocache-service:
 ```commandline
-ssh ubuntu@<bastion ip> -N -L 0.0.0.0:5006:biocache-service.biodiversiteitsportaal.dev.internal:5005
+ssh ubuntu@<bastion ip> -N -L 0.0.0.0:5005:biocache-service.biodiversiteitsportaal.dev.internal:5005
 ```
