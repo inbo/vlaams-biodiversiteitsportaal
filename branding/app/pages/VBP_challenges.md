@@ -4,7 +4,7 @@ _options:
   layout: public/pagesLayout.html
 ---
 
-### Concretere Challenges voor Testers van het Vlaams Biodiversiteitsportaal
+### Challenges voor Testers van het Vlaams Biodiversiteitsportaal
 
 1. **Soortinformatie opzoeken**  
    - Zoek de **boomkikker** op (Hyla arborea) en controleer of de waarnemingen correct worden weergegeven.  
