@@ -21,7 +21,7 @@ alertsResourceName: Atlas
 #  region: Flanders
 #  regionType: ''
 google:
-  apikey: AIzaSyBeNBJ_PVybOhw2CLLDWi5ees_ZnoNScVw
+  apikey: get-a-google-api-key
 
 showNotesInfoInAccordionPanel: 'false'
 serverName: ${common.protocol}://${common.domain}/regions
