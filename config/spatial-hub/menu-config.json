@@ -1,7 +1,7 @@
 [
   {
     "name": "Add to map",
-    "width": 110,
+    "width": 100,
     "items": [
       {
         "name": "Species",
@@ -23,7 +23,7 @@
   },
   {
     "name": "Tools",
-    "width": 70,
+    "width": 68,
     "items": [
       {
         "name": "Area Report - interactive",
@@ -104,7 +104,7 @@
   },
   {
     "name": "Import",
-    "width": 78,
+    "width": 80,
     "items": [
       {
         "name": "Points",
@@ -141,7 +141,7 @@
   },
   {
     "name": "Export",
-    "width": 77,
+    "width": 80,
     "items": [
       {
         "name": "Area Checklist",
@@ -163,7 +163,7 @@
   },
   {
     "name": "Help",
-    "width": 69,
+    "width": 67,
     "items": [
       {
         "name": "Getting Started",
