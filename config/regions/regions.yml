@@ -21,7 +21,7 @@ alertsResourceName: Atlas
 #  region: Flanders
 #  regionType: ''
 google:
-  apikey: get-a-google-api-key
+  apikey: AIzaSyBeNBJ_PVybOhw2CLLDWi5ees_ZnoNScVw
 
 showNotesInfoInAccordionPanel: 'false'
 serverName: ${common.protocol}://${common.domain}/regions
@@ -54,6 +54,9 @@ geoserver:
   baseURL: ${common.protocol}://${common.domain}/geoserver
 biocacheService:
   baseURL: ${common.protocol}://${common.domain}/biocache-service
+speciesList:
+  baseURL: ${common.protocol}://${common.domain}/species-list
+
 map:
   minLat: 49.5294835476
   minLng: 2.51357303225
@@ -75,3 +78,4 @@ layers:
   intersectObject: ''
   queryContextDisplayName: ''
   queryContextName: ''
+config_dir: '/config/config/regions'
