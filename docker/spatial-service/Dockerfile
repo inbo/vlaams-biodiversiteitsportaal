@@ -1,7 +1,6 @@
 ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
-
 # ARG VERSION=2.1.5
 # ARG SOURCE=https://github.com/AtlasOfLivingAustralia/spatial-service.git
 
@@ -31,6 +30,13 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     apt-get update && apt-get install -y --no-install-recommends \
     gettext-base \
     gdal-bin
+
+# Libraries require linking from <data.dir>/modelling/maxent because the path is required to be a subfolder of the data directory
+RUN mkdir -p /libs \
+    && curl -L https://nexus.ala.org.au/repository/releases/au/org/ala/spatial/ala-aloc/1.0/ala-aloc-1.0.jar -o /libs/aloc.jar \
+    && curl https://biodiversiteitsportaal-dev-backups.s3.eu-west-1.amazonaws.com/maxent.zip -o /libs/maxent.zip \
+    && unzip -p /libs/maxent.zip maxent/maxent.jar -d libs \
+    && rm /libs/maxent.zip
 
 # ARG VERSION=2.1.5
 ARG VERSION=2.1.6-SNAPSHOT
