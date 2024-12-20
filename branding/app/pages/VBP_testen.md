@@ -1,5 +1,5 @@
 ---
-title: Isue Tracker
+title: Issue Tracker
 _options:
   layout: public/pagesLayout.html
 ---
