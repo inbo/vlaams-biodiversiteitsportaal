@@ -379,7 +379,7 @@ startup:
 #      projections: ['3857']
 
 defaultareas:
-  - name: 'Flanders'
+  - name: 'Vlaanderen'
     fqs: [ 'longitude:[2.296 TO 6.1468505859375]', 'latitude:[50.6 TO 51.5]' ]
     wkt: 'POLYGON((2.296 50.6, 6.1468505859375 50.6, 6.1468505859375 51.5, 2.296 51.5, 2.296 50.6))'
     areaSqKm: 13625
