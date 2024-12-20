@@ -21,7 +21,9 @@ RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
 
 COPY resources.xml ./grails-app/conf/spring/resources.xml
 COPY ./layouts/* ./grails-app/views/layouts/
-COPY ./assets/* ./grails-app/assets/
+COPY ./assets ./grails-app/assets/
+RUN ls -la ./grails-app/assets/
+RUN ls -la ./grails-app/assets/images/
 
 
 RUN --mount=type=cache,target=/gradle-cache,ro \
