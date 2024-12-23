@@ -74,8 +74,7 @@
             <!-- Your site title as branding in the menu -->
             <div class="navbar-header">
                 <div>
-                    <a href="https://biodiversiteitsportaal.dev.svdev.be/" class="custom-logo-link navbar-brand"
-                       itemprop="url">
+                    <a href="${grailsApplication.config.ala.baseURL}" class="custom-logo-link navbar-brand" itemprop="url">
                         <!-- Logo INBO -->
                         <!--                        <img width="1005" height="150"-->
                         <!--                             class="custom-logo" alt="Vlaams biodiversiteitsportaal" itemprop="image"-->
@@ -134,7 +133,7 @@
                                         class="account-mobile hidden-md hidden-lg loginBtn mobile-login-btn"/>
                     </g:if>
                     <g:if test="${request.userPrincipal != null}">
-                        <a href="${grailsApplication.config.userdetails.web.url+'profile'}" role="button"
+                        <a href="/userdetails/profile" role="button"
                            class="account-mobile hidden-md hidden-lg myProfileBtn hideLoggedOut" title="My Account">
                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="18" viewBox="0 0 37 41">
                                 <defs>
