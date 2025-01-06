@@ -75,6 +75,8 @@ _options:
    - Voer een lokatie in naar keuze
    - Bekijk alle gepubliceerde records in een straal van 5 of 10 km
    - Visualiseer deze in het VBP
+   - Pas eventueel de filters aan
+   - Download een soortenlijst van deze data (via download)
    
    
    
