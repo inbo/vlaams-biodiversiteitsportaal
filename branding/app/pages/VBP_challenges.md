@@ -51,6 +51,29 @@ _options:
 #####8. **Probleem melden**  
    - Ga naar de issue tracker en meldt een probleem via Github
    - mail een issue naar support.natuurdata@inbo.ne 
+   
+#####9. **Soortenlijsten**  
+   - Ga naar de issue tracker en meldt een probleem via Github
+   - mail een issue naar support.natuurdata@inbo.be
+   
+#####10. **Regio's**  
+   - Ga naar de issue tracker en meldt een probleem via Github
+   - mail een issue naar support.natuurdata@inbo.be
+
+#####11. **In je buurt**  
+   - Ga naar de issue tracker en meldt een probleem via Github
+   - mail een issue naar support.natuurdata@inbo.be
+   
+   
+   
+   
+   
+   
+   
+   
+   
+  
+
 
 
 
