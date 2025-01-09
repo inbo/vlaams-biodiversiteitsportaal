@@ -120,8 +120,6 @@ services:
 
   cassandradb:
     image: cassandra:3
-    ports:
-      - "9042:9042"
     environment:
       HEAP_NEWSIZE: 128M
       MAX_HEAP_SIZE: 2048M
