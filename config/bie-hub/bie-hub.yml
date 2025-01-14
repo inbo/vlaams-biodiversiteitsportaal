@@ -45,6 +45,7 @@ allowedImageEditingRoles: ROLE_ADMIN,ROLE_EDITOR
 
 wikipedia:
   url: https://nl.wikipedia.org/api/rest_v1/page/html/
+  webportalUrl: https://nl.wikipedia.org/wiki/
   lang: nl
 
 # Skin and layout
