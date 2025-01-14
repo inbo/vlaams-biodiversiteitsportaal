@@ -7,7 +7,7 @@ WORKDIR /project
 # ARG SOURCE=https://github.com/AtlasOfLivingAustralia/ala-bie-hub.git
 
 ARG VERSION=develop
-ARG COMMIT=92d51eaf4c802ac131e384630a11caae10e4feb7
+ARG COMMIT=71758a3e376755615dc37cb4eaa6dab65feba283
 ARG SOURCE=https://github.com/katya-shaleninova/ala-bie-hub.git
 LABEL ala.version=inbo-${COMMIT}
 
