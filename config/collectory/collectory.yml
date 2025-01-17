@@ -94,7 +94,7 @@ openapi:
 orgNameLong: Vlaams Biodiversiteitsportaal
 projectName: Vlaams Biodiversiteitsportaal
 projectNameShort: VBP
-regionName: Australia
+regionName: België en Vlaanderen
 repository:
   location:
     images: /data/collectory/data
