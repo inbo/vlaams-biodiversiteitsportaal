@@ -7,8 +7,8 @@ WORKDIR /project
 # ARG SOURCE=https://github.com/AtlasOfLivingAustralia/ala-bie-hub.git
 
 ARG VERSION=develop
-ARG COMMIT=859f76df03ab219bee3398d775218f81f3abfaad
-ARG SOURCE=https://github.com/katya-shaleninova/ala-bie-hub.git
+ARG COMMIT=261b5138873c63d7c08de17ae961dc50a3158dc0
+ARG SOURCE=https://github.com/inbo/ala-bie-hub.git
 LABEL ala.version=inbo-${COMMIT}
 
 RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
