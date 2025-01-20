@@ -4,8 +4,8 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 # ARG VERSION=2.1.5
 # ARG SOURCE=https://github.com/AtlasOfLivingAustralia/spatial-service.git
 
-ARG VERSION=vbp-develop
-ARG COMMIT=a85a6b51abb2203d3e242e726965eb7f59eb98c1
+ARG VERSION=130-fix-grid-layer-creation
+ARG COMMIT=2b36ae277c68029186f4797572fdb7da29727b99
 ARG SOURCE=https://github.com/StefanVanDyck/spatial-service.git
 LABEL ala.version=inbo-${COMMIT}
 
@@ -41,7 +41,7 @@ RUN mkdir -p /libs \
 
 # ARG VERSION=2.1.5
 ARG VERSION=2.1.6-SNAPSHOT
-ARG COMMIT=a85a6b51abb2203d3e242e726965eb7f59eb98c1
+ARG COMMIT=2b36ae277c68029186f4797572fdb7da29727b99
 LABEL ala.version=inbo-${COMMIT}
 
 COPY --from=builder /project/build/libs/project-${VERSION}-plain.war ${CATALINA_HOME}/webapps/spatial-service.war

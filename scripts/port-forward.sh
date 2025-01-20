@@ -12,5 +12,5 @@ INSTANCE_ID=$(aws ec2 describe-instances \
 
 # create the port forwarding tunnel
 aws ssm start-session --target "${INSTANCE_ID}" \
-                       --document-name AWS-StartPortForwardingSession \
-                       --parameters "host=${REMOTE_HOST},portNumber${REMOTE_PORT},localPortNumber=${LOCAL_PORT}"
+                       --document-name AWS-StartPortForwardingSessionToRemoteHost \
+                       --parameters "host=${REMOTE_HOST},portNumber=${REMOTE_PORT},localPortNumber=${LOCAL_PORT}"
