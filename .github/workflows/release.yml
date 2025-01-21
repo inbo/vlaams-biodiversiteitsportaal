@@ -240,7 +240,10 @@ jobs:
               --set="${docker_name}.labels.build_url=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
               --set="${docker_name}.labels.git_tag=${GIT_TAG}" \
               --set="${docker_name}.labels.git_hash=${{ github.sha }}" \
-              --set="${docker_name}.cache-to=type=registry,ref=${{ secrets.ECR_REPO }}/${docker_name}:${CACHE_TAG},oci-mediatypes=true,image-manifest=true,mode=max" \
+              --set="custom-gradle.cache-to=type=registry,ref=${DOCKER_REPO}/inbo-biodiversiteitsportaal-custom-gradle:${CACHE_TAG},oci-mediatypes=true,image-manifest=true,mode=max" \
+              --set="custom-maven.cache-to=type=registry,ref=${DOCKER_REPO}/inbo-biodiversiteitsportaal-custom-maven:${CACHE_TAG},oci-mediatypes=true,image-manifest=true,mode=max" \
+              --set="tomcat-base.cache-to=type=registry,ref=${DOCKER_REPO}/inbo-biodiversiteitsportaal-tomcat-base:${CACHE_TAG},oci-mediatypes=true,image-manifest=true,mode=max" \
+              --set="${docker_name}.cache-to=type=registry,ref=${DOCKER_REPO}/inbo-biodiversiteitsportaal-${docker_name}:${CACHE_TAG},oci-mediatypes=true,image-manifest=true,mode=max" \
 
             # Create Git Tag
             echo "Creating Git Tag: ${GIT_TAG}"
