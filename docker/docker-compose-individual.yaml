@@ -1,6 +1,6 @@
 services:
   biocache-hub:
-    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/biocache-hub:dev
+    image: ${DOCKER_REPO:-local}/biocache-hub:dev
     build:
       context: biocache-hub
     environment:
@@ -9,7 +9,7 @@ services:
       - ../config:/config/config:ro
 
   bie-hub:
-    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/bie-hub:dev
+    image: ${DOCKER_REPO:-local}/bie-hub:dev
     build:
       context: bie-hub
     environment:
@@ -18,7 +18,7 @@ services:
       - ../config:/config/config:ro
 
   bie-index:
-    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/bie-index:dev
+    image: ${DOCKER_REPO:-local}/bie-index:dev
     build:
       context: bie-index
     environment:
@@ -30,7 +30,7 @@ services:
         condition: service_healthy
 
   biocache-service:
-    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/biocache-service:dev
+    image: ${DOCKER_REPO:-local}/biocache-service:dev
     build:
       context: biocache-service
     environment:
@@ -49,7 +49,7 @@ services:
         condition: service_started
 
   apikey:
-    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/apikey:dev
+    image: ${DOCKER_REPO:-local}/apikey:dev
     build:
       context: apikey
     environment:
@@ -62,7 +62,7 @@ services:
         condition: service_healthy
 
   alerts:
-    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/alerts:dev
+    image: ${DOCKER_REPO:-local}/alerts:dev
     build:
       context: alerts
     environment:
@@ -74,7 +74,7 @@ services:
         condition: service_healthy
 
   collectory:
-    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/collectory:dev
+    image: ${DOCKER_REPO:-local}/collectory:dev
     build:
       context: collectory
     environment:
@@ -88,7 +88,7 @@ services:
         condition: service_healthy
 
   doi-service:
-    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/doi-service:dev
+    image: ${DOCKER_REPO:-local}/doi-service:dev
     build:
       context: doi-service
     environment:
@@ -100,7 +100,7 @@ services:
         condition: service_healthy
 
   logger:
-    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/logger:dev
+    image: ${DOCKER_REPO:-local}/logger:dev
     build:
       context: logger
     environment:
@@ -112,7 +112,7 @@ services:
         condition: service_healthy
 
   species-list:
-    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/species-list:dev
+    image: ${DOCKER_REPO:-local}/species-list:dev
     build:
       context: species-list
     environment:
@@ -125,7 +125,7 @@ services:
         condition: service_healthy
 
   regions:
-    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/regions:dev
+    image: ${DOCKER_REPO:-local}/regions:dev
     build:
       context: regions
     environment:
@@ -140,7 +140,7 @@ services:
         condition: service_healthy
 
   image-service:
-    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/image-service:dev
+    image: ${DOCKER_REPO:-local}/image-service:dev
     build:
       context: image-service
     volumes:
@@ -153,7 +153,7 @@ services:
         condition: service_healthy
 
   spatial-hub:
-    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/spatial-hub:dev
+    image: ${DOCKER_REPO:-local}/spatial-hub:dev
     build:
       context: spatial-hub
     environment:
@@ -165,7 +165,7 @@ services:
         condition: service_healthy
 
   spatial-service:
-    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/spatial-service:dev
+    image: ${DOCKER_REPO:-local}/spatial-service:dev
     build:
       context: spatial-service
     environment:
@@ -183,7 +183,7 @@ services:
         condition: service_healthy
 
   userdetails:
-    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/userdetails:dev
+    image: ${DOCKER_REPO:-local}/userdetails:dev
     build:
       context: userdetails
     environment:
@@ -344,7 +344,7 @@ services:
       retries: 5
 
   namematching:
-    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/namematching-service:dev
+    image: ${DOCKER_REPO:-local}/namematching-service:dev
     ports:
       - "9179:9179"
 
