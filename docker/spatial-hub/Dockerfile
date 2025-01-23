@@ -5,10 +5,10 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 #ARG SOURCE=https://github.com/AtlasOfLivingAustralia/spatial-hub.git
 #LABEL ala.version=${VERSION}
 
-ARG VERSION=fix-setting-language-in-spatial-portal
-ARG COMMIT=50a19013e5e0c20d279d3c6f7654a0ebed4f3e44
-ARG SOURCE=https://github.com/StefanVanDyck/spatial-hub.git
-LABEL ala.version=inbo-${COMMIT}
+ARG VERSION=483-sandbox
+#ARG COMMIT=50a19013e5e0c20d279d3c6f7654a0ebed4f3e44
+ARG SOURCE=https://github.com/katya-shaleninova/spatial-hub.git
+LABEL ala.version=inbo-${VERSION}
 
 RUN rm -f /etc/apt/apt.conf.d/docker-clean; echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/keep-cache
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
@@ -17,7 +17,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     npm
 
 WORKDIR /project
-RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
+RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} .
 
 COPY resources.xml ./grails-app/conf/spring/resources.xml
 COPY ./layouts/* ./grails-app/views/layouts/
@@ -36,9 +36,9 @@ RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
 
 FROM tomcat-base
 
-ARG VERSION=2.1.2-SNAPSHOT
+ARG VERSION=2.2.0-SNAPSHOT
 ARG COMMIT=50a19013e5e0c20d279d3c6f7654a0ebed4f3e44
-LABEL ala.version=inbo-${COMMIT}
+LABEL ala.version=inbo-${VERSION}
 
 COPY --from=builder /project/build/libs/project-${VERSION}-plain.war ${CATALINA_HOME}/webapps/spatial-hub.war
 COPY spatial-hub.xml ${CATALINA_HOME}/conf/portal/localhost/spatial-hub.xml
