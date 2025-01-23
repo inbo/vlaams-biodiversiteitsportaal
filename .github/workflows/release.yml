@@ -171,9 +171,10 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
         with:
+          # Should probably make this our own docker pull-through
           buildkitd-config-inline: |
             [registry."docker.io"]
-              mirrors = ["${{ secrets.ECR_REPO }}/docker-hub"]
+              mirrors = ["public.ecr.aws/vend"]
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
 
