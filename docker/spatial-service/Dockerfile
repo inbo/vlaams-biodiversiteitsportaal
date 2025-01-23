@@ -4,13 +4,13 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 # ARG VERSION=2.1.5
 # ARG SOURCE=https://github.com/AtlasOfLivingAustralia/spatial-service.git
 
-ARG VERSION=130-fix-grid-layer-creation
-ARG COMMIT=35990eb3c285faf5c53b08e15b53b3960bcb9741
-ARG SOURCE=https://github.com/StefanVanDyck/spatial-service.git
-LABEL ala.version=inbo-${COMMIT}
+ARG VERSION=develop
+#ARG COMMIT=a85a6b51abb2203d3e242e726965eb7f59eb98c1
+ARG SOURCE=https://github.com/katya-shaleninova/spatial-service.git
+LABEL ala.version=inbo-${VERSION}
 
 WORKDIR /project
-RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
+RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} .
 
 RUN --mount=type=cache,target=/gradle-cache,ro \
     gradle \
@@ -41,7 +41,7 @@ RUN mkdir -p /libs \
 
 # ARG VERSION=2.1.5
 ARG VERSION=2.1.6-SNAPSHOT
-ARG COMMIT=35990eb3c285faf5c53b08e15b53b3960bcb9741
+ARG COMMIT=a85a6b51abb2203d3e242e726965eb7f59eb98c1
 LABEL ala.version=inbo-${COMMIT}
 
 COPY --from=builder /project/build/libs/project-${VERSION}-plain.war ${CATALINA_HOME}/webapps/spatial-service.war
