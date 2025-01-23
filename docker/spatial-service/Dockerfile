@@ -42,9 +42,13 @@ RUN mkdir -p /libs \
 # ARG VERSION=2.1.5
 ARG VERSION=2.1.6-SNAPSHOT
 ARG COMMIT=a85a6b51abb2203d3e242e726965eb7f59eb98c1
+ARG PIPELINES_VERSION=2.18.6-SNAPSHOT
 LABEL ala.version=inbo-${COMMIT}
+LABEL pipelines.version=${PIPELINES_VERSION}
 
 COPY --from=builder /project/build/libs/project-${VERSION}-plain.war ${CATALINA_HOME}/webapps/spatial-service.war
+COPY --from=pipelines /app/livingatlas/pipelines/target/pipelines-${PIPELINES_VERSION}-shaded.jar /pipelines.jar
+
 COPY spatial-service.xml ${CATALINA_HOME}/conf/portal/localhost/spatial-service.xml
 
 # Symlink to i18n files location
