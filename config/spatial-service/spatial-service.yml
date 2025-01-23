@@ -77,10 +77,7 @@ records.url: '${common.protocol}://archives.${common.domain}/archives/exports/la
 
 lists.url: '${common.protocol}://${common.domain}/species-list'
 collections.url: '${common.protocol}://${common.domain}/collectory'
-sandboxHubUrl: '${common.protocol}://sandbox.${common.domain}/ala-hub'
-sandboxBiocacheServiceUrl: '${common.protocol}://sandbox.${common.domain}/biocache-service'
 phyloServiceUrl: '${common.protocol}://phylolink.${common.domain}'
-
 
 # au.org.ala.spatial.process config
 spatialService.url: "${common.protocol}://${common.domain}/spatial-service"
@@ -108,3 +105,10 @@ management:
         include: health
 
 useFixedLocale: en
+
+sandboxEnabled: true
+sandboxSolrUrl: http://solr:8983/solr
+sandboxSolrCollection: sandbox
+sandboxThreadCount: 2
+pipelinesCmd: "java -Dspark.local.dir=/data/spatial-data/sandbox/tmp -Djava.io.tmpdir=/data/spatial-data/sandbox/tmp -cp /pipelines.jar"
+pipelinesConfig: "--config=/config/config/spatial-service/la-pipelines.yaml"

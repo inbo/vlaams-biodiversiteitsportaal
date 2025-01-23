@@ -197,6 +197,7 @@ target "spatial-service" {
   contexts = {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
+    "pipelines"   = "target:pipelines"
   }
   cache-from = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/spatial-service:cache-github"]
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/spatial-service:${TAG}"]
