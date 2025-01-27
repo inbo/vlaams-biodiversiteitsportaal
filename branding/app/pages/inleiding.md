@@ -18,32 +18,33 @@ Al de nodige informatie om te testen kan u ook rechtstreeks op het VBP terug vin
 
 ### Hoe kunt u deelnemen aan de test?
 
-1.  **Vraag uw login aan**\
-    Stuur een e-mail naar [support.natuurdata\@inbo.be](mailto:support.natuurdata@inbo.be){.email} om een persoonlijke login te ontvangen. Deze zal u worden toegestuurd vanaf de UAT versie toegankelijk is.\
-2.  **Test de functionaliteiten van het VBP**\
+1.  **Vraag uw login aan** <br>
+    Stuur een e-mail naar [support.natuurdata\@inbo.be](mailto:support.natuurdata@inbo.be?subject=login%20AUT%20VBP) om een persoonlijke login te ontvangen. Deze zal u worden toegestuurd vanaf de UAT versie toegankelijk is.
+2.  **Test de functionaliteiten van het VBP** <br>
     Na ontvangst van uw login kunt u de Test-omgeving bereiken via een link die u zal worden toegestuurd.
 
 ### Waar kunt u feedback geven?
 
-U kunt uw bevindingen melden via onze **GitHub issues tracker**: <https://github.com/inbo/vlaams-biodiversiteitsportaal/issues>.\
-Uitleg over hoe de issue tracker te gebruiken vind u [hier](https://natuurdata.dev.inbo.be/pages/VBP_testen.html). Opmerkingen mailen kan ook naar [support.natuurdata\@inbo.be](mailto:support.natuurdata@inbo.be){.email}\
+U kunt uw bevindingen melden via onze **GitHub issues tracker**: <https://github.com/inbo/vlaams-biodiversiteitsportaal/issues>. <br>
+Uitleg over hoe de issue tracker te gebruiken vind u [hier](https://natuurdata.dev.inbo.be/pages/VBP_testen.html).<br> 
+Opmerkingen mailen kan ook naar [support.natuurdata\@inbo.be](mailto:support.natuurdata@inbo.be?subject=opmerkingen%20AUT%20VBP)
 Verder vragen wij u ook om na het testen deze survey in te vullen: [Survey](https://docs.google.com/forms/d/e/1FAIpQLSew0_I58MHipqdOIlgJpjLEveTXWnxRv3kmeYXAG675f_JFuA/viewform?usp=sf_link)
 
 ### Waarop kunt u letten?
 
 Wij nodigen u uit om alle aspecten van het portaal te testen en ons op de hoogte te brengen van:
 
--   **Technische problemen:** Zijn er foutmeldingen of werkt iets niet zoals verwacht?\
--   **Gebruiksvriendelijkheid:** Zijn processen en functionaliteiten helder en eenvoudig te gebruiken?\
--   **Inhoudelijke volledigheid:** Mist u informatie of functionaliteiten die essentieel zijn?\
--   **Vormgeving en presentatie:** Is de interface intuïtief, aantrekkelijk en praktisch in gebruik? Waar kan het beter?\
+-   **Technische problemen:** Zijn er foutmeldingen of werkt iets niet zoals verwacht?
+-   **Gebruiksvriendelijkheid:** Zijn processen en functionaliteiten helder en eenvoudig te gebruiken?
+-   **Inhoudelijke volledigheid:** Mist u informatie of functionaliteiten die essentieel zijn?
+-   **Vormgeving en presentatie:** Is de interface intuïtief, aantrekkelijk en praktisch in gebruik? Waar kan het beter?
 -   **Taal en vertaling:** Zijn de teksten duidelijk, en zijn de vertalingen accuraat en begrijpelijk?
 
 ### Specifieke aandachtspunten:
 
--   Hoe eenvoudig is het om gegevens te zoeken, bekijken en downloaden?\
--   Is de navigatie op het portaal logisch en overzichtelijk?\
--   Ontbreken er functies of tools die volgens u belangrijk zijn?\
+-   Hoe eenvoudig is het om gegevens te zoeken, bekijken en downloaden?
+-   Is de navigatie op het portaal logisch en overzichtelijk?
+-   Ontbreken er functies of tools die volgens u belangrijk zijn?
 -   Welke onderdelen kunnen worden verbeterd om toegankelijker of efficiënter te zijn?
 
 ### Wat verwachten we van u?
@@ -52,10 +53,10 @@ We vragen u om het Vlaams Biodiversiteitsportaal, verspreid over de periode van 
 
 Tijdens deze testperiode verwachten we:
 
--   Dat u verschillende modules en functionaliteiten uitprobeert\
--   Dat u eventuele problemen, verbeterpunten, of ontbrekende functionaliteiten duidelijk en gedetailleerd rapporteert via de [GitHub Issue Tracker](https://github.com/inbo/vlaams-biodiversiteitsportaal/issues).\
--   Extra aandacht voor gebruiksvriendelijkheid, inhoudelijke correctheid en de volledigheid van de vertalingen.\
--   Suggesties voor verbeteringen of aanvullingen die de bruikbaarheid van het portaal verhogen.\
+-   Dat u verschillende modules en functionaliteiten uitprobeert
+-   Dat u eventuele problemen, verbeterpunten, of ontbrekende functionaliteiten duidelijk en gedetailleerd rapporteert via de [GitHub Issue Tracker](https://github.com/inbo/vlaams-biodiversiteitsportaal/issues).
+-   Extra aandacht voor gebruiksvriendelijkheid, inhoudelijke correctheid en de volledigheid van de vertalingen.
+-   Suggesties voor verbeteringen of aanvullingen die de bruikbaarheid van het portaal verhogen.
 -   Suggesties voor nieuwe tools op basis van biodiversiteitsdata die we zouden kunnen ontwikkelen in de toekomst.
 -   Invullen van de survey over het VBP.
 
@@ -65,9 +66,9 @@ Het doel is om het portaal kritisch te testen vanuit het perspectief van een ein
 
 Als stakeholder speelt u een sleutelrol in de ontwikkeling van dit portaal. Uw inzichten en ervaringen helpen ons om een platform te bouwen dat zowel functioneel als gebruiksvriendelijk is, en dat een brede meerwaarde biedt voor beleidsmakers, onderzoekers en andere gebruikers.
 
-Heeft u vragen of wenst u ondersteuning tijdens het testen? Aarzel dan niet om contact met ons op te nemen. Wij waarderen uw tijd en inspanning enorm en kijken uit naar uw feedback!\
+Heeft u vragen of wenst u ondersteuning tijdens het testen? Aarzel dan niet om contact met ons op te nemen. Wij waarderen uw tijd en inspanning enorm en kijken uit naar uw feedback!
 Op het portaal kan u, indien u navigeert naar “Help & info over VBP testen’, al deze informatie steeds nalezen.
 
-Met vriendelijke groet,\
-Dimitri Brosens\
+Met vriendelijke groet,
+Dimitri Brosens
 **Vlaams Biodiversiteitsportaal Team**
