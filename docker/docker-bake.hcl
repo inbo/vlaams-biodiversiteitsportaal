@@ -25,22 +25,23 @@ target "tomcat-base" {
 target "portal-full" {
   context = "./tomcat"
   contexts = {
-    "tomcat-base"      = "target:tomcat-base"
-    "alerts"           = "target:alerts"
-    "apikey"           = "target:apikey"
-    "bie-hub"          = "target:bie-hub"
-    "bie-index"        = "target:bie-index"
-    "biocache-hub"     = "target:biocache-hub"
-    "biocache-service" = "target:biocache-service"
-    "collectory"       = "target:collectory"
-    "doi-service"      = "target:doi-service"
-    "image-service"    = "target:image-service"
-    "logger"           = "target:logger"
-    "regions"          = "target:regions"
-    "spatial-hub"      = "target:spatial-hub"
-    "spatial-service"  = "target:spatial-service"
-    "species-list"     = "target:species-list"
-    "userdetails"      = "target:userdetails"
+    "tomcat-base"                 = "target:tomcat-base"
+    "alerts"                      = "target:alerts"
+    "apikey"                      = "target:apikey"
+    "bie-hub"                     = "target:bie-hub"
+    "bie-index"                   = "target:bie-index"
+    "biocache-hub"                = "target:biocache-hub"
+    "biocache-service"            = "target:biocache-service"
+    "collectory"                  = "target:collectory"
+    "data-quality-filter-service" = "target:data-quality-filter-service"
+    "doi-service"                 = "target:doi-service"
+    "image-service"               = "target:image-service"
+    "logger"                      = "target:logger"
+    "regions"                     = "target:regions"
+    "spatial-hub"                 = "target:spatial-hub"
+    "spatial-service"             = "target:spatial-service"
+    "species-list"                = "target:species-list"
+    "userdetails"                 = "target:userdetails"
   }
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/portal-full:${TAG}"]
   target = "portal"
@@ -116,7 +117,7 @@ target "collectory" {
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/collectory:${TAG}"]
 }
 
-target "doi-service" {
+target "data-quality-filter-service" {
   context = "./data-quality-filter-service"
   contexts = {
     "custom-gradle" = "target:custom-gradle"
