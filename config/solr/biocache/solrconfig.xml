@@ -85,6 +85,10 @@
        <lib path="../a-jar-that-does-not-exist.jar" />
     -->
 
+    <!--Enable S3 storage support for backups -->
+    <lib dir="../../../contrib/s3-repository/lib/" regex=".*\.jar" />
+    <lib dir="../../../dist/" regex="solr-s3-.*\.jar" />
+
     <!-- Data Directory
          Used to specify an alternate directory to hold all index data
          other than the default ./data under the Solr home.  If
