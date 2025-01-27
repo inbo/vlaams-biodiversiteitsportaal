@@ -33,7 +33,7 @@ target "portal-full" {
     "biocache-hub"                = "target:biocache-hub"
     "biocache-service"            = "target:biocache-service"
     "collectory"                  = "target:collectory"
-    "data-quality-filter-service" = "target:data-quality-filter-service"
+    "dqf-service" = "target:dqf-service"
     "doi-service"                 = "target:doi-service"
     "image-service"               = "target:image-service"
     "logger"                      = "target:logger"
@@ -117,14 +117,14 @@ target "collectory" {
   tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/collectory:${TAG}"]
 }
 
-target "data-quality-filter-service" {
-  context = "./data-quality-filter-service"
+target "dqf-service" {
+  context = "./dqf-service"
   contexts = {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
   }
-  cache-from = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/data-quality-filter-service:cache-github"]
-  tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/data-quality-filter-service:${TAG}"]
+  cache-from = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/dqf-service:cache-github"]
+  tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/dqf-service:${TAG}"]
 }
 
 target "doi-service" {
@@ -243,7 +243,7 @@ group "all" {
     "biocache-hub",
     "biocache-service",
     "collectory",
-    "data-quality-filter-service",
+    "dqf-service",
     "doi-service",
     "image-service",
     "logger",
@@ -268,7 +268,7 @@ group "services" {
     "biocache-hub",
     "biocache-service",
     "collectory",
-    "data-quality-filter-service",
+    "dqf-service",
     "doi-service",
     "image-service",
     "logger",
