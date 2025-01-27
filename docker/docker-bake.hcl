@@ -117,6 +117,16 @@ target "collectory" {
 }
 
 target "doi-service" {
+  context = "./data-quality-filter-service"
+  contexts = {
+    "custom-gradle" = "target:custom-gradle"
+    "tomcat-base"   = "target:tomcat-base"
+  }
+  cache-from = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/data-quality-filter-service:cache-github"]
+  tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/data-quality-filter-service:${TAG}"]
+}
+
+target "doi-service" {
   context = "./doi-service"
   contexts = {
     "custom-gradle" = "target:custom-gradle"
@@ -232,6 +242,7 @@ group "all" {
     "biocache-hub",
     "biocache-service",
     "collectory",
+    "data-quality-filter-service",
     "doi-service",
     "image-service",
     "logger",
@@ -256,6 +267,7 @@ group "services" {
     "biocache-hub",
     "biocache-service",
     "collectory",
+    "data-quality-filter-service",
     "doi-service",
     "image-service",
     "logger",
