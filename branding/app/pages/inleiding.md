@@ -18,17 +18,12 @@ Al de nodige informatie om te testen kan u ook rechtstreeks op het VBP terug vin
 
 ### Hoe kunt u deelnemen aan de test?
 
-1.  **Vraag uw login aan** <br>
-    Stuur een e-mail naar [support.natuurdata\@inbo.be](mailto:support.natuurdata@inbo.be?subject=login%20AUT%20VBP) om een persoonlijke login te ontvangen. Deze zal u worden toegestuurd vanaf de UAT versie toegankelijk is.
-2.  **Test de functionaliteiten van het VBP** <br>
-    Na ontvangst van uw login kunt u de Test-omgeving bereiken via een link die u zal worden toegestuurd.
+1.  **Vraag uw login aan** <br> Stuur een e-mail naar [support.natuurdata\@inbo.be](mailto:support.natuurdata@inbo.be?subject=login%20AUT%20VBP) om een persoonlijke login te ontvangen. Deze zal u worden toegestuurd vanaf de UAT versie toegankelijk is.
+2.  **Test de functionaliteiten van het VBP** <br> Na ontvangst van uw login kunt u de Test-omgeving bereiken via een link die u zal worden toegestuurd.
 
 ### Waar kunt u feedback geven?
 
-U kunt uw bevindingen melden via onze **GitHub issues tracker**: <https://github.com/inbo/vlaams-biodiversiteitsportaal/issues>. <br>
-Uitleg over hoe de issue tracker te gebruiken vind u [hier](https://natuurdata.dev.inbo.be/pages/VBP_testen.html).<br> 
-Opmerkingen mailen kan ook naar [support.natuurdata\@inbo.be](mailto:support.natuurdata@inbo.be?subject=opmerkingen%20AUT%20VBP)
-Verder vragen wij u ook om na het testen deze survey in te vullen: [Survey](https://docs.google.com/forms/d/e/1FAIpQLSew0_I58MHipqdOIlgJpjLEveTXWnxRv3kmeYXAG675f_JFuA/viewform?usp=sf_link)
+U kunt uw bevindingen melden via onze **GitHub issues tracker**: <https://github.com/inbo/vlaams-biodiversiteitsportaal/issues>. <br> Uitleg over hoe de issue tracker te gebruiken vind u [hier](https://natuurdata.dev.inbo.be/pages/VBP_testen.html).<br> Opmerkingen mailen kan ook naar [support.natuurdata\@inbo.be](mailto:support.natuurdata@inbo.be?subject=opmerkingen%20AUT%20VBP) Verder vragen wij u ook om na het testen deze survey in te vullen: [Survey](https://docs.google.com/forms/d/e/1FAIpQLSew0_I58MHipqdOIlgJpjLEveTXWnxRv3kmeYXAG675f_JFuA/viewform?usp=sf_link)
 
 ### Waarop kunt u letten?
 
@@ -66,9 +61,6 @@ Het doel is om het portaal kritisch te testen vanuit het perspectief van een ein
 
 Als stakeholder speelt u een sleutelrol in de ontwikkeling van dit portaal. Uw inzichten en ervaringen helpen ons om een platform te bouwen dat zowel functioneel als gebruiksvriendelijk is, en dat een brede meerwaarde biedt voor beleidsmakers, onderzoekers en andere gebruikers.
 
-Heeft u vragen of wenst u ondersteuning tijdens het testen? Aarzel dan niet om contact met ons op te nemen. Wij waarderen uw tijd en inspanning enorm en kijken uit naar uw feedback!
-Op het portaal kan u, indien u navigeert naar “Help & info over VBP testen’, al deze informatie steeds nalezen.
+Heeft u vragen of wenst u ondersteuning tijdens het testen? Aarzel dan niet om contact met ons op te nemen. Wij waarderen uw tijd en inspanning enorm en kijken uit naar uw feedback! Op het portaal kan u, indien u navigeert naar “Help & info over VBP testen’, al deze informatie steeds nalezen.
 
-Met vriendelijke groet,
-Dimitri Brosens
-**Vlaams Biodiversiteitsportaal Team**
+Met vriendelijke groet, Dimitri Brosens **Vlaams Biodiversiteitsportaal Team**
