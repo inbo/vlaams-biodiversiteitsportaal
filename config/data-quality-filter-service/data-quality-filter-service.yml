@@ -1,0 +1,60 @@
+---
+### OIDC Credentials ###
+security:
+  jwt:
+    clientId: data-quality-filter
+  oidc:
+    clientId: data-quality-filter
+webservice:
+  client-id: data-quality-filter
+  client-secret: xxx
+
+biocache:
+  baseUrl: ${common.protocol}://${common.domain}/biocache-hub
+biocacheService:
+  baseURL: ${common.protocol}://${common.domain}/biocache-service
+
+grails:
+  serverURL: ${common.protocol}://${common.domain}/data-quality-filter-service
+
+hibernate:
+  dialect: org.hibernate.spatial.dialect.postgis.PostgisPG9Dialect
+
+dataSource:
+  driverClassName: org.postgresql.Driver
+  dialect: org.hibernate.spatial.dialect.postgis.PostgisPG9Dialect
+  url: 'jdbc:postgresql://postgis:5432/dataqualityfilter'
+  username: 'dataqualityfilter'
+  password: 'my-super-secret-password'
+  pooled: true
+  jmxExport: true
+  dbCreate: update
+  properties:
+    jmxEnabled: true
+    initialSize: 5
+    maxActive: 50
+    minIdle: 5
+    maxIdle: 25
+    maxWait: 10000
+    maxAge: 600000
+    timeBetweenEvictionRunsMillis: 5000
+    minEvictableIdleTimeMillis: 60000
+    validationQuery: SELECT 1
+    validationQueryTimeout: 3
+    validationInterval: 15000
+    testOnBorrow: true
+    testWhileIdle: true
+    testOnReturn: false
+    jdbcInterceptors: ConnectionState
+    defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
+
+server:
+  port: 8080
+
+environments:
+  development:
+    grails:
+      serverURL: "http://localhost:8080/data-quality-filter-service"
+    security:
+      cas:
+        appServerName: "http://localhost:8080"
