@@ -86,8 +86,8 @@
     -->
 
     <!--Enable S3 storage support for backups -->
-    <lib dir="../../../contrib/s3-repository/lib/" regex=".*\.jar" />
-    <lib dir="../../../dist/" regex="solr-s3-.*\.jar" />
+    <lib dir="/opt/solr/contrib/s3-repository/lib/" regex=".*\.jar" />
+    <lib dir="/opt/solr/dist/" regex="solr-s3-.*\.jar" />
 
     <!-- Data Directory
          Used to specify an alternate directory to hold all index data
