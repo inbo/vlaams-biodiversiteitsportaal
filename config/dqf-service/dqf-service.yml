@@ -15,7 +15,7 @@ biocacheService:
   baseURL: ${common.protocol}://${common.domain}/biocache-service
 
 grails:
-  serverURL: ${common.protocol}://${common.domain}/data-quality-filter-service
+  serverURL: ${common.protocol}://${common.domain}/dqf-service
 
 hibernate:
   dialect: org.hibernate.spatial.dialect.postgis.PostgisPG9Dialect
@@ -54,7 +54,7 @@ server:
 environments:
   development:
     grails:
-      serverURL: "http://localhost:8080/data-quality-filter-service"
+      serverURL: "http://localhost:8080/dqf-service"
     security:
       cas:
         appServerName: "http://localhost:8080"
