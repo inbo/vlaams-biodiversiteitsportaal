@@ -8,20 +8,20 @@ variable "DOCKER_REPO" {
 
 target "custom-gradle" {
   context = "./gradle"
-  cache-from = ["${DOCKER_REPO}/inbo-biodiversiteitsportaal-custom-gradle:cache-github"]
+  cache-from = ["${DOCKER_REPO}/inbo-vbp-custom-gradle:cache-github"]
   tags = ["custom-gradle:${TAG}"]
 }
 
 target "custom-maven" {
   context = "./maven"
-  cache-from = ["${DOCKER_REPO}/inbo-biodiversiteitsportaal-custom-maven:cache-github"]
+  cache-from = ["${DOCKER_REPO}/inbo-vbp-custom-maven:cache-github"]
   tags = ["custom-maven:${TAG}"]
 }
 
 
 target "tomcat-base" {
   context = "./tomcat"
-  cache-from = ["${DOCKER_REPO}/inbo-biodiversiteitsportaal-tomcat-base:cache-github"]
+  cache-from = ["${DOCKER_REPO}/inbo-vbp-tomcat-base:cache-github"]
   tags = ["tomcat:${TAG}"]
   target  = "base"
 }
@@ -46,7 +46,7 @@ target "portal-full" {
     "species-list"     = "target:species-list"
     "userdetails"      = "target:userdetails"
   }
-  tags = ["${DOCKER_REPO}/inbo-biodiversiteitsportaal-portal-full:${TAG}"]
+  tags = ["${DOCKER_REPO}/inbo-vbp-portal-full:${TAG}"]
   target = "portal"
 }
 
@@ -56,8 +56,8 @@ target "alerts" {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
   }
-  cache-from = ["${DOCKER_REPO}/inbo-biodiversiteitsportaal-alerts:cache-github"]
-  tags = ["${DOCKER_REPO}/inbo-biodiversiteitsportaal-alerts:${TAG}"]
+  cache-from = ["${DOCKER_REPO}/inbo-vbp-alerts:cache-github"]
+  tags = ["${DOCKER_REPO}/inbo-vbp-alerts:${TAG}"]
 }
 
 target "apikey" {
@@ -66,8 +66,8 @@ target "apikey" {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
   }
-  cache-from = ["${DOCKER_REPO}/inbo-biodiversiteitsportaal-apikey:cache-github"]
-  tags = ["${DOCKER_REPO}/inbo-biodiversiteitsportaal-apikey:${TAG}"]
+  cache-from = ["${DOCKER_REPO}/inbo-vbp-apikey:cache-github"]
+  tags = ["${DOCKER_REPO}/inbo-vbp-apikey:${TAG}"]
 }
 
 target "bie-hub" {
@@ -76,8 +76,8 @@ target "bie-hub" {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
   }
-  cache-from = ["${DOCKER_REPO}/inbo-biodiversiteitsportaal-bie-hub:cache-github"]
-  tags = ["${DOCKER_REPO}/inbo-biodiversiteitsportaal-bie-hub:${TAG}"]
+  cache-from = ["${DOCKER_REPO}/inbo-vbp-bie-hub:cache-github"]
+  tags = ["${DOCKER_REPO}/inbo-vbp-bie-hub:${TAG}"]
 }
 
 target "bie-index" {
@@ -86,8 +86,8 @@ target "bie-index" {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
   }
-  cache-from = ["${DOCKER_REPO}/inbo-biodiversiteitsportaal-bie-index:cache-github"]
-  tags = ["${DOCKER_REPO}/inbo-biodiversiteitsportaal-bie-index:${TAG}"]
+  cache-from = ["${DOCKER_REPO}/inbo-vbp-bie-index:cache-github"]
+  tags = ["${DOCKER_REPO}/inbo-vbp-bie-index:${TAG}"]
 }
 
 target "biocache-hub" {
@@ -96,8 +96,8 @@ target "biocache-hub" {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
   }
-  cache-from = ["${DOCKER_REPO}/inbo-biodiversiteitsportaal-biocache-hub:cache-github"]
-  tags = ["${DOCKER_REPO}/inbo-biodiversiteitsportaal-biocache-hub:${TAG}"]
+  cache-from = ["${DOCKER_REPO}/inbo-vbp-biocache-hub:cache-github"]
+  tags = ["${DOCKER_REPO}/inbo-vbp-biocache-hub:${TAG}"]
 }
 
 target "biocache-service" {
@@ -106,8 +106,8 @@ target "biocache-service" {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
   }
-  cache-from = ["${DOCKER_REPO}/inbo-biodiversiteitsportaal-biocache-service:cache-github"]
-  tags = ["${DOCKER_REPO}/inbo-biodiversiteitsportaal-biocache-service:${TAG}"]
+  cache-from = ["${DOCKER_REPO}/inbo-vbp-biocache-service:cache-github"]
+  tags = ["${DOCKER_REPO}/inbo-vbp-biocache-service:${TAG}"]
 }
 
 target "collectory" {
@@ -116,8 +116,8 @@ target "collectory" {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
   }
-  cache-from = ["${DOCKER_REPO}/inbo-biodiversiteitsportaal-collectory:cache-github"]
-  tags = ["${DOCKER_REPO}/inbo-biodiversiteitsportaal-collectory:${TAG}"]
+  cache-from = ["${DOCKER_REPO}/inbo-vbp-collectory:cache-github"]
+  tags = ["${DOCKER_REPO}/inbo-vbp-collectory:${TAG}"]
 }
 
 target "doi-service" {
@@ -126,8 +126,8 @@ target "doi-service" {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
   }
-  cache-from = ["${DOCKER_REPO}/inbo-biodiversiteitsportaal-doi-service:cache-github"]
-  tags = ["${DOCKER_REPO}/inbo-biodiversiteitsportaal-doi-service:${TAG}"]
+  cache-from = ["${DOCKER_REPO}/inbo-vbp-doi-service:cache-github"]
+  tags = ["${DOCKER_REPO}/inbo-vbp-doi-service:${TAG}"]
 }
 
 target "image-service" {
@@ -136,8 +136,8 @@ target "image-service" {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
   }
-  cache-from = ["${DOCKER_REPO}/inbo-biodiversiteitsportaal-image-service:cache-github"]
-  tags = ["${DOCKER_REPO}/inbo-biodiversiteitsportaal-image-service:${TAG}"]
+  cache-from = ["${DOCKER_REPO}/inbo-vbp-image-service:cache-github"]
+  tags = ["${DOCKER_REPO}/inbo-vbp-image-service:${TAG}"]
 }
 
 target "logger" {
@@ -146,8 +146,8 @@ target "logger" {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
   }
-  cache-from = ["${DOCKER_REPO}/inbo-biodiversiteitsportaal-logger:cache-github"]
-  tags = ["${DOCKER_REPO}/inbo-biodiversiteitsportaal-logger:${TAG}"]
+  cache-from = ["${DOCKER_REPO}/inbo-vbp-logger:cache-github"]
+  tags = ["${DOCKER_REPO}/inbo-vbp-logger:${TAG}"]
 }
 
 target "namematching-service" {
@@ -155,8 +155,8 @@ target "namematching-service" {
   contexts = {
     "custom-maven" = "target:custom-maven"
   }
-  cache-from = ["${DOCKER_REPO}/inbo-biodiversiteitsportaal-namematching-service:cache-github"]
-  tags = ["${DOCKER_REPO}/inbo-biodiversiteitsportaal-namematching-service:${TAG}"]
+  cache-from = ["${DOCKER_REPO}/inbo-vbp-namematching-service:cache-github"]
+  tags = ["${DOCKER_REPO}/inbo-vbp-namematching-service:${TAG}"]
 }
 
 target "pipelines" {
@@ -164,8 +164,8 @@ target "pipelines" {
   contexts = {
     "custom-maven" = "target:custom-maven"
   }
-  cache-from = ["${DOCKER_REPO}/inbo-biodiversiteitsportaal-pipelines:cache-github"]
-  tags = ["${DOCKER_REPO}/inbo-biodiversiteitsportaal-pipelines:${TAG}"]
+  cache-from = ["${DOCKER_REPO}/inbo-vbp-pipelines:cache-github"]
+  tags = ["${DOCKER_REPO}/inbo-vbp-pipelines:${TAG}"]
 }
 
 target "regions" {
@@ -174,8 +174,8 @@ target "regions" {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
   }
-  cache-from = ["${DOCKER_REPO}/inbo-biodiversiteitsportaal-regions:cache-github"]
-  tags = ["${DOCKER_REPO}/inbo-biodiversiteitsportaal-regions:${TAG}"]
+  cache-from = ["${DOCKER_REPO}/inbo-vbp-regions:cache-github"]
+  tags = ["${DOCKER_REPO}/inbo-vbp-regions:${TAG}"]
 }
 
 target "sensitive-data-service" {
@@ -183,7 +183,7 @@ target "sensitive-data-service" {
   contexts = {
     "custom-maven" = "target:custom-maven"
   }
-  tags = ["${DOCKER_REPO}/inbo-biodiversiteitsportaal-sensitive-data-service:${TAG}"]
+  tags = ["${DOCKER_REPO}/inbo-vbp-sensitive-data-service:${TAG}"]
 }
 
 target "spatial-hub" {
@@ -192,8 +192,8 @@ target "spatial-hub" {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
   }
-  cache-from = ["${DOCKER_REPO}/inbo-biodiversiteitsportaal-spatial-hub:cache-github"]
-  tags = ["${DOCKER_REPO}/inbo-biodiversiteitsportaal-spatial-hub:${TAG}"]
+  cache-from = ["${DOCKER_REPO}/inbo-vbp-spatial-hub:cache-github"]
+  tags = ["${DOCKER_REPO}/inbo-vbp-spatial-hub:${TAG}"]
 }
 
 target "spatial-service" {
@@ -202,8 +202,8 @@ target "spatial-service" {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
   }
-  cache-from = ["${DOCKER_REPO}/inbo-biodiversiteitsportaal-spatial-service:cache-github"]
-  tags = ["${DOCKER_REPO}/inbo-biodiversiteitsportaal-spatial-service:${TAG}"]
+  cache-from = ["${DOCKER_REPO}/inbo-vbp-spatial-service:cache-github"]
+  tags = ["${DOCKER_REPO}/inbo-vbp-spatial-service:${TAG}"]
 }
 
 target "species-list" {
@@ -212,8 +212,8 @@ target "species-list" {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
   }
-  cache-from = ["${DOCKER_REPO}/inbo-biodiversiteitsportaal-species-list:cache-github"]
-  tags = ["${DOCKER_REPO}/inbo-biodiversiteitsportaal-species-list:${TAG}"]
+  cache-from = ["${DOCKER_REPO}/inbo-vbp-species-list:cache-github"]
+  tags = ["${DOCKER_REPO}/inbo-vbp-species-list:${TAG}"]
 }
 
 target "userdetails" {
@@ -222,8 +222,8 @@ target "userdetails" {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
   }
-  cache-from = ["${DOCKER_REPO}/inbo-biodiversiteitsportaal-userdetails:cache-github"]
-  tags = ["${DOCKER_REPO}/inbo-biodiversiteitsportaal-userdetails:${TAG}"]
+  cache-from = ["${DOCKER_REPO}/inbo-vbp-userdetails:cache-github"]
+  tags = ["${DOCKER_REPO}/inbo-vbp-userdetails:${TAG}"]
 }
 
 group "all" {
