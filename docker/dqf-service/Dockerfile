@@ -24,6 +24,6 @@ ARG VERSION=2.0.0-SNAPSHOT
 LABEL ala.version=${VERSION}
 
 COPY --from=builder /project/build/libs/data-quality-filter-service-${VERSION}-plain.war ${CATALINA_HOME}/webapps/dqf-service.war
-COPY data-quality-filter-service.xml ${CATALINA_HOME}/conf/portal/localhost/dqf-service.xml
+COPY dqf-service.xml ${CATALINA_HOME}/conf/portal/localhost/dqf-service.xml
 
-HEALTHCHECK CMD curl --fail --silent http://localhost:8080/data-quality-filter-service/actuator/health || exit 1
+HEALTHCHECK CMD curl --fail --silent http://localhost:8080/dqf-service/actuator/health || exit 1
