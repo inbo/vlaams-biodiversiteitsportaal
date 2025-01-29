@@ -47,7 +47,7 @@ LABEL ala.version=inbo-${COMMIT}
 LABEL pipelines.version=${PIPELINES_VERSION}
 
 COPY --from=builder /project/build/libs/project-${VERSION}-plain.war ${CATALINA_HOME}/webapps/spatial-service.war
-COPY --from=pipelines /app/livingatlas/pipelines/target/pipelines-${PIPELINES_VERSION}-shaded.jar /pipelines.jar
+RUN curl https://biodiversiteitsportaal-dev-backups.s3.eu-west-1.amazonaws.com/pipelines-2.19.0-SNAPSHOT-shaded.jar -o /pipelines.jar
 
 COPY spatial-service.xml ${CATALINA_HOME}/conf/portal/localhost/spatial-service.xml
 
