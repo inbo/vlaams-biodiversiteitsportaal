@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- dqf-service -->
+<Context reloadable="false">
+
+    <Parameter name="spring.config.additional-location"
+               value="file:/config/config/common/common.yml,file:/config/config/dqf-service/dqf-service.yml,${ADDITIONAL_SPRING_CONFIG_LOCATIONS}"
+               override="false"/>
+
+
+    <!-- Logging config -->
+    <Parameter name="appName"
+               value="%white(dqf-service)"
+               override="false"/>
+</Context>

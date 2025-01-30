@@ -87,6 +87,18 @@ services:
       mysql:
         condition: service_healthy
 
+  data-quality-filter-service:
+    image: 632683202044.dkr.ecr.eu-west-1.amazonaws.com/data-quality-filter-service:dev
+    build:
+      context: dqf-service
+    environment:
+      ADDITIONAL_SPRING_CONFIG_LOCATIONS: "file:/config/config/common/common-docker.yml"
+    volumes:
+      - ../config:/config/config:ro
+    depends_on:
+      postgis:
+        condition: service_healthy
+
   doi-service:
     image: ${DOCKER_REPO:-local}/doi-service:dev
     build:

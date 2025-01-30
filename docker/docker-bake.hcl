@@ -29,22 +29,23 @@ target "tomcat-base" {
 target "portal-full" {
   context = "./tomcat"
   contexts = {
-    "tomcat-base"      = "target:tomcat-base"
-    "alerts"           = "target:alerts"
-    "apikey"           = "target:apikey"
-    "bie-hub"          = "target:bie-hub"
-    "bie-index"        = "target:bie-index"
-    "biocache-hub"     = "target:biocache-hub"
-    "biocache-service" = "target:biocache-service"
-    "collectory"       = "target:collectory"
-    "doi-service"      = "target:doi-service"
-    "image-service"    = "target:image-service"
-    "logger"           = "target:logger"
-    "regions"          = "target:regions"
-    "spatial-hub"      = "target:spatial-hub"
-    "spatial-service"  = "target:spatial-service"
-    "species-list"     = "target:species-list"
-    "userdetails"      = "target:userdetails"
+    "tomcat-base"                 = "target:tomcat-base"
+    "alerts"                      = "target:alerts"
+    "apikey"                      = "target:apikey"
+    "bie-hub"                     = "target:bie-hub"
+    "bie-index"                   = "target:bie-index"
+    "biocache-hub"                = "target:biocache-hub"
+    "biocache-service"            = "target:biocache-service"
+    "collectory"                  = "target:collectory"
+    "data-quality-filter-service" = "target:data-quality-filter-service"
+    "doi-service"                 = "target:doi-service"
+    "image-service"               = "target:image-service"
+    "logger"                      = "target:logger"
+    "regions"                     = "target:regions"
+    "spatial-hub"                 = "target:spatial-hub"
+    "spatial-service"             = "target:spatial-service"
+    "species-list"                = "target:species-list"
+    "userdetails"                 = "target:userdetails"
   }
   tags = ["${DOCKER_REPO}/inbo-vbp-portal-full:${TAG}", "632683202044.dkr.ecr.eu-west-1.amazonaws.com/portal-full:${TAG}"]
   target = "portal"
@@ -118,6 +119,16 @@ target "collectory" {
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-collectory:cache-github"]
   tags = ["${DOCKER_REPO}/inbo-vbp-collectory:${TAG}", "632683202044.dkr.ecr.eu-west-1.amazonaws.com/collectory:${TAG}"]
+}
+
+target "data-quality-filter-service" {
+  context = "./dqf-service"
+  contexts = {
+    "custom-gradle" = "target:custom-gradle"
+    "tomcat-base"   = "target:tomcat-base"
+  }
+  cache-from = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/data-quality-filter-service:cache-github"]
+  tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/data-quality-filter-service:${TAG}"]
 }
 
 target "doi-service" {
@@ -201,6 +212,7 @@ target "spatial-service" {
   contexts = {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
+    "pipelines"   = "target:pipelines"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-spatial-service:cache-github"]
   tags = ["${DOCKER_REPO}/inbo-vbp-spatial-service:${TAG}", "632683202044.dkr.ecr.eu-west-1.amazonaws.com/spatial-service:${TAG}"]
@@ -235,6 +247,7 @@ group "all" {
     "biocache-hub",
     "biocache-service",
     "collectory",
+    "data-quality-filter-service",
     "doi-service",
     "image-service",
     "logger",
@@ -259,6 +272,7 @@ group "services" {
     "biocache-hub",
     "biocache-service",
     "collectory",
+    "data-quality-filter-service",
     "doi-service",
     "image-service",
     "logger",

@@ -2,6 +2,9 @@
 
 !.gitignore
 
+!solr.xml
+!zoo.cfg
+
 /bie/*
 !/bie
 !/bie/solrconfig.xml
