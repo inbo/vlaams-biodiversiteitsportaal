@@ -106,3 +106,4 @@ biosecurity:
 
 dataSource:
   url: jdbc:mysql://alerts:my-super-secret-password@mysql/alerts
+
