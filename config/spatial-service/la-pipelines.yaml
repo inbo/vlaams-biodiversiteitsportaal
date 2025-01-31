@@ -44,7 +44,7 @@ sds:
   wsUrl: http://sensitive-data-service.biodiversiteitsportaal.dev.internal:9189
   timeoutSec: 300
 collectory:
-  wsUrl: http://collectory.biodiversiteitsportaal.dev.internal:8080/collectory/ws/
+  wsUrl: ${common.protocol}://${common.domain}/collectory/ws/
   timeoutSec: 300
   retryConfig:
     maxAttempts: 10
@@ -53,7 +53,7 @@ collectory:
     Authorization: ${APIKEY}
     apiKey: ${APIKEY}
 imageService:
-  wsUrl: http://image-service.biodiversiteitsportaal.dev.internal:8080/image-service/
+  wsUrl: ${common.protocol}://${common.domain}/image-service
   timeoutSec: 300
   httpHeaders:
     apiKey: ${APIKEY}
@@ -61,13 +61,13 @@ imageService:
     maxAttempts: 5
     initialIntervalMillis: 1000
 speciesListService:
-  wsUrl: http://species-list.biodiversiteitsportaal.dev.internal:8080/species-list/
+  wsUrl: ${common.protocol}://${common.domain}/species-list
   timeoutSec: 900
   retryConfig:
     maxAttempts: 5
     initialIntervalMillis: 1000
 samplingService:
-  wsUrl: http://spatial-service.biodiversiteitsportaal.dev.internal:8080/spatial-service/
+  wsUrl: ${common.protocol}://${common.domain}/spatial-service
   timeoutSec: 600
   batchSize: 25000
   batchStatusSleepTime: 1000
