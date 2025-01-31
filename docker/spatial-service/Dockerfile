@@ -47,7 +47,15 @@ LABEL ala.version=inbo-${COMMIT}
 LABEL pipelines.version=${PIPELINES_VERSION}
 
 COPY --from=builder /project/build/libs/project-${VERSION}-plain.war ${CATALINA_HOME}/webapps/spatial-service.war
-RUN curl https://biodiversiteitsportaal-dev-backups.s3.eu-west-1.amazonaws.com/pipelines-2.19.0-SNAPSHOT-shaded.jar -o /pipelines.jar
+
+RUN mkdir /data/pipelines-vocabularies && mkdir /data/pipelines-data && mkdir /data/pipelines-shp
+
+RUN `curl https://biodiversiteitsportaal-dev-backups.s3.eu-west-1.amazonaws.com/pipelines-2.19.0-SNAPSHOT-shaded.jar -o /pipelines.jar`
+
+RUN `curl https://pipelines-shp.s3-ap-southeast-2.amazonaws.com/pipelines-shapefiles.zip -o /data/pipelines-shp/pipelines-shapefiles.zip`
+RUN unzip /data/pipelines-shp/pipelines-shapefiles.zip -d /data/pipelines-shp
+
+COPY pipelines/vocabularies/* /data/pipelines-vocabularies/
 
 COPY spatial-service.xml ${CATALINA_HOME}/conf/portal/localhost/spatial-service.xml
 
