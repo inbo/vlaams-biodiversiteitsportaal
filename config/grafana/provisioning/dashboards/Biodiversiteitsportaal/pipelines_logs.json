@@ -115,8 +115,8 @@
           "logGroups": [
             {
               "accountId": "632683202044",
-              "arn": "arn:aws:logs:eu-west-1:632683202044:log-group:/inbo/biodiversiteitsportaal/dev/batch:*",
-              "name": "/inbo/biodiversiteitsportaal/dev/batch"
+              "arn": "arn:aws:logs:eu-west-1:632683202044:log-group:/inbo/vbp/pipelines:*",
+              "name": "/inbo/vbp/pipelines"
             }
           ],
           "matchExact": true,
@@ -182,8 +182,8 @@
           "logGroups": [
             {
               "accountId": "632683202044",
-              "arn": "arn:aws:logs:eu-west-1:632683202044:log-group:/inbo/biodiversiteitsportaal/dev/batch:*",
-              "name": "/inbo/biodiversiteitsportaal/dev/batch"
+              "arn": "arn:aws:logs:eu-west-1:632683202044:log-group:/inbo/vbp/pipelines:*",
+              "name": "/inbo/vbp/pipelines"
             }
           ],
           "matchExact": true,
@@ -268,7 +268,7 @@
   },
   "timepicker": {},
   "timezone": "browser",
-  "title": "Batch Logs",
+  "title": "Pipelines Logs",
   "uid": "fdn6d7an0e5moe",
   "version": 1,
   "weekStart": ""

@@ -115,8 +115,8 @@
           "logGroups": [
             {
               "accountId": "632683202044",
-              "arn": "arn:aws:logs:eu-west-1:632683202044:log-group:/inbo/biodiversiteitsportaal/dev/ecs:*",
-              "name": "/inbo/biodiversiteitsportaal/dev/ecs"
+              "arn": "arn:aws:logs:eu-west-1:632683202044:log-group:/inbo/vbp/ecs:*",
+              "name": "/inbo/vbp/ecs"
             }
           ],
           "matchExact": true,
@@ -182,8 +182,8 @@
           "logGroups": [
             {
               "accountId": "632683202044",
-              "arn": "arn:aws:logs:eu-west-1:632683202044:log-group:/inbo/biodiversiteitsportaal/dev/ecs:*",
-              "name": "/inbo/biodiversiteitsportaal/dev/ecs"
+              "arn": "arn:aws:logs:eu-west-1:632683202044:log-group:/inbo/vbp/ecs:*",
+              "name": "/inbo/vbp/ecs"
             }
           ],
           "matchExact": true,
