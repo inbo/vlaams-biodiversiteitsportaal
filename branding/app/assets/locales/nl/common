@@ -49,8 +49,8 @@
   "index.footer.about-inbo.about-us": "Over ons",
   "index.footer.about-inbo.contact-us": "Contacteer ons",
   "footer.bug-modal.title": "Vlaams Biodiversiteitsportaal development website",
-  "footer.bug-modal.intro": "Kijk en klik gerust rond!\nMaar, besef dat dit een ontwikkeling- en test-website is en dus nog niet klaar voor normaal, publiek, gebruik.",
-  "footer.bug-modal.contact-us": "Indien je vragen of feedback hebt, contacteer ons dan via ",
-  "footer.bug-modal.report-bug": "Moest je problemen ervaren of een bug zien, zou het enorm geäpprecieerd worden deze te rapporteren op ",
+  "footer.bug-modal.intro": "Neem gerust een kijkje en klik rond! Houd er echter rekening mee dat je je bevindt in de UAT-omgeving van het Vlaams Biodiversiteitsportaal, die nog in de testfase verkeert en niet bedoeld is voor regulier publiek gebruik.\n\nIn de tab Help & Info vind je meer informatie over hoe te testen. In het submenu ‘Challenges’ vind je enkele uitdagingen die het testen wat kunnen begeleiden.",
+  "footer.bug-modal.contact-us": "Heb je vragen, opmerkingen of feedback? Neem dan contact met ons op via ",
+  "footer.bug-modal.report-bug": "Mocht je een probleem of bug tegenkomen, dan stellen we het zeer op prijs als je dit meldt op ",
   "footer.bug-modal.github-page": "onze publieke Github pagina"
 }
