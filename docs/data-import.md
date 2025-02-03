@@ -85,8 +85,8 @@ $ ./mysqldump -h 0.0.0.0 -u root -p --databases {database} > ~/Work/INBO/data_im
 
 ```
 for each database in ('apikey', 'cas', 'collectory', 'specieslists')
-$ sed -i -e 's|CREATE DATABASE \/\*\!32312 IF NOT EXISTS\*\/|CREATE DATABASE IF NOT EXISTS|' /Users/katyashaleninova/Work/INBO/data_import/mysql/specieslists_mysqldump.sql
-$./mysql -h 0.0.0.0 -u root -p specieslists < ~/Work/INBO/data_import/mysql/specieslists_mysqldump.sql
+$ sed -i -e 's|CREATE DATABASE \/\*\!32312 IF NOT EXISTS\*\/|CREATE DATABASE IF NOT EXISTS|' /Users/katyashaleninova/Work/INBO/data_import/mysql/{database}_mysqldump.sql
+$./mysql -h 0.0.0.0 -u root -p {database} < ~/Work/INBO/data_import/mysql/{database}_mysqldump.sql
 ```
 ### script explained
 The dump script contains the following statement:
@@ -95,6 +95,6 @@ CREATE DATABASE /* !32312 IF NOT EXISTS */
 ```
 'IF NOT EXISTS' is commented out, we have to un-comment it. 
 The database is already created in the local container (at startup), therefore creating it again would give an error and fail the script.
-Therefore we un-comment the 'IF NOT EXISTS' with 'sed' utility.
+un-comment the 'IF NOT EXISTS' with 'sed' utility.
 
 ## Mysql done
