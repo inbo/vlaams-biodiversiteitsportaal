@@ -112,3 +112,6 @@ sandboxSolrCollection: sandbox
 sandboxThreadCount: 2
 pipelinesCmd: "java -Dspark.local.dir=/data/spatial-data/sandbox/tmp -Djava.io.tmpdir=/data/spatial-data/sandbox/tmp -cp /pipelines.jar"
 pipelinesConfig: "--config=/config/config/spatial-service/la-pipelines.yaml"
+
+logging:
+  config: /config/config/spatial-service/logback.xml
