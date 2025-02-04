@@ -195,6 +195,7 @@ useDownloadPlugin: true
 userCharts: false
 userdetails:
   url: ${common.protocol}://${common.domain}/userdetails/
+  baseUrl: ${common.protocol}://${common.domain}/userdetails/
 searchTabs:
   catalogUpload: false
 
