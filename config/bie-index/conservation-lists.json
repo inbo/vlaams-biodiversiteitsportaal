@@ -2,7 +2,7 @@
   "defaultSourceField": "status",
   "lists": [
     {
-      "uid": "dr538",
+      "uid": "drt1722600264151",
       "field": "threatStatus_s",
       "sourceField": "threatStatus",
       "term": "threatStatus",
