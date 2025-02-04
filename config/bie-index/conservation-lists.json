@@ -4,6 +4,7 @@
     {
       "uid": "dr538",
       "field": "threatStatus_s",
+      "sourceField": "threatStatus",
       "term": "threatStatus",
       "label": "RODE_LIJST"
     }
