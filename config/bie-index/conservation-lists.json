@@ -2,11 +2,11 @@
   "defaultSourceField": "status",
   "lists": [
     {
-      "uid": "drt1722600264151",
+      "uid": "drt1738675870749",
       "field": "threatStatus_s",
       "sourceField": "threatStatus",
       "term": "threatStatus",
-      "label": "RODE_LIJST"
+      "label": "VLINDERS_TEST_LIJST"
     }
   ]
 }
