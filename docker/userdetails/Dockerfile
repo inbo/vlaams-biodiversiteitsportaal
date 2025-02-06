@@ -7,7 +7,7 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 #LABEL ala.version=${VERSION}
 
 ARG VERSION=attempt-userdetails-cognito-fix
-ARG COMMIT=e40aa80329c092e8fc8b7c21a76a0f5a5fa77d27
+ARG COMMIT=947b937da1aa8ebf5b277e913217059030942a5c
 ARG SOURCE=https://github.com/StefanVanDyck/userdetails.git
 LABEL ala.version=inbo-${COMMIT}
 
@@ -30,7 +30,7 @@ RUN ls -la /project/build/libs/
 FROM tomcat-base
 
 ARG VERSION=3.3.0-SNAPSHOT
-ARG COMMIT=e40aa80329c092e8fc8b7c21a76a0f5a5fa77d27
+ARG COMMIT=947b937da1aa8ebf5b277e913217059030942a5c
 LABEL ala.version=inbo-${COMMIT}
 
 COPY --from=builder /project/build/libs/userdetails-${VERSION}-plain.war ${CATALINA_HOME}/webapps/userdetails.war
