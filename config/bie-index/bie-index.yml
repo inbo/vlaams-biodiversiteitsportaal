@@ -122,7 +122,7 @@ skin:
 
 useLegacyAuto: false
 import:
-  sequence: collectory,taxonomy-all,vernacular,denormalise,layers,regions,localities,conservation-lists,wordpress,knowledgebase,biocollect,species-lists,favourites,weights,link-identifiers,images,occurrences,hidden-images,wiki-urls,suggest-index,sitemap,swap
+  sequence: collectory,taxonomy-all,vernacular,denormalise,layers,localities,conservation-lists,knowledgebase,species-lists,favourites,weights,link-identifiers,images,occurrences,hidden-images,wiki-urls,suggest-index
   sequenceDaily: conservation-lists,wordpress,knowledgebase,biocollect,species-lists,favourites,suggest-index,images,hidden-images,wiki-urls,sitemap,swap
   sequenceWeekly: occurrences,layers,regions,localities,suggest-index,swap
   dailyRunHour: 2
