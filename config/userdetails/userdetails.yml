@@ -89,7 +89,7 @@ lists:
   url: ${common.protocol}://${common.domain}/species-list/speciesList/list
 biocache:
   search:
-    url: ${common.protocol}://${common.domain}/biocache-hub/occurrences/search/?q=*%253A*&fq=assertion_user_id%253A
+    url: "${common.protocol}://${common.domain}/biocache-hub/occurrences/search/?q=*:*&fq=assertion_user_id:"
     baseUrl: ${common.protocol}://${common.domain}/biocache-hub/occurrences/search
   myDownloads:
     url: ${common.protocol}://${common.domain}/biocache-hub/download/myDownloads/
