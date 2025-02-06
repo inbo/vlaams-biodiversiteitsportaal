@@ -6,7 +6,7 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 #LABEL ala.version=${VERSION}
 
 ARG VERSION=483-sandbox
-#ARG COMMIT=50a19013e5e0c20d279d3c6f7654a0ebed4f3e44
+ARG COMMIT=d05d81d6d7cf0e8cf3d3ad0485ccf1edf4832931
 ARG SOURCE=https://github.com/katya-shaleninova/spatial-hub.git
 LABEL ala.version=inbo-${VERSION}
 
@@ -17,7 +17,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     npm
 
 WORKDIR /project
-RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} .
+RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
 
 COPY resources.xml ./grails-app/conf/spring/resources.xml
 COPY ./layouts/* ./grails-app/views/layouts/
@@ -37,7 +37,7 @@ RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
 FROM tomcat-base
 
 ARG VERSION=2.2.0-SNAPSHOT
-ARG COMMIT=50a19013e5e0c20d279d3c6f7654a0ebed4f3e44
+ARG COMMIT=d05d81d6d7cf0e8cf3d3ad0485ccf1edf4832931
 LABEL ala.version=inbo-${VERSION}
 
 COPY --from=builder /project/build/libs/project-${VERSION}-plain.war ${CATALINA_HOME}/webapps/spatial-hub.war
