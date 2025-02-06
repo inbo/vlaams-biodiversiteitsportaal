@@ -7,6 +7,13 @@
       "sourceField": "threatStatus",
       "term": "threatStatus",
       "label": "VLINDERS_TEST_LIJST"
+    },
+    {
+      "uid": "drt1722600264151",
+      "field": "threatStatus_rlf",
+      "sourceField": "threatStatus",
+      "term": "threatStatus",
+      "label": "RLF"
     }
   ]
 }
