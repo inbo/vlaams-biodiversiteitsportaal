@@ -73,7 +73,7 @@ attribution:
   common: National Species Lists
 commonName:
   # Acceptable vernacular names to appear in autocomplete and primary name eg en,en-AU,en-CA,en-GB,en-US (leave empty for any language)
-  languages:
+  languages: en,nl
   defaultLanguage: en
 # Location of conservation lists
 conservationListsUrl: file:///config/config/bie-index/conservation-lists.json
