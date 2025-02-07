@@ -1,30 +1,30 @@
 [
   {
     "label": "Vlaams Gewest",
-    "fid": "cl10000"
+    "fid": "cl10008"
   },
   {
     "label": "Provincies",
-    "fid": "cl10001"
+    "fid": "cl10007"
   },
   {
     "label": "Gemeenten",
-    "fid": "cl10002"
+    "fid": "cl10009"
   },
   {
     "label": "Openbaar bos en natuurgebieden",
-    "fid": "cl10022"
+    "fid": "cl10003"
   },
   {
     "label": "Natura 2000 gebieden",
-    "fid": "cl110008"
+    "fid": "cl111"
   },
   {
     "label": "Jachtterreinen",
-    "fid": "cl10013"
+    "fid": "cl10016"
   },
   {
     "label": "Wildbeheereenheden",
-    "fid": "cl10011"
+    "fid": "cl10017"
   }
 ]
