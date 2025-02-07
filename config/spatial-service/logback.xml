@@ -18,7 +18,7 @@
     <!-- Disable flood of hibernate deprecation warnings-->
     <logger name="org.hibernate.orm.deprecation" level="OFF"/>
 
-    <root level="${LOG_LEVEL:-DEBUG}">
+    <root level="${LOG_LEVEL:-INFO}">
         <appender-ref ref="${LOG_FORMAT:-TEXT}"/>
     </root>
 </configuration>
