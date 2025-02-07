@@ -64,6 +64,9 @@ regions:
 occurrence:
   searchURL: "${common.protocol}://${common.domain}/biocache-hub/occurrences/search?q=passer"
   searchTitle: occurrence search
+userdetails:
+  web:
+    url: "${common.protocol}://${common.domain}/userdetails/"
 
 useSpeciesListsAlerts: true
 useSpatialAlerts: true
