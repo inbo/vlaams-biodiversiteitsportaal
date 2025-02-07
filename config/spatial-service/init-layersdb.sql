@@ -239,7 +239,7 @@ CREATE TABLE task
     id       serial NOT NULL,
     name     character varying(40),
     json     text,
-    error    character varying(256),
+    error    text,
     created  timestamp without time zone,
     finished timestamp without time zone,
     size     integer,
@@ -947,3 +947,7 @@ CREATE OR REPLACE FUNCTION updateNameSearch()
     LANGUAGE sql VOLATILE;
 
 --INSERT INTO fields (name, id, type, "desc", enabled, spid, indb, defaultlayer, namesearch, "intersect", layerbranch, analysis, addtomap) VALUES ('User Uploaded Objects', 'cl1083', 'e', '', true, '1083', false, false, false, false, false, false, false);
+
+
+ALTER TABLE public.task ALTER COLUMN json TYPE text USING json::text;
+ALTER TABLE public.task ALTER COLUMN error TYPE text USING error::text;
