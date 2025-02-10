@@ -50,7 +50,7 @@ COPY --from=builder /project/build/libs/project-${VERSION}-plain.war ${CATALINA_
 
 RUN mkdir /data/pipelines-vocabularies && mkdir /data/pipelines-data && mkdir /data/pipelines-shp
 
-RUN `curl https://biodiversiteitsportaal-dev-backups.s3.eu-west-1.amazonaws.com/pipelines-2.19.0-SNAPSHOT-shaded.jar -o /pipelines.jar`
+RUN `curl https://inbo-vbp-dev-backups.s3.eu-west-1.amazonaws.com/sandbox/pipelines-2.19.0-SNAPSHOT-shaded.jar -o /pipelines.jar`
 
 RUN `curl https://pipelines-shp.s3-ap-southeast-2.amazonaws.com/pipelines-shapefiles.zip -o /data/pipelines-shp/pipelines-shapefiles.zip`
 RUN unzip /data/pipelines-shp/pipelines-shapefiles.zip -d /data/pipelines-shp
