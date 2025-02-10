@@ -26,7 +26,7 @@ RUN mkdir /data && mkdir /data/lucene && chown -R app:app /data
 USER app
 WORKDIR /data/lucene
 
-RUN curl https://biodiversiteitsportaal-dev-backups.s3.eu-west-1.amazonaws.com/namematching-gbif-backbone-lucene-8-2024-09-11.tgz -o namematching-nm.tgz \
+RUN curl https://inbo-vbp-global-public-artifacts.s3.eu-west-1.amazonaws.com/taxonomy/namematching-gbif-backbone-lucene-8-2024-09-11.tgz -o namematching-nm.tgz \
     && tar -xzf namematching-nm.tgz \
     && mv namematching-gbif-backbone-lucene-8-2024-09-11 namematching-nm \
     && rm namematching-nm.tgz
