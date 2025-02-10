@@ -47,7 +47,7 @@ target "portal-full" {
     "species-list"                = "target:species-list"
     "userdetails"                 = "target:userdetails"
   }
-  tags = ["${DOCKER_REPO}/inbo-vbp-portal-full:${TAG}", "632683202044.dkr.ecr.eu-west-1.amazonaws.com/portal-full:${TAG}"]
+  tags = ["${DOCKER_REPO}/inbo-vbp-portal-full:${TAG}"]
   target = "portal"
 }
 
@@ -58,7 +58,7 @@ target "alerts" {
     "tomcat-base"   = "target:tomcat-base"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-alerts:cache-github"]
-  tags = ["${DOCKER_REPO}/inbo-vbp-alerts:${TAG}", "632683202044.dkr.ecr.eu-west-1.amazonaws.com/alerts:${TAG}"]
+  tags = ["${DOCKER_REPO}/inbo-vbp-alerts:${TAG}"]
 }
 
 target "apikey" {
@@ -68,7 +68,7 @@ target "apikey" {
     "tomcat-base"   = "target:tomcat-base"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-apikey:cache-github"]
-  tags = ["${DOCKER_REPO}/inbo-vbp-apikey:${TAG}", "632683202044.dkr.ecr.eu-west-1.amazonaws.com/apikey:${TAG}"]
+  tags = ["${DOCKER_REPO}/inbo-vbp-apikey:${TAG}"]
 }
 
 target "bie-hub" {
@@ -78,7 +78,7 @@ target "bie-hub" {
     "tomcat-base"   = "target:tomcat-base"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-bie-hub:cache-github"]
-  tags = ["${DOCKER_REPO}/inbo-vbp-bie-hub:${TAG}", "632683202044.dkr.ecr.eu-west-1.amazonaws.com/bie-hub:${TAG}"]
+  tags = ["${DOCKER_REPO}/inbo-vbp-bie-hub:${TAG}"]
 }
 
 target "bie-index" {
@@ -88,7 +88,7 @@ target "bie-index" {
     "tomcat-base"   = "target:tomcat-base"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-bie-index:cache-github"]
-  tags = ["${DOCKER_REPO}/inbo-vbp-bie-index:${TAG}", "632683202044.dkr.ecr.eu-west-1.amazonaws.com/bie-index:${TAG}"]
+  tags = ["${DOCKER_REPO}/inbo-vbp-bie-index:${TAG}"]
 }
 
 target "biocache-hub" {
@@ -98,7 +98,7 @@ target "biocache-hub" {
     "tomcat-base"   = "target:tomcat-base"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-biocache-hub:cache-github"]
-  tags = ["${DOCKER_REPO}/inbo-vbp-biocache-hub:${TAG}", "632683202044.dkr.ecr.eu-west-1.amazonaws.com/biocache-hub:${TAG}"]
+  tags = ["${DOCKER_REPO}/inbo-vbp-biocache-hub:${TAG}"]
 }
 
 target "biocache-service" {
@@ -108,7 +108,7 @@ target "biocache-service" {
     "tomcat-base"   = "target:tomcat-base"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-biocache-service:cache-github"]
-  tags = ["${DOCKER_REPO}/inbo-vbp-biocache-service:${TAG}", "632683202044.dkr.ecr.eu-west-1.amazonaws.com/biocache-service:${TAG}"]
+  tags = ["${DOCKER_REPO}/inbo-vbp-biocache-service:${TAG}"]
 }
 
 target "collectory" {
@@ -118,7 +118,7 @@ target "collectory" {
     "tomcat-base"   = "target:tomcat-base"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-collectory:cache-github"]
-  tags = ["${DOCKER_REPO}/inbo-vbp-collectory:${TAG}", "632683202044.dkr.ecr.eu-west-1.amazonaws.com/collectory:${TAG}"]
+  tags = ["${DOCKER_REPO}/inbo-vbp-collectory:${TAG}"]
 }
 
 target "data-quality-filter-service" {
@@ -128,7 +128,7 @@ target "data-quality-filter-service" {
     "tomcat-base"   = "target:tomcat-base"
   }
   cache-from = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/data-quality-filter-service:cache-github"]
-  tags = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/data-quality-filter-service:${TAG}"]
+  tags = ["${DOCKER_REPO}/inbo-vbp-data-quality-filter-service:${TAG}"]
 }
 
 target "doi-service" {
@@ -138,7 +138,7 @@ target "doi-service" {
     "tomcat-base"   = "target:tomcat-base"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-doi-service:cache-github"]
-  tags = ["${DOCKER_REPO}/inbo-vbp-doi-service:${TAG}", "632683202044.dkr.ecr.eu-west-1.amazonaws.com/doi-service:${TAG}"]
+  tags = ["${DOCKER_REPO}/inbo-vbp-doi-service:${TAG}"]
 }
 
 target "image-service" {
@@ -148,7 +148,7 @@ target "image-service" {
     "tomcat-base"   = "target:tomcat-base"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-image-service:cache-github"]
-  tags = ["${DOCKER_REPO}/inbo-vbp-image-service:${TAG}", "632683202044.dkr.ecr.eu-west-1.amazonaws.com/image-service:${TAG}"]
+  tags = ["${DOCKER_REPO}/inbo-vbp-image-service:${TAG}"]
 }
 
 target "logger" {
@@ -158,7 +158,7 @@ target "logger" {
     "tomcat-base"   = "target:tomcat-base"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-logger:cache-github"]
-  tags = ["${DOCKER_REPO}/inbo-vbp-logger:${TAG}", "632683202044.dkr.ecr.eu-west-1.amazonaws.com/logger:${TAG}"]
+  tags = ["${DOCKER_REPO}/inbo-vbp-logger:${TAG}"]
 }
 
 target "namematching-service" {
@@ -167,7 +167,7 @@ target "namematching-service" {
     "custom-maven" = "target:custom-maven"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-namematching-service:cache-github"]
-  tags = ["${DOCKER_REPO}/inbo-vbp-namematching-service:${TAG}", "632683202044.dkr.ecr.eu-west-1.amazonaws.com/namematching-service:${TAG}"]
+  tags = ["${DOCKER_REPO}/inbo-vbp-namematching-service:${TAG}"]
 }
 
 target "pipelines" {
@@ -176,7 +176,7 @@ target "pipelines" {
     "custom-maven" = "target:custom-maven"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-pipelines:cache-github"]
-  tags = ["${DOCKER_REPO}/inbo-vbp-pipelines:${TAG}", "632683202044.dkr.ecr.eu-west-1.amazonaws.com/pipelines:${TAG}"]
+  tags = ["${DOCKER_REPO}/inbo-vbp-pipelines:${TAG}"]
 }
 
 target "regions" {
@@ -186,7 +186,7 @@ target "regions" {
     "tomcat-base"   = "target:tomcat-base"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-regions:cache-github"]
-  tags = ["${DOCKER_REPO}/inbo-vbp-regions:${TAG}", "632683202044.dkr.ecr.eu-west-1.amazonaws.com/regions:${TAG}"]
+  tags = ["${DOCKER_REPO}/inbo-vbp-regions:${TAG}"]
 }
 
 target "sensitive-data-service" {
@@ -194,7 +194,7 @@ target "sensitive-data-service" {
   contexts = {
     "custom-maven" = "target:custom-maven"
   }
-  tags = ["${DOCKER_REPO}/inbo-vbp-sensitive-data-service:${TAG}", "632683202044.dkr.ecr.eu-west-1.amazonaws.com/sensitive-data-service:${TAG}"]
+  tags = ["${DOCKER_REPO}/inbo-vbp-sensitive-data-service:${TAG}"]
 }
 
 target "spatial-hub" {
@@ -204,7 +204,7 @@ target "spatial-hub" {
     "tomcat-base"   = "target:tomcat-base"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-spatial-hub:cache-github"]
-  tags = ["${DOCKER_REPO}/inbo-vbp-spatial-hub:${TAG}", "632683202044.dkr.ecr.eu-west-1.amazonaws.com/spatial-hub:${TAG}"]
+  tags = ["${DOCKER_REPO}/inbo-vbp-spatial-hub:${TAG}"]
 }
 
 target "spatial-service" {
@@ -215,7 +215,7 @@ target "spatial-service" {
     "pipelines"   = "target:pipelines"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-spatial-service:cache-github"]
-  tags = ["${DOCKER_REPO}/inbo-vbp-spatial-service:${TAG}", "632683202044.dkr.ecr.eu-west-1.amazonaws.com/spatial-service:${TAG}"]
+  tags = ["${DOCKER_REPO}/inbo-vbp-spatial-service:${TAG}"]
 }
 
 target "species-list" {
@@ -225,7 +225,7 @@ target "species-list" {
     "tomcat-base"   = "target:tomcat-base"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-species-list:cache-github"]
-  tags = ["${DOCKER_REPO}/inbo-vbp-species-list:${TAG}", "632683202044.dkr.ecr.eu-west-1.amazonaws.com/species-list:${TAG}"]
+  tags = ["${DOCKER_REPO}/inbo-vbp-species-list:${TAG}"]
 }
 
 target "userdetails" {
@@ -235,7 +235,7 @@ target "userdetails" {
     "tomcat-base"   = "target:tomcat-base"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-userdetails:cache-github"]
-  tags = ["${DOCKER_REPO}/inbo-vbp-userdetails:${TAG}", "632683202044.dkr.ecr.eu-west-1.amazonaws.com/userdetails:${TAG}"]
+  tags = ["${DOCKER_REPO}/inbo-vbp-userdetails:${TAG}"]
 }
 
 group "all" {
