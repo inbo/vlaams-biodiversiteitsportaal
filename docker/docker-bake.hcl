@@ -212,7 +212,6 @@ target "spatial-service" {
   contexts = {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
-    "pipelines"   = "target:pipelines"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-spatial-service:cache-github"]
   tags = ["${DOCKER_REPO}/inbo-vbp-spatial-service:${TAG}"]
