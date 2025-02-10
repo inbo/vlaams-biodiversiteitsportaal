@@ -147,6 +147,7 @@ jobs:
     if: fromJSON(needs.get-versions.outputs.docker_versions) != '{}'
     permissions:
       contents: write
+      actions: write
     steps:
       - uses: actions/checkout@v4
         with:
