@@ -35,7 +35,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
 # Libraries require linking from <data.dir>/modelling/maxent because the path is required to be a subfolder of the data directory
 RUN mkdir -p /libs \
     && curl -L https://nexus.ala.org.au/repository/releases/au/org/ala/spatial/ala-aloc/1.0/ala-aloc-1.0.jar -o /libs/aloc.jar \
-    && curl https://biodiversiteitsportaal-dev-backups.s3.eu-west-1.amazonaws.com/maxent.zip -o /tmp/maxent.zip \
+    && curl https://inbo-vbp-global-public-artifacts.s3.eu-west-1.amazonaws.com/spatial-service/maxent.zip -o /tmp/maxent.zip \
     && unzip -j /tmp/maxent.zip maxent/maxent.jar -d /libs \
     && rm /tmp/maxent.zip
 
@@ -50,7 +50,7 @@ COPY --from=builder /project/build/libs/project-${VERSION}-plain.war ${CATALINA_
 
 RUN mkdir /data/pipelines-vocabularies && mkdir /data/pipelines-data && mkdir /data/pipelines-shp
 
-RUN `curl https://inbo-vbp-dev-backups.s3.eu-west-1.amazonaws.com/sandbox/pipelines-2.19.0-SNAPSHOT-shaded.jar -o /pipelines.jar`
+RUN `curl https://inbo-vbp-global-public-artifacts.s3.eu-west-1.amazonaws.com/spatial-service/pipelines-2.19.0-SNAPSHOT-shaded.jar -o /pipelines.jar`
 
 RUN `curl https://pipelines-shp.s3-ap-southeast-2.amazonaws.com/pipelines-shapefiles.zip -o /data/pipelines-shp/pipelines-shapefiles.zip`
 RUN unzip /data/pipelines-shp/pipelines-shapefiles.zip -d /data/pipelines-shp
