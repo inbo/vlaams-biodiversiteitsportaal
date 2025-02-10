@@ -15,7 +15,7 @@ biocacheService:
   baseURL: ${common.protocol}://${common.domain}/biocache-service
 
 grails:
-  serverURL: ${common.protocol}://${common.domain}/dqf-service
+  serverURL: ${common.protocol}://${common.domain}/data-quality-filter-service
 
 hibernate:
   dialect: org.hibernate.spatial.dialect.postgis.PostgisPG9Dialect

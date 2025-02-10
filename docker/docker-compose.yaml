@@ -31,7 +31,7 @@ services:
           - biocache-service
           - collectory
           - doi-service
-          - dqf-service
+          - data-quality-filter-service
           - image-service
           - logger
           - regions

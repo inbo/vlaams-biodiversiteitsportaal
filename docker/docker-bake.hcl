@@ -122,7 +122,7 @@ target "collectory" {
 }
 
 target "data-quality-filter-service" {
-  context = "./dqf-service"
+  context = "./data-quality-filter-service"
   contexts = {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
