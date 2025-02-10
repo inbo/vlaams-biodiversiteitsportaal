@@ -3,10 +3,11 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 ARG VERSION=250_setup_data_quality_filter_service
 ARG SOURCE=https://github.com/katya-shaleninova/data-quality-filter-service
-LABEL ala.version=${VERSION}
+ARG COMMIT=83e9fe873398a88c6d50a195c932b0a3fb70d2ff
+LABEL ala.version=inbo-${COMMIT}
 
 WORKDIR /project
-RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} .
+RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
 
 RUN --mount=type=cache,target=/gradle-cache,ro \
     gradle \
@@ -21,7 +22,8 @@ RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
 FROM tomcat-base
 
 ARG VERSION=2.0.0-SNAPSHOT
-LABEL ala.version=${VERSION}
+ARG COMMIT=83e9fe873398a88c6d50a195c932b0a3fb70d2ff
+LABEL ala.version=inbo-${COMMIT}
 
 COPY --from=builder /project/build/libs/data-quality-filter-service-${VERSION}-plain.war ${CATALINA_HOME}/webapps/dqf-service.war
 COPY data-quality-filter-service.xml ${CATALINA_HOME}/conf/portal/localhost/dqf-service.xml

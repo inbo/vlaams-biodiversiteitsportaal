@@ -54,7 +54,7 @@ server:
 environments:
   development:
     grails:
-      serverURL: "http://localhost:8080/dqf-service"
+      serverURL: "http://localhost:8080/data-quality-filter-service"
     security:
       cas:
         appServerName: "http://localhost:8080"
