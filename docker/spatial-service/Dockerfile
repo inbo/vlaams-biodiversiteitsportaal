@@ -22,6 +22,8 @@ RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
     rsync -a /home/gradle/.gradle/caches/modules-2 /gradle-cache/ \
     && rm /gradle-cache/modules-2/*.lock && rm /gradle-cache/modules-2/gc.properties
 
+RUN ls -la /project/build/libs
+
 FROM tomcat-base
 
 RUN rm -f /etc/apt/apt.conf.d/docker-clean; echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/keep-cache
@@ -40,9 +42,9 @@ RUN mkdir -p /libs \
     && rm /tmp/maxent.zip
 
 # ARG VERSION=2.1.5
-ARG VERSION=2.1.6-SNAPSHOT
+ARG VERSION=2.2.0-SNAPSHOT
 ARG COMMIT=a85a6b51abb2203d3e242e726965eb7f59eb98c1
-ARG PIPELINES_VERSION=2.18.6-SNAPSHOT
+ARG PIPELINES_VERSION=2.19.0-SNAPSHOT
 LABEL ala.version=inbo-${COMMIT}
 LABEL pipelines.version=${PIPELINES_VERSION}
 
