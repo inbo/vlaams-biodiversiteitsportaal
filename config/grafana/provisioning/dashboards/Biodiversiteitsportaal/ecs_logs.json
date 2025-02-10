@@ -227,7 +227,7 @@
         "options": [],
         "query": {
           "dimensionFilters": {
-            "ClusterName": "inbo-biodiversiteitsportaal-cluster"
+            "ClusterName": "inbo-vbp-cluster"
           },
           "dimensionKey": "ServiceName",
           "metricName": "TaskSetCount",
