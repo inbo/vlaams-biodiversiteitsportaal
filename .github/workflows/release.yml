@@ -62,7 +62,7 @@ jobs:
           DOCKER_VERSIONS="{}"
           for component in ${DOCKER_COMPONENTS}; do          
             export COMPONENT=docker-${component}
-            export PATHS="./docker/docker-bake.hcl ./docker/tomcat/** ./docker/${component}/**"
+            export PATHS="./docker/tomcat/** ./docker/${component}/**"
             export $(bash <(curl -fsS "https://raw.githubusercontent.com/StefanVanDyck/git-semantic-version/refs/heads/main/version.sh") | xargs)
 
             if [ "${number_of_changes_since_last_tag}" != "0" ]; then
