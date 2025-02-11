@@ -18,11 +18,11 @@ grails:
   serverURL: ${common.protocol}://${common.domain}/data-quality-filter-service
 
 hibernate:
-  dialect: org.hibernate.spatial.dialect.postgis.PostgisPG9Dialect
+  dialect: org.hibernate.dialect.PostgreSQLDialect
 
 dataSource:
   driverClassName: org.postgresql.Driver
-  dialect: org.hibernate.spatial.dialect.postgis.PostgisPG9Dialect
+  dialect: org.hibernate.dialect.PostgreSQLDialect
   url: 'jdbc:postgresql://postgis:5432/dataqualityfilter'
   username: 'dataqualityfilter'
   password: 'my-super-secret-password'
