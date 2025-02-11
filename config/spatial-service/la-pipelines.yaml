@@ -35,16 +35,16 @@ copy:
 recordedByConfig:
   cacheSizeMb: 64
 alaNameMatch:
-  wsUrl: http://namematching.biodiversiteitsportaal.dev.internal:9179
+  wsUrl: http://namematching.vbp.internal:9179
   timeoutSec: 300
   retryConfig:
     maxAttempts: 5
     initialIntervalMillis: 5000
 sds:
-  wsUrl: http://sensitive-data-service.biodiversiteitsportaal.dev.internal:9189
+  wsUrl: http://sensitive-data-service.vbp.internal:9189
   timeoutSec: 300
 collectory:
-  wsUrl: http://collectory.biodiversiteitsportaal.dev.internal:8080/collectory/ws/
+  wsUrl: http://collectory.vbp.internal:8080/collectory/ws/
   timeoutSec: 300
   retryConfig:
     maxAttempts: 10
@@ -53,7 +53,7 @@ collectory:
     Authorization: ${APIKEY}
     apiKey: ${APIKEY}
 imageService:
-  wsUrl: http://image-service.biodiversiteitsportaal.dev.internal:8080/image-service/
+  wsUrl: http://image-service.vbp.internal:8080/image-service/
   timeoutSec: 300
   httpHeaders:
     apiKey: ${APIKEY}
@@ -61,13 +61,13 @@ imageService:
     maxAttempts: 5
     initialIntervalMillis: 1000
 speciesListService:
-  wsUrl: http://species-list.biodiversiteitsportaal.dev.internal:8080/species-list/
+  wsUrl: http://species-list.vbp.internal:8080/species-list/
   timeoutSec: 900
   retryConfig:
     maxAttempts: 5
     initialIntervalMillis: 1000
 samplingService:
-  wsUrl: http://spatial-service.biodiversiteitsportaal.dev.internal:8080/spatial-service/
+  wsUrl: http://spatial-service.vbp.internal:8080/spatial-service/
   timeoutSec: 600
   batchSize: 25000
   batchStatusSleepTime: 1000
@@ -215,7 +215,7 @@ sampling:
 # class:au.org.ala.pipelines.beam.DistributionOutlierPipeline
 outlier:
   appName: Expert distribution outliers for {datasetId}
-  baseUrl: https://spatial-service.biodiversiteitsportaal.dev.internal:8080/spatial-service/
+  baseUrl: https://spatial-service.vbp.internal:8080/spatial-service/
   targetPath: '{fsPath}/pipelines-outlier'
   allDatasetsInputPath: '{fsPath}/pipelines-all-datasets'
   runner: SparkRunner
@@ -259,7 +259,7 @@ solr:
   includeJackKnife: true
   includeClustering: false
   runner: SparkRunner
-  zkHost: solr.biodiversiteitsportaal.dev.internal:9983
+  zkHost: solr.vbp.internal:9983
   numOfPartitions: 3
 
 # class: au.org.ala.pipelines.beam.IndexRecordToSolrPipeline
@@ -268,7 +268,7 @@ elastic:
   inputPath: '{fsPath}/pipelines-data'
   targetPath: '{fsPath}/pipelines-data'
   runner: SparkRunner
-  esHosts: http://elasticsearch.biodiversiteitsportaal.dev.internal:9200
+  esHosts: http://elasticsearch.vbp.internal:9200
   esAlias: event
   esIndexName: 'event_{datasetId}'
   indexNumberShards: 1
@@ -342,7 +342,7 @@ validation-report:
   inputPath: '{fsPath}/pipelines-data'
   targetPath: /tmp/dataset-validation-list.csv
   fullReportPath: /tmp/full-validation-list.csv
-  zkHost: solr.biodiversiteitsportaal.dev.internal:9983
+  zkHost: solr.vbp.internal:9983
   checkSolr: true
   checkSampling: true
   solrCollection: biocache
