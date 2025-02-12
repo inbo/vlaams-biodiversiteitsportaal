@@ -6,7 +6,7 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 # ARG SOURCE=https://github.com/AtlasOfLivingAustralia/regions.git
 
 ARG VERSION=develop-vbp
-ARG COMMIT=a7cdb8ebf15dbdab0bc8c31d3327f742a00e61e7
+ARG COMMIT=1e599e807db00ed615f398d0812eafa75271f5ed
 ARG SOURCE=https://github.com/StefanVanDyck/regions.git
 LABEL ala.version=inbo-${COMMIT}
 
@@ -28,7 +28,7 @@ FROM tomcat-base
 
 # ARG VERSION=4.0.0
 ARG VERSION=4.1.0-SNAPSHOT
-ARG COMMIT=a1a58634cdd1d8c4383dc6b49c25ac4cf8062c9b
+ARG COMMIT=1e599e807db00ed615f398d0812eafa75271f5ed
 LABEL ala.version=inbo-${COMMIT}
 
 COPY --from=builder /project/build/libs/regions-${VERSION}-plain.war ${CATALINA_HOME}/webapps/regions.war
