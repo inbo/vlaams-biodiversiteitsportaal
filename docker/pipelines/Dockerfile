@@ -1,11 +1,8 @@
 ARG BUILDPLATFORM=linux/amd64
-FROM --platform=${BUILDPLATFORM} maven:3.8-openjdk-11 AS builder
+FROM --platform=${BUILDPLATFORM} custom-maven AS builder
 
-RUN mkdir ~/.m2
-COPY settings.xml /root/.m2/settings.xml
-
-ARG VERSION=fix-new-layers-check
-ARG COMMIT=b7def8ed9ad304576d9ba9016a62c5abffdf0296
+ARG VERSION=fixed-stuff
+ARG COMMIT=890c1d82e3860b3270ec36aac78255d7bcbd2bb4
 ARG SOURCE=https://github.com/StefanVanDyck/pipelines.git
 LABEL ala.version=inbo-${COMMIT}
 
@@ -29,9 +26,9 @@ RUN --mount=type=cache,target=/root/.m2/repository \
 # ARG test=2
 # RUN ls -la livingatlas/pipelines/target/pipelines-2.18.6-SNAPSHOT.jar
 #
-FROM openjdk:11
+FROM openjdk:8
 
-ARG COMMIT=b7def8ed9ad304576d9ba9016a62c5abffdf0296
+ARG COMMIT=890c1d82e3860b3270ec36aac78255d7bcbd2bb4
 LABEL ala.version=inbo-${COMMIT}
 #
 # ARG VERSION=2.18.6-SNAPSHOT
