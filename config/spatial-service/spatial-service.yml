@@ -107,7 +107,7 @@ management:
 useFixedLocale: en
 
 sandboxEnabled: true
-sandboxSolrUrl: http://solr.vbp.internal:8983
+sandboxSolrUrl: http://solr.vbp.internal:9983
 sandboxSolrCollection: sandbox
 sandboxThreadCount: 2
 pipelinesCmd: "java -Dspark.local.dir=/data/spatial-data/sandbox/tmp -Djava.io.tmpdir=/data/spatial-data/sandbox/tmp -cp /pipelines.jar"
