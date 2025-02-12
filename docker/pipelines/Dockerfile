@@ -2,7 +2,7 @@ ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-maven AS builder
 
 ARG VERSION=fix-new-layers-check
-ARG COMMIT=f28eed26f927b12769362101b4c6b35f14763022
+ARG COMMIT=b7def8ed9ad304576d9ba9016a62c5abffdf0296
 ARG SOURCE=https://github.com/StefanVanDyck/pipelines.git
 LABEL ala.version=inbo-${COMMIT}
 
@@ -28,7 +28,7 @@ RUN --mount=type=cache,target=/root/.m2/repository \
 #
 FROM openjdk:11
 
-ARG COMMIT=f28eed26f927b12769362101b4c6b35f14763022
+ARG COMMIT=b7def8ed9ad304576d9ba9016a62c5abffdf0296
 LABEL ala.version=inbo-${COMMIT}
 #
 # ARG VERSION=2.18.6-SNAPSHOT
