@@ -26,7 +26,7 @@ RUN --mount=type=cache,target=/root/.m2/repository \
 # ARG test=2
 # RUN ls -la livingatlas/pipelines/target/pipelines-2.18.6-SNAPSHOT.jar
 #
-FROM openjdk:8
+FROM openjdk:11
 
 ARG COMMIT=f28eed26f927b12769362101b4c6b35f14763022
 LABEL ala.version=inbo-${COMMIT}
