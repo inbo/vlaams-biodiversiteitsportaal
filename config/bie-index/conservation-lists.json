@@ -2,18 +2,11 @@
   "defaultSourceField": "status",
   "lists": [
     {
-      "uid": "drt1738675870749",
+      "uid": "drt1739347616892",
       "field": "threatStatus_s",
       "sourceField": "threatStatus",
       "term": "threatStatus",
-      "label": "VLINDERS_TEST_LIJST"
-    },
-    {
-      "uid": "drt1722600264151",
-      "field": "threatStatus_rlf",
-      "sourceField": "threatStatus",
-      "term": "threatStatus",
-      "label": "RLF"
+      "label": "RLFP"
     }
   ]
 }
