@@ -2,7 +2,7 @@ ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-maven AS builder
 
 ARG VERSION=fixed-stuff
-ARG COMMIT=890c1d82e3860b3270ec36aac78255d7bcbd2bb4
+ARG COMMIT=15db71c4357e9f3d644aa6ca38e697b74815b416
 ARG SOURCE=https://github.com/StefanVanDyck/pipelines.git
 LABEL ala.version=inbo-${COMMIT}
 
@@ -28,7 +28,7 @@ RUN --mount=type=cache,target=/root/.m2/repository \
 #
 FROM openjdk:8
 
-ARG COMMIT=890c1d82e3860b3270ec36aac78255d7bcbd2bb4
+ARG COMMIT=15db71c4357e9f3d644aa6ca38e697b74815b416
 LABEL ala.version=inbo-${COMMIT}
 #
 # ARG VERSION=2.18.6-SNAPSHOT
