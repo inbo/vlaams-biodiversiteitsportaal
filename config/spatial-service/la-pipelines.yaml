@@ -35,7 +35,7 @@ copy:
 recordedByConfig:
   cacheSizeMb: 64
 alaNameMatch:
-  wsUrl: http://namematching.vbp.internal:9179
+  wsUrl: http://namematching-service.vbp.internal:9179
   timeoutSec: 300
   retryConfig:
     maxAttempts: 5
