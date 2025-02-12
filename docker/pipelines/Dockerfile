@@ -1,5 +1,8 @@
 ARG BUILDPLATFORM=linux/amd64
-FROM --platform=${BUILDPLATFORM} custom-maven AS builder
+FROM --platform=${BUILDPLATFORM} maven:3.8-openjdk-11 AS builder
+
+RUN mkdir ~/.m2
+COPY settings.xml /root/.m2/settings.xml
 
 ARG VERSION=fix-new-layers-check
 ARG COMMIT=b7def8ed9ad304576d9ba9016a62c5abffdf0296
