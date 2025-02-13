@@ -2,11 +2,18 @@
   "defaultSourceField": "status",
   "lists": [
     {
-      "uid": "drt1739347616892",
-      "field": "threatStatus_s",
+      "uid": "drt1738833463033",
+      "field": "threatStatus_VRLF_s",
       "sourceField": "threatStatus",
       "term": "threatStatus",
-      "label": "RLFP"
+      "label": "VRLF"
+    },
+    {
+      "uid": "drt1738932783392",
+      "field": "threatStatus_NVRLF_s",
+      "sourceField": "threatStatus",
+      "term": "threatStatus",
+      "label": "NVRLF"
     }
   ]
 }

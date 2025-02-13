@@ -50,14 +50,14 @@ Dwz in de conservation-lists.json zo de conservation lijsts definieeëren
   "lists": [
     {
       "uid": "drt1738675870749",
-      "field": "threatStatus_RodeLijst",
+      "field": "threatStatus_RedList_s",
       "sourceField": "threatStatus",
       "term": "threatStatus",
       "label": "RODE_LIJST"
     },
     {
       "uid": "drt123123123123",
-      "field": "threatStatus_SpecialeVlindersLijst",
+      "field": "threatStatus_SpecialeVlindersLijst_s",
       "sourceField": "threatStatus",
       "term": "threatStatus",
       "label": "SPECIALE_VLINDERS_LIJST"
