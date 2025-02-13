@@ -384,20 +384,62 @@ defaultareas:
     wkt: 'POLYGON((2.296 50.6, 6.1468505859375 50.6, 6.1468505859375 51.5, 2.296 51.5, 2.296 50.6))'
     areaSqKm: 13625
     bbox: [ 50.65843926853822, 51.52780962525605, 2.296, 6.1468505859375 ]
-#  - name: 'World'
-#    fqs: []
-#    wkt: 'POLYGON((-180 -90.0,180.0 -90.0,180.0 90.0,-180 90.0,-180 -90.0))'
-#    areaSqKm: 510000000
-#    bbox: [-180, -90, 180, 90]
 
 presetWMSServers:
   - name: "GRB"
     url: "https://geo.api.vlaanderen.be/GRB/wms?service=WMS&request=getcapabilities"
   - name: "INBO"
     url: "https://geo.api.vlaanderen.be/INBO/wms?service=WMS&request=getcapabilities"
+  - name: "INBO - ARPL"
+    url: "https://gisservices.inbo.be/arcgis/services/ARPL/MapServer/WMSServer?request=GetCapabilities&service=WMS"
+  - name: "INBO - BWK"
+    url: "https://gisservices.inbo.be/arcgis/services/BWK/MapServer/WMSServer?request=GetCapabilities&service=WMS"
+  - name: "INBO - Ecoregio"
+    url: "https://gisservices.inbo.be/arcgis/services/Ecoregio/MapServer/WMSServer?request=GetCapabilities&service=WMS"
+  - name: "INBO - Ecotoopkwetsbaarheid"
+    url: "https://gisservices.inbo.be/arcgis/services/Ecotoopkwetsbaarheid/MapServer/WMSServer?request=GetCapabilities&service=WMS"
+  - name: "INBO - Genenbronnen"
+    url: "https://gisservices.inbo.be/arcgis/services/Genenbronnen/MapServer/WMSServer?request=GetCapabilities&service=WMS"
+  - name: "INBO - Grenzen"
+    url: "https://gisservices.inbo.be/arcgis/services/Grenzen/MapServer/WMSServer?request=GetCapabilities&service=WMS"
+  - name: "INBO - Habitatkaart"
+    url: "https://gisservices.inbo.be/arcgis/services/Habitatkaart/MapServer/WMSServer?request=GetCapabilities&service=WMS"
+  - name: "INBO - IFBLhokken"
+    url: "https://gisservices.inbo.be/arcgis/services/IFBLhokken/MapServer/WMSServer?request=GetCapabilities&service=WMS"
+  - name: "INBO - IFBL"
+    url: "https://gisservices.inbo.be/arcgis/services/IFBL/MapServer/WMSServer?request=GetCapabilities&service=WMS"
+  - name: "INBO - ImportantPollinatorAreas"
+    url: "https://gisservices.inbo.be/arcgis/services/ImportantPollinatorAreas/MapServer/WMSServer?request=GetCapabilities&service=WMS"
+  - name: "INBO - LSVIviewer"
+    url: "https://gisservices.inbo.be/arcgis/services/LSVIviewer/MapServer/WMSServer?request=GetCapabilities&service=WMS"
+  - name: "INBO - Natura2000"
+    url: "https://gisservices.inbo.be/arcgis/services/Natura2000/MapServer/WMSServer?request=GetCapabilities&service=WMS"
+  - name: "INBO - Orthofoto_WM"
+    url: "https://gisservices.inbo.be/arcgis/services/Orthofoto_WM/MapServer/WMSServer?request=GetCapabilities&service=WMS"
+  - name: "INBO - Orthofoto"
+    url: "https://gisservices.inbo.be/arcgis/services/Orthofoto/MapServer/WMSServer?request=GetCapabilities&service=WMS"
+  - name: "INBO - Potleefgebieden"
+    url: "https://gisservices.inbo.be/arcgis/services/Potleefgebieden/MapServer/WMSServer?request=GetCapabilities&service=WMS"
+  - name: "INBO - PotNat"
+    url: "https://gisservices.inbo.be/arcgis/services/PotNat/MapServer/WMSServer?request=GetCapabilities&service=WMS"
+  - name: "INBO - Signaalkaart_vleermuizen"
+    url: "https://gisservices.inbo.be/arcgis/services/Signaalkaart_vleermuizen/MapServer/WMSServer?request=GetCapabilities&service=WMS"
+  - name: "INBO - Signaalkaart"
+    url: "https://gisservices.inbo.be/arcgis/services/Signaalkaart/MapServer/WMSServer?request=GetCapabilities&service=WMS"
+  - name: "INBO - UTMhokken"
+    url: "https://gisservices.inbo.be/arcgis/services/UTMhokken/MapServer/WMSServer?request=GetCapabilities&service=WMS"
+  - name: "INBO - VEN"
+    url: "https://gisservices.inbo.be/arcgis/services/VEN/MapServer/WMSServer?request=GetCapabilities&service=WMS"
+  - name: "INBO - VIS_VHA_WV"
+    url: "https://gisservices.inbo.be/arcgis/services/VIS_VHA_WV/MapServer/WMSServer?request=GetCapabilities&service=WMS"
+  - name: "INBO - VRB"
+    url: "https://gisservices.inbo.be/arcgis/services/VRB/MapServer/WMSServer?request=GetCapabilities&service=WMS"
+  - name: "INBO - Watervlakken"
+    url: "https://gisservices.inbo.be/arcgis/services/Watervlakken/MapServer/WMSServer?request=GetCapabilities&service=WMS"
+
 
 allowProxy:
-  server: "geo.api.vlaanderen.be"
+  server: "geo.api.vlaanderen.be,gisservices.inbo.be"
 
 #getMapExamples:
 #  - name: "Fractional Cover CLW - Non-PS Veg - 2012.297"
