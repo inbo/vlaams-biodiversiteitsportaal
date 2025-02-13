@@ -345,6 +345,15 @@ startup:
         format: 'image/png'
       link: "https://www.vlaanderen.be/datavindplaats/catalogus/wms-grb"
       exportType: 'normal'
+    outline:
+      name: 'Outline'
+      type: 'wms'
+      url: 'geoserver/wms?'
+      layerParams:
+        layers: 'ALA:world'
+        format: 'image/png'
+        continuousWorld: true
+      exportType: 'outline'
 #    grb_grijs:
 #      name: 'Grootschalig Referentiebestand (Grijs)'
 #      type: 'wms'
