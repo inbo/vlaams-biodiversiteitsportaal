@@ -29,7 +29,7 @@ biocacheService:
   baseURL: ${common.protocol}://${common.domain}/biocache-service
 collectory:
   baseURL: ${common.protocol}://${common.domain}/collectory
-  enableSync: false
+  enableSync: true
 dataSource:
   dbCreate: update
   url: jdbc:mysql://species:my-super-secret-password@mysql:3306/specieslists?allowPublicKeyRetrieval=true&autoReconnect=true&connectTimeout=0&useUnicode=true&characterEncoding=UTF-8&useSSL=False
