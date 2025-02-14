@@ -1,32 +1,31 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="UTF-8"/>
-    HEADLOCAL_HERE
-    HEAD_HERE
-  </head>
-  <body>
-    BANNER_HERE
-    <script>require('js/settings').inMante=false;</script>
-    <div id="mante-container" class="container">
-      <div class="row">
-        <div class="col-md-6">
-          <div class="error-template">
-            <h1 data-i18n="error.title"></h1>
-            <h2 data-i18n="error.subtitle"></h2>
-            <div>
-              <p data-i18n="error.description"></p>
-            </div>
-            <div class="error-actions">
-              <a data-i18n="error.button" href="::centralServer::" style="margin-top: 10px;" class="btn btn-primary btn-lg"></a>
-            </div>
-          </div>
+
+<head>
+  <meta charset="UTF-8" />
+  HEADLOCAL_HERE
+  HEAD_HERE
+</head>
+
+<body>
+  BANNER_HERE
+  <script>require('js/settings').inMante = false;</script>
+  <div id="mante-container" class="container">
+    <div class="error-page">
+      <div class="error-template">
+        <h1 data-i18n="error.title"></h1>
+        <h2 data-i18n="error.subtitle"></h2>
+        <div>
+          <p data-i18n="error.description"></p>
         </div>
-        <div class="col-md-6">
-          <img src="images/error.svg" alt="Error Image" onerror="this.onerror=null; this.src='images/error.png'">
+        <div class="error-actions">
+          <a data-i18n="error.button" href="::centralServer::" style="margin-top: 10px;"
+            class="btn btn-primary btn-lg"></a>
         </div>
       </div>
     </div>
-    FOOTER_HERE
-  </body>
+  </div>
+  FOOTER_HERE
+</body>
+
 </html>
