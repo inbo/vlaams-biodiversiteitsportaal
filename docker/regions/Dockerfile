@@ -6,7 +6,7 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 # ARG SOURCE=https://github.com/AtlasOfLivingAustralia/regions.git
 
 ARG VERSION=develop-vbp
-ARG COMMIT=1e599e807db00ed615f398d0812eafa75271f5ed
+ARG COMMIT=ca75f49c33934523d45bedf0e255cb5f4e102e3c
 ARG SOURCE=https://github.com/StefanVanDyck/regions.git
 LABEL ala.version=inbo-${COMMIT}
 
