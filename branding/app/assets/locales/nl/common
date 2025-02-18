@@ -52,5 +52,6 @@
   "footer.bug-modal.intro": "Neem gerust een kijkje en klik rond! Houd er echter rekening mee dat je je bevindt in de UAT-omgeving van het Vlaams Biodiversiteitsportaal, die nog in de testfase verkeert en niet bedoeld is voor regulier publiek gebruik.\n\nIn de tab Help & Info vind je meer informatie over hoe te testen. In het submenu ‘Challenges’ vind je enkele uitdagingen die het testen wat kunnen begeleiden.\n\nDE HUIDIGE TEST-CAMPAGNE EINDIGT OP 15 MAART 2025!",
   "footer.bug-modal.contact-us": "Heb je vragen, opmerkingen of feedback? Neem dan contact met ons op via ",
   "footer.bug-modal.report-bug": "Mocht je een probleem of bug tegenkomen, dan stellen we het zeer op prijs als je dit meldt op ",
-  "footer.bug-modal.github-page": "onze publieke Github pagina"
+  "footer.bug-modal.github-page": "onze publieke Github pagina",
+  "footer.bug-modal.login-button": "Klik hier om in te loggen"
 }
