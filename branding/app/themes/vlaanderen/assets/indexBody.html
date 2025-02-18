@@ -140,7 +140,11 @@
 </div>
 
 <script type="text/javascript">
+    var Cookies = require("js-cookie");
     $(window).on('load', function() {
-        $('#bug-modal').modal('show');
+        const authCookie = Cookies.get("VBP-AUTH");
+        if(!authCookie) {
+            $('#bug-modal').modal('show');
+        }
     });
 </script>
