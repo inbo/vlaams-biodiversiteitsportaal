@@ -349,8 +349,15 @@ startup:
       name: 'Grootschalig Referentiebestand WFS'
       type: 'wfs'
       url: "https://geo.api.vlaanderen.be/GRB/wfs?"
-      layer: GRB_BSK
+      layer: grb_bsk
       link: "https://www.vlaanderen.be/datavindplaats/catalogus/wfs-grb"
+      exportType: 'normal'
+    grb_wmts:
+      name: 'Grootschalig Referentiebestand WMTS'
+      type: 'wmts'
+      url: "https://geo.api.vlaanderen.be/GRB/wmts?"
+      layer: grb_bsk
+      link: "https://www.vlaanderen.be/datavindplaats/catalogus/wmts-grb"
       exportType: 'normal'
     outline:
       name: 'Outline'
