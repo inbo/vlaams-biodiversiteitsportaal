@@ -345,6 +345,15 @@ startup:
         format: 'image/png'
       link: "https://www.vlaanderen.be/datavindplaats/catalogus/wms-grb"
       exportType: 'normal'
+    grb_wfs:
+      name: 'Grootschalig Referentiebestand WFS'
+      type: 'wfs'
+      url: "https://geo.api.vlaanderen.be/GRB/wfs?"
+      layerParams:
+        layers: GRB_BSK
+        format: 'image/png'
+      link: "https://www.vlaanderen.be/datavindplaats/catalogus/wfs-grb"
+      exportType: 'normal'
     outline:
       name: 'Outline'
       type: 'wms'
