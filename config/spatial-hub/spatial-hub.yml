@@ -349,9 +349,7 @@ startup:
       name: 'Grootschalig Referentiebestand WFS'
       type: 'wfs'
       url: "https://geo.api.vlaanderen.be/GRB/wfs?"
-      layerParams:
-        layers: GRB_BSK
-        format: 'image/png'
+      layer: GRB_BSK
       link: "https://www.vlaanderen.be/datavindplaats/catalogus/wfs-grb"
       exportType: 'normal'
     outline:
