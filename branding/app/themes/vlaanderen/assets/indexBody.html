@@ -143,7 +143,9 @@
     var Cookies = require("js-cookie");
     $(window).on('load', function() {
         const authCookie = Cookies.get("VBP-AUTH");
-        if(!authCookie) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const authCookieAction = urlParams.get('auth-cookie-action');
+        if(!authCookieAction && !authCookie) {
             $('#bug-modal').modal('show');
         }
     });
