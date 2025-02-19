@@ -3,7 +3,7 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 
 ARG VERSION=master
-ARG COMMIT=59abb80d6ed97ba4351a1caef30fb06555a9cd86
+ARG COMMIT=fc76acf166db81db7735de2ddc4bb8d1083c3a04
 ARG SOURCE=https://github.com/inbo/bie-index.git
 LABEL ala.version=inbo-${COMMIT}
 
