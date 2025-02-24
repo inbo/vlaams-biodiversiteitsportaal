@@ -32,6 +32,7 @@ LABEL pipelines.version=${PIPELINES_VERSION}
 
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
     amazon-linux-extras install epel -y && \
+    yum update && \
     yum -y install \
     gettext \
     unzip \
