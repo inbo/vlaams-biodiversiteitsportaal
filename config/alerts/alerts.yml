@@ -22,8 +22,8 @@ grails:
   #default mail service
   serverURL: "${common.protocol}://${common.domain}/alerts"
   mail:
-    port: 25
-    server: mailhog
+    host: mailhog
+    port: 1025
 
   plugin:
     awssdk:
