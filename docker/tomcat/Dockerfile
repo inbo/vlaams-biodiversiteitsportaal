@@ -1,16 +1,18 @@
 ######################################### TOMCAT BASE #########################################
-FROM tomcat:9.0-jdk11-openjdk AS base
+FROM tomcat:9.0-jdk11-corretto AS base
 
 WORKDIR ${CATALINA_HOME}
 
 # Create the user
 ENV UID=1000
 ENV GID=1000
-RUN groupadd --gid ${GID} tomcat \
-    && useradd --uid ${UID} --gid ${GID} -m -d /tomcat tomcat
+
+RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
+    yum install -y \
+        util-linux
 
 RUN mkdir /data
-RUN chown tomcat:tomcat /data
+RUN chown ${UID}:${GID} /data
 VOLUME /data
 
 COPY docker-entrypoint.sh /docker-entrypoint.sh

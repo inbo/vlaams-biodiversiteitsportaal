@@ -1,4 +1,3 @@
-ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 # ARG VERSION=2.1.5
@@ -26,12 +25,16 @@ RUN ls -la /project/build/libs
 
 FROM tomcat-base
 
-RUN rm -f /etc/apt/apt.conf.d/docker-clean; echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/keep-cache
-RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
-    --mount=type=cache,target=/var/lib/apt,sharing=locked \
-    apt-get update && apt-get install -y --no-install-recommends \
-    gettext-base \
-    gdal-bin libproj-dev proj-data proj-bin # GDAL dependencies
+RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
+    amazon-linux-extras install epel -y && \
+    yum -y install \
+    gettext \
+    unzip \
+    gdal \
+    proj \
+    proj-data \
+    proj-data-be
+#     gdal-bin libproj-dev proj-data proj-bin # GDAL dependencies
 
 
 # Libraries require linking from <data.dir>/modelling/maxent because the path is required to be a subfolder of the data directory
