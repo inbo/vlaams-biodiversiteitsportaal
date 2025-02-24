@@ -240,6 +240,9 @@ services:
       - "9999:9999"
     environment:
       SERVER_PORT: 9999
+      JSON_CONFIG_PATH: /config/config.json
+    volumes:
+      - ../config/mock-oauth2-server:/config:ro
 
 
 networks:
