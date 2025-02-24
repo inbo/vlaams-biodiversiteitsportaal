@@ -21,9 +21,14 @@ RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
     rsync -a /home/gradle/.gradle/caches/modules-2 /gradle-cache/ \
     && rm /gradle-cache/modules-2/*.lock && rm /gradle-cache/modules-2/gc.properties
 
-RUN ls -la /project/build/libs
-
 FROM tomcat-base
+
+# ARG VERSION=2.1.5
+ARG VERSION=2.2.0-SNAPSHOT
+ARG COMMIT=a85a6b51abb2203d3e242e726965eb7f59eb98c1
+ARG PIPELINES_VERSION=2.19.0-SNAPSHOT
+LABEL ala.version=inbo-${COMMIT}
+LABEL pipelines.version=${PIPELINES_VERSION}
 
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
     amazon-linux-extras install epel -y && \
@@ -34,8 +39,11 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
     proj \
     proj-data \
     proj-data-be
-#     gdal-bin libproj-dev proj-data proj-bin # GDAL dependencies
 
+RUN mkdir /data/pipelines-shp && \
+    curl https://inbo-vbp-global-public-artifacts.s3.eu-west-1.amazonaws.com/spatial-service/pipelines-shapefiles.zip -o /data/pipelines-shp/pipelines-shapefiles.zip && \
+    unzip /data/pipelines-shp/pipelines-shapefiles.zip -d /data/pipelines-shp && \
+    rm /data/pipelines-shp/pipelines-shapefiles.zip
 
 # Libraries require linking from <data.dir>/modelling/maxent because the path is required to be a subfolder of the data directory
 RUN mkdir -p /libs \
@@ -44,23 +52,13 @@ RUN mkdir -p /libs \
     && unzip -j /tmp/maxent.zip maxent/maxent.jar -d /libs \
     && rm /tmp/maxent.zip
 
-# ARG VERSION=2.1.5
-ARG VERSION=2.2.0-SNAPSHOT
-ARG COMMIT=a85a6b51abb2203d3e242e726965eb7f59eb98c1
-ARG PIPELINES_VERSION=2.19.0-SNAPSHOT
-LABEL ala.version=inbo-${COMMIT}
-LABEL pipelines.version=${PIPELINES_VERSION}
+RUN curl https://inbo-vbp-global-public-artifacts.s3.eu-west-1.amazonaws.com/spatial-service/pipelines-2.19.0-SNAPSHOT-shaded.jar -o /pipelines.jar
 
-COPY --from=builder /project/build/libs/project-${VERSION}-plain.war ${CATALINA_HOME}/webapps/spatial-service.war
-
-RUN mkdir /data/pipelines-vocabularies && mkdir /data/pipelines-data && mkdir /data/pipelines-shp
-
-RUN `curl https://inbo-vbp-global-public-artifacts.s3.eu-west-1.amazonaws.com/spatial-service/pipelines-2.19.0-SNAPSHOT-shaded.jar -o /pipelines.jar`
-
-RUN `curl https://pipelines-shp.s3-ap-southeast-2.amazonaws.com/pipelines-shapefiles.zip -o /data/pipelines-shp/pipelines-shapefiles.zip`
-RUN unzip /data/pipelines-shp/pipelines-shapefiles.zip -d /data/pipelines-shp
+RUN mkdir /data/pipelines-vocabularies && mkdir /data/pipelines-data
 
 COPY pipelines/vocabularies/* /data/pipelines-vocabularies/
+
+COPY --from=builder /project/build/libs/project-${VERSION}-plain.war ${CATALINA_HOME}/webapps/spatial-service.war
 
 COPY spatial-service.xml ${CATALINA_HOME}/conf/portal/localhost/spatial-service.xml
 

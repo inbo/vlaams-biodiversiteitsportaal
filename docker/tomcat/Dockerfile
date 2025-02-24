@@ -9,6 +9,7 @@ ENV GID=1000
 
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
     yum install -y \
+        shadow-utils \
         util-linux
 
 RUN mkdir /data
