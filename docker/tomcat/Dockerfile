@@ -8,6 +8,7 @@ ENV UID=1000
 ENV GID=1000
 
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
+    yum update && \
     yum install -y \
         shadow-utils \
         util-linux
