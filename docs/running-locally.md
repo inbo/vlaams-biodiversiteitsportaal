@@ -100,3 +100,15 @@ Instead of the AWS Application Load Balancer and the AWS CloudFront distribution
 Instead of AWS Cognito for user authentication and authorization.
 - **mailhog**  
 Instead of SES a smtp server.
+
+## Reloading services without rebuilding and restarting everything
+In order to quickly test changes to service code, a script is provided to quickly upload a new war file to the tomcat server and reload the service.
+This can be done using the following command:
+```commandline
+./scripts/update-local-war.sh <service-name> <path-to-war>
+
+# In order to quickly test spatial-hub changes for example, you can use:
+cd ~/Projects/Inbo/spatial-hub
+./gradlew assemble -x test -x integrationTest
+~/Projects/Inbo/vlaams-biodiversiteitsportaal/scripts/update-local-war.sh "spatial-hub" build/libs/spatial-hub-2.1.2-SNAPSHOT-plain.war
+```
