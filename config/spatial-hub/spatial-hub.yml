@@ -320,33 +320,35 @@ startup:
   lng: 4.4
   zoom: 9
   baselayer:
-    default: grb
+    default: 1_grb
   baselayers:
-#    google_roadmaps:
-#      name: 'Streets'
-#      layerType: 'ROADMAP'
-#      type: 'google'
-#      exportType: 'normal'
-#      link: 'https://www.google.com/intl/en_au/help/terms_maps.html'
-#      projections: ['3857']
-#    google_hybrid:
-#      name: 'Hybrid'
-#      layerType: 'HYBRID'
-#      type: 'google'
-#      exportType: 'hybrid'
-#      link: 'https://www.google.com/intl/en_au/help/terms_maps.html'
-#      projections: ['3857']
-
-    grb_wmts:
+    1_grb:
       name: 'Grootschalig Referentiebestand'
-      url: 'https://geo.api.vlaanderen.be/GRB/wmts?service=WMTS&request=GetTile&version=1.0.0&layer=grb_bsk&style=GRB-Basiskaart&tilematrixset=GoogleMapsVL&format=image%2Fpng&tilematrix={z}&tilerow={y}&tilecol={x}'
-      type: 'xyz'
-      exportType: 'minimal'
       link: 'https://www.vlaanderen.be/datavindplaats/catalogus/wmts-grb'
-      projections: [ '3857' ]
-
-    grouped:
-      name: 'Grootschalig Referentiebestand Grouped'
+      type: 'group'
+      layerParams:
+        layers:
+          - name: 'Open Street Map'
+            url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+            type: 'xyz'
+            exportType: 'minimal'
+            projections: [ '3857' ]
+            layerParams:
+              opacity: 0.3
+          - name: 'Grootschalig Referentiebestand'
+            url: 'https://geo.api.vlaanderen.be/GRB/wmts?service=WMTS&request=GetTile&version=1.0.0&layer=grb_bsk&style=GRB-Basiskaart&tilematrixset=GoogleMapsVL&format=image%2Fpng&tilematrix={z}&tilerow={y}&tilecol={x}'
+            type: 'xyz'
+            exportType: 'minimal'
+            projections: [ '3857' ]
+            layerParams:
+              maxZoom: 21
+#              bounds: [
+#                [ 50.65843926853822, 2.296],
+#                [ 51.52780962525605, 6.1468505859375 ]
+#              ]
+    2_luchtkaart:
+      name: 'Luchtfoto''s'
+      link: 'https://www.vlaanderen.be/datavindplaats/catalogus/wmts-orthofotomozaiek-middenschalig-winteropnamen-kleur-meest-recent-vlaanderen'
       type: 'group'
       layerParams:
         layers:
@@ -356,22 +358,19 @@ startup:
             exportType: 'minimal'
             link: 'https://www.openstreetmap.org/about'
             projections: [ '3857' ]
-          - name: 'Grootschalig Referentiebestand'
-            url: 'https://geo.api.vlaanderen.be/GRB/wmts?service=WMTS&request=GetTile&version=1.0.0&layer=grb_bsk&style=GRB-Basiskaart&tilematrixset=GoogleMapsVL&format=image%2Fpng&tilematrix={z}&tilerow={y}&tilecol={x}'
+            layerParams:
+              opacity: 0.3
+          - name: 'Lucht Foto''s'
+            url: 'https://geo.api.vlaanderen.be/OMWRGBMRVL/wmts?service=WMTS&request=GetTile&version=1.0.0&layer=omwrgbmrvl&tilematrixset=GoogleMapsVL&format=image%2Fpng&tilematrix={z}&tilerow={y}&tilecol={x}'
             type: 'xyz'
-            exportType: 'minimal'
-            link: 'https://www.vlaanderen.be/datavindplaats/catalogus/wmts-grb'
+            exportType: 'satellite'
             projections: [ '3857' ]
-
-    outline:
-      name: 'Outline'
-      type: 'wms'
-      url: 'geoserver/wms?'
-      layerParams:
-        layers: 'ALA:world'
-        format: 'image/png'
-        continuousWorld: true
-      exportType: 'outline'
+            layerParams:
+              maxZoom: 21
+      #        bounds: [
+      #          [ 50.65843926853822, 2.296],
+      #          [ 51.52780962525605, 6.1468505859375 ]
+      #        ]
 
 defaultareas:
   - name: 'Vlaanderen'
