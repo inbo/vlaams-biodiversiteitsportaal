@@ -336,29 +336,33 @@ startup:
 #      exportType: 'hybrid'
 #      link: 'https://www.google.com/intl/en_au/help/terms_maps.html'
 #      projections: ['3857']
-    grb:
-      name: 'Grootschalig Referentiebestand'
-      type: 'wms'
-      url: "https://geo.api.vlaanderen.be/GRB/wms?"
-      layerParams:
-        layers: GRB_BSK
-        format: 'image/png'
-      link: "https://www.vlaanderen.be/datavindplaats/catalogus/wms-grb"
-      exportType: 'normal'
-    grb_wfs:
-      name: 'Grootschalig Referentiebestand WFS'
-      type: 'wfs'
-      url: "https://geo.api.vlaanderen.be/GRB/wfs?"
-      layer: grb_bsk
-      link: "https://www.vlaanderen.be/datavindplaats/catalogus/wfs-grb"
-      exportType: 'normal'
+
     grb_wmts:
-      name: 'Grootschalig Referentiebestand WMTS'
-      type: 'wmts'
-      url: "https://geo.api.vlaanderen.be/GRB/wmts?"
-      layer: grb_bsk
-      link: "https://www.vlaanderen.be/datavindplaats/catalogus/wmts-grb"
-      exportType: 'normal'
+      name: 'Grootschalig Referentiebestand'
+      url: 'https://geo.api.vlaanderen.be/GRB/wmts?service=WMTS&request=GetTile&version=1.0.0&layer=grb_bsk&style=GRB-Basiskaart&tilematrixset=GoogleMapsVL&format=image%2Fpng&tilematrix={z}&tilerow={y}&tilecol={x}'
+      type: 'xyz'
+      exportType: 'minimal'
+      link: 'https://www.vlaanderen.be/datavindplaats/catalogus/wmts-grb'
+      projections: [ '3857' ]
+
+    grouped:
+      name: 'Grootschalig Referentiebestand Grouped'
+      type: 'group'
+      layerParams:
+        layers:
+          - name: 'Open Street Map'
+            url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+            type: 'xyz'
+            exportType: 'minimal'
+            link: 'https://www.openstreetmap.org/about'
+            projections: [ '3857' ]
+          - name: 'Grootschalig Referentiebestand'
+            url: 'https://geo.api.vlaanderen.be/GRB/wmts?service=WMTS&request=GetTile&version=1.0.0&layer=grb_bsk&style=GRB-Basiskaart&tilematrixset=GoogleMapsVL&format=image%2Fpng&tilematrix={z}&tilerow={y}&tilecol={x}'
+            type: 'xyz'
+            exportType: 'minimal'
+            link: 'https://www.vlaanderen.be/datavindplaats/catalogus/wmts-grb'
+            projections: [ '3857' ]
+
     outline:
       name: 'Outline'
       type: 'wms'
@@ -368,38 +372,6 @@ startup:
         format: 'image/png'
         continuousWorld: true
       exportType: 'outline'
-#    grb_grijs:
-#      name: 'Grootschalig Referentiebestand (Grijs)'
-#      type: 'wms'
-#      url: "https://geo.api.vlaanderen.be/GRB/wms?"
-#      layerParams:
-#        layers: GRB_BSK_GRIJS
-#        format: 'image/png'
-#      link: "https://www.vlaanderen.be/datavindplaats/catalogus/wms-grb"
-#      exportType: 'normal'
-#    luchtkaart:
-#      name: 'Luchtfoto'
-#      type: 'wms'
-#      url: "https://geo.api.vlaanderen.be/OMWRGBMRVL/wms?"
-#      layerParams:
-#        layers: OMWRGBMRVL
-#        format: 'image/png'
-#      link: "https://www.vlaanderen.be/datavindplaats/catalogus/wms-grb"
-#      exportType: 'satellite'
-#    osm:
-#      name: 'Open Street Map'
-#      url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-#      type: 'xyz'
-#      exportType: 'minimal'
-#      link: 'https://www.openstreetmap.org/about'
-#      projections: ['3857']
-#    google_satellite:
-#      name: 'Satellite'
-#      layerType: 'SATELLITE'
-#      type: 'google'
-#      exportType: 'satellite'
-#      link: 'https://www.google.com/intl/en_au/help/terms_maps.html'
-#      projections: ['3857']
 
 defaultareas:
   - name: 'Vlaanderen'
