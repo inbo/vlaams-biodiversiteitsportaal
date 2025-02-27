@@ -11,10 +11,10 @@ mail:
     enabled: false
   details:
     sender: "${common.supportEmail}"
-    alertAddressTitle: "Atlas alerts"
+    alertAddressTitle: "VBP alerts"
     infoSender: "${common.supportEmail}"
-    infoAddressTitle: "Atlas of Living Australia"
-    defaultResourceName: "Atlas of Living Australia"
+    infoAddressTitle: "VLAAMS BIODIVERSITEITSPORTAAL"
+    defaultResourceName: "VLAAMS BIODIVERSITEITSPORTAAL"
     # forceAllAlertsGetSent results in emails getting sent regardless if data has changed - only use in DEV env
     forceAllAlertsGetSent: false
 
@@ -22,7 +22,7 @@ grails:
   #default mail service
   serverURL: "${common.protocol}://${common.domain}/alerts"
   mail:
-    host: mailhog
+    host: host.docker.internal
     port: 1025
 
   plugin:
@@ -33,6 +33,9 @@ grails:
         region: eu-west-1
 
 security:
+  cas:
+    adminRole: ROLE_ADMIN
+    uriFilterPattern: []
 skin:
   layout: "ala-main"
   orgSupportEmail: ${common.supportEmail}

@@ -4,13 +4,14 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 #ARG VERSION=4.2.1
 #ARG SOURCE=https://github.com/AtlasOfLivingAustralia/alerts.git
 
-ARG VERSION=fix-biocache-query-invalid-characters
+ARG VERSION=develop
+ARG COMMIT=aa7df1bbf477137cda448d79ca96f6b8556d6730
 ARG SOURCE=https://github.com/StefanVanDyck/alerts.git
 
-LABEL ala.version=${VERSION}
+LABEL ala.version=inbo-${COMMIT}
 
 WORKDIR /project
-RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} .
+RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
 
 COPY resources.xml ./grails-app/conf/spring/resources.xml
 
