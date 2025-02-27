@@ -139,6 +139,17 @@
     </div>
 </div>
 
+<!-- Add wildcards to the search on the homepage to allow partial matching -->
+<script>
+    $("#main_biosearch_form").on("submit", function (e) {
+        e.preventDefault();
+        var self = $(this);
+        $("#search").val("*" + $("#search").val() + "*");
+        $("#main_biosearch_form").off("submit");
+        self.submit(); //submit form
+    });
+</script>
+
 <script type="text/javascript">
     var Cookies = require("js-cookie");
     $(window).on('load', function() {
