@@ -50,10 +50,10 @@ jobs:
 
             if [ "${number_of_changes_since_last_tag}" != "0" ]; then
               echo "Setting new version for config ${component} to ${new_version} with ${number_of_changes_since_last_tag} changes"
-              CONFIG_VERSIONS=$(jq -c ". += {\"${component}\": \"${new_version}\"}" <<< ${CONFIG_VERSIONS})
-              ALL_VERSIONS=$(jq -c ".config += {\"${component}\": \"${new_version}\"}" <<< ${ALL_VERSIONS})
+              CONFIG_VERSIONS=$(jq -c ". += {\"${component}\": \"v${new_version}\"}" <<< ${CONFIG_VERSIONS})
+              ALL_VERSIONS=$(jq -c ".config += {\"${component}\": \"v${new_version}\"}" <<< ${ALL_VERSIONS})
             else
-              ALL_VERSIONS=$(jq -c ".config += {\"${component}\": \"${previous_version}\"}" <<< ${ALL_VERSIONS})
+              ALL_VERSIONS=$(jq -c ".config += {\"${component}\": \"v${previous_version}\"}" <<< ${ALL_VERSIONS})
             fi
           done
           echo "config_versions=${CONFIG_VERSIONS}" >> "$GITHUB_OUTPUT"
@@ -136,7 +136,7 @@ jobs:
               github.rest.git.createRef({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                ref: `refs/tags/config-${component}-v${version}`,
+                ref: `refs/tags/config-${component}-${version}`,
                 sha: context.sha
               })
             }
