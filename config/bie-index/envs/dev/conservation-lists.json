@@ -1,0 +1,6 @@
+{
+  "defaultSourceField": "status",
+  "defaultYearSourceField": "eventDate",
+  "lists": [
+  ]
+}

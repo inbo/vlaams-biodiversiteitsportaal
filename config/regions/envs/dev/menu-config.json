@@ -1,0 +1,30 @@
+[
+  {
+    "label": "Gewest",
+    "fid": "cl100"
+  },
+  {
+    "label": "Provincies",
+    "fid": "cl101"
+  },
+  {
+    "label": "Gemeenten",
+    "fid": "cl102"
+  },
+  {
+    "label": "Openbaar bos en natuurgebieden",
+    "fid": "cl200"
+  },
+  {
+    "label": "Habitatrichtlijngebieden",
+    "fid": "cl201"
+  },
+  {
+    "label": "Jachtterreinen",
+    "fid": "cl202"
+  },
+  {
+    "label": "Wildbeheereenheden",
+    "fid": "cl203"
+  }
+]

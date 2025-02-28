@@ -1,0 +1,30 @@
+{
+  "defaultVernacularNameField": "name",
+  "defaultNameIdField": "nameID",
+  "defaultKingdomField": "kingdom",
+  "defaultPhylumField": "phylum",
+  "defaultClassField": "class",
+  "defaultOrderField": "order",
+  "defaultFamilyField": "family",
+  "defaultRankField": "rank",
+  "defaultStatusField": "status",
+  "defaultLanguageField": "language",
+  "defaultSourceField": "source",
+  "defaultTemporalField": "temporal",
+  "defaultLocationIdField": "locationID",
+  "defaultLocalityField": "locality",
+  "defaultCountryCodeField": "countryCode",
+  "defaultSexField": "sex",
+  "defaultLifeStageField": "lifeStage",
+  "defaultIsPluralField": "isPlural",
+  "defaultIsPreferredField": "isPreferred",
+  "defaultOrganismPartField": "organismPart",
+  "defaultLabelsField": "labels",
+  "defaultTaxonRemarksField": "taxonRemarks",
+  "defaultProvenanceField": "provenance",
+  "defaultStatus": "common",
+  "defaultLanguage": "en",
+  "lists": [
+
+  ]
+}

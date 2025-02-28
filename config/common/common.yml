@@ -1,5 +1,6 @@
 # Custom common config values, used to template others
 common:
+  environment: local
   protocol: https
   domain: biodiversiteitsportaal.dev.svdev.be
   homepage: ${common.protocol}://${common.domain}
