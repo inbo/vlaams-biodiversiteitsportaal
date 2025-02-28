@@ -21,9 +21,11 @@ RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
     rsync -a /home/gradle/.gradle/caches/modules-2 /gradle-cache \
     && rm /gradle-cache/modules-2/*.lock && rm /gradle-cache/modules-2/gc.properties
 
+RUN ls -la /project/build/libs
+
 FROM tomcat-base
 
-ARG VERSION=4.5.3
+ARG VERSION=5.3.0-SNAPSHOT
 ARG COMMIT=c353fd4940dfe06853311997f2692affec822998
 LABEL ala.version=inbo-${COMMIT}
 
