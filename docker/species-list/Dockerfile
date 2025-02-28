@@ -3,7 +3,7 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 
 ARG VERSION=develop-vbp
-ARG COMMIT=2f81333720346b21870e983567eb65ab321cd49d
+ARG COMMIT=c353fd4940dfe06853311997f2692affec822998
 ARG SOURCE=https://github.com/inbo/specieslist-webapp.git
 LABEL ala.version=inbo-${COMMIT}
 
@@ -24,7 +24,8 @@ RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
 FROM tomcat-base
 
 ARG VERSION=4.5.3
-LABEL ala.version=${VERSION}
+ARG COMMIT=c353fd4940dfe06853311997f2692affec822998
+LABEL ala.version=inbo-${COMMIT}
 
 COPY --from=builder /project/build/libs/specieslist-webapp-${VERSION}-plain.war ${CATALINA_HOME}/webapps/species-list.war
 COPY species-list.xml ${CATALINA_HOME}/conf/portal/localhost/species-list.xml

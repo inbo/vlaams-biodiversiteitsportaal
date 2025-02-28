@@ -59,8 +59,6 @@ ownerVisibleToEditor: false
 publicview:
   hidePrivateLists: true
 
-registryApiKey: 449cac3c-0498-4c25-ae0b-2517267c3f05
-
 serverName: ${common.protocol}://${common.domain}/species-list
 serverURL: ${common.protocol}://${common.domain}/species-list
 skin:
