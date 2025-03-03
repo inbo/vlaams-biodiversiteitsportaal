@@ -228,23 +228,26 @@ jobs:
             echo " Releasing ${docker_name} version ${version}"
             export TAG=${version}
             export DOCKER_REPO="${{ secrets.ECR_REPO }}"
-            export CACHE_TAG="cache-github"
             export GIT_TAG="docker-${docker_name}-v${version}"
 
             # Build and push a single image
-            docker buildx bake --push \
-              ${docker_name} \
-              --set="*.args.BUILDPLATFORM=${BUILDPLATFORM}" \
-              --set="${docker_name}.platform=linux/amd64,linux/arm64" \
-              --set="${docker_name}.labels.maintainer=support.natuurdata@inbo.be" \
-              --set="${docker_name}.labels.build_date=$(date +'%Y-%m-%dT%H:%M:%S')" \
-              --set="${docker_name}.labels.build_url=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
-              --set="${docker_name}.labels.git_tag=${GIT_TAG}" \
-              --set="${docker_name}.labels.git_hash=${{ github.sha }}" \
-              --set="custom-gradle.cache-to=type=registry,ref=${DOCKER_REPO}/inbo-vbp-custom-gradle:${CACHE_TAG},oci-mediatypes=true,image-manifest=true,mode=max" \
-              --set="custom-maven.cache-to=type=registry,ref=${DOCKER_REPO}/inbo-vbp-custom-maven:${CACHE_TAG},oci-mediatypes=true,image-manifest=true,mode=max" \
-              --set="tomcat-base.cache-to=type=registry,ref=${DOCKER_REPO}/inbo-vbp-tomcat-base:${CACHE_TAG},oci-mediatypes=true,image-manifest=true,mode=max" \
-              --set="${docker_name}.cache-to=type=registry,ref=${DOCKER_REPO}/inbo-vbp-${docker_name}:${CACHE_TAG},oci-mediatypes=true,image-manifest=true,mode=max" \
+            for platform in linux/amd64 linux/arm64; do
+              export CACHE_TAG="cache-github-${platform}"
+          
+              docker buildx bake --push \
+                ${docker_name} \
+                --set="*.args.BUILDPLATFORM=${BUILDPLATFORM}" \
+                --set="${docker_name}.platform=${platform}" \
+                --set="${docker_name}.labels.maintainer=support.natuurdata@inbo.be" \
+                --set="${docker_name}.labels.build_date=$(date +'%Y-%m-%dT%H:%M:%S')" \
+                --set="${docker_name}.labels.build_url=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
+                --set="${docker_name}.labels.git_tag=${GIT_TAG}" \
+                --set="${docker_name}.labels.git_hash=${{ github.sha }}" \
+                --set="custom-gradle.cache-to=type=registry,ref=${DOCKER_REPO}/inbo-vbp-custom-gradle:${CACHE_TAG},oci-mediatypes=true,image-manifest=true,mode=max" \
+                --set="custom-maven.cache-to=type=registry,ref=${DOCKER_REPO}/inbo-vbp-custom-maven:${CACHE_TAG},oci-mediatypes=true,image-manifest=true,mode=max" \
+                --set="tomcat-base.cache-to=type=registry,ref=${DOCKER_REPO}/inbo-vbp-tomcat-base:${CACHE_TAG},oci-mediatypes=true,image-manifest=true,mode=max" \
+                --set="${docker_name}.cache-to=type=registry,ref=${DOCKER_REPO}/inbo-vbp-${docker_name}:${CACHE_TAG},oci-mediatypes=true,image-manifest=true,mode=max"
+            done
 
             # Create Git Tag
             echo "Creating Git Tag: ${GIT_TAG}"
