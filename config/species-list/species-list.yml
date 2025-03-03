@@ -38,6 +38,10 @@ fieldGuide:
   baseURL: ''
 grails:
   serverURL: ${common.protocol}://${common.domain}/species-list
+  cache:
+    ehcache:
+      ehcacheXmlLocation: 'file:///config/config/species-list/ehcache.xml'
+
 iconicSpecies:
   uid: dr781
 logger:
