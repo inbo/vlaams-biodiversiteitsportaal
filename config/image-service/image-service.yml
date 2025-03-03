@@ -65,6 +65,8 @@ biocache:
   baseURL: "${common.protocol}://${common.domain}/biocache-hub"
   service:
       baseURL: "${common.protocol}://${common.domain}/biocache-service"
+bie:
+  baseURL: "${common.protocol}://${common.domain}/bie-hub"
 
 dataSource:
   driverClassName: org.postgresql.Driver
