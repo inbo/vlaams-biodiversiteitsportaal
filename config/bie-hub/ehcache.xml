@@ -1,0 +1,42 @@
+<config xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+        xmlns='http://www.ehcache.org/v3'
+        xmlns:jsr107='http://www.ehcache.org/v3/jsr107'>
+
+    <persistence directory="/data/bie-hub/ehcache"/>
+
+    <cache alias="wikiCache">
+        <expiry>
+            <ttl unit="days">1</ttl>
+        </expiry>
+        <resources>
+            <heap unit="entries">200000</heap>
+        </resources>
+    </cache>
+
+    <cache alias="austraitsCache">
+        <expiry>
+            <ttl unit="days">1</ttl>
+        </expiry>
+        <resources>
+            <heap unit="entries">200000</heap>
+        </resources>
+    </cache>
+
+    <cache alias="bhlCache">
+        <expiry>
+            <ttl unit="days">1</ttl>
+        </expiry>
+        <resources>
+            <heap unit="entries">200000</heap>
+        </resources>
+    </cache>
+
+    <cache alias="userDetailsCache">
+        <expiry>
+            <ttl unit="days">1</ttl>
+        </expiry>
+        <resources>
+            <heap unit="entries">2000</heap>
+        </resources>
+    </cache>
+</config>

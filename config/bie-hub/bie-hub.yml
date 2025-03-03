@@ -14,6 +14,9 @@ grails:
   serverURL: ${common.protocol}://${common.domain}/bie-hub
   cors:
     enabled: true
+  cache:
+    ehcache:
+      ehcacheXmlLocation: 'file:///config/config/bie-hub/ehcache.xml'
 
 serverName: ${common.protocol}://${common.domain}/bie-hub
 
@@ -78,7 +81,6 @@ speciesList:
   preferredSpeciesListDruid: dr152
   preferredListName: Preferred Image List
   apiKey: 081489d3-e581-4dad-8f37-b9331bcf04a8
-  useListWs: False
   wsURL: ${common.protocol}://${common.domain}/species-list
 speciesListService:
   baseURL: ${common.protocol}://${common.domain}/species-list

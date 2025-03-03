@@ -33,9 +33,9 @@ if [ ! -z "${UID}" ]; then
     if ! id -u ${UID} > /dev/null 2>&1; then
         echo "The user ${UID} does not exist, trying to create it"
         # Adding group
-        addgroup --gid ${GID} tomcat-users
+        groupadd --gid ${GID} tomcat-users
         # Adding user
-        adduser --disabled-password --gecos "" --no-create-home --gid ${GID} --uid ${UID} tomcat-user
+        useradd --no-create-home --gid ${GID} --uid ${UID} tomcat-user
     fi
     # Change ownership of tomcat
     chown -R ${UID}:${GID} /usr/local/tomcat

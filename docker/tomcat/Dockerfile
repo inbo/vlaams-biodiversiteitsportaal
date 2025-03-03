@@ -3,15 +3,15 @@ FROM tomcat:9.0-jdk11-corretto AS base
 
 WORKDIR ${CATALINA_HOME}
 
-# Create the user
-ENV UID=1000
-ENV GID=1000
-
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
     yum update && \
     yum install -y \
         shadow-utils \
         util-linux
+
+# Default user and group id
+ENV UID=1000
+ENV GID=1000
 
 RUN mkdir /data
 RUN chown ${UID}:${GID} /data

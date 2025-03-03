@@ -127,7 +127,7 @@ target "data-quality-filter-service" {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
   }
-  cache-from = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/data-quality-filter-service:cache-github"]
+  cache-from = ["${DOCKER_REPO}/inbo-vbp-data-quality-filter-service:cache-github"]
   tags = ["${DOCKER_REPO}/inbo-vbp-data-quality-filter-service:${TAG}"]
 }
 

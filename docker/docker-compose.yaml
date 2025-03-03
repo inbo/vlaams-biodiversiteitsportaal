@@ -15,6 +15,7 @@ services:
       LOG_LEVEL: "INFO"
       JAVA_OPTS: "-Xmx6g"
       ADDITIONAL_SPRING_CONFIG_LOCATIONS: "file:/config/config/common/common-docker.yml"
+      GRAILS_ENV: local
       REMOTE_DEBUGGER_PORT: 5005
     extra_hosts:
       - "host.docker.internal:host-gateway"

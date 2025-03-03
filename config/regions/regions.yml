@@ -78,4 +78,11 @@ layers:
   intersectObject: ''
   queryContextDisplayName: ''
   queryContextName: ''
-config_dir: '/config/config/regions/envs/${environment}'
+
+environments:
+  uat:
+    config_dir: '/config/config/regions/envs/uat'
+  dev:
+    config_dir: '/config/config/regions/envs/dev'
+  local:
+    config_dir: '/config/config/regions/envs/local'
