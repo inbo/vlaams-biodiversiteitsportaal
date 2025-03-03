@@ -10,6 +10,9 @@ INSTANCE_ID=$(aws ec2 describe-instances \
                --query "Reservations[].Instances[?State.Name == 'running'].InstanceId[]" \
                --output text)
 
+# Try making sure all child processes are killed when the script exits
+trap "trap - SIGTERM && kill -- -$$" SIGINT SIGTERM EXIT
+
 # Issue with ssm only binding on 127.0.0.1, making the port unavailable to docker containers
 # https://github.com/aws/session-manager-plugin/issues/14
 # Fixed by forwarding using socat on a port with a 1 pre-pended

@@ -75,8 +75,8 @@ collectoryService:
   baseURL: ${common.protocol}://${common.domain}/collectory
 speciesList:
   baseURL: ${common.protocol}://${common.domain}/species-list
-  preferredSpeciesListDruid: dr4778
-  preferredListName: ALA Preferred Species Images
+  preferredSpeciesListDruid: dr152
+  preferredListName: Preferred Image List
   apiKey: 081489d3-e581-4dad-8f37-b9331bcf04a8
   useListWs: False
   wsURL: ${common.protocol}://${common.domain}/species-list
