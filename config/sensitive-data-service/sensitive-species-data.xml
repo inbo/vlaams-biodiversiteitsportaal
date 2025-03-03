@@ -2,17 +2,17 @@
 <sensitiveSpeciesList>
   <sensitiveSpecies name="Dictyophorus spumans" family="Pyrgomorphidae" guid="1727415" rank="SPECIES" commonName="">
     <instances>
-      <conservationInstance category="IA" authority="StekkeFakke 3000" dataResourceId="dr673" generalisation="10km" zone="BE" />
+      <conservationInstance category="IA" authority="StekkeFakke 3000" dataResourceId="dr4" generalisation="10km" zone="BE" />
     </instances>
   </sensitiveSpecies>
   <sensitiveSpecies name="Romalea guttata" family="Romaleidae" guid="1714599" rank="SPECIES" commonName="">
     <instances>
-      <conservationInstance category="R" authority="StekkeFakke 3000" dataResourceId="dr673" generalisation="WITHHOLD" zone="BE" />
+      <conservationInstance category="R" authority="StekkeFakke 3000" dataResourceId="dr4" generalisation="WITHHOLD" zone="BE" />
     </instances>
   </sensitiveSpecies>
   <sensitiveSpecies name="Ectobius panzeri" family="Ectobiidae" guid="4514051" rank="SPECIES" commonName="">
     <instances>
-      <conservationInstance category="" authority="StekkeFakke 3000" dataResourceId="dr673" generalisation="5km" zone="VL" />
+      <conservationInstance category="" authority="StekkeFakke 3000" dataResourceId="dr4" generalisation="5km" zone="VL" />
     </instances>
   </sensitiveSpecies>
 </sensitiveSpeciesList>
