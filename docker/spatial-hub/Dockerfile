@@ -5,9 +5,9 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 #ARG SOURCE=https://github.com/AtlasOfLivingAustralia/spatial-hub.git
 #LABEL ala.version=${VERSION}
 
-ARG VERSION=483-sandbox
-ARG COMMIT=d05d81d6d7cf0e8cf3d3ad0485ccf1edf4832931
-ARG SOURCE=https://github.com/katya-shaleninova/spatial-hub.git
+ARG VERSION=allow-configuring-language
+ARG COMMIT=53d4aad16d6b1a704ef147923ed233a2d18d668d
+ARG SOURCE=https://github.com/inbo/spatial-hub.git
 LABEL ala.version=inbo-${VERSION}
 
 RUN rm -f /etc/apt/apt.conf.d/docker-clean; echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/keep-cache
@@ -37,7 +37,7 @@ RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
 FROM tomcat-base
 
 ARG VERSION=2.2.0-SNAPSHOT
-ARG COMMIT=d05d81d6d7cf0e8cf3d3ad0485ccf1edf4832931
+ARG COMMIT=53d4aad16d6b1a704ef147923ed233a2d18d668d
 LABEL ala.version=inbo-${VERSION}
 
 COPY --from=builder /project/build/libs/project-${VERSION}-plain.war ${CATALINA_HOME}/webapps/spatial-hub.war
