@@ -2,26 +2,30 @@ variable "TAG" {
   default = "dev"
 }
 
+variable "CACHE_TAG" {
+  default = "dev"
+}
+
 variable "DOCKER_REPO" {
   default = "local"
 }
 
 target "custom-gradle" {
   context = "./gradle"
-  cache-from = ["${DOCKER_REPO}/inbo-vbp-custom-gradle:cache-github-arm64", "${DOCKER_REPO}/inbo-vbp-custom-gradle:cache-github-amd64"]
+  cache-from = ["${DOCKER_REPO}/inbo-vbp-custom-gradle:${CACHE_TAG}"]
   tags = ["custom-gradle:${TAG}"]
 }
 
 target "custom-maven" {
   context = "./maven"
-  cache-from = ["${DOCKER_REPO}/inbo-vbp-custom-maven:cache-github-arm64", "${DOCKER_REPO}/inbo-vbp-custom-maven:cache-github-amd64"]
+  cache-from = ["${DOCKER_REPO}/inbo-vbp-custom-maven:${CACHE_TAG}"]
   tags = ["custom-maven:${TAG}"]
 }
 
 
 target "tomcat-base" {
   context = "./tomcat"
-  cache-from = ["${DOCKER_REPO}/inbo-vbp-tomcat-base:cache-github-arm64", "${DOCKER_REPO}/inbo-vbp-tomcat-base:cache-github-amd64"]
+  cache-from = ["${DOCKER_REPO}/inbo-vbp-tomcat-base:${CACHE_TAG}"]
   tags = ["tomcat:${TAG}"]
   target  = "base"
 }
@@ -57,7 +61,7 @@ target "alerts" {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
   }
-  cache-from = ["${DOCKER_REPO}/inbo-vbp-alerts:cache-github-arm64", "${DOCKER_REPO}/inbo-vbp-alerts:cache-github-amd64"]
+  cache-from = ["${DOCKER_REPO}/inbo-vbp-alerts:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-alerts:${TAG}"]
 }
 
@@ -67,7 +71,7 @@ target "apikey" {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
   }
-  cache-from = ["${DOCKER_REPO}/inbo-vbp-apikey:cache-github-arm64", "${DOCKER_REPO}/inbo-vbp-apikey:cache-github-amd64"]
+  cache-from = ["${DOCKER_REPO}/inbo-vbp-apikey:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-apikey:${TAG}"]
 }
 
@@ -77,7 +81,7 @@ target "bie-hub" {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
   }
-  cache-from = ["${DOCKER_REPO}/inbo-vbp-bie-hub:cache-github-arm64", "${DOCKER_REPO}/inbo-vbp-bie-hub:cache-github-amd64"]
+  cache-from = ["${DOCKER_REPO}/inbo-vbp-bie-hub:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-bie-hub:${TAG}"]
 }
 
@@ -87,7 +91,7 @@ target "bie-index" {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
   }
-  cache-from = ["${DOCKER_REPO}/inbo-vbp-bie-index:cache-github-arm64", "${DOCKER_REPO}/inbo-vbp-bie-index:cache-github-amd64"]
+  cache-from = ["${DOCKER_REPO}/inbo-vbp-bie-index:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-bie-index:${TAG}"]
 }
 
@@ -97,7 +101,7 @@ target "biocache-hub" {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
   }
-  cache-from = ["${DOCKER_REPO}/inbo-vbp-biocache-hub:cache-github-arm64", "${DOCKER_REPO}/inbo-vbp-biocache-hub:cache-github-amd64"]
+  cache-from = ["${DOCKER_REPO}/inbo-vbp-biocache-hub:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-biocache-hub:${TAG}"]
 }
 
@@ -107,7 +111,7 @@ target "biocache-service" {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
   }
-  cache-from = ["${DOCKER_REPO}/inbo-vbp-biocache-service:cache-github-arm64", "${DOCKER_REPO}/inbo-vbp-biocache-service:cache-github-amd64"]
+  cache-from = ["${DOCKER_REPO}/inbo-vbp-biocache-service:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-biocache-service:${TAG}"]
 }
 
@@ -117,7 +121,7 @@ target "collectory" {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
   }
-  cache-from = ["${DOCKER_REPO}/inbo-vbp-collectory:cache-github-arm64", "${DOCKER_REPO}/inbo-vbp-collectory:cache-github-amd64"]
+  cache-from = ["${DOCKER_REPO}/inbo-vbp-collectory:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-collectory:${TAG}"]
 }
 
@@ -127,7 +131,7 @@ target "data-quality-filter-service" {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
   }
-  cache-from = ["${DOCKER_REPO}/inbo-vbp-data-quality-filter-service:cache-github-arm64", "${DOCKER_REPO}/inbo-vbp-data-quality-filter-service:cache-github-amd64"]
+  cache-from = ["${DOCKER_REPO}/inbo-vbp-data-quality-filter-service:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-data-quality-filter-service:${TAG}"]
 }
 
@@ -137,7 +141,7 @@ target "doi-service" {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
   }
-  cache-from = ["${DOCKER_REPO}/inbo-vbp-doi-service:cache-github-arm64", "${DOCKER_REPO}/inbo-vbp-doi-service:cache-github-amd64"]
+  cache-from = ["${DOCKER_REPO}/inbo-vbp-doi-service:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-doi-service:${TAG}"]
 }
 
@@ -147,7 +151,7 @@ target "image-service" {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
   }
-  cache-from = ["${DOCKER_REPO}/inbo-vbp-image-service:cache-github-arm64", "${DOCKER_REPO}/inbo-vbp-image-service:cache-github-amd64"]
+  cache-from = ["${DOCKER_REPO}/inbo-vbp-image-service:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-image-service:${TAG}"]
 }
 
@@ -157,7 +161,7 @@ target "logger" {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
   }
-  cache-from = ["${DOCKER_REPO}/inbo-vbp-logger:cache-github-arm64", "${DOCKER_REPO}/inbo-vbp-logger:cache-github-amd64"]
+  cache-from = ["${DOCKER_REPO}/inbo-vbp-logger:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-logger:${TAG}"]
 }
 
@@ -166,7 +170,7 @@ target "namematching-service" {
   contexts = {
     "custom-maven" = "target:custom-maven"
   }
-  cache-from = ["${DOCKER_REPO}/inbo-vbp-namematching-service:cache-github-arm64", "${DOCKER_REPO}/inbo-vbp-namematching-service:cache-github-amd64"]
+  cache-from = ["${DOCKER_REPO}/inbo-vbp-namematching-service:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-namematching-service:${TAG}"]
 }
 
@@ -175,7 +179,7 @@ target "pipelines" {
   contexts = {
     "custom-maven" = "target:custom-maven"
   }
-  cache-from = ["${DOCKER_REPO}/inbo-vbp-pipelines:cache-github-arm64", "${DOCKER_REPO}/inbo-vbp-pipelines:cache-github-amd64"]
+  cache-from = ["${DOCKER_REPO}/inbo-vbp-pipelines:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-pipelines:${TAG}"]
 }
 
@@ -185,7 +189,7 @@ target "regions" {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
   }
-  cache-from = ["${DOCKER_REPO}/inbo-vbp-regions:cache-github-arm64", "${DOCKER_REPO}/inbo-vbp-regions:cache-github-amd64"]
+  cache-from = ["${DOCKER_REPO}/inbo-vbp-regions:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-regions:${TAG}"]
 }
 
@@ -203,7 +207,7 @@ target "spatial-hub" {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
   }
-  cache-from = ["${DOCKER_REPO}/inbo-vbp-spatial-hub:cache-github-arm64", "${DOCKER_REPO}/inbo-vbp-spatial-hub:cache-github-amd64"]
+  cache-from = ["${DOCKER_REPO}/inbo-vbp-spatial-hub:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-spatial-hub:${TAG}"]
 }
 
@@ -213,7 +217,7 @@ target "spatial-service" {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
   }
-  cache-from = ["${DOCKER_REPO}/inbo-vbp-spatial-service:cache-github-arm64", "${DOCKER_REPO}/inbo-vbp-spatial-service:cache-github-amd64"]
+  cache-from = ["${DOCKER_REPO}/inbo-vbp-spatial-service:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-spatial-service:${TAG}"]
 }
 
@@ -223,7 +227,7 @@ target "species-list" {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
   }
-  cache-from = ["${DOCKER_REPO}/inbo-vbp-species-list:cache-github-arm64", "${DOCKER_REPO}/inbo-vbp-species-list:cache-github-amd64"]
+  cache-from = ["${DOCKER_REPO}/inbo-vbp-species-list:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-species-list:${TAG}"]
 }
 
@@ -233,7 +237,7 @@ target "userdetails" {
     "custom-gradle" = "target:custom-gradle"
     "tomcat-base"   = "target:tomcat-base"
   }
-  cache-from = ["${DOCKER_REPO}/inbo-vbp-userdetails:cache-github-arm64", "${DOCKER_REPO}/inbo-vbp-userdetails:cache-github-amd64"]
+  cache-from = ["${DOCKER_REPO}/inbo-vbp-userdetails:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-userdetails:${TAG}"]
 }
 
