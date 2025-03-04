@@ -42,3 +42,4 @@ RUN mkdir -p /opt/atlas/i18n \
   && ln -s /config/config/alerts/i18n/override /var/opt/atlas/i18n/alerts
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/alerts/actuator/health || exit 1
+
