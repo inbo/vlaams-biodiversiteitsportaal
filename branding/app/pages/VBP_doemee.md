@@ -4,13 +4,7 @@ _options:
   layout: public/pagesLayout.html
 ---
 
-<!DOCTYPE html>
-<html lang="nl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doe Mee - Citizen Science & Biodiversiteit</title>
-    <style>
+ <style>
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
@@ -52,9 +46,8 @@ _options:
             white-space: nowrap;
         }
     </style>
-</head>
-<body>
-    <div class="watermerk">DRAFT</div> 
+
+  <div class="watermerk">DRAFT</div> 
     <h1>Doe Mee met Citizen Science en Biodiversiteitsdata!</h1>
     <p>Wil je bijdragen aan wetenschappelijk onderzoek en de natuur in Vlaanderen beter in kaart brengen? Er zijn verschillende platformen waar je waarnemingen kan registreren en data kan verzamelen over biodiversiteit.</p>
     
@@ -113,5 +106,4 @@ _options:
     <p><a href="https://www.mijntuinlab.be" target="_blank">Mijn Tuinlab</a> laat je toe om de biodiversiteit in je eigen tuin te meten en te vergelijken met andere deelnemers.</p>
     
   <p>Iedereen kan meedoen! Of je nu een beginnende natuurliefhebber bent of een doorgewinterde expert, jouw waarnemingen zijn waardevol. Doe mee en help mee bouwen aan kennis over de natuur!</p>
-</body>
-</html>
+
