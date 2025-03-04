@@ -178,32 +178,32 @@ jobs:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
 
-#      - name: Cache
-#        uses: actions/cache@v4
-#        id: cache
-#        with:
-#          path: |
-#            var-cache-apt
-#            var-cache-yum
-#            var-lib-apt
-#            gradle-cache
-#            maven-cache
-#          key: cache-docker-${{ hashFiles('./docker/**/Dockerfile') }}
-#          restore-keys: |
-#            cache-docker-
-#
-#      - name: inject cache into docker
-#        uses: reproducible-containers/buildkit-cache-dance@v3.1.0
-#        with:
-#          cache-map: |
-#            {
-#              "var-cache-apt": "/var/cache/apt",
-#              "var-cache-yum": "/var/cache/yum",
-#              "var-lib-apt": "/var/lib/apt",
-#              "gradle-cache": "/gradle-cache",
-#              "maven-cache": "/root/.m2/repository"
-#            }
-#          skip-extraction: ${{ steps.cache.outputs.cache-hit }}
+      - name: Cache
+        uses: actions/cache@v4
+        id: cache
+        with:
+          path: |
+            var-cache-apt
+            var-cache-yum
+            var-lib-apt
+            gradle-cache
+            maven-cache
+          key: cache-docker-${{ hashFiles('./docker/**/Dockerfile') }}
+          restore-keys: |
+            cache-docker-
+
+      - name: inject cache into docker
+        uses: reproducible-containers/buildkit-cache-dance@v3.1.0
+        with:
+          cache-map: |
+            {
+              "var-cache-apt": "/var/cache/apt",
+              "var-cache-yum": "/var/cache/yum",
+              "var-lib-apt": "/var/lib/apt",
+              "gradle-cache": "/gradle-cache",
+              "maven-cache": "/root/.m2/repository"
+            }
+          skip-extraction: ${{ steps.cache.outputs.cache-hit }}
 
       - name: Build and push docker images
         working-directory: ./docker

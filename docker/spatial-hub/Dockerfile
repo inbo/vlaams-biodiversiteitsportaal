@@ -10,10 +10,9 @@ ARG COMMIT=53d4aad16d6b1a704ef147923ed233a2d18d668d
 ARG SOURCE=https://github.com/inbo/spatial-hub.git
 LABEL ala.version=inbo-${VERSION}
 
-RUN rm -f /etc/apt/apt.conf.d/docker-clean; echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/keep-cache
-RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
-    --mount=type=cache,target=/var/lib/apt,sharing=locked \
-    apt-get update && apt-get -y install --no-install-recommends \
+RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
+    yum update && \
+    yum install -y \
     npm
 
 WORKDIR /project

@@ -32,10 +32,9 @@ ARG COMMIT=15db71c4357e9f3d644aa6ca38e697b74815b416
 LABEL ala.version=inbo-${COMMIT}
 #
 # ARG VERSION=2.18.6-SNAPSHOT
-RUN rm -f /etc/apt/apt.conf.d/docker-clean; echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/keep-cache
-RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
-    --mount=type=cache,target=/var/lib/apt,sharing=locked \
-    apt-get update && apt-get install -y --no-install-recommends \
+RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
+    yum update && \
+    yum install -y \
     nano \
     file
 
