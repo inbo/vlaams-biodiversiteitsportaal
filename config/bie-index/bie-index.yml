@@ -173,7 +173,19 @@ management:
                 include: health
 
 environments:
-  uat:
+  inbo_prod:
+    images:
+      config: file:///config/config/bie-index/envs/prod/image-lists.json
+    conservationListsUrl: file:///config/config/bie-index/envs/prod/conservation-lists.json
+    vernacularListsUrl: file:///config/config/bie-index/envs/prod/vernacular-lists.json
+    hiddenImages:
+      config: file:///config/config/bie-index/envs/prod/hidden-images-lists.json
+    wiki:
+      config: file:///config/config/bie-index/envs/prod/wiki-lists.json
+    import:
+      favouritesConfigUrl: file:///config/config/bie-index/envs/prod/favourites.json
+
+  inbo_uat:
     images:
       config: file:///config/config/bie-index/envs/uat/image-lists.json
     conservationListsUrl: file:///config/config/bie-index/envs/uat/conservation-lists.json
@@ -185,7 +197,7 @@ environments:
     import:
       favouritesConfigUrl: file:///config/config/bie-index/envs/uat/favourites.json
 
-  dev:
+  inbo_dev:
     images:
       config: file:///config/config/bie-index/envs/dev/image-lists.json
     conservationListsUrl: file:///config/config/bie-index/envs/dev/conservation-lists.json

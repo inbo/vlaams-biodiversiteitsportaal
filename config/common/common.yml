@@ -85,15 +85,15 @@ environments:
     common:
       protocol: http
       domain: localhost
-  dev:
+  inbo_dev:
     common:
       protocol: https
-      domain: biodiversiteitsportaal.dev.svdev.be
-  uat:
+      domain: natuurdata.dev.inbo.be
+  inbo_uat:
     common:
       protocol: https
-      domain: biodiversiteitsportaal.uat.svdev.be
-  prod:
+      domain: natuurdata.uat.inbo.be
+  inbo_prod:
     common:
       protocol: https
-      domain: biodiversiteitsportaal.uat.svdev.be
+      domain: natuurdata.uat.inbo.be

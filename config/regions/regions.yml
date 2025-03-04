@@ -80,9 +80,11 @@ layers:
   queryContextName: ''
 
 environments:
-  uat:
+  inbo_prod:
+    config_dir: '/config/config/regions/envs/prod'
+  inbo_uat:
     config_dir: '/config/config/regions/envs/uat'
-  dev:
+  inbo_dev:
     config_dir: '/config/config/regions/envs/dev'
   local:
     config_dir: '/config/config/regions/envs/local'
