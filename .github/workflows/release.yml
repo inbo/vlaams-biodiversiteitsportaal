@@ -184,6 +184,7 @@ jobs:
         with:
           path: |
             var-cache-apt
+            var-cache-yum
             var-lib-apt
             gradle-cache
             maven-cache
@@ -197,6 +198,7 @@ jobs:
           cache-map: |
             {
               "var-cache-apt": "/var/cache/apt",
+              "var-cache-yum": "/var/cache/yum",
               "var-lib-apt": "/var/lib/apt",
               "gradle-cache": "/gradle-cache",
               "maven-cache": "/root/.m2/repository"
