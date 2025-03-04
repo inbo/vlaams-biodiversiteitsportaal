@@ -6,7 +6,7 @@
         </layout>
     </appender>
     <root>
-        <priority value="${log_level:-INFO}"/>
+        <priority value="${log_level}"/>
         <appender-ref ref="CONSOLE"/>
     </root>
 </log4j:configuration>

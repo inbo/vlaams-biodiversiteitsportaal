@@ -244,3 +244,5 @@ doi:
   service:
     url: ${common.protocol}://${common.domain}/doi-service/
   provider: VBP
+
+log_level: INFO
