@@ -1,6 +1,6 @@
 common:
-  protocol: https
-  domain: biodiversiteitsportaal.dev.svdev.be
+  protocol: http
+  domain: localhost
   homepage: ${common.protocol}://${common.domain}
   supportEmail: support.natuurdata@inbo.be
 
@@ -79,3 +79,21 @@ server:
       cookie:
         secure: true
         same-site: "strict"
+
+environments:
+  local:
+    common:
+      protocol: http
+      domain: localhost
+  dev:
+    common:
+      protocol: https
+      domain: biodiversiteitsportaal.dev.svdev.be
+  uat:
+    common:
+      protocol: https
+      domain: biodiversiteitsportaal.uat.svdev.be
+  prod:
+    common:
+      protocol: https
+      domain: biodiversiteitsportaal.uat.svdev.be
