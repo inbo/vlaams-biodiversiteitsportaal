@@ -172,9 +172,11 @@ jobs:
         uses: docker/setup-buildx-action@v3
         with:
           # Should probably make this our own docker pull-through
-          buildkitd-config-inline: |
-            [registry."docker.io"]
-              mirrors = ["public.ecr.aws/vend"]
+#          buildkitd-config-inline: |
+#            [registry."docker.io"]
+#              mirrors = ["public.ecr.aws/vend"]
+          driver-opts: |
+            image=moby/buildkit:buildx-stable-1
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
 
