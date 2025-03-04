@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1.14.0
 ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-maven AS builder
 

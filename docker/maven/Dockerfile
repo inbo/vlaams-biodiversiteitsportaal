@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1.14.0
 ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} maven:3.8-amazoncorretto-8 AS builder
 

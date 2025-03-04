@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1.14.0
 FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 # ARG VERSION=2.1.5

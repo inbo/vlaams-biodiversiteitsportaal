@@ -1,6 +1,6 @@
+# syntax=docker/dockerfile:1.14.0
 ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
-
 
 ARG VERSION=develop-vbp
 ARG COMMIT=c353fd4940dfe06853311997f2692affec822998
