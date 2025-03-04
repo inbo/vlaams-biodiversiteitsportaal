@@ -243,7 +243,6 @@ jobs:
           
               docker buildx bake --push \
                 ${docker_name} \
-                --debug \
                 --set="*.args.BUILDPLATFORM=${BUILDPLATFORM}" \
                 --set="${docker_name}.platform=linux/${platform}" \
                 --set="${docker_name}.labels.maintainer=support.natuurdata@inbo.be" \
