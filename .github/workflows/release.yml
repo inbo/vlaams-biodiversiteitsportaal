@@ -233,7 +233,7 @@ jobs:
             export GIT_TAG="docker-${docker_name}-v${version}"
 
             # Build and push a single image
-            for platform in amd64 arm64; do
+            for platform in arm64 amd64; do
               export CACHE_TAG="cache-${platform}"
           
               docker buildx bake --push \
