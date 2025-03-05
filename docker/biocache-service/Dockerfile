@@ -4,7 +4,7 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 
 ARG VERSION=poc-rbac
-ARG COMMIT=5b0ef542a97658b08253d5d8f0ccc701de7a7a87
+ARG COMMIT=49effaf82c1d8e099ef2123e4c3b5dd98f8fcef0
 ARG SOURCE=https://github.com/StefanVanDyck/biocache-service.git
 LABEL ala.version=inbo-${COMMIT}
 
@@ -29,7 +29,7 @@ RUN ls -la /project/build/libs/
 FROM tomcat-base
 
 ARG VERSION=3.6.0-SNAPSHOT
-ARG COMMIT=5b0ef542a97658b08253d5d8f0ccc701de7a7a87
+ARG COMMIT=49effaf82c1d8e099ef2123e4c3b5dd98f8fcef0
 LABEL ala.version=inbo-${COMMIT}
 
 
