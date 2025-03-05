@@ -752,7 +752,7 @@
   <field name="null" type="string" docValues="true" indexed="true" stored="true"/>
 
   <!-- INBO RBAC fields -->
-  <field name="rbac"  type="boolean" docValues="false" indexed="true"/>
-  <field name="rbac_allowed"  type="string" docValues="false" multiValued="true" indexed="true"/>
+  <field name="dynamicProperties_rbac"  type="boolean" docValues="false" indexed="true"/>
+  <field name="dynamicProperties_rbac_allowed"  type="string" docValues="false" multiValued="true" indexed="true"/>
 
 </schema>
