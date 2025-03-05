@@ -95,7 +95,7 @@ Het verzamelt en integreert betrouwbare data uit uiteenlopende bronnen – van w
             <li>Onderzoekers</li>
             <li>Individuele burgers (via platformen zoals INaturalist en Waarnemingen.be)</li>
          </ul>
-        <p>Het grootste deel van deze data bestaat uit soortwaarnemingen – bewijzen van een plant of dier op een specifieke plaats en tijd. Het portaal bevat ook referentiedata voor analyse en visualisatie.</p>
+        <p>Het grootste deel van deze data bestaat uit soortwaarnemingen – bewijzen van een plant of dier op een specifieke plaats en tijd. Het portaal bevat ook referentiedata voor analyse en visualisatie. Wil je zelf data aanleveren, contacteer ons dan via <a href="mailto:support.natuurdata@inbo.be">email</a></p>
         
   <h3>Zoeken in het Vlaams Biodiversiteitsportaal</h3>
         <p>Je kan zoeken op:</p>
@@ -152,6 +152,8 @@ Het verzamelt en integreert betrouwbare data uit uiteenlopende bronnen – van w
             <img src="https://curieuzeneuzen.be/wp-content/uploads/2020/12/logo-vmm.png" alt="VMM logo">
             <img src="https://www.vlm.be/nl/Style%20Library/VLM%20Styles/Images/vlaanderen_openruimte.png" alt="VLM logo">
         </div>
+    <h2>Contact</h2>
+    <p> Contacteer ons op support.natuurdata@inbo.be </p>
     </div>
 </body>
 <P ALIGN="center">Het Vlaams Biodiversiteitsportaal maakt deel uit van de Living Atlas Community</p>
