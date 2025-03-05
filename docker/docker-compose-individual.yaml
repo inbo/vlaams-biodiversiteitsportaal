@@ -1,6 +1,6 @@
 services:
   biocache-hub:
-    image: ${DOCKER_REPO:-local}/biocache-hub:dev
+    image: ${DOCKER_REPO:-local}/inbo-vbp-biocache-hub:dev
     build:
       context: biocache-hub
     environment:
@@ -9,7 +9,7 @@ services:
       - ../config:/config/config:ro
 
   bie-hub:
-    image: ${DOCKER_REPO:-local}/bie-hub:dev
+    image: ${DOCKER_REPO:-local}/inbo-vbp-bie-hub:dev
     build:
       context: bie-hub
     environment:
@@ -18,7 +18,7 @@ services:
       - ../config:/config/config:ro
 
   bie-index:
-    image: ${DOCKER_REPO:-local}/bie-index:dev
+    image: ${DOCKER_REPO:-local}/inbo-vbp-bie-index:dev
     build:
       context: bie-index
     environment:
@@ -30,12 +30,12 @@ services:
         condition: service_healthy
 
   biocache-service:
-    image: ${DOCKER_REPO:-local}/biocache-service:dev
-    build:
-      context: biocache-service
+    image: ${DOCKER_REPO:-local}/inbo-vbp-biocache-service:dev
+#    build:
+#      context: biocache-service
     environment:
       ADDITIONAL_SPRING_CONFIG_LOCATIONS: "file:/config/config/common/common-docker.yml"
-      LOG_LEVEL: DEBUG
+      LOG_LEVEL: WARN
       JAVA_OPTS: "-Xms128m -Xmx256m -Dspring.profiles.active=local -Dspring.config.additional-location=file:/config/config/common/common.yml,file:/config/config/common/common-docker.yml,file:/config/config/biocache-service/biocache-service.yml -Dspring.config.import=''"
       SPRING_CONFIG_IMPORT: ''
     volumes:
@@ -49,7 +49,7 @@ services:
         condition: service_started
 
   apikey:
-    image: ${DOCKER_REPO:-local}/apikey:dev
+    image: ${DOCKER_REPO:-local}/inbo-vbp-apikey:dev
     build:
       context: apikey
     environment:
@@ -62,7 +62,7 @@ services:
         condition: service_healthy
 
   alerts:
-    image: ${DOCKER_REPO:-local}/alerts:dev
+    image: ${DOCKER_REPO:-local}/inbo-vbp-alerts:dev
     build:
       context: alerts
     environment:
@@ -74,7 +74,7 @@ services:
         condition: service_healthy
 
   collectory:
-    image: ${DOCKER_REPO:-local}/collectory:dev
+    image: ${DOCKER_REPO:-local}/inbo-vbp-collectory:dev
     build:
       context: collectory
     environment:
@@ -88,7 +88,7 @@ services:
         condition: service_healthy
 
   data-quality-filter-service:
-    image: ${DOCKER_REPO:-local}/data-quality-filter-service:dev
+    image: ${DOCKER_REPO:-local}/inbo-vbp-data-quality-filter-service:dev
     build:
       context: data-quality-filter-service
     environment:
@@ -100,7 +100,7 @@ services:
         condition: service_healthy
 
   doi-service:
-    image: ${DOCKER_REPO:-local}/doi-service:dev
+    image: ${DOCKER_REPO:-local}/inbo-vbp-doi-service:dev
     build:
       context: doi-service
     environment:
@@ -112,7 +112,7 @@ services:
         condition: service_healthy
 
   logger:
-    image: ${DOCKER_REPO:-local}/logger:dev
+    image: ${DOCKER_REPO:-local}/inbo-vbp-logger:dev
     build:
       context: logger
     environment:
@@ -124,7 +124,7 @@ services:
         condition: service_healthy
 
   species-list:
-    image: ${DOCKER_REPO:-local}/species-list:dev
+    image: ${DOCKER_REPO:-local}/inbo-vbp-species-list:dev
     build:
       context: species-list
     environment:
@@ -137,7 +137,7 @@ services:
         condition: service_healthy
 
   regions:
-    image: ${DOCKER_REPO:-local}/regions:dev
+    image: ${DOCKER_REPO:-local}/inbo-vbp-regions:dev
     build:
       context: regions
     environment:
@@ -152,7 +152,7 @@ services:
         condition: service_healthy
 
   image-service:
-    image: ${DOCKER_REPO:-local}/image-service:dev
+    image: ${DOCKER_REPO:-local}/inbo-vbp-image-service:dev
     build:
       context: image-service
     volumes:
@@ -165,7 +165,7 @@ services:
         condition: service_healthy
 
   spatial-hub:
-    image: ${DOCKER_REPO:-local}/spatial-hub:dev
+    image: ${DOCKER_REPO:-local}/inbo-vbp-spatial-hub:dev
     build:
       context: spatial-hub
     environment:
@@ -177,7 +177,7 @@ services:
         condition: service_healthy
 
   spatial-service:
-    image: ${DOCKER_REPO:-local}/spatial-service:dev
+    image: ${DOCKER_REPO:-local}/inbo-vbp-spatial-service:dev
     build:
       context: spatial-service
     environment:
@@ -195,7 +195,7 @@ services:
         condition: service_healthy
 
   userdetails:
-    image: ${DOCKER_REPO:-local}/userdetails:dev
+    image: ${DOCKER_REPO:-local}/inbo-vbp-userdetails:dev
     build:
       context: userdetails
     environment:
@@ -356,7 +356,7 @@ services:
       retries: 5
 
   namematching:
-    image: ${DOCKER_REPO:-local}/namematching-service:dev
+    image: ${DOCKER_REPO:-local}/inbo-vbp-namematching-service:dev
     ports:
       - "9179:9179"
 
