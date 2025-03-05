@@ -11,7 +11,7 @@ _options:
             line-height: 1.6;
         }
         h1, h2 {
-            color: #2c3e50;
+            color: #b02586;
         }
         a {
             color: #2980b9;
