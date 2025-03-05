@@ -79,7 +79,19 @@ _options:
         font-size: 0.9em;
         color: #666;
     }
-</style>
+    .watermerk {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-30deg);
+            font-size: 100px;
+            color: rgba(150, 150, 150, 0.5);
+            font-weight: bold;
+            z-index: 1000;
+            white-space: nowrap;
+        }
+   </style>
+   <div class="watermerk">DRAFT</div> 
 </head>
 <body>
     <header>
