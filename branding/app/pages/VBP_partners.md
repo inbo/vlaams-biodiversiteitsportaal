@@ -1,28 +1,35 @@
----
-title: Doe mee
-_options:
-  layout: public/pagesLayout.html
----
-
- <style>
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vlaams Biodiversiteitsportaal - Over, Data en Partners</title>
+    <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
-            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
         }
-        h1, h2 {
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2, h3 {
             color: #b02586;
         }
-        a {
-            color: #2980b9;
-            text-decoration: none;
+        .logos {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
         }
-        a:hover {
-            text-decoration: underline;
-        }
-        .logo {
-            width: 150px;
-            margin: 10px 0;
+        .logos img {
+            max-width: 150px;
+            margin: 10px;
         }
         .natuurfoto-container {
             display: flex;
@@ -33,6 +40,12 @@ _options:
         .natuurfoto {
             width: 20%; /* Groter formaat zodat ze mooi naast elkaar staan */
             border-radius: 30px;
+        }
+        .partners a {
+            display: block;
+            margin: 10px 0;
+            color: #d1006c;
+            text-decoration: none;
         }
         .watermerk {
             position: fixed;
@@ -45,65 +58,105 @@ _options:
             z-index: 1000;
             white-space: nowrap;
         }
+        .iframe-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            width: 100%;
+        }
+        iframe {
+            width: 80%;
+            height: 600px;
+            border: none;
+        }
     </style>
+    <div class="watermerk">DRAFT</div> 
+</head>
+<body>
+    <div class="container">
+        <h2>Over</h2>
+        <h2>Het Vlaams Biodiversiteitsportaal is de centrale biodiversiteitsdatabank van Vlaanderen.</h2>
+        <p>Het Vlaams Biodiversiteitsportaal fungeert als de centrale hub voor open biodiversiteitsdata in Vlaanderen.
+Het verzamelt en integreert betrouwbare data uit uiteenlopende bronnen – van wetenschappelijke instellingen tot burgerwetenschappers – en maakt deze vrij toegankelijk via een gebruiksvriendelijk platform.<br> Cruciaal hierbij is dat de data voldoen aan de Darwin Core-standaard, een internationaal erkend framework voor het uitwisselen van biodiversiteitsinformatie. Dankzij deze standaard zijn gegevens zoals soortnamen, locaties en tijdsstippen gestandaardiseerd, waardoor datasets naadloos gecombineerd en vergeleken kunnen worden.<br> Het portaal werd niet enkel gelanceerd om een overzicht te bieden van de Vlaamse biodiversiteit, maar ook om transparantie en herbruikbaarheid van data te garanderen. Of het nu gaat om historische museumcollecties, recente veldstudies, of foto’s uit citizen science-projecten: alle informatie wordt omgezet naar hetzelfde formaat.</p>
 
-  <div class="watermerk">DRAFT</div> 
-    <h1>Doe Mee met Citizen Science en Biodiversiteitsdata!</h1>
-    <p>Wil je bijdragen aan wetenschappelijk onderzoek en de natuur in Vlaanderen beter in kaart brengen? Er zijn verschillende platformen waar je waarnemingen kan registreren en data kan verzamelen over biodiversiteit.</p>
-    
-  <h2> Ontdek en bescherm de biodiversiteit in Vlaanderen!</h2>
-    <p>
-        Het Vlaams Biodiversiteitsportaal is dé plek waar kennis over natuur in Vlaanderen samenkomt. Dit platform bundelt waarnemingen van alles wat leeft (planten, dieren, schimmels...) en helpt onderzoekers, beleidsmakers en natuurverenigingen om onze biodiversiteit beter te begrijpen en te beschermen.
-    </p>
-    
-  <div class="natuurfoto-container">
-        <img src="https://inaturalist-open-data.s3.amazonaws.com/photos/445621194/large.jpeg" alt="Anoplotrupes stercorosus" class="natuurfoto">
-        <img src="https://inaturalist-open-data.s3.amazonaws.com/photos/438921805/large.jpeg" alt="Calliteara pudibunda" class="natuurfoto">
-        <img src="https://inaturalist-open-data.s3.amazonaws.com/photos/299753066/original.jpeg" alt="Argiope bruennichi" class="natuurfoto">
+ <div class="natuurfoto-container">
+        <img src="https://inaturalist-open-data.s3.amazonaws.com/photos/431119134/medium.jpeg" alt="Aeshna mixta" class="natuurfoto">
+        <img src="https://inaturalist-open-data.s3.amazonaws.com/photos/285252232/medium.jpg" alt="Xylocopa violacea" class="natuurfoto">
+        <img src="https://inaturalist-open-data.s3.amazonaws.com/photos/244910202/medium.jpg" alt="Ardea cinerea" class="natuurfoto">
+        <img src="https://inaturalist-open-data.s3.amazonaws.com/photos/219432858/medium.jpg" alt="Drosera intermedia" class="natuurfoto">
     </div>
-    
-  <p>
-        Wil je zelf bijdragen? Dat kan! Door jouw waarnemingen van vogels, insecten, planten en andere soorten te registreren, help je om de verspreiding en trends van onze natuur in kaart te brengen. Jouw gegevens maken een verschil: ze dragen bij aan onderzoek, natuurbeheer en het behoud van kwetsbare soorten.
-    </p>
-    
-  <p>Doe mee en ontdek hoe waardevol jouw bijdrage is voor de natuur in Vlaanderen!</p>
-    
-  <h2> Vlaams Biodiversiteitsportaal</h2>
-   <img src="/images/Portaal_logo_wit_voorl.png" alt="Vlaams Biodiversiteitsportaal Logo" class="logo">
-    <p>Het <a href="https://www.vlaamsbiodiversiteitsportaal.be" target="_blank">Vlaams Biodiversiteitsportaal</a> verzamelt en ontsluit biodiversiteitsdata uit diverse bronnen. Hier kan je inzichten verkrijgen over soorten in Vlaanderen en zelf bijdragen.</p>
-    
-  <h2>INBO-initiatieven</h2>
-    <p>Het Instituut voor Natuur- en Bosonderzoek (INBO) beheert verschillende projecten die bijdragen aan het in kaart brengen van de biodiversiteit in Vlaanderen. Zo zijn er:</p>
-    <ul>
-        <li><strong><a href="https://flora.inbo.be/">Florabank</a></strong>: Een uitgebreide databank met waarnemingen van wilde planten in Vlaanderen.</li>
-        <img src="/images/streeplijst.jpg" alt="Florabank illustratie" class="logo">
-        <li><strong><a href="https://meetnetten.be/">Meetnetten</a></strong>: Monitoringprogramma's die trends in populaties van soorten opvolgen.</li>
-        <img src="/images/meetnetten_banner.png" alt="Meetnetten illustratie" class="logo">
-        <li><strong><a href="https://watervogels.inbo.be/info">Watervogeltellingen</a></strong>: Jaarlijkse tellingen van overwinterende en doortrekkende watervogels.</li>
-        <img src="/images/watervogels.PNG" alt="Watervogeltellingen illustratie" class="logo">
-        <li><strong><a href="https://www.vogelatlas.be/">Broedvogelatlas</a></strong>: Een gedetailleerde inventaris van broedvogels in Vlaanderen.</li>
-        <img src="/images/vogelatlas.PNG" alt="Broedvogelatlas illustratie" class="logo">
-    </ul>
-    <p>Deze initiatieven leveren waardevolle informatie op voor wetenschappelijk onderzoek en natuurbeheer.</p>
- 
- 
- 
- 
-  <h2> iNaturalist</h2>
-    <img src="https://static.inaturalist.org/sites/1-logo.svg?1573071870" alt="iNaturalist Logo" class="logo">
-    <p><a href="https://www.inaturalist.org" target="_blank">iNaturalist</a> is een wereldwijd platform waar je foto’s van planten en dieren kan uploaden en determineren met hulp van AI en een community van experten.</p>
-    
-  <h2> Waarnemingen.be</h2>
-    <img src="https://waarnemingen.be/static/img/tiles/home3.svg" alt="Waarnemingen.be Logo" class="logo">
-    <p>Op <a href="https://www.waarnemingen.be" target="_blank">Waarnemingen.be</a> kan je je natuurwaarnemingen delen en bijdragen aan wetenschappelijk onderzoek over biodiversiteit in België.</p>
-    
-  <h2> Pl@ntNet</h2>
-    <img src="https://www.interregeurope.eu/sites/default/files/styles/banner_image/public/good_practices/good_practice__5704__1629384845.png?itok=waRb8bN8" alt="Pl@ntNet Logo" class="logo">
-    <p><a href="https://plantnet.org" target="_blank">Pl@ntNet</a> is een handige app waarmee je planten kan identificeren door een foto te nemen en bij te dragen aan botanisch onderzoek.</p>
-    
-  <h2> Mijn Tuinlab</h2>
-    <img src="https://www.klascement.net/files/1/0/8/9/5/2/l/logo-mijn-tuinlab.webp?v=1418832" alt="Mijn Tuinlab Logo" class="logo">
-    <p><a href="https://www.mijntuinlab.be" target="_blank">Mijn Tuinlab</a> laat je toe om de biodiversiteit in je eigen tuin te meten en te vergelijken met andere deelnemers.</p>
-    
-  <p>Iedereen kan meedoen! Of je nu een beginnende natuurliefhebber bent of een doorgewinterde expert, jouw waarnemingen zijn waardevol. Doe mee en help mee bouwen aan kennis over de natuur!</p>
+        
+  <h2>Data</h2>
+        <p>Het Vlaams Biodiversiteitsportaal verzamelt data van:</p>
+        <ul>
+            <li>Natuurhistorische collecties</li>
+            <li>Overheidsdiensten</li>
+            <li>Onderzoekers</li>
+            <li>Individuele burgers (via platformen zoals INaturalist en Waarnemingen.be)</li>
+         </ul>
+        <p>Het grootste deel van deze data bestaat uit soortwaarnemingen – bewijzen van een plant of dier op een specifieke plaats en tijd. Het portaal bevat ook referentiedata voor analyse en visualisatie.</p>
+        
+  <h3>Zoeken in het Vlaams Biodiversiteitsportaal</h3>
+        <p>Je kan zoeken op:</p>
+        <ul>
+            <li>Soortnaam</li>
+            <li>Dataset</li>
+            <li>Locatie (bijv. een gemeente of natuurgebied)</li>
+            <li>Beschermingsstatus</li>
+            <li>Organisatie</li>
+        </ul>
+        <p>Filter je zoekresultaten om enkel de gewenste data te zien, en download vervolgens eenvoudig je records mét bronvermelding en licentie-informatie.</p>
+        
+  <h3>Kaarttools</h3>
+        <p>Met de kaarttools ontdek je relaties tussen soorten, locaties en hun omgeving, zoals de verspreiding van bedreigde soorten in Vlaanderen.</p>
+        
+  <h3>Data delen</h3>
+        <p>Er zijn veel manieren om data met het portaal te delen:</p>
+        <ul>
+            <li>Automatische datatransfers (via GBIF)</li>
+            <li>Individuele waarnemingen doorgeven via apps zoals iNaturalist of Pl@ntnet</li>
+            <li>Aanleveren van datasets (vnl door onderzoekers)</li>
+        </ul>
+        <p>Alle data worden gestandaardiseerd met gemeenschappelijke termen, waardoor ze als één dataset doorzocht en tussen platformen gedeeld kunnen worden. De data zijn wereldwijd toegankelijk via het Global Biodiversity Information Facility (GBIF).</p>
+        
+  <h3>Wie gebruikt het Vlaams Biodiversiteitsportaal?</h3>
+        <ul>
+            <li><strong>Onderzoekers:</strong> Voor samenwerking en innovatief onderzoek naar Vlaamse ecosystemen.</li>
+            <li><strong>Overheden en terreinbeheerders:</strong> Voor beleidsondersteuning en oplossingen voor milieu-uitdagingen, zoals stikstofdepositie of habitatverlies.</li>
+            <li><strong>Scholen en burgers:</strong> Om bij te dragen aan citizen science-projecten en het behoud van Vlaamse natuur.</li>
+        </ul>
+        
+  <h3>Ondersteuning</h3>
+        <p>Het portaal wordt gefinancierd door de Vlaamse overheid en wordt technisch beheerd door INBO (Instituut voor Natuur- en Bosonderzoek).</p>
+        
+  <h3>Waarom dit portaal?</h3>
+        <p>Net zoals de Australische Atlas of Living Australia biodiversiteitsdata centraliseert, doet het Vlaams Biodiversiteitsportaal dit voor Vlaanderen. Het is een onmisbare tool voor het beschermen van onze lokale natuur!</p>
+        
+  <h3>Meer weten of meedoen?</h3>
+        <p>Bezoek het Vlaams Biodiversiteitsportaal voor actuele data, handleidingen en manieren om zelf waarnemingen in te voeren.</p>
+        
+  <h2>Partners</h2>
+        
+  <h3>Living Atlas Community</h3>
+        <div class="logos">
+            <img src="https://www.ala.org.au/app/uploads/2020/06/ALA_Logo_StackedTagline_RGB-768x336.png" alt="Atlas of Living Australia (ALA) logo">
+            <img src="https://www.biodiversity.be/5127/download" alt="GBIF logo">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt_KbGGLyO14N_JNp_LtzMi0dbbDzRH4JvKw&s" alt="TDWG logo">
+        </div>
+        
+  <h3>Departement Omgeving</h3>
+        <div class="logos">
+            <img src="https://www.vlaanderen.be/inbo/images/INBO-logo.svg" alt="INBO logo">
+            <img src="https://www.ikzoekfsc.be/wp-content/uploads/2016/08/ANB-logo.jpg" alt="ANB logo">
+            <img src="https://curieuzeneuzen.be/wp-content/uploads/2020/12/logo-vmm.png" alt="VMM logo">
+            <img src="https://www.vlm.be/nl/Style%20Library/VLM%20Styles/Images/vlaanderen_openruimte.png" alt="VLM logo">
+        </div>
+    </div>
+</body>
+<P ALIGN="center">Het Vlaams Biodiversiteitsportaal maakt deel uit van de Living Atlas Community</p>
+<div class="iframe-container">
+        <iframe src="https://living-atlases.gbif.org/"></iframe>
+    </div>
 
+</html>
