@@ -4,6 +4,14 @@ _options:
   layout: public/pagesLayout.html
 ---
 <style>
+     header {
+        background-color: #b02586;
+        padding: 20px;
+        text-align: center;
+    }
+    header h1 {
+        color: white;
+    }
      h2, h3 {
         color: #b02586;
     }
@@ -57,6 +65,9 @@ _options:
     }
 </style>
 <div class="watermerk">DRAFT</div> 
+<header>
+        <h1>Over het Vlaams Biodiversiteitsportaal</h1>
+    </header>
 <div class="container">
     <h2>Over</h2>
     <h2>Het Vlaams Biodiversiteitsportaal is de centrale biodiversiteitsdatabank van Vlaanderen.</h2>
