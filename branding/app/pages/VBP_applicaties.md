@@ -96,24 +96,28 @@ _options:
             <div class="tile"></div>
             <div class="tile"></div>
             <div class="tile">
-            <h3>AGOUTI</h3>
+                <img src="https://www.vlaanderen.be/inbo/media/1181/anb_agouti.png" alt="Placeholder agouti">
+                <h3>AGOUTI</h3>
                 <p>Platform voor het beheren van projecten met cameravallen.</p>
                 <a href="https://www.vlaanderen.be/inbo/datasets/agouti/">Meer informatie</a><br>
                 <a href="https://www.agouti.eu/">Applicatie</a>
             </div>
             <div class="tile">
+                <img src="https://www.vlaanderen.be/inbo/media/1071/vis.png" alt="Placeholder VIS">
                 <h3>VIS 2</h3>
-                <p>Platform voor het beheren van projecten met cameravallen.</p>
+                <p>Databank en invoersysteem voor data en informatie over vissen in Vlaanderen.</p>
                 <a href="https://www.vlaanderen.be/inbo/datasets/vis-informatiesysteem/">Meer informatie</a><br>
                 <a href="https://vis2.inbo.be/">Applicatie</a>
             </div>
             <div class="tile">
+                <img src="https://www.vlaanderen.be/inbo/media/1072/vogel.png" alt="Placeholder Broedvogelmonitoring">
                 <h3>Algemene Broedvogelmonitoring (ABV)</h3>
                 <p>Monitoring van algemene broedvogels in Vlaanderen.</p>
                 <a href="https://www.meetnetten.be/">Meer informatie</a><br>
                 <a href="https://www.meetnetten.be/">Applicatie</a>
             </div>
             <div class="tile">
+                <img src="https://www.vlaanderen.be/inbo/media/1198/anb_vlinder.png" alt="Placeholder vlindermonitoring">
                 <h3>Algemene Dagvlindermonitoring</h3>
                 <p>Monitoring van dagvlinders in Vlaanderen.</p>
                 <a href="https://www.meetnetten.be/">Meer informatie</a><br>
