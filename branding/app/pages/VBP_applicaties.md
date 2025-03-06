@@ -4,14 +4,7 @@ _options:
   layout: public/pagesLayout.html
 ---
 
-<!DOCTYPE html>
-<html lang="nl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INBO Applicaties - Vlaams Biodiversiteitsportaal</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
+  <style>
     body {
         font-family: Arial, sans-serif;
         background-color: #b02586;
@@ -92,9 +85,7 @@ _options:
         }
    </style>
    <div class="watermerk">DRAFT</div> 
-</head>
-<body>
-    <header>
+<header>
         <h1>INBO Applicaties</h1>
     </header>
     <main>
@@ -206,5 +197,4 @@ _options:
             <div class="tile"></div>
         </div>
     </main>
-</body>
 </html>
