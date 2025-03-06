@@ -72,6 +72,12 @@ _options:
         font-size: 0.9em;
         color: #666;
     }
+    .tile img {
+    width: 150px;
+    height: 150px;
+    object-fit: contain; /* Zorgt ervoor dat de afbeelding niet vervormt */
+    border-radius: 8px; /* Optioneel: afgeronde hoeken */
+    }
     .watermerk {
             position: fixed;
             top: 50%;
