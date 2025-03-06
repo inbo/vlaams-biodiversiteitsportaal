@@ -38,7 +38,8 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
     yum install -y \
     nano \
     file \
-    curl
+    curl \
+    unzip
 
 RUN mkdir /data && chown 1000:1000 /data
 VOLUME /data
