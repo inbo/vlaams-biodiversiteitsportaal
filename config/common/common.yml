@@ -21,15 +21,23 @@ skin:
   fluidLayout: true
   favicon: '${common.protocol}://${common.domain}/favicon.ico'
 
-# Healthcheck endpoint
+# Actuator configuration
 management:
   endpoint:
     health:
       enabled: true
+      show-details: never
+    loggers:
+      enabled: true
   endpoints:
+    jmx:
+      domain: org.spring.${appName}
+      exposure:
+        include: loggers
     web:
       exposure:
         include: health
+
 
 logging:
   config: /config/config/common/logback.xml

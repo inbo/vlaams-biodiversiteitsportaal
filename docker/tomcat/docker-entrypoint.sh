@@ -25,6 +25,15 @@ if [ ! -z "${REMOTE_DEBUGGER_PORT}" ]; then
     export CATALINA_OPTS="${CATALINA_OPTS} -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:${REMOTE_DEBUGGER_PORT}"
 fi
 
+if [ ! -z "${REMOTE_JMX_PORT}" ]; then
+    echo "Enabling remote JMX on port ${REMOTE_JMX_PORT}"
+
+    echo "vbp_jmx readwrite" > jmxremote.access
+    echo "vbp_jmx ${REMOTE_JMX_PASSWORD}" > jmxremote.password
+    chmod 600 jmxremote.access jmxremote.password
+
+    export CATALINA_OPTS="${CATALINA_OPTS} -Dcom.sun.management.jmxremote=true -Dcom.sun.management.jmxremote.port=${REMOTE_JMX_PORT} -Dcom.sun.management.jmxremote.rmi.port=${REMOTE_JMX_PORT} -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=true -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.access.file=jmxremote.access -Dcom.sun.management.jmxremote.password.file=jmxremote.password -Dspring.jmx.enabled=true"
+fi
 
 # Check if UID is given
 if [ ! -z "${UID}" ]; then
