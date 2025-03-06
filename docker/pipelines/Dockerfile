@@ -40,7 +40,7 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
     file \
     curl
 
-RUN mkdir /data && chown app:app /data
+RUN mkdir /data && chown 1000:1000 /data
 VOLUME /data
 
 ARG TARGETARCH
