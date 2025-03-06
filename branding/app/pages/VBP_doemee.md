@@ -74,6 +74,7 @@ _options:
         <img src="https://inaturalist-open-data.s3.amazonaws.com/photos/445621194/large.jpeg" alt="Anoplotrupes stercorosus" class="natuurfoto">
         <img src="https://inaturalist-open-data.s3.amazonaws.com/photos/438921805/large.jpeg" alt="Calliteara pudibunda" class="natuurfoto">
         <img src="https://inaturalist-open-data.s3.amazonaws.com/photos/299753066/original.jpeg" alt="Argiope bruennichi" class="natuurfoto">
+        <img src="https://inaturalist-open-data.s3.amazonaws.com/photos/46087752/medium.jpeg" alt="Leopoldius valvatus" class="natuurfoto">
     </div>
     
   <p>
