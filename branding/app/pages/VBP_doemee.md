@@ -5,6 +5,17 @@ _options:
 ---
 
  <style>
+        header {
+        background-color: #b02586;
+        padding: 20px;
+        text-align: center;
+        }
+        header h1 {
+        color: white;
+        }
+        h2, h3 {
+        color: #b02586;
+        }
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
@@ -47,8 +58,11 @@ _options:
         }
     </style>
 
-  <div class="watermerk">DRAFT</div> 
-    <h1>Doe Mee met Citizen Science en Biodiversiteitsdata!</h1>
+  <div class="watermerk">DRAFT</div>
+  <header>
+        <h1>Doe mee met het Vlaams Biodiversiteitsportaal</h1>
+    </header>
+    <h1>Citizen Science en Biodiversiteitsdata!</h1>
     <p>Wil je bijdragen aan wetenschappelijk onderzoek en de natuur in Vlaanderen beter in kaart brengen? Er zijn verschillende platformen waar je waarnemingen kan registreren en data kan verzamelen over biodiversiteit.</p>
     
   <h2> Ontdek en bescherm de biodiversiteit in Vlaanderen!</h2>
