@@ -5,13 +5,24 @@ _options:
 ---
 
  <style>
+        header {
+        background-color: #b02586;
+        padding: 20px;
+        text-align: center;
+        }
+        header h1 {
+        color: white;
+        }
+        h2, h3 {
+        color: #b02586;
+        }
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
             line-height: 1.6;
         }
         h1, h2 {
-            color: #2c3e50;
+            color: #b02586;
         }
         a {
             color: #2980b9;
@@ -47,8 +58,11 @@ _options:
         }
     </style>
 
-  <div class="watermerk">DRAFT</div> 
-    <h1>Doe Mee met Citizen Science en Biodiversiteitsdata!</h1>
+  <div class="watermerk">DRAFT</div>
+  <header>
+        <h1>Doe mee met het Vlaams Biodiversiteitsportaal</h1>
+    </header>
+    <h1>Citizen Science en Biodiversiteitsdata!</h1>
     <p>Wil je bijdragen aan wetenschappelijk onderzoek en de natuur in Vlaanderen beter in kaart brengen? Er zijn verschillende platformen waar je waarnemingen kan registreren en data kan verzamelen over biodiversiteit.</p>
     
   <h2> Ontdek en bescherm de biodiversiteit in Vlaanderen!</h2>
@@ -60,6 +74,7 @@ _options:
         <img src="https://inaturalist-open-data.s3.amazonaws.com/photos/445621194/large.jpeg" alt="Anoplotrupes stercorosus" class="natuurfoto">
         <img src="https://inaturalist-open-data.s3.amazonaws.com/photos/438921805/large.jpeg" alt="Calliteara pudibunda" class="natuurfoto">
         <img src="https://inaturalist-open-data.s3.amazonaws.com/photos/299753066/original.jpeg" alt="Argiope bruennichi" class="natuurfoto">
+        <img src="https://inaturalist-open-data.s3.amazonaws.com/photos/46087752/medium.jpeg" alt="Leopoldius valvatus" class="natuurfoto">
     </div>
     
   <p>
