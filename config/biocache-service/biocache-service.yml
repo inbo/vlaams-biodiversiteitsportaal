@@ -244,6 +244,7 @@ doi:
 
 rbac:
   enabled: true
+  rolePrefix: "ROLE_DATA_"
 
 spring:
   main:

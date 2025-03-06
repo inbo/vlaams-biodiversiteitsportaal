@@ -1,5 +1,5 @@
 ######################################### TOMCAT BASE #########################################
-FROM tomcat:9.0-jdk11-corretto AS base
+FROM tomcat:9-jdk11-corretto AS base
 
 WORKDIR ${CATALINA_HOME}
 
