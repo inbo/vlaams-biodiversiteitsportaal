@@ -39,7 +39,8 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
     nano \
     file \
     curl \
-    unzip
+    unzip \
+    which
 
 RUN mkdir /data && chown 1000:1000 /data
 VOLUME /data
