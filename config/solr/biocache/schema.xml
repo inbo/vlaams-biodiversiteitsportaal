@@ -191,7 +191,7 @@
   <field name="occurrence_year"    type="date" docValues="true" multiValued="true"  indexed="true" />
 
   <!-- Legacy conservation fields -->
-  <field name="raw_stateConservation" type="string"  docValues="true" multiValued="false"  indexed="true" />
+  <field name="raw_stateConservation" type="string"  docValues="false" multiValued="false"  indexed="false" />
   <field name="stateConservation"     type="string"  docValues="true" multiValued="false"  indexed="true" />
   <field name="countryConservation"   type="string"  docValues="true" multiValued="false"  indexed="true" />
 
@@ -471,24 +471,26 @@
   <field name="subfamily"   type="string" docValues="true" indexed="true"/>
 
   <!-- ALA Sensitive data fields -->
-  <field name="sensitive"                             type="string"   docValues="true" indexed="true"/>
-  <field name="sensitive_dataGeneralizations"         type="string"   docValues="true" indexed="true"/>
-  <field name="sensitive_day"                         type="string"   docValues="true" indexed="true"/>
-  <field name="sensitive_decimalLatitude"             type="string"   docValues="true" indexed="true"/>
-  <field name="sensitive_decimalLongitude"            type="string"   docValues="true" indexed="true"/>
-  <field name="sensitive_eventDate"                   type="string"   docValues="true" indexed="true"/>
-  <field name="sensitive_eventID"                     type="string"   docValues="true" indexed="true"/>
-  <field name="sensitive_eventTime"                   type="string"   docValues="true" indexed="true"/>
-  <field name="sensitive_footprintWKT"                type="string"   docValues="true" indexed="true"/>
-  <field name="sensitive_locality"                    type="string"   docValues="true" indexed="true"/>
-  <field name="sensitive_locationRemarks"             type="string"   docValues="true" indexed="true"/>
-  <field name="sensitive_month"                       type="string"   docValues="true" indexed="true"/>
-  <field name="sensitive_verbatimCoordinates"         type="string"   docValues="true" indexed="true"/>
-  <field name="sensitive_verbatimEventDate"           type="string"   docValues="true" indexed="true"/>
-  <field name="sensitive_verbatimLatitude"            type="string"   docValues="true" indexed="true"/>
-  <field name="sensitive_verbatimLocality"            type="string"   docValues="true" indexed="true"/>
-  <field name="generalisationInMetres"                type="string"   docValues="true" indexed="true"/>
-  <field name="generalisationToApplyInMetres"         type="string"   docValues="true" indexed="true"/>
+  <field name="sensitive"                             type="string"   docValues="false" indexed="false"/>
+  <field name="sensitive_dataGeneralizations"         type="string"   docValues="false" indexed="false"/>
+  <field name="sensitive_day"                         type="string"   docValues="false" indexed="false"/>
+  <field name="sensitive_decimalLatitude"             type="string"   docValues="false" indexed="false"/>
+  <field name="sensitive_decimalLongitude"            type="string"   docValues="false" indexed="false"/>
+  <field name="sensitive_eventDate"                   type="string"   docValues="false" indexed="false"/>
+  <field name="sensitive_eventID"                     type="string"   docValues="false" indexed="false"/>
+  <field name="sensitive_eventTime"                   type="string"   docValues="false" indexed="false"/>
+  <field name="sensitive_footprintWKT"                type="string"   docValues="false" indexed="false"/>
+  <field name="sensitive_locality"                    type="string"   docValues="false" indexed="false"/>
+  <field name="sensitive_locationRemarks"             type="string"   docValues="false" indexed="false"/>
+  <field name="sensitive_month"                       type="string"   docValues="false" indexed="false"/>
+  <field name="sensitive_verbatimCoordinates"         type="string"   docValues="false" indexed="false"/>
+  <field name="sensitive_verbatimEventDate"           type="string"   docValues="false" indexed="false"/>
+  <field name="sensitive_verbatimLatitude"            type="string"   docValues="false" indexed="false"/>
+  <field name="sensitive_verbatimLocality"            type="string"   docValues="false" indexed="false"/>
+  <field name="generalisationInMetres"                type="string"   docValues="false" indexed="false"/>
+  <field name="generalisationToApplyInMetres"         type="string"   docValues="false" indexed="false"/>
+
+  <dynamicField name="sensitive_*" type="string" docValues="false" indexed="false" />
 
   <!-- GGBN loan fields and ABCD fields -->
   <field name="loanDestination"  type="string" docValues="true" indexed="true"/>
@@ -535,8 +537,6 @@
 
   <field name="machineTags"  type="string" docValues="true" indexed="true" multiValued="true" />
 
-  <dynamicField name="sensitive_*" type="string" docValues="true" indexed="true" />
-
   <!-- ALA specific fields -->
   <dynamicField name="gbif_s_*" type="string" docValues="true" indexed="true" />
   <dynamicField name="gbif_i_*" type="int" docValues="true" indexed="true" />
@@ -547,144 +547,140 @@
   <dynamicField name="gbif_t_*" type="date" docValues="true" indexed="true" />
 
   <!-- Raw fields - these fields are explicitly added to indicate a interpreted value is indexed -->
-  <field name="raw_altered"					             type="string"  docValues="true" indexed="true" />
-  <field name="raw_associatedOccurrences"                type="string"  docValues="true" indexed="true" />
-  <field name="raw_audience"					         type="string"  docValues="true" indexed="true" />
-  <field name="raw_basisOfRecord"					     type="string"  docValues="true" indexed="true" />
-  <field name="raw_biome"					             type="string"  docValues="true" indexed="true" />
-  <field name="raw_classID"					             type="string"  docValues="true" indexed="true" />
-  <field name="raw_class"					             type="string"  docValues="true" indexed="true" />
-  <field name="raw_collectionName"					     type="string"  docValues="true" indexed="true" />
-  <field name="raw_collectionUid"					     type="string"  docValues="true" indexed="true" />
-  <field name="raw_connectionParameters"			     type="string"  docValues="true" indexed="true" />
-  <field name="raw_conservationStatuses"			     type="string"  docValues="true" indexed="true" />
-  <field name="raw_continent"					         type="string"  docValues="true" indexed="true" />
-  <field name="raw_contributor"					         type="string"  docValues="true" indexed="true" />
-  <field name="raw_coordinatePrecision"				     type="string"  docValues="true" indexed="true" />
-  <field name="raw_coordinateUncertaintyInMeters"	     type="string"  docValues="true" indexed="true" />
-  <field name="raw_country"					             type="string"  docValues="true" indexed="true" />
-  <field name="raw_countryCode"					         type="string"  docValues="true" indexed="true" />
-  <field name="raw_created"					             type="string"  docValues="true" indexed="true" />
-  <field name="raw_creator"					             type="string"  docValues="true" indexed="true" />
-  <field name="raw_dataGeneralizations"				     type="string"  docValues="true" indexed="true" />
-  <field name="raw_dataProviderName"				     type="string"  docValues="true" indexed="true" />
-  <field name="raw_dataProviderUid"					     type="string"  docValues="true" indexed="true" />
-  <field name="raw_dataResourceName"				     type="string"  docValues="true" indexed="true" />
-  <field name="raw_dataResourceUid"					     type="string"  docValues="true" indexed="true" />
-  <field name="raw_datasetTitle"					     type="string"  docValues="true" indexed="true" />
-  <field name="raw_dateIdentified"					     type="string"  docValues="true" indexed="true" />
-  <field name="raw_datePrecision"					     type="string"  docValues="true" indexed="true" />
-  <field name="raw_day"					                 type="string"  docValues="true" indexed="true" />
-  <field name="raw_decimalLatitude"					     type="string"  docValues="true" indexed="true" />
-  <field name="raw_decimalLongitude"				     type="string"  docValues="true" indexed="true" />
-  <field name="raw_depth"					             type="string"  docValues="true" indexed="true" />
-  <field name="raw_depthAccuracy"					     type="string"  docValues="true" indexed="true" />
-  <field name="raw_description"					         type="string"  docValues="true" indexed="true" />
-  <field name="raw_elevation"					         type="string"  docValues="true" indexed="true" />
-  <field name="raw_elevationAccuracy"				     type="string"  docValues="true" indexed="true" />
-  <field name="raw_endDayOfYear"					     type="string"  docValues="true" indexed="true" />
-  <field name="raw_establishmentMeans"				     type="string"  docValues="true" indexed="true" />
-  <field name="raw_eventDate"					         type="string"  docValues="true" indexed="true" />
-  <field name="raw_family"					             type="string"  docValues="true" indexed="true" />
-  <field name="raw_familyID"					         type="string"  docValues="true" indexed="true" />
-  <field name="raw_format"					             type="string"  docValues="true" indexed="true" />
-  <field name="raw_geodeticDatum"       			     type="string"  docValues="true" indexed="true" />
-  <field name="raw_generalisationInMetres"			     type="string"  docValues="true" indexed="true" />
-  <field name="raw_generalisationToApplyInMetres"	     type="string"  docValues="true" indexed="true" />
-  <field name="raw_genus"					             type="string"  docValues="true" indexed="true" />
-  <field name="raw_genusID"					             type="string"  docValues="true" indexed="true" />
-  <field name="raw_georeferencedDate"				     type="string"  docValues="true" indexed="true" />
-  <field name="raw_identifiedByIds"					     type="string"  docValues="true" indexed="true" />
-  <field name="raw_identifier"					         type="string"  docValues="true" indexed="true" />
-  <field name="raw_individualCount"					     type="string"  docValues="true" indexed="true" />
-  <field name="raw_informationWithheld"				     type="string"  docValues="true" indexed="true" />
-  <field name="raw_installationKey"					     type="string"  docValues="true" indexed="true" />
-  <field name="raw_institutionName"					     type="string"  docValues="true" indexed="true" />
-  <field name="raw_institutionUid"					     type="string"  docValues="true" indexed="true" />
-  <field name="raw_invasiveStatuses"				     type="string"  docValues="true" indexed="true" />
-  <field name="raw_isClustered"					         type="string"  docValues="true" indexed="true" />
-  <field name="raw_isSensitive"					         type="string"  docValues="true" indexed="true" />
-  <field name="raw_issues"					             type="string"  docValues="true" indexed="true" />
-  <field name="raw_kingdom"					             type="string"  docValues="true" indexed="true" />
-  <field name="raw_kingdomID"					         type="string"  docValues="true" indexed="true" />
-  <field name="raw_lastCrawled"					         type="string"  docValues="true" indexed="true" />
-  <field name="raw_lastLoadDate"					     type="string"  docValues="true" indexed="true" />
-  <field name="raw_lastProcessedDate"				     type="string"  docValues="true" indexed="true" />
-  <field name="raw_lft"					                 type="string"  docValues="true" indexed="true" />
-  <field name="raw_license"					             type="string"  docValues="true" indexed="true" />
-  <field name="raw_licenseType"					         type="string"  docValues="true" indexed="true" />
-  <field name="raw_licenseVersion"					     type="string"  docValues="true" indexed="true" />
-  <field name="raw_lifeStage"					         type="string"  docValues="true" indexed="true" />
-  <field name="raw_lifeStageLineage"					 type="string"  docValues="true" indexed="true" />
-  <field name="raw_locality"					         type="string"  docValues="true" indexed="true" />
-  <field name="raw_machineTags"					         type="string"  docValues="true" indexed="true" />
-  <field name="raw_matchType"					         type="string"  docValues="true" indexed="true" />
-  <field name="raw_maximumDepthInMeters"				 type="string"  docValues="true" indexed="true" />
-  <field name="raw_maximumDistanceAboveSurfaceInMeters"	 type="string"  docValues="true" indexed="true" />
-  <field name="raw_maximumElevationInMeters"			 type="string"  docValues="true" indexed="true" />
-  <field name="raw_minimumDepthInMeters"				 type="string"  docValues="true" indexed="true" />
-  <field name="raw_minimumDistanceAboveSurfaceInMeters"	 type="string"  docValues="true" indexed="true" />
-  <field name="raw_minimumElevationInMeters"			 type="string"  docValues="true" indexed="true" />
-  <field name="raw_modified"					         type="string"  docValues="true" indexed="true" />
-  <field name="raw_month"					             type="string"  docValues="true" indexed="true" />
-  <field name="raw_nameType"					         type="string"  docValues="true" indexed="true" />
-  <field name="raw_networkKeys"					         type="string"  docValues="true" indexed="true" />
-  <field name="raw_occurrenceStatus"					 type="string"  docValues="true" indexed="true" />
-  <field name="raw_order"					             type="string"  docValues="true" indexed="true" />
-  <field name="raw_orderID"					             type="string"  docValues="true" indexed="true" />
-  <field name="raw_organismQuantity"					 type="string"  docValues="true" indexed="true" />
-  <field name="raw_organismQuantityType"				 type="string"  docValues="true" indexed="true" />
-  <field name="raw_original"					         type="string"  docValues="true" indexed="true" />
-  <field name="raw_phylum"					             type="string"  docValues="true" indexed="true" />
-  <field name="raw_phylumID"					         type="string"  docValues="true" indexed="true" />
-  <field name="raw_provenance"					         type="string"  docValues="true" indexed="true" />
-  <field name="raw_publisher"					         type="string"  docValues="true" indexed="true" />
-  <field name="raw_publisherTitle"					     type="string"  docValues="true" indexed="true" />
-  <field name="raw_publishingCountry"					 type="string"  docValues="true" indexed="true" />
-  <field name="raw_publishingOrganizationKey"			 type="string"  docValues="true" indexed="true" />
-  <field name="raw_taxonRank"					         type="string"  docValues="true" indexed="true" />
-  <field name="raw_taxonRankID"					         type="string"  docValues="true" indexed="true" />
-  <field name="raw_recordedBy"					         type="string"  docValues="true" indexed="true" />
-  <field name="raw_recordedByIds"					     type="string"  docValues="true" indexed="true" />
-  <field name="raw_references"					         type="string"  docValues="true" indexed="true" />
-  <field name="raw_relativeOrganismQuantity"	         type="string"  docValues="true" indexed="true" />
-  <field name="raw_repatriated"					         type="string"  docValues="true" indexed="true" />
-  <field name="raw_rgt"					                 type="string"  docValues="true" indexed="true" />
-  <field name="raw_rightsHolder"			             type="string"  docValues="true" indexed="true" />
-  <field name="raw_sampleSizeUnit"			             type="string"  docValues="true" indexed="true" />
-  <field name="raw_sampleSizeValue"			             type="string"  docValues="true" indexed="true" />
-  <field name="raw_scientificName"			             type="string"  docValues="true" indexed="true" />
-  <field name="raw_scientificNameAuthorship"		     type="string"  docValues="true" indexed="true" />
-  <field name="raw_sensitive"					         type="string"  docValues="true" indexed="true" />
-  <field name="raw_sex"					                 type="string"  docValues="true" indexed="true" />
-  <field name="raw_source"					             type="string"  docValues="true" indexed="true" />
-  <field name="raw_species"					             type="string"  docValues="true" indexed="true" />
-  <field name="raw_speciesGroup"					     type="string"  docValues="true" indexed="true" />
-  <field name="raw_speciesID"					         type="string"  docValues="true" indexed="true" />
-  <field name="raw_speciesListID"					     type="string"  docValues="true" indexed="true" />
-  <field name="raw_speciesSubgroup"					     type="string"  docValues="true" indexed="true" />
-  <field name="raw_startDayOfYear"					     type="string"  docValues="true" indexed="true" />
-  <field name="raw_stateProvince"					     type="string"  docValues="true" indexed="true" />
-  <field name="raw_taxonConceptID"					     type="string"  docValues="true" indexed="true" />
-  <field name="raw_title"					             type="string"  docValues="true" indexed="true" />
-  <field name="raw_type"					             type="string"  docValues="true" indexed="true" />
-  <field name="raw_typeStatus"					         type="string"  docValues="true" indexed="true" />
-  <field name="raw_typifiedName"					     type="string"  docValues="true" indexed="true" />
-  <field name="raw_vernacularName"					     type="string"  docValues="true" indexed="true" />
-  <field name="raw_waterBody"					         type="string"  docValues="true" indexed="true" />
-  <field name="raw_year"					             type="string"  docValues="true" indexed="true" />
+  <field name="raw_altered"					             type="string"  docValues="false" indexed="false" />
+  <field name="raw_associatedOccurrences"                type="string"  docValues="false" indexed="false" />
+  <field name="raw_audience"					         type="string"  docValues="false" indexed="false" />
+  <field name="raw_basisOfRecord"					     type="string"  docValues="false" indexed="false" />
+  <field name="raw_biome"					             type="string"  docValues="false" indexed="false" />
+  <field name="raw_classID"					             type="string"  docValues="false" indexed="false" />
+  <field name="raw_class"					             type="string"  docValues="false" indexed="false" />
+  <field name="raw_collectionName"					     type="string"  docValues="false" indexed="false" />
+  <field name="raw_collectionUid"					     type="string"  docValues="false" indexed="false" />
+  <field name="raw_connectionParameters"			     type="string"  docValues="false" indexed="false" />
+  <field name="raw_conservationStatuses"			     type="string"  docValues="false" indexed="false" />
+  <field name="raw_continent"					         type="string"  docValues="false" indexed="false" />
+  <field name="raw_contributor"					         type="string"  docValues="false" indexed="false" />
+  <field name="raw_coordinatePrecision"				     type="string"  docValues="false" indexed="false" />
+  <field name="raw_coordinateUncertaintyInMeters"	     type="string"  docValues="false" indexed="false" />
+  <field name="raw_country"					             type="string"  docValues="false" indexed="false" />
+  <field name="raw_countryCode"					         type="string"  docValues="false" indexed="false" />
+  <field name="raw_created"					             type="string"  docValues="false" indexed="false" />
+  <field name="raw_creator"					             type="string"  docValues="false" indexed="false" />
+  <field name="raw_dataGeneralizations"				     type="string"  docValues="false" indexed="false" />
+  <field name="raw_dataProviderName"				     type="string"  docValues="false" indexed="false" />
+  <field name="raw_dataProviderUid"					     type="string"  docValues="false" indexed="false" />
+  <field name="raw_dataResourceName"				     type="string"  docValues="false" indexed="false" />
+  <field name="raw_dataResourceUid"					     type="string"  docValues="false" indexed="false" />
+  <field name="raw_datasetTitle"					     type="string"  docValues="false" indexed="false" />
+  <field name="raw_dateIdentified"					     type="string"  docValues="false" indexed="false" />
+  <field name="raw_datePrecision"					     type="string"  docValues="false" indexed="false" />
+  <field name="raw_day"					                 type="string"  docValues="false" indexed="false" />
+  <field name="raw_decimalLatitude"					     type="string"  docValues="false" indexed="false" />
+  <field name="raw_decimalLongitude"				     type="string"  docValues="false" indexed="false" />
+  <field name="raw_depth"					             type="string"  docValues="false" indexed="false" />
+  <field name="raw_depthAccuracy"					     type="string"  docValues="false" indexed="false" />
+  <field name="raw_description"					         type="string"  docValues="false" indexed="false" />
+  <field name="raw_elevation"					         type="string"  docValues="false" indexed="false" />
+  <field name="raw_elevationAccuracy"				     type="string"  docValues="false" indexed="false" />
+  <field name="raw_endDayOfYear"					     type="string"  docValues="false" indexed="false" />
+  <field name="raw_establishmentMeans"				     type="string"  docValues="false" indexed="false" />
+  <field name="raw_eventDate"					         type="string"  docValues="false" indexed="false" />
+  <field name="raw_family"					             type="string"  docValues="false" indexed="false" />
+  <field name="raw_familyID"					         type="string"  docValues="false" indexed="false" />
+  <field name="raw_format"					             type="string"  docValues="false" indexed="false" />
+  <field name="raw_geodeticDatum"       			     type="string"  docValues="false" indexed="false" />
+  <field name="raw_generalisationInMetres"			     type="string"  docValues="false" indexed="false" />
+  <field name="raw_generalisationToApplyInMetres"	     type="string"  docValues="false" indexed="false" />
+  <field name="raw_genus"					             type="string"  docValues="false" indexed="false" />
+  <field name="raw_genusID"					             type="string"  docValues="false" indexed="false" />
+  <field name="raw_georeferencedDate"				     type="string"  docValues="false" indexed="false" />
+  <field name="raw_identifiedByIds"					     type="string"  docValues="false" indexed="false" />
+  <field name="raw_identifier"					         type="string"  docValues="false" indexed="false" />
+  <field name="raw_individualCount"					     type="string"  docValues="false" indexed="false" />
+  <field name="raw_informationWithheld"				     type="string"  docValues="false" indexed="false" />
+  <field name="raw_installationKey"					     type="string"  docValues="false" indexed="false" />
+  <field name="raw_institutionName"					     type="string"  docValues="false" indexed="false" />
+  <field name="raw_institutionUid"					     type="string"  docValues="false" indexed="false" />
+  <field name="raw_invasiveStatuses"				     type="string"  docValues="false" indexed="false" />
+  <field name="raw_isClustered"					         type="string"  docValues="false" indexed="false" />
+  <field name="raw_isSensitive"					         type="string"  docValues="false" indexed="false" />
+  <field name="raw_issues"					             type="string"  docValues="false" indexed="false" />
+  <field name="raw_kingdom"					             type="string"  docValues="false" indexed="false" />
+  <field name="raw_kingdomID"					         type="string"  docValues="false" indexed="false" />
+  <field name="raw_lastCrawled"					         type="string"  docValues="false" indexed="false" />
+  <field name="raw_lastLoadDate"					     type="string"  docValues="false" indexed="false" />
+  <field name="raw_lastProcessedDate"				     type="string"  docValues="false" indexed="false" />
+  <field name="raw_lft"					                 type="string"  docValues="false" indexed="false" />
+  <field name="raw_license"					             type="string"  docValues="false" indexed="false" />
+  <field name="raw_licenseType"					         type="string"  docValues="false" indexed="false" />
+  <field name="raw_licenseVersion"					     type="string"  docValues="false" indexed="false" />
+  <field name="raw_lifeStage"					         type="string"  docValues="false" indexed="false" />
+  <field name="raw_lifeStageLineage"					 type="string"  docValues="false" indexed="false" />
+  <field name="raw_locality"					         type="string"  docValues="false" indexed="false" />
+  <field name="raw_machineTags"					         type="string"  docValues="false" indexed="false" />
+  <field name="raw_matchType"					         type="string"  docValues="false" indexed="false" />
+  <field name="raw_maximumDepthInMeters"				 type="string"  docValues="false" indexed="false" />
+  <field name="raw_maximumDistanceAboveSurfaceInMeters"	 type="string"  docValues="false" indexed="false" />
+  <field name="raw_maximumElevationInMeters"			 type="string"  docValues="false" indexed="false" />
+  <field name="raw_minimumDepthInMeters"				 type="string"  docValues="false" indexed="false" />
+  <field name="raw_minimumDistanceAboveSurfaceInMeters"	 type="string"  docValues="false" indexed="false" />
+  <field name="raw_minimumElevationInMeters"			 type="string"  docValues="false" indexed="false" />
+  <field name="raw_modified"					         type="string"  docValues="false" indexed="false" />
+  <field name="raw_month"					             type="string"  docValues="false" indexed="false" />
+  <field name="raw_nameType"					         type="string"  docValues="false" indexed="false" />
+  <field name="raw_networkKeys"					         type="string"  docValues="false" indexed="false" />
+  <field name="raw_occurrenceStatus"					 type="string"  docValues="false" indexed="false" />
+  <field name="raw_order"					             type="string"  docValues="false" indexed="false" />
+  <field name="raw_orderID"					             type="string"  docValues="false" indexed="false" />
+  <field name="raw_organismQuantity"					 type="string"  docValues="false" indexed="false" />
+  <field name="raw_organismQuantityType"				 type="string"  docValues="false" indexed="false" />
+  <field name="raw_original"					         type="string"  docValues="false" indexed="false" />
+  <field name="raw_phylum"					             type="string"  docValues="false" indexed="false" />
+  <field name="raw_phylumID"					         type="string"  docValues="false" indexed="false" />
+  <field name="raw_provenance"					         type="string"  docValues="false" indexed="false" />
+  <field name="raw_publisher"					         type="string"  docValues="false" indexed="false" />
+  <field name="raw_publisherTitle"					     type="string"  docValues="false" indexed="false" />
+  <field name="raw_publishingCountry"					 type="string"  docValues="false" indexed="false" />
+  <field name="raw_publishingOrganizationKey"			 type="string"  docValues="false" indexed="false" />
+  <field name="raw_taxonRank"					         type="string"  docValues="false" indexed="false" />
+  <field name="raw_taxonRankID"					         type="string"  docValues="false" indexed="false" />
+  <field name="raw_recordedBy"					         type="string"  docValues="false" indexed="false" />
+  <field name="raw_recordedByIds"					     type="string"  docValues="false" indexed="false" />
+  <field name="raw_references"					         type="string"  docValues="false" indexed="false" />
+  <field name="raw_relativeOrganismQuantity"	         type="string"  docValues="false" indexed="false" />
+  <field name="raw_repatriated"					         type="string"  docValues="false" indexed="false" />
+  <field name="raw_rgt"					                 type="string"  docValues="false" indexed="false" />
+  <field name="raw_rightsHolder"			             type="string"  docValues="false" indexed="false" />
+  <field name="raw_sampleSizeUnit"			             type="string"  docValues="false" indexed="false" />
+  <field name="raw_sampleSizeValue"			             type="string"  docValues="false" indexed="false" />
+  <field name="raw_scientificName"			             type="string"  docValues="false" indexed="false" />
+  <field name="raw_scientificNameAuthorship"		     type="string"  docValues="false" indexed="false" />
+  <field name="raw_sensitive"					         type="string"  docValues="false" indexed="false" />
+  <field name="raw_sex"					                 type="string"  docValues="false" indexed="false" />
+  <field name="raw_source"					             type="string"  docValues="false" indexed="false" />
+  <field name="raw_species"					             type="string"  docValues="false" indexed="false" />
+  <field name="raw_speciesGroup"					     type="string"  docValues="false" indexed="false" />
+  <field name="raw_speciesID"					         type="string"  docValues="false" indexed="false" />
+  <field name="raw_speciesListID"					     type="string"  docValues="false" indexed="false" />
+  <field name="raw_speciesSubgroup"					     type="string"  docValues="false" indexed="false" />
+  <field name="raw_startDayOfYear"					     type="string"  docValues="false" indexed="false" />
+  <field name="raw_stateProvince"					     type="string"  docValues="false" indexed="false" />
+  <field name="raw_taxonConceptID"					     type="string"  docValues="false" indexed="false" />
+  <field name="raw_title"					             type="string"  docValues="false" indexed="false" />
+  <field name="raw_type"					             type="string"  docValues="false" indexed="false" />
+  <field name="raw_typeStatus"					         type="string"  docValues="false" indexed="false" />
+  <field name="raw_typifiedName"					     type="string"  docValues="false" indexed="false" />
+  <field name="raw_vernacularName"					     type="string"  docValues="false" indexed="false" />
+  <field name="raw_waterBody"					         type="string"  docValues="false" indexed="false" />
+  <field name="raw_year"					             type="string"  docValues="false" indexed="false" />
 
-  <!-- Raw / Verbatim fields -->
-  <dynamicField name="raw_*" type="string" docValues="true" indexed="true"/>
+  <dynamicField name="raw_*" type="string" docValues="false" indexed="false"/>
 
   <!-- Environmental fields -->
   <dynamicField name="el*" type="float" docValues="true" indexed="true"/>
 
   <!-- Contextual fields -->
   <dynamicField name="cl*" type="string" docValues="true" indexed="true" />
-
-  <!-- Map deprecated fields to this field -->
-  <dynamicField name="deprecated_*" type="string" docValues="true" indexed="false"/>
 
   <!-- Adhoc fields -->
   <dynamicField name="dynamicProperties_*" type="string" docValues="true" indexed="true"/>
@@ -747,11 +743,7 @@
   <copyField source="vernacularName" dest="matched_name"/>
   <copyField source="vernacularName" dest="text"/>
 
-  <!-- Deprecated ALA SOLR fields no longer in use will be mapped to this unused SOLR field so
-       as not to throw an error. No data will be added to this field.  -->
-  <field name="null" type="string" docValues="true" indexed="true" stored="true"/>
-
-  <!-- INBO RBAC fields -->
+  <!-- INBO VBP RBAC fields -->
   <field name="dynamicProperties_rbac"  type="boolean" docValues="false" indexed="true"/>
   <field name="dynamicProperties_rbac_allowed"  type="string" docValues="false" multiValued="true" indexed="true"/>
 
