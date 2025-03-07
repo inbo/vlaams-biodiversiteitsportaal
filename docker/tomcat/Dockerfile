@@ -4,7 +4,7 @@ FROM tomcat:9-jdk11-corretto AS base
 WORKDIR ${CATALINA_HOME}
 
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
-    yum update && \
+    yum update -y && \
     yum install -y \
         shadow-utils \
         util-linux

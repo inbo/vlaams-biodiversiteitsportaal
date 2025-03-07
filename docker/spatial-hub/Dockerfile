@@ -12,7 +12,7 @@ ARG SOURCE=https://github.com/inbo/spatial-hub.git
 LABEL ala.version=inbo-${VERSION}
 
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
-    yum update && \
+    yum update -y && \
     yum install -y \
     npm
 

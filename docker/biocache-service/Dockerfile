@@ -4,16 +4,13 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 
 ARG VERSION=poc-rbac
-ARG COMMIT=7ad7b6b95a096920cdb1b8123841bf3fd183954b
+ARG COMMIT=d549b665d9508a08b5a2b3dfb5b17af6d90d0e6c
 ARG SOURCE=https://github.com/StefanVanDyck/biocache-service.git
 LABEL ala.version=inbo-${COMMIT}
 
 
 WORKDIR /project
 RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
-
-### Cannot seem to override config from application properties
-COPY log4j.xml ./src/main/resources/log4j.xml
 
 RUN --mount=type=cache,target=/gradle-cache,ro \
     gradle build assemble \
@@ -29,7 +26,7 @@ RUN ls -la /project/build/libs/
 FROM tomcat-base
 
 ARG VERSION=3.7.0-SNAPSHOT
-ARG COMMIT=7ad7b6b95a096920cdb1b8123841bf3fd183954b
+ARG COMMIT=d549b665d9508a08b5a2b3dfb5b17af6d90d0e6c
 LABEL ala.version=inbo-${COMMIT}
 
 

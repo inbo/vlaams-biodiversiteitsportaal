@@ -8,6 +8,6 @@ COPY init.gradle /home/gradle/.gradle/init.gradle
 ENV GRADLE_RO_DEP_CACHE=/gradle-cache
 
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
-    yum update && \
+    yum update -y && \
     yum install -y \
         rsync

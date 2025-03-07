@@ -34,7 +34,7 @@ LABEL ala.version=inbo-${COMMIT}
 #
 # ARG VERSION=2.18.6-SNAPSHOT
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
-    yum update && \
+    yum update -y && \
     yum install -y \
     nano \
     file \
