@@ -23,7 +23,7 @@
     {
       "datasource": {
         "type": "cloudwatch",
-        "uid": "cloudwatch"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -106,10 +106,10 @@
         {
           "datasource": {
             "type": "cloudwatch",
-            "uid": "cloudwatch"
+            "uid": "${datasource}"
           },
           "dimensions": {},
-          "expression": "fields @timestamp, @message, @logStream\n| filter @message like /(?i)$query/\n| stats count() by @logStream, bin(${__interval})\n| limit 100",
+          "expression": "fields @timestamp, @message, @logStream\n| filter @logStream like /(?i)$logstream/\n| filter @message like /(?i)$query/\n| stats count() by @logStream, bin(${__interval})\n| limit 100",
           "id": "",
           "label": "",
           "logGroups": [
@@ -150,7 +150,7 @@
     {
       "datasource": {
         "type": "cloudwatch",
-        "uid": "cloudwatch"
+        "uid": "${datasource}"
       },
       "gridPos": {
         "h": 13,
@@ -173,10 +173,10 @@
         {
           "datasource": {
             "type": "cloudwatch",
-            "uid": "cloudwatch"
+            "uid": "${datasource}"
           },
           "dimensions": {},
-          "expression": "fields @timestamp, @message, @logStream\n| filter @message like /(?i)$query/\n| sort @timestamp desc\n| limit ${log_limit}",
+          "expression": "fields @timestamp, @message, @logStream\n| filter @logStream like /(?i)$logstream/\n| filter @message like /(?i)$query/\n| sort @timestamp desc\n| limit ${log_limit}",
           "id": "",
           "label": "",
           "logGroups": [
@@ -208,6 +208,44 @@
   "tags": [],
   "templating": {
     "list": [
+      {
+        "current": {
+          "selected": false,
+          "text": "cloudwatch DEV",
+          "value": "cloudwatch-dev"
+        },
+        "hide": 1,
+        "includeAll": false,
+        "label": "Datasource",
+        "multi": false,
+        "name": "datasource",
+        "options": [],
+        "query": "cloudwatch",
+        "refresh": 1,
+        "regex": "/cloudwatch (.+)/",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "",
+          "value": ""
+        },
+        "hide": 0,
+        "label": "Log Stream",
+        "name": "log_stream",
+        "options": [
+          {
+            "selected": true,
+            "text": "",
+            "value": ""
+          }
+        ],
+        "query": "",
+        "skipUrlSync": false,
+        "type": "textbox"
+      },
       {
         "current": {
           "selected": false,
