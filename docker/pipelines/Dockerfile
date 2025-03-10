@@ -40,7 +40,8 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
     file \
     curl \
     unzip \
-    which
+    which \
+    shadow-utils
 
 RUN mkdir /data && chown 1000:1000 /data
 VOLUME /data
