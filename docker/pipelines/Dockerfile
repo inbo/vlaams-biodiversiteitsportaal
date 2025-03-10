@@ -60,6 +60,10 @@ RUN if [ $TARGETARCH = "arm64" ] ; then curl https://awscli.amazonaws.com/awscli
 RUN unzip -q awscliv2.zip && \
     ./aws/install
 
+# Create the user
+RUN groupadd --gid 1000 app \
+    && useradd --uid 1000 --gid 1000 -m -d /app app
+
 USER 1000
 
 COPY --from=builder --chown=1000:1000 /app /app
