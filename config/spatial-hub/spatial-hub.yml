@@ -229,11 +229,11 @@ collections:
   url: "${common.protocol}://${common.domain}/collectory"
 
 sandbox:
-  url: "${#{null}}"
+  url: "${common.protocol}://${common.domain}/spatial-hub/sandbox"
   uiUrl: "${common.protocol}://${common.domain}/spatial-hub/"
 
 sandboxService:
-  url: "${#{null}}"
+  url: "${common.protocol}://${common.domain}/biocache-service"
 
 sandboxSpatial:
   hubUrl: "${common.protocol}://${common.domain}/biocache-hub"
