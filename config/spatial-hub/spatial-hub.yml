@@ -18,12 +18,12 @@ i18n:
   region: 'nl'
 
 viewConfig:
-    json: 'view-config.json'
+  json: 'view-config.json'
 
 # List of valid user roles.
 # Use '*' for ANY role (login will be required).
 # Use an empty list for 'login is not required'
-user_roles: []
+user_roles: [ ]
 
 
 # fq applied to every biocache-service query
@@ -33,76 +33,76 @@ qc: ""
 # spApp configuration
 #
 spApp:
-    # show "map options" and associated controls in the list of layers
-    mapOptions: true
-    # show map control for collapsing up and hiding the header
-    collapseUp: true
-    # show map control for collapsing left and hiding left panel
-    collapseLeft: true
-    # show map control that displays the cursor coordinates (on the lower left of the map, above the scale)
-    cursorCoordinates: true
-    # show map control that displays the quicklinks
-    quicklinks: true
-    # show "map options" button "Add WMS Layer"
-    optionsAddWms: true
-    # show "map options" button "Download Map"
-    optionsDownloadMap: false
-    # show "map options" button "Reset Map"
-    optionsResetMap: true
-    # show "map options" section to change the base map
-    optionsSelectBaseMap: true
-    # load the layerDistances data to display the layer selection list's traffic light indicator
-    layerDistances: true
-    # show the "add to map | area | google location search" option
-    googleLocation: true
-    # show the left panel by default
-    leftPanel: true
-    # show the header by default
-    header: true
-    # list charts to show on species info page
-    charts:
-      genus:
-        title: "By genus"
-        chartType: "doughnut"
-        emptyValueMsg: "Genus not specified"
-        hideEmptyValues: true
-        disableBiocacheQueryOnClick: true
-      collection_uid:
-        title: "By collection"
-        chartType: "doughnut"
-        emptyValueMsg: "Collection not specified"
-        hideEmptyValues: true
-        disableBiocacheQueryOnClick: true
-      assertions:
-        title: "By data assertion"
-        chartType: "horizontal-bar"
-        emptyValueMsg: "Assertion not specified"
-        hideEmptyValues: true
-        disableBiocacheQueryOnClick: true
-      type_status:
-        title: "By type status (as % of all type specimens)"
-        chartType: "doughnut"
-        emptyValueMsg: "Type status not specified"
-        hideEmptyValues: true
-        disableBiocacheQueryOnClick: true
-      state_conservation:
-        title: "By state conservation status"
-        chartType: "bar"
-        emptyValueMsg: "State conservation not specified"
-        hideEmptyValues: true
-        disableBiocacheQueryOnClick: true
-      month:
-        title: "By month"
-        chartType: "bar"
-        emptyValueMsg: "Month not specified"
-        hideEmptyValues: true
-        disableBiocacheQueryOnClick: true
-      decade:
-        title: "By decade"
-        chartType: "bar"
-        emptyValueMsg: "Year not specified"
-        hideEmptyValues: true
-        disableBiocacheQueryOnClick: true
+  # show "map options" and associated controls in the list of layers
+  mapOptions: true
+  # show map control for collapsing up and hiding the header
+  collapseUp: true
+  # show map control for collapsing left and hiding left panel
+  collapseLeft: true
+  # show map control that displays the cursor coordinates (on the lower left of the map, above the scale)
+  cursorCoordinates: true
+  # show map control that displays the quicklinks
+  quicklinks: true
+  # show "map options" button "Add WMS Layer"
+  optionsAddWms: true
+  # show "map options" button "Download Map"
+  optionsDownloadMap: false
+  # show "map options" button "Reset Map"
+  optionsResetMap: true
+  # show "map options" section to change the base map
+  optionsSelectBaseMap: true
+  # load the layerDistances data to display the layer selection list's traffic light indicator
+  layerDistances: true
+  # show the "add to map | area | google location search" option
+  googleLocation: true
+  # show the left panel by default
+  leftPanel: true
+  # show the header by default
+  header: true
+  # list charts to show on species info page
+  charts:
+    genus:
+      title: "By genus"
+      chartType: "doughnut"
+      emptyValueMsg: "Genus not specified"
+      hideEmptyValues: true
+      disableBiocacheQueryOnClick: true
+    collection_uid:
+      title: "By collection"
+      chartType: "doughnut"
+      emptyValueMsg: "Collection not specified"
+      hideEmptyValues: true
+      disableBiocacheQueryOnClick: true
+    assertions:
+      title: "By data assertion"
+      chartType: "horizontal-bar"
+      emptyValueMsg: "Assertion not specified"
+      hideEmptyValues: true
+      disableBiocacheQueryOnClick: true
+    type_status:
+      title: "By type status (as % of all type specimens)"
+      chartType: "doughnut"
+      emptyValueMsg: "Type status not specified"
+      hideEmptyValues: true
+      disableBiocacheQueryOnClick: true
+    state_conservation:
+      title: "By state conservation status"
+      chartType: "bar"
+      emptyValueMsg: "State conservation not specified"
+      hideEmptyValues: true
+      disableBiocacheQueryOnClick: true
+    month:
+      title: "By month"
+      chartType: "bar"
+      emptyValueMsg: "Month not specified"
+      hideEmptyValues: true
+      disableBiocacheQueryOnClick: true
+    decade:
+      title: "By decade"
+      chartType: "bar"
+      emptyValueMsg: "Year not specified"
+      hideEmptyValues: true
+      disableBiocacheQueryOnClick: true
 
 rangeDataTypes:
   - 'tint'
@@ -176,7 +176,7 @@ workflow.enabled: true
 # These workflows will be forced to operate on the selected layer and should be public.
 #
 #workflow.speciesFilters: [ { name: 'CSDM default filter', workflowId: 52 } ]
-workflow.speciesFilters: []
+workflow.speciesFilters: [ ]
 
 google:
   apikey: "get-a-google-api-key"
@@ -213,9 +213,9 @@ layersService:
 
 lists:
   url: ''
-#  TODO: causes the portal-full tomcat to hang at startup, spatial-hub blocks on this
-#        and species-lists is no yet serving any requests
-#  url: "${common.protocol}://${common.domain}/species-list"
+  #  TODO: causes the portal-full tomcat to hang at startup, spatial-hub blocks on this
+  #        and species-lists is no yet serving any requests
+  #  url: "${common.protocol}://${common.domain}/species-list"
   threatenedSpeciesUrl: '/ws/speciesList/?isThreatened=eq:true&isAuthoritative=eq:true'
   invasiveSpeciesUrl: '/ws/speciesList/?isInvasive=eq:true&isAuthoritative=eq:true'
   facets: True
@@ -346,10 +346,10 @@ startup:
             projections: [ '3857' ]
             layerParams:
               maxZoom: 21
-#              bounds: [
-#                [ 50.65843926853822, 2.296],
-#                [ 51.52780962525605, 6.1468505859375 ]
-#              ]
+    #              bounds: [
+    #                [ 50.65843926853822, 2.296],
+    #                [ 51.52780962525605, 6.1468505859375 ]
+    #              ]
     2_luchtkaart:
       name: 'Luchtfoto''s'
       link: 'https://www.vlaanderen.be/datavindplaats/catalogus/wmts-orthofotomozaiek-middenschalig-winteropnamen-kleur-meest-recent-vlaanderen'
@@ -469,3 +469,14 @@ fq:
 #      label: 'Belgische Lambert 1972'
 #      definition:
 #        code: 'EPSG:31370'
+---
+environments:
+  inbo-dev:
+    assets:
+      bundle: true
+  inbo-uat:
+    assets:
+      bundle: true
+  inbo-prod:
+    assets:
+      bundle: true
