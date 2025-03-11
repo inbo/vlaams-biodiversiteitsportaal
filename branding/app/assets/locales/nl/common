@@ -23,6 +23,7 @@
   "nav.VBP_survey" : "Survey",
   "nav.VBP_introductiefilmpjes" : "Introductiefilmpjes",
   "nav.VBP_tools" : "INBO applicaties",
+  "nav.inbo" : "Naar INBO home" ,
   "index.slogan": "Openbaar portaal voor alle data mbt. biodiversisteit in Vlaanderen",
   "index.search-btn": "Zoeken",
   "index.stats.occurrences": "Waarnemingen",

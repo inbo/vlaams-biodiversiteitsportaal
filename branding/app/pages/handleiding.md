@@ -50,6 +50,16 @@ _options:
             height: auto;
             border-radius: 10px;
         }
+        .infofoto-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        }
+        .infofoto {
+        max-width: none; /* Behoudt originele breedte */
+        height: auto; /* Houdt de originele hoogte */
+        border-radius: 10px;
+        }
         .watermerk {
             position: fixed;
             top: 50%;
@@ -62,11 +72,10 @@ _options:
             white-space: nowrap;
         }
     </style>
-
+  <div class="watermerk">DRAFT</div>
   <header>
         <h1>Beknopte Handleiding voor het Vlaams Biodiversiteitsportaal</h1>
     </header>
-    
   <h2>1. Toegang tot het Portaal</h2>
     <p><strong>URL:</strong> <a href="#">Vlaams Biodiversiteitsportaal UAT</a> </p>
     <p><strong>Inloggen / Registreren:</strong></p>
@@ -74,9 +83,9 @@ _options:
         <li>Registreren: Mail naar <a href="mailto:support.natuurdata@inbo.be">support.natuurdata@inbo.be</a>.</li>
         <li>Inloggen: Klik op "Inloggen" rechtsboven op de startpagina.</li>
     </ul>
-    <div class="natuurfoto-container">
-        <img src="/images/Afbeelding1.png" class="natuurfoto" alt="Inlogscherm">
-        <img src="/images/Afbeelding2.png" class="natuurfoto" alt="Startpagina">
+    <div class="infofoto-container">
+        <img src="/images/Afbeelding1.png" class="infofoto" alt="Inlogscherm">
+        <img src="/images/Afbeelding2.png" class="infofoto" alt="Startpagina">
     </div>
     <h2>2. Navigatie</h2>
     <p>Het portaal is ingedeeld in verschillende secties:</p>
