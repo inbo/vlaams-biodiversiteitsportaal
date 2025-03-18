@@ -6,7 +6,7 @@ That project, started in 2008 in Australia, was aimed at providing easy access t
 It has since been made open-source and [is currently used by a number of countries around the world](https://living-atlases.gbif.org/).
 
 ## Architecture
-A DrawIO diagram showing an overview of the current architecture can be found [in the /docs folder](/docs/architecture.drawio).
+A DrawIO diagram showing an overview of the current architecture can be found [in the /wiki folder](/wiki/diagrams/architecture.drawio).
 
 ### Web Application
 The platform is made up of a number of microservices.  
@@ -61,7 +61,7 @@ as all the services need to be built form scratch.
 
 ### Local
 
-Please refer to the [running locally documentation](docs/running-locally.md) for more information on how to run the portal locally.
+Please refer to the [running locally documentation](wiki/Running%20locally.md) for more information on how to run the portal locally.
 
 ## Making changes to the actual code
 This project only contains the things needed to build and configure the platform.  

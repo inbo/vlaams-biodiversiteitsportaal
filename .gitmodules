@@ -1,3 +1,6 @@
 [submodule "branding/commonui-bs3-2019"]
 	path = branding/commonui-bs3-2019
 	url = https://github.com/AtlasOfLivingAustralia/commonui-bs3-2019
+[submodule "wiki"]
+	path = wiki
+	url = https://github.com/inbo/vlaams-biodiversiteitsportaal.wiki.git
