@@ -4,7 +4,7 @@
     "loginPagePath" : "/config/login.html",
     "tokenCallbacks": [
         {
-            "issuerId": "mock-oauth2",
+            "issuerId": "mock-oauth2-server",
             "tokenExpiry": 120,
             "requestMappings": [
                 {
