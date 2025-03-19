@@ -2,6 +2,7 @@
 <sensitivity-zones>
     <!-- Australian zone is required, causes null-pointer if not provided -->
     <sensitivity-zone id="AUS" name="Australia" type="COUNTRY"/>
+    <sensitivity-zone id="BEL" name="België" type="COUNTRY"/>
     <sensitivity-zone id="BE" name="België" type="COUNTRY"/>
     <sensitivity-zone id="VL" name="Vlaanderen" type="STATE"/>
 </sensitivity-zones>
