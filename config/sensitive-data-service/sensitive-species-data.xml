@@ -2,7 +2,7 @@
 <sensitiveSpeciesList>
   <sensitiveSpecies name="Dictyophorus spumans" family="Pyrgomorphidae" guid="1727415" rank="SPECIES" commonName="">
     <instances>
-      <conservationInstance category="IA" authority="StekkeFakke 3000" dataResourceId="dr4" generalisation="10km" zone="BE" />
+      <conservationInstance category="IA" authority="StekkeFakke 3000" dataResourceId="dr4" generalisation="10km" zone="BEL" />
     </instances>
   </sensitiveSpecies>
   <sensitiveSpecies name="Romalea guttata" family="Romaleidae" guid="1714599" rank="SPECIES" commonName="">
