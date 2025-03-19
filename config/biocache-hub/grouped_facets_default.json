@@ -65,6 +65,10 @@
       {
         "sort": "count",
         "field": "interaction"
+      },
+      {
+        "sort": "index",
+        "field": "species_list_uid"
       }
     ]
   },
