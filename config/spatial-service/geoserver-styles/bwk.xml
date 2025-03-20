@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StyledLayerDescriptor version="1.0.0"
+    xsi:schemaLocation="http://www.opengis.net/sld StyledLayerDescriptor.xsd"
+    xmlns="http://www.opengis.net/sld"
+    xmlns:ogc="http://www.opengis.net/ogc"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <NamedLayer>
+        <Name>BWK Map Style</Name>
+        <UserStyle>
+            <Title>BWK Layer Styling</Title>
+            <FeatureTypeStyle>
+                <!-- Dark Green for z -->
+                <Rule>
+                    <Name>z</Name>
+                    <ogc:Filter>
+                        <ogc:PropertyIsEqualTo>
+                            <ogc:PropertyName>EVAL</ogc:PropertyName>
+                            <ogc:Literal>z</ogc:Literal>
+                        </ogc:PropertyIsEqualTo>
+                    </ogc:Filter>
+                    <PolygonSymbolizer>
+                        <Fill>
+                            <CssParameter name="fill">#006400</CssParameter>
+                        </Fill>
+                    </PolygonSymbolizer>
+                </Rule>
+
+                <!-- Light Green for w -->
+                <Rule>
+                    <Name>w</Name>
+                    <ogc:Filter>
+                        <ogc:PropertyIsEqualTo>
+                            <ogc:PropertyName>EVAL</ogc:PropertyName>
+                            <ogc:Literal>w</ogc:Literal>
+                        </ogc:PropertyIsEqualTo>
+                    </ogc:Filter>
+                    <PolygonSymbolizer>
+                        <Fill>
+                            <CssParameter name="fill">#90EE90</CssParameter>
+                        </Fill>
+                    </PolygonSymbolizer>
+                </Rule>
+
+                <!-- Very Light Green for m -->
+                <Rule>
+                    <Name>m</Name>
+                    <ogc:Filter>
+                        <ogc:PropertyIsEqualTo>
+                            <ogc:PropertyName>EVAL</ogc:PropertyName>
+                            <ogc:Literal>m</ogc:Literal>
+                        </ogc:PropertyIsEqualTo>
+                    </ogc:Filter>
+                    <PolygonSymbolizer>
+                        <Fill>
+                            <CssParameter name="fill">#CCFFCC</CssParameter>
+                        </Fill>
+                    </PolygonSymbolizer>
+                </Rule>
+
+                <!-- Striped orange pattern for wz -->
+                <Rule>
+                    <Name>wz</Name>
+                    <ogc:Filter>
+                        <ogc:PropertyIsEqualTo>
+                            <ogc:PropertyName>EVAL</ogc:PropertyName>
+                            <ogc:Literal>wz</ogc:Literal>
+                        </ogc:PropertyIsEqualTo>
+                    </ogc:Filter>
+                    <PolygonSymbolizer>
+                        <Fill>
+                            <GraphicFill>
+                                <Graphic>
+                                    <Mark>
+                                        <WellKnownName>shape://slash</WellKnownName>
+                                        <Stroke>
+                                            <CssParameter name="stroke">#008000</CssParameter>
+                                            <CssParameter name="stroke-width">2</CssParameter>
+                                        </Stroke>
+                                    </Mark>
+                                    <Size>8</Size>
+                                </Graphic>
+                            </GraphicFill>
+                        </Fill>
+                    </PolygonSymbolizer>
+                </Rule>
+
+                <!-- Striped light orange pattern for mwz -->
+                <Rule>
+                    <Name>mwz</Name>
+                    <ogc:Filter>
+                        <ogc:PropertyIsEqualTo>
+                            <ogc:PropertyName>EVAL</ogc:PropertyName>
+                            <ogc:Literal>mwz</ogc:Literal>
+                        </ogc:PropertyIsEqualTo>
+                    </ogc:Filter>
+                    <PolygonSymbolizer>
+                        <Fill>
+                            <GraphicFill>
+                                <Graphic>
+                                    <Mark>
+                                        <WellKnownName>shape://slash</WellKnownName>
+                                        <Stroke>
+                                            <CssParameter name="stroke">#66C266</CssParameter>
+                                            <CssParameter name="stroke-width">1</CssParameter>
+                                        </Stroke>
+                                    </Mark>
+                                    <Size>6</Size>
+                                </Graphic>
+                            </GraphicFill>
+                        </Fill>
+                    </PolygonSymbolizer>
+                </Rule>
+
+                <!-- Striped dark orange pattern for mz -->
+                <Rule>
+                    <Name>mz</Name>
+                    <ogc:Filter>
+                        <ogc:PropertyIsEqualTo>
+                            <ogc:PropertyName>EVAL</ogc:PropertyName>
+                            <ogc:Literal>mz</ogc:Literal>
+                        </ogc:PropertyIsEqualTo>
+                    </ogc:Filter>
+                    <PolygonSymbolizer>
+                        <Fill>
+                            <GraphicFill>
+                                <Graphic>
+                                    <Mark>
+                                        <WellKnownName>shape://slash</WellKnownName>
+                                        <Stroke>
+                                            <CssParameter name="stroke">#006400</CssParameter>
+                                            <CssParameter name="stroke-width">3</CssParameter>
+                                        </Stroke>
+                                    </Mark>
+                                    <Size>10</Size>
+                                </Graphic>
+                            </GraphicFill>
+                        </Fill>
+                    </PolygonSymbolizer>
+                </Rule>
+
+                <!-- Striped pale orange pattern for mw -->
+                <Rule>
+                    <Name>mw</Name>
+                    <ogc:Filter>
+                        <ogc:PropertyIsEqualTo>
+                            <ogc:PropertyName>EVAL</ogc:PropertyName>
+                            <ogc:Literal>mw</ogc:Literal>
+                        </ogc:PropertyIsEqualTo>
+                    </ogc:Filter>
+                    <PolygonSymbolizer>
+                        <Fill>
+                            <GraphicFill>
+                                <Graphic>
+                                    <Mark>
+                                        <WellKnownName>shape://slash</WellKnownName>
+                                        <Stroke>
+                                            <CssParameter name="stroke">#99E699</CssParameter>
+                                            <CssParameter name="stroke-width">1</CssParameter>
+                                        </Stroke>
+                                    </Mark>
+                                    <Size>4</Size>
+                                </Graphic>
+                            </GraphicFill>
+                        </Fill>
+                    </PolygonSymbolizer>
+                </Rule>
+            </FeatureTypeStyle>
+        </UserStyle>
+    </NamedLayer>
+</StyledLayerDescriptor>

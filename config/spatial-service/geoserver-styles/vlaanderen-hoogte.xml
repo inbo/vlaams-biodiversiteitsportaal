@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sld:StyledLayerDescriptor xmlns:sld="http://www.opengis.net/sld" xmlns="http://www.opengis.net/sld" xmlns:gml="http://www.opengis.net/gml" xmlns:ogc="http://www.opengis.net/ogc" version="1.0.0">
+  <sld:NamedLayer>
+    <sld:Name>dhm_vlaanderen</sld:Name>
+    <sld:UserStyle>
+      <sld:Name>dhm_style</sld:Name>
+      <sld:Title>Digital Height Model Vlaanderen</sld:Title>
+      <sld:Abstract>Pseudocolor style for the Digital Height Model of Flanders</sld:Abstract>
+      <sld:FeatureTypeStyle>
+        <sld:Rule>
+          <sld:RasterSymbolizer>
+            <sld:ColorMap type="ramp">
+              <sld:ColorMapEntry color="#FF0000" quantity="-9999.0" opacity="0.0" label="Transparent"/>
+              <sld:ColorMapEntry color="#0000FF" quantity="-3.4028" opacity="1.0" label="Below Sea Level"/>
+              <sld:ColorMapEntry color="#007FFF" quantity="0.0" opacity="0.0" label="Transparent Sea Level"/>
+              <sld:ColorMapEntry color="#00AFFF" quantity="25" opacity="1.0"/>
+              <sld:ColorMapEntry color="#00FFFF" quantity="50" opacity="1.0" label="Low Elevation"/>
+              <sld:ColorMapEntry color="#00FF7F" quantity="75" opacity="1.0"/>
+              <sld:ColorMapEntry color="#7FFF00" quantity="100" opacity="1.0" label="Moderate Low Elevation"/>
+              <sld:ColorMapEntry color="#BFFF00" quantity="125" opacity="1.0"/>
+              <sld:ColorMapEntry color="#FFFF00" quantity="150" opacity="1.0" label="Moderate Elevation"/>
+              <sld:ColorMapEntry color="#FFC700" quantity="175" opacity="1.0"/>
+              <sld:ColorMapEntry color="#FFCC00" quantity="200" opacity="1.0"/>
+              <sld:ColorMapEntry color="#FFA500" quantity="225" opacity="1.0" label="High Elevation"/>
+              <sld:ColorMapEntry color="#FF7F00" quantity="250" opacity="1.0"/>
+              <sld:ColorMapEntry color="#FF4D00" quantity="275" opacity="1.0"/>
+              <sld:ColorMapEntry color="#FF0000" quantity="289.1" opacity="1.0" label="Highest Elevation"/>
+             </sld:ColorMap>
+          </sld:RasterSymbolizer>
+        </sld:Rule>
+      </sld:FeatureTypeStyle>
+    </sld:UserStyle>
+  </sld:NamedLayer>
+</sld:StyledLayerDescriptor>

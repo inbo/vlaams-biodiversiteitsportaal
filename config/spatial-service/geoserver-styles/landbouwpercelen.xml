@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StyledLayerDescriptor version="1.0.0"
+    xsi:schemaLocation="http://www.opengis.net/sld StyledLayerDescriptor.xsd"
+    xmlns="http://www.opengis.net/sld"
+    xmlns:ogc="http://www.opengis.net/ogc"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <NamedLayer>
+        <Name>Landbouwgebruikspercelen</Name>
+        <UserStyle>
+            <Title>Landbouwgebruikspercelen Styling</Title>
+            <FeatureTypeStyle>
+                <!-- Aardappelen (Potatoes) - Brown -->
+                <Rule>
+                    <Name>Aardappelen</Name>
+                    <ogc:Filter>
+                        <ogc:PropertyIsEqualTo>
+                            <ogc:PropertyName>GEWASGROEP</ogc:PropertyName>
+                            <ogc:Literal>Aardappelen</ogc:Literal>
+                        </ogc:PropertyIsEqualTo>
+                    </ogc:Filter>
+                    <PolygonSymbolizer>
+                        <Fill>
+                            <CssParameter name="fill">#8B4513</CssParameter>
+                        </Fill>
+                    </PolygonSymbolizer>
+                </Rule>
+
+                <!-- Fruit en Noten (Fruits and Nuts) - Red -->
+                <Rule>
+                    <Name>Fruit en Noten</Name>
+                    <ogc:Filter>
+                        <ogc:PropertyIsEqualTo>
+                            <ogc:PropertyName>GEWASGROEP</ogc:PropertyName>
+                            <ogc:Literal>Fruit en Noten</ogc:Literal>
+                        </ogc:PropertyIsEqualTo>
+                    </ogc:Filter>
+                    <PolygonSymbolizer>
+                        <Fill>
+                            <CssParameter name="fill">#FF0000</CssParameter>
+                        </Fill>
+                    </PolygonSymbolizer>
+                </Rule>
+
+                <!-- Granen, zaden en peulvruchten (Grains, Seeds, Legumes) - Yellow -->
+                <Rule>
+                    <Name>Granen, zaden en peulvruchten</Name>
+                    <ogc:Filter>
+                        <ogc:PropertyIsEqualTo>
+                            <ogc:PropertyName>GEWASGROEP</ogc:PropertyName>
+                            <ogc:Literal>Granen, zaden en peulvruchten</ogc:Literal>
+                        </ogc:PropertyIsEqualTo>
+                    </ogc:Filter>
+                    <PolygonSymbolizer>
+                        <Fill>
+                            <CssParameter name="fill">#FFD700</CssParameter>
+                        </Fill>
+                    </PolygonSymbolizer>
+                </Rule>
+
+                <!-- Grasland (Grassland) - Green -->
+                <Rule>
+                    <Name>Grasland</Name>
+                    <ogc:Filter>
+                        <ogc:PropertyIsEqualTo>
+                            <ogc:PropertyName>GEWASGROEP</ogc:PropertyName>
+                            <ogc:Literal>Grasland</ogc:Literal>
+                        </ogc:PropertyIsEqualTo>
+                    </ogc:Filter>
+                    <PolygonSymbolizer>
+                        <Fill>
+                            <CssParameter name="fill">#008000</CssParameter>
+                        </Fill>
+                    </PolygonSymbolizer>
+                </Rule>
+
+                <!-- Additional Crop Groups -->
+                <Rule><Name>Overige</Name><ogc:Filter><ogc:PropertyIsEqualTo><ogc:PropertyName>GEWASGROEP</ogc:PropertyName><ogc:Literal>Overige</ogc:Literal></ogc:PropertyIsEqualTo></ogc:Filter><PolygonSymbolizer><Fill><CssParameter name="fill">#CCCCCC</CssParameter></Fill></PolygonSymbolizer></Rule>
+                <Rule><Name>Overige gewassen</Name><ogc:Filter><ogc:PropertyIsEqualTo><ogc:PropertyName>GEWASGROEP</ogc:PropertyName><ogc:Literal>Overige gewassen</ogc:Literal></ogc:PropertyIsEqualTo></ogc:Filter><PolygonSymbolizer><Fill><CssParameter name="fill">#999999</CssParameter></Fill></PolygonSymbolizer></Rule>
+                <Rule><Name>Suikerbieten</Name><ogc:Filter><ogc:PropertyIsEqualTo><ogc:PropertyName>GEWASGROEP</ogc:PropertyName><ogc:Literal>Suikerbieten</ogc:Literal></ogc:PropertyIsEqualTo></ogc:Filter><PolygonSymbolizer><Fill><CssParameter name="fill">#32CD32</CssParameter></Fill></PolygonSymbolizer></Rule>
+                <Rule><Name>Vlas en hennep</Name><ogc:Filter><ogc:PropertyIsEqualTo><ogc:PropertyName>GEWASGROEP</ogc:PropertyName><ogc:Literal>Vlas en hennep</ogc:Literal></ogc:PropertyIsEqualTo></ogc:Filter><PolygonSymbolizer><Fill><CssParameter name="fill">#B8860B</CssParameter></Fill></PolygonSymbolizer></Rule>
+                <Rule><Name>Voedergewassen</Name><ogc:Filter><ogc:PropertyIsEqualTo><ogc:PropertyName>GEWASGROEP</ogc:PropertyName><ogc:Literal>Voedergewassen</ogc:Literal></ogc:PropertyIsEqualTo></ogc:Filter><PolygonSymbolizer><Fill><CssParameter name="fill">#6B8E23</CssParameter></Fill></PolygonSymbolizer></Rule>
+                <Rule><Name>Water</Name><ogc:Filter><ogc:PropertyIsEqualTo><ogc:PropertyName>GEWASGROEP</ogc:PropertyName><ogc:Literal>Water</ogc:Literal></ogc:PropertyIsEqualTo></ogc:Filter><PolygonSymbolizer><Fill><CssParameter name="fill">#1E90FF</CssParameter></Fill></PolygonSymbolizer></Rule>
+            </FeatureTypeStyle>
+        </UserStyle>
+    </NamedLayer>
+</StyledLayerDescriptor>
