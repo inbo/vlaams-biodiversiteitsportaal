@@ -114,8 +114,7 @@
           "label": "",
           "logGroups": [
             {
-              "accountId": "${AWS_ACCOUNT_ID_UAT}",
-              "arn": "arn:aws:logs:eu-west-1:${AWS_ACCOUNT_ID_UAT}:log-group:/inbo/vbp/pipelines:*",
+              "arn": "/inbo/vbp/pipelines",
               "name": "/inbo/vbp/pipelines"
             }
           ],
@@ -181,8 +180,7 @@
           "label": "",
           "logGroups": [
             {
-              "accountId": "${AWS_ACCOUNT_ID_UAT}",
-              "arn": "arn:aws:logs:eu-west-1:${AWS_ACCOUNT_ID_UAT}:log-group:/inbo/vbp/pipelines:*",
+              "arn": "/inbo/vbp/pipelines",
               "name": "/inbo/vbp/pipelines"
             }
           ],

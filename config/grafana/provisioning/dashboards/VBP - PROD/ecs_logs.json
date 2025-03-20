@@ -114,8 +114,7 @@
           "label": "",
           "logGroups": [
             {
-              "accountId": "${AWS_ACCOUNT_ID_PROD}",
-              "arn": "arn:aws:logs:eu-west-1:${AWS_ACCOUNT_ID_PROD}:log-group:/inbo/vbp/ecs:*",
+              "arn": "log-group:/inbo/vbp/ecs",
               "name": "/inbo/vbp/ecs"
             }
           ],
@@ -181,8 +180,7 @@
           "label": "",
           "logGroups": [
             {
-              "accountId": "${AWS_ACCOUNT_ID_PROD}",
-              "arn": "arn:aws:logs:eu-west-1:${AWS_ACCOUNT_ID_PROD}:log-group:/inbo/vbp/ecs:*",
+              "arn": "log-group:/inbo/vbp/ecs",
               "name": "/inbo/vbp/ecs"
             }
           ],
