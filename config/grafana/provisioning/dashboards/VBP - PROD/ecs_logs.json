@@ -323,7 +323,7 @@
   "timepicker": {},
   "timezone": "browser",
   "title": "ECS Logs",
-  "uid": "ecs-logs",
+  "uid": "ecs-logs-prod",
   "version": 1,
   "weekStart": ""
 }
