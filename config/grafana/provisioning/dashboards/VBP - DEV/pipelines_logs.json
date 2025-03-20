@@ -23,7 +23,7 @@
     {
       "datasource": {
         "type": "cloudwatch",
-        "uid": "cloudwatch-prod"
+        "uid": "cloudwatch-dev"
       },
       "fieldConfig": {
         "defaults": {
@@ -106,7 +106,7 @@
         {
           "datasource": {
             "type": "cloudwatch",
-            "uid": "cloudwatch-prod"
+            "uid": "cloudwatch-dev"
           },
           "dimensions": {},
           "expression": "fields @timestamp, @message, @logStream\n| filter @logStream like /(?i)$log_stream/\n| filter @message like /(?i)$query/\n| stats count() by @logStream, bin(${__interval})\n| limit 100",
@@ -114,8 +114,8 @@
           "label": "",
           "logGroups": [
             {
-              "accountId": "${ENV_AWS_ACCOUNT_ID_PROD}",
-              "arn": "arn:aws:logs:eu-west-1:${ENV_AWS_ACCOUNT_ID_PROD}:log-group:/inbo/vbp/pipelines:*",
+              "accountId": "${AWS_ACCOUNT_ID_DEV}",
+              "arn": "arn:aws:logs:eu-west-1:${AWS_ACCOUNT_ID_DEV}:log-group:/inbo/vbp/pipelines:*",
               "name": "/inbo/vbp/pipelines"
             }
           ],
@@ -150,7 +150,7 @@
     {
       "datasource": {
         "type": "cloudwatch",
-        "uid": "cloudwatch-prod"
+        "uid": "cloudwatch-dev"
       },
       "gridPos": {
         "h": 13,
@@ -173,7 +173,7 @@
         {
           "datasource": {
             "type": "cloudwatch",
-            "uid": "cloudwatch-prod"
+            "uid": "cloudwatch-dev"
           },
           "dimensions": {},
           "expression": "fields @timestamp, @message, @logStream\n| filter @logStream like /(?i)$log_stream/\n| filter @message like /(?i)$query/\n| sort @timestamp desc\n| limit ${log_limit}",
@@ -181,8 +181,8 @@
           "label": "",
           "logGroups": [
             {
-              "accountId": "${ENV_AWS_ACCOUNT_ID_PROD}",
-              "arn": "arn:aws:logs:eu-west-1:${ENV_AWS_ACCOUNT_ID_PROD}:log-group:/inbo/vbp/pipelines:*",
+              "accountId": "${AWS_ACCOUNT_ID_DEV}",
+              "arn": "arn:aws:logs:eu-west-1:${AWS_ACCOUNT_ID_DEV}:log-group:/inbo/vbp/pipelines:*",
               "name": "/inbo/vbp/pipelines"
             }
           ],
