@@ -18,3 +18,12 @@ datasources:
       defaultRegion: eu-west-1
       assumeRoleArn: arn:aws:iam::${AWS_ACCOUNT_ID_UAT}:role/inbo-vbp-grafana-dev-role
       customMetricsNamespaces: CWAgent
+
+  - name: cloudwatch PROD
+    type: cloudwatch
+    uid: cloudwatch-prod
+    isDefault: false
+    jsonData:
+      defaultRegion: eu-west-1
+      assumeRoleArn: arn:aws:iam::${AWS_ACCOUNT_ID_PROD}:role/inbo-vbp-grafana-dev-role
+      customMetricsNamespaces: CWAgent
