@@ -215,8 +215,24 @@ services:
 
   namematching:
     image: ${DOCKER_REPO:-local}/inbo-vbp-namematching-service:dev
+    command:
+      - /config/config/namematching-service/config.yml
     ports:
       - "9179:9179"
+    volumes:
+      - ../config/namematching-service:/config/config/namematching-service:ro
+
+#  sensitive-data-service:
+#    image: ${DOCKER_REPO:-local}/inbo-vbp-sensitive-data-service:dev
+#    command:
+#      - /config/config/sensitive-data-service/config.yml
+#    ports:
+#      - "9189:9189"
+#      - "5005:5005"
+#    volumes:
+#      - ../config/sensitive-data-service:/config/config/sensitive-data-service:ro
+#    environment:
+#      JAVA_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,address=*:5005,suspend=n"
 
   nginx:
     image: nginx

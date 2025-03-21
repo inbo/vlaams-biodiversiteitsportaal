@@ -34,13 +34,11 @@ WORKDIR /app
 COPY --from=builder --chown=1000 \
     /project/server/target/ala-namematching-server-${VERSION}.jar /app/app.jar
 
-COPY --from=builder --chown=1000 \
-    /project/server/config.yml /app/config.yml
-
 RUN mkdir /data/ala-namematching-service && mkdir /data/ala-namematching-service/config
 COPY groups.json /data/ala-namematching-service/config/groups.json
 COPY subgroups.json /data/ala-namematching-service/config/subgroups.json
 
-ENTRYPOINT ["java", "-jar", "/app/app.jar", "server", "config.yml"]
+ENTRYPOINT ["java", "-jar", "/app/app.jar", "server"]
+CMD ["config.yml"]
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:9180 || exit 1
