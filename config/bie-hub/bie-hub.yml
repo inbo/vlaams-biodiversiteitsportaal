@@ -186,3 +186,6 @@ management:
     web:
       exposure:
         include: health
+
+sortFields: occurrenceCount,score,scientificName,commonNameSingle,rank
+defaultSortField: occurrenceCount
