@@ -6,9 +6,9 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 #ARG SOURCE=https://github.com/AtlasOfLivingAustralia/spatial-hub.git
 #LABEL ala.version=${VERSION}
 
-ARG VERSION=allow-configuring-language
-ARG COMMIT=53d4aad16d6b1a704ef147923ed233a2d18d668d
-ARG SOURCE=https://github.com/inbo/spatial-hub.git
+ARG VERSION=develop
+ARG COMMIT=8d72b87e478b1f1edf0ad8f09200d8cdfb83ba0f
+ARG SOURCE=https://github.com/katya-shaleninova/spatial-hub
 LABEL ala.version=inbo-${VERSION}
 
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
