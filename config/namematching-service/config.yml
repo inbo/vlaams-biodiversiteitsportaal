@@ -4,7 +4,7 @@ logging:
     au.org.ala: WARN
     org.reflections: ERROR
 server:
-  rootPath: '/namematching-service/*'
+#  rootPath: '/namematching-service/*'
   applicationConnectors:
     - type: http
       port: 9179

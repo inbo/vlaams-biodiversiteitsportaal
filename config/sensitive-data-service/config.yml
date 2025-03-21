@@ -4,7 +4,7 @@ logging:
     au.org.ala: WARN
     org.reflections: ERROR
 server:
-  rootPath: '/sensitive-data-service/*'
+#  rootPath: '/sensitive-data-service/*'
   applicationConnectors:
     - type: http
       port: 9189
