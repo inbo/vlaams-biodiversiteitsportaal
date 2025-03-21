@@ -48,7 +48,7 @@ logger:
   baseURL: ${common.protocol}://${common.domain}/logger/service
   baseUrl: ${common.protocol}://${common.domain}/logger/service
 namematching:
-  serviceURL: http://namematching:9179/namematching-service
+  serviceURL: http://namematching:9179
 openapi:
   components:
     security:

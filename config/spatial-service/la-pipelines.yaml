@@ -35,13 +35,13 @@ copy:
 recordedByConfig:
   cacheSizeMb: 64
 alaNameMatch:
-  wsUrl: http://namematching-service.vbp.internal:9179/namematching-service
+  wsUrl: http://namematching-service.vbp.internal:9179
   timeoutSec: 300
   retryConfig:
     maxAttempts: 5
     initialIntervalMillis: 5000
 sds:
-  wsUrl: http://sensitive-data-service.vbp.internal:9189/sesntive-data-service/
+  wsUrl: http://sensitive-data-service.vbp.internal:9189
   timeoutSec: 300
 collectory:
   wsUrl: http://collectory.vbp.internal:8080/collectory/ws/

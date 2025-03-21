@@ -67,7 +67,7 @@ biocollect:
   service:
   search: /ws/project/search?initiator=ala&facets=status
 naming:
-  service: http://namematching.biodiversiteitsportaal.dev.internal:9179/namematching-service
+  service: http://namematching.biodiversiteitsportaal.dev.internal:9179
 attribution:
   default: National Species Lists
   common: National Species Lists
