@@ -67,7 +67,7 @@ biocollect:
   service:
   search: /ws/project/search?initiator=ala&facets=status
 naming:
-  service: http://namematching.biodiversiteitsportaal.dev.internal:9179
+  service: http://namematching.biodiversiteitsportaal.dev.internal:9179/namematching-service
 attribution:
   default: National Species Lists
   common: National Species Lists
@@ -148,6 +148,7 @@ openapi:
 
 userdetails:
   url: ${common.protocol}://${common.domain}/userdetails/
+
 userdetails.web.url: ${common.protocol}://${common.domain}/userdetails/
 userdetails.api.url: ${common.protocol}://${common.domain}/userdetails/
 
