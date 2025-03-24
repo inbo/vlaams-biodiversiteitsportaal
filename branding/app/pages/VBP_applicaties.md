@@ -1,5 +1,5 @@
 ---
-title: Doe mee
+title: Applicaties
 _options:
   layout: public/pagesLayout.html
 ---
@@ -73,8 +73,8 @@ _options:
         color: #666;
     }
     .tile img {
-    width: 150px;
-    height: 150px;
+    width: 130px;
+    height: 130px;
     object-fit: contain; /* Zorgt ervoor dat de afbeelding niet vervormt */
     border-radius: 8px; /* Optioneel: afgeronde hoeken */
     }
