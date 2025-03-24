@@ -77,7 +77,7 @@ _options:
         <h1>Beknopte Handleiding voor het Vlaams Biodiversiteitsportaal</h1>
     </header>
   <h2>1. Toegang tot het Portaal</h2>
-    <p><strong>URL:</strong> <a href="#">Vlaams Biodiversiteitsportaal UAT</a> </p>
+    <p><strong>URL:</strong> <a href="#">Vlaams Biodiversiteitsportaal</a> </p>
     <p><strong>Inloggen / Registreren:</strong></p>
     <ul>
         <li>Registreren: Mail naar <a href="mailto:support.natuurdata@inbo.be">support.natuurdata@inbo.be</a>.</li>
