@@ -10,7 +10,7 @@ WORKDIR /project
 
 ARG VERSION=fix-use-occurenceid-as-default-unique-id-when-scanning-ipt
 ARG SOURCE=https://github.com/StefanVanDyck/collectory
-ARG COMMIT=29e12de13c5820b672a6b2dd46bba83c5f74eac6
+ARG COMMIT=43f4391e7757f1636392ad74af0f9f4ca44e1735
 LABEL ala.version=inbo-${COMMIT}
 
 RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
