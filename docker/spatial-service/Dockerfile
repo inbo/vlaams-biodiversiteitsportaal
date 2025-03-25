@@ -54,7 +54,7 @@ RUN mkdir -p /libs \
     && unzip -j /tmp/maxent.zip maxent/maxent.jar -d /libs \
     && rm /tmp/maxent.zip
 
-RUN curl https://inbo-vbp-global-public-artifacts.s3.eu-west-1.amazonaws.com/spatial-service/pipelines-2.19.0-SNAPSHOT-shaded.jar -o /pipelines.jar
+RUN curl -f https://inbo-vbp-global-public-artifacts.s3.eu-west-1.amazonaws.com/spatial-service/pipelines-2.19.0-SNAPSHOT-shaded.jar -o /pipelines.jar
 
 RUN mkdir /data/pipelines-vocabularies && mkdir /data/pipelines-data
 
