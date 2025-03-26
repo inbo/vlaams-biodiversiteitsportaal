@@ -255,7 +255,5 @@ spring:
     activate:
       on-profile: local
 caches:
-  collections:
-    enabled: false
-  log:
+  collections: # needs to be disabled when running locally, if not deadlocks waiting for collectory to became available
     enabled: false
