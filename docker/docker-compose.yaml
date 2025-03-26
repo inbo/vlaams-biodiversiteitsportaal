@@ -19,8 +19,8 @@ services:
       SPRING_PROFILES_ACTIVE: "local"
       GRAILS_ENV: local
       REMOTE_DEBUGGER_PORT: 5005
-      REMOTE_JMX_PORT: 1099
-      REMOTE_JMX_PASSWORD: my-super-secret-password
+#      REMOTE_JMX_PORT: 1099
+#      REMOTE_JMX_PASSWORD: my-super-secret-password
     extra_hosts:
       - "host.docker.internal:host-gateway"
       # Use host, so we can easily swap in port-forwarded version of solr
@@ -28,22 +28,23 @@ services:
     networks:
       default:
         aliases:
-          - alerts
-          - apikey
-          - bie-hub
-          - bie-index
-          - biocache-hub
-          - biocache-service
-          - collectory
-          - doi-service
-          - data-quality-filter-service
-          - image-service
-          - logger
-          - regions
-          - spatial-hub
-          - spatial-service
-          - species-list
-          - userdetails
+          - alerts.vbp.internal
+          - apikey.vbp.internal
+          - bie-hub.vbp.internal
+          - bie-index.vbp.internal
+          - biocache-hub.vbp.internal
+          - biocache-service.vbp.internal
+          - collectory.vbp.internal
+          - doi-service.vbp.internal
+          - data-quality-filter-service.vbp.internal
+          - image-service.vbp.internal
+          - logger.vbp.internal
+          - regions.vbp.internal
+          - sandbox.vbp.internal
+          - spatial-hub.vbp.internal
+          - spatial-service.vbp.internal
+          - species-list.vbp.internal
+          - userdetails.vbp.internal
     depends_on:
       #      solr-init:
       #        condition: service_completed_successfully
@@ -73,6 +74,10 @@ services:
 
   geoserver:
     image: kartoza/geoserver:2.23.2
+    networks:
+      default:
+        aliases:
+          - geoserver.vbp.internal
     volumes:
       #geoserver data folder
       # - ./spatial/geoserver/geoserver-files:/data/geoserver-files/
@@ -146,37 +151,45 @@ services:
       cassandradb:
         condition: service_healthy
 
-  #  solr:
-  #    image: solr:8
-  #    ports:
-  #      - "8983:8983"
-  #    volumes:
-  #      - ../config/solr:/var/solr/init/docker/solr-data:ro
-  #      - solr-data:/var/solr/data
-  #    environment:
-  #      SOLR_HEAP: 2g
-  #      SOLR_MODE: solrcloud
-  #    healthcheck:
-  #      test: [ "CMD-SHELL", "curl -sf http://localhost:8983/solr/" ]
-  #
-  #  solr-init:
-  #    image: solr:8
-  #    entrypoint: ["bash", "-c"]
-  #    command:
-  #      - |-
-  #        set -e -x
-  #        ./server/scripts/cloud-scripts/zkcli.sh -zkhost solr:9983 -cmd upconfig -confdir /var/solr/init/docker/solr-data/bie/ -confname bie
-  #        ./server/scripts/cloud-scripts/zkcli.sh -zkhost solr:9983 -cmd upconfig -confdir /var/solr/init/docker/solr-data/biocache/ -confname biocache
-  #
-  #        curl -X POST --fail 'http://solr:8983/solr/admin/collections?action=CREATE&name=biocache&collection.configName=biocache&numShards=1' || curl -X POST --fail 'http://solr:8983/solr/admin/collections?action=RELOAD&name=biocache'
-  #        curl -X POST --fail 'http://solr:8983/solr/admin/collections?action=CREATE&name=bie&collection.configName=bie&numShards=1' || curl -X POST --fail 'http://solr:8983/solr/admin/collections?action=RELOAD&name=bie'
-  #        curl -X POST --fail 'http://solr:8983/solr/admin/collections?action=CREATE&name=bie-offline&collection.configName=bie&numShards=1' || curl -X POST --fail 'http://solr:8983/solr/admin/collections?action=RELOAD&name=bie-offline'
-  #    volumes:
-  #      - ../config/solr:/var/solr/init/docker/solr-data:ro
-  #      - solr-data:/var/solr/data
-  #    depends_on:
-  #      solr:
-  #        condition: service_healthy
+  solr:
+    image: solr:8
+    networks:
+      default:
+        aliases:
+          - solr.vbp.internal
+    ports:
+      - "8983:8983"
+    volumes:
+      - ../config/solr:/var/solr/init/docker/solr-data:ro
+      - solr-data:/var/solr/data
+    environment:
+      SOLR_HEAP: 2g
+      SOLR_MODE: solrcloud
+    healthcheck:
+      test: [ "CMD-SHELL", "curl -sf http://localhost:8983/solr/" ]
+
+  solr-init:
+    image: solr:8
+    entrypoint: [ "bash", "-c" ]
+    command:
+      - |-
+        set -e -x
+        ./server/scripts/cloud-scripts/zkcli.sh -zkhost solr:9983 -cmd upconfig -confdir /var/solr/init/docker/solr-data/bie/ -confname bie
+        ./server/scripts/cloud-scripts/zkcli.sh -zkhost solr:9983 -cmd clear /configs/bie/managed-schema || true
+        
+        ./server/scripts/cloud-scripts/zkcli.sh -zkhost solr:9983 -cmd upconfig -confdir /var/solr/init/docker/solr-data/biocache/ -confname biocache
+        ./server/scripts/cloud-scripts/zkcli.sh -zkhost solr:9983 -cmd clear /configs/biocache/managed-schema || true
+
+        curl -X POST --fail 'http://solr:8983/solr/admin/collections?action=CREATE&numShards=4&maxShardsPerNode=4&collection.configName=biocache&name=biocache' || curl -X POST --fail 'http://solr:8983/solr/admin/collections?action=RELOAD&name=biocache'
+        curl -X POST --fail 'http://solr:8983/solr/admin/collections?action=CREATE&numShards=4&maxShardsPerNode=4&collection.configName=biocache&name=sandbox'  || curl -X POST --fail 'http://solr:8983/solr/admin/collections?action=RELOAD&name=sandbox'
+        curl -X POST --fail 'http://solr:8983/solr/admin/collections?action=CREATE&numShards=4&maxShardsPerNode=4&collection.configName=bie&name=bie'           || curl -X POST --fail 'http://solr:8983/solr/admin/collections?action=RELOAD&name=bie'
+        curl -X POST --fail 'http://solr:8983/solr/admin/collections?action=CREATE&numShards=4&maxShardsPerNode=4&collection.configName=bie&name=bie-offline'   || curl -X POST --fail 'http://solr:8983/solr/admin/collections?action=RELOAD&name=bie-offline'
+    volumes:
+      - ../config/solr:/var/solr/init/docker/solr-data:ro
+      - solr-data:/var/solr/data
+    depends_on:
+      solr:
+        condition: service_healthy
 
   mailhog:
     image: mailhog/mailhog
@@ -188,6 +201,7 @@ services:
 
   elasticsearch:
     image: elasticsearch:7.17.20
+    domainname: elasticsearch.vbp.internal
     environment:
       ES_JAVA_OPTS: -Xms128m -Xmx1024m
       node.name: elasticsearch
@@ -215,6 +229,10 @@ services:
 
   namematching:
     image: ${DOCKER_REPO:-local}/inbo-vbp-namematching-service:dev
+    networks:
+      default:
+        aliases:
+          - namematching-service.vbp.internal
     command:
       - /config/config/namematching-service/config.yml
     ports:
@@ -222,17 +240,17 @@ services:
     volumes:
       - ../config/namematching-service:/config/config/namematching-service:ro
 
-#  sensitive-data-service:
-#    image: ${DOCKER_REPO:-local}/inbo-vbp-sensitive-data-service:dev
-#    command:
-#      - /config/config/sensitive-data-service/config.yml
-#    ports:
-#      - "9189:9189"
-#      - "5005:5005"
-#    volumes:
-#      - ../config/sensitive-data-service:/config/config/sensitive-data-service:ro
-#    environment:
-#      JAVA_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,address=*:5005,suspend=n"
+  #  sensitive-data-service:
+  #    image: ${DOCKER_REPO:-local}/inbo-vbp-sensitive-data-service:dev
+  #    command:
+  #      - /config/config/sensitive-data-service/config.yml
+  #    ports:
+  #      - "9189:9189"
+  #      - "5005:5005"
+  #    volumes:
+  #      - ../config/sensitive-data-service:/config/config/sensitive-data-service:ro
+  #    environment:
+  #      JAVA_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,address=*:5005,suspend=n"
 
   nginx:
     image: nginx

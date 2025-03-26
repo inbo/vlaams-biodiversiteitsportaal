@@ -11,6 +11,7 @@
                     "requestParam": "grant_type",
                     "match": "*",
                     "claims": {
+                        "client_id": "some-client",
                         "sub": "some-user-id",
                         "something": "else"
                     }

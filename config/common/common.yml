@@ -1,6 +1,7 @@
 common:
   protocol: http
   domain: localhost
+  internalDomain: vbp.internal
   homepage: ${common.protocol}://${common.domain}
   supportEmail: support.natuurdata@inbo.be
 

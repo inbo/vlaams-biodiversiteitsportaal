@@ -20,7 +20,15 @@ SET default_with_oids = false;
 -- CREATE USER ${POSTGRES_USER} WITH PASSWORD '${POSTGRES_PASSWORD}';
 -- GRANT ALL PRIVILEGES ON DATABASE ${POSTGRES_DB} TO ${POSTGRES_USER};
 
-\connect layersdb spatial;
+\connect layersdb;
+
+-- Enable PostGIS (includes raster)
+--CREATE EXTENSION postgis;
+-- Enable Topology
+--CREATE EXTENSION postgis_topology;
+
+-- TODO: Configure somehow
+SET ROLE spatial;
 
 CREATE TYPE searchobjectstype AS
 (
@@ -230,8 +238,8 @@ CREATE TABLE task
 (
     id       serial NOT NULL,
     name     character varying(40),
-    json     character varying(256),
-    error    character varying(256),
+    json     text,
+    error    text,
     created  timestamp without time zone,
     finished timestamp without time zone,
     size     integer,

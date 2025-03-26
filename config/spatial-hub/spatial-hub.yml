@@ -228,17 +228,6 @@ journalmap:
 collections:
   url: "${common.protocol}://${common.domain}/collectory"
 
-sandbox:
-  url: "${common.protocol}://${common.domain}/spatial-hub/sandbox"
-  uiUrl: "${common.protocol}://${common.domain}/spatial-hub/"
-
-sandboxService:
-  url: "${common.protocol}://${common.domain}/biocache-service"
-
-sandboxSpatial:
-  hubUrl: "${common.protocol}://${common.domain}/biocache-hub"
-  serviceUrl: "${common.protocol}://${common.domain}/biocache-service"
-
 gazField: cl2123
 
 userObjectsField: cl1083
@@ -469,6 +458,20 @@ fq:
 #      label: 'Belgische Lambert 1972'
 #      definition:
 #        code: 'EPSG:31370'
+
+
+sandbox:
+  url: ${common.protocol}://${common.domain}/sandbox
+  uiUrl: ${common.protocol}://${common.domain}/sandbox
+
+sandboxService:
+  url: ${common.protocol}://${common.domain}/sandbox
+
+
+sandboxSpatial:
+  hubUrl: ${common.protocol}://${common.domain}/spatial-hub/sandbox
+  serviceUrl: ${common.protocol}://${common.domain}/sandbox
+
 ---
 environments:
   inbo-dev:

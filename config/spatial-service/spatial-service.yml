@@ -25,7 +25,7 @@ spatialHubUrl: ${common.protocol}://${common.domain}/spatial-hub/
 #
 
 geoserver:
-  url: '${common.protocol}://${common.domain}/geoserver'
+  url: 'http://geoserver.${common.internalDomain}:8080/geoserver'
   username: 'admin'
   password: 'geoserver'
   canDeploy: true
@@ -71,7 +71,7 @@ ala.baseURL: '${common.protocol}://${common.domain}'
 bie.baseURL: '${common.protocol}://bie.${common.domain}'
 bie.searchPath: '/search'
 
-namematching.url: http://namematching.biodiversiteitsportaal.dev.internal:9179
+namematching.url: http://namematching-service.${common.internalDomain}:9179
 
 records.url: '${common.protocol}://archives.${common.domain}/archives/exports/lat_lon_taxon.zip'
 
@@ -91,7 +91,7 @@ layers_store:
   GEONETWORK_URL: '${common.protocol}://${common.domain}/spatial-hub/geonetwork'
   LAYER_INDEX_URL: ${common.protocol}://${common.domain}/spatial-hub/layers-service
 
-apiKeyCheckUrlTemplate: '${common.protocol}://${common.domain}/apikey/ws/check?apikey={0}'
+apiKeyCheckUrlTemplate: 'http://apikey.${common.internalDomain}:8080/apikey/ws/check?apikey={0}'
 spatialService:
   remote: "${common.protocol}://${common.domain}/spatial-service"
 
@@ -107,10 +107,10 @@ management:
 useFixedLocale: en
 
 sandboxEnabled: true
-sandboxSolrUrl: http://solr.vbp.internal:8983/solr
+sandboxSolrUrl: http://solr.${common.internalDomain}:8983/solr
 sandboxSolrCollection: sandbox
 sandboxThreadCount: 2
-pipelinesCmd: "java -Dspark.local.dir=/data/spatial-data/sandbox/tmp -Djava.io.tmpdir=/data/spatial-data/sandbox/tmp -cp /pipelines.jar"
+pipelinesCmd: "java -Dspark.local.dir=/data/spatial-data/sandbox/tmp -Djava.io.tmpdir=/data/spatial-data/sandbox/tmp -cp /pipelines/pipelines.jar"
 pipelinesConfig: "--config=/config/config/spatial-service/la-pipelines.yaml"
 
 logging:

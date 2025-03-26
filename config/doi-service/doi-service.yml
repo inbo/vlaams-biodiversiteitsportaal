@@ -67,7 +67,7 @@ file:
   store: /data/doi-service/files
 
 biocache:
-  wsUrl: https://records-ws.${common.domain}
+  wsUrl: https://biocache-service.${common.internalDomain}:8080/biocache-service
 
 #dqservice: # TODO
 #  url: https://data-quality-service.ala.org.au

@@ -3,8 +3,8 @@ ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 
-ARG VERSION=poc-rbac
-ARG COMMIT=d549b665d9508a08b5a2b3dfb5b17af6d90d0e6c
+ARG VERSION=try-deconflicting-beans
+ARG COMMIT=b2c9b7cd0f35e31f2c60c2870d9d3fe264e73092
 ARG SOURCE=https://github.com/StefanVanDyck/biocache-service.git
 LABEL ala.version=inbo-${COMMIT}
 
@@ -26,12 +26,13 @@ RUN ls -la /project/build/libs/
 FROM tomcat-base
 
 ARG VERSION=3.7.0-SNAPSHOT
-ARG COMMIT=d549b665d9508a08b5a2b3dfb5b17af6d90d0e6c
+ARG COMMIT=b2c9b7cd0f35e31f2c60c2870d9d3fe264e73092
 LABEL ala.version=inbo-${COMMIT}
 
 
 COPY --from=builder /project/build/libs/biocache-service-${VERSION}.war ${CATALINA_HOME}/webapps/biocache-service.war
 COPY biocache-service.xml ${CATALINA_HOME}/conf/portal/localhost/biocache-service.xml
+COPY sandbox.xml ${CATALINA_HOME}/conf/portal/localhost/sandbox.xml
 
 # Symlink to i18n files location
 RUN mkdir -p /opt/atlas/i18n \

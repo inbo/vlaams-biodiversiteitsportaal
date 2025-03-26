@@ -1,6 +1,10 @@
 services:
   biocache-hub:
     image: ${DOCKER_REPO:-local}/inbo-vbp-biocache-hub:dev
+    networks:
+      default:
+        aliases:
+          - biocache-hub.vbp.internal
     build:
       context: biocache-hub
     environment:
@@ -10,6 +14,10 @@ services:
 
   bie-hub:
     image: ${DOCKER_REPO:-local}/inbo-vbp-bie-hub:dev
+    networks:
+      default:
+        aliases:
+          - bie-hub.vbp.internal
     build:
       context: bie-hub
     environment:
@@ -19,6 +27,10 @@ services:
 
   bie-index:
     image: ${DOCKER_REPO:-local}/inbo-vbp-bie-index:dev
+    networks:
+      default:
+        aliases:
+          - bie-index.vbp.internal
     build:
       context: bie-index
     environment:
@@ -31,6 +43,10 @@ services:
 
   biocache-service:
     image: ${DOCKER_REPO:-local}/inbo-vbp-biocache-service:dev
+    networks:
+      default:
+        aliases:
+          - biocache-service.vbp.internal
 #    build:
 #      context: biocache-service
     environment:
@@ -50,6 +66,10 @@ services:
 
   apikey:
     image: ${DOCKER_REPO:-local}/inbo-vbp-apikey:dev
+    networks:
+      default:
+        aliases:
+          - apikey.vbp.internal
     build:
       context: apikey
     environment:
@@ -63,6 +83,10 @@ services:
 
   alerts:
     image: ${DOCKER_REPO:-local}/inbo-vbp-alerts:dev
+    networks:
+      default:
+        aliases:
+          - alerts.vbp.internal
     build:
       context: alerts
     environment:
@@ -75,6 +99,10 @@ services:
 
   collectory:
     image: ${DOCKER_REPO:-local}/inbo-vbp-collectory:dev
+    networks:
+      default:
+        aliases:
+          - collectory.vbp.internal
     build:
       context: collectory
     environment:
@@ -89,6 +117,10 @@ services:
 
   data-quality-filter-service:
     image: ${DOCKER_REPO:-local}/inbo-vbp-data-quality-filter-service:dev
+    networks:
+      default:
+        aliases:
+          - data-quality-filter-service.vbp.internal
     build:
       context: data-quality-filter-service
     environment:
@@ -101,6 +133,10 @@ services:
 
   doi-service:
     image: ${DOCKER_REPO:-local}/inbo-vbp-doi-service:dev
+    networks:
+      default:
+        aliases:
+          - doi-service.vbp.internal
     build:
       context: doi-service
     environment:
@@ -113,6 +149,10 @@ services:
 
   logger:
     image: ${DOCKER_REPO:-local}/inbo-vbp-logger:dev
+    networks:
+      default:
+        aliases:
+          - logger.vbp.internal
     build:
       context: logger
     environment:
@@ -125,6 +165,10 @@ services:
 
   species-list:
     image: ${DOCKER_REPO:-local}/inbo-vbp-species-list:dev
+    networks:
+      default:
+        aliases:
+          - species-list.vbp.internal
     build:
       context: species-list
     environment:
@@ -138,6 +182,10 @@ services:
 
   regions:
     image: ${DOCKER_REPO:-local}/inbo-vbp-regions:dev
+    networks:
+      default:
+        aliases:
+          - regions.vbp.internal
     build:
       context: regions
     environment:
@@ -153,6 +201,10 @@ services:
 
   image-service:
     image: ${DOCKER_REPO:-local}/inbo-vbp-image-service:dev
+    networks:
+      default:
+        aliases:
+          - image-service.vbp.internal
     build:
       context: image-service
     volumes:
@@ -166,6 +218,10 @@ services:
 
   spatial-hub:
     image: ${DOCKER_REPO:-local}/inbo-vbp-spatial-hub:dev
+    networks:
+      default:
+        aliases:
+          - spatial-hub.vbp.internal
     build:
       context: spatial-hub
     environment:
@@ -178,6 +234,10 @@ services:
 
   spatial-service:
     image: ${DOCKER_REPO:-local}/inbo-vbp-spatial-service:dev
+    networks:
+      default:
+        aliases:
+          - spatial-service.vbp.internal
     build:
       context: spatial-service
     environment:
@@ -196,6 +256,10 @@ services:
 
   userdetails:
     image: ${DOCKER_REPO:-local}/inbo-vbp-userdetails:dev
+    networks:
+      default:
+        aliases:
+          - userdetails.vbp.internal
     build:
       context: userdetails
     environment:
@@ -227,6 +291,10 @@ services:
 
   geoserver:
     image: kartoza/geoserver:2.23.2
+    networks:
+      default:
+        aliases:
+          - geoserver.vbp.internal
     volumes:
       #geoserver data folder
       # - ./spatial/geoserver/geoserver-files:/data/geoserver-files/
@@ -291,6 +359,10 @@ services:
 
   solr:
     image: solr:8
+    networks:
+      default:
+        aliases:
+          - solr.vbp.internal
     ports:
       - "8983:8983"
     volumes:
@@ -331,6 +403,10 @@ services:
 
   elasticsearch:
     image: elasticsearch:7.17.20
+    networks:
+      default:
+        aliases:
+          - elasticsearch.vbp.internal
     environment:
       - node.name=elasticsearch
       - xpack.security.enabled=false
@@ -355,8 +431,12 @@ services:
       timeout: 10s
       retries: 5
 
-  namematching:
+  namematching-service:
     image: ${DOCKER_REPO:-local}/inbo-vbp-namematching-service:dev
+    networks:
+      default:
+        aliases:
+          - namematching-service.vbp.internal
     ports:
       - "9179:9179"
 

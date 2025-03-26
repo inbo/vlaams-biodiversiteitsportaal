@@ -42,10 +42,10 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
     proj-data \
     proj-data-be
 
-RUN mkdir /data/pipelines-shp && \
-    curl https://inbo-vbp-global-public-artifacts.s3.eu-west-1.amazonaws.com/spatial-service/pipelines-shapefiles.zip -o /data/pipelines-shp/pipelines-shapefiles.zip && \
-    unzip /data/pipelines-shp/pipelines-shapefiles.zip -d /data/pipelines-shp && \
-    rm /data/pipelines-shp/pipelines-shapefiles.zip
+RUN mkdir -p /pipelines/shp && \
+    curl https://inbo-vbp-global-public-artifacts.s3.eu-west-1.amazonaws.com/spatial-service/pipelines-shapefiles.zip -o /pipelines/shp/pipelines-shapefiles.zip && \
+    unzip /pipelines/shp/pipelines-shapefiles.zip -d /pipelines/shp && \
+    rm /pipelines/shp/pipelines-shapefiles.zip
 
 # Libraries require linking from <data.dir>/modelling/maxent because the path is required to be a subfolder of the data directory
 RUN mkdir -p /libs \
@@ -54,11 +54,10 @@ RUN mkdir -p /libs \
     && unzip -j /tmp/maxent.zip maxent/maxent.jar -d /libs \
     && rm /tmp/maxent.zip
 
-RUN curl -f https://inbo-vbp-global-public-artifacts.s3.eu-west-1.amazonaws.com/spatial-service/pipelines-2.19.0-SNAPSHOT-shaded.jar -o /pipelines.jar
+RUN curl -f https://inbo-vbp-global-public-artifacts.s3.eu-west-1.amazonaws.com/spatial-service/pipelines-2.19.0-SNAPSHOT-shaded.jar -o /pipelines/pipelines.jar
 
-RUN mkdir /data/pipelines-vocabularies && mkdir /data/pipelines-data
 
-COPY pipelines/vocabularies/* /data/pipelines-vocabularies/
+COPY pipelines/vocabularies/* /pipelines/vocabularies/
 
 COPY --from=builder /project/build/libs/project-${VERSION}-plain.war ${CATALINA_HOME}/webapps/spatial-service.war
 

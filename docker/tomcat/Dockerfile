@@ -26,7 +26,8 @@ RUN mkdir -p ${CATALINA_HOME}/conf/portal/localhost
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
 ######################################### PORTAL FULL #########################################
-FROM base AS portal
+# Start from spatial-service as that image has a bunch of additional dependencies installed
+FROM spatial-service AS portal
 
 COPY --from=alerts ${CATALINA_HOME}/webapps webapps
 COPY --from=alerts ${CATALINA_HOME}/conf/portal/localhost conf/portal/localhost
@@ -45,6 +46,8 @@ COPY --from=biocache-hub ${CATALINA_HOME}/conf/portal/localhost conf/portal/loca
 
 COPY --from=biocache-service ${CATALINA_HOME}/webapps webapps
 COPY --from=biocache-service ${CATALINA_HOME}/conf/portal/localhost conf/portal/localhost
+# Second instance of biocache-service for user sandbox
+RUN ln -s ./biocache-service.war webapps/sandbox.war
 
 COPY --from=collectory ${CATALINA_HOME}/webapps webapps
 COPY --from=collectory ${CATALINA_HOME}/conf/portal/localhost conf/portal/localhost

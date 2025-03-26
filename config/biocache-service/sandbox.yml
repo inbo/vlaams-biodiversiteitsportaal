@@ -1,0 +1,19 @@
+---
+### OIDC Credentials ###
+security:
+  jwt:
+    clientId: sandbox
+  oidc:
+    clientId: "sandbox"
+    secret: "sandbox-oidc-super-secret"
+webservice:
+  client-id: "sandbox"
+  client-secret: "sandbox-oidc-super-secret"
+
+spring:
+  application:
+    name: sandbox
+
+solr:
+  home: http://solr.${common.internalDomain}:8983/solr/sandbox
+

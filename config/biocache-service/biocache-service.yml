@@ -63,7 +63,7 @@ citations:
   enabled: false
 collection:
   contacts:
-    url: ${common.protocol}://${common.domain}/collectory/ws/collection
+    url: http://collectory.${common.internalDomain}:8080/collectory/ws/collection
 concurrent:
   downloads:
     json: '[{"label": "smallSolr", "threads": 4, "maxRecords": 50000, "type":
@@ -113,7 +113,7 @@ download:
     title:
       prefix: "Waarnemingen download"
     landing:
-        page: ${common.protocol}://${common.domain}/doi-service/
+      page: ${common.protocol}://${common.domain}/doi-service/
     readme:
       template: /config/config/biocache-service/templates/readme.html
   readme:
@@ -158,7 +158,7 @@ name:
   index:
     dir: /data/lucene/namematching_v13
 namesearch:
-  url: http://host.docker.internal:9179
+  url: http://namematching-service.${common.internalDomain}:9179
 qid:
   cache:
     largestCacheableSize: 5242880
@@ -168,18 +168,18 @@ qid:
   wkt:
     maxPoints: 5000
 registry:
-  url: ${common.protocol}://${common.domain}/collectory/ws
+  url: http://collectory.${common.internalDomain}:8080/collectory/ws
 sample:
   fields: none
 sds:
-  url: ${common.protocol}://sds.${common.domain}/sensitive-species-data.xml
+  url: http://sensitive-data-service.${common.internalDomain}:9189/sensitive-species-data.xml
 service:
   bie:
     enabled: true
     ui:
       url: ${common.protocol}://${common.domain}/bie-hub
     ws:
-      url: ${common.protocol}://${common.domain}/bie-index/ws
+      url: http://bie-index.${common.internalDomain}:8080/bie-index/ws
 shapefile:
   tmp:
     dir: /data/biocache-download/tmp
@@ -188,7 +188,7 @@ solr:
     busywaitsleep: 100
     maxthreads: 30
     writertimeout: 60000
-  home: http://host.docker.internal:8983/solr/biocache
+  home: http://solr.${common.internalDomain}:8983/solr/biocache
   server:
     indexVersion:
       refresh: 300000
@@ -228,14 +228,14 @@ wms:
     max: 30000
 
 cors:
-  allowedOrigins: ["*"]
+  allowedOrigins: [ "*" ]
 
 userdetails:
   url: ${common.protocol}://${common.domain}/userdetails
   web:
     url: ${common.protocol}://${common.domain}/userdetails/
   api:
-    url: ${common.protocol}://${common.domain}/userdetails/
+    url: http://userdetails.${common.internalDomain}:8080/userdetails/
 
 doi:
   service:
@@ -249,3 +249,13 @@ rbac:
 spring:
   main:
     banner-mode: off
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+caches:
+  collections:
+    enabled: false
+  log:
+    enabled: false

@@ -134,7 +134,7 @@ userDetails:
   url: ${common.protocol}://${common.domain}/userdetails/
 userdetails:
   api:
-    url: ${common.protocol}://${common.domain}/userdetails/
+    url: http://userdetails.${common.internalDomain}:8080/userdetails/
   url: ${common.protocol}://${common.domain}/userdetails/
   web:
     url: ${common.protocol}://${common.domain}/userdetails/

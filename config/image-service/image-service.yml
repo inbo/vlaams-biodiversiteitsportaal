@@ -64,7 +64,7 @@ collectory:
 biocache:
   baseURL: "${common.protocol}://${common.domain}/biocache-hub"
   service:
-      baseURL: "${common.protocol}://${common.domain}/biocache-service"
+      baseURL: "http://biocache-service.${common.internalDomain}:8080/biocache-service"
 bie:
   baseURL: "${common.protocol}://${common.domain}/bie-hub"
 

@@ -19,14 +19,14 @@ userDetails:
   url: ${common.protocol}://${common.domain}/userdetails/
 biocache:
   base: ${common.protocol}://${common.domain}/biocache-hub
-  service: ${common.protocol}://${common.domain}/biocache-service
+  service: http://biocache-service.${common.internalDomain}:8080/biocache-service
 collectory:
   base: ${common.protocol}://${common.domain}/collectory
-  service: ${common.protocol}://${common.domain}/collectory/ws
+  service: http://collectory.${common.internalDomain}:8080/collectory/ws
   # A list of uids for the national species list datasets
   nationalSpeciesDatsets:
 layers:
-  service: ${common.protocol}://${common.domain}/spatial-service
+  service: http://spatial-service.${common.internalDomain}/spatial-service
   gazetteerId:
 images:
   # URL of image configuration file
@@ -56,7 +56,7 @@ wordPress:
   contentOnlyParams: ?content-only=1&categories=1
 lists:
   useListWs: false
-  service: ${common.protocol}://${common.domain}/species-list/ws
+  service: http://species-list.${common.internalDomain}:8080/species-list/ws
   ui: ${common.protocol}://${common.domain}/species-list
   conservation: /speciesList?isAuthoritative=eq:true&isThreatened=eq:true&max={0}&offset={1}
   search: /speciesList/?isAuthoritative=eq:true&max={0}&offset={1}
@@ -67,7 +67,7 @@ biocollect:
   service:
   search: /ws/project/search?initiator=ala&facets=status
 naming:
-  service: http://namematching.biodiversiteitsportaal.dev.internal:9179
+  service: http://namematching-service.${common.internalDomain}:9179
 attribution:
   default: National Species Lists
   common: National Species Lists
@@ -89,22 +89,22 @@ wiki:
   config: file:///config/config/bie-index/envs/local/wiki-lists.json
 solr:
   admin:
-    connection: http://solr:8983/solr
+    connection: http://solr.${common.internalDomain}:8983/solr
     type: HTTP
     queueSize: 10
     threadCount: 4
   live:
-    connection: http://solr:8983/solr/bie
+    connection: http://solr.${common.internalDomain}:8983/solr/bie
     type: HTTP
     queueSize: 10
     threadCount: 4
   updatingLive:
-    connection: http://solr:8983/solr/bie
+    connection: http://solr.${common.internalDomain}:8983/solr/bie
     type: UPDATE
     queueSize: 10
     threadCount: 4
   offline:
-    connection: http://solr:8983/solr/bie-offline
+    connection: http://solr.${common.internalDomain}:8983/solr/bie-offline
     type: UPDATE
     queueSize: 10
     threadCount: 4
