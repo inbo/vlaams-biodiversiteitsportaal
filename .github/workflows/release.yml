@@ -153,6 +153,7 @@ jobs:
       contents: write
       actions: write
     strategy:
+      fail-fast: false
       matrix:
         docker: ${{ fromJSON(needs.get-versions.outputs.docker_build_matrix) }}
     steps:
@@ -186,9 +187,9 @@ jobs:
           cache-binary: false
           platforms: linux/amd64,linux/arm64
           # Should probably make this our own docker pull-through
-          buildkitd-config-inline: |
-            [registry."docker.io"]
-              mirrors = ["public.ecr.aws/vend"]
+#          buildkitd-config-inline: |
+#            [registry."docker.io"]
+#              mirrors = ["public.ecr.aws/vend"]
 #          driver-opts: |
 #            image=moby/buildkit:buildx-stable-1
 
