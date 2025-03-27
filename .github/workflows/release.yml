@@ -70,7 +70,7 @@ jobs:
             if [ "${number_of_changes_since_last_tag}" != "0" ]; then
               echo "Setting new version for docker ${component} to ${new_version} with ${number_of_changes_since_last_tag} changes"
               DOCKER_VERSIONS=$(jq -c ". += {\"${component}\": \"${new_version}\"}" <<< ${DOCKER_VERSIONS})
-              DOCKER_BUILD_MATRIX=$(jq ". += [{\"name\": \"${component}\",\"version\": \"${new_version}\"}]" <<< ${DOCKER_BUILD_MATRIX})
+              DOCKER_BUILD_MATRIX=$(jq -c ". += [{\"name\": \"${component}\", \"version\": \"${new_version}\"}]" <<< ${DOCKER_BUILD_MATRIX})
               ALL_VERSIONS=$(jq -c ".docker += {\"${component}\": \"${new_version}\"}" <<< ${ALL_VERSIONS})
             else
               ALL_VERSIONS=$(jq -c ".docker += {\"${component}\": \"${previous_version}\"}" <<< ${ALL_VERSIONS})
