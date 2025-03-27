@@ -188,7 +188,7 @@ jobs:
           # Should probably make this our own docker pull-through
           buildkitd-config-inline: |
             [registry."docker.io"]
-              mirrors = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/docker-hub"]
+              mirrors = ["public.ecr.aws/vend"]
 #          driver-opts: |
 #            image=moby/buildkit:buildx-stable-1
 
