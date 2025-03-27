@@ -84,6 +84,7 @@ jobs:
       branding_version: ${{ steps.versions.outputs.branding_version }}
       config_versions: ${{ toJSON(steps.versions.outputs.config_versions) }}
       docker_versions: ${{ toJSON(steps.versions.outputs.docker_versions) }}
+      docker_build_matrix: ${{ toJSON(steps.versions.outputs.docker_build_matrix) }}
       all_versions: ${{ toJSON(steps.versions.outputs.all_versions) }}
 
 #  build-and-release-branding:
