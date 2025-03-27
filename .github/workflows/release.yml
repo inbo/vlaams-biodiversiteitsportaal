@@ -154,7 +154,6 @@ jobs:
       actions: write
     strategy:
       matrix:
-#        docker: [{"name":"alerts", "version": "0.1.25"},{"name":"apikey","version":"0.1.15"}]
         docker: ${{ fromJSON(needs.get-versions.outputs.docker_build_matrix) }}
     steps:
       - uses: actions/checkout@v4
@@ -185,9 +184,9 @@ jobs:
           cache-binary: false
           platforms: linux/amd64,linux/arm64
           # Should probably make this our own docker pull-through
-#          buildkitd-config-inline: |
-#            [registry."docker.io"]
-#              mirrors = ["public.ecr.aws/vend"]
+          buildkitd-config-inline: |
+            [registry."docker.io"]
+              mirrors = ["${{ secrets.ECR_REPO }}/dockerhub"]
 #          driver-opts: |
 #            image=moby/buildkit:buildx-stable-1
 
