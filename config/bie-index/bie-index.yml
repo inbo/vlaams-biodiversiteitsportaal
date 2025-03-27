@@ -123,8 +123,8 @@ skin:
 useLegacyAuto: false
 import:
   sequence: collectory,taxonomy-all,vernacular,denormalise,layers,localities,conservation-lists,knowledgebase,species-lists,favourites,weights,link-identifiers,images,occurrences,hidden-images,wiki-urls,suggest-index
-  sequenceDaily: conservation-lists,wordpress,knowledgebase,biocollect,species-lists,favourites,suggest-index,images,hidden-images,wiki-urls,sitemap,swap
-  sequenceWeekly: occurrences,layers,regions,localities,suggest-index,swap
+  sequenceDaily: conservation-lists,wordpress,knowledgebase,biocollect,species-lists,favourites,suggest-index,images,hidden-images,wiki-urls,sitemap
+  sequenceWeekly: occurrences,layers,regions,localities,suggest-index
   dailyRunHour: 2
   weeklyRunDay: 6
   favouritesConfigUrl: file:///config/config/bie-index/envs/local/favourites.json
@@ -197,6 +197,8 @@ environments:
       config: file:///config/config/bie-index/envs/uat/wiki-lists.json
     import:
       favouritesConfigUrl: file:///config/config/bie-index/envs/uat/favourites.json
+      dailyRunHour: 12
+      weeklyRunDay: 3
 
   inbo_dev:
     images:
@@ -209,6 +211,8 @@ environments:
       config: file:///config/config/bie-index/envs/dev/wiki-lists.json
     import:
       favouritesConfigUrl: file:///config/config/bie-index/envs/dev/favourites.json
+      dailyRunHour: 12
+      weeklyRunDay: 3
 
   local:
     images:
