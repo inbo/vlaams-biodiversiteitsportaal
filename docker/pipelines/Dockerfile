@@ -2,13 +2,13 @@
 ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-maven AS builder
 
-ARG VERSION=1084
+ARG VERSION=fixed-stuff
 ARG COMMIT=15db71c4357e9f3d644aa6ca38e697b74815b416
-ARG SOURCE=https://github.com/gbif/pipelines.git
+ARG SOURCE=https://github.com/StefanVanDyck/pipelines.git
 LABEL ala.version=inbo-${COMMIT}
 
 WORKDIR /app
-RUN git clone --branch ${VERSION} ${SOURCE} .
+RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
 
 RUN --mount=type=cache,target=/root/.m2/repository \
     mvn --batch-mode --no-transfer-progress \
