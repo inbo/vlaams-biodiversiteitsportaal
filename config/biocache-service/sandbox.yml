@@ -17,3 +17,5 @@ spring:
 solr:
   home: http://solr.${common.internalDomain}:8983/solr/sandbox
 
+webservices:
+  root: ${common.protocol}://${common.domain}/sandbox
