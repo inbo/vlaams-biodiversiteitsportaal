@@ -25,7 +25,7 @@ jobs:
         id: versions
         env:
           CONFIG_COMPONENTS: "alerts apikey bie-hub bie-index biocache-hub biocache-service collectory data-quality-filter-service doi-service grafana image-service logger namematching-service regions solr sensitive-data-service spatial-hub spatial-service species-list userdetails"
-          DOCKER_COMPONENTS: "alerts apikey bie-hub bie-index biocache-hub biocache-service collectory data-quality-filter-service doi-service image-service pipelines logger namematching-service regions sensitive-data-service spatial-hub spatial-service species-list userdetails"
+          DOCKER_COMPONENTS: "alerts apikey bie-hub bie-index biocache-hub biocache-service collectory data-quality-filter-service doi-service image-service pipelines logger namematching-service regions sandbox sensitive-data-service spatial-hub spatial-service species-list userdetails"
         run: |
           # Branding
           ALL_VERSIONS='{}'

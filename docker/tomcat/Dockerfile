@@ -46,8 +46,6 @@ COPY --from=biocache-hub ${CATALINA_HOME}/conf/portal/localhost conf/portal/loca
 
 COPY --from=biocache-service ${CATALINA_HOME}/webapps webapps
 COPY --from=biocache-service ${CATALINA_HOME}/conf/portal/localhost conf/portal/localhost
-# Second instance of biocache-service for user sandbox
-RUN ln -s ./biocache-service.war webapps/sandbox.war
 
 COPY --from=collectory ${CATALINA_HOME}/webapps webapps
 COPY --from=collectory ${CATALINA_HOME}/conf/portal/localhost conf/portal/localhost
@@ -63,6 +61,9 @@ COPY --from=logger ${CATALINA_HOME}/conf/portal/localhost conf/portal/localhost
 
 COPY --from=regions ${CATALINA_HOME}/webapps webapps
 COPY --from=regions ${CATALINA_HOME}/conf/portal/localhost conf/portal/localhost
+
+COPY --from=sandbox ${CATALINA_HOME}/webapps webapps
+COPY --from=sandbox ${CATALINA_HOME}/conf/portal/localhost conf/portal/localhost
 
 COPY --from=spatial-hub ${CATALINA_HOME}/webapps webapps
 COPY --from=spatial-hub ${CATALINA_HOME}/conf/portal/localhost conf/portal/localhost

@@ -46,6 +46,7 @@ target "portal-full" {
     "image-service"               = "target:image-service"
     "logger"                      = "target:logger"
     "regions"                     = "target:regions"
+    "sandbox"                     = "target:sandbox"
     "spatial-hub"                 = "target:spatial-hub"
     "spatial-service"             = "target:spatial-service"
     "species-list"                = "target:species-list"
@@ -191,6 +192,14 @@ target "regions" {
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-regions:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-regions:${TAG}"]
+}
+
+target "sandbox" {
+  context = "./sandbox"
+  contexts = {
+    "biocache-service" = "target:biocache-service"
+  }
+  tags = ["${DOCKER_REPO}/inbo-vbp-sandbox:${TAG}"]
 }
 
 target "sensitive-data-service" {
