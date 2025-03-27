@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - 'main'
-      - 'attempt-matrix-build'
 
 # Only allow one workflow to run at a time
 concurrency:
@@ -87,64 +86,64 @@ jobs:
       docker_build_matrix: ${{ steps.versions.outputs.docker_build_matrix }}
       all_versions: ${{ toJSON(steps.versions.outputs.all_versions) }}
 
-#  build-and-release-branding:
-#    runs-on: [ self-hosted ]
-#    needs: get-versions
-#    if: needs.get-versions.outputs.branding_version != ''
-#    steps:
-#      - uses: actions/checkout@v4
-#
-#      - uses: actions/setup-node@v4
-#        with:
-#          node-version: 20
-#          cache: 'npm'
-#          cache-dependency-path: branding/package-lock.json
-#
-#      - name: Build branding website S3
-#        working-directory: ./branding
-#        run: |
-#          set -e -x -o pipefail
-#
-#          git submodule update --init --recursive
-#          cd commonui-bs3-2019
-#          git submodule foreach --recursive 'git checkout commonui-bs3-2019'
-#
-#          npm install
-#          npx gulp build
-#
-#          cd ..
-#          npm install
-#          npm run build:prod
-#          tar -cvzf branding-${{ needs.get-versions.outputs.branding_version }}.tar.gz -C "$(pwd)/public" ./
-#
-#      - name: Create release
-#        uses: ncipollo/release-action@v1
-#        with:
-#          commit: ${{ github.sha }}
-#          tag: branding-v${{ needs.get-versions.outputs.branding_version }}
-#          artifacts: "branding/branding-${{ needs.get-versions.outputs.branding_version }}.tar.gz"
-#
-#  version-config-files:
-#    runs-on: [ self-hosted ]
-#    needs: get-versions
-#    if: fromJSON(needs.get-versions.outputs.config_versions) != '{}'
-#    permissions:
-#      contents: write
-#    steps:
-#      - name: Create tags
-#        uses: actions/github-script@v7
-#        with:
-#          script: |
-#            const versions = ${{ fromJSON(needs.get-versions.outputs.config_versions) }};
-#            console.log(versions);
-#            for (const [component, version] of Object.entries(versions)) {
-#              github.rest.git.createRef({
-#                owner: context.repo.owner,
-#                repo: context.repo.repo,
-#                ref: `refs/tags/config-${component}-${version}`,
-#                sha: context.sha
-#              })
-#            }
+  build-and-release-branding:
+    runs-on: [ self-hosted ]
+    needs: get-versions
+    if: needs.get-versions.outputs.branding_version != ''
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: branding/package-lock.json
+
+      - name: Build branding website S3
+        working-directory: ./branding
+        run: |
+          set -e -x -o pipefail
+
+          git submodule update --init --recursive
+          cd commonui-bs3-2019
+          git submodule foreach --recursive 'git checkout commonui-bs3-2019'
+
+          npm install
+          npx gulp build
+
+          cd ..
+          npm install
+          npm run build:prod
+          tar -cvzf branding-${{ needs.get-versions.outputs.branding_version }}.tar.gz -C "$(pwd)/public" ./
+
+      - name: Create release
+        uses: ncipollo/release-action@v1
+        with:
+          commit: ${{ github.sha }}
+          tag: branding-v${{ needs.get-versions.outputs.branding_version }}
+          artifacts: "branding/branding-${{ needs.get-versions.outputs.branding_version }}.tar.gz"
+
+  version-config-files:
+    runs-on: [ self-hosted ]
+    needs: get-versions
+    if: fromJSON(needs.get-versions.outputs.config_versions) != '{}'
+    permissions:
+      contents: write
+    steps:
+      - name: Create tags
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const versions = ${{ fromJSON(needs.get-versions.outputs.config_versions) }};
+            console.log(versions);
+            for (const [component, version] of Object.entries(versions)) {
+              github.rest.git.createRef({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                ref: `refs/tags/config-${component}-${version}`,
+                sha: context.sha
+              })
+            }
 
   build-and-push-docker-images:
     runs-on: [ self-hosted ]
@@ -267,79 +266,79 @@ jobs:
           git tag "${GIT_TAG}"
           git push origin "${GIT_TAG}"
 
-#  deploy:
-#    needs:
-#      - get-versions
-#      - build-and-release-branding
-#      - version-config-files
-#      - build-and-push-docker-images
-#    # Only run if no failures or cancellations and at least one was not skipped
-#    if: |
-#      always()
-#        && !contains(needs.*.result, 'failure')
-#        && !contains(needs.*.result, 'cancelled')
-#        && contains(needs.*.result, 'success')
-#    runs-on: [ self-hosted ]
-#    permissions:
-#      contents: write
-#      pull-requests: write
-#    steps:
-#      - name: Checkout terraform repository
-#        uses: actions/checkout@v4
-#        with:
-#          repository: 'inbo/inbo-aws-biodiversiteitsportaal-terraform'
-#          token: ${{ secrets.GIT_PAT_TOKEN }}
-#          fetch-depth: 0
-#
-#      - name: Update versions in dev deployment
-#        id: update-versions
-#        run: |
-#          set -e -o pipefail
-#
-#          git checkout automated-version-update || git checkout -b automated-version-update
-#
-#          git config --global user.email "support.natuurdata@inbo.be"
-#          git config --global user.name "Github Actions"
-#
-#          jq <<< '${{ fromJSON(needs.get-versions.outputs.all_versions) }}' > ./versions.json
-#
-#          if [ -n "$(git status --porcelain)" ]; then
-#            git add versions.json
-#            git commit -m "Github actions: automated update of versions"
-#            git push --set-upstream origin automated-version-update
-#            echo "changes=true" >> "$GITHUB_OUTPUT"
-#          else
-#            echo "no changes";
-#            echo "changes=false" >> "$GITHUB_OUTPUT"
-#          fi
-#
-#      - name: Create Pull Request
-#        uses: actions/github-script@v7
-#        if: steps.update-versions.outputs.changes == 'true'
-#        with:
-#          github-token: ${{ secrets.GIT_PAT_TOKEN }}
-#          script: |
-#            const openPrs = await github.rest.pulls.list({
-#              owner: 'inbo',
-#              repo: 'inbo-aws-biodiversiteitsportaal-terraform',
-#              state: 'open',
-#              head: 'inbo:automated-version-update'
-#            });
-#            if (openPrs.data.length === 1) {
-#              console.log(`PR already exists: ${openPrs.data[0].html_url}`);
-#              return;
-#            }
-#            const result = await github.rest.pulls.create({
-#              title: 'Automated version update',
-#              owner: 'inbo',
-#              repo: 'inbo-aws-biodiversiteitsportaal-terraform',
-#              head: 'automated-version-update',
-#              base: 'dev',
-#              body: 'This PR is auto-generated by [a github action](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) in [inbo/vlaams-biodiversiteitsportaal](https://github.com/inbo/vlaams-biodiversiteitsportaal).'
-#            });
-#            github.rest.issues.addLabels({
-#              owner: 'inbo',
-#              repo: 'inbo-aws-biodiversiteitsportaal-terraform',
-#              issue_number: result.data.number,
-#              labels: ['versions', 'automated pr']
-#            });
+  deploy:
+    needs:
+      - get-versions
+      - build-and-release-branding
+      - version-config-files
+      - build-and-push-docker-images
+    # Only run if no failures or cancellations and at least one was not skipped
+    if: |
+      always()
+        && !contains(needs.*.result, 'failure')
+        && !contains(needs.*.result, 'cancelled')
+        && contains(needs.*.result, 'success')
+    runs-on: [ self-hosted ]
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout terraform repository
+        uses: actions/checkout@v4
+        with:
+          repository: 'inbo/inbo-aws-biodiversiteitsportaal-terraform'
+          token: ${{ secrets.GIT_PAT_TOKEN }}
+          fetch-depth: 0
+
+      - name: Update versions in dev deployment
+        id: update-versions
+        run: |
+          set -e -o pipefail
+
+          git checkout automated-version-update || git checkout -b automated-version-update
+
+          git config --global user.email "support.natuurdata@inbo.be"
+          git config --global user.name "Github Actions"
+
+          jq <<< '${{ fromJSON(needs.get-versions.outputs.all_versions) }}' > ./versions.json
+
+          if [ -n "$(git status --porcelain)" ]; then
+            git add versions.json
+            git commit -m "Github actions: automated update of versions"
+            git push --set-upstream origin automated-version-update
+            echo "changes=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "no changes";
+            echo "changes=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create Pull Request
+        uses: actions/github-script@v7
+        if: steps.update-versions.outputs.changes == 'true'
+        with:
+          github-token: ${{ secrets.GIT_PAT_TOKEN }}
+          script: |
+            const openPrs = await github.rest.pulls.list({
+              owner: 'inbo',
+              repo: 'inbo-aws-biodiversiteitsportaal-terraform',
+              state: 'open',
+              head: 'inbo:automated-version-update'
+            });
+            if (openPrs.data.length === 1) {
+              console.log(`PR already exists: ${openPrs.data[0].html_url}`);
+              return;
+            }
+            const result = await github.rest.pulls.create({
+              title: 'Automated version update',
+              owner: 'inbo',
+              repo: 'inbo-aws-biodiversiteitsportaal-terraform',
+              head: 'automated-version-update',
+              base: 'dev',
+              body: 'This PR is auto-generated by [a github action](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) in [inbo/vlaams-biodiversiteitsportaal](https://github.com/inbo/vlaams-biodiversiteitsportaal).'
+            });
+            github.rest.issues.addLabels({
+              owner: 'inbo',
+              repo: 'inbo-aws-biodiversiteitsportaal-terraform',
+              issue_number: result.data.number,
+              labels: ['versions', 'automated pr']
+            });
