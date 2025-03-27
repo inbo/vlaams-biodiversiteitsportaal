@@ -156,7 +156,7 @@ jobs:
     strategy:
       matrix:
 #        docker: [{"name":"alerts", "version": "0.1.25"},{"name":"apikey","version":"0.1.15"}]
-        docker: ${{ needs.get-versions.outputs.docker_build_matrix) }}
+        docker: ${{ needs.get-versions.outputs.docker_build_matrix }}
     steps:
       - uses: actions/checkout@v4
         with:
