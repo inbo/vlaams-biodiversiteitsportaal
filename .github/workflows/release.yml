@@ -148,7 +148,7 @@ jobs:
   build-and-push-docker-images:
     runs-on: [ self-hosted ]
     needs: get-versions
-    if: fromJSON(needs.get-versions.outputs.docker_build_matrix) != '{}'
+    if: fromJSON(needs.get-versions.outputs.docker_build_matrix) != '[]'
     permissions:
       contents: write
       actions: write
