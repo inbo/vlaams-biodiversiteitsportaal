@@ -153,7 +153,8 @@ jobs:
       contents: write
       actions: write
     strategy:
-      matrix: ${{ fromJSON(needs.get-versions.outputs.docker_build_matrix) }}
+      matrix:
+        docker: ${{ fromJSON(needs.get-versions.outputs.docker_build_matrix) }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -199,9 +200,9 @@ jobs:
             var-lib-apt
             gradle-cache
             maven-cache
-          key: cache-docker-${{ matrix.component }}-${{ hashFiles('./docker/${{ matrix.component }}') }}
+          key: cache-docker-${{ matrix.docker.component }}-${{ hashFiles('./docker/${{ matrix.docker.component }}') }}
           restore-keys: |
-            cache-docker-${{ matrix.component }}
+            cache-docker-${{ matrix.docker.component }}
             cache-docker-
 
       - name: inject cache into docker
@@ -221,8 +222,8 @@ jobs:
         working-directory: ./docker
         env:
           SOURCE_DATE_EPOCH: 0
-          COMPONENT: ${{ matrix.component }}
-          VERSION: ${{ matrix.version }}
+          COMPONENT: ${{ matrix.docker.component }}
+          VERSION: ${{ matrix.docker.version }}
         run: |
           set -e -o pipefail
           
