@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 'main'
+      - 'attempt-matrix-build'
 
 # Only allow one workflow to run at a time
 concurrency:
@@ -60,6 +61,7 @@ jobs:
           
           # Docker images
           DOCKER_VERSIONS="{}"
+          DOCKER_BUILD_MATRIX="[]"
           for component in ${DOCKER_COMPONENTS}; do          
             export COMPONENT=docker-${component}
             export PATHS="./docker/tomcat/** ./docker/${component}/**"
@@ -68,12 +70,14 @@ jobs:
             if [ "${number_of_changes_since_last_tag}" != "0" ]; then
               echo "Setting new version for docker ${component} to ${new_version} with ${number_of_changes_since_last_tag} changes"
               DOCKER_VERSIONS=$(jq -c ". += {\"${component}\": \"${new_version}\"}" <<< ${DOCKER_VERSIONS})
+              DOCKER_BUILD_MATRIX=$(jq -c ". += [{\"component\": \"${component}\",\"version\": \"${new_version}\"}]" <<< ${DOCKER_VERSIONS})
               ALL_VERSIONS=$(jq -c ".docker += {\"${component}\": \"${new_version}\"}" <<< ${ALL_VERSIONS})
             else
               ALL_VERSIONS=$(jq -c ".docker += {\"${component}\": \"${previous_version}\"}" <<< ${ALL_VERSIONS})
             fi
           done
           echo "docker_versions=${DOCKER_VERSIONS}" >> "$GITHUB_OUTPUT"
+          echo "docker_build_matrix=${DOCKER_BUILD_MATRIX}" >> "$GITHUB_OUTPUT"
           echo "all_versions=${ALL_VERSIONS}" >> "$GITHUB_OUTPUT"
 
     outputs:
@@ -144,10 +148,12 @@ jobs:
   build-and-push-docker-images:
     runs-on: [ self-hosted ]
     needs: get-versions
-    if: fromJSON(needs.get-versions.outputs.docker_versions) != '{}'
+    if: fromJSON(needs.get-versions.outputs.docker_build_matrix) != '{}'
     permissions:
       contents: write
       actions: write
+    strategy:
+      matrix: ${{ fromJSON(needs.get-versions.outputs.docker_build_matrix) }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -193,8 +199,9 @@ jobs:
             var-lib-apt
             gradle-cache
             maven-cache
-          key: cache-docker-${{ hashFiles('./docker/**/Dockerfile') }}
+          key: cache-docker-${{ matrix.component }}-${{ hashFiles('./docker/${{ matrix.component }}') }}
           restore-keys: |
+            cache-docker-${{ matrix.component }}
             cache-docker-
 
       - name: inject cache into docker
@@ -214,6 +221,8 @@ jobs:
         working-directory: ./docker
         env:
           SOURCE_DATE_EPOCH: 0
+          COMPONENT: ${{ matrix.component }}
+          VERSION: ${{ matrix.version }}
         run: |
           set -e -o pipefail
           
@@ -229,35 +238,31 @@ jobs:
             exit 1
           fi
 
-          for component_version in $(jq -c '. | to_entries | .[]' <<< ${{ needs.get-versions.outputs.docker_versions }}); do
-            docker_name=$(jq -r '.key' <<< "${component_version}")
-            version=$(jq -r '.value' <<< "${component_version}")
-            echo " Releasing ${docker_name} version ${version}"
-            export TAG=${version}
-            export DOCKER_REPO="${{ secrets.ECR_REPO }}"
-            export GIT_TAG="docker-${docker_name}-v${version}"
+          echo " Releasing ${COMPONENT} version ${VERSION}"
+          export TAG=${VERSION}
+          export DOCKER_REPO="${{ secrets.ECR_REPO }}"
+          export GIT_TAG="docker-${COMPONENT}-v${VERSION}"
 
-            export CACHE_TAG="cache-github"
-          
-            docker buildx bake --push \
-              ${docker_name} \
-              --set="*.args.BUILDPLATFORM=${BUILDPLATFORM}" \
-              --set="${docker_name}.platform=linux/amd64,linux/arm64" \
-              --set="${docker_name}.labels.maintainer=support.natuurdata@inbo.be" \
-              --set="${docker_name}.labels.build_date=$(date +'%Y-%m-%dT%H:%M:%S')" \
-              --set="${docker_name}.labels.build_url=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
-              --set="${docker_name}.labels.git_tag=${GIT_TAG}" \
-              --set="${docker_name}.labels.git_hash=${{ github.sha }}" \
-              --set="custom-gradle.cache-to=type=registry,ref=${DOCKER_REPO}/inbo-vbp-custom-gradle:${CACHE_TAG},oci-mediatypes=true,image-manifest=true,mode=max" \
-              --set="custom-maven.cache-to=type=registry,ref=${DOCKER_REPO}/inbo-vbp-custom-maven:${CACHE_TAG},oci-mediatypes=true,image-manifest=true,mode=max" \
-              --set="tomcat-base.cache-to=type=registry,ref=${DOCKER_REPO}/inbo-vbp-tomcat-base:${CACHE_TAG},oci-mediatypes=true,image-manifest=true,mode=max" \
-              --set="${docker_name}.cache-to=type=registry,ref=${DOCKER_REPO}/inbo-vbp-${docker_name}:${CACHE_TAG},oci-mediatypes=true,image-manifest=true,mode=max"
+          export CACHE_TAG="cache-github"
+        
+          docker buildx bake --push \
+            ${COMPONENT} \
+            --set="*.args.BUILDPLATFORM=${BUILDPLATFORM}" \
+            --set="${COMPONENT}.platform=linux/amd64,linux/arm64" \
+            --set="${COMPONENT}.labels.maintainer=support.natuurdata@inbo.be" \
+            --set="${COMPONENT}.labels.build_date=$(date +'%Y-%m-%dT%H:%M:%S')" \
+            --set="${COMPONENT}.labels.build_url=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
+            --set="${COMPONENT}.labels.git_tag=${GIT_TAG}" \
+            --set="${COMPONENT}.labels.git_hash=${{ github.sha }}" \
+            --set="custom-gradle.cache-to=type=registry,ref=${DOCKER_REPO}/inbo-vbp-custom-gradle:${CACHE_TAG},oci-mediatypes=true,image-manifest=true,mode=max" \
+            --set="custom-maven.cache-to=type=registry,ref=${DOCKER_REPO}/inbo-vbp-custom-maven:${CACHE_TAG},oci-mediatypes=true,image-manifest=true,mode=max" \
+            --set="tomcat-base.cache-to=type=registry,ref=${DOCKER_REPO}/inbo-vbp-tomcat-base:${CACHE_TAG},oci-mediatypes=true,image-manifest=true,mode=max" \
+            --set="${COMPONENT}.cache-to=type=registry,ref=${DOCKER_REPO}/inbo-vbp-${COMPONENT}:${CACHE_TAG},oci-mediatypes=true,image-manifest=true,mode=max"
 
-            # Create Git Tag
-            echo "Creating Git Tag: ${GIT_TAG}"
-            git tag "${GIT_TAG}"
-            git push origin "${GIT_TAG}"
-          done
+          # Create Git Tag
+          echo "Creating Git Tag: ${GIT_TAG}"
+          git tag "${GIT_TAG}"
+          git push origin "${GIT_TAG}"
 
   deploy:
     needs:
