@@ -50,26 +50,25 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
     proj-data \
     proj-data-be
 
-RUN mkdir -p /pipelines/shp && \
-    curl https://inbo-vbp-global-public-artifacts.s3.eu-west-1.amazonaws.com/spatial-service/pipelines-shapefiles.zip -o /pipelines/shp/pipelines-shapefiles.zip && \
-    unzip /pipelines/shp/pipelines-shapefiles.zip -d /pipelines/shp && \
-    rm /pipelines/shp/pipelines-shapefiles.zip
+RUN mkdir -p /opt/vbp/pipelines/shp && \
+    curl https://inbo-vbp-global-public-artifacts.s3.eu-west-1.amazonaws.com/spatial-service/pipelines-shapefiles.zip -o /opt/vbp/pipelines/shp/pipelines-shapefiles.zip && \
+    unzip /opt/vbp/pipelines/shp/pipelines-shapefiles.zip -d /opt/vbp/pipelines/shp && \
+    rm /opt/vbp/pipelines/shp/pipelines-shapefiles.zip
 
-# Libraries require linking from <data.dir>/modelling/maxent because the path is required to be a subfolder of the data directory
-RUN mkdir -p /libs \
-    && curl -L https://nexus.ala.org.au/repository/releases/au/org/ala/spatial/ala-aloc/1.0/ala-aloc-1.0.jar -o /libs/aloc.jar \
+RUN mkdir -p /opt/vbp/spatial-service/libs \
+    && curl -L https://nexus.ala.org.au/repository/releases/au/org/ala/spatial/ala-aloc/1.0/ala-aloc-1.0.jar -o /opt/vbp/spatial-service/libs/aloc.jar \
     && curl https://inbo-vbp-global-public-artifacts.s3.eu-west-1.amazonaws.com/spatial-service/maxent.zip -o /tmp/maxent.zip \
-    && unzip -j /tmp/maxent.zip maxent/maxent.jar -d /libs \
+    && unzip -j /tmp/maxent.zip maxent/maxent.jar -d /opt/vbp/spatial-service/libs \
     && rm /tmp/maxent.zip
 
-RUN curl -f https://inbo-vbp-global-public-artifacts.s3.eu-west-1.amazonaws.com/spatial-service/pipelines-2.19.0-SNAPSHOT-shaded.jar -o /pipelines/pipelines.jar
+RUN curl -f https://inbo-vbp-global-public-artifacts.s3.eu-west-1.amazonaws.com/spatial-service/pipelines-2.19.0-SNAPSHOT-shaded.jar -o /opt/vbp/pipelines/pipelines.jar
 
-
-COPY pipelines/vocabularies/* /pipelines/vocabularies/
+COPY pipelines/vocabularies/* /opt/vbp/pipelines/vocabularies/
 
 COPY --from=builder /project/build/libs/project-${VERSION}.war /spatial-service.war
-
+COPY link-libs.sh /opt/vbp/spatial-service/link-libs.sh
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/spatial-service/actuator/health || exit 1
 
-ENTRYPOINT ["sh", "-c", "java ${JAVA_OPTS} -jar /spatial-service.war"]
+# Libraries require linking from <data.dir>/modelling/... because the path is required to be a subfolder of the data directory
+ENTRYPOINT ["sh", "-c", "/opt/vbp/spatial-service/link-libs.sh && java ${JAVA_OPTS} -jar /spatial-service.war"]

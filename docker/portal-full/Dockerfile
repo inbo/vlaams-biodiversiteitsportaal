@@ -1,17 +1,25 @@
 ######################################### TOMCAT BASE #########################################
 FROM tomcat:9-jdk11-corretto AS base
 
-WORKDIR ${CATALINA_HOME}
-
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
+    amazon-linux-extras install epel -y && \
     yum update -y && \
-    yum install -y \
-        shadow-utils \
-        util-linux
+    yum -y install --skip-broken \
+    shadow-utils \
+    util-linux \
+    # Spatial-service dependencies \
+    gettext \
+    unzip \
+    gdal \
+    proj \
+    proj-data \
+    proj-data-be
 
 # Default user and group id
 ENV UID=1000
 ENV GID=1000
+
+WORKDIR ${CATALINA_HOME}
 
 RUN mkdir /data
 RUN chown ${UID}:${GID} /data
@@ -48,14 +56,16 @@ COPY --from=bie-hub /bie-hub.war webapps
 COPY --from=bie-index /bie-index.war webapps
 COPY --from=biocache-hub /biocache-hub.war webapps
 COPY --from=biocache-service /biocache-service.war webapps
-RUN ln -s ./biocache-service.war webapps/sandbox.war
+RUN ln -s ./biocache-service webapps/sandbox
 COPY --from=collectory /collectory.war webapps
+COPY --from=data-quality-filter-service /data-quality-filter-service.war webapps
 COPY --from=doi-service /doi-service.war webapps
 COPY --from=image-service /image-service.war webapps
 COPY --from=logger /logger.war webapps
 COPY --from=regions /regions.war webapps
 COPY --from=spatial-hub /spatial-hub.war webapps
 COPY --from=spatial-service /spatial-service.war webapps
+COPY --from=spatial-service /opt/vbp /opt/vbp
 COPY --from=species-list /species-list.war webapps
 COPY --from=userdetails /userdetails.war webapps
 

@@ -23,7 +23,7 @@ target "custom-maven" {
 }
 
 target "portal-full" {
-  context = "./tomcat"
+  context = "./portal-full"
   contexts = {
     "alerts"                      = "target:alerts"
     "apikey"                      = "target:apikey"

@@ -14,6 +14,9 @@ biocache:
 biocacheService:
   baseURL: ${common.protocol}://${common.domain}/biocache-service
 
+server:
+  servlet:
+    contextPath: /data-quality-filter-service
 grails:
   serverURL: ${common.protocol}://${common.domain}/data-quality-filter-service
 
@@ -48,5 +51,3 @@ dataSource:
     jdbcInterceptors: ConnectionState
     defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
 
-server:
-  port: 8080

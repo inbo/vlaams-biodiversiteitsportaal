@@ -12,7 +12,7 @@ webservice:
 
 server:
   servlet:
-    contextPath: /alerts
+    contextPath: /bie-index
 grails:
   serverURL: ${common.protocol}://${common.domain}/bie-index
 

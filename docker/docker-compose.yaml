@@ -9,8 +9,8 @@ services:
     volumes:
       - ../config:/config:ro
       - ../config/biocache-hub:/data/ala-hub/config/ # Hardcoded paths in the biocache-hub
-      - ./tomcat/tomcat-manager-ui/host-manager:/usr/local/tomcat/webapps/host-manager
-      - ./tomcat/tomcat-manager-ui/manager:/usr/local/tomcat/webapps/manager
+      - ./portal-full/tomcat-manager-ui/host-manager:/usr/local/tomcat/webapps/host-manager
+      - ./portal-full/tomcat-manager-ui/manager:/usr/local/tomcat/webapps/manager
       - vbp-data:/data
     environment:
       LOG_LEVEL: "INFO"
@@ -24,7 +24,7 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
       # Use host, so we can easily swap in port-forwarded version of solr
-      - "solr:host-gateway"
+      - "solr.vbp.internal:host-gateway"
     networks:
       default:
         aliases:
@@ -279,7 +279,7 @@ services:
       - "9999:9999"
     environment:
       SERVER_PORT: 9999
-      JSON_CONFIG_PATH: /config.json
+      JSON_CONFIG_PATH: /config/config.json
     volumes:
       - ../config/mock-oauth2-server:/config:ro
 

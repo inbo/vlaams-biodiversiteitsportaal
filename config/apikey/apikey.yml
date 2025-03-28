@@ -13,7 +13,7 @@ management:
 
 server:
   servlet:
-    contextPath: /alerts
+    contextPath: /apikey
 grails:
   serverURL: ${common.protocol}://${common.domain}/apikey
 

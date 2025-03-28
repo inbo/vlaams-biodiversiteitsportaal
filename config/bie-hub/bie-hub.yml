@@ -12,7 +12,7 @@ webservice:
 
 server:
   servlet:
-    contextPath: /alerts
+    contextPath: /bie-hub
 grails:
   serverURL: ${common.protocol}://${common.domain}/bie-hub
   cors:

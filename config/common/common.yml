@@ -28,13 +28,13 @@ management:
     health:
       enabled: true
       show-details: never
-    loggers:
-      enabled: true
+#    loggers:
+#      enabled: true
   endpoints:
-    jmx:
-      domain: org.spring.${appName}
-      exposure:
-        include: loggers
+#    jmx:
+#      domain: org.spring.${appName}
+#      exposure:
+#        include: loggers
     web:
       exposure:
         include: health
@@ -81,11 +81,11 @@ webservice:
   jwt: true
   jwt-scopes: openid users/read
 
-# Failed attempt at making the JSESSESIONID cookie more secure
 server:
   port: 8080
   servlet:
     session:
+      # Failed attempt at making the JSESSESIONID cookie more secure
       cookie:
         secure: true
         same-site: "strict"
@@ -106,4 +106,4 @@ environments:
   inbo_prod:
     common:
       protocol: https
-      domain: natuurdata.uat.inbo.be
+      domain: natuurdata.inbo.be
