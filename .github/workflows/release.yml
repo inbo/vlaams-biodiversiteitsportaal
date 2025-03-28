@@ -208,7 +208,6 @@ jobs:
           key: cache-docker-${{ matrix.docker.component }}-${{ hashFiles('./docker/${{ matrix.docker.component }}') }}
           restore-keys: |
             cache-docker-${{ matrix.docker.component }}
-            cache-docker-
 
       - name: inject cache into docker
         uses: reproducible-containers/buildkit-cache-dance@v3.1.0
