@@ -4,7 +4,7 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 
 ARG VERSION=try-deconflicting-beans
-ARG COMMIT=4effbcbc27cd3d90e35d6970890d79a721aa882e
+ARG COMMIT=2b7048ab4c40c272da920470c215783e186624ab
 ARG SOURCE=https://github.com/StefanVanDyck/biocache-service.git
 LABEL ala.version=inbo-${COMMIT}
 
@@ -34,10 +34,10 @@ RUN mkdir -p /opt/atlas/i18n \
   && ln -s /config/biocache-service/i18n/override /var/opt/atlas/i18n/biocache-service
 
 ARG VERSION=3.7.0-SNAPSHOT
-ARG COMMIT=4effbcbc27cd3d90e35d6970890d79a721aa882e
+ARG COMMIT=2b7048ab4c40c272da920470c215783e186624ab
 LABEL ala.version=inbo-${COMMIT}
 
-COPY --from=builder /project/build/libs/biocache-service-${VERSION}.war /biocache-service.war
+COPY --from=builder /project/build/libs/biocache-service-${VERSION}-exec.war /biocache-service.war
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/biocache-service/actuator/health || exit 1
 

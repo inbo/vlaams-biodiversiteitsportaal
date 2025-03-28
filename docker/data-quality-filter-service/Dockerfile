@@ -22,6 +22,9 @@ RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
 
 FROM amazoncorretto:11
 
+# Default based on repo structure, can be overridden at runtime
+ENV SPRING_CONFIG_ADDITIONAL-LOCATION="file:/config/common/common.yml,file:/config/data-quality-filter-service/data-quality-filter-service.yml"
+
 ARG VERSION=2.0.0-SNAPSHOT
 ARG COMMIT=83e9fe873398a88c6d50a195c932b0a3fb70d2ff
 LABEL ala.version=inbo-${COMMIT}

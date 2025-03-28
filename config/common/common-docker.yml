@@ -20,4 +20,4 @@ security:
 
 # Header and footer
 headerAndFooter:
-  baseURL: ${common.protocol}://host.docker.internal
+  baseURL: http://host.docker.internal

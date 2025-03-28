@@ -66,10 +66,8 @@ services:
 #    build:
 #      context: biocache-service
     environment:
-      ADDITIONAL_SPRING_CONFIG_LOCATIONS: "file:/config/common/common-docker.yml"
-      LOG_LEVEL: WARN
-      JAVA_OPTS: "-Xms128m -Xmx256m -Dspring.profiles.active=local -Dspring.config.additional-location=file:/config/common/common.yml,file:/config/common/common-docker.yml,file:/config/biocache-service/biocache-service.yml -Dspring.config.import=''"
-      SPRING_CONFIG_IMPORT: ''
+      SPRING_CONFIG_ADDITIONAL-LOCATION: "file:/config/common/common.yml,file:/config/biocache-service/biocache-service.yml,file:/config/common/common-docker.yml"
+      JAVA_OPTS: "-Xms128m -Xmx256m -Dspring.profiles.active=local"
     volumes:
       - ../config:/config:ro
     depends_on:
@@ -260,13 +258,37 @@ services:
     build:
       context: image-service
     volumes:
-      - ./image-service/config:/data/image-service/config:ro
+      - ../config:/config:ro
     command:
       - -Xms128m
       - -Xmx128m
     depends_on:
       mysql:
         condition: service_healthy
+
+  sandbox:
+    image: ${DOCKER_REPO:-local}/inbo-vbp-biocache-service:dev
+    networks:
+      default:
+        aliases:
+          - sandbox.vbp.internal
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+      # Use host, so we can easily swap in port-forwarded version of solr
+      - "solr.vbp.internal:host-gateway"
+    environment:
+      SPRING_CONFIG_ADDITIONAL-LOCATION: "file:/config/common/common.yml,file:/config/biocache-service/biocache-service.yml,file:/config/biocache-service/sandbox.yml,file:/config/common/common-docker.yml"
+      JAVA_OPTS: "-Xms128m -Xmx256m -Dspring.profiles.active=local"
+      SECURITY_JWT_ENABLED: 'false'
+    volumes:
+      - ../config:/config:ro
+    depends_on:
+      solr:
+        condition: service_healthy
+      cassandradb:
+        condition: service_healthy
+      cassandra-load-keyspace:
+        condition: service_started
 
   spatial-hub:
     image: ${DOCKER_REPO:-local}/inbo-vbp-spatial-hub:dev
@@ -525,7 +547,7 @@ services:
     environment:
       LOG_LEVEL: "info"
       SERVER_PORT: 9999
-      JSON_CONFIG_PATH: /config.json
+      JSON_CONFIG_PATH: /config/config.json
     volumes:
       - ../config/mock-oauth2-server:/config:ro
 
