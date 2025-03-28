@@ -42,3 +42,8 @@ COPY --from=builder /project/build/libs/specieslist-webapp-${VERSION}.war /speci
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/species-list/actuator/health || exit 1
 
 ENTRYPOINT ["sh", "-c", "java ${JAVA_OPTS} -jar /species-list.war"]
+
+RUN mkdir /data
+RUN chown 1000:1000 /data
+VOLUME /data
+USER 1000:1000

@@ -45,3 +45,8 @@ HEALTHCHECK CMD curl --fail --silent http://localhost:8080/alerts/actuator/healt
 
 
 ENTRYPOINT ["sh", "-c", "java ${JAVA_OPTS} -jar /alerts.war"]
+
+RUN mkdir /data
+RUN chown 1000:1000 /data
+VOLUME /data
+USER 1000:1000

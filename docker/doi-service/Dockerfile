@@ -39,3 +39,8 @@ COPY --from=builder /project/build/libs/doi-service-${VERSION}-exec.war /doi-ser
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/doi-service/actuator/health || exit 1
 
 ENTRYPOINT ["sh", "-c", "java ${JAVA_OPTS} -jar /doi-service.war"]
+
+RUN mkdir /data
+RUN chown 1000:1000 /data
+VOLUME /data
+USER 1000:1000

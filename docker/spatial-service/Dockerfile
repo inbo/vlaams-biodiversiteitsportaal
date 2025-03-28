@@ -72,3 +72,8 @@ HEALTHCHECK CMD curl --fail --silent http://localhost:8080/spatial-service/actua
 
 # Libraries require linking from <data.dir>/modelling/... because the path is required to be a subfolder of the data directory
 ENTRYPOINT ["sh", "-c", "/opt/vbp/spatial-service/link-libs.sh && java ${JAVA_OPTS} -jar /spatial-service.war"]
+
+RUN mkdir /data
+RUN chown 1000:1000 /data
+VOLUME /data
+USER 1000:1000

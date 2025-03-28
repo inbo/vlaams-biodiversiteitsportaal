@@ -53,3 +53,8 @@ COPY --from=builder /project/build/libs/project-${VERSION}.war /spatial-hub.war
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/spatial-hub/actuator/health || exit 1
 
 ENTRYPOINT ["sh", "-c", "java ${JAVA_OPTS} -jar /spatial-hub.war"]
+
+RUN mkdir /data
+RUN chown 1000:1000 /data
+VOLUME /data
+USER 1000:1000

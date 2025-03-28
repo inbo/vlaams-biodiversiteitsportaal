@@ -42,3 +42,8 @@ COPY --from=builder /project/build/libs/logger-service-${VERSION}.war /logger.wa
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/logger/actuator/health || exit 1
 
 ENTRYPOINT ["sh", "-c", "java ${JAVA_OPTS} -jar /logger.war"]
+
+RUN mkdir /data
+RUN chown 1000:1000 /data
+VOLUME /data
+USER 1000:1000

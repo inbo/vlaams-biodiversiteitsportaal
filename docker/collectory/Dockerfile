@@ -45,3 +45,8 @@ COPY --from=builder /project/build/libs/collectory-${VERSION}.war /collectory.wa
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/collectory/actuator/health || exit 1
 
 ENTRYPOINT ["sh", "-c", "java ${JAVA_OPTS} -jar /collectory.war"]
+
+RUN mkdir /data
+RUN chown 1000:1000 /data
+VOLUME /data
+USER 1000:1000

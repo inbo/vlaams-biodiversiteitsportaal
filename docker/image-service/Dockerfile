@@ -40,3 +40,8 @@ COPY --from=builder /project/build/libs/image-service-${VERSION}.war /image-serv
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/image-service/actuator/health || exit 1
 
 ENTRYPOINT ["sh", "-c", "java ${JAVA_OPTS} -jar /image-service.war"]
+
+RUN mkdir /data
+RUN chown 1000:1000 /data
+VOLUME /data
+USER 1000:1000
