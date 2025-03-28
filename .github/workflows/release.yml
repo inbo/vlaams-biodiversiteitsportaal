@@ -164,6 +164,21 @@ jobs:
       - name: Login to AWS
         uses: aws-actions/configure-aws-credentials@v4
         with:
+          aws-access-key-id: ${{ secrets.AWS_PERSONAL_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_PERSONAL_SECRET }}
+          aws-region: ${{ secrets.AWS_REGION }}
+          role-to-assume: ${{ secrets.DEV_DEPLOYMENT_ROLE_ARN }}
+
+      - name: Docker login to Amazon ECR
+        env:
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+        run: |
+          aws ecr get-login-password --region ${{ secrets.AWS_REGION }} \
+            | docker login --username AWS --password-stdin 632683202044.dkr.ecr.eu-west-1.amazonaws.com
+
+      - name: Login to AWS
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
@@ -175,8 +190,6 @@ jobs:
         run: |
           aws ecr get-login-password --region ${{ secrets.AWS_REGION }} \
             | docker login --username AWS --password-stdin ${{ secrets.ECR_REPO }}
-          aws ecr get-login-password --region ${{ secrets.AWS_REGION }} \
-            | docker login --username AWS --password-stdin 632683202044.dkr.ecr.eu-west-1.amazonaws.com
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
