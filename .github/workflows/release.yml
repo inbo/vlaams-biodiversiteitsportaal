@@ -180,6 +180,7 @@ jobs:
       - name: Login to AWS
         uses: aws-actions/configure-aws-credentials@v4
         with:
+          aws-region: ${{ secrets.AWS_REGION }}
           role-to-assume: ${{ secrets.DEV_DEPLOYMENT_ROLE_ARN }}
 
       - name: Docker login to Amazon ECR
