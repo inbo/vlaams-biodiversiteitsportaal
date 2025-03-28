@@ -25,20 +25,23 @@ RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
     rsync -a /home/gradle/.gradle/caches/modules-2 /gradle-cache \
     && rm /gradle-cache/modules-2/*.lock && rm /gradle-cache/modules-2/gc.properties
 
-FROM tomcat-base
+FROM amazoncorretto:11
+
+# Default based on repo structure, can be overridden at runtime
+ENV SPRING_CONFIG_ADDITIONAL-LOCATION="file:/config/common/common.yml,file:/config/regions/regions.yml"
+# Symlink to i18n files location, unfortunately hard-coded at docker image build time
+RUN mkdir -p /opt/atlas/i18n \
+  && ln -s /config/regions/i18n/crowdin /opt/atlas/i18n/regions \
+  && mkdir -p /var/opt/atlas/i18n \
+  && ln -s /config/regions/i18n/override /var/opt/atlas/i18n/regions
 
 # ARG VERSION=4.0.0
 ARG VERSION=4.1.0-SNAPSHOT
 ARG COMMIT=1e599e807db00ed615f398d0812eafa75271f5ed
 LABEL ala.version=inbo-${COMMIT}
 
-COPY --from=builder /project/build/libs/regions-${VERSION}-plain.war ${CATALINA_HOME}/webapps/regions.war
-COPY regions.xml ${CATALINA_HOME}/conf/portal/localhost/regions.xml
-
-# Symlink to i18n files location
-RUN mkdir -p /opt/atlas/i18n \
-  && ln -s /config/config/regions/i18n/crowdin /opt/atlas/i18n/regions \
-  && mkdir -p /var/opt/atlas/i18n \
-  && ln -s /config/config/regions/i18n/override /var/opt/atlas/i18n/regions
+COPY --from=builder /project/build/libs/regions-${VERSION}.war /regions.war
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/regions/actuator/health || exit 1
+
+ENTRYPOINT ["sh", "-c", "java ${JAVA_OPTS} -jar /regions.war"]

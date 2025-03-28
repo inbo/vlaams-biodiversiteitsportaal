@@ -77,7 +77,7 @@ samplingService:
     initialIntervalMillis: 1000
 geocodeConfig:
   country:
-    path: /pipelines/shp/political
+    path: /opt/vbp/pipelines/shp/political
     field: ISO_A2
     intersectBuffer: 0.135
     intersectMapping:
@@ -86,15 +86,15 @@ geocodeConfig:
       HM: AU
       NF: AU
   eez:
-    path: /pipelines/shp/eez
+    path: /opt/vbp/pipelines/shp/eez
     field: ISO2
     intersectBuffer: 0.135
   stateProvince:
-    path: /pipelines/shp/cw_state_poly
+    path: /opt/vbp/pipelines/shp/cw_state_poly
     field: FEATURE
     intersectBuffer: 0
   biome:
-    path: /pipelines/shp/gadm0
+    path: /opt/vbp/pipelines/shp/gadm0
     field: FEATURE
 
 gbifConfig:
@@ -125,7 +125,7 @@ gbifConfig:
     - http://rs.gbif.org/terms/1.0/DNADerivedData
     - http://ala.org.au/terms/seedbank/0.1/SeedbankRecord
   vocabularyConfig:
-    vocabulariesPath: /pipelines/vocabularies/
+    vocabulariesPath: /opt/vbp/pipelines/vocabularies/
     vocabulariesNames:
       http://rs.tdwg.org/dwc/terms/degreeOfEstablishment: DegreeOfEstablishment
       http://rs.tdwg.org/dwc/terms/lifeStage: LifeStage

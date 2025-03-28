@@ -5,12 +5,16 @@ services:
       default:
         aliases:
           - biocache-hub.vbp.internal
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+      # Use host, so we can easily swap in port-forwarded version of solr
+      - "solr.vbp.internal:host-gateway"
     build:
       context: biocache-hub
     environment:
-      ADDITIONAL_SPRING_CONFIG_LOCATIONS: "file:/config/config/common/common-docker.yml"
+      ADDITIONAL_SPRING_CONFIG_LOCATIONS: "file:/config/common/common-docker.yml"
     volumes:
-      - ../config:/config/config:ro
+      - ../config:/config:ro
 
   bie-hub:
     image: ${DOCKER_REPO:-local}/inbo-vbp-bie-hub:dev
@@ -18,12 +22,16 @@ services:
       default:
         aliases:
           - bie-hub.vbp.internal
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+      # Use host, so we can easily swap in port-forwarded version of solr
+      - "solr.vbp.internal:host-gateway"
     build:
       context: bie-hub
     environment:
-      ADDITIONAL_SPRING_CONFIG_LOCATIONS: "file:/config/config/common/common-docker.yml"
+      ADDITIONAL_SPRING_CONFIG_LOCATIONS: "file:/config/common/common-docker.yml"
     volumes:
-      - ../config:/config/config:ro
+      - ../config:/config:ro
 
   bie-index:
     image: ${DOCKER_REPO:-local}/inbo-vbp-bie-index:dev
@@ -31,12 +39,16 @@ services:
       default:
         aliases:
           - bie-index.vbp.internal
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+      # Use host, so we can easily swap in port-forwarded version of solr
+      - "solr.vbp.internal:host-gateway"
     build:
       context: bie-index
     environment:
-      ADDITIONAL_SPRING_CONFIG_LOCATIONS: "file:/config/config/common/common-docker.yml"
+      ADDITIONAL_SPRING_CONFIG_LOCATIONS: "file:/config/common/common-docker.yml"
     volumes:
-      - ../config:/config/config:ro
+      - ../config:/config:ro
     depends_on:
       solr:
         condition: service_healthy
@@ -47,15 +59,17 @@ services:
       default:
         aliases:
           - biocache-service.vbp.internal
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+      # Use host, so we can easily swap in port-forwarded version of solr
+      - "solr.vbp.internal:host-gateway"
 #    build:
 #      context: biocache-service
     environment:
-      ADDITIONAL_SPRING_CONFIG_LOCATIONS: "file:/config/config/common/common-docker.yml"
-      LOG_LEVEL: WARN
-      JAVA_OPTS: "-Xms128m -Xmx256m -Dspring.profiles.active=local -Dspring.config.additional-location=file:/config/config/common/common.yml,file:/config/config/common/common-docker.yml,file:/config/config/biocache-service/biocache-service.yml -Dspring.config.import=''"
-      SPRING_CONFIG_IMPORT: ''
+      SPRING_CONFIG_ADDITIONAL-LOCATION: "file:/config/common/common.yml,file:/config/biocache-service/biocache-service.yml,file:/config/common/common-docker.yml"
+      JAVA_OPTS: "-Xms128m -Xmx256m -Dspring.profiles.active=local"
     volumes:
-      - ../config:/config/config:ro
+      - ../config:/config:ro
     depends_on:
       solr:
         condition: service_healthy
@@ -70,12 +84,16 @@ services:
       default:
         aliases:
           - apikey.vbp.internal
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+      # Use host, so we can easily swap in port-forwarded version of solr
+      - "solr.vbp.internal:host-gateway"
     build:
       context: apikey
     environment:
-      ADDITIONAL_SPRING_CONFIG_LOCATIONS: "file:/config/config/common/common-docker.yml"
+      ADDITIONAL_SPRING_CONFIG_LOCATIONS: "file:/config/common/common-docker.yml"
     volumes:
-      - ../config:/config/config:ro
+      - ../config:/config:ro
       - ./apikey/keystore:/etc/cas:ro
     depends_on:
       mysql:
@@ -87,12 +105,16 @@ services:
       default:
         aliases:
           - alerts.vbp.internal
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+      # Use host, so we can easily swap in port-forwarded version of solr
+      - "solr.vbp.internal:host-gateway"
     build:
       context: alerts
     environment:
-      ADDITIONAL_SPRING_CONFIG_LOCATIONS: "file:/config/config/common/common-docker.yml"
+      ADDITIONAL_SPRING_CONFIG_LOCATIONS: "file:/config/common/common-docker.yml"
     volumes:
-      - ../config:/config/config:ro
+      - ../config:/config:ro
     depends_on:
       mysql:
         condition: service_healthy
@@ -103,12 +125,16 @@ services:
       default:
         aliases:
           - collectory.vbp.internal
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+      # Use host, so we can easily swap in port-forwarded version of solr
+      - "solr.vbp.internal:host-gateway"
     build:
       context: collectory
     environment:
-      ADDITIONAL_SPRING_CONFIG_LOCATIONS: "file:/config/config/common/common-docker.yml"
+      ADDITIONAL_SPRING_CONFIG_LOCATIONS: "file:/config/common/common-docker.yml"
     volumes:
-      - ../config:/config/config:ro
+      - ../config:/config:ro
       - ./collections/taxa:/data/collectory/taxa
       - ./collections/taxa:/data/ala-collectory/taxa
     depends_on:
@@ -121,12 +147,16 @@ services:
       default:
         aliases:
           - data-quality-filter-service.vbp.internal
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+      # Use host, so we can easily swap in port-forwarded version of solr
+      - "solr.vbp.internal:host-gateway"
     build:
       context: data-quality-filter-service
     environment:
-      ADDITIONAL_SPRING_CONFIG_LOCATIONS: "file:/config/config/common/common-docker.yml"
+      ADDITIONAL_SPRING_CONFIG_LOCATIONS: "file:/config/common/common-docker.yml"
     volumes:
-      - ../config:/config/config:ro
+      - ../config:/config:ro
     depends_on:
       postgis:
         condition: service_healthy
@@ -137,12 +167,16 @@ services:
       default:
         aliases:
           - doi-service.vbp.internal
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+      # Use host, so we can easily swap in port-forwarded version of solr
+      - "solr.vbp.internal:host-gateway"
     build:
       context: doi-service
     environment:
-      ADDITIONAL_SPRING_CONFIG_LOCATIONS: "file:/config/config/common/common-docker.yml"
+      ADDITIONAL_SPRING_CONFIG_LOCATIONS: "file:/config/common/common-docker.yml"
     volumes:
-      - ../config:/config/config:ro
+      - ../config:/config:ro
     depends_on:
       mysql:
         condition: service_healthy
@@ -153,12 +187,16 @@ services:
       default:
         aliases:
           - logger.vbp.internal
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+      # Use host, so we can easily swap in port-forwarded version of solr
+      - "solr.vbp.internal:host-gateway"
     build:
       context: logger
     environment:
-      ADDITIONAL_SPRING_CONFIG_LOCATIONS: "file:/config/config/common/common-docker.yml"
+      ADDITIONAL_SPRING_CONFIG_LOCATIONS: "file:/config/common/common-docker.yml"
     volumes:
-      - ../config:/config/config:ro
+      - ../config:/config:ro
     depends_on:
       mysql:
         condition: service_healthy
@@ -169,12 +207,16 @@ services:
       default:
         aliases:
           - species-list.vbp.internal
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+      # Use host, so we can easily swap in port-forwarded version of solr
+      - "solr.vbp.internal:host-gateway"
     build:
       context: species-list
     environment:
-      ADDITIONAL_SPRING_CONFIG_LOCATIONS: "file:/config/config/common/common-docker.yml"
+      ADDITIONAL_SPRING_CONFIG_LOCATIONS: "file:/config/common/common-docker.yml"
     volumes:
-      - ../config:/config/config:ro
+      - ../config:/config:ro
       - ../config/species-list:/config/species-list:ro
     depends_on:
       mysql:
@@ -186,12 +228,16 @@ services:
       default:
         aliases:
           - regions.vbp.internal
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+      # Use host, so we can easily swap in port-forwarded version of solr
+      - "solr.vbp.internal:host-gateway"
     build:
       context: regions
     environment:
-      ADDITIONAL_SPRING_CONFIG_LOCATIONS: "file:/config/config/common/common-docker.yml"
+      ADDITIONAL_SPRING_CONFIG_LOCATIONS: "file:/config/common/common-docker.yml"
     volumes:
-      - ../config:/config/config:ro
+      - ../config:/config:ro
     command:
       - -Xms128m
       - -Xmx128m
@@ -205,10 +251,14 @@ services:
       default:
         aliases:
           - image-service.vbp.internal
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+      # Use host, so we can easily swap in port-forwarded version of solr
+      - "solr.vbp.internal:host-gateway"
     build:
       context: image-service
     volumes:
-      - ./image-service/config:/data/image-service/config:ro
+      - ../config:/config:ro
     command:
       - -Xms128m
       - -Xmx128m
@@ -216,18 +266,46 @@ services:
       mysql:
         condition: service_healthy
 
+  sandbox:
+    image: ${DOCKER_REPO:-local}/inbo-vbp-biocache-service:dev
+    networks:
+      default:
+        aliases:
+          - sandbox.vbp.internal
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+      # Use host, so we can easily swap in port-forwarded version of solr
+      - "solr.vbp.internal:host-gateway"
+    environment:
+      SPRING_CONFIG_ADDITIONAL-LOCATION: "file:/config/common/common.yml,file:/config/biocache-service/biocache-service.yml,file:/config/biocache-service/sandbox.yml,file:/config/common/common-docker.yml"
+      JAVA_OPTS: "-Xms128m -Xmx256m -Dspring.profiles.active=local"
+      SECURITY_JWT_ENABLED: 'false'
+    volumes:
+      - ../config:/config:ro
+    depends_on:
+      solr:
+        condition: service_healthy
+      cassandradb:
+        condition: service_healthy
+      cassandra-load-keyspace:
+        condition: service_started
+
   spatial-hub:
     image: ${DOCKER_REPO:-local}/inbo-vbp-spatial-hub:dev
     networks:
       default:
         aliases:
           - spatial-hub.vbp.internal
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+      # Use host, so we can easily swap in port-forwarded version of solr
+      - "solr.vbp.internal:host-gateway"
     build:
       context: spatial-hub
     environment:
-      ADDITIONAL_SPRING_CONFIG_LOCATIONS: "file:/config/config/common/common-docker.yml"
+      ADDITIONAL_SPRING_CONFIG_LOCATIONS: "file:/config/common/common-docker.yml"
     volumes:
-      - ../config:/config/config:ro
+      - ../config:/config:ro
     depends_on:
       spatial-service:
         condition: service_healthy
@@ -238,12 +316,16 @@ services:
       default:
         aliases:
           - spatial-service.vbp.internal
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+      # Use host, so we can easily swap in port-forwarded version of solr
+      - "solr.vbp.internal:host-gateway"
     build:
       context: spatial-service
     environment:
-      ADDITIONAL_SPRING_CONFIG_LOCATIONS: "file:/config/config/common/common-docker.yml"
+      ADDITIONAL_SPRING_CONFIG_LOCATIONS: "file:/config/common/common-docker.yml"
     volumes:
-      - ../config:/config/config:ro
+      - ../config:/config:ro
       - /home/stefan/Projects/Inbo/spatial-service/data/spatial-data:/data/spatial-data
       - geoserver-data:/data/geoserver_data_dir
     depends_on:
@@ -260,12 +342,16 @@ services:
       default:
         aliases:
           - userdetails.vbp.internal
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+      # Use host, so we can easily swap in port-forwarded version of solr
+      - "solr.vbp.internal:host-gateway"
     build:
       context: userdetails
     environment:
-      ADDITIONAL_SPRING_CONFIG_LOCATIONS: "file:/config/config/common/common-docker.yml"
+      ADDITIONAL_SPRING_CONFIG_LOCATIONS: "file:/config/common/common-docker.yml"
     volumes:
-      - ../config:/config/config:ro
+      - ../config:/config:ro
     depends_on:
       mysql:
         condition: service_healthy

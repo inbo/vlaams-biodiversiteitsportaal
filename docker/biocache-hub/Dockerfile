@@ -40,21 +40,24 @@ RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
     rsync -a /home/gradle/.gradle/caches/modules-2 /gradle-cache \
     && rm /gradle-cache/modules-2/*.lock && rm /gradle-cache/modules-2/gc.properties
 
-FROM tomcat-base
+FROM amazoncorretto:11
+
+# Default based on repo structure, can be overridden at runtime
+ENV SPRING_CONFIG_ADDITIONAL-LOCATION="file:/config/common/common.yml,file:/config/biocache-hub/biocache-hub.yml"
+# Symlink to i18n files location, unfortunately hard-coded at docker image build time
+RUN mkdir -p /opt/atlas/i18n \
+  && ln -s /config/biocache-hub/i18n/downloads-plugin/crowdin /opt/atlas/i18n/downloads-plugin \
+  && ln -s /config/biocache-hub/i18n/crowdin /opt/atlas/i18n/biocache-hubs \
+  && mkdir -p /var/opt/atlas/i18n \
+  && ln -s /config/biocache-hub/i18n/downloads-plugin/override /var/opt/atlas/i18n/downloads-plugin \
+  && ln -s /config/biocache-hub/i18n/override /var/opt/atlas/i18n/biocache-hubs
 
 ARG VERSION=7.1.1
 ARG COMMIT=6a473fbb17deeebcadecc28dbe3d0b05740816f5
 LABEL ala.version=inbo-${COMMIT}
 
-COPY --from=builder /project/ala-hub/build/libs/ala-hub-${VERSION}-plain.war ${CATALINA_HOME}/webapps/biocache-hub.war
-COPY biocache-hub.xml ${CATALINA_HOME}/conf/portal/localhost/biocache-hub.xml
-
-# Symlink to i18n files location
-RUN mkdir -p /opt/atlas/i18n \
-  && ln -s /config/config/biocache-hub/i18n/downloads-plugin/crowdin /opt/atlas/i18n/downloads-plugin \
-  && ln -s /config/config/biocache-hub/i18n/crowdin /opt/atlas/i18n/biocache-hubs \
-  && mkdir -p /var/opt/atlas/i18n \
-  && ln -s /config/config/biocache-hub/i18n/downloads-plugin/override /var/opt/atlas/i18n/downloads-plugin \
-  && ln -s /config/config/biocache-hub/i18n/override /var/opt/atlas/i18n/biocache-hubs
+COPY --from=builder /project/ala-hub/build/libs/ala-hub-${VERSION}.war /biocache-hub.war
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/biocache-hub/actuator/health || exit 1
+
+ENTRYPOINT ["sh", "-c", "java ${JAVA_OPTS} -jar /biocache-hub.war"]

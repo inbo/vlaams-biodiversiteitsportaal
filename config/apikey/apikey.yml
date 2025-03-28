@@ -10,6 +10,10 @@ management:
   health:
     mongo:
       enabled: false
+
+server:
+  servlet:
+    contextPath: /apikey
 grails:
   serverURL: ${common.protocol}://${common.domain}/apikey
 

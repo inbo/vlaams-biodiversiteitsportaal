@@ -12,6 +12,9 @@ webservice:
   client-id: images
   client-secret: xxx
 
+server:
+  servlet:
+    contextPath: /image-service
 grails:
   serverURL: '${common.protocol}://${common.domain}/image-service'
 

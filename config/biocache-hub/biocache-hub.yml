@@ -98,6 +98,10 @@ geocode:
   region: BE
 google:
   apikey: get-a-google-api-key
+
+server:
+  servlet:
+    contextPath: /biocache-hub
 grails:
   resources:
     work:

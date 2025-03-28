@@ -19,6 +19,8 @@ trap_term () {
 
 trap trap_term SIGTERM
 
+# needed to find spatial-service libraries due to hardcoded paths in /data
+/opt/vbp/spatial-service/link-libs.sh
 
 if [ ! -z "${REMOTE_DEBUGGER_PORT}" ]; then
     echo "Enabling remote debugging on port ${REMOTE_DEBUGGER_PORT}"

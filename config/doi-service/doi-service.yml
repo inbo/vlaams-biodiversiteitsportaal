@@ -8,6 +8,9 @@ flyway:
 support:
   email: ${common.supportEmail}
 
+server:
+  servlet:
+    contextPath: /doi-service
 grails:
   serverURL: ${common.protocol}://${common.domain}/doi-service
 

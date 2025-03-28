@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- imageservice -->
+<!-- userdetails -->
 <Context reloadable="false">
 
     <Parameter name="spring.config.additional-location"
-               value="file:/config/config/common/common.yml,file:/config/config/image-service/image-service.yml,${ADDITIONAL_SPRING_CONFIG_LOCATIONS}"
+               value="file:/config/common/common.yml,file:/config/userdetails/userdetails.yml,${ADDITIONAL_SPRING_CONFIG_LOCATIONS}"
                override="false"/>
     <Parameter name="grails.env"
                value="${GRAILS_ENV}"
@@ -11,7 +11,6 @@
 
     <!-- Logging config -->
     <Parameter name="appName"
-               value="%gray(image-service)"
+               value="%boldGreen(userdetails)"
                override="false"/>
-
 </Context>

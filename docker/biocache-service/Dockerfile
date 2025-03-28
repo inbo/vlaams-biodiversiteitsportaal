@@ -4,7 +4,7 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 
 ARG VERSION=try-deconflicting-beans
-ARG COMMIT=4effbcbc27cd3d90e35d6970890d79a721aa882e
+ARG COMMIT=2b7048ab4c40c272da920470c215783e186624ab
 ARG SOURCE=https://github.com/StefanVanDyck/biocache-service.git
 LABEL ala.version=inbo-${COMMIT}
 
@@ -23,20 +23,22 @@ RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
 
 RUN ls -la /project/build/libs/
 
-FROM tomcat-base
+FROM amazoncorretto:11
+
+# Default based on repo structure, can be overridden at runtime
+ENV SPRING_CONFIG_ADDITIONAL-LOCATION="file:/config/common/common.yml,file:/config/biocache-service/biocache-service.yml"
+# Symlink to i18n files location, unfortunately hard-coded at docker image build time
+RUN mkdir -p /opt/atlas/i18n \
+  && ln -s /config/biocache-service/i18n/crowdin /opt/atlas/i18n/biocache-service \
+  && mkdir -p /var/opt/atlas/i18n \
+  && ln -s /config/biocache-service/i18n/override /var/opt/atlas/i18n/biocache-service
 
 ARG VERSION=3.7.0-SNAPSHOT
-ARG COMMIT=4effbcbc27cd3d90e35d6970890d79a721aa882e
+ARG COMMIT=2b7048ab4c40c272da920470c215783e186624ab
 LABEL ala.version=inbo-${COMMIT}
 
-
-COPY --from=builder /project/build/libs/biocache-service-${VERSION}.war ${CATALINA_HOME}/webapps/biocache-service.war
-COPY biocache-service.xml ${CATALINA_HOME}/conf/portal/localhost/biocache-service.xml
-
-# Symlink to i18n files location
-RUN mkdir -p /opt/atlas/i18n \
-  && ln -s /config/config/biocache-service/i18n/crowdin /opt/atlas/i18n/biocache-service \
-  && mkdir -p /var/opt/atlas/i18n \
-  && ln -s /config/config/biocache-service/i18n/override /var/opt/atlas/i18n/biocache-service
+COPY --from=builder /project/build/libs/biocache-service-${VERSION}-exec.war /biocache-service.war
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/biocache-service/actuator/health || exit 1
+
+ENTRYPOINT ["sh", "-c", "java ${JAVA_OPTS} -jar /biocache-service.war"]

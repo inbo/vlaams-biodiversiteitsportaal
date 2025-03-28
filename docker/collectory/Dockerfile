@@ -26,19 +26,22 @@ RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
     rsync -a /home/gradle/.gradle/caches/modules-2 /gradle-cache \
     && rm /gradle-cache/modules-2/*.lock && rm /gradle-cache/modules-2/gc.properties
 
-FROM tomcat-base
+FROM amazoncorretto:11
+
+# Default based on repo structure, can be overridden at runtime
+ENV SPRING_CONFIG_ADDITIONAL-LOCATION="file:/config/common/common.yml,file:/config/collectory/collectory.yml"
+# Symlink to i18n files location, unfortunately hard-coded at docker image build time
+RUN mkdir -p /opt/atlas/i18n \
+  && ln -s /config/collectory/i18n/crowdin /opt/atlas/i18n/collectory-plugin \
+  && mkdir -p /var/opt/atlas/i18n \
+  && ln -s /config/collectory/i18n/override /var/opt/atlas/i18n/collectory-plugin
 
 ARG VERSION=5.2.0-SNAPSHOT
 ARG COMMIT=29e12de13c5820b672a6b2dd46bba83c5f74eac6
 LABEL ala.version=inbo-${COMMIT}
 
-COPY --from=builder /project/build/libs/collectory-${VERSION}-plain.war ${CATALINA_HOME}/webapps/collectory.war
-COPY collectory.xml ${CATALINA_HOME}/conf/portal/localhost/collectory.xml
-
-# Symlink to i18n files location
-RUN mkdir -p /opt/atlas/i18n \
-  && ln -s /config/config/collectory/i18n/crowdin /opt/atlas/i18n/collectory-plugin \
-  && mkdir -p /var/opt/atlas/i18n \
-  && ln -s /config/config/collectory/i18n/override /var/opt/atlas/i18n/collectory-plugin
+COPY --from=builder /project/build/libs/collectory-${VERSION}.war /collectory.war
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/collectory/actuator/health || exit 1
+
+ENTRYPOINT ["sh", "-c", "java ${JAVA_OPTS} -jar /collectory.war"]

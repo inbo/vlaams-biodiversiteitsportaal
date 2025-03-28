@@ -22,19 +22,21 @@ RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
     rsync -a /home/gradle/.gradle/caches/modules-2 /gradle-cache \
     && rm /gradle-cache/modules-2/*.lock && rm /gradle-cache/modules-2/gc.properties
 
-FROM tomcat-base
+FROM amazoncorretto:11
+
+# Default based on repo structure, can be overridden at runtime
+ENV SPRING_CONFIG_ADDITIONAL-LOCATION="file:/config/common/common.yml,file:/config/apikey/apikey.yml"
+# Symlink to i18n files location, unfortunately hard-coded at docker image build time
+RUN mkdir -p /opt/atlas/i18n \
+  && ln -s /config/apikey/i18n/crowdin /opt/atlas/i18n/apikey \
+  && mkdir -p /var/opt/atlas/i18n \
+  && ln -s /config/apikey/i18n/override /var/opt/atlas/i18n/apikey
 
 ARG VERSION=1.7.0
-
 LABEL ala.version=${VERSION}
 
-COPY --from=builder /project/build/libs/apikey-${VERSION}-plain.war ${CATALINA_HOME}/webapps/apikey.war
-COPY apikey.xml ${CATALINA_HOME}/conf/portal/localhost/apikey.xml
-
-# Symlink to i18n files location
-RUN mkdir -p /opt/atlas/i18n \
-  && ln -s /config/config/apikey/i18n/crowdin /opt/atlas/i18n/apikey \
-  && mkdir -p /var/opt/atlas/i18n \
-  && ln -s /config/config/apikey/i18n/override /var/opt/atlas/i18n/apikey
+COPY --from=builder /project/build/libs/apikey-${VERSION}-exec.war /apikey.war
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/apikey/actuator/health || exit 1
+
+ENTRYPOINT ["sh", "-c", "java ${JAVA_OPTS} -jar /apikey.war"]

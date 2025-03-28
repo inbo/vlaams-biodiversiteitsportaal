@@ -10,6 +10,9 @@ webservice:
   client-id: regions
   client-secret: xxx
 
+server:
+  servlet:
+    contextPath: /regions
 grails:
   serverURL: ${common.protocol}://${common.domain}/regions
   cors:
@@ -81,10 +84,10 @@ layers:
 
 environments:
   inbo_prod:
-    config_dir: '/config/config/regions/envs/prod'
+    config_dir: '/config/regions/envs/prod'
   inbo_uat:
-    config_dir: '/config/config/regions/envs/uat'
+    config_dir: '/config/regions/envs/uat'
   inbo_dev:
-    config_dir: '/config/config/regions/envs/dev'
+    config_dir: '/config/regions/envs/dev'
   local:
-    config_dir: '/config/config/regions/envs/local'
+    config_dir: '/config/regions/envs/local'

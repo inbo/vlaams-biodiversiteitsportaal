@@ -10,6 +10,9 @@ webservice:
   client-id: "bie_index"
   client-secret: "bie_index-oidc-super-secret"
 
+server:
+  servlet:
+    contextPath: /bie-index
 grails:
   serverURL: ${common.protocol}://${common.domain}/bie-index
 
@@ -30,7 +33,7 @@ layers:
   gazetteerId:
 images:
   # URL of image configuration file
-  config: file:///config/config/bie-index/envs/local/image-lists.json
+  config: file:///config/bie-index/envs/local/image-lists.json
   base: ${common.protocol}://${common.domain}/image-service
   service:
     base: ${common.protocol}://${common.domain}/image-service
@@ -76,17 +79,17 @@ commonName:
   languages: en,nl
   defaultLanguage: nl
 # Location of conservation lists
-conservationListsUrl: file:///config/config/bie-index/envs/local/conservation-lists.json
+conservationListsUrl: file:///config/bie-index/envs/local/conservation-lists.json
 # Location of vernacular name lists (null for default)
-vernacularListsUrl: file:///config/config/bie-index/envs/local/vernacular-lists.json
+vernacularListsUrl: file:///config/bie-index/envs/local/vernacular-lists.json
 #nationalSpeciesDatasets: dr2699,dr2700,dr2702,dr2704,dr2703,dr3118
 nationalSpeciesDatasets: ""
 hiddenImages:
   # URL of hidden images configuration file
-  config: file:///config/config/bie-index/envs/local/hidden-images-lists.json
+  config: file:///config/bie-index/envs/local/hidden-images-lists.json
 wiki:
   # URL of wiki configuration file
-  config: file:///config/config/bie-index/envs/local/wiki-lists.json
+  config: file:///config/bie-index/envs/local/wiki-lists.json
 solr:
   admin:
     connection: http://solr.${common.internalDomain}:8983/solr
@@ -127,7 +130,7 @@ import:
   sequenceWeekly: occurrences,layers,regions,localities,suggest-index
   dailyRunHour: 2
   weeklyRunDay: 6
-  favouritesConfigUrl: file:///config/config/bie-index/envs/local/favourites.json
+  favouritesConfigUrl: file:///config/bie-index/envs/local/favourites.json
   enableTasks: false
   taxonomy:
     dir: /data/bie/import
@@ -176,52 +179,52 @@ management:
 environments:
   inbo_prod:
     images:
-      config: file:///config/config/bie-index/envs/prod/image-lists.json
-    conservationListsUrl: file:///config/config/bie-index/envs/prod/conservation-lists.json
-    vernacularListsUrl: file:///config/config/bie-index/envs/prod/vernacular-lists.json
+      config: file:///config/bie-index/envs/prod/image-lists.json
+    conservationListsUrl: file:///config/bie-index/envs/prod/conservation-lists.json
+    vernacularListsUrl: file:///config/bie-index/envs/prod/vernacular-lists.json
     hiddenImages:
-      config: file:///config/config/bie-index/envs/prod/hidden-images-lists.json
+      config: file:///config/bie-index/envs/prod/hidden-images-lists.json
     wiki:
-      config: file:///config/config/bie-index/envs/prod/wiki-lists.json
+      config: file:///config/bie-index/envs/prod/wiki-lists.json
     import:
-      favouritesConfigUrl: file:///config/config/bie-index/envs/prod/favourites.json
+      favouritesConfigUrl: file:///config/bie-index/envs/prod/favourites.json
 
   inbo_uat:
     images:
-      config: file:///config/config/bie-index/envs/uat/image-lists.json
-    conservationListsUrl: file:///config/config/bie-index/envs/uat/conservation-lists.json
-    vernacularListsUrl: file:///config/config/bie-index/envs/uat/vernacular-lists.json
+      config: file:///config/bie-index/envs/uat/image-lists.json
+    conservationListsUrl: file:///config/bie-index/envs/uat/conservation-lists.json
+    vernacularListsUrl: file:///config/bie-index/envs/uat/vernacular-lists.json
     hiddenImages:
-      config: file:///config/config/bie-index/envs/uat/hidden-images-lists.json
+      config: file:///config/bie-index/envs/uat/hidden-images-lists.json
     wiki:
-      config: file:///config/config/bie-index/envs/uat/wiki-lists.json
+      config: file:///config/bie-index/envs/uat/wiki-lists.json
     import:
-      favouritesConfigUrl: file:///config/config/bie-index/envs/uat/favourites.json
+      favouritesConfigUrl: file:///config/bie-index/envs/uat/favourites.json
       dailyRunHour: 12
       weeklyRunDay: 3
 
   inbo_dev:
     images:
-      config: file:///config/config/bie-index/envs/dev/image-lists.json
-    conservationListsUrl: file:///config/config/bie-index/envs/dev/conservation-lists.json
-    vernacularListsUrl: file:///config/config/bie-index/envs/dev/vernacular-lists.json
+      config: file:///config/bie-index/envs/dev/image-lists.json
+    conservationListsUrl: file:///config/bie-index/envs/dev/conservation-lists.json
+    vernacularListsUrl: file:///config/bie-index/envs/dev/vernacular-lists.json
     hiddenImages:
-      config: file:///config/config/bie-index/envs/dev/hidden-images-lists.json
+      config: file:///config/bie-index/envs/dev/hidden-images-lists.json
     wiki:
-      config: file:///config/config/bie-index/envs/dev/wiki-lists.json
+      config: file:///config/bie-index/envs/dev/wiki-lists.json
     import:
-      favouritesConfigUrl: file:///config/config/bie-index/envs/dev/favourites.json
+      favouritesConfigUrl: file:///config/bie-index/envs/dev/favourites.json
       dailyRunHour: 12
       weeklyRunDay: 3
 
   local:
     images:
-      config: file:///config/config/bie-index/envs/local/image-lists.json
-    conservationListsUrl: file:///config/config/bie-index/envs/local/conservation-lists.json
-    vernacularListsUrl: file:///config/config/bie-index/envs/local/vernacular-lists.json
+      config: file:///config/bie-index/envs/local/image-lists.json
+    conservationListsUrl: file:///config/bie-index/envs/local/conservation-lists.json
+    vernacularListsUrl: file:///config/bie-index/envs/local/vernacular-lists.json
     hiddenImages:
-      config: file:///config/config/bie-index/envs/local/hidden-images-lists.json
+      config: file:///config/bie-index/envs/local/hidden-images-lists.json
     wiki:
-      config: file:///config/config/bie-index/envs/local/wiki-lists.json
+      config: file:///config/bie-index/envs/local/wiki-lists.json
     import:
-      favouritesConfigUrl: file:///config/config/bie-index/envs/local/favourites.json
+      favouritesConfigUrl: file:///config/bie-index/envs/local/favourites.json

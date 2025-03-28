@@ -22,10 +22,10 @@ server:
       port: 9190
 conservation:
   index: /data/lucene/gbif-backbone
-  speciesUrl: file:///config/config/sensitive-data-service/sensitive-species-data.xml
-  zonesUrl: file:///config/config/sensitive-data-service/sensitivity-zones.xml
-  categoriesUrl: file:///config/config/sensitive-data-service/sensitivity-categories.xml
-  layersUrl: file:///config/config/sensitive-data-service/layers.json
+  speciesUrl: file:///config/sensitive-data-service/sensitive-species-data.xml
+  zonesUrl: file:///config/sensitive-data-service/sensitivity-zones.xml
+  categoriesUrl: file:///config/sensitive-data-service/sensitivity-categories.xml
+  layersUrl: file:///config/sensitive-data-service/layers.json
   layersServiceUrl: ${common.protocol}://${common.domain}/spatial-service
   cache:
     entryCapacity: 10000

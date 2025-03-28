@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- data-quality-filter-service -->
+<!-- apikey -->
 <Context reloadable="false">
 
     <Parameter name="spring.config.additional-location"
-               value="file:/config/config/common/common.yml,file:/config/config/data-quality-filter-service/data-quality-filter-service.yml,${ADDITIONAL_SPRING_CONFIG_LOCATIONS}"
+               value="file:/config/common/common.yml,file:/config/apikey/apikey.yml,${ADDITIONAL_SPRING_CONFIG_LOCATIONS}"
                override="false"/>
     <Parameter name="grails.env"
                value="${GRAILS_ENV}"
@@ -11,6 +11,7 @@
 
     <!-- Logging config -->
     <Parameter name="appName"
-               value="%white(data-quality-filter-service)"
+               value="%green(apikey)"
                override="false"/>
+
 </Context>

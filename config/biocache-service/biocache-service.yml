@@ -37,9 +37,9 @@ autocomplete:
     images:
       enabled: true
     groups:
-      url: /config/config/biocache-service/groups.json
+      url: /config/biocache-service/groups.json
     subgroups:
-      url: /config/config/biocache-service/subgroups.json
+      url: /config/biocache-service/subgroups.json
 biocache:
   ui:
     url: ${common.protocol}://${common.domain}/biocache-hub
@@ -105,17 +105,17 @@ download:
     subject.failure: "Er is een fout opgetreden bij het verwerken van jouw downloadverzoek - [filename]"
     body:
       error: "Jouw [hubName] download is mislukt."
-    template: /config/config/biocache-service/templates/email.html
+    template: /config/biocache-service/templates/email.html
   doi:
     resolver: ${common.protocol}://${common.domain}/doi-service
     email:
-      template: /config/config/biocache-service/templates/email.html
+      template: /config/biocache-service/templates/email.html
     title:
       prefix: "Waarnemingen download"
     landing:
       page: ${common.protocol}://${common.domain}/doi-service/
     readme:
-      template: /config/config/biocache-service/templates/readme.html
+      template: /config/biocache-service/templates/readme.html
   readme:
     template:
       url: ${common.protocol}://${common.domain}/doi-service/
@@ -136,7 +136,7 @@ extra:
     fields: ''
 facet:
   default: true
-  config: /config/config/biocache-service/facets.json
+  config: /config/biocache-service/facets.json
 facets:
   defaultmax: 0
   max: 4
@@ -197,7 +197,7 @@ solr:
       wait: 50
   pipelines:
     field:
-      config: /config/config/biocache-service/pipelines-field-config.json
+      config: /config/biocache-service/pipelines-field-config.json
 term:
   query:
     limit: 1000

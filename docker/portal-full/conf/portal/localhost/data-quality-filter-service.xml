@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- spatial-hub -->
+<!-- data-quality-filter-service -->
 <Context reloadable="false">
 
     <Parameter name="spring.config.additional-location"
-               value="file:/config/config/common/common.yml,file:/config/config/spatial-hub/spatial-hub.yml,${ADDITIONAL_SPRING_CONFIG_LOCATIONS}"
+               value="file:/config/common/common.yml,file:/config/data-quality-filter-service/data-quality-filter-service.yml,${ADDITIONAL_SPRING_CONFIG_LOCATIONS}"
                override="false"/>
     <Parameter name="grails.env"
                value="${GRAILS_ENV}"
@@ -11,6 +11,6 @@
 
     <!-- Logging config -->
     <Parameter name="appName"
-               value="%boldMagenta(spatial-hub)"
+               value="%white(data-quality-filter-service)"
                override="false"/>
 </Context>
