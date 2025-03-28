@@ -153,7 +153,7 @@ media:
   dir: /data/biocache-media/
   url: ${common.protocol}://${common.domain}/image-service
   store:
-    url: ${common.protocol}://${common.domain}/image-service
+    url: http://image-service.vbp.internal:8080/image-service
 name:
   index:
     dir: /data/lucene/namematching_v13
