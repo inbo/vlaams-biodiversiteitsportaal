@@ -44,8 +44,3 @@ ENTRYPOINT ["java", "-jar", "/app/app.jar", "server"]
 CMD ["config.yml"]
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:9180 || exit 1
-
-RUN mkdir /data
-RUN chown 1000:1000 /data
-VOLUME /data
-USER 1000:1000
