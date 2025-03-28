@@ -63,7 +63,7 @@ jobs:
           DOCKER_BUILD_MATRIX="[]"
           for component in ${DOCKER_COMPONENTS}; do          
             export COMPONENT=docker-${component}
-            export PATHS="./docker/tomcat/** ./docker/${component}/**"
+            export PATHS="./docker/docker-bake.hcl ./docker/${component}/**"
             export $(bash <(curl -fsS "https://raw.githubusercontent.com/StefanVanDyck/git-semantic-version/refs/heads/main/version.sh") | xargs)
 
             if [ "${number_of_changes_since_last_tag}" != "0" ]; then
@@ -261,7 +261,6 @@ jobs:
             --set="${COMPONENT}.labels.git_hash=${{ github.sha }}" \
             --set="custom-gradle.cache-to=type=registry,ref=${DOCKER_REPO}/inbo-vbp-custom-gradle:${CACHE_TAG},oci-mediatypes=true,image-manifest=true,mode=max" \
             --set="custom-maven.cache-to=type=registry,ref=${DOCKER_REPO}/inbo-vbp-custom-maven:${CACHE_TAG},oci-mediatypes=true,image-manifest=true,mode=max" \
-            --set="tomcat-base.cache-to=type=registry,ref=${DOCKER_REPO}/inbo-vbp-tomcat-base:${CACHE_TAG},oci-mediatypes=true,image-manifest=true,mode=max" \
             --set="${COMPONENT}.cache-to=type=registry,ref=${DOCKER_REPO}/inbo-vbp-${COMPONENT}:${CACHE_TAG},oci-mediatypes=true,image-manifest=true,mode=max"
 
           # Create Git Tag
