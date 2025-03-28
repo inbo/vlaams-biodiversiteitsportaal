@@ -22,18 +22,9 @@ target "custom-maven" {
   tags = ["custom-maven:${TAG}"]
 }
 
-
-target "tomcat-base" {
-  context = "./tomcat"
-  cache-from = ["${DOCKER_REPO}/inbo-vbp-tomcat-base:${CACHE_TAG}"]
-  tags = ["tomcat:${TAG}"]
-  target  = "base"
-}
-
 target "portal-full" {
   context = "./tomcat"
   contexts = {
-    "tomcat-base"                 = "target:tomcat-base"
     "alerts"                      = "target:alerts"
     "apikey"                      = "target:apikey"
     "bie-hub"                     = "target:bie-hub"
@@ -46,21 +37,18 @@ target "portal-full" {
     "image-service"               = "target:image-service"
     "logger"                      = "target:logger"
     "regions"                     = "target:regions"
-    "sandbox"                     = "target:sandbox"
     "spatial-hub"                 = "target:spatial-hub"
     "spatial-service"             = "target:spatial-service"
     "species-list"                = "target:species-list"
     "userdetails"                 = "target:userdetails"
   }
   tags = ["${DOCKER_REPO}/inbo-vbp-portal-full:${TAG}"]
-  target = "portal"
 }
 
 target "alerts" {
   context = "./alerts"
   contexts = {
     "custom-gradle" = "target:custom-gradle"
-    "tomcat-base"   = "target:tomcat-base"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-alerts:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-alerts:${TAG}"]
@@ -70,7 +58,6 @@ target "apikey" {
   context = "./apikey"
   contexts = {
     "custom-gradle" = "target:custom-gradle"
-    "tomcat-base"   = "target:tomcat-base"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-apikey:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-apikey:${TAG}"]
@@ -80,7 +67,6 @@ target "bie-hub" {
   context = "./bie-hub"
   contexts = {
     "custom-gradle" = "target:custom-gradle"
-    "tomcat-base"   = "target:tomcat-base"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-bie-hub:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-bie-hub:${TAG}"]
@@ -90,7 +76,6 @@ target "bie-index" {
   context = "./bie-index"
   contexts = {
     "custom-gradle" = "target:custom-gradle"
-    "tomcat-base"   = "target:tomcat-base"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-bie-index:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-bie-index:${TAG}"]
@@ -100,7 +85,6 @@ target "biocache-hub" {
   context = "./biocache-hub"
   contexts = {
     "custom-gradle" = "target:custom-gradle"
-    "tomcat-base"   = "target:tomcat-base"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-biocache-hub:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-biocache-hub:${TAG}"]
@@ -110,7 +94,6 @@ target "biocache-service" {
   context = "./biocache-service"
   contexts = {
     "custom-gradle" = "target:custom-gradle"
-    "tomcat-base"   = "target:tomcat-base"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-biocache-service:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-biocache-service:${TAG}"]
@@ -120,7 +103,6 @@ target "collectory" {
   context = "./collectory"
   contexts = {
     "custom-gradle" = "target:custom-gradle"
-    "tomcat-base"   = "target:tomcat-base"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-collectory:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-collectory:${TAG}"]
@@ -130,7 +112,6 @@ target "data-quality-filter-service" {
   context = "./data-quality-filter-service"
   contexts = {
     "custom-gradle" = "target:custom-gradle"
-    "tomcat-base"   = "target:tomcat-base"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-data-quality-filter-service:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-data-quality-filter-service:${TAG}"]
@@ -140,7 +121,6 @@ target "doi-service" {
   context = "./doi-service"
   contexts = {
     "custom-gradle" = "target:custom-gradle"
-    "tomcat-base"   = "target:tomcat-base"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-doi-service:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-doi-service:${TAG}"]
@@ -150,7 +130,6 @@ target "image-service" {
   context = "./image-service"
   contexts = {
     "custom-gradle" = "target:custom-gradle"
-    "tomcat-base"   = "target:tomcat-base"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-image-service:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-image-service:${TAG}"]
@@ -160,7 +139,6 @@ target "logger" {
   context = "./logger"
   contexts = {
     "custom-gradle" = "target:custom-gradle"
-    "tomcat-base"   = "target:tomcat-base"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-logger:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-logger:${TAG}"]
@@ -188,18 +166,9 @@ target "regions" {
   context = "./regions"
   contexts = {
     "custom-gradle" = "target:custom-gradle"
-    "tomcat-base"   = "target:tomcat-base"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-regions:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-regions:${TAG}"]
-}
-
-target "sandbox" {
-  context = "./sandbox"
-  contexts = {
-    "biocache-service" = "target:biocache-service"
-  }
-  tags = ["${DOCKER_REPO}/inbo-vbp-sandbox:${TAG}"]
 }
 
 target "sensitive-data-service" {
@@ -214,7 +183,6 @@ target "spatial-hub" {
   context = "./spatial-hub"
   contexts = {
     "custom-gradle" = "target:custom-gradle"
-    "tomcat-base"   = "target:tomcat-base"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-spatial-hub:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-spatial-hub:${TAG}"]
@@ -224,7 +192,6 @@ target "spatial-service" {
   context = "./spatial-service"
   contexts = {
     "custom-gradle" = "target:custom-gradle"
-    "tomcat-base"   = "target:tomcat-base"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-spatial-service:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-spatial-service:${TAG}"]
@@ -234,7 +201,6 @@ target "species-list" {
   context = "./species-list"
   contexts = {
     "custom-gradle" = "target:custom-gradle"
-    "tomcat-base"   = "target:tomcat-base"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-species-list:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-species-list:${TAG}"]
@@ -244,7 +210,6 @@ target "userdetails" {
   context = "./userdetails"
   contexts = {
     "custom-gradle" = "target:custom-gradle"
-    "tomcat-base"   = "target:tomcat-base"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-userdetails:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-userdetails:${TAG}"]

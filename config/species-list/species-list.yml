@@ -36,11 +36,15 @@ dataSource:
 downloadLimit: 200
 fieldGuide:
   baseURL: ''
+
+server:
+  servlet:
+    contextPath: /species-list
 grails:
   serverURL: ${common.protocol}://${common.domain}/species-list
   cache:
     ehcache:
-      ehcacheXmlLocation: 'file:///config/config/species-list/ehcache.xml'
+      ehcacheXmlLocation: 'file:///config/species-list/ehcache.xml'
 
 iconicSpecies:
   uid: dr781

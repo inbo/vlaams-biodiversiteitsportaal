@@ -42,6 +42,10 @@ endpoints:
     sensitive: false
 serverURL: ${common.protocol}://${common.domain}/userdetails
 serverName: ${common.protocol}://${common.domain}/userdetails
+
+server:
+  servlet:
+    contextPath: /userdetails
 grails:
   serverURL: ${common.protocol}://${common.domain}/userdetails
   mail:

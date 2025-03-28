@@ -29,7 +29,7 @@ RUN mkdir /data && mkdir /data/lucene && chown -R 1000:1000 /data
 
 # Link to hardcoded config location
 RUN mkdir -p /data/sds/config \
-    && ln -s /config/config/sensitive-data-service/sds-config.properties /data/sds/config/sds-config.properties
+    && ln -s /config/sensitive-data-service/sds-config.properties /data/sds/config/sds-config.properties
 
 COPY --from=builder \
     /gbif-backbone /data/lucene/gbif-backbone

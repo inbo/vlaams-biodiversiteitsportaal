@@ -23,19 +23,22 @@ RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
 
 RUN ls -la /project/build/libs
 
-FROM tomcat-base
+FROM amazoncorretto:11
+
+# Default based on repo structure, can be overridden at runtime
+ENV SPRING_CONFIG_ADDITIONAL-LOCATION="file:/config/common/common.yml,file:/config/species-list/species-list.yml"
+# Symlink to i18n files location, unfortunately hard-coded at docker image build time
+RUN mkdir -p /opt/atlas/i18n \
+  && ln -s /config/species-list/i18n/crowdin /opt/atlas/i18n/specieslist-webapp \
+  && mkdir -p /var/opt/atlas/i18n \
+  && ln -s /config/species-list/i18n/override /var/opt/atlas/i18n/specieslist-webapp
 
 ARG VERSION=5.3.0-SNAPSHOT
 ARG COMMIT=c353fd4940dfe06853311997f2692affec822998
 LABEL ala.version=inbo-${COMMIT}
 
-COPY --from=builder /project/build/libs/specieslist-webapp-${VERSION}-plain.war ${CATALINA_HOME}/webapps/species-list.war
-COPY species-list.xml ${CATALINA_HOME}/conf/portal/localhost/species-list.xml
-
-# Symlink to i18n files location
-RUN mkdir -p /opt/atlas/i18n \
-  && ln -s /config/config/species-list/i18n/crowdin /opt/atlas/i18n/specieslist-webapp \
-  && mkdir -p /var/opt/atlas/i18n \
-  && ln -s /config/config/species-list/i18n/override /var/opt/atlas/i18n/specieslist-webapp
+COPY --from=builder /project/build/libs/specieslist-webapp-${VERSION}.war /species-list.war
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/species-list/actuator/health || exit 1
+
+ENTRYPOINT ["sh", "-c", "java ${JAVA_OPTS} -jar /species-list.war"]

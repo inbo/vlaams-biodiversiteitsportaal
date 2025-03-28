@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- bie-hub -->
+<!-- collectory -->
 <Context reloadable="false">
 
     <Parameter name="spring.config.additional-location"
-               value="file:/config/config/common/common.yml,file:/config/config/bie-hub/bie-hub.yml,${ADDITIONAL_SPRING_CONFIG_LOCATIONS}"
+               value="file:/config/common/common.yml,file:/config/collectory/collectory.yml,${ADDITIONAL_SPRING_CONFIG_LOCATIONS}"
                override="false"/>
     <Parameter name="grails.env"
                value="${GRAILS_ENV}"
@@ -11,6 +11,6 @@
 
     <!-- Logging config -->
     <Parameter name="appName"
-               value="%yellow(bie-hub)"
+               value="%cyan(collectory)"
                override="false"/>
 </Context>

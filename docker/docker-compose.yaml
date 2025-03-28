@@ -7,7 +7,7 @@ services:
       - "8181:80"
       - "8080:8080"
     volumes:
-      - ../config:/config/config:ro
+      - ../config:/config:ro
       - ../config/biocache-hub:/data/ala-hub/config/ # Hardcoded paths in the biocache-hub
       - ./tomcat/tomcat-manager-ui/host-manager:/usr/local/tomcat/webapps/host-manager
       - ./tomcat/tomcat-manager-ui/manager:/usr/local/tomcat/webapps/manager
@@ -15,7 +15,7 @@ services:
     environment:
       LOG_LEVEL: "INFO"
       JAVA_OPTS: "-Xmx6g"
-      ADDITIONAL_SPRING_CONFIG_LOCATIONS: "file:/config/config/common/common-docker.yml"
+      ADDITIONAL_SPRING_CONFIG_LOCATIONS: "file:/config/common/common-docker.yml" # Custom env var used in tomcat context
       SPRING_PROFILES_ACTIVE: "local"
       GRAILS_ENV: local
       REMOTE_DEBUGGER_PORT: 5005
@@ -123,8 +123,8 @@ services:
   mysql-logger-init:
     image: mysql
     volumes:
-      - ../config/logger:/config/config/logger:ro
-    command: bash -c "cat /config/config/logger/db-init/*.sql | mysql --host=mysql --user=logger --password=my-super-secret-password --database logger"
+      - ../config/logger:/config/logger:ro
+    command: bash -c "cat /config/logger/db-init/*.sql | mysql --host=mysql --user=logger --password=my-super-secret-password --database logger"
     depends_on:
       mysql:
         condition: service_healthy
@@ -234,21 +234,21 @@ services:
         aliases:
           - namematching-service.vbp.internal
     command:
-      - /config/config/namematching-service/config.yml
+      - /config/namematching-service/config.yml
     ports:
       - "9179:9179"
     volumes:
-      - ../config/namematching-service:/config/config/namematching-service:ro
+      - ../config/namematching-service:/config/namematching-service:ro
 
   #  sensitive-data-service:
   #    image: ${DOCKER_REPO:-local}/inbo-vbp-sensitive-data-service:dev
   #    command:
-  #      - /config/config/sensitive-data-service/config.yml
+  #      - /config/sensitive-data-service/config.yml
   #    ports:
   #      - "9189:9189"
   #      - "5005:5005"
   #    volumes:
-  #      - ../config/sensitive-data-service:/config/config/sensitive-data-service:ro
+  #      - ../config/sensitive-data-service:/config/sensitive-data-service:ro
   #    environment:
   #      JAVA_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,address=*:5005,suspend=n"
 
@@ -279,7 +279,7 @@ services:
       - "9999:9999"
     environment:
       SERVER_PORT: 9999
-      JSON_CONFIG_PATH: /config/config.json
+      JSON_CONFIG_PATH: /config.json
     volumes:
       - ../config/mock-oauth2-server:/config:ro
 

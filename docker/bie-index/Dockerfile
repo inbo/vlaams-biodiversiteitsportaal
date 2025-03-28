@@ -22,19 +22,22 @@ RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
     rsync -a /home/gradle/.gradle/caches/modules-2 /gradle-cache \
     && rm /gradle-cache/modules-2/*.lock && rm /gradle-cache/modules-2/gc.properties
 
-FROM tomcat-base
+FROM amazoncorretto:11
+
+# Default based on repo structure, can be overridden at runtime
+ENV SPRING_CONFIG_ADDITIONAL-LOCATION="file:/config/common/common.yml,file:/config/bie-index/bie-index.yml"
+# Symlink to i18n files location, unfortunately hard-coded at docker image build time
+RUN mkdir -p /opt/atlas/i18n \
+  && ln -s /config/bie-index/i18n/crowdin /opt/atlas/i18n/bie-index \
+  && mkdir -p /var/opt/atlas/i18n \
+  && ln -s /config/bie-index/i18n/override /var/opt/atlas/i18n/bie-index
 
 ARG VERSION=3.1.0
 ARG COMMIT=cdcce55581b5d37173d6536431d92defeb2d7266
 LABEL ala.version=inbo-${COMMIT}
 
-COPY --from=builder /project/build/libs/bie-index-${VERSION}-plain.war ${CATALINA_HOME}/webapps/bie-index.war
-COPY bie-index.xml ${CATALINA_HOME}/conf/portal/localhost/bie-index.xml
-
-# Symlink to i18n files location
-RUN mkdir -p /opt/atlas/i18n \
-  && ln -s /config/config/bie-index/i18n/crowdin /opt/atlas/i18n/bie-index \
-  && mkdir -p /var/opt/atlas/i18n \
-  && ln -s /config/config/bie-index/i18n/override /var/opt/atlas/i18n/bie-index
+COPY --from=builder /project/build/libs/bie-index-${VERSION}.war /bie-index.war
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/apikey/actuator/health || exit 1
+
+ENTRYPOINT ["sh", "-c", "java ${JAVA_OPTS} -jar /bie-index.war"]

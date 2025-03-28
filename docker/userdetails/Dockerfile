@@ -27,19 +27,22 @@ RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
 
 RUN ls -la /project/build/libs/
 
-FROM tomcat-base
+FROM amazoncorretto:11
+
+# Default based on repo structure, can be overridden at runtime
+ENV SPRING_CONFIG_ADDITIONAL-LOCATION="file:/config/common/common.yml,file:/config/userdetails/userdetails.yml"
+# Symlink to i18n files location, unfortunately hard-coded at docker image build time
+RUN mkdir -p /opt/atlas/i18n \
+  && ln -s /config/userdetails/i18n/crowdin /opt/atlas/i18n/userdetails \
+  && mkdir -p /var/opt/atlas/i18n \
+  && ln -s /config/userdetails/i18n/override /var/opt/atlas/i18n/userdetails
 
 ARG VERSION=3.3.0-SNAPSHOT
 ARG COMMIT=6a498f276dcaa5e1b26acbcf29b7dbe40cc9c2fa
 LABEL ala.version=inbo-${COMMIT}
 
-COPY --from=builder /project/build/libs/userdetails-${VERSION}-plain.war ${CATALINA_HOME}/webapps/userdetails.war
-COPY userdetails.xml ${CATALINA_HOME}/conf/portal/localhost/userdetails.xml
-
-# Symlink to i18n files location
-RUN mkdir -p /opt/atlas/i18n \
-  && ln -s /config/config/userdetails/i18n/crowdin /opt/atlas/i18n/userdetails \
-  && mkdir -p /var/opt/atlas/i18n \
-  && ln -s /config/config/userdetails/i18n/override /var/opt/atlas/i18n/userdetails
+COPY --from=builder /project/build/libs/userdetails-${VERSION}-exec.war /userdetails.war
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/userdetails/actuator/health || exit 1
+
+ENTRYPOINT ["sh", "-c", "java ${JAVA_OPTS} -jar /userdetails.war"]

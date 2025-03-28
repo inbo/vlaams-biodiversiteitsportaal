@@ -3,7 +3,7 @@
 <Context reloadable="false">
 
     <Parameter name="spring.config.additional-location"
-               value="file:/config/config/common/common.yml,file:/config/config/biocache-service/biocache-service.yml,${ADDITIONAL_SPRING_CONFIG_LOCATIONS}"
+               value="file:/config/common/common.yml,file:/config/biocache-service/biocache-service.yml,${ADDITIONAL_SPRING_CONFIG_LOCATIONS}"
                override="false"/>
 
     <!-- Logging config -->

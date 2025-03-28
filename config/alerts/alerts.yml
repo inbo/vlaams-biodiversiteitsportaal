@@ -18,6 +18,9 @@ mail:
     # forceAllAlertsGetSent results in emails getting sent regardless if data has changed - only use in DEV env
     forceAllAlertsGetSent: false
 
+server:
+  servlet:
+    contextPath: /alerts
 grails:
   #default mail service
   serverURL: "${common.protocol}://${common.domain}/alerts"

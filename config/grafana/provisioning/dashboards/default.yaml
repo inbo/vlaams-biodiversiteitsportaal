@@ -5,5 +5,5 @@ providers:
     type: file
     updateIntervalSeconds: 30
     options:
-      path: /config/config/grafana/provisioning/dashboards
+      path: /config/grafana/provisioning/dashboards
       foldersFromFilesStructure: true

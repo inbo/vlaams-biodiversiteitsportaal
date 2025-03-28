@@ -10,6 +10,9 @@ webservice:
   client-id: logger
   client-secret: xxx
 
+server:
+  servlet:
+    contextPath: /logger
 grails:
   serverURL: ${common.protocol}://logger.${common.domain}
 

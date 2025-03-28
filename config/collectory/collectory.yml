@@ -52,13 +52,17 @@ gbifDefaultEntityCountry: BEL
 gbifEndorsingNodeKey: ""
 gbifExportUrlBase: ""
 gbifInstallationKey: ""
-gbifLicenceMappingUrl: file:///config/config/collectory/default-gbif-license-mapping.json
+gbifLicenceMappingUrl: file:///config/collectory/default-gbif-license-mapping.json
 gbifOrphansPublisherID: ""
 gbifRegistrationDryRun: true
 gbifRegistrationEnabled: false
 gbifWebsite: https://www.gbif.org
 google:
   apikey: get-a-google-api-key
+
+server:
+  servlet:
+    contextPath: /collectory
 grails:
   controllers:
     upload:

@@ -10,13 +10,16 @@ webservice:
   client-id: "ala_bie"
   client-secret: "ala_bie-oidc-super-secret"
 
+server:
+  servlet:
+    contextPath: /alerts
 grails:
   serverURL: ${common.protocol}://${common.domain}/bie-hub
   cors:
     enabled: true
   cache:
     ehcache:
-      ehcacheXmlLocation: 'file:///config/config/bie-hub/ehcache.xml'
+      ehcacheXmlLocation: 'file:///config/bie-hub/ehcache.xml'
 
 serverName: ${common.protocol}://${common.domain}/bie-hub
 
@@ -56,7 +59,7 @@ skin:
   layout: ala
   fluidLayout: true
 
-languageCodesUrl: file:///config/config/bie-hub/languages.json
+languageCodesUrl: file:///config/bie-hub/languages.json
 
 # Facets displayed on search page
 facets: idxtype,rank,locatedInHubCountry,imageAvailable,speciesGroup,taxonomicStatus,conservationStatusAUS_s,conservationStatusACT_s,conservationStatusNSW_s,conservationStatusQLD_s,conservationStatusVIC_s,conservationStatusTAS_s,conservationStatusSA_s,conservationStatusWA_s,conservationStatusNT_s
@@ -125,7 +128,7 @@ literature:
     api: https://api.trove.nla.gov.au/v2
     apikey: get-an-api-key
 external:
-  blacklist: file:///config/config/bie-hub/blacklist.json
+  blacklist: file:///config/bie-hub/blacklist.json
 
 # Mapping options
 defaultDecimalLatitude: 51.0

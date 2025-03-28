@@ -4,7 +4,7 @@ common:
   homepage: ${common.protocol}://${common.domain}
 
 logging:
-  config: /config/config/common/logback-docker.xml
+  config: /config/common/logback-docker.xml
 
 grails:
   cors:

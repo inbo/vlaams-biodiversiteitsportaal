@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- bie-index -->
+<!-- spatial-hub -->
 <Context reloadable="false">
 
     <Parameter name="spring.config.additional-location"
-               value="file:/config/config/common/common.yml,file:/config/config/bie-index/bie-index.yml,${ADDITIONAL_SPRING_CONFIG_LOCATIONS}"
+               value="file:/config/common/common.yml,file:/config/spatial-hub/spatial-hub.yml,${ADDITIONAL_SPRING_CONFIG_LOCATIONS}"
                override="false"/>
     <Parameter name="grails.env"
                value="${GRAILS_ENV}"
@@ -11,6 +11,6 @@
 
     <!-- Logging config -->
     <Parameter name="appName"
-               value="%blue(bie-index)"
+               value="%boldMagenta(spatial-hub)"
                override="false"/>
 </Context>

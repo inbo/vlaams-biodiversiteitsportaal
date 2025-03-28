@@ -10,6 +10,9 @@ webservice:
   client-id: spatial_service
   client-secret: xxx
 
+server:
+  servlet:
+    contextPath: /spatial-service
 grails:
   serverURL: ${common.protocol}://${common.domain}/spatial-service
 google:
@@ -111,7 +114,7 @@ sandboxSolrUrl: http://solr.${common.internalDomain}:8983/solr
 sandboxSolrCollection: sandbox
 sandboxThreadCount: 2
 pipelinesCmd: "java -Dspark.local.dir=/data/spatial-data/sandbox/tmp -Djava.io.tmpdir=/data/spatial-data/sandbox/tmp -cp /pipelines/pipelines.jar"
-pipelinesConfig: "--config=/config/config/spatial-service/la-pipelines.yaml"
+pipelinesConfig: "--config=/config/spatial-service/la-pipelines.yaml"
 
 logging:
-  config: /config/config/spatial-service/logback.xml
+  config: /config/spatial-service/logback.xml
