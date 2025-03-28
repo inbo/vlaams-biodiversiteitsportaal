@@ -190,7 +190,7 @@ jobs:
           # Should probably make this our own docker pull-through
           buildkitd-config-inline: |
             [registry."docker.io"]
-              mirrors = ["347082780157.dkr.ecr.eu-west-1.amazonaws.com/dockerhub"]
+              mirrors = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/docker-hub"]
       #          driver-opts: |
       #            image=moby/buildkit:buildx-stable-1
 
