@@ -10,6 +10,10 @@ webservice:
   client-id: "biocache_service"
   client-secret: "biocache_service-oidc-super-secret"
 
+server:
+  servlet:
+    contextPath: /biocache-service
+
 allow:
   layer:
     lookup: false
