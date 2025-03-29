@@ -85,10 +85,9 @@ server:
   port: 8080
   servlet:
     session:
-      # Failed attempt at making the JSESSESIONID cookie more secure
       cookie:
         secure: true
-        same-site: "strict"
+        same-site: "lax" # Strict causes pac4j issues
 
 environments:
   local:
