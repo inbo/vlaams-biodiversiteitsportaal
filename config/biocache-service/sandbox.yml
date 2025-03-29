@@ -24,3 +24,13 @@ solr:
 
 webservices:
   root: ${common.protocol}://${common.domain}/sandbox
+
+caches:
+  auth:
+    enabled: false
+  collections:
+    enabled: false
+  layers:
+    enabled: false
+  log:
+    enabled: false
