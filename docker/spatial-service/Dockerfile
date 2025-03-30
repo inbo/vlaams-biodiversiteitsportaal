@@ -77,3 +77,5 @@ RUN mkdir /data
 RUN chown 1000:1000 /data
 VOLUME /data
 USER 1000:1000
+RUN groupadd --gid 1000 app && useradd --no-create-home --gid 1000 --uid 1000 app
+
