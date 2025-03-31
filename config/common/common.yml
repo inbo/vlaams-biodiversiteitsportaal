@@ -89,20 +89,36 @@ server:
         secure: true
         same-site: "lax" # Strict causes pac4j issues
 
-environments:
-  local:
-    common:
-      protocol: http
-      domain: localhost
-  inbo_dev:
-    common:
-      protocol: https
-      domain: natuurdata.dev.inbo.be
-  inbo_uat:
-    common:
-      protocol: https
-      domain: natuurdata.uat.inbo.be
-  inbo_prod:
-    common:
-      protocol: https
-      domain: natuurdata.inbo.be
+# Spring profiles should work for both grails and non-grails spring applications
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+common:
+  protocol: http
+  domain: localhost
+---
+spring:
+  config:
+    activate:
+      on-profile: inbo_dev
+common:
+  protocol: https
+  domain: natuurdata.dev.inbo.be
+---
+spring:
+  config:
+    activate:
+      on-profile: inbo_uat
+common:
+  protocol: https
+  domain: natuurdata.uat.inbo.be
+---
+spring:
+  config:
+    activate:
+      on-profile: inbo_prod
+common:
+  protocol: https
+  domain: natuurdata.inbo.be
