@@ -1,9 +1,9 @@
 console.log(`Building static pages for ${process.env.NODE_ENV} environment`)
 
 let protocol = "https"
-let domain = "::BASE_URL::"
-let loginUrl = "https://::KEYCLOAK_URL::/realms/vbp/protocol/openid-connect/auth?client_id=::KEYCLOAK_CLIENT_ID::&response_type=code&scope=openid&redirect_uri=https%3A%2F%2Fn::BASE_URL::?auth-cookie-action=set"
-let logoutUrl = "https://::KEYCLOAK_URL::/realms/vbp/protocol/openid-connect/logout?client_id=::KEYCLOAK_CLIENT_ID::&logout_uri=https%3A%2F%2F::BASE_URL::?auth-cookie-action=remove"
+let domain = "::BASE_DOMAIN::"
+let loginUrl = "https://::KEYCLOAK_URL::/realms/vbp/protocol/openid-connect/auth?client_id=::KEYCLOAK_CLIENT_ID::&response_type=code&scope=openid&redirect_uri=https%3A%2F%2Fn::BASE_DOMAIN::?auth-cookie-action=set"
+let logoutUrl = "https://::KEYCLOAK_URL::/realms/vbp/protocol/openid-connect/logout?client_id=::KEYCLOAK_CLIENT_ID::&logout_uri=https%3A%2F%2F::BASE_DOMAIN::?auth-cookie-action=remove"
 
 if (process.env.NODE_ENV === 'development') {
     protocol = "http"
