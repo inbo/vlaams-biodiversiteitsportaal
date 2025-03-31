@@ -176,7 +176,7 @@ jobs:
           aws ecr get-login-password --region ${{ secrets.AWS_REGION }} \
             | docker login --username AWS --password-stdin ${{ secrets.ECR_REPO }}
           
-          OUT=$(aws sts assume-role --role-arn arn:aws:iam::632683202044:role/inbo-devops-github-actions-deployer-role --role-session-name "GithubActions");\
+          OUT=$(aws sts assume-role --role-arn arn:aws:iam::625469168093:role/inbo-biodiversiteitsportaal-developers-role --role-session-name "GithubActions");\
           export AWS_ACCESS_KEY_ID=$(echo $OUT | jq -r '.Credentials''.AccessKeyId');\
           export AWS_SECRET_ACCESS_KEY=$(echo $OUT | jq -r '.Credentials''.SecretAccessKey');\
           export AWS_SESSION_TOKEN=$(echo $OUT | jq -r '.Credentials''.SessionToken');
