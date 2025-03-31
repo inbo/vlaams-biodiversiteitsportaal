@@ -1,9 +1,9 @@
 console.log(`Building static pages for ${process.env.NODE_ENV} environment`)
 
 let protocol = "https"
-let domain = "natuurdata.dev.inbo.be"
-let loginUrl = "https://biodiversiteitsportaal-dev.auth.eu-west-1.amazoncognito.com/login?client_id=7072p1h0hnf2hiu7172iuqjsbb&response_type=code&scope=openid&redirect_uri=https%3A%2F%2Fnatuurdata.dev.inbo.be?auth-cookie-action=set"
-let logoutUrl = "https://biodiversiteitsportaal-dev.auth.eu-west-1.amazoncognito.com/logout?client_id=7072p1h0hnf2hiu7172iuqjsbb&logout_uri=https%3A%2F%2Fnatuurdata.dev.inbo.be?auth-cookie-action=remove"
+let domain = "::BASE_URL::"
+let loginUrl = "https://::KEYCLOAK_URL::/realms/vbp/protocol/openid-connect/auth?client_id=::KEYCLOAK_CLIENT_ID::&response_type=code&scope=openid&redirect_uri=https%3A%2F%2Fn::BASE_URL::?auth-cookie-action=set"
+let logoutUrl = "https://::KEYCLOAK_URL::/realms/vbp/protocol/openid-connect/logout?client_id=::KEYCLOAK_CLIENT_ID::&logout_uri=https%3A%2F%2F::BASE_URL::?auth-cookie-action=remove"
 
 if (process.env.NODE_ENV === 'development') {
     protocol = "http"
