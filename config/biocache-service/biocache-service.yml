@@ -192,7 +192,8 @@ solr:
     busywaitsleep: 100
     maxthreads: 30
     writertimeout: 60000
-  home: http://solr.${common.internalDomain}:8983/solr/biocache
+  home: http://solr.${common.internalDomain}:9983
+  collection: biocache
   server:
     indexVersion:
       refresh: 300000

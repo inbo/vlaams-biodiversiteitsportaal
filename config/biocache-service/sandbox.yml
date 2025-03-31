@@ -20,7 +20,8 @@ spring:
     name: sandbox
 
 solr:
-  home: http://solr.${common.internalDomain}:8983/solr/sandbox
+  home: http://solr.${common.internalDomain}:9983
+  collection: sandbox
 
 webservices:
   root: ${common.protocol}://${common.domain}/sandbox
@@ -34,3 +35,16 @@ caches:
     enabled: false
   log:
     enabled: false
+
+deleted:
+  file:
+    store: /data/biocache-delete/
+download:
+  url: ${common.protocol}://${common.domain}/biocache-download
+  offline:
+    max:
+      url: ${common.protocol}://${common.domain}/biocache-download/
+
+shapefile:
+  tmp:
+    dir: /data/biocache-download/tmp
