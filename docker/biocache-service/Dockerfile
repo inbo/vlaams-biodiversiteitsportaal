@@ -47,3 +47,4 @@ RUN mkdir /data
 RUN chown 1000:1000 /data
 VOLUME /data
 USER 1000:1000
+
