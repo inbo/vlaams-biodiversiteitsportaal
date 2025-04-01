@@ -254,11 +254,40 @@ rbac:
 spring:
   main:
     banner-mode: off
+
 ---
 spring:
   config:
     activate:
       on-profile: local
+common:
+  protocol: http
+  domain: localhost
 caches:
   collections: # needs to be disabled when running locally, if not deadlocks waiting for collectory to became available
-    enabled: false
+    enabled: # Spring profiles should work for both grails and non-grails spring applications
+---
+spring:
+  config:
+    activate:
+      on-profile: inbo_dev
+common:
+  protocol: https
+  domain: natuurdata.dev.inbo.be
+---
+spring:
+  config:
+    activate:
+      on-profile: inbo_uat
+common:
+  protocol: https
+  domain: natuurdata.uat.inbo.be
+---
+spring:
+  config:
+    activate:
+      on-profile: inbo_prod
+common:
+  protocol: https
+  domain: natuurdata.inbo.be
+
