@@ -24,7 +24,7 @@ grails:
 serverName: ${common.protocol}://${common.domain}/bie-hub
 
 userDetails:
-  baseUrl: ${common.protocol}://${common.domain}/userdetails/
+  url: ${common.protocol}://${common.domain}/userdetails/
 
 # BIE index webservices
 bie:
