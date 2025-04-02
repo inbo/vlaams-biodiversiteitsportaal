@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-AU">
+<html lang="nl-BE">
 <head>
     <g:if test="${config == null}">
         <g:set var="config" value="${grailsApplication.config}"/>
@@ -93,6 +93,19 @@
                 </div>
 
                 <div class="display-flex ${loginStatus}">
+                    <ul class="nav navbar-nav language-selection">
+                        <li id="dropdown-lang" class="dropdown">
+                            <a id="lang-switch" href="#" class="save-load" data-toggle="dropdown" role="button" aria-haspopup="true"
+                               aria-expanded="false">Change language<span class="caret"></span></a>
+                            <ul class="locale-switcher dropdown-menu dropdown-lang-menu">
+                                <li class="locale-link" data-locale="nl"><a class="nl-locale-link" href="?lang=nl"><span
+                                        class="lang_link_nl">Nederlands</span></a></li>
+                                <!-- <li class="locale-link" data-locale="fr"><a class="fr-locale-link" href="#"><span class="lang_link_fr">Français</span></a></li> -->
+                                <li class="locale-link" data-locale="en"><a class="en-locale-link" href="?lang=en"><span
+                                        class="lang_link_en">English</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
                     <g:if test="${request.userPrincipal != null}">
                         <a href="#" class="save-load"
                            onclick="$('#saveSessionButton')[0].click()"
@@ -215,6 +228,7 @@
 
 <asset:javascript src="commonui-bs3-2019/js/application.min.js"/>
 <asset:javascript src="commonui-bs3-2019.js"/>
+<asset:javascript src="i18n.js"/>
 
 <!-- End Google Analytics -->
 </body>
