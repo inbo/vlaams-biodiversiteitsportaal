@@ -23,6 +23,7 @@ COPY resources.xml ./grails-app/conf/spring/resources.xml
 COPY ./layouts/* ./grails-app/views/layouts/
 COPY ./assets/images/icon_flanders.png ./grails-app/assets/images/icon_contextual-layer.png
 COPY ./assets/images/icon_flanders.png ./grails-app/assets/images/icon_wms-layer.png
+COPY ./assets/javascripts/* ./grails-app/javascripts/
 
 RUN --mount=type=cache,target=/gradle-cache,ro \
     gradle \
