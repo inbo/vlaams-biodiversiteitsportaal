@@ -63,7 +63,7 @@ security:
   cas:
     enabled: false
   jwt:
-    enabled: false
+    enabled: true
     discoveryUri: http://host.docker.internal:9999/default/.well-known/openid-configuration
     fallbackToLegacyBehaviour: false
   oidc:
