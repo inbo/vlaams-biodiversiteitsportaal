@@ -1,0 +1,165 @@
+$gray-base:              #000 !default;
+$gray-darker:            #212121 !default;
+$gray-dark:              #343a40 !default;
+$gray:                   #6c757d !default;
+$gray-light:             #ced4da !default;
+$gray-lighter:           #f2f2f2 !default;
+
+$brand-primary:         #f26649 !default;
+$brand-primary-dark:    #c44d34 !default;
+$brand-success:         #28a745 !default;
+$brand-info:            #17a2b8 !default;
+$brand-warning:         #ffc107 !default;
+$brand-danger:          #dc3545 !default;
+$brand-default:         #fff !default;
+
+$yiq-contrasted-threshold:  150 !default;
+
+//== Scaffolding
+//
+//## Settings for some of the most global styles.
+
+//** Background color for `<body>`.
+$body-bg:               #fff !default;
+//** Global text color on `<body>`.
+$text-color:            $gray-darker !default;
+
+//** Global textual link color.
+$link-color:            #c44d34 !default;
+//** Link hover color set via `darken()` function.
+$link-hover-color:      darken($link-color, 15%) !default;
+//** Link hover decoration.
+$link-hover-decoration: underline !default;
+
+
+//== Typography
+//
+//## Font, line-height, and color for body text, headings, and more.
+
+$font-family-sans-serif:  'Roboto', sans-serif;
+//** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
+$font-family-monospace:   SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
+
+
+//== Buttons
+//
+//## For each of Bootstrap's buttons, define text, background and border color.
+$btn-default-color:              #000 !default;
+$btn-default-bg:                 $brand-default !default;
+$btn-default-border:             #999 !default;
+
+$btn-primary-color:              #fff !default;
+$btn-primary-bg:                 $brand-primary-dark !default;
+$btn-primary-border:             $brand-primary-dark !default;
+
+$btn-success-color:              #fff !default;
+$btn-success-bg:                 $brand-success !default;
+$btn-success-border:             $brand-success !default;
+
+$btn-info-color:                 #fff !default;
+$btn-info-bg:                    $brand-info !default;
+$btn-info-border:                $btn-info-bg !default;
+
+$btn-warning-color:              #fff !default;
+$btn-warning-bg:                 $brand-warning !default;
+$btn-warning-border:             $btn-warning-bg !default;
+
+$btn-danger-color:               #fff !default;
+$btn-danger-bg:                  $brand-danger !default;
+$btn-danger-border:              $btn-danger-bg !default;
+
+$btn-link-disabled-color:        $gray-light !default;
+
+
+//== Forms
+//
+//##
+
+//** `<input>` background color
+$input-bg:                       #fff !default;
+//** `<input disabled>` background color
+$input-bg-disabled:              $gray-lighter !default;
+
+//** Text color for `<input>`s
+$input-color:                    $gray-darker !default;
+//** `<input>` border color
+$input-border:                   #999 !default;
+
+//** Border color for inputs on focus
+$input-border-focus:             lighten($brand-primary, 25%) !default;
+
+//** Placeholder text color
+$input-color-placeholder:        $gray-light !default;
+
+
+//== Dropdowns
+//
+//## Dropdown menu container and contents.
+$dropdown-font-size: 14px;
+
+//** Divider color for between dropdown items.
+$dropdown-divider-bg:            $gray-light !default;
+
+//** Dropdown link text color.
+$dropdown-link-color:            $gray-dark !default;
+//** Hover background for dropdown links.
+$dropdown-link-hover-bg:         $gray-lighter !default;
+
+$grid-float-breakpoint: 992px !default;
+
+//** Border color for table and cell borders.
+$table-border-color:            #999 !default;
+
+// Navbar toggle
+$navbar-default-toggle-hover-bg:           #999 !default;
+$navbar-default-toggle-border-color:       #999 !default;
+
+//== Tabs
+$nav-tabs-border-color:                     #999 !default;
+$nav-tabs-active-link-hover-border-color:   #999 !default;
+$nav-tabs-justified-link-border-color:            #999 !default;
+
+
+//== Pagination
+$pagination-border:                    #999 !default;
+$pagination-hover-border:              #999 !default;
+$pagination-disabled-border:           #999 !default;
+
+//== List group
+//** `.list-group-item` border color
+$list-group-border:             #999 !default;
+
+//== Panels
+$panel-inner-border:          #999 !default;
+$panel-default-border:        #999 !default;
+$thumbnail-border:            #999 !default;
+
+
+// Font
+// $icon-font-path: "@bootstrap/assets/fonts/bootstrap";
+// @import url(https://fonts.googleapis.com/css?family=Lato%3A700%7CRoboto%3A300%2C400%2C400i%2C500%2C700%2C900&ver=5.2.1);
+
+// @import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/variables";
+// @import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/mixins";
+// @import "./bootstrap4/variables";
+// /*! bs4
+//  */
+// @import "../../../../branding/commonui-bs3-2019/ala-wordpress-2019/web/app/themes/pvtl/src/sass/bootstrap4/functions";
+// @import "../../../../branding/commonui-bs3-2019/ala-wordpress-2019/web/app/themes/pvtl/src/sass/bootstrap4/mixins";
+// // @import "../../../../branding/commonui-bs3-2019/ala-wordpress-2019/web/app/themes/pvtl/sass/theme/child_theme_variables";
+// @import "./bootstrap4/base";
+// @import "./bootstrap4/breakpoints";
+// #wrapper-navbar>nav, footer, .ui-autocomplete, .ui-autocomplete .ui-state-active {
+//   @import "./bootstrap4/buttons";
+// }
+// @import "../../../../branding/commonui-bs3-2019/ala-wordpress-2019/web/app/themes/pvtl/sass/theme/child_theme";
+
+// #wrapper-navbar {
+//   @import "../../../../branding/commonui-bs3-2019/ala-wordpress-2019/web/app/themes/pvtl/sass/theme/partials/header";
+// }
+
+// footer {
+//   @import "../../../../branding/commonui-bs3-2019/ala-wordpress-2019/web/app/themes/pvtl/sass/theme/partials/footer";
+// }
+
+@import "./extras/basic";

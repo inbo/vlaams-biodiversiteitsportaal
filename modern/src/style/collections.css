@@ -1,0 +1,55 @@
+.filter-buttons a {
+    box-shadow: none;
+}
+
+.filter-buttons div {
+    opacity: 0.7;
+}
+
+.filter-buttons a {
+    padding: 10px 10px 0px 10px;
+    background-color: gray;
+}
+
+.filter-buttons h2 a:hover {
+    box-shadow: none;
+    color: rgb(53, 97, 150);
+}
+
+/* Remove collection category images */
+.filter-buttons .all a {
+    background-image: none;
+    background-color: #f5f5f5;
+}
+.filter-buttons .fauna a {
+    background-image: none;
+    background-color: #f5f5f5;
+}
+.filter-buttons .insects a {
+    background-image: none;
+    background-color: #f5f5f5;
+}
+.filter-buttons .microbes a {
+    background-image: none;
+    background-color: #f5f5f5;
+}
+.filter-buttons .plants a {
+    background-image: none;
+    background-color: #f5f5f5;
+}
+.filter-buttons .fungi a {
+    background-image: none;
+    background-color: #f5f5f5;
+}
+
+/* Fix ugly shadow on map */
+div > div#map-container {
+    background: none;
+}
+
+/* Fix tab contant pain having darker borders than the top tab list */
+.tab-content {  
+    border-bottom: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+}

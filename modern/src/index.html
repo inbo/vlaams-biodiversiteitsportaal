@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {{> head }}
+    <meta name="description" content="Vlaams Biodiversiteitsportaal"/>
+    <meta name="author" content="Instituut voor Natuur- en Bosonderzoek">
+
+    <title>Vlaams Biodiversiteitsportaal</title>
+
+    <link rel="stylesheet" href="{{ resolve-from-root 'style/index.scss' }}">
+    <script type="module" src="{{ resolve-from-root '../node_modules/bootstrap-sass/assets/javascripts/bootstrap.min.js' }}"></script>
+
+    <script type="module" src="{{ resolve-from-root 'legacy-portal/index.ts' }}"></script>
+  </head>
+  <body>
+    {{> banner }}
+    {{> app }}
+    {{> footer }}
+  </body>
+</html>

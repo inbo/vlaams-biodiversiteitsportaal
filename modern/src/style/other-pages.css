@@ -1,0 +1,36 @@
+section#breadcrumb {
+    background-color: white;
+    border-bottom: 1px solid #a83d7a;
+    overflow: hidden;
+    height: 3em;
+    line-height: 3em;
+    padding: 0;
+    margin: 0;
+    /* position: absolute; */
+}
+
+section#breadcrumb li {
+    vertical-align: middle;
+    margin: 0;
+    margin-top: -5px;
+    padding: 0;
+    padding-right: 2em;
+    vertical-align: middle;
+    /* overflow: hidden; */
+    position: relative;   
+}
+
+section#breadcrumb li + li::before {
+    color: #a83d7a;
+    content: "";
+    width: 1px;
+    height: 5em;
+    transform: rotate(-18deg) translate(-1em, -2em);
+    -ms-transform: rotate(-18deg);
+    background: #a83d7a;
+    position: absolute;
+}
+
+.well {
+    background-image: none;
+}

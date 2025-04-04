@@ -1,0 +1,10 @@
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+	#refine-options {display: block; visibility: visible;}
+}
+/* Taxon header */
+.list-inline > li {
+	display: inline-block;
+	padding-right: 5px;
+	padding-left: 16px;
+}

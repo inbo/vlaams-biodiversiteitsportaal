@@ -1,0 +1,16 @@
+@use "sass:color";
+
+$brand-primary:         #a83d7a !default;
+$brand-primary-dark:    color.adjust($brand-primary, $lightness: -2.5%) !default;
+$brand-success:         #28a745 !default;
+$brand-info:            #17a2b8 !default;
+$brand-warning:         #ffc107 !default;
+$brand-danger:          #dc3545 !default;
+$brand-default:         #fff !default;
+
+// @import "./ala/bootstrap-ala.scss";
+
+$icon-font-path: "bootstrap-sass/assets/fonts/bootstrap/";
+
+// @import "bootstrap-sass/assets/stylesheets/bootstrap-sprockets";
+@import "bootstrap-sass/assets/stylesheets/bootstrap";

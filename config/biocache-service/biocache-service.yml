@@ -51,13 +51,13 @@ caches:
   auth:
     enabled: false
   collections:
-    enabled: true
+    enabled: false
   layers:
     enabled: false
   log:
-    enabled: true
+    enabled: false
 cassandra:
-  hosts: cassandradb
+  hosts: localhost
   max:
     connections: -1
     retries: 6
@@ -192,8 +192,8 @@ solr:
     busywaitsleep: 100
     maxthreads: 30
     writertimeout: 60000
-  home: http://solr.${common.internalDomain}:9983
-  collection: biocache
+  home: http://localhost:8983/solr/biocache
+#  collection: biocache
   server:
     indexVersion:
       refresh: 300000
