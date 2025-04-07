@@ -9,8 +9,8 @@ webservice:
   client-id: collections
   client-secret: xxx
 
-ROLE_ADMIN: ADMIN
-ROLE_EDITOR: EDITOR
+ROLE_ADMIN: ROLE_ADMIN
+ROLE_EDITOR: ROLE_EDITOR
 ala:
   baseURL: ${common.homepage}
 alertUrl: ""
