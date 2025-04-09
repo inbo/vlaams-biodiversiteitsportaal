@@ -165,7 +165,6 @@ skin:
     text: not set
     url: ''
   exploreUrl: ${common.protocol}://${common.domain}/regions/explore-by-location/
-  fluidLayout: true
   layout: ala
   taxaLinks:
     baseUrl: ${common.protocol}://${common.domain}/bie-hub/species/

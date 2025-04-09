@@ -57,7 +57,6 @@ wikipedia:
 # Skin and layout
 skin:
   layout: ala
-  fluidLayout: true
 
 languageCodesUrl: file:///config/bie-hub/languages.json
 

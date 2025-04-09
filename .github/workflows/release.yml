@@ -104,17 +104,10 @@ jobs:
         run: |
           set -e -x -o pipefail
 
-          git submodule update --init --recursive
-          cd commonui-bs3-2019
-          git submodule foreach --recursive 'git checkout commonui-bs3-2019'
-
-          npm install
-          npx gulp build
-
-          cd ..
-          npm install
+          npm install --dev
           npm run build:prod
-          tar -cvzf branding-${{ needs.get-versions.outputs.branding_version }}.tar.gz -C "$(pwd)/public" ./
+
+          tar -cvzf branding-${{ needs.get-versions.outputs.branding_version }}.tar.gz -C "$(pwd)/dist" ./
 
       - name: Create release
         uses: ncipollo/release-action@v1

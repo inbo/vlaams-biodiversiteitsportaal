@@ -1,8 +1,0 @@
-User-agent: *
-Disallow: /bie-index/
-Disallow: /image-service/
-Disallow: /collectory/admin/
-Disallow: /biocache-service/
-Disallow: /bie-index/
-Disallow: /spatial-hub/
-Disallow: /spatial-service/

@@ -1,0 +1,27 @@
+@use "sass:color";
+
+@import "./vbp-style/variables.scss";
+
+$brand-primary: $inbo-primary;
+$brand-primary-dark: $inbo-ternary;
+$brand-success: #28a745;
+$brand-info: rgb(53, 97, 150);
+$brand-warning: #ffc107;
+$brand-danger: #dc3545;
+$brand-default: #fff;
+
+$font-size-base: $inbo-font-size-base;
+$font-family-sans-serif: $inbo-font-sans;
+$font-family-serif: $inbo-font-serif;
+$font-family-monospace: $inbo-font-mono;
+$font-family-base: $inbo-font-base;
+
+// $text-color: $gray-dark;
+
+$link-color: $inbo-link-color;
+$link-hover-color: $inbo-link-hover-color;
+$link-hover-decoration: $inbo-link-hover-decoration;
+
+$icon-font-path: "bootstrap-sass/assets/fonts/bootstrap/";
+
+@import "bootstrap-sass/assets/stylesheets/bootstrap";

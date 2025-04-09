@@ -1,0 +1,47 @@
+// Stolen from the digitaal vlaanderen footer on the inbo.be website
+@import "./digitaal-vlaanderen.css";
+
+footer {
+    width: 100%;
+    position: relative;
+    display: block;
+    min-width: $inbo-footer-height;
+
+    .vlaanderen-logo {
+        height: calc(0.6 * $inbo-footer-height);
+    }
+
+    .footer-bug-modal {
+        text-align: right;
+        margin-left: auto !important;
+        margin-right: 0;
+    }
+
+    .bug-modal-button {
+        margin-left: auto;
+        margin-right: 0;
+        display: block;
+        height: 2em;
+        width: 2em;
+    }
+
+    #bug-icon {
+        fill: $inbo-primary;
+        height: 2em;
+        width: 2em;
+    }
+
+    #bug-icon:hover {
+        fill: $inbo-secondary;
+    }
+
+    .bug-modal-header {
+        padding-top: 1.5em;
+        padding-left: 2em;
+    }
+
+    .bug-modal-content {
+        white-space: pre-line;
+        padding: 2em;
+    }
+}

@@ -33,7 +33,6 @@ uriFilterPattern: /admin/*,/alaAdmin/*
 orgNameLong: Vlaams Biodiversiteitsportaal
 skin:
   layout: ala-main
-  fluidLayout: false
 ala:
   skin: ala-main
 bie:

@@ -1,0 +1,161 @@
+.banner {
+    // font-size: large;
+
+    .max-width {
+        max-width: $inbo-banner-max-width;
+    }
+
+    .navbar-default {
+        border: 0;
+        border-radius: 0;
+        margin: 0;
+        background-color: white;
+        font-weight: bold;
+        height: $inbo-banner-height;
+        border-bottom: 1px solid $inbo-primary;
+    }
+
+    .navbar-header {
+        line-height: $inbo-banner-height;
+    }
+
+    .navbar .navbar-nav > li > a {
+        color: black;
+        text-decoration: underline 0.15em rgba(0, 0, 0, 0);
+        transition: text-decoration-color 300ms, color 300ms;
+
+        &:hover {
+            color: #222;
+            text-decoration-color: $inbo-primary;
+        }
+    }
+
+    .navbar .navbar-brand {
+        text-transform: uppercase;
+        color: $inbo-primary;
+        padding-right: 2em;
+        font-weight: bold;
+
+        &:hover {
+            color: $inbo-secondary;
+        }
+    }
+
+    #dropdown-auth-menu {
+        /* Authentication menu items */
+        &.signedIn > li > a.signUpBtn {
+            display: none;
+        }
+
+        &.signedOut > li > a.myProfileBtn {
+            display: none;
+        }
+
+        &.signedIn > li > a.loginBtn {
+            display: none;
+        }
+
+        &.signedOut > li > a.logoutBtn {
+            display: none;
+        }
+    }
+
+    #dropdown-lang {
+        > a {
+            text-transform: uppercase;
+            color: $inbo-primary;
+
+            &:hover {
+                color: $inbo-secondary;
+            }
+        }
+        &.open > a {
+            color: $inbo-secondary;
+        }
+    }
+
+    // override breakpoint: https://stackoverflow.com/questions/19827605/how-to-change-bootstrap-navbar-collapse-breakpoint
+    @media (max-width: 70rem) {
+        .navbar-left {
+            border-bottom: solid 1px #bbb;
+        }
+        .navbar-header {
+            float: none;
+        }
+        .navbar-left, .navbar-right {
+            float: none !important;
+        }
+        .navbar-toggle {
+            display: block;
+        }
+        .navbar-collapse {
+            // border: 0;
+            position: absolute;
+            top: calc(
+                $inbo-banner-height - 1px
+            ); // overlap with the bottom border from the nav header
+            left: 0;
+            z-index: 9999;
+
+            width: 100%;
+            background-color: white;
+            margin: 0 !important;
+            padding: 0;
+            // padding: 0 1em 0 1em;
+
+            border-top: 1px solid #bbb;
+            border-bottom: 1px solid;
+            border-bottom-color: $inbo-primary !important;
+        }
+        .navbar-fixed-top {
+            top: 0;
+            border-width: 0 0 1px;
+        }
+        .navbar-collapse.collapse {
+            display: none !important;
+        }
+        .navbar-nav {
+            float: none !important;
+            margin-top: 7.5px;
+            margin: 0;
+        }
+        .navbar-nav > li {
+            float: none;
+        }
+        .navbar-nav > li > a {
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        .collapse.in {
+            display: block !important;
+        }
+
+        // sub-menus
+        .navbar-nav .open .dropdown-menu {
+            position: static;
+            float: none;
+            width: auto;
+            margin-top: 0;
+            background-color: transparent;
+            border: 0;
+            box-shadow: none;
+        }
+        .navbar-nav .open .dropdown-menu > li > a,
+        .navbar-nav .open .dropdown-menu .dropdown-header {
+            padding: 5px 15px 5px 25px;
+        }
+        .navbar-nav .open .dropdown-menu > li > a {
+            line-height: 20px;
+        }
+        .navbar-nav .open .dropdown-menu > li > a:hover,
+        .navbar-nav .open .dropdown-menu > li > a:focus {
+            background-image: none;
+        }
+    }
+
+    @media only screen and (max-width: 400px) {
+        .navbar .navbar-brand {
+            max-width: 32rem;
+        }
+    }
+}
