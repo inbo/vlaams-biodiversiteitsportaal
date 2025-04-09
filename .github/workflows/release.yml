@@ -105,7 +105,7 @@ jobs:
           set -e -x -o pipefail
 
           npm install --dev
-          npm run build:prod
+          npm run build:dev
 
           tar -cvzf branding-${{ needs.get-versions.outputs.branding_version }}.tar.gz -C "$(pwd)/dist" ./
 
