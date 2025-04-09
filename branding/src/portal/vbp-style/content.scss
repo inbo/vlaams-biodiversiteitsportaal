@@ -1,5 +1,5 @@
 // Add a gray style background if width of screen is to big and make sure the content stretches all the way to the bottom
-.content-area {
+.vbp-content-area {
     width: 100%;
 
     background-image: url("../../assets/background-pattern_1_vdccrg.png");
@@ -11,7 +11,7 @@
         display: block;
     }
 
-    .content {
+    .vbp-content {
         display: block;
         background-color: #fff;
         padding: 2em 4em 4em 4em;
