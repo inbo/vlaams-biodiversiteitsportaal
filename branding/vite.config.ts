@@ -7,6 +7,8 @@ import { console } from "node:inspector";
 
 const replacements = {
     loginStatus: "signedIn",
+    loginURL: "",
+    logoutURL: "",
 };
 
 export default {
