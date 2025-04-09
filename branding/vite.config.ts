@@ -32,7 +32,7 @@ export default {
                 head: resolve(__dirname, "./src/head.html"),
                 banner: resolve(__dirname, "./src/banner.html"),
                 footer: resolve(__dirname, "./src/footer.html"),
-                settings: resolve(__dirname, "./src/settings.json"),
+                settings: resolve(__dirname, "./src/settings.ts"),
                 "bootstrap": resolve(
                     __dirname,
                     "./src/portal/bootstrap.scss",

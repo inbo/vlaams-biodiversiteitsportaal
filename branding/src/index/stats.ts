@@ -24,24 +24,24 @@ async function setCounter(id: string, val: number): Promise<void> {
 async function loadStats(): Promise<void> {
   const dataResourceCount = await fetch(`/collectory/ws/dataResource/count`);
   const dataResourceCountJson = await dataResourceCount.json();
-  setCounter("stats_dataResources", dataResourceCountJson.total);
+  setCounter("stats_datasets", dataResourceCountJson.total || 0);
 
   const institutionCount = await fetch(`/collectory/ws/institution/count`);
   const institutionCountJson = await institutionCount.json();
-  setCounter("stats_institutions", institutionCountJson.total);
+  setCounter("stats_institutions", institutionCountJson.total || 0);
 
   const speciesCount = await fetch(
     `/biocache-service/occurrence/facets?q=*:*&facets=species&pageSize=0`,
   );
   const speciesCountJson = await speciesCount.json();
-  setCounter("stats_species", speciesCountJson[0].count);
+  setCounter("stats_species", speciesCountJson[0]?.count || 0);
 
   const occurrenceCount = await fetch(
     `/biocache-service/occurrences/search?q=*:*&pageSize=0`,
   );
 
   const occurrenceCountJson = await occurrenceCount.json();
-  setCounter("stats_occurrences", occurrenceCountJson.totalRecords);
+  setCounter("stats_occurrences", occurrenceCountJson.totalRecords || 0);
 }
 
 $(() => {

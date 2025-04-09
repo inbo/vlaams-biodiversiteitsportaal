@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "build:dev": "tsc && vite build --minify=false",
+    "build:dev": "tsc && NODE_ENV=development vite build --minify=false",
     "build:prod": "tsc && vite build",
     "preview": "vite preview",
     "watch": "tsc && vite build --watch"

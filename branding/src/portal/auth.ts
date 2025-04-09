@@ -1,5 +1,5 @@
 import Cookies from "js-cookie";
-import settings from "../settings.json";
+import settings from "../settings";
 import { Log, UserManager } from "oidc-client-ts";
 
 Log.setLogger(console);

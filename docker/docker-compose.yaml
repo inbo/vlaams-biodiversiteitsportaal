@@ -259,7 +259,7 @@ services:
     image: nginx
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d
-      - ../modern/dist:/srv/branding.la-flanders.org/www/
+      - ../branding/dist:/srv/branding.la-flanders.org/www/
     ports:
       - "80:80"
     healthcheck:

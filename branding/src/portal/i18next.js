@@ -1,4 +1,4 @@
-import settings from "../settings.json";
+import settings from "../settings";
 
 import i18n from "i18next";
 import jqueryI18next from "jquery-i18next";
