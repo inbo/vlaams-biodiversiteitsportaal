@@ -9,7 +9,7 @@
     "build:dev": "tsc && NODE_ENV=development vite build --minify=false",
     "build:prod": "tsc && vite build",
     "preview": "vite preview",
-    "watch": "tsc && vite build --watch"
+    "watch": "tsc && NODE_ENV=development vite build --watch --minify=false"
   },
   "devDependencies": {
     "@types/js-cookie": "^3.0.6",
@@ -34,7 +34,6 @@
     "jquery": "^3.7.1",
     "jquery-i18next": "^1.2.1",
     "jquery-migrate": "^3.5.2",
-    "jquery-ui": "^1.14.1",
     "js-cookie": "^3.0.5",
     "oidc-client-ts": "^3.2.0"
   }

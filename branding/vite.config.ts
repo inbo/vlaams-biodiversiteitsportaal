@@ -51,10 +51,6 @@ export default {
                     __dirname,
                     "./src/portal/ala/ala-styles.css",
                 ),
-                "autocomplete.min": resolve(
-                    __dirname,
-                    "./src/portal/ala/autocomplete.ts",
-                ),
                 "autocomplete-extra": resolve(
                     __dirname,
                     "./src/portal/ala/autocomplete-extra.css",

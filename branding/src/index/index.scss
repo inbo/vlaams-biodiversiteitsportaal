@@ -211,3 +211,22 @@ ul.socials {
         padding: 0.5em 1em;
     }
 }
+
+ul.ui-autocomplete {
+    background-color: white;
+    padding: 0;
+    z-index: 99999;
+    border: 2px solid $inbo-primary;
+    border-top: 1px solid #ccc;
+    border-radius: 6px;
+    overflow: hidden;
+
+    > li {
+        list-style: none;
+        padding: 0.5em 1em;
+        &:hover {
+            background-color: #ddd;
+            cursor: pointer;
+        }
+    }
+}
