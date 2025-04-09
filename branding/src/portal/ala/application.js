@@ -60,8 +60,6 @@ jQuery(function () {
         templateId =  BC_CONF.templateId || "autoCompleteTemplate",
         autocomplete = $.ui && $.ui.autocomplete;
 
-    console.error(BC_CONF)
-
     if( typeof autocomplete === "function") {
         var instance = autocomplete({
             appendTo: appendToSelector,

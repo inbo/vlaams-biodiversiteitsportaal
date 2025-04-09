@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
 import settings from "../settings";
-import { Log, UserManager } from "oidc-client-ts";
+import { Log, User, UserManager, WebStorageStateStore } from "oidc-client-ts";
 
 Log.setLogger(console);
 
@@ -25,6 +25,25 @@ $(() => {
       client_id: settings.auth.oidc.clientId,
       redirect_uri: redirectUrl.href,
       post_logout_redirect_uri: post_logout_redirect_uri.href,
+      includeIdTokenInSilentSignout: true,
+      userStore: new WebStorageStateStore({
+        store: window.localStorage,
+      }),
+      automaticSilentRenew: false,
+    });
+    userManager.events.addAccessTokenExpiring(async function () {
+      try {
+        console.debug("Access token expiring, trying to renew");
+        const user = await userManager.signinSilent();
+        if (!user) {
+          console.error("User not found after silent signin");
+          return;
+        }
+        setAlaAuthCookie(user);
+        console.debug("Successfully renewed access token");
+      } catch (e) {
+        console.error("Silent signin failed", e);
+      }
     });
     addAuthButtonClickHandlers(userManager);
     handleAuthCallbacks(userManager);
@@ -70,16 +89,7 @@ async function handleAuthCallbacks(userManager: UserManager) {
       console.error("User not found after login");
       return;
     }
-    Cookies.set(
-      settings.auth.ala.authCookieName,
-      user?.profile.sub,
-      {
-        path: "/",
-        expires: user?.expires_in,
-        sameSite: "strict",
-        secure: window.location.protocol === "https:",
-      },
-    );
+    setAlaAuthCookie(user);
 
     window.history.replaceState("data", document.title, getCurrentUrl());
   } else if (urlParams.get("logout")) {
@@ -111,6 +121,19 @@ function getCurrentUrl() {
   cleanedUrl.searchParams.delete("code");
   cleanedUrl.searchParams.delete("state");
   return cleanedUrl;
+}
+
+function setAlaAuthCookie(user: User) {
+  Cookies.set(
+    settings.auth.ala.authCookieName,
+    user.profile.sub,
+    {
+      path: "/",
+//       expires: (user.expires_in || 0) / (3600 * 24),
+      sameSite: "strict",
+      secure: window.location.protocol === "https:",
+    },
+  );
 }
 
 export function isLoggedIn() {
