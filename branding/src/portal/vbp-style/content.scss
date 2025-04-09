@@ -1,0 +1,73 @@
+// Add a gray style background if width of screen is to big and make sure the content stretches all the way to the bottom
+.content-area {
+    width: 100%;
+
+    background-image: url("../../assets/background-pattern_1_vdccrg.png");
+    background-color: #f5f5f5;
+
+    .max-width {
+        max-width: $inbo-content-max-width;
+        margin: auto;
+        display: block;
+    }
+
+    .content {
+        display: block;
+        background-color: #fff;
+        padding: 2em 4em 4em 4em;
+        // No idea why we need the additional 2em
+        min-height: calc(
+            100vh - $inbo-banner-height - $inbo-footer-height - 2em
+        );
+    }
+
+    #main {
+        padding: 0;
+        margin-top: 3em;
+    }
+
+    // biocache-hub had a different margin
+    .breadcrumb-list {
+        margin-left: 2em !important;
+    }
+
+    section#breadcrumb {
+        background-color: white;
+        border-bottom: 1px solid $inbo-primary;
+        overflow: hidden;
+        height: 3em;
+        line-height: 3em;
+        padding: 0;
+        margin: 0;
+        width: 100vw;
+        position: absolute;
+        top: $inbo-banner-height;
+        left: 0;
+    }
+
+    section#breadcrumb li {
+        vertical-align: middle;
+        margin: 0;
+        margin-top: -5px;
+        padding: 0;
+        padding-right: 2em;
+        vertical-align: middle;
+        /* overflow: hidden; */
+        position: relative;
+    }
+
+    section#breadcrumb li + li::before {
+        color: $inbo-primary;
+        content: "";
+        width: 1px;
+        height: 5em;
+        transform: rotate(-18deg) translate(-1em, -2em);
+        -ms-transform: rotate(-18deg);
+        background: $inbo-primary;
+        position: absolute;
+    }
+
+    .well {
+        background-image: none;
+    }
+}

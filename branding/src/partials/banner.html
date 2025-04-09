@@ -1,0 +1,107 @@
+<!-- site-banner -->
+<div class="banner">
+  <div class="max-width">
+
+    <!-- BootStrap 3 Classic Navbar addapted from sample:
+      https://getbootstrap.com/docs/3.3/components/#navbar -->
+
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/" data-i18n="general.orgfullname">
+          </a>
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+            data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-left">
+            <!-- Main buttons -->
+            <li><a data-i18n="nav.VBP_tools" href="/pages/VBP_applicaties.html"></a></li>
+            <li><a data-i18n="nav.spatial" href="/spatial-hub/"></a></li>
+            <li><a data-i18n="nav.participate" href="/pages/VBP_doemee.html"></a></li>
+            <li><a data-i18n="nav.dataandpartners" href="/pages/VBP_partners.html"></a></li>
+
+            <!-- News dropdown -->
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                aria-expanded="false"><span data-i18n="nav.news"></span> <span class="caret"></span></a>
+              <ul id="dropdown-news-menu" class="dropdown-menu">
+                <li><a data-i18n="nav.inbo" href="https://www.inbo.be">INBO</a></li>
+                <li><a data-i18n="nav.inboportal" href="https://pureportal.inbo.be/nl/">INBO</a></li>
+                <li role="separator" class="divider"></li>
+              </ul>
+            </li>
+            
+            <!-- Help dropdown -->
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                aria-expanded="false"><span data-i18n="nav.help"></span> <span class="caret"></span></a>
+              <ul id="dropdown-news-menu" class="dropdown-menu">
+                <li><a data-i18n="nav.handleiding" href="/pages/handleiding.html"></a></li>
+                <li role="separator" class="divider"></li>
+                <li><a data-i18n="nav.VBP_testen" href="/pages/VBP_testen.html"></a></li>
+                <li><a data-i18n="nav.VBP_challenges" href="/pages/VBP_challenges.html"></a></li>
+                <li><a data-i18n="nav.VBP_introductiefilmpjes" href="/pages/VBP_introductiefilmpjes.html"></a></li>
+                <li><a data-i18n="nav.VBP_survey" href="/pages/survey.html"></a></li>
+              </ul>
+            </li>
+
+            <!-- More dropdown -->
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                aria-expanded="false"><span data-i18n="nav.more"></span> <span class="caret"></span></a>
+              <ul id="dropdown-auth-menu" class="dropdown-menu ::loginStatus::">
+                <li><a id="loginButton" data-i18n="nav.login" class="loginBtn login-button" href="login"></a></li>
+                <li><a data-i18n="nav.myprofile" class="myProfileBtn" href="/userdetails/myprofile/"></a></li>
+                <li><a id="logoutButton" data-i18n="nav.logout" class="logoutBtn logout-button" href="logout"></a></li>
+                <li role="separator" class="divider"></li>
+                <li><a data-i18n="nav.collectory" href="/collectory"></a></li>
+                <li><a data-i18n="nav.biocache" href="/biocache-hub"></a></li>
+                <li><a data-i18n="nav.species" href="/bie-hub"></a></li>
+                <li><a data-i18n="nav.species-lists" href="/species-list"></a></li>
+                <li><a data-i18n="nav.spatial" href="/spatial-hub"></a></li>
+                <li><a data-i18n="nav.regions" href="/regions"></a></li>
+                <li><a data-i18n="nav.images" href="/image-service"></a></li>
+                <li role="separator" class="divider"></li>
+                <li><a data-i18n="nav.your-area" href="/biocache-hub/explore/your-area/"></a></li>
+                <li><a data-i18n="nav.datasets" href="/collectory/datasets"></a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right language-selection">
+            <li id="dropdown-lang" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                aria-expanded="false"><span class="caret"></span></a>
+              <ul class="locale-switcher dropdown-menu dropdown-lang-menu">
+                <li class="locale-link" data-locale="nl"><a class="nl-locale-link" href="#"><span
+                      class="lang_link_nl">Nederlands</span></a></li>
+                <!-- <li class="locale-link" data-locale="fr"><a class="fr-locale-link" href="#"><span class="lang_link_fr">Français</span></a></li> -->
+                <li class="locale-link" data-locale="en"><a class="en-locale-link" href="#"><span
+                      class="lang_link_en">English</span></a></li>
+              </ul>
+            </li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </div>
+</div>
+
+<div class="{{ containerClass }}" id="autocompleteSearchALA" class="collapse"></div>
+
+
+<!-- end site-banner -->
+<!-- maintenance -->
+<div id="mante-container" style="display: none;" class="container"></div>
+<!-- end maintenance -->
+<div class="content-area">
+  <div class="max-width">
+    <div id="content" class="content">

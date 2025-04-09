@@ -1,0 +1,15 @@
+@import "../portal/vbp-style/variables.scss";
+
+.page-content {
+    max-width: $inbo-page-max-width;
+    margin: auto;
+
+    h1 {
+        position: relative;
+        text-align: center;
+    }
+
+    img {
+        margin: 2em;
+    }
+}

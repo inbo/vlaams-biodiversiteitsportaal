@@ -281,7 +281,6 @@ skin:
   orgNameShort: "VBP"
   header: true
   footer: true
-  fluidLayout: true
   layout: vlaanderen
 #  layout: 'main'
 

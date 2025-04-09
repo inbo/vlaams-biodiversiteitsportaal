@@ -36,7 +36,6 @@ serverName: '${common.protocol}://${common.domain}/image-service'
 
 skin:
   layout: 'ala-main'
-  fluidLayout: true
 
 
 facets: [ "recognisedLicence", "dataResourceUid", "creator.keyword", "imageSize", "fileType", "format", "dateUploadedYearMonth" ]

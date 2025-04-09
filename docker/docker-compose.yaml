@@ -134,6 +134,8 @@ services:
     environment:
       HEAP_NEWSIZE: 128M
       MAX_HEAP_SIZE: 2048M
+    ports:
+      - "9042:9042"
     volumes:
       - cassandra:/var/lib/cassandra
     healthcheck:
@@ -159,6 +161,7 @@ services:
           - solr.vbp.internal
     ports:
       - "8983:8983"
+      - "9983:9983"
     volumes:
       - ../config/solr:/var/solr/init/docker/solr-data:ro
       - solr-data:/var/solr/data
@@ -176,7 +179,7 @@ services:
         set -e -x
         ./server/scripts/cloud-scripts/zkcli.sh -zkhost solr:9983 -cmd upconfig -confdir /var/solr/init/docker/solr-data/bie/ -confname bie
         ./server/scripts/cloud-scripts/zkcli.sh -zkhost solr:9983 -cmd clear /configs/bie/managed-schema || true
-        
+
         ./server/scripts/cloud-scripts/zkcli.sh -zkhost solr:9983 -cmd upconfig -confdir /var/solr/init/docker/solr-data/biocache/ -confname biocache
         ./server/scripts/cloud-scripts/zkcli.sh -zkhost solr:9983 -cmd clear /configs/biocache/managed-schema || true
 
@@ -256,7 +259,7 @@ services:
     image: nginx
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d
-      - ../branding/public:/srv/branding.la-flanders.org/www/
+      - ../modern/dist:/srv/branding.la-flanders.org/www/
     ports:
       - "80:80"
     healthcheck:

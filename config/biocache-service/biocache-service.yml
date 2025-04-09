@@ -51,11 +51,11 @@ caches:
   auth:
     enabled: false
   collections:
-    enabled: true
+    enabled: false
   layers:
     enabled: false
   log:
-    enabled: true
+    enabled: false
 cassandra:
   hosts: cassandradb
   max:
@@ -192,8 +192,8 @@ solr:
     busywaitsleep: 100
     maxthreads: 30
     writertimeout: 60000
-  home: http://solr.${common.internalDomain}:9983
-  collection: biocache
+  home: http://solr.vbp.internal:8983/solr/biocache
+#  collection: biocache
   server:
     indexVersion:
       refresh: 300000
@@ -265,7 +265,7 @@ common:
   domain: localhost
 caches:
   collections: # needs to be disabled when running locally, if not deadlocks waiting for collectory to became available
-    enabled: # Spring profiles should work for both grails and non-grails spring applications
+    enabled: false # Spring profiles should work for both grails and non-grails spring applications
 ---
 spring:
   config:

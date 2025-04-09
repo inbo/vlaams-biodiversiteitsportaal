@@ -121,7 +121,6 @@ solr:
     qAlt: text:*
 skin:
   layout: ala-main
-  fluidLayout: true
 
 useLegacyAuto: false
 import:

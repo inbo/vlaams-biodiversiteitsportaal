@@ -110,7 +110,6 @@ bie:
   searchPath: /search
 skin:
   layout: ala-main
-  fluidLayout: true
 attributes:
   affiliations:
     enabled: false

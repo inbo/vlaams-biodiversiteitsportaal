@@ -52,7 +52,6 @@ bie.searchPath: /search
 # Skin options
 skin:
   layout: ala-main
-  fluidLayout: true
 
 spring:
   session:
