@@ -26,24 +26,13 @@ $(() => {
       redirect_uri: redirectUrl.href,
       post_logout_redirect_uri: post_logout_redirect_uri.href,
       includeIdTokenInSilentSignout: true,
-      userStore: new WebStorageStateStore({
-        store: window.localStorage,
-      }),
-      automaticSilentRenew: false,
+      //       userStore: new WebStorageStateStore({
+      //         store: window.session,
+      //       }),
+      automaticSilentRenew: true,
     });
-    userManager.events.addAccessTokenExpiring(async function () {
-      try {
-        console.debug("Access token expiring, trying to renew");
-        const user = await userManager.signinSilent();
-        if (!user) {
-          console.error("User not found after silent signin");
-          return;
-        }
-        setAlaAuthCookie(user);
-        console.debug("Successfully renewed access token");
-      } catch (e) {
-        console.error("Silent signin failed", e);
-      }
+    userManager.events.addAccessTokenExpired(function () {
+      clearAlaAuthCookie();
     });
     addAuthButtonClickHandlers(userManager);
     handleAuthCallbacks(userManager);
@@ -94,7 +83,7 @@ async function handleAuthCallbacks(userManager: UserManager) {
     window.history.replaceState("data", document.title, getCurrentUrl());
   } else if (urlParams.get("logout")) {
     await userManager.signoutCallback();
-    Cookies.remove(settings.auth.ala.authCookieName);
+    clearAlaAuthCookie();
 
     window.history.replaceState("data", document.title, getCurrentUrl());
   }
@@ -129,7 +118,17 @@ function setAlaAuthCookie(user: User) {
     user.profile.sub,
     {
       path: "/",
-//       expires: (user.expires_in || 0) / (3600 * 24),
+      sameSite: "strict",
+      secure: window.location.protocol === "https:",
+    },
+  );
+}
+
+function clearAlaAuthCookie() {
+  Cookies.remove(
+    settings.auth.ala.authCookieName,
+    {
+      path: "/",
       sameSite: "strict",
       secure: window.location.protocol === "https:",
     },
