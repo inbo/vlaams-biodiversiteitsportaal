@@ -13,5 +13,6 @@ export async function downloadAbvAssets({outputFolder = "./dist",}: { outputFold
   })
   .catch((error) => {
     console.log(error);
+
   });
 }
