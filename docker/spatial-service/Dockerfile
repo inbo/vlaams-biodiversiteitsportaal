@@ -4,13 +4,13 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 # ARG VERSION=2.1.5
 # ARG SOURCE=https://github.com/AtlasOfLivingAustralia/spatial-service.git
 
-ARG VERSION=develop
-ARG COMMIT=b5dd4042a1ffce035111dc7c709d77055e576289
-ARG SOURCE=https://github.com/katya-shaleninova/spatial-service.git
+ARG VERSION=fix-loading-reseource-when-running-using-embedded-tomcat
+ARG COMMIT=936070d0b3c984718c0eb1ab31c2eedd3942d36e
+ARG SOURCE=https://github.com/StefanVanDyck/spatial-service.git
 LABEL ala.version=inbo-${VERSION}
 
 WORKDIR /project
-RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} .
+RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
 
 RUN --mount=type=cache,target=/gradle-cache,ro \
     gradle \
@@ -34,7 +34,7 @@ RUN mkdir -p /opt/atlas/i18n \
 
 # ARG VERSION=2.1.5
 ARG VERSION=2.2.0-SNAPSHOT
-ARG COMMIT=a85a6b51abb2203d3e242e726965eb7f59eb98c1
+ARG COMMIT=936070d0b3c984718c0eb1ab31c2eedd3942d36e
 ARG PIPELINES_VERSION=2.19.0-SNAPSHOT
 LABEL ala.version=inbo-${COMMIT}
 LABEL pipelines.version=${PIPELINES_VERSION}
