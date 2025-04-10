@@ -9,6 +9,12 @@
                             class="form-control ac_input general-search ui-autocomplete-input" type="text"
                             autocomplete="on">
                         <input id="actual-query" type="hidden" name="q">
+                        <!-- Add wildcards to the search on the homepage to allow partial matching -->
+                        <script type="module" type="text/javascript">
+                            $("#main_biosearch_form").on("submit", function (e) {
+                                $("#actual-query").val("*" + $("#search").val() + "*");
+                            });
+                        </script>
                     </div>
                     <span id="main_biosearch_label" class="input-group-btn">
                         <button type="submit" class="btn btn-link">
@@ -131,12 +137,6 @@
     </div>
 </div>
 
-<!-- Add wildcards to the search on the homepage to allow partial matching -->
-<script type="module" type="text/javascript">
-    $("#main_biosearch_form").on("submit", function (e) {
-        $("#actual-query").val("*" + $("#search").val() + "*");
-    });
-</script>
 
 <script type="module" type="text/javascript">
     import {isLoggedIn} from "{{ resolve-from-root 'portal/auth.ts' }}";
