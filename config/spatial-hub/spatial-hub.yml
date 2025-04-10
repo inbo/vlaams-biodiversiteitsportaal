@@ -5,7 +5,8 @@ security:
     clientId: spatial_hub
   oidc:
     clientId: spatial_hub
-    secret: spatial_hub-oidc-super-secret
+    secret: spatial_hub-oidc-super-secretclient_secret_basic
+    scope: openid profile email ala/attrs ala/roles offline_access
 webservice:
   client-id: spatial_hub
   client-secret: xxx
