@@ -464,16 +464,16 @@ fq:
 
 
 sandbox:
-  url: ${common.protocol}://${common.domain}/sandbox
-  uiUrl: ${common.protocol}://${common.domain}/sandbox
+  url: ${common.protocol}://${common.domain}/sandbox-service
+  uiUrl: ${common.protocol}://${common.domain}/sandbox-hub
 
 sandboxService:
-  url: ${common.protocol}://${common.domain}/sandbox
+  url: ${common.protocol}://${common.domain}/sandbox-service
 
 
 sandboxSpatial:
-  hubUrl: ${common.protocol}://${common.domain}/spatial-hub/sandbox
-  serviceUrl: ${common.protocol}://${common.domain}/sandbox
+  hubUrl: ${common.protocol}://${common.domain}/sandbox-hub
+  serviceUrl: ${common.protocol}://${common.domain}/sandbox-service
 
 ---
 environments:

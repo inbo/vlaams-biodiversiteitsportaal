@@ -55,8 +55,9 @@ COPY --from=apikey /apikey.war webapps
 COPY --from=bie-hub /bie-hub.war webapps
 COPY --from=bie-index /bie-index.war webapps
 COPY --from=biocache-hub /biocache-hub.war webapps
+RUN ln -s ./biocache-hub webapps/sandbox-hub
 COPY --from=biocache-service /biocache-service.war webapps
-RUN ln -s ./biocache-service webapps/sandbox
+RUN ln -s ./biocache-service webapps/sandbox-service
 COPY --from=collectory /collectory.war webapps
 COPY --from=data-quality-filter-service /data-quality-filter-service.war webapps
 COPY --from=doi-service /doi-service.war webapps

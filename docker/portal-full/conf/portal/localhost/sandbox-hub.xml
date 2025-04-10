@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- sandbox-hub -->
+<Context reloadable="false">
+
+    <Parameter name="spring.config.additional-location"
+               value="file:/config/common/common.yml,file:/config/biocache-hub/biocache-hub.yml,file:/config/biocache-hub/sandbox.yml,${ADDITIONAL_SPRING_CONFIG_LOCATIONS}"
+               override="false"/>
+
+    <!-- Logging config -->
+    <Parameter name="appName"
+               value="sandbox-hub"
+               override="false"/>
+</Context>

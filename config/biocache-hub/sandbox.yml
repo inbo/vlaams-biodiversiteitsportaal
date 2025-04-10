@@ -1,0 +1,15 @@
+server:
+  servlet:
+    contextPath: /sandbox-hub
+grails:
+  serverURL: ${common.protocol}://${common.domain}/sandbox-hub
+
+biocache:
+  baseUrl: ${common.protocol}://${common.domain}/sandbox-service
+  indexedFieldsUrl: ${common.protocol}://${common.domain}/sandbox-service/index/fields
+biocacheServiceUrl: ${common.protocol}://${common.domain}/sandbox-service
+biocacheServicesUrl: ${common.protocol}://${common.domain}/sandbox-service
+downloads:
+  checklistDownloadUrl: ${common.protocol}://${common.domain}/sandbox-service/occurrences/facets/download
+  indexedDownloadUrl: ${common.protocol}://${common.domain}/sandbox-service/occurrences/offline/download
+  indexedFieldsUrl: ${common.protocol}://${common.domain}/sandbox-service/index/fields

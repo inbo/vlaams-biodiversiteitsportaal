@@ -32,7 +32,7 @@ biocache:
   baseUrl: ${common.protocol}://${common.domain}/biocache-service
   downloads:
     extra: dataResourceUid,dataResourceName.p
-  groupedFacetsUrl: file:///data/ala-hub/config/grouped_facets_default.json
+  groupedFacetsUrl: file:///data/biocache-hub/config/grouped_facets_default.json
   indexedFieldsUrl: ${common.protocol}://${common.domain}/biocache-service/index/fields
   queryContext: -_nest_parent_:*
   url: ${common.protocol}://${common.domain}/biocache-hub
@@ -105,7 +105,7 @@ server:
 grails:
   resources:
     work:
-      dir: /data/ala-hub/cache
+      dir: /data/biocache-hub/cache
   serverURL: ${common.protocol}://${common.domain}/biocache-hub
 image:
   baseUrl: ${common.protocol}://${common.domain}/image-service

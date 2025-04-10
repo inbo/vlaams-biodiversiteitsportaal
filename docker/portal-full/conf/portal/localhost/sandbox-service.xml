@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- biocache-service -->
+<!-- sandbox-service -->
 <Context reloadable="false">
 
     <Parameter name="spring.config.additional-location"
@@ -8,6 +8,6 @@
 
     <!-- Logging config -->
     <Parameter name="appName"
-               value="sandbox"
+               value="sandbox-service"
                override="false"/>
 </Context>

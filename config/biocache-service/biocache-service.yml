@@ -6,6 +6,7 @@ security:
   oidc:
     clientId: "biocache_service"
     secret: "biocache_service-oidc-super-secret"
+    scope: openid profile email # Needed for email claim
 webservice:
   client-id: "biocache_service"
   client-secret: "biocache_service-oidc-super-secret"

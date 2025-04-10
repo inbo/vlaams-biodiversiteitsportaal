@@ -2,29 +2,29 @@
 ### OIDC Credentials ###
 security:
   jwt:
-    clientId: sandbox
+    clientId: sandbox-service
   oidc:
-    clientId: "sandbox"
-    secret: "sandbox-oidc-super-secret"
+    clientId: "sandbox-service"
+    secret: "sandbox-service-oidc-super-secret"
 webservice:
-  client-id: "sandbox"
-  client-secret: "sandbox-oidc-super-secret"
+  client-id: "sandbox-service"
+  client-secret: "sandbox-service-oidc-super-secret"
 
 
 server:
   servlet:
-    contextPath: /sandbox
+    contextPath: /sandbox-service
 
 spring:
   application:
-    name: sandbox
+    name: sandbox-service
 
 solr:
-  home: http://solr.${common.internalDomain}:9983
-  collection: sandbox
+  home: http://solr.${common.internalDomain}:8983/solr/sandbox
+  collection: sandbox-service
 
 webservices:
-  root: ${common.protocol}://${common.domain}/sandbox
+  root: ${common.protocol}://${common.domain}/sandbox-service
 
 caches:
   auth:
@@ -38,13 +38,13 @@ caches:
 
 deleted:
   file:
-    store: /data/biocache-delete/
+    store: /data/sandbox-delete/
 download:
-  url: ${common.protocol}://${common.domain}/biocache-download
+  url: ${common.protocol}://${common.domain}/sandbox-download
   offline:
     max:
-      url: ${common.protocol}://${common.domain}/biocache-download/
+      url: ${common.protocol}://${common.domain}/sandbox-download/
 
 shapefile:
   tmp:
-    dir: /data/biocache-download/tmp
+    dir: /data/sandbox-download/tmp
