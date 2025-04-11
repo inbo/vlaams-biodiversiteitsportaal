@@ -131,6 +131,10 @@
       {
         "sort": "index",
         "field": "location_id"
+      },
+      {
+        "sort": "index",
+        "field": "verbatimCoordinateSystem"
       }
     ]
   },
