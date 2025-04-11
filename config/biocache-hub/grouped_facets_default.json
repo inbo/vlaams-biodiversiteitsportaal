@@ -198,6 +198,10 @@
       {
         "sort": "index",
         "field": "dynamicProperties_level2Name"
+      },
+      {
+        "sort": "index",
+        "field": "verbatimCoordinateSystem"
       }
     ]
   },
