@@ -8,9 +8,9 @@ WORKDIR /project
 # ARG VERSION=5.1.1
 # ARG SOURCE=https://github.com/AtlasOfLivingAustralia/collectory.git
 
-ARG VERSION=fix-use-occurenceid-as-default-unique-id-when-scanning-ipt
+ARG VERSION=develop-vbp
 ARG SOURCE=https://github.com/StefanVanDyck/collectory
-ARG COMMIT=43f4391e7757f1636392ad74af0f9f4ca44e1735
+ARG COMMIT=368d4ab1f8bb2681e9a5f4ffe08a5f3a776ebf6e
 LABEL ala.version=inbo-${COMMIT}
 
 RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
