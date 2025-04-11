@@ -1,6 +1,6 @@
 {"tabs": [
     {
-      "tab": "abv-info",
-      "speciesList": "dr177",
-      "contentKey": "abvReference"
+      "tab": "abv",
+      "speciesList": "dr29",
+      "contentKey": "contentFilePath"
     }]}
