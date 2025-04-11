@@ -7,7 +7,7 @@ export async function downloadAbvAssets({outputFolder = "./dist",}: { outputFold
   const buffer = Buffer.from(await response.arrayBuffer())
   var abvAssetsFilepath= './abv-assets.zip'
   await fs.writeFile(abvAssetsFilepath, buffer)
-  decompress(abvAssetsFilepath, outputFolder + "/abv-info")
+  decompress(abvAssetsFilepath, outputFolder + "/abv")
   .then((files) => {
     console.log("Abv assets unzipped successfully into " + outputFolder);
   })
