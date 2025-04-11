@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
 import settings from "../settings";
-import { Log, User, UserManager, WebStorageStateStore } from "oidc-client-ts";
+import { Log, User, UserManager } from "oidc-client-ts";
 
 Log.setLogger(console);
 
