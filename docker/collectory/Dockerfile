@@ -10,7 +10,7 @@ WORKDIR /project
 
 ARG VERSION=develop-vbp
 ARG SOURCE=https://github.com/StefanVanDyck/collectory
-ARG COMMIT=3ad9875cea123145d1c997df8c7d4c123e4672a3
+ARG COMMIT=2edd762000cc3ecc118f4e4d7b648c3ee8a23eb4
 LABEL ala.version=inbo-${COMMIT}
 
 RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
