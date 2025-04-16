@@ -85,19 +85,27 @@
     font-weight: bold;
 }
 
-.vbp-doemee-natuurfotos {
-    display: flex;
-    flex-wrap: wrap;
-    img {
-        flex: 1;
+.vbp-natuurfoto-container {
+    width: 100%;
 
-        border: solid 3px $inbo-primary;
+    a {
         border-radius: 50%;
-        max-width: 14em;
-        aspect-ratio: 1/1;
-        margin: 1em auto;
+        margin: 0;
+        padding: 0;
+        width: fit-content;
+        height: fit-content;
     }
-    margin: 2em;
+
+    img {
+        aspect-ratio: 1/1;
+        border: solid 2px $inbo-primary;
+        border-radius: 50%;
+
+        width: 21%;
+        margin: 1%;
+        display: inline-block;
+    }
+    margin: 2em auto;
 }
 
 .vbp-doemee-portal-logo {
@@ -121,6 +129,10 @@
         object-fit: contain;
 
         margin: 1em 1em 1em 0;
+    }
+
+    h4 {
+        margin-top: 2em;
     }
 }
 
@@ -229,4 +241,16 @@
 
     color: $inbo-secondary;
     font-weight: bold;
+}
+
+.vbp-partners-logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 2em;
+    width: 100%;
+    img {
+        flex: 1;
+        max-width: 20rem;
+    }
 }
