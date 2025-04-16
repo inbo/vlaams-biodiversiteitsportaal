@@ -14,7 +14,7 @@ webservice:
 server:
   servlet:
     contextPath: /biocache-service
-
+  maxPostSize: "-1"
 allow:
   layer:
     lookup: false

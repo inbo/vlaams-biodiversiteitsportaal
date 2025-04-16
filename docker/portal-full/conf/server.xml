@@ -20,9 +20,11 @@
         <Connector port="80" protocol="HTTP/1.1"
                    connectionTimeout="5000"
                    redirectPort="8080"
+                   maxPostSize="-1"
                    URIEncoding="UTF-8"/>
         <Connector port="8080" protocol="HTTP/1.1"
                    connectionTimeout="5000"
+                   maxPostSize="-1"
                    URIEncoding="UTF-8"/>
         <Engine name="portal" defaultHost="localhost" startStopThreads="0">
             <Realm className="org.apache.catalina.realm.LockOutRealm">
