@@ -26,7 +26,7 @@
 }
 
 .inbo-applicaties-item {
-    width: 20em;
+    width: 16em;
     margin-bottom: 20px;
     text-align: center;
 
@@ -83,4 +83,79 @@
 
     color: $inbo-secondary;
     font-weight: bold;
+}
+
+.vbp-doemee-natuurfotos {
+    display: flex;
+    flex-wrap: wrap;
+    img {
+        flex: 1;
+
+        border: solid 3px $inbo-primary;
+        border-radius: 50%;
+        max-width: 14em;
+        aspect-ratio: 1/1;
+        margin: 1em auto;
+    }
+    margin: 2em;
+}
+
+.vbp-doemee-portal-logo {
+    height: 0.8em;
+    margin: 0 0 0 0.25em !important;
+}
+
+.vbp-doemee-initiatieven {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 4em;
+
+    justify-items: center;
+    max-width: 100%; /* Make sure it uses the full width available */
+    margin: 2em auto; /* Center the container */
+
+    img {
+        height: 5em;
+        max-width: 10em;
+        object-fit: contain;
+
+        margin: 1em 1em 1em 0;
+    }
+}
+
+.vbp-doemee-initiatieven-item {
+    flex: 1;
+
+    padding: 1em;
+
+    max-width: 100vw;
+}
+
+.vbp-doemee-initiatieven-inbo {
+    display: flex;
+    flex-wrap: wrap;
+
+    .vbp-doemee-initiatieven-item {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        min-width: 40%;
+
+        .vbp-doemee-initiatieven-item-left {
+            flex: 1 0 0;
+        }
+
+        img {
+            flex: 10 10 10;
+            align-self: center;
+            display: inline-block;
+        }
+    }
+}
+
+.vbp-doemee-projecten {
+    text-align: center;
+    gap: 0.5em;
 }
