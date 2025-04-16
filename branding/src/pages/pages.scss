@@ -13,3 +13,74 @@
         margin: 2em;
     }
 }
+
+.inbo-applicaties {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 2em;
+
+    justify-items: center;
+    max-width: 100%; /* Make sure it uses the full width available */
+    margin: 2em auto; /* Center the container */
+}
+
+.inbo-applicaties-item {
+    width: 20em;
+    margin-bottom: 20px;
+    text-align: center;
+
+    border: solid 1px $inbo-primary;
+
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    img {
+        max-width: 10em;
+        height: 8em;
+        object-fit: contain;
+        /* aspect-ratio: 3/4; */
+    }
+
+    h3 {
+        color: $inbo-primary;
+    }
+
+    p {
+        color: #aaa;
+    }
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+}
+
+.inbo-applicaties-app-link {
+    position: relative;
+
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 1em;
+
+    &:hover {
+        h3 {
+            text-decoration: underline;
+        }
+        text-decoration: none;
+        color: $inbo-primary;
+    }
+
+    margin-bottom: 3em;
+}
+
+.inbo-applicaties-info-link {
+    position: relative;
+    display: block;
+    bottom: 6em;
+
+    color: $inbo-secondary;
+    font-weight: bold;
+}

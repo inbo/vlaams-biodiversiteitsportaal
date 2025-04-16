@@ -24,22 +24,23 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-left">
             <!-- Main buttons -->
-            <li><a data-i18n="nav.VBP_tools" href="/pages/VBP_applicaties.html"></a></li>
             <li><a data-i18n="nav.spatial" href="/spatial-hub/"></a></li>
             <li><a data-i18n="nav.participate" href="/pages/VBP_doemee.html"></a></li>
             <li><a data-i18n="nav.dataandpartners" href="/pages/VBP_partners.html"></a></li>
 
-            <!-- News dropdown -->
+            <!-- INBO dropdown -->
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                aria-expanded="false"><span data-i18n="nav.news"></span> <span class="caret"></span></a>
+                aria-expanded="false"><span data-i18n="nav.inbo"></span> <span class="caret"></span></a>
               <ul id="dropdown-news-menu" class="dropdown-menu">
-                <li><a data-i18n="nav.inbo" href="https://www.inbo.be">INBO</a></li>
-                <li><a data-i18n="nav.inboportal" href="https://pureportal.inbo.be/nl/">INBO</a></li>
-                <li role="separator" class="divider"></li>
+                <li><a data-i18n="nav.inbo.home" target="_blank" href="https://www.inbo.be">Home</a></li>
+                <li><a data-i18n="nav.inbo.experts" target="_blank"
+                    href="https://pureportal.inbo.be/nl/">Expertenportaal</a>
+                </li>
+                <li><a data-i18n="nav.inbo.apps" href="/pages/VBP_applicaties.html"></a></li>
               </ul>
             </li>
-            
+
             <!-- Help dropdown -->
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -59,9 +60,11 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                 aria-expanded="false"><span data-i18n="nav.more"></span> <span class="caret"></span></a>
               <ul id="dropdown-auth-menu" class="dropdown-menu ::loginStatus::">
-                <li><a id="loginButton" data-i18n="nav.login" class="loginBtn login-button" href="::loginURL::"></a></li>
+                <li><a id="loginButton" data-i18n="nav.login" class="loginBtn login-button" href="::loginURL::"></a>
+                </li>
                 <li><a data-i18n="nav.myprofile" class="myProfileBtn" href="/userdetails/myprofile/"></a></li>
-                <li><a id="logoutButton" data-i18n="nav.logout" class="logoutBtn logout-button" href="::logoutURL::"></a></li>
+                <li><a id="logoutButton" data-i18n="nav.logout" class="logoutBtn logout-button"
+                    href="::logoutURL::"></a></li>
                 <li role="separator" class="divider"></li>
                 <li><a data-i18n="nav.collectory" href="/collectory"></a></li>
                 <li><a data-i18n="nav.biocache" href="/biocache-hub"></a></li>
