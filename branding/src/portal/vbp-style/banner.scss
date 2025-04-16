@@ -24,6 +24,14 @@
         text-decoration: underline 0.15em rgba(0, 0, 0, 0);
         transition: text-decoration-color 300ms, color 300ms;
 
+        display: block;
+        width: 100%;
+        min-width: 6em;
+        height: 100%;
+        padding: auto;
+        padding: 1em 1.5em;
+        text-align: center;
+
         &:hover {
             color: #222;
             text-decoration-color: $inbo-primary;
@@ -35,6 +43,7 @@
         color: $inbo-primary;
         padding-right: 2em;
         font-weight: bold;
+        margin-right: 1em;
 
         &:hover {
             color: $inbo-secondary;
@@ -75,7 +84,7 @@
     }
 
     // override breakpoint: https://stackoverflow.com/questions/19827605/how-to-change-bootstrap-navbar-collapse-breakpoint
-    @media (max-width: 70rem) {
+    @media (max-width: 68rem) {
         .navbar-left {
             border-bottom: solid 1px #bbb;
         }
