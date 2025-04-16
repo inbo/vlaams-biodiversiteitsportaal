@@ -15,7 +15,19 @@
   "nav.images": "Images",
   "nav.spatial": "Spatial Portal",
   "nav.searchbox": "Search species, datasets, and more...",
-  "nav.halowtjes": "Test page",
+
+
+  "nav.inbo": "INBO",
+  "nav.handleiding": "Guide",
+  "nav.VBP_testen" : "Issue tracker",
+  "nav.inleiding" : "Introduction to testing",
+  "nav.VBP_challenges" : "Challenges",
+  "nav.VBP_survey" : "Survey",
+  "nav.VBP_introductiefilmpjes" : "Intoduction Videos",
+  "nav.inbo.home" : "Home" ,
+  "nav.inbo.experts" : "Expert Portal" ,
+  "nav.inbo.apps" : "Applications",
+
   "index.slogan": "Free National Biodiversity Data Supporting our Environmental Actions",
   "index.search-btn": "Search",
   "index.stats.occurrences": "Occurrences",
@@ -28,7 +40,6 @@
   "error.button": "Go to our homepage",
   "nav.participate": "Participate",
   "nav.halowtjes": "Test page",
-  "nav.news": "News",
   "nav.aboutus": "About us",
   "nav.dataandpartners": "Data & partners",
   "index.breakdown.portal-data-summary.title": "The Flemish Biodiversity Portal",

@@ -3,7 +3,7 @@ import handlebars from "vite-plugin-handlebars";
 
 import { viteStaticCopy } from "vite-plugin-static-copy";
 import { generateMarkdownPages } from "./template-pages";
-import {downloadAbvAssets} from "./abv-assets";
+import { downloadAbvAssets } from "./abv-assets";
 import { console } from "node:inspector";
 
 const replacements = {
@@ -98,7 +98,7 @@ export default {
                 },
             },
         },
-        abvAssets: downloadAbvAssets({outputFolder: "./dist"})
+        abvAssets: downloadAbvAssets({ outputFolder: "./dist" }),
     },
     css: {
         preprocessorOptions: {

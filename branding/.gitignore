@@ -25,6 +25,8 @@ dist-ssr
 
 .vite
 
+abv-assets.zip
+
 src/pages/*
 !src/pages/pages-layout.html
 !src/pages/pages.scss
