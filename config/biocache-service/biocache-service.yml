@@ -15,7 +15,7 @@ server:
   servlet:
     contextPath: /biocache-service
   tomcat:
-    max-http-post-size: "-1"
+    max-http-form-post-size: "-1"
 allow:
   layer:
     lookup: false
