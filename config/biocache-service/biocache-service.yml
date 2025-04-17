@@ -14,10 +14,8 @@ webservice:
 server:
   servlet:
     contextPath: /biocache-service
-  maxPostSize: "-1"
   tomcat:
-    mbeanregistry:
-      enabled: true
+    max-http-post-size: "-1"
 allow:
   layer:
     lookup: false
