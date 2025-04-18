@@ -1,0 +1,89 @@
+.vbp-picture-carousel {
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+
+    z-index: -1;
+}
+
+.vbp-picture-carousel-picture {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url("../assets/VlaamseGaai.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    opacity: 0;
+    transition: opacity 2s ease;
+
+    &[data-carousel-active] {
+        opacity: 1;
+    }
+}
+
+.hidden {
+    display: none;
+}
+
+.vbp-picture-carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #fff;
+    cursor: pointer;
+    text-align: center;
+
+    font-size: 2em;
+    font-weight: bold;
+    opacity: 0.5;
+
+    width: 1.5em;
+    height: 1.5em;
+    line-height: 1.5em;
+
+    vertical-align: middle;
+
+    &:hover {
+        opacity: 0.7;
+    }
+}
+
+.vbp-picture-carousel-button-prev {
+    left: 1em;
+}
+.vbp-picture-carousel-button-next {
+    right: 1em;
+}
+
+.vbp-picture-carousel-attribution {
+    position: absolute;
+    bottom: 1em;
+    right: 2em;
+    color: #fff;
+    background-color: #000;
+    padding: 0.5em;
+    font-size: 0.8em;
+    line-height: 1.2em;
+
+    padding: 1em;
+    text-decoration: none;
+    border-radius: 10px;
+
+    opacity: 0.5;
+
+    z-index: 99;
+
+    &:hover {
+        opacity: 0.6;
+    }
+
+    &:hover {
+        text-decoration: underline;
+        color: #fff;
+    }
+}

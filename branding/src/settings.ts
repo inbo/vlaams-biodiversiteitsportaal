@@ -1,4 +1,14 @@
-export default {
+enum Environment {
+  local = "local",
+  dev = "dev",
+  uat = "uat",
+  prod = "prod",
+}
+const environment: string = process.env.NODE_ENV === "development"
+  ? Environment.local
+  : "::ENVIRONMENT::";
+
+const defaultConfig = {
   "enabledLangs": ["nl", "en"],
   "auth": {
     // Replaced by terraform when deploying to the specific environment
@@ -16,4 +26,24 @@ export default {
       "logoutClass": "signedOut",
     },
   },
+};
+
+const environmentConfig: Record<Environment, object> = {
+  local: {
+    "pictureCarouselSpeciesListId": "dr381",
+  },
+  dev: {
+    "pictureCarouselSpeciesListId": "dr381",
+  },
+  uat: {
+    "pictureCarouselSpeciesListId": "dr1",
+  },
+  prod: {
+    "pictureCarouselSpeciesListId": "dr1",
+  },
+};
+
+export default {
+  ...defaultConfig,
+  ...environmentConfig[environment as Environment],
 };
