@@ -276,6 +276,9 @@ spring:
 common:
   protocol: https
   domain: natuurdata.dev.inbo.be
+caches:
+  collections:
+    enabled: true
 ---
 spring:
   config:
