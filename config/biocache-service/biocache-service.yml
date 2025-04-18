@@ -53,7 +53,7 @@ caches:
   auth:
     enabled: false
   collections:
-    enabled: false
+    enabled: true
   layers:
     enabled: false
   log:

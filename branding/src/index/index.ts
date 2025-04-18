@@ -1,4 +1,10 @@
 import "./stats";
+import "../settings";
 import { PictureCarousel } from "./picture-carousel";
+import settings from "../settings";
 
-new PictureCarousel("picture-carousel", "dr381", 10000);
+new PictureCarousel(
+    "picture-carousel",
+    settings.pictureCarouselSpeciesListId,
+    10000,
+);

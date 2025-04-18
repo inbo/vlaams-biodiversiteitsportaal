@@ -18,7 +18,7 @@ function preloadImage(url: string) {
 
 interface Picture {
     url: string;
-    attribution?: {
+    attribution: {
         text: string;
         link?: string;
     };
@@ -48,17 +48,7 @@ async function fetchPictureList(listId: string): Promise<Picture[]> {
                 result.url = `/image-service/image/${value}/original`;
             }
             if (key?.toLowerCase() === "attributiontext") {
-                result.attribution = {
-                    ...result.attribution,
-                    text: value,
-                };
-            }
-            if (key?.toLowerCase() === "attributionlink") {
-                result.attribution = {
-                    text: "",
-                    ...result.attribution,
-                    link: value,
-                };
+                result.attribution.text += ` - ${value}`;
             }
         }
         return result;
@@ -69,7 +59,8 @@ export class PictureCarousel {
     private pictureList: Picture[] = [{
         url: "/assets/VlaamseGaai.png",
         attribution: {
-            text: "Vlaamse gaai (Garrulus glandarius)",
+            text:
+                "Vlaamse gaai (Garrulus glandarius) - Photo by Giles Laurent on Wikipedia, licensed under CC BY-SA 4.0.",
             link:
                 "https://commons.wikimedia.org/wiki/File:075_Wild_Eurasian_jay_in_flight_at_the_Parc_naturel_r%C3%A9gional_Jura_vaudois_Photo_by_Giles_Laurent.jpg",
         },
