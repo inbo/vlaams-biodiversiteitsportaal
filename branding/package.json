@@ -5,11 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && npm run generate:clients && vite build",
-    "build:dev": "tsc && npm run generate:clients && NODE_ENV=development vite build --minify=false",
-    "build:prod": "tsc && npm run generate:clients && vite build",
+    "build": "npm run generate:clients && tsc && vite build",
+    "build:dev": "npm run generate:clients && tsc && NODE_ENV=development vite build --minify=false",
+    "build:prod": "npm run generate:clients && tsc && vite build",
     "preview": "vite preview",
-    "watch": "tsc && npm run generate:clients && NODE_ENV=development vite build --watch --minify=false",
+    "watch": "npm run generate:clients && tsc && NODE_ENV=development vite build --watch --minify=false",
     "generate:clients": "node generate-openapi-clients.ts"
   },
   "devDependencies": {
