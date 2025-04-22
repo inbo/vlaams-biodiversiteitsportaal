@@ -40,7 +40,8 @@ services:
           - image-service.vbp.internal
           - logger.vbp.internal
           - regions.vbp.internal
-          - sandbox.vbp.internal
+          - sandbox-hub.vbp.internal
+          - sandbox-service.vbp.internal
           - spatial-hub.vbp.internal
           - spatial-service.vbp.internal
           - species-list.vbp.internal
