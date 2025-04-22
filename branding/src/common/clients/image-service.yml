@@ -1,0 +1,3309 @@
+openapi: 3.0.1
+info:
+  title: Image Service API
+  description: API Documentation for Image Services
+  termsOfService: https://www.ala.org.au/who-we-are/terms-of-use/
+  contact:
+    name: ALA Support
+    email: support@ala.org.au
+  license:
+    name: Mozilla Public License 1.1
+    url: https://www.mozilla.org/en-US/MPL/1.1/
+  version: 3.1.0-SNAPSHOT
+servers:
+- url: https://natuurdata.dev.inbo.be/image-service
+paths:
+  /ws/analytics:
+    get:
+      tags:
+      - Analytics services - image usage tracking
+      summary: Get overall image usage for the system
+      description: Get overall image usage for the system
+      operationId: byAll
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+  /ws/analytics/{dataResourceUID}:
+    get:
+      tags:
+      - Analytics services - image usage tracking
+      summary: Get image usage for data resource. e.g dataResourceUID=dr123
+      description: Get image usage for data resource.
+      operationId: byDataResource
+      parameters:
+      - name: dataResourceUID
+        in: path
+        description: Data Resource UID
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+        "400":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+  /ws/batch/status/{id}:
+    get:
+      tags:
+      - BatchUpdate
+      summary: Get batch update status
+      description: Get batch update status.
+      operationId: status
+      parameters:
+      - name: id
+        in: path
+        description: The batch id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+        "404":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+  /ws/batch/dataresource/{dataResourceUid}:
+    get:
+      tags:
+      - BatchUpdate
+      summary: Get batch update status
+      description: Get batch update status.
+      operationId: statusForDataResource
+      parameters:
+      - name: dataResourceUid
+        in: path
+        description: Data Resource UId
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        "404":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+  /ws/batch/upload:
+    post:
+      tags:
+      - BatchUpdate
+      summary: Upload zipped AVRO files for loading
+      description: "Upload zipped AVRO files for loading. Required scopes: 'image-service/write'."
+      operationId: upload
+      parameters:
+      - name: dataResourceUid
+        in: query
+        description: Data Resource UId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: The gzipped upload file
+        content:
+          application/gzip:
+            schema:
+              title: The file to upload
+              type: string
+              format: binary
+        required: true
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+        "403":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+      security:
+      - openIdConnect:
+        - image-service/write
+  /image/details:
+    get:
+      tags:
+      - "Access to image derivatives (e.g. thumbnails, tiles and originals)"
+      summary: Get original image.
+      description: Get original image.
+      operationId: details
+      parameters:
+      - name: id
+        in: query
+        description: Image Id
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        description: Content type requested
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+            image/*:
+              schema:
+                type: string
+                format: binary
+            text/html:
+              schema:
+                type: string
+        "404":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+  /image/{id}/original:
+    get:
+      tags:
+      - "Access to image derivatives (e.g. thumbnails, tiles and originals)"
+      summary: "Get original image, sound or video file."
+      description: "Get original image, sound or video file."
+      operationId: getOriginalFile
+      parameters:
+      - name: id
+        in: path
+        description: Image Id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            image/jpeg: {}
+        "404":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+  /image/{id}/thumbnail:
+    get:
+      tags:
+      - "Access to image derivatives (e.g. thumbnails, tiles and originals)"
+      summary: Get image thumbnail.
+      description: Get image thumbnail.
+      operationId: proxyImageThumbnail
+      parameters:
+      - name: id
+        in: path
+        description: Image Id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            image/jpeg: {}
+        "404":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+  /image/{id}/large:
+    get:
+      tags:
+      - "Access to image derivatives (e.g. thumbnails, tiles and originals)"
+      summary: Get image thumbnail large version.
+      description: Get image thumbnail large version.
+      operationId: proxyImageThumbnailType
+      parameters:
+      - name: id
+        in: path
+        description: Image Id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            image/jpeg: {}
+        "404":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+  /image/{id}/tms/{z}/{x}/{y}.png:
+    get:
+      tags:
+      - "Access to image derivatives (e.g. thumbnails, tiles and originals)"
+      summary: Get image tile - for use with tile mapping service clients such as
+        LeafletJS or Openlayers.
+      description: Get image tile - for use with tile mapping service clients such
+        as LeafletJS or Openlayers.
+      operationId: proxyImageTile
+      parameters:
+      - name: id
+        in: path
+        description: Image Id
+        required: true
+        schema:
+          type: string
+      - name: z
+        in: path
+        description: Tile mapping service Z value
+        required: true
+        schema:
+          type: string
+      - name: "y"
+        in: path
+        description: Tile mapping service Y value
+        required: true
+        schema:
+          type: string
+      - name: x
+        in: path
+        description: Tile mapping service X value
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            image/png: {}
+        "404":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+  /ws/tag/{tagId}/imageWS/{imageId}:
+    put:
+      tags:
+      - Tag services
+      summary: Tag an image
+      description: "Tag an image. Required scopes: 'image-service/write'."
+      operationId: attachTagToImageWS
+      parameters:
+      - name: tagId
+        in: path
+        description: Tag Id
+        required: true
+        schema:
+          type: string
+      - name: imageId
+        in: path
+        description: Image Id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+        "404":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+        "403":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+      security:
+      - openIdConnect:
+        - image-service/write
+    delete:
+      tags:
+      - Tag services
+      summary: Detach tag from image
+      description: "Detach tag from image. Required scopes: 'image-service/write'."
+      operationId: detachTagFromImageWS
+      parameters:
+      - name: tagId
+        in: path
+        description: Tag Id
+        required: true
+        schema:
+          type: string
+      - name: imageId
+        in: path
+        description: Image Id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+        "404":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+        "403":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+      security:
+      - openIdConnect:
+        - image-service/write
+  /ws/bulkAddUserMetadataToImage/{id}:
+    post:
+      tags:
+      - Image metadata
+      summary: Bulk Add User Metadata To Image
+      description: "Bulk Add User Metadata To Image. Required scopes: 'image-service/write'."
+      operationId: bulkAddUserMetadataToImage_1
+      parameters:
+      - name: id
+        in: path
+        description: Image ID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: JSON Document of fields names to field values
+        content:
+          application/json:
+            schema:
+              type: string
+        required: true
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+        "403":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+      security:
+      - openIdConnect:
+        - image-service/write
+  /ws/cancelTileJob:
+    post:
+      tags:
+      - Tile jobs
+      summary: Cancel Tile Job
+      description: "Cancel Tile Job. Required scopes: 'image-service/write'."
+      operationId: cancelTileJob
+      parameters:
+      - name: jobTicket
+        in: query
+        description: Job Ticket
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+        "403":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+      security:
+      - openIdConnect:
+        - image-service/write
+  /ws/tagWS:
+    put:
+      tags:
+      - Tag services
+      summary: Create tag by path
+      description: "Create tag by path. Required scopes: 'image-service/write'."
+      operationId: createTagByPathWS
+      parameters:
+      - name: tagPath
+        in: query
+        description: Tag path. Paths separated by '/'. e.g. 'Birds/Colour/Red'
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+        "400":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+        "405":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+        "403":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+      security:
+      - openIdConnect:
+        - image-service/write
+  /ws/darwinCoreTerms:
+    get:
+      tags:
+      - JSON services for accessing and updating metadata
+      summary: List the recognised darwin core terms
+      description: List the recognised darwin core terms
+      operationId: darwinCoreTerms
+      parameters:
+      - name: q
+        in: query
+        description: Optional Darwin Core field name to query for
+        schema:
+          type: string
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+  /ws/image/{imageID}:
+    get:
+      tags:
+      - JSON services for accessing and updating metadata
+      summary: Get Image Details - optionally include tags and other metadata (e.g.
+        EXIF)
+      description: Get Image Details - optionally include tags and other metadata
+        (e.g. EXIF).
+      operationId: getImageInfo
+      parameters:
+      - name: imageID
+        in: path
+        description: Image ID
+        required: true
+        schema:
+          type: string
+      - name: includeTags
+        in: query
+        description: Include tags
+        schema:
+          type: boolean
+      - name: includeMetadata
+        in: query
+        description: Include metadata
+        schema:
+          type: boolean
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+        "404":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+    delete:
+      tags:
+      - JSON services for accessing and updating metadata
+      summary: Delete image
+      description: "Delete image. Required scopes: 'image-service/write'."
+      operationId: deleteImageService
+      parameters:
+      - name: imageID
+        in: path
+        description: Image Id
+        required: true
+        schema:
+          type: string
+      - name: apiKey
+        in: header
+        description: User Id as api key
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+        "405":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+        "404":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+        "403":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+      security:
+      - openIdConnect:
+        - image-service/write
+  /ws/tag/delete/{tagId}:
+    delete:
+      tags:
+      - Tag services
+      summary: Delete tag
+      description: "Delete tag. Required scopes: 'image-service/write'."
+      operationId: deleteTagWS
+      parameters:
+      - name: tagId
+        in: path
+        description: Tag Id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+        "404":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+        "403":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+      security:
+      - openIdConnect:
+        - image-service/write
+  /ws/exportCSV:
+    get:
+      tags:
+      - Export
+      summary: Export CSV of entire image catalogue
+      description: Export CSV of entire image catalogue
+      operationId: exportCSV
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/gzip:
+              schema:
+                type: string
+                format: binary
+  /ws/exportDataset/{id}:
+    get:
+      tags:
+      - Export
+      summary: Export CSV of URL to imageIdentifier mappings
+      description: |-
+        Exports the following fields in CSV:
+                        image_identifier as "imageID"
+                        identifier
+                        audience
+                        contributor
+                        created
+                        creator
+                        description
+                        format
+                        license
+                        publisher
+                        references
+                        rightsHolder
+                        source
+                        title
+                        type
+      operationId: exportDataset
+      parameters:
+      - name: id
+        in: path
+        description: Data Resource UID
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/gzip:
+              schema:
+                type: string
+                format: binary
+        "400":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+  /ws/exportMapping/{id}:
+    get:
+      tags:
+      - Export
+      summary: Export dataset mappings
+      description: Export dataset mappings.
+      operationId: exportDatasetMapping
+      parameters:
+      - name: id
+        in: path
+        description: Data Resource UID
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/gzip:
+              schema:
+                type: string
+                format: binary
+        "400":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+  /ws/exportMapping:
+    get:
+      tags:
+      - Export
+      summary: Export CSV of URL to imageIdentifier mappings
+      description: Export CSV of URL to imageIdentifier mappings.
+      operationId: exportMapping
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/gzip:
+              schema:
+                type: string
+                format: binary
+  /ws/facet:
+    get:
+      tags:
+      - Image search
+      summary: Facet search for images
+      description: Facet search for images.
+      operationId: facet
+      parameters:
+      - name: facet
+        in: query
+        description: Facet
+        required: true
+        schema:
+          type: string
+      - name: q
+        in: query
+        description: Query
+        required: true
+        schema:
+          type: string
+      - name: fq
+        in: query
+        description: Filter query
+        required: true
+        schema:
+          type: string
+      - name: max
+        in: query
+        description: Max results to return
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Search Offset
+        schema:
+          type: integer
+          format: int32
+      - name: sort
+        in: query
+        description: Sort field
+        schema:
+          type: string
+      - name: order
+        in: query
+        description: Sort order
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+  /ws/findImagesByMetadata:
+    post:
+      tags:
+      - JSON services for accessing and updating metadata
+      summary: Find images by image metadata - deprecated. Use /search instead
+      description: Find images by image metadata - deprecated. Use /search instead.
+      operationId: findImagesByMetadata
+      requestBody:
+        description: JSON doc with a string "key" and a string list "values" fields.
+        content:
+          application/json:
+            schema:
+              type: string
+        required: true
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+      deprecated: true
+  /ws/findImagesByOriginalFilename:
+    post:
+      tags:
+      - JSON services for accessing and updating metadata
+      summary: Find image by original filename (URL)
+      description: Find image by original filename (URL).
+      operationId: findImagesByOriginalFilename
+      requestBody:
+        description: "JSON Document of with a single field, filenames, which contains\
+          \ a list of file names."
+        content:
+          application/json:
+            schema:
+              type: string
+        required: true
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+  /ws/backgroundQueueStats:
+    get:
+      tags:
+      - JSON services for accessing and updating metadata
+      summary: Background queue statistics
+      description: Background queue statistics.
+      operationId: getBackgroundQueueStats
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+  /ws/getBatchStatus:
+    get:
+      tags:
+      - Upload
+      summary: Get batch status for a batch upload of images
+      description: "Get batch status for a batch upload of images. Required scopes:\
+        \ 'image-service/read'."
+      operationId: getBatchStatus
+      parameters:
+      - name: batchId
+        in: query
+        description: The batch id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+        "400":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+        "403":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+      security:
+      - openIdConnect:
+        - image-service/read
+  /ws/getImageInfoForIdList:
+    post:
+      tags:
+      - Image metadata
+      summary: Get images for a list of image IDs
+      description: Get images for a list of image IDs.
+      operationId: getImageInfoForIdList
+      requestBody:
+        description: "JSON Document of with a single field, imageIds, which contains\
+          \ a list of image ids."
+        content:
+          application/json:
+            schema:
+              type: string
+        required: true
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+        "400":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+  /ws/getImageLinksForMetaDataValues:
+    get:
+      tags:
+      - Image metadata
+      summary: Get ImageLinks For MetaData Values
+      description: Get ImageLinks For MetaData Values.
+      operationId: getImageLinksForMetaDataValues
+      parameters:
+      - name: key
+        in: query
+        description: Metadata key
+        required: true
+        schema:
+          type: string
+      - name: q
+        in: query
+        description: Query
+        required: true
+        schema:
+          type: string
+          enum:
+          - Embedded
+          - UserDefined
+          - SystemDefined
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+        "400":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+  /ws/images/keyword/{keyword}:
+    get:
+      tags:
+      - Tag services
+      summary: Find images by keyword (a keyword is just the raw string of a tag)
+      description: Find images by keyword (a keyword is just the raw string of a tag).
+      operationId: getImagesForKeyword
+      parameters:
+      - name: keyword
+        in: path
+        description: Keyword
+        required: true
+        schema:
+          type: string
+      - name: max
+        in: query
+        description: max results to return
+        schema:
+          type: integer
+          format: int32
+          default: 100
+      - name: offset
+        in: query
+        description: offset for paging
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+  /ws/images/tag/{tagID}:
+    get:
+      tags:
+      - Tag services
+      summary: Find images by keyword (a keyword is just the raw string of a tag)
+      description: Find images by keyword (a keyword is just the raw string of a tag).
+      operationId: getImagesForTag
+      parameters:
+      - name: tagID
+        in: path
+        description: Tag ID
+        required: true
+        schema:
+          type: string
+      - name: max
+        in: query
+        description: max results to return
+        schema:
+          type: integer
+          format: int32
+          default: 100
+      - name: offset
+        in: query
+        description: offset for paging
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+  /ws/getMetadataKeys:
+    get:
+      tags:
+      - Image metadata
+      summary: Get Metadata
+      description: Get Metadata.
+      operationId: getMetadataKeys
+      parameters:
+      - name: source
+        in: query
+        description: Only return metadata items with this source
+        schema:
+          type: string
+          enum:
+          - Embedded
+          - UserDefined
+          - SystemDefined
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+  /ws/repositoryStatistics:
+    get:
+      tags:
+      - JSON services for accessing and updating metadata
+      summary: Repository statistics
+      description: Repository statistics.
+      operationId: getRepositoryStatistics
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+  /ws/tagsWS:
+    get:
+      tags:
+      - Tag services
+      summary: Get tag model
+      description: "Get tag model. Required scopes: 'image-service/write'."
+      operationId: getTagModelWS
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+        "405":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+        "403":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+      security:
+      - openIdConnect:
+        - image-service/write
+  /ws/imagePopupInfo/{id}:
+    get:
+      tags:
+      - JSON services for accessing and updating metadata
+      summary: Get Image PopUp details
+      description: Get Image PopUp details.
+      operationId: imagePopupInfo
+      parameters:
+      - name: id
+        in: path
+        description: Image ID
+        required: true
+        schema:
+          type: string
+      - name: includeTags
+        in: query
+        description: Include tags
+        schema:
+          type: boolean
+      - name: includeMetadata
+        in: query
+        description: Include metadata
+        schema:
+          type: boolean
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+        "404":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+  /ws/licence:
+    get:
+      tags:
+      - Licences
+      summary: Retrieve a list of recognised Licences
+      description: Retrieve a list of recognised Licences.
+      operationId: licence
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+  /ws/licenceMapping:
+    get:
+      tags:
+      - Licences
+      summary: Retrieve a list of string to licence mappings in use by the image service
+      description: Retrieve a list of string to licence mappings in use by the image
+        service.
+      operationId: licenceMapping
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+  /ws/tag/moveWS:
+    put:
+      tags:
+      - Tag services
+      summary: Move tag
+      description: "Move tag. Required scopes: 'image-service/write'."
+      operationId: moveTagWS
+      parameters:
+      - name: targetTagId
+        in: query
+        description: Target Tag Id to move
+        required: true
+        schema:
+          type: string
+      - name: newParentTagId
+        in: query
+        description: New target parent tag Id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+        "400":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+        "405":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+        "403":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+      security:
+      - openIdConnect:
+        - image-service/write
+  /ws/removeUserMetadataFromImageWS/{id}:
+    post:
+      tags:
+      - Image metadata
+      summary: Remove User Metadata from Image
+      description: "Remove User Metadata from Image. Required scopes: 'image-service/write'."
+      operationId: removeUserMetadataFromImageWS
+      parameters:
+      - name: id
+        in: path
+        description: Image ID
+        required: true
+        schema:
+          type: string
+      - name: key
+        in: query
+        description: Metadata key/name
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+        "400":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+        "403":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+      security:
+      - openIdConnect:
+        - image-service/write
+  /ws/tag/{tagID}/renameWS:
+    put:
+      tags:
+      - Tag services
+      summary: Rename tag
+      description: "Rename tag. Required scopes: 'image-service/write'."
+      operationId: renameTagWS
+      parameters:
+      - name: tagID
+        in: path
+        description: Tag ID
+        required: true
+        schema:
+          type: string
+      - name: name
+        in: query
+        description: New name
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+        "404":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+        "403":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+      security:
+      - openIdConnect:
+        - image-service/write
+  /ws/scheduleArtifactGenerationWS/{id}:
+    post:
+      tags:
+      - JSON services for accessing and updating metadata
+      summary: Schedule artifact generation
+      description: "Schedule artifact generation. Required scopes: 'image-service/write'."
+      operationId: scheduleArtifactGenerationWS
+      parameters:
+      - name: id
+        in: path
+        description: Image Id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+        "405":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+        "404":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+        "403":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+      security:
+      - openIdConnect:
+        - image-service/write
+  /ws/scheduleKeywordRegenerationWS/{id}:
+    get:
+      tags:
+      - JSON services for accessing and updating metadata
+      summary: Schedule keyword generation
+      description: "Schedule keyword generation. Required scopes: 'image-service/write'."
+      operationId: scheduleKeywordRegenerationWS
+      parameters:
+      - name: id
+        in: path
+        description: Image Id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+        "400":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+        "405":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+        "403":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+      security:
+      - openIdConnect:
+        - image-service/write
+  /ws/scheduleThumbnailGenerationWS/{id}:
+    post:
+      tags:
+      - JSON services for accessing and updating metadata
+      summary: Schedule thumbnail generation
+      description: "Schedule thumbnail generation. Required scopes: 'image-service/write'."
+      operationId: scheduleThumbnailGenerationWS
+      parameters:
+      - name: id
+        in: path
+        description: Image Id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+        "405":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+        "404":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+        "403":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+      security:
+      - openIdConnect:
+        - image-service/write
+  /ws/scheduleUploadFromUrls:
+    post:
+      tags:
+      - Upload
+      summary: Schedule upload from URLs
+      description: "Schedule upload from URLs. Required scopes: 'image-service/write'.\
+        \ JSON document with a list of images to upload.  Provide a list of objects\
+        \ under the images key with the follow properties:\n                \n   \
+        \             imageUrl      - The image url\n                audience    \
+        \  - http://purl.org/dc/terms/audience\n                contributor   - http://purl.org/dc/terms/contributor\n\
+        \                creator       - http://purl.org/dc/terms/creator\n      \
+        \          created       - http://purl.org/dc/terms/created\n            \
+        \    description   - http://purl.org/dc/terms/description\n              \
+        \  format        - http://purl.org/dc/terms/format (see https://www.iana.org/assignments/media-types/media-types.xhtml)\n\
+        \                license       - http://purl.org/dc/terms/license\n      \
+        \          publisher     - http://purl.org/dc/terms/publisher\n          \
+        \      references    - http://purl.org/dc/terms/references\n             \
+        \   rights        - http://purl.org/dc/terms/rights\n                rightsHolder\
+        \  - http://purl.org/dc/terms/rightsHolder\n                source       \
+        \ - http://purl.org/dc/terms/source\n                title         - http://purl.org/dc/terms/title\n\
+        \                type          - http://purl.org/dc/terms/type"
+      operationId: scheduleUploadFromUrls
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+        required: true
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+        "400":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+        "403":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+      security:
+      - openIdConnect:
+        - image-service/write
+  /ws/search:
+    get:
+      tags:
+      - Image search
+      summary: Search for images
+      description: Search for images.
+      operationId: search
+      parameters:
+      - name: q
+        in: query
+        description: Query
+        required: true
+        schema:
+          type: string
+      - name: fq
+        in: query
+        description: Filter query
+        required: true
+        schema:
+          type: string
+      - name: max
+        in: query
+        description: Max results to return
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Search Offset
+        schema:
+          type: integer
+          format: int32
+      - name: sort
+        in: query
+        description: Sort field
+        schema:
+          type: string
+      - name: order
+        in: query
+        description: Sort order
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+  /ws/subimage/{id}:
+    put:
+      tags:
+      - Tag services
+      summary: Create Subimage
+      description: "Create Subimage. Required scopes: 'image-service/write'."
+      operationId: subimage
+      parameters:
+      - name: id
+        in: path
+        description: Image ID
+        required: true
+        schema:
+          type: string
+      - name: x
+        in: query
+        description: x co-ordinate
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: "y"
+        in: query
+        description: y co-ordinate
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: height
+        in: query
+        description: sub image height
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: width
+        in: query
+        description: sub image width
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+        "404":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+        "400":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+        "403":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+      security:
+      - openIdConnect:
+        - image-service/write
+  /ws/updateMetadata:
+    post:
+      tags:
+      - JSON services for accessing and updating metadata
+      summary: Update image metadata using a JSON payload.
+      description: "Update image metadata using a JSON payload. Required scopes: 'image-service/write'."
+      operationId: updateMetadata
+      parameters:
+      - name: imageIdentifier
+        in: query
+        description: Image Identifier
+        required: true
+        schema:
+          type: string
+      - name: metadata
+        in: query
+        description: "Metadata as a JSON document, encoded as a POST param"
+        schema:
+          type: string
+      - name: tags
+        in: query
+        description: List of tags
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+        "404":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+        "403":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+      security:
+      - openIdConnect:
+        - image-service/write
+  /ws/uploadImage:
+    post:
+      tags:
+      - Upload
+      summary: |-
+        Upload a single image, with by URL or multipart HTTP file upload.
+        For multipart the image must be posted in a 'image' property.
+      description: "Required scopes: 'image-service/write'. The following metadata\
+        \ properties can be set/updated:    \n                \n                audience\
+        \      - http://purl.org/dc/terms/audience\n                contributor  \
+        \ - http://purl.org/dc/terms/contributor\n                creator       -\
+        \ http://purl.org/dc/terms/creator\n                created       - http://purl.org/dc/terms/created\
+        \  \n                description   - http://purl.org/dc/terms/description\
+        \ \n                format        - http://purl.org/dc/terms/format (see https://www.iana.org/assignments/media-types/media-types.xhtml)\
+        \ \n                license       - http://purl.org/dc/terms/license\n   \
+        \             publisher     - http://purl.org/dc/terms/publisher\n       \
+        \         references    - http://purl.org/dc/terms/references   \n       \
+        \         rights        - http://purl.org/dc/terms/rights \n             \
+        \   rightsHolder  - http://purl.org/dc/terms/rightsHolder\n              \
+        \  source        - http://purl.org/dc/terms/source\n                title\
+        \         - http://purl.org/dc/terms/title\n                type         \
+        \ - http://purl.org/dc/terms/type"
+      operationId: uploadImage
+      parameters:
+      - name: metadata
+        in: query
+        description: "Metadata as a JSON document, encoded as a POST param"
+        schema:
+          type: string
+      - name: tags
+        in: query
+        description: List of tags
+        schema:
+          type: array
+          items:
+            type: string
+      - name: imageUrl
+        in: query
+        description: "An URL to be used to load the image from, use in lieu of sending\
+          \ a multipart upload"
+        schema:
+          type: string
+      requestBody:
+        description: "Multipart file upload, use image for the part name - TODO This\
+          \ needs properties for the multipart"
+        content:
+          multipart/form-data:
+            schema:
+              type: string
+              format: binary
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+        "500":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+        "400":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+        "403":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+      security:
+      - openIdConnect:
+        - image-service/write
+  /ws/uploadImagesFromUrls:
+    post:
+      tags:
+      - Upload
+      summary: Asynchronous upload images by supplying a list of URLs in  a JSON  payload
+      description: "Asynchronous upload images by supplying a list of URLs in  a JSON\
+        \  payload. Required scopes: 'image-service/write'. JSON document with a list\
+        \ of images to upload.  Provide a list of objects under the images key with\
+        \ the follow properties:\n                \n                audience     \
+        \ - http://purl.org/dc/terms/audience\n                contributor   - http://purl.org/dc/terms/contributor\n\
+        \                creator       - http://purl.org/dc/terms/creator\n      \
+        \          created       - http://purl.org/dc/terms/created  \n          \
+        \      description   - http://purl.org/dc/terms/description \n           \
+        \     format        - http://purl.org/dc/terms/format (see https://www.iana.org/assignments/media-types/media-types.xhtml)\
+        \ \n                license       - http://purl.org/dc/terms/license\n   \
+        \             publisher     - http://purl.org/dc/terms/publisher\n       \
+        \         references    - http://purl.org/dc/terms/references   \n       \
+        \         rights        - http://purl.org/dc/terms/rights \n             \
+        \   rightsHolder  - http://purl.org/dc/terms/rightsHolder\n              \
+        \  source        - http://purl.org/dc/terms/source\n                title\
+        \         - http://purl.org/dc/terms/title\n                type         \
+        \ - http://purl.org/dc/terms/type"
+      operationId: uploadImagesFromUrls
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+        required: true
+      responses:
+        "200":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+        "404":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+          content:
+            application/json:
+              schema:
+                type: string
+        "403":
+          headers:
+            Access-Control-Allow-Origin:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Methods:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+            Access-Control-Allow-Headers:
+              description: CORS header
+              style: simple
+              schema:
+                type: String
+      security:
+      - openIdConnect:
+        - image-service/write
+components:
+  securitySchemes:
+    openIdConnect:
+      type: openIdConnect
+      openIdConnectUrl: https://keycloak-dev.inbo.be/realms/vbp/.well-known/openid-configuration
+    oauth:
+      type: oauth2
+      flows:
+        clientCredentials:
+          authorizationUrl: https://auth.ala.org.au/cas/oidc/authorize
+          tokenUrl: https://auth.ala.org.au/cas/oidc/token
+          refreshUrl: https://auth.ala.org.au/cas/oidc/refresh
+          scopes:
+            image-service/read: Read or list any or all images records
+            image-service/write: Write to an images record
+        authorizationCode:
+          authorizationUrl: https://auth.ala.org.au/cas/oidc/authorize
+          tokenUrl: https://auth.ala.org.au/cas/oidc/token
+          refreshUrl: https://auth.ala.org.au/cas/oidc/refresh
+          scopes:
+            image-service/read: Read or list any or all images records
+            image-service/write: Write to an images record
+    jwt:
+      type: http
+      bearerFormat: JWT

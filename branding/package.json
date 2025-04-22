@@ -5,26 +5,30 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
-    "build:dev": "tsc && NODE_ENV=development vite build --minify=false",
-    "build:prod": "tsc && vite build",
+    "build": "tsc && npm run generate:clients && vite build",
+    "build:dev": "tsc && npm run generate:clients && NODE_ENV=development vite build --minify=false",
+    "build:prod": "tsc && npm run generate:clients && vite build",
     "preview": "vite preview",
-    "watch": "tsc && NODE_ENV=development vite build --watch --minify=false"
+    "watch": "tsc && npm run generate:clients && NODE_ENV=development vite build --watch --minify=false",
+    "generate:clients": "node generate-openapi-clients.ts"
   },
   "devDependencies": {
+    "@hey-api/openapi-ts": "^0.66.5",
     "@types/js-cookie": "^3.0.6",
+    "@types/lodash": "^4.17.16",
     "@types/node": "^22.14.0",
+    "decompress": "^4.2.1",
     "markdown-it": "^14.1.0",
     "markdown-it-front-matter": "^0.2.4",
     "sass-embedded": "^1.86.3",
     "typescript": "~5.7.2",
     "vite": "^6.2.0",
     "vite-plugin-handlebars": "^2.0.0",
-    "vite-plugin-static-copy": "^2.3.0",
-    "decompress": "^4.2.1"
+    "vite-plugin-static-copy": "^2.3.0"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.7.2",
+    "@hey-api/client-fetch": "^0.10.0",
     "@types/jquery": "^3.5.32",
     "bootstrap-sass": "^3.4.3",
     "compression": "^1.8.0",
@@ -36,6 +40,7 @@
     "jquery-i18next": "^1.2.1",
     "jquery-migrate": "^3.5.2",
     "js-cookie": "^3.0.5",
+    "lodash": "^4.17.21",
     "oidc-client-ts": "^3.2.0"
   }
 }

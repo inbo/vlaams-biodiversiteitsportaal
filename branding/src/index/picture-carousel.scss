@@ -1,0 +1,143 @@
+.vbp-picture-carousel {
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+
+    z-index: -1;
+}
+
+.vbp-picture-carousel-picture {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url("../assets/VlaamseGaai.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    opacity: 0;
+    transition: opacity 2s ease;
+
+    &[data-carousel-active] {
+        opacity: 1;
+    }
+}
+
+.hidden {
+    display: none;
+}
+
+.vbp-picture-carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #fff;
+    cursor: pointer;
+    text-align: center;
+
+    font-size: 2em;
+    font-weight: bold;
+    opacity: 0.5;
+
+    width: 1.5em;
+    height: 1.5em;
+    line-height: 1.5em;
+
+    vertical-align: middle;
+
+    &:hover {
+        opacity: 0.7;
+    }
+}
+
+.vbp-picture-carousel-button-prev {
+    left: 1em;
+}
+.vbp-picture-carousel-button-next {
+    right: 1em;
+}
+
+@media (max-width: 650px) {
+    .vbp-picture-carousel-button {
+        top: unset;
+        bottom: 20%;
+    }
+}
+
+.vbp-picture-carousel-info {
+    position: absolute;
+    top: 1em;
+    right: 2em;
+    background-color: #000;
+    padding: 0.5em;
+    font-size: 0.8em;
+    line-height: 1.2em;
+    height: 3.2em;
+
+    padding: 1em;
+    border-radius: 10px;
+
+    opacity: 0.4;
+
+    z-index: 99;
+
+    transition: max-width 0.5s ease, opacity 0.5s ease;
+
+    max-width: 20em;
+
+    text-decoration: none;
+    color: #fff;
+
+    // overflow: hidden;
+    // text-overflow: ellipsis;
+    text-wrap: nowrap;
+    overflow: hidden;
+    // text-overflow: ellipsis;
+
+    a {
+        color: #fff;
+        text-decoration: none;
+
+        &:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+    }
+
+    &:hover {
+        opacity: 0.7;
+    }
+
+    .vbp-picture-carousel-attribution-container {
+        display: inline-block;
+
+        .vbp-picture-carousel-attribution {
+            display: none;
+
+            &::before {
+                content: " - ";
+            }
+        }
+
+        .vbp-picture-carousel-info-icon {
+            padding: 0.5em 0 0.5em 0.5em;
+            display: inline;
+        }
+    }
+
+    &:has(.vbp-picture-carousel-attribution-container:hover) {
+        max-width: 60em;
+
+        .vbp-picture-carousel-attribution {
+            display: inline;
+        }
+
+        .vbp-picture-carousel-info-icon {
+            display: none;
+            text-decoration: none !important;
+        }
+    }
+}

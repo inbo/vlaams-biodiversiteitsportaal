@@ -10,23 +10,11 @@
     height: 100%;
     height: 500px;
     max-height: 80vh;
-    background-image: url("../assets/VlaamseGaai.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
     padding: 200px 20px 0px 20px;
 
     align-items: center;
     position: relative;
-}
-
-.index-content::after {
-    content: "Photo by Giles Laurent on Wikipedia, licensed under CC BY-SA 4.0.";
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    color: rgba(255, 255, 255, 0.5);
-    font-size: xx-small;
+    z-index: 1;
 }
 
 .index-search {
@@ -37,6 +25,7 @@
     border-radius: 20px;
     overflow: hidden;
     margin: auto;
+    z-index: 2;
 }
 
 .index-search:hover {

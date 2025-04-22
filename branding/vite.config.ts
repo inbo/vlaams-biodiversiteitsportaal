@@ -157,4 +157,12 @@ export default {
             },
         },
     ],
+    server: {
+        proxy: {
+            "^/(species-list|image-service)/": {
+                target: "https://natuurdata.dev.inbo.be",
+                changeOrigin: true,
+            },
+        },
+    },
 };
