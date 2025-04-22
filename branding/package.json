@@ -10,7 +10,7 @@
     "build:prod": "npm run generate:clients && tsc && vite build",
     "preview": "vite preview",
     "watch": "npm run generate:clients && tsc && NODE_ENV=development vite build --watch --minify=false",
-    "generate:clients": "node generate-openapi-clients.ts"
+    "generate:clients": "node --loader ts-node/esm generate-openapi-clients.ts"
   },
   "devDependencies": {
     "@hey-api/openapi-ts": "^0.66.5",
@@ -24,7 +24,8 @@
     "typescript": "~5.7.2",
     "vite": "^6.2.0",
     "vite-plugin-handlebars": "^2.0.0",
-    "vite-plugin-static-copy": "^2.3.0"
+    "vite-plugin-static-copy": "^2.3.0",
+    "ts-node": "^10.9.2"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.7.2",
