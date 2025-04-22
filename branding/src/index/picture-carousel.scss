@@ -60,6 +60,13 @@
     right: 1em;
 }
 
+@media (max-width: 650px) {
+    .vbp-picture-carousel-button {
+        top: unset;
+        bottom: 20%;
+    }
+}
+
 .vbp-picture-carousel-info {
     position: absolute;
     top: 1em;
