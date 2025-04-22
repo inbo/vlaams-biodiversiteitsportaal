@@ -3,8 +3,10 @@ import "../settings";
 import { PictureCarousel } from "./picture-carousel";
 import settings from "../settings";
 
-new PictureCarousel(
-    "picture-carousel",
-    settings.pictureCarouselSpeciesListId,
-    10000,
-);
+if (settings.pictureCarousel) {
+    new PictureCarousel(
+        "picture-carousel",
+        settings.pictureCarousel.speciesListId,
+        settings.pictureCarousel.interval,
+    );
+}

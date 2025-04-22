@@ -1,3 +1,5 @@
+import { merge } from "lodash";
+
 enum Environment {
   local = "local",
   dev = "dev",
@@ -25,26 +27,43 @@ const defaultConfig = {
       loginClass: "signedIn",
       logoutClass: "signedOut",
     },
-    pictureCarouselSpeciesListId: "dr382",
+  },
+  pictureCarousel: {
+    interval: 10_000,
   },
 };
 
 const environmentConfig: Record<Environment, object> = {
   local: {
-    "pictureCarouselSpeciesListId": "dr382",
+    pictureCarousel: {
+      speciesListId: "dr383",
+    },
   },
   dev: {
-    "pictureCarouselSpeciesListId": "dr382",
+    pictureCarousel: {
+      speciesListId: "dr383",
+    },
   },
   uat: {
-    "pictureCarouselSpeciesListId": "dr1",
+    pictureCarousel: {
+      speciesListId: "dr1",
+    },
   },
   prod: {
-    "pictureCarouselSpeciesListId": "dr1",
+    pictureCarousel: {
+      speciesListId: "dr1",
+    },
   },
 };
 
-export default {
-  ...defaultConfig,
-  ...environmentConfig[environment as Environment],
-};
+const settings = merge(
+  defaultConfig,
+  environmentConfig[environment as Environment],
+);
+
+console.debug(
+  `Loaded settings for environment: ${environment}`,
+  settings,
+);
+
+export default settings;

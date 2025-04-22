@@ -15,6 +15,7 @@
   "devDependencies": {
     "@hey-api/openapi-ts": "^0.66.5",
     "@types/js-cookie": "^3.0.6",
+    "@types/lodash": "^4.17.16",
     "@types/node": "^22.14.0",
     "decompress": "^4.2.1",
     "markdown-it": "^14.1.0",
@@ -39,6 +40,7 @@
     "jquery-i18next": "^1.2.1",
     "jquery-migrate": "^3.5.2",
     "js-cookie": "^3.0.5",
+    "lodash": "^4.17.21",
     "oidc-client-ts": "^3.2.0"
   }
 }
