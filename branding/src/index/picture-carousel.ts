@@ -124,7 +124,7 @@ async function fetchImageAttribution(
 
 export class PictureCarousel {
     private pictureList: Picture[] = [{
-        url: "/assets/VlaamseGaai.png",
+        url: "/images/VlaamseGaai.png",
         species: {
             id: "5229493",
             commonName: "Vlaamse gaai",
