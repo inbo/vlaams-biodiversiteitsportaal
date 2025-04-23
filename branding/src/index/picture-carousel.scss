@@ -128,7 +128,8 @@
         }
     }
 
-    &:has(.vbp-picture-carousel-attribution-container:hover) {
+    &:has(.vbp-picture-carousel-attribution-container:hover),
+    &:has(.vbp-picture-carousel-attribution-container:active) {
         max-width: 120em;
 
         .vbp-picture-carousel-attribution {
