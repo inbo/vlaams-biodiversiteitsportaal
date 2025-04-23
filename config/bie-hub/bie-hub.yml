@@ -194,3 +194,9 @@ management:
 
 sortFields: occurrenceCount,score,scientificName,commonNameSingle,rank
 defaultSortField: occurrenceCount
+
+environments:
+  inbo_dev:
+    speciesList:
+      preferredSpeciesListDruid: dr384
+      preferredListName: Preferred Species Images
