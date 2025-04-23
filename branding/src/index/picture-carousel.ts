@@ -260,7 +260,7 @@ export class PictureCarousel {
         if (infoLink) {
             infoLink.innerText =
                 `${picture.species.commonName} (${picture.species.scientificName})`;
-            infoLink.href = `/species/${picture.species.id}`;
+            infoLink.href = `/bie-hub/species/${picture.species.id}`;
         } else {
             console.error("Info link element not found");
         }

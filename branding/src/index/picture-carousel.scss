@@ -86,7 +86,7 @@
 
     transition: max-width 0.5s ease, opacity 0.5s ease;
 
-    max-width: 20em;
+    max-width: 60em;
 
     text-decoration: none;
     color: #fff;
@@ -129,7 +129,7 @@
     }
 
     &:has(.vbp-picture-carousel-attribution-container:hover) {
-        max-width: 60em;
+        max-width: 120em;
 
         .vbp-picture-carousel-attribution {
             display: inline;
