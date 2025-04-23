@@ -156,8 +156,6 @@ export class PictureCarousel {
         this.timerInterval = interval;
 
         this.init(listId);
-
-        this.resetTimer();
     }
 
     async init(listId: string) {
@@ -192,6 +190,8 @@ export class PictureCarousel {
                     await this.nextPicture();
                 });
             });
+
+        this.resetTimer();
     }
 
     async nextPicture() {
