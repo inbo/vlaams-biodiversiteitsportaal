@@ -6,8 +6,8 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 #ARG SOURCE=https://github.com/AtlasOfLivingAustralia/userdetails.git
 #LABEL ala.version=${VERSION}
 
-ARG VERSION=try-fixing-npe
-ARG COMMIT=3ff5aa9e1afe961da5b6a0f48121e566a39ada88
+ARG VERSION=attempt-userdetails-cognito-fix
+ARG COMMIT=6a498f276dcaa5e1b26acbcf29b7dbe40cc9c2fa
 ARG SOURCE=https://github.com/StefanVanDyck/userdetails.git
 LABEL ala.version=inbo-${COMMIT}
 
@@ -38,7 +38,7 @@ RUN mkdir -p /opt/atlas/i18n \
   && ln -s /config/userdetails/i18n/override /var/opt/atlas/i18n/userdetails
 
 ARG VERSION=3.3.0-SNAPSHOT
-ARG COMMIT=3ff5aa9e1afe961da5b6a0f48121e566a39ada88
+ARG COMMIT=6a498f276dcaa5e1b26acbcf29b7dbe40cc9c2fa
 LABEL ala.version=inbo-${COMMIT}
 
 COPY --from=builder /project/build/libs/userdetails-${VERSION}-exec.war /userdetails.war
