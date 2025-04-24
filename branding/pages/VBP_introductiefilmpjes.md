@@ -1,10 +1,4 @@
----
-title: Introductiefilmpjes
-_options:
-  layout: public/pagesLayout.html
----
-
-**Introductiefilmpjes**
+## Introductiefilmpjes
 
 Hier kan je de introductiefilpjes nog eens herbekijken
 
