@@ -47,7 +47,7 @@ ala:
   image:
     service:
       url: ${common.protocol}://${common.domain}/image-service
-allowedImageEditingRoles: ROLE_ADMIN
+allowedImageEditingRoles: ROLE_ADMIN,ROLE_EDITOR
 
 wikipedia:
   url: https://nl.wikipedia.org/api/rest_v1/page/html/
