@@ -7,7 +7,7 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 #LABEL ala.version=${VERSION}
 
 ARG VERSION=try-fixing-npe
-ARG COMMIT=827f3f5f37e902b97282986853ccc2a0262a6e56
+ARG COMMIT=3ff5aa9e1afe961da5b6a0f48121e566a39ada88
 ARG SOURCE=https://github.com/StefanVanDyck/userdetails.git
 LABEL ala.version=inbo-${COMMIT}
 
@@ -38,7 +38,7 @@ RUN mkdir -p /opt/atlas/i18n \
   && ln -s /config/userdetails/i18n/override /var/opt/atlas/i18n/userdetails
 
 ARG VERSION=3.3.0-SNAPSHOT
-ARG COMMIT=827f3f5f37e902b97282986853ccc2a0262a6e56
+ARG COMMIT=3ff5aa9e1afe961da5b6a0f48121e566a39ada88
 LABEL ala.version=inbo-${COMMIT}
 
 COPY --from=builder /project/build/libs/userdetails-${VERSION}-exec.war /userdetails.war
