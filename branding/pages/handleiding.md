@@ -1,8 +1,6 @@
-Beknopte Handleiding voor het Vlaams Biodiversiteitsportaal
-===========================================================
+## Beknopte Handleiding voor het Vlaams Biodiversiteitsportaal
 
-1\. Toegang tot het Portaal
----------------------------
+### 1\. Toegang tot het Portaal
 
 **URL:** [Vlaams Biodiversiteitsportaal](#)
 
@@ -14,46 +12,43 @@ Beknopte Handleiding voor het Vlaams Biodiversiteitsportaal
 ![Inlogscherm](/images/pages/Afbeelding1.png) 
 ![Startpagina](/images/pages/Afbeelding2.png)
 
-2\. Navigatie
--------------
+### Navigatie
 
 Het portaal is ingedeeld in verschillende secties:
 
 ![Navigatiemenu](/images/pages/Afbeelding3.png)
 
-3\. Belangrijkste Modules
--------------------------
+### 3\. Belangrijkste Modules
 
-### Verzamelingen (Natuurhistorische collecties)
+#### Verzamelingen (Natuurhistorische collecties)
 
 Bekijk en beheer collectie data. Toegang tot gedigitaliseerde collecties.
 
-### Waarnemingen
+#### Waarnemingen
 
 Doorzoek en analyseer waarnemingsdata van soorten.
 
 ![Waarnemingen](/images/pages/Afbeelding4.png)
 
-### Soorten
+#### Soorten
 
 Zoek informatie over specifieke soorten.
 
 ![Soorten](/images/pages/Afbeelding5.png)
 
-### Geografisch Portaal
+#### Geografisch Portaal
 
 Visualiseer gegevens op interactieve kaarten.
 
 ![Geografisch portaal](/images/pages/Afbeelding8.png)
 
-### Afbeeldingen
+#### Afbeeldingen
 
 Bekijk afbeeldingen die gekoppeld zijn aan soorten.
 
 ![Afbeeldingen](/images/pages/Afbeelding10.png)
 
-4\. Tips voor Gebruik
----------------------
+### 4\. Tips voor Gebruik
 
 Gebruik de geavanceerde zoekfunctie en stel voorkeuren in.
 
