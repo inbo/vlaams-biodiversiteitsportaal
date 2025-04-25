@@ -76,6 +76,6 @@ spatial:
 termsOfUseUrl: ''
 userdetails:
   api:
-    url: http://userdetails.${common.internalDomain}:8080/userdetails/
+    url: ${common.protocol}://${common.domain}/userdetails/
   web:
     url: ${common.protocol}://${common.domain}/userdetails/
