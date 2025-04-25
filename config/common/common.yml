@@ -60,6 +60,7 @@ security:
       serviceUrl: ${common.protocol}://${common.domain}/apikey/
     check:
       serviceUrl: ${common.protocol}://${common.domain}/apikey/ws/check?apikey=
+    serviceUrl: ${common.protocol}://${common.domain}/apikey/ws/check?apikey=
     userdetails:
       serviceUrl: ${common.protocol}://${common.domain}/userdetails/
 
