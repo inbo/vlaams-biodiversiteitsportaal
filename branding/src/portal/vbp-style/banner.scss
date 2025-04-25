@@ -10,7 +10,7 @@
         border-radius: 0;
         margin: 0;
         background-color: white;
-        font-weight: bold;
+        font-weight: 500;
         height: $inbo-banner-height;
         border-bottom: 1px solid $inbo-primary;
     }
@@ -23,6 +23,8 @@
         color: black;
         text-decoration: underline 0.15em rgba(0, 0, 0, 0);
         transition: text-decoration-color 300ms, color 300ms;
+        text-transform: uppercase;
+        font-size: $inbo-font-size-navbar;
 
         display: block;
         width: 100%;
@@ -40,9 +42,10 @@
 
     .navbar .navbar-brand {
         text-transform: uppercase;
+        font-size: $inbo-font-size-navbar;
         color: $inbo-primary;
         padding-right: 2em;
-        font-weight: bold;
+        font-weight: normal;
         margin-right: 1em;
 
         &:hover {
