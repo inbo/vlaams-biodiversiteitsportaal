@@ -38,8 +38,8 @@ images:
   service:
     base: ${common.protocol}://${common.domain}/image-service
     thumbnail: ${common.protocol}://${common.domain}/image-service/image/{0}/thumbnail
-    large: ${common.protocol}://${common.domain}/image-service/image/{0}/large
-    small: ${common.protocol}://${common.domain}/image-service/image/{0}/original
+    large: ${common.protocol}://${common.domain}/image-service/image/{0}/original
+    small: ${common.protocol}://${common.domain}/image-service/image/{0}/thumbnail
     metadata: ${common.protocol}://${common.domain}/image-service/ws/image/{0}
   index: true
 knowledgeBase:
