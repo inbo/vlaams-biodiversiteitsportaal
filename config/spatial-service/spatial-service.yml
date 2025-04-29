@@ -28,7 +28,8 @@ spatialHubUrl: ${common.protocol}://${common.domain}/spatial-hub/
 #
 
 geoserver:
-  url: 'http://geoserver.${common.internalDomain}:8080/geoserver'
+  # Needs to be externally accessible, as it ends up being used by the browser client too
+  url: "${common.protocol}://${common.domain}/geoserver"
   username: 'admin'
   password: 'geoserver'
   canDeploy: true
