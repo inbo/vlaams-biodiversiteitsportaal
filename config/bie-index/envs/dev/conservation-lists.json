@@ -2,5 +2,22 @@
   "defaultSourceField": "status",
   "defaultYearSourceField": "eventDate",
   "lists": [
+    {
+      "uid": "dr149",
+      "field": "threatStatus_VRLF_s",
+      "sourceField": "threatStatus",
+      "yearSourceField": "eventDate",
+      "term": "threatStatus",
+      "label": "VRLF"
+    },
+    {
+      "uid": "dr153",
+      "field": "threatStatus_NVRLF_s",
+      "sourceField": "threatStatus",
+      "yearSourceField": "eventDate",
+      "term": "threatStatus",
+      "label": "NVRLF"
+    }
+
   ]
 }
