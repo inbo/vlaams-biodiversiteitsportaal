@@ -104,10 +104,18 @@ jobs:
         run: |
           set -e -x -o pipefail
 
-          npm install --dev
+          npm ci
+          npm test run --reporter=junit
           npm run build:prod
 
           tar -cvzf branding-${{ needs.get-versions.outputs.branding_version }}.tar.gz -C "$(pwd)/dist" ./
+
+      - name: Archive failed test report
+        uses: actions/upload-artifact@v4
+        if: failure()   
+        with:
+          name: branding-tests
+          path: ./test-output.json
 
       - name: Create release
         uses: ncipollo/release-action@v1

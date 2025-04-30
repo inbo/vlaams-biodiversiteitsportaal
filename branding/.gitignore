@@ -32,3 +32,5 @@ src/pages/*
 !src/pages/pages.scss
 
 src/common/clients/.generated
+
+test-output.json

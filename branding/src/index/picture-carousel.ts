@@ -14,15 +14,6 @@ imageServiceClient.setConfig({
     baseUrl: "/image-service",
 });
 
-function preloadImage(url: string) {
-    return new Promise((resolve, reject) => {
-        const image = new Image();
-        image.onload = resolve;
-        image.onerror = reject;
-        image.src = url;
-    });
-}
-
 interface Attribution {
     text: string;
     link: string;
@@ -52,49 +43,59 @@ async function fetchPictureList(listId: string): Promise<Picture[]> {
     }
 
     return (await Promise.all<Picture>(
-        listItems.data.map(async (item) => {
-            const result: Picture = {
-                url: "",
-                species: {
-                    id: item.lsid!,
-                    commonName: item.commonName!,
-                    scientificName: item.scientificName!,
-                },
-            };
-            // Parse KVP values
-            for (const { key, value } of item.kvpValues || []) {
-                switch (key?.toLowerCase()) {
-                    case "imageurl":
-                        result.url = value;
-                        break;
-                    case "imageid":
-                        result.url = `/image-service/image/${value}/original`;
-                        result.attribution = await fetchImageAttribution(
-                            value,
-                        );
-                        break;
-                    case "attributiontext":
-                        result.attribution = {
-                            link: "",
-                            ...result.attribution,
-                            text: value,
-                        };
-                        break;
+        listItems.data
+            .filter((item) =>
+                item.lsid && item.commonName && item.scientificName &&
+                item.kvpValues?.find((kvp) =>
+                        kvp.key?.toLowerCase() === "disabled"
+                    )?.value.toLowerCase() !== "true"
+            )
+            .map(async (item) => {
+                const result: Picture = {
+                    url: "",
+                    species: {
+                        id: item.lsid!,
+                        commonName: item.commonName!,
+                        scientificName: item.scientificName!,
+                    },
+                };
+                // Parse KVP values
+                for (const { key, value } of item.kvpValues || []) {
+                    switch (key?.toLowerCase()) {
+                        case "imageurl":
+                            result.url = value;
+                            break;
+                        case "imageid":
+                            result.url =
+                                `/image-service/image/${value}/original`;
+                            result.attribution = await fetchImageAttribution(
+                                value,
+                            );
+                            break;
+                        case "attributiontext":
+                            result.attribution = {
+                                link: "",
+                                ...result.attribution,
+                                text: value,
+                            };
+                            break;
 
-                    case "attributionlink":
-                        result.attribution = {
-                            text: "",
-                            ...result.attribution,
-                            link: value,
-                        };
-                        break;
-                    case "alignment":
-                        result.position = value;
-                        break;
+                        case "attributionlink":
+                            result.attribution = {
+                                text: "",
+                                ...result.attribution,
+                                link: value,
+                            };
+                            break;
+                        case "alignment":
+                            result.position = value;
+                            break;
+                    }
                 }
-            }
-            return result;
-        }),
+                console.log(result);
+
+                return result;
+            }),
     )).filter((item) => item.url.length > 0);
 }
 
@@ -140,6 +141,8 @@ export class PictureCarousel {
     private currentPictureIndex = 0;
     private element: HTMLElement;
 
+    private readonly listId: string;
+
     private readonly timerInterval: number | undefined;
     private timer?: number;
 
@@ -153,14 +156,13 @@ export class PictureCarousel {
             throw new Error(`Element with id ${elementId} not found`);
         }
 
+        this.listId = listId;
         this.timerInterval = interval;
-
-        this.init(listId);
     }
 
-    async init(listId: string) {
+    public async render() {
         this.pictureList = this.pictureList.concat(
-            await fetchPictureList(listId),
+            await fetchPictureList(this.listId),
         );
 
         if (this.pictureList.length < 2) {
@@ -194,15 +196,15 @@ export class PictureCarousel {
         this.resetTimer();
     }
 
-    async nextPicture() {
+    private async nextPicture() {
         await this.switchPicture(false);
     }
 
-    async previousPicture() {
+    private async previousPicture() {
         await this.switchPicture(true);
     }
 
-    async switchPicture(next = true) {
+    private async switchPicture(next = true) {
         const activeElement = this.element?.querySelector(
             ".vbp-picture-carousel-picture[data-carousel-active]",
         ) as HTMLElement;
@@ -225,7 +227,7 @@ export class PictureCarousel {
             newPicture,
         );
 
-        await preloadImage(newPicture.url);
+        await this.preloadImage(newPicture.url);
 
         this.updateElement(inactiveElement, newPicture);
         inactiveElement.setAttribute("data-carousel-active", "");
@@ -239,7 +241,7 @@ export class PictureCarousel {
             if (this.timer) {
                 clearInterval(this.timer);
             }
-            this.timer = setInterval(
+            this.timer = window.setInterval(
                 () => this.nextPicture(),
                 this.timerInterval,
             );
@@ -277,8 +279,24 @@ export class PictureCarousel {
             attributionContainer.classList.remove("hidden");
         } else {
             attributionElement.innerText = "";
-            attributionElement.href = "";
+            attributionElement.removeAttribute("href");
             attributionContainer.classList.add("hidden");
         }
+    }
+
+    private preloadImage(url: string) {
+        console.debug("Preloading image:", url);
+        return new Promise((resolve, reject) => {
+            const image = new Image();
+            image.onload = (e) => {
+                console.debug("Loaded image:", e);
+                resolve(e);
+            };
+            image.onerror = (e) => {
+                console.error("Error loading image:", e);
+                reject(e);
+            };
+            image.src = url;
+        });
     }
 }
