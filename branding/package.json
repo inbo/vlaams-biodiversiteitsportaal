@@ -12,7 +12,7 @@
     "watch": "npm run generate:clients && tsc && NODE_ENV=development vite build --watch --minify=false",
     "generate:clients": "node generate-openapi-clients.ts",
     "test": "vitest",
-    "test:ci": "vitest run --reporter=dot --reporter=json --outputFile=../test-output.json"
+    "test:ci": "npm run generate:clients && vitest run --reporter=dot --reporter=json --outputFile=../test-output.json"
   },
   "devDependencies": {
     "@hey-api/openapi-ts": "^0.66.5",
