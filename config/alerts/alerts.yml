@@ -47,6 +47,8 @@ skin:
 privacyPolicy: "${common.protocol}://${common.domain}/terms-of-use/privacy-policy/"
 siteDefaultLanguage: "nl"
 
+uriFilterPattern: /*
+
 ala:
   baseURL: "${common.protocol}://${common.domain}"
   userDetailsURL: "${common.protocol}://${common.domain}/userdetails/userDetails/getUserListFull"
