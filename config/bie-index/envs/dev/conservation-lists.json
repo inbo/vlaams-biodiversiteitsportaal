@@ -17,6 +17,14 @@
       "yearSourceField": "eventDate",
       "term": "threatStatus",
       "label": "VRLF"
+    },
+    {
+      "uid": "dr411",
+      "field": "threatStatus_VRLF_s",
+      "sourceField": "threatStatus",
+      "yearSourceField": "eventDate",
+      "term": "threatStatus",
+      "label": "VRLF"
     }
 
   ]
