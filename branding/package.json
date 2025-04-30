@@ -10,7 +10,9 @@
     "build:prod": "npm run generate:clients && tsc && vite build",
     "preview": "vite preview",
     "watch": "npm run generate:clients && tsc && NODE_ENV=development vite build --watch --minify=false",
-    "generate:clients": "node generate-openapi-clients.ts"
+    "generate:clients": "node generate-openapi-clients.ts",
+    "test": "vitest",
+    "test:ci": "vitest run --reporter=dot --reporter=json --outputFile=../test-output.json"
   },
   "devDependencies": {
     "@hey-api/openapi-ts": "^0.66.5",
@@ -18,14 +20,16 @@
     "@types/lodash": "^4.17.16",
     "@types/node": "^22.14.0",
     "decompress": "^4.2.1",
+    "happy-dom": "^17.4.4",
     "markdown-it": "^14.1.0",
     "markdown-it-front-matter": "^0.2.4",
     "sass-embedded": "^1.86.3",
+    "ts-node": "^10.9.2",
     "typescript": "~5.7.2",
     "vite": "^6.2.0",
     "vite-plugin-handlebars": "^2.0.0",
     "vite-plugin-static-copy": "^2.3.0",
-    "ts-node": "^10.9.2"
+    "vitest": "^3.1.2"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.7.2",

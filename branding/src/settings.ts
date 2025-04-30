@@ -1,13 +1,3 @@
-interface ProcessEnv {
-  [key: string]: string | undefined;
-}
-// Do not pull in all nodejs types just for env vars
-declare global {
-  const process: {
-    env: ProcessEnv;
-  };
-}
-
 import { merge } from "lodash";
 
 enum Environment {
