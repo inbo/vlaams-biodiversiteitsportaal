@@ -38,7 +38,7 @@ grails:
 security:
   cas:
     adminRole: ROLE_ADMIN
-    uriFilterPattern: []
+    uriFilterPattern: ['/notification/*', '/admin/*']
     appServerName: "${common.protocol}://${common.domain}"
     contextPath: "/alerts"
 skin:
@@ -46,8 +46,6 @@ skin:
   orgSupportEmail: ${common.supportEmail}
 privacyPolicy: "${common.protocol}://${common.domain}/terms-of-use/privacy-policy/"
 siteDefaultLanguage: "nl"
-
-uriFilterPattern: /*
 
 ala:
   baseURL: "${common.protocol}://${common.domain}"
