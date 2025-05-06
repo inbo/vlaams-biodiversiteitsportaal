@@ -21,42 +21,6 @@ RUN --mount=type=cache,target=/gradle-cache,ro \
 RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
     rsync -a /home/gradle/.gradle/caches/modules-2 /gradle-cache/ \
     && rm /gradle-cache/modules-2/*.lock && rm /gradle-cache/modules-2/gc.properties
-
-FROM amazoncorretto:11 AS gdal-builder
-
-RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
-    yum -y install \
-    gcc-c++ \
-    cpp \
-    sqlite-devel \
-    libtiff \
-    libpng-devel \
-    cmake3 \
-    make \
-    tar \
-    gzip
-
-RUN mkdir /install
-
-RUN cd /tmp &&\
-    curl -fL https://download.osgeo.org/proj/proj-6.1.1.tar.gz -o proj-6.1.1.tar.gz &&\
-    tar -xf proj-6.1.1.tar.gz &&\
-    cd proj-6.1.1 &&\
-    ./configure --prefix=/install &&\
-    make -j8 &&\
-    make install
-
-
-RUN cd /tmp &&\
-    curl -fL https://github.com/OSGeo/gdal/releases/download/v3.2.1/gdal-3.2.1.tar.gz -o /tmp/gdal-3.2.1.tar.gz &&\
-    tar -xf gdal-3.2.1.tar.gz &&\
-    cd gdal-3.2.1 &&\
-    ./configure --prefix=/install --with-proj=/install &&\
-    make -j8 &&\
-    make install
-
-RUN ls -la /install/*
-
 FROM amazoncorretto:11
 
 # Default based on repo structure, can be overridden at runtime
@@ -83,8 +47,12 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
     sqlite \
     shadow-utils
 
-COPY --from=gdal-builder /install /usr
-RUN ldconfig
+# Install GDAL using self built RPMs (check rpm folder for script used to generate them)
+ARG PROJ_VERSION=6.1.1
+ARG GDAL_VERSION=3.2.1
+ARG TARGETARCH
+RUN yum -y install https://inbo-vbp-global-public-artifacts.s3.eu-west-1.amazonaws.com/spatial-service/gdal/proj-${PROJ_VERSION}-1.amzn2.$TARGETARCH.rpm &&\
+    yum -y install https://inbo-vbp-global-public-artifacts.s3.eu-west-1.amazonaws.com/spatial-service/gdal/gdal-${GDAL_VERSION}-1.amzn2.$TARGETARCH.rpm
 
 RUN mkdir -p /opt/vbp/pipelines/shp && \
     curl https://inbo-vbp-global-public-artifacts.s3.eu-west-1.amazonaws.com/spatial-service/pipelines-shapefiles.zip -o /opt/vbp/pipelines/shp/pipelines-shapefiles.zip && \
