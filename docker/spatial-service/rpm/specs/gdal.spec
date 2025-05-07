@@ -27,3 +27,5 @@ rm -rf %{buildroot}
 /usr/lib/*
 /usr/share/*
 /usr/include/*
+
+%post -p /sbin/ldconfig
