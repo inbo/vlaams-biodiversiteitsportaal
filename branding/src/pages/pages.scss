@@ -129,6 +129,8 @@
         object-fit: contain;
 
         margin: 1em 1em 1em 0;
+
+        margin: auto auto 0 auto;
     }
 
     h4 {
@@ -154,6 +156,7 @@
         justify-content: center;
         flex-wrap: wrap;
         min-width: 40%;
+        position: relative;
 
         .vbp-doemee-initiatieven-item-left {
             flex: 1 0 0;
@@ -170,6 +173,11 @@
 .vbp-doemee-projecten {
     text-align: center;
     gap: 0.5em;
+
+    .vbp-doemee-initiatieven-item {
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 .inbo-applicaties {
