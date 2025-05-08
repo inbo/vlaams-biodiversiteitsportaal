@@ -7,7 +7,7 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 #LABEL ala.version=${VERSION}
 
 ARG VERSION=develop
-ARG COMMIT=ebd5fe912cc840981c99ae215c4a553ae9abf6b7
+ARG COMMIT=a98f3ea52a102da28a17eb4aec0e4b9d00f24576
 ARG SOURCE=https://github.com/katya-shaleninova/spatial-hub
 LABEL ala.version=inbo-${VERSION}
 
