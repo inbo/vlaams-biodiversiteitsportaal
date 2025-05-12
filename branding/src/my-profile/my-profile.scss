@@ -1,0 +1,17 @@
+#my-roles {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.9em;
+    margin-left: 0.75em;
+    margin-bottom: 2em;
+}
+
+.link-icon {
+    img {
+        width: 4em;
+        aspect-ratio: 1;
+    }
+    i {
+        font-size: 3em;
+    }
+}
