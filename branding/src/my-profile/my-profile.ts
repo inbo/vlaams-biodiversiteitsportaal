@@ -4,6 +4,10 @@ $(() => {
     initPage();
 });
 
+interface RealmAccess {
+    roles: string[];
+}
+
 async function initPage() {
     if (isLoggedIn()) {
         const user = await getUser()!;
@@ -29,7 +33,7 @@ async function initPage() {
                 `/biocache-hub/occurrences/search/?q=*:*&amp;fq=assertion_user_id:%22${user?.profile.sub}%22`;
 
         const rolesElement = document.getElementById("my-roles")!;
-        (user?.profile?.realm_access?.roles as string[]).forEach((role) => {
+        (user?.profile?.realm_access as RealmAccess).roles.forEach((role) => {
             const roleElement = document.createElement("span");
             roleElement.className = "badge badge-secondary";
             roleElement.innerText = role;
