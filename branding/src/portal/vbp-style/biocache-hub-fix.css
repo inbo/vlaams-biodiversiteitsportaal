@@ -1,0 +1,4 @@
+/* Hide link to my downloads as we're currently not supporting it */
+#mydownloads {
+	display: none;
+}
