@@ -36,6 +36,10 @@ export default {
                 banner: resolve(__dirname, "./src/banner.html"),
                 footer: resolve(__dirname, "./src/footer.html"),
                 settings: resolve(__dirname, "./src/settings.ts"),
+                "user-profile": resolve(
+                    __dirname,
+                    "./src/my-profile.html",
+                ),
                 "bootstrap": resolve(
                     __dirname,
                     "./src/portal/bootstrap.scss",

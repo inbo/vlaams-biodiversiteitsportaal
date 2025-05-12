@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="nl">
+
+<head>
+    <meta name="description" content="Vlaams Biodiversiteitsportaal" />
+    <meta name="author" content="Instituut voor Natuur- en Bosonderzoek">
+
+    <title>Vlaams Biodiversiteitsportaal</title>
+
+    <!-- Loaded by grails pages automatically  -->
+    <link rel="stylesheet" href="{{ resolve-from-root 'portal/bootstrap.scss' }}">
+
+    <link rel="stylesheet" href="{{ resolve-from-root 'portal/font-awesome.scss' }}">
+
+    <link rel="stylesheet" href="{{ resolve-from-root 'my-profile/my-profile.scss' }}">
+
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+
+    {{> head }}
+
+    <script type="module" src="{{ resolve-from-root 'portal/auth.ts' }}"></script>
+    <script type="module" src="{{ resolve-from-root 'my-profile/my-profile.ts' }}"></script>
+</head>
+
+<body>
+    {{> banner }}
+
+    <div id="profile-login" class="container-fluid align-center">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Je bent nog niet ingelogd.</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <a id="loginButton" class="loginBtn login-button" href="::loginURL::">
+                    Log in om je profiel te bekijken.
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div id="profile-overview" class="container-fluid hidden">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>Hallo <span id="user-greeting-name">Stefan</span>!</h1>
+
+            </div>
+            <div id="my-roles" class="row">
+                Rollen:
+            </div>
+        </div>
+        <div class="row">
+            <!-- Column 1 -->
+            <div class="col-lg-4">
+                <div class="d-flex">
+                    <div class="link-icon">
+                        <i class="glyphicon glyphicon-user"></i>
+                    </div>
+                    <div class="content">
+                        <h4 id="update-your-details">
+                            <a id="update-profile-details" href="">
+                                Werk mijn gegevens bij
+                            </a>
+                        </h4>
+                        <p>Werk je e-mailadres, organisatie en contactgegevens bij.</p>
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <div class="link-icon">
+                        <i class="glyphicon glyphicon-lock"></i>
+                    </div>
+                    <div class="content">
+                        <h4 id="reset-your-password">
+                            <a id="update-password" href="">
+                                Verander mijn wachtwoord
+                            </a>
+                        </h4>
+                        <p>Verander je VBP-wachtwoord.</p>
+                    </div>
+                </div>
+
+
+                <div class="d-flex">
+                    <div class="link-icon">
+                        <i class="glyphicon glyphicon-cog"></i>
+                    </div>
+                    <div class="content">
+                        <h4 id="admin-tools">
+                            <a href="/userdetails/admin">
+                                Beheertools
+                            </a>
+                        </h4>
+                        <p>Beheertools voor het VBP.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Column 2 -->
+            <div class="col-lg-4">
+                <div class="d-flex">
+                    <div class="link-icon">
+                        <img src="https://www.ala.org.au/app/uploads/2019/06/19-0078_ALA_ICON_IconSuite_Species-Lists.svg"
+                            alt="">
+                    </div>
+                    <div class="content">
+                        <h4 id="species-lists">
+                            <a href="/species-list/speciesList/list">
+                                Mijn soortenlijsten
+                            </a>
+                        </h4>
+                        <p>Bekijk soortenlijsten en kenmerken die je hebt geüpload of bewerkt in het VBP.</p>
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <div class="link-icon">
+                        <i class="glyphicon glyphicon-pencil"></i>
+                    </div>
+                    <div class="content">
+                        <h4 id="records-annotated">
+                            <a id="my-annotated-records" href="">
+                                Mijn recordannotaties
+                            </a>
+                        </h4>
+                        <p>Bekijk records die je hebt geannoteerd, waarin je problemen met geospatiale informatie of
+                            taxonomie hebt aangegeven.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Column 3 -->
+            <div class="col-lg-4">
+                <div class="d-flex">
+                    <div class="link-icon">
+                        <i class="glyphicon glyphicon-envelope"></i>
+                    </div>
+                    <div class="content">
+                        <h4 id="my-alerts">
+                            <a href="/alerts">
+                                Mijn meldingen
+                            </a>
+                        </h4>
+                        <p>Werk je meldingsinstellingen bij voor de e-mails die je van het VBP ontvangt.</p>
+                    </div>
+                </div>
+
+
+                <div class="d-flex">
+                    <div class="link-icon">
+                        <img src="https://www.ala.org.au/app/uploads/2019/06/19-0078_ALA_ICON_IconSuite_Spatial-Portal.svg"
+                            alt="">
+                    </div>
+                    <div class="content">
+                        <h4 id="spatial-portal">
+                            <a href="/spatial-hub?tool=log">
+                                Mijn analyses
+                            </a>
+                        </h4>
+                        <p>Tabuleer en grafieken voor alle functies die je hebt gebruikt in het Spatial Portal.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{> footer }}
+</body>
+
+</html>

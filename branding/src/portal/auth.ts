@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
 import settings from "../settings";
-import { Log, User, UserManager } from "oidc-client-ts";
+import { Log, SignIn, User, UserManager } from "oidc-client-ts";
 
 Log.setLogger(console);
 
@@ -12,15 +12,21 @@ Log.setLogger(console);
  * This logic is part of the ala-security project.
  */
 
-$(() => {
-  if (needToHandleAuth()) {
+let userManager: UserManager | undefined = undefined;
+
+$(async () => {
+  await init();
+});
+
+async function init() {
+  if (userManager === undefined) {
     const redirectUrl = getCurrentUrl();
     redirectUrl.searchParams.set("login", "true");
 
     const post_logout_redirect_uri = getCurrentUrl();
     post_logout_redirect_uri.searchParams.set("logout", "true");
 
-    const userManager = new UserManager({
+    userManager = new UserManager({
       authority: settings.auth.oidc.authority,
       client_id: settings.auth.oidc.clientId,
       redirect_uri: redirectUrl.href,
@@ -34,27 +40,20 @@ $(() => {
     userManager.events.addAccessTokenExpired(function () {
       clearAlaAuthCookie();
     });
-    addAuthButtonClickHandlers(userManager);
-    handleAuthCallbacks(userManager);
+    addAuthButtonClickHandlers();
+    await handleAuthCallbacks(userManager);
     setAuthMenuStatus();
   }
-});
-
-// Check if the current page is served by a grails service.
-// If not, we need to handle the auth stuff ourselves in the browser.
-function needToHandleAuth() {
-  return document.location.pathname === "/" ||
-    document.location.pathname.startsWith("/pages");
 }
 
-function addAuthButtonClickHandlers(userManager: UserManager) {
+function addAuthButtonClickHandlers() {
   const loginButtons = document.getElementsByClassName("login-button");
   for (const button of loginButtons) {
     button.addEventListener(
       "click",
       async (e) => {
         e.preventDefault();
-        await userManager.signinRedirect();
+        await login();
       },
     );
   }
@@ -64,7 +63,7 @@ function addAuthButtonClickHandlers(userManager: UserManager) {
       "click",
       async (e) => {
         e.preventDefault();
-        await userManager.signoutRedirect();
+        await logout();
       },
     );
   }
@@ -147,4 +146,28 @@ export function isLoggedIn() {
     const authCookie = Cookies.get(settings.auth.ala.authCookieName);
     return typeof authCookie !== "undefined";
   }
+}
+
+export async function getUser(): Promise<User | null> {
+  if (userManager === undefined) {
+    throw new Error("UserManager is not initialized");
+  }
+  return userManager.getUser();
+}
+
+export async function login(
+  extraQueryParams: Record<string, string | number | boolean> | undefined =
+    undefined,
+) {
+  if (userManager === undefined) {
+    throw new Error("UserManager is not initialized");
+  }
+  await userManager.signinRedirect({ extraQueryParams });
+}
+
+export async function logout() {
+  if (userManager === undefined) {
+    throw new Error("UserManager is not initialized");
+  }
+  await userManager.signoutRedirect();
 }
