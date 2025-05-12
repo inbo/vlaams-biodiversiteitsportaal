@@ -4,10 +4,6 @@ $(() => {
     initPage();
 });
 
-interface RealmAccess {
-    roles: string[];
-}
-
 async function initPage() {
     if (isLoggedIn()) {
         const user = await getUser()!;
@@ -32,13 +28,26 @@ async function initPage() {
             .href =
                 `/biocache-hub/occurrences/search/?q=*:*&amp;fq=assertion_user_id:%22${user?.profile.sub}%22`;
 
+        const roles =
+            (user?.profile?.realm_access as { roles: string[] | undefined })
+                .roles || [];
+
         const rolesElement = document.getElementById("my-roles")!;
-        (user?.profile?.realm_access as RealmAccess).roles.forEach((role) => {
+        roles.forEach((role) => {
             const roleElement = document.createElement("span");
             roleElement.className = "badge badge-secondary";
             roleElement.innerText = role;
             rolesElement.appendChild(roleElement);
         });
+
+        if (roles.includes("ADMIN")) {
+            Array.from(document.getElementsByClassName("admin-tooling"))
+                .forEach(
+                    (element) => {
+                        element.classList.remove("hidden");
+                    },
+                );
+        }
 
         document.getElementById("profile-login")!.classList.add("hidden");
         document.getElementById("profile-overview")!.classList.remove("hidden");
