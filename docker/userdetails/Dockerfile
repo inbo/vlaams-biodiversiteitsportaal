@@ -7,7 +7,7 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 #LABEL ala.version=${VERSION}
 
 ARG VERSION=attempt-userdetails-cognito-fix
-ARG COMMIT=6a498f276dcaa5e1b26acbcf29b7dbe40cc9c2fa
+ARG COMMIT=aebad9c5aaa5c5dfe294e4baa4d821f92fb74e08
 ARG SOURCE=https://github.com/StefanVanDyck/userdetails.git
 LABEL ala.version=inbo-${COMMIT}
 
