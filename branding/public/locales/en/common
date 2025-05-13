@@ -78,6 +78,6 @@
   "my-profile.annotated-records-description": "View records you have annotated, indicating problems with geospatial information or taxonomy.",
   "my-profile.alerts": "My notifications",
   "my-profile.alerts-description": "Update your notification settings for emails you receive from the FBP.",
-  "my-profile.spatial-analyses": "My analyses",
-  "my-profile.spatial-analyses-description": "Tabulate and graph all features you've used in the Spatial Portal."
+  "my-profile.spatial-analysis": "My analysis",
+  "my-profile.spatial-analysis-description": "Tabulate and graph all features you've used in the Spatial Portal."
 }
