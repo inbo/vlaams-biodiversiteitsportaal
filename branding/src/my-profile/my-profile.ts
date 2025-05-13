@@ -47,7 +47,7 @@ function showUserDetails(user: User) {
 
         (document.getElementById("my-annotated-records")! as HTMLAnchorElement)
             .href =
-                `/biocache-hub/occurrences/search/?q=*:*&amp;fq=assertion_user_id:%22${profile.sub}%22`;
+                `/biocache-hub/occurrences/search/?q=*:*&fq=assertion_user_id:%22${profile.sub}%22`;
 
         const roles: string[] = (profile.realm_access as any)?.roles || [];
 
