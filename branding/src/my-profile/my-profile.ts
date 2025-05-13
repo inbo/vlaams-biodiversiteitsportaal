@@ -5,11 +5,12 @@ $(() => {
 });
 
 async function initPage() {
-    if (isLoggedIn()) {
+    if (await isLoggedIn()) {
         const user = await getUser()!;
+        const profile = user!.profile!;
+
         document.getElementById("user-greeting-name")!
-            .innerText =
-                `${user?.profile.given_name} ${user?.profile.family_name}`;
+            .innerText = `${profile.given_name} ${profile.family_name}`;
 
         (document.getElementById(
             "update-profile-details",
@@ -26,11 +27,9 @@ async function initPage() {
 
         (document.getElementById("my-annotated-records")! as HTMLAnchorElement)
             .href =
-                `/biocache-hub/occurrences/search/?q=*:*&amp;fq=assertion_user_id:%22${user?.profile.sub}%22`;
+                `/biocache-hub/occurrences/search/?q=*:*&amp;fq=assertion_user_id:%22${profile.sub}%22`;
 
-        const roles =
-            (user?.profile?.realm_access as { roles: string[] | undefined })
-                .roles || [];
+        const roles: string[] = (profile.realm_access as any)?.roles || [];
 
         const rolesElement = document.getElementById("my-roles")!;
         roles.forEach((role) => {
