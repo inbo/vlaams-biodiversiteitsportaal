@@ -3,12 +3,13 @@ ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 
-ARG VERSION=3.0.0
-ARG SOURCE=https://github.com/AtlasOfLivingAustralia/image-service.git
-LABEL ala.version=${VERSION}
+ARG VERSION=tiling-image-memory-leak
+ARG COMMIT=f128e723367524413536c0d4163314e311babb97
+ARG SOURCE=https://github.com/inbo/image-service.git
+LABEL ala.version=inbo-${COMMIT}
 
 WORKDIR /project
-RUN git clone --branch v${VERSION} --depth 1 ${SOURCE} /project
+RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} /project
 
 COPY build.gradle /project/build.gradle
 COPY resources.xml ./grails-app/conf/spring/resources.xml
