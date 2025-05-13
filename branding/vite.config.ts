@@ -38,7 +38,7 @@ export default {
                 settings: resolve(__dirname, "./src/settings.ts"),
                 "user-profile": resolve(
                     __dirname,
-                    "./src/my-profile.html",
+                    "./src/my-profile/index.html",
                 ),
                 "bootstrap": resolve(
                     __dirname,
