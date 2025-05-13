@@ -5,7 +5,6 @@ import { viteStaticCopy } from "vite-plugin-static-copy";
 import { generateMarkdownPages } from "./template-pages";
 import { downloadAbvAssets } from "./abv-assets";
 import { console } from "node:inspector";
-import { exec } from "child_process";
 
 import fg from "fast-glob";
 import { rename } from "node:fs/promises";
@@ -130,7 +129,6 @@ export default {
                         });
                     },
                 );
-                return {};
             },
         },
         // Copy JS libraries, cannot be bundled by Vite because they aren't ES modules
@@ -166,39 +164,12 @@ export default {
                 console.log("Transforming HTML for:", path);
                 let result = html;
 
-                if (path === "/index.html" || path.includes("/pages/")) {
-                    console.log("Replacing TagLib entries in HTML for:", path);
-                    for (const [key, value] of Object.entries(replacements)) {
-                        result = result.replaceAll(`::${key}::`, value);
-                    }
+                console.log("Replacing TagLib entries in HTML for:", path);
+                for (const [key, value] of Object.entries(replacements)) {
+                    result = result.replaceAll(`::${key}::`, value);
                 }
 
                 return result;
-            },
-        },
-        {
-            name: "rename-html-for-s3",
-            apply: "build",
-            enforce: "post",
-            async closeBundle(error) {
-                if (error) {
-                    console.error("Error during build:", error);
-                    return;
-                }
-
-                const globs = [
-                    resolve(__dirname, "./dist/pages/**/*.html"),
-                    resolve(__dirname, "./dist/my-profile.html"),
-                ];
-                globs.forEach(async (globPattern) =>
-                    (await fg.glob(globPattern))
-                        .forEach(async (file) => {
-                            await rename(
-                                file,
-                                `${dirname(file)}/${basename(file, ".html")}`,
-                            );
-                        })
-                );
             },
         },
     ],

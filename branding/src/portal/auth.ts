@@ -19,7 +19,8 @@ $(async () => {
 });
 
 async function init() {
-  if (userManager === undefined) {
+  if (!userManager) {
+    console.debug("Initializing OIDC UserManager");
     const redirectUrl = getCurrentUrl();
     redirectUrl.searchParams.set("login", "true");
 
@@ -71,20 +72,27 @@ function addAuthButtonClickHandlers() {
 
 async function handleAuthCallbacks(userManager: UserManager) {
   const urlParams = new URLSearchParams(window.location.search);
+
+  console.log("HANDLE AUTH CALLBACKS");
+
   if (urlParams.get("login")) {
+    console.trace("HANDLE AUTH CALLBACKS - LOGIN");
+
     const user = await userManager.signinCallback();
     if (!user) {
-      console.error("User not found after login");
+      console.trace("User not found after login");
       return;
     }
     setAlaAuthCookie(user);
 
-    window.history.replaceState("data", document.title, getCurrentUrl());
+    window.history.pushState(null, document.title, getCurrentUrl());
   } else if (urlParams.get("logout")) {
+    console.trace("HANDLE AUTH CALLBACKS - LOGOUT");
+
     await userManager.signoutCallback();
     clearAlaAuthCookie();
 
-    window.history.replaceState("data", document.title, getCurrentUrl());
+    window.history.pushState(null, document.title, getCurrentUrl());
   }
 }
 
