@@ -59,15 +59,6 @@ function showUserDetails(user: User) {
             rolesElement.appendChild(roleElement);
         });
 
-        if (roles.includes("ADMIN")) {
-            Array.from(document.getElementsByClassName("admin-tooling"))
-                .forEach(
-                    (element) => {
-                        element.classList.remove("hidden");
-                    },
-                );
-        }
-
         document.getElementById("profile-login")!.classList.add("hidden");
         document.getElementById("profile-overview")!.classList.remove("hidden");
     }
