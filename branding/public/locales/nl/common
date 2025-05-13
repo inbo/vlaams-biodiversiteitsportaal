@@ -75,6 +75,6 @@
   "my-profile.annotated-records-description": "Bekijk records die je hebt geannoteerd, waarin je problemen met geospatiale informatie of taxonomie hebt aangegeven.",
   "my-profile.alerts": "Mijn meldingen",
   "my-profile.alerts-description": "Werk je meldingsinstellingen bij voor de e-mails die je van het VBP ontvangt.",
-  "my-profile.spatial-analyses": "Mijn analyses",
-  "my-profile.spatial-analyses-description": "Tabuleer en grafieken voor alle functies die je hebt gebruikt in het Spatial Portal."
+  "my-profile.spatial-analysis": "Mijn analyses",
+  "my-profile.spatial-analysis-description": "Tabuleer en grafieken voor alle functies die je hebt gebruikt in het Spatial Portal."
 }
