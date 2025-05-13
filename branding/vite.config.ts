@@ -5,6 +5,12 @@ import { viteStaticCopy } from "vite-plugin-static-copy";
 import { generateMarkdownPages } from "./template-pages";
 import { downloadAbvAssets } from "./abv-assets";
 import { console } from "node:inspector";
+import { exec } from "child_process";
+
+import fg from "fast-glob";
+import { rename } from "node:fs/promises";
+import { basename, dirname } from "node:path";
+import { createClient, defaultPlugins } from "@hey-api/openapi-ts";
 
 const replacements = {
     loginStatus: "signedIn",
@@ -18,17 +24,6 @@ export default {
     build: {
         outDir: resolve(__dirname, "./dist"),
         emptyOutDir: true,
-        // watch: {
-        //     include: [/.*pages\/.*/],
-        //     clearScreen: true,
-        //     onRebuild(error, _result) {
-        //         if (error) {
-        //             console.error("Error during rebuild:", error);
-        //         } else {
-        //             console.log("Rebuild complete.");
-        //         }
-        //     },
-        // },
         rollupOptions: {
             input: {
                 index: resolve(__dirname, "./src/index.html"),
@@ -38,7 +33,7 @@ export default {
                 settings: resolve(__dirname, "./src/settings.ts"),
                 "user-profile": resolve(
                     __dirname,
-                    "./src/my-profile/index.html",
+                    "./src/my-profile.html",
                 ),
                 "bootstrap": resolve(
                     __dirname,
@@ -117,6 +112,27 @@ export default {
         },
     },
     plugins: [
+        {
+            name: "generate-openapi-clients",
+            apply: "build",
+            enforce: "pre",
+            async buildStart(options) {
+                (await fg.glob("./src/common/clients/*.yml")).forEach(
+                    async (schema) => {
+                        const serviceName = basename(schema, ".yml");
+                        await createClient({
+                            input: schema,
+                            output:
+                                `./src/common/clients/.generated/${serviceName}`,
+                            plugins: [
+                                ...defaultPlugins,
+                                "@hey-api/client-fetch",
+                            ],
+                        });
+                    },
+                );
+            },
+        },
         // Copy JS libraries, cannot be bundled by Vite because they aren't ES modules
         viteStaticCopy({
             targets: [
@@ -158,6 +174,31 @@ export default {
                 }
 
                 return result;
+            },
+        },
+        {
+            name: "rename-html-for-s3",
+            apply: "build",
+            enforce: "post",
+            async closeBundle(error) {
+                if (error) {
+                    console.error("Error during build:", error);
+                    return;
+                }
+
+                const globs = [
+                    resolve(__dirname, "./dist/pages/**/*.html"),
+                    resolve(__dirname, "./dist/my-profile.html"),
+                ];
+                globs.forEach(async (globPattern) =>
+                    (await fg.glob(globPattern))
+                        .forEach(async (file) => {
+                            await rename(
+                                file,
+                                `${dirname(file)}/${basename(file, ".html")}`,
+                            );
+                        })
+                );
             },
         },
     ],
