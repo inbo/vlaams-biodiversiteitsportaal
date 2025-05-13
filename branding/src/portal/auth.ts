@@ -42,7 +42,7 @@ async function init() {
     });
     addAuthButtonClickHandlers();
     await handleAuthCallbacks(userManager);
-    setAuthMenuStatus();
+    await setAuthMenuStatus();
   }
 }
 
@@ -88,10 +88,10 @@ async function handleAuthCallbacks(userManager: UserManager) {
   }
 }
 
-function setAuthMenuStatus() {
+async function setAuthMenuStatus() {
   const authMenu = document.getElementById("dropdown-auth-menu")!;
 
-  if (isLoggedIn()) {
+  if (await isLoggedIn()) {
     console.debug("Auth cookie present so logged in");
     authMenu.classList.remove(settings.auth.ala.logoutClass);
     authMenu.classList.add(settings.auth.ala.loginClass);
@@ -134,17 +134,17 @@ function clearAlaAuthCookie() {
   );
 }
 
-export function isLoggedIn() {
+export async function isLoggedIn() {
   // First check if the URL has a login or logout parameter
   // The cookie can be late to update
   const currentUrl = new URL(window.location.href);
   if (currentUrl.searchParams.get("login")) {
-    return true;
+    return (await getUser() !== null);
   } else if (currentUrl.searchParams.get("logout")) {
     return false;
   } else {
     const authCookie = Cookies.get(settings.auth.ala.authCookieName);
-    return typeof authCookie !== "undefined";
+    return typeof authCookie !== "undefined" && (await getUser() !== null);
   }
 }
 
@@ -152,7 +152,7 @@ export async function getUser(): Promise<User | null> {
   if (userManager === undefined) {
     throw new Error("UserManager is not initialized");
   }
-  return userManager.getUser();
+  return await userManager.getUser();
 }
 
 export async function login(
