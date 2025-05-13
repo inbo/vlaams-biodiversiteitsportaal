@@ -10,8 +10,8 @@
     "build:prod": "tsc && vite build",
     "preview": "vite preview",
     "watch": "tsc && NODE_ENV=development vite build --watch --minify=false",
-    "test": "vitest",
-    "test:ci": "vitest run --reporter=dot --reporter=json --outputFile=../test-output.json"
+    "test": "npm run build && vitest",
+    "test:ci": "npm run build && vitest run --reporter=dot --reporter=json --outputFile=../test-output.json",
   },
   "devDependencies": {
     "@hey-api/openapi-ts": "^0.66.5",
