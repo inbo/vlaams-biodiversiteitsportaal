@@ -5,11 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
-    "build:dev": "tsc && NODE_ENV=development vite build --minify=false",
-    "build:prod": "tsc && vite build",
+    "build": "vite build",
+    "build:dev": "NODE_ENV=development vite build --minify=false",
+    "build:prod": "vite build",
     "preview": "vite preview",
-    "watch": "tsc && NODE_ENV=development vite build --watch --minify=false",
+    "watch": "NODE_ENV=development vite build --watch --minify=false",
     "test": "npm run build && vitest",
     "test:ci": "npm run build && vitest run --reporter=dot --reporter=json --outputFile=../test-output.json"
   },

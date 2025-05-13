@@ -115,8 +115,7 @@ export default {
         {
             name: "generate-openapi-clients",
             apply: "build",
-            enforce: "pre",
-            async buildStart(options) {
+            async buildStart() {
                 (await fg.glob("./src/common/clients/*.yml")).forEach(
                     async (schema) => {
                         const serviceName = basename(schema, ".yml");
@@ -131,6 +130,7 @@ export default {
                         });
                     },
                 );
+                return {};
             },
         },
         // Copy JS libraries, cannot be bundled by Vite because they aren't ES modules
