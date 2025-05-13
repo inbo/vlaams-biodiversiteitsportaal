@@ -6,12 +6,21 @@
     margin-bottom: 2em;
 }
 
+.d-flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2em;
+}
+
 .link-icon {
-    img {
-        width: 4em;
-        aspect-ratio: 1;
-    }
+    flex: 1;
+
     i {
         font-size: 3em;
     }
+}
+
+.content {
+    flex: 11;
 }
