@@ -1,0 +1,33 @@
+location = /userdetails/userDetails/getUserDetails {
+    return 200 '{
+        "id" : 0,
+        "firstName" : "Mockedy",
+        "lastName" : "Mock",
+        "userName" : "mocked-user",
+        "email" : "support.natuurdata@inbo.be",
+        "userId" : "mocked-user",
+        "locked" : false,
+        "activated" : true,
+        "organisation" : "INBO",
+        "city" : "Brussel",
+        "state" : "Brussel",
+        "country" : "België",
+        "roles" : [
+          "ROLE_ADMIN"
+        ],
+        "telephone" : "",
+        "displayName" : "Mocked user"
+      }';
+}
+
+location ^~ /userdetails/userDetails/ {
+    add_header Content-Type application/json;
+    return 404 '{
+        "status" : 404,
+        "error" : "userd",
+      }';
+}
+
+location ~* ^/userdetails.* {
+    return 301 /my-profile.html;
+}
