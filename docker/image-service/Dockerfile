@@ -4,7 +4,7 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 
 ARG VERSION=tiling-image-memory-leak
-ARG COMMIT=768492ed4ce99a48e46f24c329e8ef7cd695f754
+ARG COMMIT=82336bb0695a6acd1a82b6c8591f6f246150eae3
 ARG SOURCE=https://github.com/inbo/image-service.git
 LABEL ala.version=inbo-${COMMIT}
 
