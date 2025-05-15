@@ -40,7 +40,6 @@ target "portal-full" {
     "spatial-hub"                 = "target:spatial-hub"
     "spatial-service"             = "target:spatial-service"
     "species-list"                = "target:species-list"
-    "userdetails"                 = "target:userdetails"
   }
   tags = ["${DOCKER_REPO}/inbo-vbp-portal-full:${TAG}"]
 }
@@ -129,6 +128,7 @@ target "doi-service" {
 target "image-service" {
   context = "./image-service"
   contexts = {
+    "custom-maven" = "target:custom-maven"
     "custom-gradle" = "target:custom-gradle"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-image-service:${CACHE_TAG}"]
@@ -206,15 +206,6 @@ target "species-list" {
   tags = ["${DOCKER_REPO}/inbo-vbp-species-list:${TAG}"]
 }
 
-target "userdetails" {
-  context = "./userdetails"
-  contexts = {
-    "custom-gradle" = "target:custom-gradle"
-  }
-  cache-from = ["${DOCKER_REPO}/inbo-vbp-userdetails:${CACHE_TAG}"]
-  tags = ["${DOCKER_REPO}/inbo-vbp-userdetails:${TAG}"]
-}
-
 group "all" {
   targets = [
     "alerts",
@@ -235,7 +226,6 @@ group "all" {
     "spatial-hub",
     "spatial-service",
     "species-list",
-    "userdetails",
     "portal-full",
   ]
 }
@@ -259,7 +249,6 @@ group "services" {
     "spatial-hub",
     "spatial-service",
     "species-list",
-    "userdetails",
   ]
 }
 
