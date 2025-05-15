@@ -216,15 +216,15 @@ layersService:
   url: "${common.protocol}://${common.domain}/spatial-service"
 
 lists:
-  url: ''
+  url: '/species-list'
   #  TODO: causes the portal-full tomcat to hang at startup, spatial-hub blocks on this
   #        and species-lists is no yet serving any requests
   #  url: "${common.protocol}://${common.domain}/species-list"
   threatenedSpeciesUrl: '/ws/speciesList/?isThreatened=eq:true&isAuthoritative=eq:true'
   invasiveSpeciesUrl: '/ws/speciesList/?isInvasive=eq:true&isAuthoritative=eq:true'
   facets: True
-  migratoryDR: dr1005
-  iconicSpeciesDR: dr781
+  migratoryDR:
+  iconicSpeciesDR:
 
 journalmap:
   url: "https://www.journalmap.org/"
@@ -477,6 +477,9 @@ sandboxSpatial:
 
 ---
 environments:
+  local:
+    lists:
+      url: '' #prevent portal-full from deadlocking at startup
   inbo-dev:
     assets:
       bundle: true
