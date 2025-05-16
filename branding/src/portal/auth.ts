@@ -1,6 +1,7 @@
 import Cookies from "js-cookie";
 import settings from "../settings";
 import { Log, User, UserManager } from "oidc-client-ts";
+import { get } from "lodash";
 
 Log.setLogger(console);
 
@@ -51,6 +52,7 @@ export async function init() {
 
     addAuthButtonClickHandlers();
     await handleAuthCallbacks();
+    await loginIfAuthCookieIsSet();
     await setAuthMenuStatus();
   }
 }
@@ -97,15 +99,29 @@ async function handleAuthCallbacks() {
   }
 }
 
+async function loginIfAuthCookieIsSet() {
+  getUserManagerInstance().events.addSilentRenewError(async (user) => {
+    console.error("Silent renew error", user);
+    clearAlaAuthCookie();
+  });
+  if (
+    typeof Cookies.get(settings.auth.ala.authCookieName) !== "undefined" &&
+    (await getUser() === null)
+  ) {
+    await getUserManagerInstance().signinSilent();
+  }
+}
+
 async function setAuthMenuStatus() {
   const authMenu = document.getElementById("dropdown-auth-menu")!;
 
   if (await isLoggedIn()) {
-    console.debug("Auth cookie present so logged in");
+    console.debug("User is logged in");
+
     authMenu.classList.remove(settings.auth.ala.logoutClass);
     authMenu.classList.add(settings.auth.ala.loginClass);
   } else {
-    console.debug("No auth cookie not present so not-logged in");
+    console.debug("User is logged out");
     authMenu.classList.remove(settings.auth.ala.loginClass);
     authMenu.classList.add(settings.auth.ala.logoutClass);
   }
