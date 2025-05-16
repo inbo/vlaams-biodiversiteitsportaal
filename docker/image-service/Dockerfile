@@ -14,7 +14,7 @@ RUN --mount=type=cache,target=/root/.m2/repository \
      mvn clean package -DskipTests -T 10 -U
 
 ARG VERSION=tiling-image-memory-leak
-ARG COMMIT=4b4f318fe68d392027d600ed0d7b3bb942ff5571
+ARG COMMIT=d1db2021c1baf5c8c16e09751f0e502ef07a5960
 ARG SOURCE=https://github.com/inbo/image-service.git
 LABEL ala.version=inbo-${COMMIT}
 
