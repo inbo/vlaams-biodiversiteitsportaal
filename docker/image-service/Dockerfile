@@ -3,7 +3,7 @@ ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 ARG VERSION=memory-leak-debug
-ARG COMMIT=4f667c9ca21d47db62c5706d730029f2962fe560
+ARG COMMIT=cdcf9e5b1bc5da8b8248bbb2ab0441e1c076525d
 ARG SOURCE=https://github.com/inbo/image-utils.git
 LABEL ala.version=inbo-${COMMIT}
 
