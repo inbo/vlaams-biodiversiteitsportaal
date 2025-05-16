@@ -18,7 +18,7 @@ RUN --mount=type=cache,target=/root/.m2/repository \
 ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 ARG VERSION=tiling-image-memory-leak
-ARG COMMIT=d1db2021c1baf5c8c16e09751f0e502ef07a5960
+ARG COMMIT=33c3e3c14d00914607a8a5b90c8c291d12aa98f0
 ARG SOURCE=https://github.com/inbo/image-service.git
 LABEL ala.version=inbo-${COMMIT}
 
