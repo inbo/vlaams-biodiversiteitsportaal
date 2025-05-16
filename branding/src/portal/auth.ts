@@ -102,7 +102,6 @@ async function handleAuthCallbacks() {
 async function loginIfAuthCookieIsSet() {
   getUserManagerInstance().events.addSilentRenewError(async (user) => {
     console.error("Silent renew error", user);
-    clearAlaAuthCookie();
   });
   if (
     typeof Cookies.get(settings.auth.ala.authCookieName) !== "undefined" &&
