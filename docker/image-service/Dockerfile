@@ -28,8 +28,6 @@ RUN --mount=type=cache,target=/gradle-cache,ro \
     gradle build assetCompile assemble bootJar \
     -x test -x integrationTest
 
-RUN ls -la /project/build/libs/
-
 # Copy dependencies to shared read-only cache
 RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
     rsync -a /home/gradle/.gradle/caches/modules-2 /gradle-cache \
@@ -48,11 +46,11 @@ RUN mkdir -p /opt/atlas/i18n \
 ARG VERSION=4.0.0-SNAPSHOT
 LABEL ala.version=${VERSION}
 
-COPY --from=builder /project/build/libs/image-service-${VERSION}-exec.war /image-service.war
+COPY --from=builder /project/build/libs/image-service-${VERSION}-exec.jar /image-service.jar
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/image-service/actuator/health || exit 1
 
-ENTRYPOINT ["sh", "-c", "java ${JAVA_OPTS} -jar /image-service.war"]
+ENTRYPOINT ["sh", "-c", "java ${JAVA_OPTS} -jar /image-service.jar"]
 
 RUN mkdir /data
 RUN chown 1000:1000 /data
