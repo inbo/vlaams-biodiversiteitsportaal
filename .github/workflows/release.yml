@@ -272,8 +272,8 @@ jobs:
             --set="${COMPONENT}.labels.build_url=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
             --set="${COMPONENT}.labels.git_tag=${GIT_TAG}" \
             --set="${COMPONENT}.labels.git_hash=${{ github.sha }}" \
-            --set="custom-gradle-jdk11.cache-to=type=registry,ref=${DOCKER_REPO}/inbo-vbp-custom-gradle-jdk11:${CACHE_TAG},oci-mediatypes=true,image-manifest=true,mode=max" \
-            --set="custom-gradle-jdk21.cache-to=type=registry,ref=${DOCKER_REPO}/inbo-vbp-custom-gradle-jdk21:${CACHE_TAG},oci-mediatypes=true,image-manifest=true,mode=max" \
+            --set="custom-gradle-jdk11.cache-to=type=registry,ref=${DOCKER_REPO}/inbo-vbp-custom-gradle:jdk11-${CACHE_TAG},oci-mediatypes=true,image-manifest=true,mode=max" \
+            --set="custom-gradle-jdk21.cache-to=type=registry,ref=${DOCKER_REPO}/inbo-vbp-custom-gradle:jdk21-${CACHE_TAG},oci-mediatypes=true,image-manifest=true,mode=max" \
             --set="custom-maven.cache-to=type=registry,ref=${DOCKER_REPO}/inbo-vbp-custom-maven:${CACHE_TAG},oci-mediatypes=true,image-manifest=true,mode=max" \
             --set="${COMPONENT}.cache-to=type=registry,ref=${DOCKER_REPO}/inbo-vbp-${COMPONENT}:${CACHE_TAG},oci-mediatypes=true,image-manifest=true,mode=max"
 

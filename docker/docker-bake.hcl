@@ -12,7 +12,7 @@ variable "DOCKER_REPO" {
 
 target "custom-gradle-jdk11" {
   context = "./gradle"
-  cache-from = ["${DOCKER_REPO}/inbo-vbp-custom-gradle-jdk11:${CACHE_TAG}"]
+  cache-from = ["${DOCKER_REPO}/inbo-vbp-custom-gradle:jdk11-${CACHE_TAG}"]
   tags = ["custom-gradle-jdk11:${TAG}"]
   args = {
     JDK_VERSION = "11"
@@ -21,7 +21,7 @@ target "custom-gradle-jdk11" {
 
 target "custom-gradle-jdk21" {
   context = "./gradle"
-  cache-from = ["${DOCKER_REPO}/inbo-vbp-custom-gradle-jdk21:${CACHE_TAG}"]
+  cache-from = ["${DOCKER_REPO}/inbo-vbp-custom-gradle:jdk21-${CACHE_TAG}"]
   tags = ["custom-gradle-jdk21:${TAG}"]
   args = {
     JDK_VERSION = "21"
