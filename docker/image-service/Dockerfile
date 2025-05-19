@@ -45,7 +45,7 @@ RUN mkdir -p /opt/atlas/i18n \
 ARG VERSION=3.1.0-SNAPSHOT
 LABEL ala.version=${VERSION}
 
-COPY --from=builder /project/build/libs/image-service-${VERSION}.war /image-service.war
+COPY --from=builder /project/build/libs/image-service-${VERSION}-exec.war /image-service.war
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/image-service/actuator/health || exit 1
 
