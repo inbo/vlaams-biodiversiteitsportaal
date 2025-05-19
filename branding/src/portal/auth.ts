@@ -1,7 +1,6 @@
 import Cookies from "js-cookie";
 import settings from "../settings";
 import { Log, User, UserManager } from "oidc-client-ts";
-import { get } from "lodash";
 
 Log.setLogger(console);
 
@@ -102,12 +101,18 @@ async function handleAuthCallbacks() {
 async function loginIfAuthCookieIsSet() {
   getUserManagerInstance().events.addSilentRenewError(async (user) => {
     console.error("Silent renew error", user);
+    // If silent login fails, we need to clear the cookie
+    clearAlaAuthCookie();
   });
   if (
     typeof Cookies.get(settings.auth.ala.authCookieName) !== "undefined" &&
     (await getUser() === null)
   ) {
-    await getUserManagerInstance().signinSilent();
+    await getUserManagerInstance().signinSilent().catch((err) => {
+      console.error("Silent login failed", err);
+      // If silent login fails, we need to clear the cookie
+      clearAlaAuthCookie();
+    });
   }
 }
 
