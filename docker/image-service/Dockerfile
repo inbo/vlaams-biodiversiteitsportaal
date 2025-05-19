@@ -13,9 +13,9 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 #RUN --mount=type=cache,target=/root/.m2/repository \
 #     mvn clean package -DskipTests -T 10 -U
 
-ARG VERSION=develop
-ARG COMMIT=304f09a7c7d93b4abef826aee18d617d0952af69
-ARG SOURCE=https://github.com/AtlasOfLivingAustralia/image-service
+ARG VERSION=trying_latest_version_for_memory_leak_fix
+ARG COMMIT=f735dd2dee946703bcc71310f35d0687755f238c
+ARG SOURCE=https://github.com/inbo/image-service.git
 LABEL ala.version=inbo-${COMMIT}
 
 WORKDIR /project
