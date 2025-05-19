@@ -142,7 +142,6 @@ target "doi-service" {
 target "image-service" {
   context = "./image-service"
   contexts = {
-    "custom-maven" = "target:custom-maven"
     "custom-gradle" = "target:custom-gradle-jdk21"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-image-service:${CACHE_TAG}"]
