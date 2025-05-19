@@ -200,3 +200,7 @@ environments:
     speciesList:
       preferredSpeciesListDruid: dr384
       preferredListName: Preferred Species Images
+  inbo_prod:
+    speciesList:
+      preferredSpeciesListDruid: dr4
+      preferredListName: Preferred Image List

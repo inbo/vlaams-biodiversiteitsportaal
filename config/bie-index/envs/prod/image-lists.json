@@ -3,7 +3,7 @@
     "record_type:Image^10",
     "record_type:HumanObservaton^20",
     "record_type:Observation^20",
-    "data_resource_uid:dr384^500"
+    "data_resource_uid:dr4^500"
   ],
   "preferred": [
     "-record_type:PreservedSpecimen"
@@ -47,7 +47,7 @@
   ],
   "lists": [
     {
-      "uid": "dr384",
+      "uid": "dr4",
       "imageId": "imageId"
     }
   ],

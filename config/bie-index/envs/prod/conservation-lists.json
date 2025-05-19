@@ -3,29 +3,11 @@
   "defaultYearSourceField": "eventDate",
   "lists": [
     {
-      "uid": "drt1739347223262",
-      "field": "threatStatus_VRLF_s",
-      "sourceField": "threatStatus",
-      "yearSourceField": "eventDate",
+      "uid": "dr6",
+      "field": "status",
+      "sourceField": "status",
       "term": "threatStatus",
-      "label": "VRLF"
-    },
-    {
-      "uid": "drt1739347616892",
-      "field": "threatStatus_VRLF_s",
-      "sourceField": "threatStatus",
-      "yearSourceField": "eventDate",
-      "term": "threatStatus",
-      "label": "VRLF"
-    },
-    {
-      "uid": "dr411",
-      "field": "threatStatus_VRLF_s",
-      "sourceField": "threatStatus",
-      "yearSourceField": "eventDate",
-      "term": "threatStatus",
-      "label": "VRLF"
+      "label": "SB"
     }
-
   ]
 }
