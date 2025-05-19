@@ -16,6 +16,7 @@ target "custom-gradle-jdk11" {
   tags = ["custom-gradle-jdk11:${TAG}"]
   args = {
     JDK_VERSION = "11"
+    GRADLE_VERSION = "7"
   }
 }
 
@@ -25,6 +26,7 @@ target "custom-gradle-jdk21" {
   tags = ["custom-gradle-jdk21:${TAG}"]
   args = {
     JDK_VERSION = "21"
+    GRADLE_VERSION = "8"
   }
 }
 
