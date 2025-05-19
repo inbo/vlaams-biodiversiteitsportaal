@@ -10,10 +10,22 @@ variable "DOCKER_REPO" {
   default = "local"
 }
 
-target "custom-gradle" {
+target "custom-gradle-jdk11" {
   context = "./gradle"
   cache-from = ["${DOCKER_REPO}/inbo-vbp-custom-gradle:${CACHE_TAG}"]
   tags = ["custom-gradle:${TAG}"]
+  args = {
+    JDK_VERSION = "11"
+  }
+}
+
+target "custom-gradle-jdk21" {
+  context = "./gradle"
+  cache-from = ["${DOCKER_REPO}/inbo-vbp-custom-gradle:${CACHE_TAG}"]
+  tags = ["custom-gradle:${TAG}"]
+  args = {
+    JDK_VERSION = "21"
+  }
 }
 
 target "custom-maven" {
@@ -47,7 +59,7 @@ target "portal-full" {
 target "alerts" {
   context = "./alerts"
   contexts = {
-    "custom-gradle" = "target:custom-gradle"
+    "custom-gradle" = "target:custom-gradle-jdk11"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-alerts:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-alerts:${TAG}"]
@@ -56,7 +68,7 @@ target "alerts" {
 target "apikey" {
   context = "./apikey"
   contexts = {
-    "custom-gradle" = "target:custom-gradle"
+    "custom-gradle" = "target:custom-gradle-jdk11"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-apikey:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-apikey:${TAG}"]
@@ -65,7 +77,7 @@ target "apikey" {
 target "bie-hub" {
   context = "./bie-hub"
   contexts = {
-    "custom-gradle" = "target:custom-gradle"
+    "custom-gradle" = "target:custom-gradle-jdk11"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-bie-hub:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-bie-hub:${TAG}"]
@@ -74,7 +86,7 @@ target "bie-hub" {
 target "bie-index" {
   context = "./bie-index"
   contexts = {
-    "custom-gradle" = "target:custom-gradle"
+    "custom-gradle" = "target:custom-gradle-jdk11"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-bie-index:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-bie-index:${TAG}"]
@@ -83,7 +95,7 @@ target "bie-index" {
 target "biocache-hub" {
   context = "./biocache-hub"
   contexts = {
-    "custom-gradle" = "target:custom-gradle"
+    "custom-gradle" = "target:custom-gradle-jdk11"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-biocache-hub:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-biocache-hub:${TAG}"]
@@ -92,7 +104,7 @@ target "biocache-hub" {
 target "biocache-service" {
   context = "./biocache-service"
   contexts = {
-    "custom-gradle" = "target:custom-gradle"
+    "custom-gradle" = "target:custom-gradle-jdk11"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-biocache-service:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-biocache-service:${TAG}"]
@@ -101,7 +113,7 @@ target "biocache-service" {
 target "collectory" {
   context = "./collectory"
   contexts = {
-    "custom-gradle" = "target:custom-gradle"
+    "custom-gradle" = "target:custom-gradle-jdk11"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-collectory:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-collectory:${TAG}"]
@@ -110,7 +122,7 @@ target "collectory" {
 target "data-quality-filter-service" {
   context = "./data-quality-filter-service"
   contexts = {
-    "custom-gradle" = "target:custom-gradle"
+    "custom-gradle" = "target:custom-gradle-jdk11"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-data-quality-filter-service:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-data-quality-filter-service:${TAG}"]
@@ -119,7 +131,7 @@ target "data-quality-filter-service" {
 target "doi-service" {
   context = "./doi-service"
   contexts = {
-    "custom-gradle" = "target:custom-gradle"
+    "custom-gradle" = "target:custom-gradle-jdk11"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-doi-service:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-doi-service:${TAG}"]
@@ -129,7 +141,7 @@ target "image-service" {
   context = "./image-service"
   contexts = {
     "custom-maven" = "target:custom-maven"
-    "custom-gradle" = "target:custom-gradle"
+    "custom-gradle" = "target:custom-gradle-jdk21"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-image-service:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-image-service:${TAG}"]
@@ -138,7 +150,7 @@ target "image-service" {
 target "logger" {
   context = "./logger"
   contexts = {
-    "custom-gradle" = "target:custom-gradle"
+    "custom-gradle" = "target:custom-gradle-jdk11"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-logger:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-logger:${TAG}"]
@@ -165,7 +177,7 @@ target "pipelines" {
 target "regions" {
   context = "./regions"
   contexts = {
-    "custom-gradle" = "target:custom-gradle"
+    "custom-gradle" = "target:custom-gradle-jdk11"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-regions:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-regions:${TAG}"]
@@ -182,7 +194,7 @@ target "sensitive-data-service" {
 target "spatial-hub" {
   context = "./spatial-hub"
   contexts = {
-    "custom-gradle" = "target:custom-gradle"
+    "custom-gradle" = "target:custom-gradle-jdk11"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-spatial-hub:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-spatial-hub:${TAG}"]
@@ -191,7 +203,7 @@ target "spatial-hub" {
 target "spatial-service" {
   context = "./spatial-service"
   contexts = {
-    "custom-gradle" = "target:custom-gradle"
+    "custom-gradle" = "target:custom-gradle-jdk11"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-spatial-service:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-spatial-service:${TAG}"]
@@ -200,7 +212,7 @@ target "spatial-service" {
 target "species-list" {
   context = "./species-list"
   contexts = {
-    "custom-gradle" = "target:custom-gradle"
+    "custom-gradle" = "target:custom-gradle-jdk11"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-species-list:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-species-list:${TAG}"]
