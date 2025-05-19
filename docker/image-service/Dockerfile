@@ -20,12 +20,14 @@ LABEL ala.version=${VERSION}
 WORKDIR /project
 RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} /project
 
-COPY build.gradle /project/build.gradle
+#COPY build.gradle /project/build.gradle
 COPY resources.xml ./grails-app/conf/spring/resources.xml
 
 RUN --mount=type=cache,target=/gradle-cache,ro \
-    gradle build assetCompile assemble \
+    gradle build assetCompile assemble bootJar \
     -x test -x integrationTest
+
+RUN ls -la /project/build/libs/
 
 # Copy dependencies to shared read-only cache
 RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
@@ -42,10 +44,10 @@ RUN mkdir -p /opt/atlas/i18n \
   && mkdir -p /var/opt/atlas/i18n \
   && ln -s /config/image-service/i18n/override /var/opt/atlas/i18n/image-service
 
-ARG VERSION=3.1.0-SNAPSHOT
+ARG VERSION=4.0.0-SNAPSHOT
 LABEL ala.version=${VERSION}
 
-COPY --from=builder /project/build/libs/image-service-${VERSION}.war /image-service.war
+COPY --from=builder /project/build/libs/image-service-${VERSION}-exec.war /image-service.war
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/image-service/actuator/health || exit 1
 
