@@ -1,7 +1,5 @@
 # syntax=docker/dockerfile:1.14.0
 ARG BUILDPLATFORM=linux/amd64
-ARG GRADLE_VERSION=7
-ARG JDK_VERSION=11
 FROM --platform=${BUILDPLATFORM} gradle:${GRADLE_VERSION}-jdk${JDK_VERSION}-corretto AS builder
 
 COPY gradle.properties /home/gradle/.gradle/gradle.properties
