@@ -14,7 +14,7 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 #     mvn clean package -DskipTests -T 10 -U
 
 ARG VERSION=trying_latest_version_for_memory_leak_fix
-ARG COMMIT=f0ff84116ebec1d8705e715897d86e4b53a778a5
+ARG COMMIT=f735dd2dee946703bcc71310f35d0687755f238c
 ARG SOURCE=https://github.com/inbo/image-service.git
 LABEL ala.version=inbo-${COMMIT}
 
