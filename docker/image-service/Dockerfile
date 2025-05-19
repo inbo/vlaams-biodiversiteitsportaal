@@ -18,7 +18,7 @@ ARG SOURCE=https://github.com/AtlasOfLivingAustralia/image-service.git
 LABEL ala.version=${VERSION}
 
 WORKDIR /project
-RUN git clone --branch v${VERSION} --depth 1 ${SOURCE} /project
+RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} /project
 
 COPY build.gradle /project/build.gradle
 COPY resources.xml ./grails-app/conf/spring/resources.xml
