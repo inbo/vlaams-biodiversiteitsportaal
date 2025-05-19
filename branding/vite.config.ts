@@ -7,12 +7,11 @@ import { downloadAbvAssets } from "./abv-assets";
 import { console } from "node:inspector";
 
 import fg from "fast-glob";
-import { rename } from "node:fs/promises";
 import { basename, dirname } from "node:path";
 import { createClient, defaultPlugins } from "@hey-api/openapi-ts";
 
 const replacements = {
-    loginStatus: "signedIn",
+    loginStatus: "",
     loginURL: "",
     logoutURL: "",
 };
@@ -156,17 +155,24 @@ export default {
                 resolve(__dirname, "src/index"),
             ],
         }),
-        // Perform tag replacement on the index file to match the ala services
+        // Perform tag replacement on non template html files to match the ala services AlaTagLib erplacements
         {
             name: "AlaTagLibReplacement",
             enforce: "post",
             async transformIndexHtml(html, { path }) {
-                console.log("Transforming HTML for:", path);
                 let result = html;
 
-                console.log("Replacing TagLib entries in HTML for:", path);
-                for (const [key, value] of Object.entries(replacements)) {
-                    result = result.replaceAll(`::${key}::`, value);
+                if (
+                    !["/banner.html", "/footer.html", "head.html"].includes(
+                        path,
+                    )
+                ) {
+                    console.log("Transforming HTML for:", path);
+
+                    console.log("Replacing TagLib entries in HTML for:", path);
+                    for (const [key, value] of Object.entries(replacements)) {
+                        result = result.replaceAll(`::${key}::`, value);
+                    }
                 }
 
                 return result;

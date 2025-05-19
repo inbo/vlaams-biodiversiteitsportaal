@@ -38,7 +38,7 @@ RUN mkdir -p ${CATALINA_HOME}/conf/portal/localhost
 RUN sh -x \
     && mkdir -p /opt/atlas/i18n \
     && mkdir -p /var/opt/atlas/i18n \
-    && for service in alerts apikey bie-index biocache-service collectory doi-service image-service logger regions spatial-hub spatial-service userdetails; do \
+    && for service in alerts apikey bie-index biocache-service collectory doi-service image-service logger regions spatial-hub spatial-service; do \
             ln -s /config/${service}/i18n/crowdin /opt/atlas/i18n/${service}; \
             ln -s /config/${service}/i18n/override /var/opt/atlas/i18n/${service}; \
         done \
@@ -71,6 +71,5 @@ COPY --from=spatial-hub /spatial-hub.war webapps
 COPY --from=spatial-service /spatial-service.war webapps
 COPY --from=spatial-service /opt/vbp /opt/vbp
 COPY --from=species-list /species-list.war webapps
-COPY --from=userdetails /userdetails.war webapps
 
 ENTRYPOINT ["/docker-entrypoint.sh"]

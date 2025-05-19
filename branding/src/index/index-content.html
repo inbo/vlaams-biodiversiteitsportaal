@@ -6,7 +6,8 @@
             <form method="get" action="/bie-hub/search" class="search-form" id="main_biosearch_form" action="#">
                 <div class="input-group">
                     <div class="form-group is-empty">
-                        <input data-i18n="[placeholder]nav.searchbox" id="search"
+                        <input data-i18n="[placeholder]nav.searchbox"
+                            placeholder="Zoeken in soorten, datasets, synoniemen en meer..." id="search"
                             class="form-control ac_input general-search ui-autocomplete-input" type="text"
                             autocomplete="on">
                         <input id="actual-query" type="hidden" name="q">
@@ -29,31 +30,48 @@
     <div class="breakdown">
         <div class="row display-flex justify-content-center">
             <div class="col-md-6 data-summary portal-data-summary">
-                <h3 data-i18n="index.breakdown.portal-data-summary.title"></h3>
+                <h3 data-i18n="index.breakdown.portal-data-summary.title">Het Vlaams Biodiversiteitsportaal</h3>
                 <p data-i18n="index.breakdown.portal-data-summary.content">
+                    Welkom bij het Vlaams Biodiversiteitsportaal, het centrale toegangspunt voor uitgebreide en actuele
+                    informatie over de biodiversiteit in Vlaanderen. Ontdek gedetailleerde gegevens over de
+                    verspreiding, status en trends van planten- en diersoorten, verrijkt met geografische data,
+                    interactieve kaarten en analyses.
+
+                    Dit portaal biedt je een toegankelijke en onderbouwde manier om de biodiversiteit in Vlaanderen te
+                    verkennen en te leren kennen. Bovendien vormt het een essentiële basis voor een robuust en
+                    wetenschappelijk onderbouwd biodiversiteitsbeleid.
                 </p>
                 <div>
                     <a href="/biocache-hub" class="btn btn-primary">
-                        <h4 data-i18n="index.stats.occurrences"></h4>
+                        <h4 data-i18n="index.stats.occurrences">Waarnemingen</h4>
                         <p id="stats_occurrences">0</p>
                     </a>
                     <a href="/bie-hub" class="btn btn-primary">
-                        <h4 data-i18n="index.stats.species"></h4>
+                        <h4 data-i18n="index.stats.species">Soorten</h4>
                         <p id="stats_species">0</p>
                     </a>
                     <a href="/collectory/datasets" class="btn btn-primary">
-                        <h4 data-i18n="index.stats.datasets"></h4>
+                        <h4 data-i18n="index.stats.datasets">Datasets</h4>
                         <p id="stats_datasets">0</p>
                     </a>
                     <a href="/collectory/datasets" class="btn btn-primary">
-                        <h4 data-i18n="index.stats.institutions"></h4>
+                        <h4 data-i18n="index.stats.institutions">Organisaties</h4>
                         <p id="stats_institutions">0</p>
                     </a>
                 </div>
             </div>
             <div class="col-md-6 data-summary our-data">
-                <h3 data-i18n="index.breakdown.our-data.title"></h3>
+                <h3 data-i18n="index.breakdown.our-data.title">Onze Biodiversiteitsdata</h3>
                 <p data-i18n="index.breakdown.our-data.content">
+                    Deze data wordt verzameld en geverifieerd door een netwerk van wetenschappers, natuurbeschermers en
+                    vrijwilligers, waardoor een betrouwbare en actuele bron van informatie ontstaat.
+
+                    Het portaal werkt nauw samen met de Global Biodiversity Information Facility (GBIF), een wereldwijd
+                    netwerk dat vrije toegang biedt tot biodiversiteitsgegevens van over de hele wereld. Door gegevens
+                    uit Vlaanderen te delen met GBIF, draagt het Vlaams Biodiversiteitsportaal bij aan een groter,
+                    mondiaal begrip van biodiversiteit en helpt het bij het bevorderen van wereldwijde inspanningen voor
+                    natuurbescherming en duurzaam beheer van natuurlijke hulpbronnen. Deze samenwerking zorgt ervoor dat
+                    de data uit Vlaanderen niet alleen lokaal, maar ook internationaal impact heeft.
                 </p>
             </div>
         </div>
@@ -62,15 +80,16 @@
         <div class="container">
             <div class="col-md-6 contact-block">
                 <div class="title" data-i18n="index.footer.contact.title">
+                    Instituut Natuur- en Bosonderzoek
                 </div>
                 <address>
                     <p>
-                        <strong data-i18n="index.footer.contact.main-seat-title"></strong><br>
+                        <strong data-i18n="index.footer.contact.main-seat-title">Hoofdzetel</strong><br>
                         Herman Teirlinckgebouw<br>Havenlaan 88, B-1000 Brussel<br><br>
-                        <strong data-i18n="index.footer.contact.postal-adress-title"></strong><br>
+                        <strong data-i18n="index.footer.contact.postal-adress-title">Postadres</strong><br>
                         Koning Albert II-laan 15 bus 186, B-1210 Brussel<br><br>
                     <div class="phone">
-                        <strong data-i18n="index.footer.contact.telephone"></strong><br><a
+                        <strong data-i18n="index.footer.contact.telephone">Telefoon</strong><br><a
                             href="tel:+32 2 430 26 37">+32 2
                             430 26
                             37</a>
@@ -78,7 +97,7 @@
                     </p>
                 </address>
                 <div>
-                    <strong data-i18n="index.footer.contact.social"></strong><br>
+                    <strong data-i18n="index.footer.contact.social">Sociale media</strong><br>
                     <ul class="socials">
                         <li class="socials-item">
                             <a href="https://www.facebook.com/INBOVlaanderen/" target="_blank">
@@ -120,24 +139,25 @@
             </div>
             <div class="col-md-6 over-inbo">
                 <div class="title" data-i18n="index.footer.about-inbo.title">
+                    Over INBO
                 </div>
-                <p data-i18n="index.footer.about-inbo.content"></p>
+                <p data-i18n="index.footer.about-inbo.content">Het INBO is het onafhankelijk onderzoeksinstituut van de
+                    Vlaamse overheid dat via toegepast wetenschappelijk onderzoek, data- en kennisontsluiting het
+                    biodiversiteitsbeleid en -beheer onderbouwt en evalueert.</p>
                 <ul class="links">
                     <li>
                         <a target="_self" href="https://www.vlaanderen.be/inbo/over-ons/"
-                            data-i18n="index.footer.about-inbo.about-us"></a>
+                            data-i18n="index.footer.about-inbo.about-us">Over ons</a>
                     </li>
                     <li>
                         <a target="_self" href="https://www.vlaanderen.be/inbo/inbo/contacteer-inbo/"
-                            data-i18n="index.footer.about-inbo.contact-us"></a>
+                            data-i18n="index.footer.about-inbo.contact-us">Contacteer ons</a>
                     </li>
                 </ul>
-
             </div>
         </div>
     </div>
 </div>
-
 
 <script type="module" type="text/javascript">
     import { isLoggedIn } from "{{ resolve-from-root 'portal/auth.ts' }}";

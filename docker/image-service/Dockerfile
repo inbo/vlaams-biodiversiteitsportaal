@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1.14.0
 ARG BUILDPLATFORM=linux/amd64
-FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
+FROM --platform=${BUILDPLATFORM} custom-maven AS image-utils-builder
 
 #ARG VERSION=memory-leak-debug
 #ARG COMMIT=cdcf9e5b1bc5da8b8248bbb2ab0441e1c076525d
@@ -22,6 +22,8 @@ RUN git clone --branch v${VERSION} --depth 1 ${SOURCE} /project
 
 COPY build.gradle /project/build.gradle
 COPY resources.xml ./grails-app/conf/spring/resources.xml
+
+COPY --from=image-utils-builder /.m2/repository /root/.m2/repository
 
 RUN --mount=type=cache,target=/gradle-cache,ro \
     gradle build assetCompile assemble \

@@ -12,13 +12,12 @@ Log.setLogger(console);
  * This logic is part of the ala-security project.
  */
 
-let userManager: UserManager | undefined = undefined;
-
 $(async () => {
   await init();
 });
 
-async function init() {
+let userManager: UserManager | undefined = undefined;
+export function getUserManagerInstance() {
   if (!userManager) {
     console.debug("Initializing OIDC UserManager");
     const redirectUrl = getCurrentUrl();
@@ -38,11 +37,21 @@ async function init() {
       //       }),
       automaticSilentRenew: true,
     });
-    userManager.events.addAccessTokenExpired(function () {
+  }
+  return userManager;
+}
+
+let initialized = false;
+export async function init() {
+  if (!initialized) {
+    initialized = true;
+    getUserManagerInstance().events.addAccessTokenExpired(function () {
       clearAlaAuthCookie();
     });
+
     addAuthButtonClickHandlers();
-    await handleAuthCallbacks(userManager);
+    await handleAuthCallbacks();
+    await loginIfAuthCookieIsSet();
     await setAuthMenuStatus();
   }
 }
@@ -70,29 +79,40 @@ function addAuthButtonClickHandlers() {
   }
 }
 
-async function handleAuthCallbacks(userManager: UserManager) {
+async function handleAuthCallbacks() {
   const urlParams = new URLSearchParams(window.location.search);
 
-  console.log("HANDLE AUTH CALLBACKS");
-
   if (urlParams.get("login")) {
-    console.trace("HANDLE AUTH CALLBACKS - LOGIN");
-
-    const user = await userManager.signinCallback();
+    const user = await getUserManagerInstance().signinCallback();
     if (!user) {
-      console.trace("User not found after login");
       return;
     }
     setAlaAuthCookie(user);
 
     window.history.pushState(null, document.title, getCurrentUrl());
   } else if (urlParams.get("logout")) {
-    console.trace("HANDLE AUTH CALLBACKS - LOGOUT");
-
-    await userManager.signoutCallback();
+    await getUserManagerInstance().signoutCallback();
     clearAlaAuthCookie();
 
     window.history.pushState(null, document.title, getCurrentUrl());
+  }
+}
+
+async function loginIfAuthCookieIsSet() {
+  getUserManagerInstance().events.addSilentRenewError(async (user) => {
+    console.error("Silent renew error", user);
+    // If silent login fails, we need to clear the cookie
+    clearAlaAuthCookie();
+  });
+  if (
+    typeof Cookies.get(settings.auth.ala.authCookieName) !== "undefined" &&
+    (await getUser() === null)
+  ) {
+    await getUserManagerInstance().signinSilent().catch((err) => {
+      console.error("Silent login failed", err);
+      // If silent login fails, we need to clear the cookie
+      clearAlaAuthCookie();
+    });
   }
 }
 
@@ -100,11 +120,12 @@ async function setAuthMenuStatus() {
   const authMenu = document.getElementById("dropdown-auth-menu")!;
 
   if (await isLoggedIn()) {
-    console.debug("Auth cookie present so logged in");
+    console.debug("User is logged in");
+
     authMenu.classList.remove(settings.auth.ala.logoutClass);
     authMenu.classList.add(settings.auth.ala.loginClass);
   } else {
-    console.debug("No auth cookie not present so not-logged in");
+    console.debug("User is logged out");
     authMenu.classList.remove(settings.auth.ala.loginClass);
     authMenu.classList.add(settings.auth.ala.logoutClass);
   }
@@ -147,35 +168,28 @@ export async function isLoggedIn() {
   // The cookie can be late to update
   const currentUrl = new URL(window.location.href);
   if (currentUrl.searchParams.get("login")) {
-    return (await getUser() !== null);
+    return true;
   } else if (currentUrl.searchParams.get("logout")) {
     return false;
   } else {
     const authCookie = Cookies.get(settings.auth.ala.authCookieName);
-    return typeof authCookie !== "undefined" && (await getUser() !== null);
+    const result = typeof authCookie !== "undefined" &&
+      (await getUser() !== null);
+    return result;
   }
 }
 
 export async function getUser(): Promise<User | null> {
-  if (userManager === undefined) {
-    throw new Error("UserManager is not initialized");
-  }
-  return await userManager.getUser();
+  return await getUserManagerInstance().getUser();
 }
 
 export async function login(
   extraQueryParams: Record<string, string | number | boolean> | undefined =
     undefined,
 ) {
-  if (userManager === undefined) {
-    throw new Error("UserManager is not initialized");
-  }
-  await userManager.signinRedirect({ extraQueryParams });
+  await getUserManagerInstance().signinRedirect({ extraQueryParams });
 }
 
 export async function logout() {
-  if (userManager === undefined) {
-    throw new Error("UserManager is not initialized");
-  }
-  await userManager.signoutRedirect();
+  await getUserManagerInstance().signoutRedirect();
 }

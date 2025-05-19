@@ -45,126 +45,100 @@
 
     <div id="profile-overview" class="container-fluid hidden">
         <div class="row">
-            <div class="col-lg-12">
-                <h1><span data-i18n="my-profile.hello">Hallo</span> <span id="user-greeting-name">Stefan</span>!</h1>
-
-            </div>
-            <div id="my-roles" class="row">
-                <span data-i18n="my-profile.roles">Rollen:</span>
-            </div>
+            <h1><span data-i18n="my-profile.hello">Hallo</span> <span id="user-greeting-name">Stefan</span>!</h1>
+        </div>
+        <div id="my-roles" class="row">
+            <span data-i18n="my-profile.roles">Rollen:</span>
         </div>
         <div class="row">
-            <!-- Column 1 -->
-            <div class="col-lg-4">
-                <div class="d-flex">
-                    <div class="link-icon">
-                        <i class="fa-solid fa-user"></i>
-                    </div>
-                    <div class="content">
-                        <h4 id="update-your-details">
-                            <a id="update-profile-details" href="" data-i18n="my-profile.update-details">
-                                Werk mijn gegevens bij
-                            </a>
-                        </h4>
-                        <p data-i18n="my-profile.update-details-description">Werk je e-mailadres, organisatie en
-                            contactgegevens bij.</p>
-                    </div>
-                </div>
-                <div class="d-flex">
-                    <div class="link-icon">
-                        <i class="fa-solid fa-lock"></i>
-                    </div>
-                    <div class="content">
-                        <h4 id="reset-your-password">
-                            <a id="update-password" href="" data-i18n="my-profile.update-password">
-                                Verander mijn wachtwoord
-                            </a>
-                        </h4>
-                        <p data-i18n="my-profile.update-password-description">Verander je VBP-wachtwoord.</p>
-                    </div>
-                </div>
 
+            <div class="col-md-4 profile-item">
+                <div class="link-icon">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <div class="content">
+                    <h4 id="update-your-details">
+                        <a id="update-profile-details" href="" data-i18n="my-profile.update-details">
+                            Werk mijn gegevens bij
+                        </a>
+                    </h4>
+                    <p data-i18n="my-profile.update-details-description">Werk je e-mailadres, organisatie en
+                        contactgegevens bij.</p>
+                </div>
+            </div>
 
-                <div class="d-flex admin-tooling hidden">
-                    <div class="link-icon">
-                        <i class="fa-solid fa-cog"></i>
-                    </div>
-                    <div class="content">
-                        <h4 id="admin-tools">
-                            <a href="/userdetails/admin" data-i18n="my-profile.admin-tools">
-                                Beheertools
-                            </a>
-                        </h4>
-                        <p data-i18n="my-profile.admin-tools-description">Beheertools voor het VBP.</p>
-                    </div>
+            <div class="col-md-4 profile-item">
+                <div class="link-icon">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                <div class="content">
+                    <h4 id="reset-your-password">
+                        <a id="update-password" href="" data-i18n="my-profile.update-password">
+                            Verander mijn wachtwoord
+                        </a>
+                    </h4>
+                    <p data-i18n="my-profile.update-password-description">Verander je VBP-wachtwoord.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4 profile-item">
+                <div class="link-icon">
+                    <i class="fa-solid fa-clipboard-list"></i>
+                </div>
+                <div class="content">
+                    <h4 id="species-lists">
+                        <a href="/species-list/speciesList/list" data-i18n="my-profile.species-lists">
+                            Mijn soortenlijsten
+                        </a>
+                    </h4>
+                    <p data-i18n="my-profile.species-lists-description">Bekijk soortenlijsten en kenmerken die je
+                        hebt geüpload of bewerkt in het VBP.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4 profile-item">
+                <div class="link-icon">
+                    <i class="fa-solid fa-pencil"></i>
+                </div>
+                <div class="content">
+                    <h4 id="records-annotated">
+                        <a id="my-annotated-records" href="" data-i18n="my-profile.annotated-records">
+                            Mijn recordannotaties
+                        </a>
+                    </h4>
+                    <p data-i18n="my-profile.annotated-records-description">Bekijk records die je hebt geannoteerd,
+                        waarin je problemen met geospatiale informatie of taxonomie hebt aangegeven.</p>
                 </div>
 
             </div>
 
-            <!-- Column 2 -->
-            <div class="col-lg-4">
-                <div class="d-flex">
-                    <div class="link-icon">
-                        <i class="fa-solid fa-clipboard-list"></i>
-                    </div>
-                    <div class="content">
-                        <h4 id="species-lists">
-                            <a href="/species-list/speciesList/list" data-i18n="my-profile.species-lists">
-                                Mijn soortenlijsten
-                            </a>
-                        </h4>
-                        <p data-i18n="my-profile.species-lists-description">Bekijk soortenlijsten en kenmerken die je
-                            hebt geüpload of bewerkt in het VBP.</p>
-                    </div>
+            <div class="col-md-4 profile-item">
+                <div class="link-icon">
+                    <i class="fa-solid fa-envelope"></i>
                 </div>
-                <div class="d-flex">
-                    <div class="link-icon">
-                        <i class="fa-solid fa-pencil"></i>
-                    </div>
-                    <div class="content">
-                        <h4 id="records-annotated">
-                            <a id="my-annotated-records" href="" data-i18n="my-profile.annotated-records">
-                                Mijn recordannotaties
-                            </a>
-                        </h4>
-                        <p data-i18n="my-profile.annotated-records-description">Bekijk records die je hebt geannoteerd,
-                            waarin je problemen met geospatiale informatie of taxonomie hebt aangegeven.</p>
-                    </div>
+                <div class="content">
+                    <h4 id="my-alerts">
+                        <a href="/alerts" data-i18n="my-profile.alerts">
+                            Mijn meldingen
+                        </a>
+                    </h4>
+                    <p data-i18n="my-profile.alerts-description">Werk je meldingsinstellingen bij voor de e-mails
+                        die je van het VBP ontvangt.</p>
                 </div>
-
             </div>
 
-            <!-- Column 3 -->
-            <div class="col-lg-4">
-                <div class="d-flex">
-                    <div class="link-icon">
-                        <i class="fa-solid fa-envelope"></i>
-                    </div>
-                    <div class="content">
-                        <h4 id="my-alerts">
-                            <a href="/alerts" data-i18n="my-profile.alerts">
-                                Mijn meldingen
-                            </a>
-                        </h4>
-                        <p data-i18n="my-profile.alerts-description">Werk je meldingsinstellingen bij voor de e-mails
-                            die je van het VBP ontvangt.</p>
-                    </div>
+            <div class="col-md-4 profile-item">
+                <div class="link-icon">
+                    <i class="fa-solid fa-map"></i>
                 </div>
-
-
-                <div class="d-flex">
-                    <div class="link-icon">
-                        <i class="fa-solid fa-map"></i>
-                    </div>
-                    <div class="content">
-                        <h4 id="spatial-portal">
-                            <a href="/spatial-hub?tool=log" data-i18n="my-profile.spatial-analysis">
-                                Mijn analyses
-                            </a>
-                        </h4>
-                        <p data-i18n="my-profile.spatial-analysis-description">Tabuleer en grafieken voor alle functies
-                            die je hebt gebruikt in het Spatial Portal.</p>
-                    </div>
+                <div class="content">
+                    <h4 id="spatial-portal">
+                        <a href="/spatial-hub?tool=log" data-i18n="my-profile.spatial-analysis">
+                            Mijn analyses
+                        </a>
+                    </h4>
+                    <p data-i18n="my-profile.spatial-analysis-description">Tabuleer en grafieken voor alle functies
+                        die je hebt gebruikt in het Spatial Portal.</p>
                 </div>
             </div>
         </div>

@@ -76,8 +76,4 @@ for lang in ${LANGUAGES}; do
   crowdin file download -l ${lang} --project-id=${PROJECT_ID} --token="${CROWDIN_TOKEN}" specieslist-webapp/messages.properties -d ./config/species-list/i18n/crowdin
   mv ./config/species-list/i18n/crowdin/messages.properties ./config/species-list/i18n/crowdin/messages_${lang//-/_}.properties
 
-  # userdetails
-  crowdin file download -l ${lang} --project-id=${PROJECT_ID} --token="${CROWDIN_TOKEN}" userdetails/messages.properties -d ./config/userdetails/i18n/crowdin
-  mv ./config/userdetails/i18n/crowdin/messages.properties ./config/userdetails/i18n/crowdin/messages_${lang//-/_}.properties
-
 done
