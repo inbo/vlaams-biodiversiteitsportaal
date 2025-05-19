@@ -2,26 +2,25 @@
 ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
-ARG VERSION=memory-leak-debug
-ARG COMMIT=cdcf9e5b1bc5da8b8248bbb2ab0441e1c076525d
-ARG SOURCE=https://github.com/inbo/image-utils.git
-LABEL ala.version=inbo-${COMMIT}
+#ARG VERSION=memory-leak-debug
+#ARG COMMIT=cdcf9e5b1bc5da8b8248bbb2ab0441e1c076525d
+#ARG SOURCE=https://github.com/inbo/image-utils.git
+#LABEL ala.version=inbo-${COMMIT}
+#
+#WORKDIR /project/image-utils
+#RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
+#
+#RUN --mount=type=cache,target=/root/.m2/repository \
+#     mvn clean package -DskipTests -T 10 -U
 
-WORKDIR /project/image-utils
-RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
+ARG VERSION=develop
+ARG SOURCE=https://github.com/AtlasOfLivingAustralia/image-service.git
+LABEL ala.version=${VERSION}
 
-RUN --mount=type=cache,target=/root/.m2/repository \
-     mvn clean package -DskipTests -T 10 -U
+WORKDIR /project
+RUN git clone --branch v${VERSION} --depth 1 ${SOURCE} /project
 
-ARG VERSION=tiling-image-memory-leak
-ARG COMMIT=33c3e3c14d00914607a8a5b90c8c291d12aa98f0
-ARG SOURCE=https://github.com/inbo/image-service.git
-LABEL ala.version=inbo-${COMMIT}
-
-WORKDIR /project/image-service
-RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} .
-
-COPY build.gradle /project/image-service/build.gradle
+COPY build.gradle /project/build.gradle
 COPY resources.xml ./grails-app/conf/spring/resources.xml
 
 RUN --mount=type=cache,target=/gradle-cache,ro \
@@ -33,7 +32,7 @@ RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
     rsync -a /home/gradle/.gradle/caches/modules-2 /gradle-cache \
     && rm /gradle-cache/modules-2/*.lock && rm /gradle-cache/modules-2/gc.properties
 
-FROM amazoncorretto:11
+FROM amazoncorretto:21
 
 # Default based on repo structure, can be overridden at runtime
 ENV SPRING_CONFIG_ADDITIONAL-LOCATION="file:/config/common/common.yml,file:/config/image-service/image-service.yml"
@@ -46,7 +45,7 @@ RUN mkdir -p /opt/atlas/i18n \
 ARG VERSION=3.1.0-SNAPSHOT
 LABEL ala.version=${VERSION}
 
-COPY --from=builder /project/image-service/build/libs/image-service-${VERSION}.war /image-service.war
+COPY --from=builder /project/build/libs/image-service-${VERSION}.war /image-service.war
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/image-service/actuator/health || exit 1
 
