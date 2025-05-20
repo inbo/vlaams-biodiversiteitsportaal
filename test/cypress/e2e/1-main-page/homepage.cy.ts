@@ -28,40 +28,21 @@ describe("Visit the homepage", () => {
         // .first().should("contain.text", "pica pica"); // Closest match is in the middle??
     });
 
-    it("Shows a picture carousel that can be navigated", () => {
-        cy.get("[data-carousel-active]")
-            .invoke("css", "background-image").then((initialBgImage) => {
-                // Check if the background image is set
-                expect(initialBgImage).to.not.equal("none");
-                // Check if the background image URL is not empty
-
-                cy.get(".vbp-picture-carousel-button-prev")
-                    .click()
-                    .then(() => {
-                        cy.get("[data-carousel-active]")
-                            .invoke("css", "background-image").then(
-                                (newBgImage) => {
-                                    expect(newBgImage).to.not.equal("none");
-                                    expect(newBgImage).to.not.equal(
-                                        initialBgImage,
-                                    );
-                                },
-                            );
-                    });
-            });
-
-        cy.get("[data-carousel-active]")
-            .invoke("css", "background-image")
-            .should("not.equal", "none")
-            .then((initialBgImage) => {
-                cy.get(".vbp-picture-carousel-button-next")
-                    .click()
-                    .then(() => {
-                        cy.get("[data-carousel-active]")
-                            .invoke("css", "background-image")
-                            .should("not.equal", "none")
-                            .should("not.equal", initialBgImage);
-                    });
-            });
-    });
+    ["prev", "next"].forEach((value) =>
+        it(`Shows a picture carousel that can be navigated using ${value} button`, () => {
+            cy.get("[data-carousel-active]")
+                .invoke("css", "background-image")
+                .should("not.equal", "none")
+                .then((initialBgImage) => {
+                    cy.get(`.vbp-picture-carousel-button-${value}`)
+                        .click()
+                        .then(() => {
+                            cy.get("[data-carousel-active]")
+                                .invoke("css", "background-image")
+                                .should("not.equal", "none")
+                                .should("not.equal", initialBgImage);
+                        });
+                });
+        })
+    );
 });

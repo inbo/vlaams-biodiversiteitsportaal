@@ -32,3 +32,19 @@ jobs:
         with:
           working-directory: ./test
           config: baseUrl=${{ github.event.inputs.host }}
+
+      - uses: actions/upload-artifact@v4
+        # add the line below to store screenshots only on failures
+        # if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+          if-no-files-found: ignore # 'warn' or 'error' are also available, defaults to `warn`
+          retention-days: 5
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cypress-videos
+          path: cypress/videos
+          if-no-files-found: ignore # 'warn' or 'error' are also available, defaults to `warn`
+          retention-days: 5
+
