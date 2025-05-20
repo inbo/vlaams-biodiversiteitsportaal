@@ -45,4 +45,10 @@ describe("Visit the homepage", () => {
                 });
         })
     );
+
+    it("Fail", () => {
+        cy.get("[data-carousel-active]").should("be.visible")
+            .invoke("css", "background-image").should("not.equal", "none");
+        cy.fail("This test is not implemented yet");
+    });
 });

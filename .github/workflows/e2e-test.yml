@@ -46,3 +46,12 @@ jobs:
           if-no-files-found: ignore # 'warn' or 'error' are also available, defaults to `warn`
           retention-days: 5
 
+      - name: Notify Google Chat
+        if: failure()
+        uses: SimonScholz/google-chat-action@v1.1.0
+        with:
+          webhookUrl: '${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}'
+          createDefaultSection: false
+          collapsibleDefaultSection: false
+          title: e2e tests failed @ ${{ github.event.inputs.host }}
+          subtitle: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
