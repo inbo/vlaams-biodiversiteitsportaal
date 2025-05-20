@@ -4,7 +4,7 @@ Simple python program that crops a given grid layer to the bounds of the Flemish
 It outputs every band as a separate Esri HDR file, ready for upload through the spatial-service admin UI.
 
 Arguments:
-- 'filename': the path to the input file
+- 'filenames': the paths to the input files, can be one or more
 - 'output_dir': the path to the output directory (default = ./output)
 
 for example:

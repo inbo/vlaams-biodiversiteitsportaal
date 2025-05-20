@@ -20,7 +20,8 @@ BBOX_VLAANDEREN = (
 
 def process_grid(filename: str, output_folder: str):
     output_converted_folder = os.path.join(output_folder, Path(filename).stem)
-    mkdir(output_converted_folder)
+    if not os.path.exists(output_converted_folder):
+        mkdir(output_converted_folder)
 
     with(zipfile.ZipFile(filename, "r")) as zip_ref:
         with tempfile.TemporaryDirectory() as tmpdirname:
@@ -57,8 +58,10 @@ def crop_and_covert(filename: str, output_folder: str):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(prog='Convert GIS layers')
-    parser.add_argument('filename')
-    parser.add_argument('-o', '--output', default="./output")
+    parser.add_argument('filenames', nargs='*', help='Input files')
+    parser.add_argument('-o', '--output', default="./output", help='Output folder')
     args = parser.parse_args()
 
-    process_grid(args.filename, args.output)
+    for input_file in args.filenames:
+        LOGGER.info(f"Processing {input_file}")
+        process_grid(input_file, args.output)

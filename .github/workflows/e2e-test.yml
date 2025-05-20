@@ -1,0 +1,34 @@
+name: Run E2E tests against the VBP portal
+run-name: ${{ github.actor }} is testing the VBP portal @ ${{ github.event.inputs.host }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      host:
+        description: 'Host endpoint to test'
+        required: true
+        default: 'https://natuurdata.inbo.be'
+        type: choice
+        options:
+        - 'https://natuurdata.dev.inbo.be'
+        - 'https://natuurdata.uat.inbo.be'
+        - 'https://natuurdata.inbo.be'
+jobs:
+  e2e-test:
+    runs-on: [ self-hosted ]
+    container:
+      image: cypress/browsers:22.15.0
+      options: --user 1001
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        env:
+          CYPRESS_VBP_USERNAME: ${{ secrets.CYPRESS_VBP_USERNAME }}
+          CYPRESS_VBP_PASSWORD: ${{ secrets.CYPRESS_VBP_PASSWORD }}
+        with:
+          working-directory: ./test
+          config: baseUrl=${{ github.event.inputs.host }}
