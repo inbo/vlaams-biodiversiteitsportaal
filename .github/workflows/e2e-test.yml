@@ -21,8 +21,6 @@ jobs:
       options: --user 1001
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Cypress run
         uses: cypress-io/github-action@v6
