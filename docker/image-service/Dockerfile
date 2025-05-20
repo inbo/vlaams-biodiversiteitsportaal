@@ -2,26 +2,14 @@
 ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
-#ARG VERSION=memory-leak-debug
-#ARG COMMIT=cdcf9e5b1bc5da8b8248bbb2ab0441e1c076525d
-#ARG SOURCE=https://github.com/inbo/image-utils.git
-#LABEL ala.version=inbo-${COMMIT}
-#
-#WORKDIR /project/image-utils
-#RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
-#
-#RUN --mount=type=cache,target=/root/.m2/repository \
-#     mvn clean package -DskipTests -T 10 -U
-
-ARG VERSION=trying_latest_version_for_memory_leak_fix
-ARG COMMIT=f735dd2dee946703bcc71310f35d0687755f238c
-ARG SOURCE=https://github.com/inbo/image-service.git
+ARG VERSION=develop
+ARG COMMIT=304f09a7c7d93b4abef826aee18d617d0952af69
+ARG SOURCE=https://github.com/AtlasOfLivingAustralia/image-service.git
 LABEL ala.version=inbo-${COMMIT}
 
 WORKDIR /project
 RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} /project
 
-#COPY build.gradle /project/build.gradle
 COPY resources.xml ./grails-app/conf/spring/resources.xml
 
 RUN --mount=type=cache,target=/gradle-cache,ro \
