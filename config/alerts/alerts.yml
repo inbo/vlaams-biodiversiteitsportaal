@@ -78,7 +78,7 @@ userdetails:
 
 useSpeciesListsAlerts: true
 useSpatialAlerts: true
-useBlogsAlerts: true
+useBlogsAlerts: false
 useCitizenScienceAlerts: true
 biosecurity:
   cronExpression: '0 30 9 ? * WED'
