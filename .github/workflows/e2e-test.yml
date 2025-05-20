@@ -2,7 +2,8 @@ name: Run E2E tests against the VBP portal
 run-name: ${{ github.actor }} is testing the VBP portal @ ${{ github.event.inputs.host }}
 
 on:
-  cron: '0 5 * * 1-5'
+  schedule:
+    - cron: '0 5 * * 1-5'
   workflow_dispatch:
     inputs:
       host:
