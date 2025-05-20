@@ -51,23 +51,16 @@ describe("Visit the homepage", () => {
             });
 
         cy.get("[data-carousel-active]")
-            .invoke("css", "background-image").then((initialBgImage) => {
-                // Check if the background image is set
-                expect(initialBgImage).to.not.equal("none");
-                // Check if the background image URL is not empty
-
+            .invoke("css", "background-image")
+            .should("not.equal", "none")
+            .then((initialBgImage) => {
                 cy.get(".vbp-picture-carousel-button-next")
                     .click()
                     .then(() => {
                         cy.get("[data-carousel-active]")
-                            .invoke("css", "background-image").then(
-                                (newBgImage) => {
-                                    expect(newBgImage).to.not.equal("none");
-                                    expect(newBgImage).to.not.equal(
-                                        initialBgImage,
-                                    );
-                                },
-                            );
+                            .invoke("css", "background-image")
+                            .should("not.equal", "none")
+                            .should("not.equal", initialBgImage);
                     });
             });
     });
