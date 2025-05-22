@@ -84,6 +84,8 @@ ownerVisibleToEditor: false
 publicview:
   hidePrivateLists: true
 
+maxItemsPerPage: 25
+
 serverName: ${common.protocol}://${common.domain}/species-list
 serverURL: ${common.protocol}://${common.domain}/species-list
 skin:
