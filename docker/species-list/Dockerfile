@@ -3,7 +3,7 @@ ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 ARG VERSION=develop-vbp
-ARG COMMIT=766c982fc6df6150345bf8f18255a8fbb7f468cb
+ARG COMMIT=101dc77150788cefd886a83adb5f7940b6db6bd4
 ARG SOURCE=https://github.com/inbo/specieslist-webapp.git
 LABEL ala.version=inbo-${COMMIT}
 
