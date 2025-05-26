@@ -126,7 +126,7 @@ jobs:
                       "widgets": [
                         {
                           "decoratedText": {
-                            "text": "$GITHUB_STEP_SUMMARY"
+                            "text": "$(cat $GITHUB_STEP_SUMMARY)"
                           }
                         }
                       ]
