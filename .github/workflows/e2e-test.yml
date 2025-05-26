@@ -126,7 +126,7 @@ jobs:
                       "widgets": [
                         {
                           "decoratedText": {
-                            "text": "$(cat $GITHUB_STEP_SUMMARY)"
+                            "text": "$(cat ./google-chat-report.md)"
                           }
                         }
                       ]

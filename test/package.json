@@ -1,6 +1,7 @@
 {
   "devDependencies": {
     "cypress": "^14.3.3",
+    "cypress-multi-reporters": "^2.0.5",
     "typescript": "^5.8.3"
   }
 }
