@@ -51,7 +51,8 @@ jobs:
         run: |
           wget \
           --header="Content-Type: application/json" \
-          --post-data '{
+          --post-data <<EOF "$GOOGLE_CHAT_WEBHOOK_URL"
+          {
             "cardsV2": [
               {
                 "card": {
@@ -136,4 +137,5 @@ jobs:
                 }
               }
             ]
-          }' "$GOOGLE_CHAT_WEBHOOK_URL"
+          }
+          EOF
