@@ -49,10 +49,7 @@ jobs:
         env:
           GOOGLE_CHAT_WEBHOOK_URL: ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
         run: |
-          wget \
-          --header="Content-Type: application/json" \
-          --post-file=@<<EOF \
-          "$GOOGLE_CHAT_WEBHOOK_URL"
+          cat <<EOF > google-chat.json
           {
             "cardsV2": [
               {
@@ -140,3 +137,8 @@ jobs:
             ]
           }
           EOF
+
+          wget \
+          --header="Content-Type: application/json" \
+          --post-file=./google-chat.json \
+          "$GOOGLE_CHAT_WEBHOOK_URL"
