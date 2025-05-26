@@ -140,4 +140,5 @@ jobs:
 
           wget \
           --header="Content-Type: application/json" \
-          --post-file=google-chat.json
+          --post-file=google-chat.json \
+          "$GOOGLE_CHAT_WEBHOOK_URL"
