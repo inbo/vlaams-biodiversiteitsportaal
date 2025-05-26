@@ -124,13 +124,7 @@ jobs:
                         }
                       },
                       "uncollapsibleWidgetsCount": 1,
-                      "widgets": [
-                        {
-                          "decoratedText": {
-                            "text": "$(cat ./test/test-results.md)"
-                          }
-                        }
-                      ]
+                      "widgets": $(cat ./test/test-results.md)
                     }
                   ]
                 }
