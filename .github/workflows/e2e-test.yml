@@ -12,9 +12,9 @@ on:
         default: 'https://natuurdata.inbo.be'
         type: choice
         options:
-        - 'https://natuurdata.dev.inbo.be'
-        - 'https://natuurdata.uat.inbo.be'
-        - 'https://natuurdata.inbo.be'
+          - 'https://natuurdata.dev.inbo.be'
+          - 'https://natuurdata.uat.inbo.be'
+          - 'https://natuurdata.inbo.be'
 jobs:
   e2e-test:
     runs-on: [ self-hosted ]
@@ -49,9 +49,7 @@ jobs:
         env:
           GOOGLE_CHAT_WEBHOOK_URL: ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
         run: |
-          wget \
-          --header="Content-Type: application/json" \
-          --post-data <<EOF "$GOOGLE_CHAT_WEBHOOK_URL"
+          cat <<EOF > google-chat.json
           {
             "cardsV2": [
               {
@@ -139,3 +137,7 @@ jobs:
             ]
           }
           EOF
+
+          wget \
+          --header="Content-Type: application/json" \
+          --post-file=google-chat.json
