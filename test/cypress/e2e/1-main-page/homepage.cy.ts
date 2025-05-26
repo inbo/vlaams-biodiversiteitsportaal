@@ -46,7 +46,7 @@ describe("Visit the homepage", () => {
         })
     );
 
-    it("Fail", () => {
+    it("Fail on purpose to test notification", () => {
         cy.get("[data-carousel-active]").should("be.visible")
             .invoke("css", "background-image").should("not.equal", "none");
         cy.fail("This test is not implemented yet");
