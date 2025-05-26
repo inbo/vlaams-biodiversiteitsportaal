@@ -49,8 +49,9 @@ jobs:
         env:
           GOOGLE_CHAT_WEBHOOK_URL: ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
         run: |
-          curl -X POST -H "Content-Type: application/json" \
-          -d '{
+          wget \
+          --header="Content-Type: application/json" \
+          --post-data '{
             "cardsV2": [
               {
                 "card": {
