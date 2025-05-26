@@ -34,20 +34,13 @@ jobs:
           config: baseUrl=${{ github.event.inputs.host }}
 
       - uses: actions/upload-artifact@v4
-        id: upload-screenshots
+        id: upload-screen-captures
         if: failure()
         with:
-          name: cypress-screenshots
-          path: ./test/cypress/screenshots
-          if-no-files-found: ignore # 'warn' or 'error' are also available, defaults to `warn`
-          retention-days: 5
-
-      - uses: actions/upload-artifact@v4
-        id: upload-videos
-        if: failure()
-        with:
-          name: cypress-videos
-          path: ./test/cypress/videos
+          name: upload-screen-captures
+          path: |
+            ./test/cypress/screenshots
+            ./test/cypress/videos
           if-no-files-found: ignore # 'warn' or 'error' are also available, defaults to `warn`
           retention-days: 5
 
@@ -97,7 +90,7 @@ jobs:
                                 },
                                 "onClick": {
                                   "openLink": {
-                                    "url": "${{ steps.upload_artifact.outputs.artifact-url }}"
+                                    "url": "${{ steps.upload-screen-captures.outputs.artifact-url }}"
                                   }
                                 }
                               }
