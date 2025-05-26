@@ -123,7 +123,7 @@ jobs:
                           "type": "BORDERLESS"
                         }
                       },
-                      "uncollapsibleWidgetsCount": 1,
+                      "uncollapsibleWidgetsCount": 0,
                       "widgets": $(cat ./test/test-results.md)
                     }
                   ]
