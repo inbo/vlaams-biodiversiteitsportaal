@@ -1,6 +1,3 @@
 {
-  "reporterEnabled": "spec, ./google-chat-markdown-reporter.js",
-  "GoogleChatMarkdownReporterReporterOptions": {
-    "output": "google-chat-report.md"
-  }
+  "reporterEnabled": "spec, ./google-chat-markdown-reporter.js"
 }

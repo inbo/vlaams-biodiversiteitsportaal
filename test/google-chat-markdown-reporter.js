@@ -16,6 +16,7 @@ class GoogleChatMarkdownReporter {
         this._indents = 1;
         const stats = runner.stats;
         const outputFile = options.outputFile || 'test-results.md';
+        console.log(`Writing test results to ${outputFile}`, options);
 
         runner
             // .once(EVENT_RUN_BEGIN, () => {

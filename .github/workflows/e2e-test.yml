@@ -49,7 +49,7 @@ jobs:
         env:
           GOOGLE_CHAT_WEBHOOK_URL: ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
         run: |
-          cat ./google-chat-report.md
+          cat ./test-results.md
           cat > google-chat.json <<EOF
           {
             "cardsV2": [
@@ -127,7 +127,7 @@ jobs:
                       "widgets": [
                         {
                           "decoratedText": {
-                            "text": "$(cat ./google-chat-report.md)"
+                            "text": "$(cat ./test-results.md)"
                           }
                         }
                       ]
