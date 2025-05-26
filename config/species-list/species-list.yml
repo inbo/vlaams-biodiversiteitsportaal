@@ -98,3 +98,9 @@ userdetails:
     url: ${common.protocol}://${common.domain}/userdetails/
   web:
     url: ${common.protocol}://${common.domain}/userdetails/
+
+hibernate:
+  jdbc:
+    batch_size: 50
+  order_inserts: true
+  order_updates: true
