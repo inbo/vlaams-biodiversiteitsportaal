@@ -34,13 +34,16 @@ jobs:
           config: baseUrl=${{ github.event.inputs.host }}
 
       - uses: actions/upload-artifact@v4
+        id: upload-screenshots
         if: failure()
         with:
           name: cypress-screenshots
           path: ./test/cypress/screenshots
           if-no-files-found: ignore # 'warn' or 'error' are also available, defaults to `warn`
           retention-days: 5
+
       - uses: actions/upload-artifact@v4
+        id: upload-videos
         if: failure()
         with:
           name: cypress-videos
@@ -50,10 +53,93 @@ jobs:
 
       - name: Notify Google Chat
         if: failure()
-        uses: SimonScholz/google-chat-action@v1.1.0
-        with:
-          webhookUrl: '${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}'
-          createDefaultSection: false
-          collapsibleDefaultSection: false
-          title: e2e tests failed @ ${{ github.event.inputs.host }}
-          subtitle: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        env:
+          GOOGLE_CHAT_WEBHOOK_URL: ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
+        run: |
+          curl -X POST -H "Content-Type: application/json" \
+          -d '{
+            "cardsV2": [
+              {
+                "card": {
+                  "header": {
+                    "title": "Automated Regression Test Failed",
+                    "imageUrl": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.3TogH2tQvYaU5cv4-EEcvwHaHa%26pid%3DApi&f=1&ipt=39902d7c82156c8499eb40496594a16b7a1d97c47c7a284eb7d95465e04b0251",
+                    "imageType": "SQUARE"
+                  },
+                  "sections": [
+                    {
+                      "collapsible": false,
+                      "widgets": [
+                        {
+                          "buttonList": {
+                            "buttons": [
+                              {
+                                "text": "Go to test run",
+                                "type": "FILLED",
+                                "icon": {
+                                  "materialIcon": {
+                                    "name": "checklist"
+                                  }
+                                },
+                                "onClick": {
+                                  "openLink": {
+                                    "url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+                                  }
+                                }
+                              },
+                              {
+                                "text": "Download Screen Captures",
+                                "type": "FILLED_TONAL",
+                                "icon": {
+                                  "materialIcon": {
+                                    "name": "photo_frame"
+                                  }
+                                },
+                                "onClick": {
+                                  "openLink": {
+                                    "url": "${{ steps.upload_artifact.outputs.artifact-url }}"
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "collapsible": true,
+                      "collapseControl": {
+                        "horizontalAlignment": "CENTER",
+                        "collapseButton": {
+                          "icon": {
+                            "materialIcon": {
+                              "name": "attachment"
+                            }
+                          },
+                          "text": "Hide results",
+                          "type": "BORDERLESS"
+                        },
+                        "expandButton": {
+                          "icon": {
+                            "materialIcon": {
+                              "name": "attachment"
+                            }
+                          },
+                          "text": "Show results",
+                          "type": "BORDERLESS"
+                        }
+                      },
+                      "uncollapsibleWidgetsCount": 1,
+                      "widgets": [
+                        {
+                          "decoratedText": {
+                            "text": "$GITHUB_STEP_SUMMARY"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          }' "$GOOGLE_CHAT_WEBHOOK_URL"
