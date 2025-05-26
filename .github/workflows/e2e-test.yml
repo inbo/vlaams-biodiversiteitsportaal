@@ -49,7 +49,7 @@ jobs:
         env:
           GOOGLE_CHAT_WEBHOOK_URL: ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
         run: |
-          cat <<EOF > google-chat.json
+          cat > google-chat.json <<EOF
           {
             "cardsV2": [
               {
