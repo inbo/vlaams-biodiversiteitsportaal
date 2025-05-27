@@ -101,6 +101,6 @@ userdetails:
 
 hibernate:
   jdbc:
-    batch_size: 50
+    batch_size: 500
   order_inserts: true
   order_updates: true
