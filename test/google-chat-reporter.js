@@ -59,7 +59,6 @@ class GoogleChatReporter {
                         "text": `<font color=\"#b10000\">${test.fullTitle()}</font>`,
                         "bottomLabel": err.message,
                         "startIcon": {
-                            "altText": err.message,
                             "materialIcon": {
                                 "name": "cancel",
                                 "fill": true,

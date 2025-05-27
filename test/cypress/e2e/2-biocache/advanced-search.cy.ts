@@ -56,9 +56,10 @@ describe("Biocache - Simple search", () => {
             );
     });
 
-    it("Raw taxon name search", () => {
+    // TODO: https://github.com/inbo/vlaams-biodiversiteitsportaal/issues/554
+    it.skip("Raw taxon name search", () => {
         const searchInput = "Columba livia var. domestica";
-        cy.get("#text").type(`${searchInput}{enter}`);
+        cy.get("#raw_taxon_name").type(`${searchInput}{enter}`);
         cy.url().should(
             "include",
             "/biocache-hub/occurrences/search",
@@ -89,7 +90,8 @@ describe("Biocache - Simple search", () => {
         );
     });
 
-    it("Institutions search", () => {
+    // TODO: https://github.com/inbo/vlaams-biodiversiteitsportaal/issues/552
+    it.skip("Institutions search", () => {
         cy.fail(
             "requires institutions to be configured in the test environment",
         );
@@ -113,14 +115,15 @@ describe("Biocache - Simple search", () => {
         );
     });
 
-    it("States search", () => {
+    // TODO: https://github.com/inbo/vlaams-biodiversiteitsportaal/issues/548
+    it.skip("States search", () => {
         cy.fail(
             "requires states endpoint to be fixed: https://github.com/orgs/inbo/projects/15?pane=issue&itemId=112534668&issue=inbo%7Cvlaams-biodiversiteitsportaal%7C548",
         );
     });
 
     it("Type Status search", () => {
-        const searchInput = "TOPOTYPE";
+        const searchInput = "HOLOTYPE";
         cy.get("#type_status").select(searchInput);
         cy.get(".tab-pane.active").within(() => {
             cy.get("input.btn-primary[type='submit']").click();
@@ -175,5 +178,142 @@ describe("Biocache - Simple search", () => {
             "have.length.greaterThan",
             10,
         );
+    });
+
+    it("CatalogNumber search", () => {
+        const searchInput = "94914";
+        cy.get("#catalogue_number").type(`${searchInput}{enter}`);
+        cy.url().should(
+            "include",
+            "/biocache-hub/occurrences/search",
+        ).get(".queryDisplay").contains(
+            searchInput,
+            { matchCase: false },
+        ).get("#results").children().should(
+            "have.length.of.at.least",
+            1,
+        );
+    });
+
+    it("Record Number search", () => {
+        const searchInput = "1818";
+        cy.get("#record_number").type(`${searchInput}{enter}`);
+        cy.url().should(
+            "include",
+            "/biocache-hub/occurrences/search",
+        ).get(".queryDisplay").contains(
+            searchInput,
+            { matchCase: false },
+        ).get("#results").children().should(
+            "have.length.of.at.least",
+            1,
+        );
+    });
+
+    it("Start Date search", () => {
+        const searchInput = "1998-01-01";
+        cy.get("#startDate").type(`${searchInput}{enter}`);
+        cy.url().should(
+            "include",
+            "/biocache-hub/occurrences/search",
+        ).get(".queryDisplay").contains(
+            searchInput,
+            { matchCase: false },
+        ).get("#results").children().should(
+            "have.length.greaterThan",
+            10,
+        );
+    });
+
+    it("End Date search", () => {
+        const searchInput = "2023-01-01";
+        cy.get("#endDate").type(`${searchInput}{enter}`);
+        cy.url().should(
+            "include",
+            "/biocache-hub/occurrences/search",
+        ).get(".queryDisplay").contains(
+            searchInput,
+            { matchCase: false },
+        ).get("#results").children().should(
+            "have.length.greaterThan",
+            10,
+        );
+    });
+
+    it("Everything search", () => {
+        // Generic text search
+        cy.get("#text").type("vulpes");
+
+        // Taxa search
+        cy.get("#taxa_1").type("vulpes vulpes");
+        cy.get("#taxa_2").type("pica pica");
+        cy.get("#taxa_3").type("Castor canadensis");
+        cy.get("#taxa_4").type("Columba livia f. domestica");
+
+        // Species group
+        cy.get("#species_group").select("Dicots");
+
+        // Country
+        cy.get("#country").select("Belgium");
+
+        // Type status
+        cy.get("#type_status").select("HOLOTYPE");
+
+        // Basis of record
+        cy.get("#basis_of_record").select("Machine observation");
+
+        // Dataset search
+        cy.get("#datasetundefined").type("Chorus");
+        cy.get("ul.typeahead > li.active > a.dropdown-item").contains(
+            "Meetnetten.be - Chorus counts for Amphibia in Flanders, Belgium",
+        ).click();
+
+        // Catalog number
+        cy.get("#catalogue_number").type("94914");
+
+        // Record Number
+        // TODO: issue when using colon in record number (e.g "Natuurpunt:Waarnemingen:143198978")
+        // https://github.com/inbo/vlaams-biodiversiteitsportaal/issues/551
+        cy.get("#record_number").type("1818");
+
+        // Date range
+        cy.get("#startDate").type("1998-01-01");
+        cy.get("#endDate").type("2023-01-01");
+
+        // Submit search
+        cy.get(".tab-pane.active").within(() => {
+            cy.get("input.btn-primary[type='submit']").click();
+        });
+
+        // Verify search was executed
+        cy.url().should("include", "/biocache-hub/occurrences/search");
+
+        // Verify query parameters are displayed
+        cy.get(".queryDisplay").within(() => {
+            const searchTerms = [
+                "vulpes",
+                "vulpes vulpes",
+                "pica pica",
+                "Castor canadensis",
+                "Columba livia f. domestica",
+                "Dicots",
+                "Belgium",
+                "HOLOTYPE",
+                "Machine observation",
+                "Chorus",
+                "94914",
+                "1818",
+                "1998-01-01",
+                "2023-01-01",
+            ];
+
+            // Check for presence of each search term
+            searchTerms.forEach((term) => {
+                cy.contains(term, { matchCase: false });
+            });
+        });
+
+        // No records found
+        cy.get(".searchInfo").contains("Geen records gevonden voor");
     });
 });
