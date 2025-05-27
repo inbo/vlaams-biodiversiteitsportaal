@@ -120,7 +120,7 @@ describe("Biocache - Simple search", () => {
     });
 
     it("Type Status search", () => {
-        const searchInput = "PARATYPE";
+        const searchInput = "TOPOTYPE";
         cy.get("#type_status").select(searchInput);
         cy.get(".tab-pane.active").within(() => {
             cy.get("input.btn-primary[type='submit']").click();

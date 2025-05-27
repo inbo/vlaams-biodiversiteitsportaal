@@ -56,7 +56,8 @@ class GoogleChatReporter {
             .on(EVENT_TEST_FAIL, (test, err) => {
                 output.push({
                     "decoratedText": {
-                        "text": `<font color=\"#b10000\">${test.fullTitle()}</font><br>${err.message}`,
+                        "text": `<font color=\"#b10000\">${test.fullTitle()}</font>`,
+                        "bottomLabel": err.message,
                         "startIcon": {
                             "materialIcon": {
                                 "name": "cancel",
