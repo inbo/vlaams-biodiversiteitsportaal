@@ -104,3 +104,4 @@ hibernate:
     batch_size: 500
   order_inserts: true
   order_updates: true
+  generate_statistics: true
