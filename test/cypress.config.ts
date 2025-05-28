@@ -38,4 +38,5 @@ module.exports = defineConfig({
     configFile: "reporter-config.json",
   },
   chromeWebSecurity: false, // Needed for cypress bridge when using auth.inbo.be
+  trashAssetsBeforeRuns: true,
 });

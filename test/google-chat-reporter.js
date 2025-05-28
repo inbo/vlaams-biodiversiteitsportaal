@@ -69,6 +69,23 @@ class GoogleChatReporter {
                     }
                 });
             })
+            .on(EVENT_TEST_PENDING, (test) => {
+                output.push({
+                    "decoratedText": {
+                        "text": `<font color=\"#cccccc\">${test.fullTitle()}</font>`,
+                        "bottomLabel": "skipped",
+                        "startIcon": {
+                            "materialIcon": {
+                                "name": "step_over",
+                                "fill": true,
+                                "weight": 200,
+                                "grade": -25
+                            }
+                        }
+                    }
+                });
+            })
+            
             .once(EVENT_RUN_END, () => {
                 output.push({
                     "textParagraph": {
