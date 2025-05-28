@@ -2,10 +2,10 @@ const Mocha = require("mocha");
 const fs = require('node:fs');
 
 const {
-    EVENT_RUN_BEGIN,
     EVENT_RUN_END,
     EVENT_TEST_FAIL,
     EVENT_TEST_PASS,
+    EVENT_TEST_PENDING,
     EVENT_SUITE_BEGIN,
     EVENT_SUITE_END,
 } = Mocha.Runner.constants;
