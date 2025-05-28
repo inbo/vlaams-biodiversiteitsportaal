@@ -1,4 +1,4 @@
-describe("Biocache - Simple search", () => {
+describe("Biocache - Advanced search", () => {
     beforeEach(() => {
         cy.visit("/biocache-hub");
 

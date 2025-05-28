@@ -1,4 +1,4 @@
-describe("Biocache - Simple search", () => {
+describe("Biocache - Event search", () => {
     beforeEach(() => {
         cy.visit("/biocache-hub");
 
@@ -10,7 +10,7 @@ describe("Biocache - Simple search", () => {
             return false; // Prevents Cypress from failing the test
         });
         cy.url().should("include", "#tab_simpleSearch"); // Ensure we start test after redirect/reload
-        cy.get("#t6").click().get("#eventSearch").should("be.visible"); // Switch to "Advanced Search" tab
+        cy.get("#t6").click().get("#eventSearch").should("be.visible"); // Switch to "Event Search" tab
     });
 
     it("Event ID search, Generic", () => {

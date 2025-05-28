@@ -1,4 +1,4 @@
-describe("Biocache - Simple search", () => {
+describe("Biocache - Batch Taxon search", () => {
     beforeEach(() => {
         cy.visit("/biocache-hub");
 
@@ -10,7 +10,7 @@ describe("Biocache - Simple search", () => {
             return false; // Prevents Cypress from failing the test
         });
         cy.url().should("include", "#tab_simpleSearch"); // Ensure we start test after redirect/reload
-        cy.get("#t3").click().get("#taxaUpload").should("be.visible"); // Switch to "Advanced Search" tab
+        cy.get("#t3").click().get("#taxaUpload").should("be.visible"); // Switch to "Batch taxon Search" tab
     });
 
     it("Batch taxon search, with matched name", () => {
