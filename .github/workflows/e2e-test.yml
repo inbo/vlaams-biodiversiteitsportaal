@@ -22,6 +22,10 @@ jobs:
       image: cypress/browsers:22.15.0
       options: --user 1001
     steps:
+      - name: Install git LFS
+        run: |
+          apt-get update && apt-get install -y git-lfs
+
       - uses: actions/checkout@v4
         with:
           lfs: true
