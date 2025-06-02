@@ -41,6 +41,7 @@ jobs:
           path: |
             ./test/cypress/screenshots
             ./test/cypress/videos
+            ./test/cypress/snapshots/4-spatial/species.cy.ts/__diff_output__
           if-no-files-found: ignore # 'warn' or 'error' are also available, defaults to `warn`
           retention-days: 5
 

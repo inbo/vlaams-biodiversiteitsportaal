@@ -1,3 +1,4 @@
 cypress/downloads
 cypress/screenshots
+cypress/snapshots/**/__diff_output__
 test-results.json

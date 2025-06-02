@@ -1,4 +1,5 @@
-const { defineConfig } = require("cypress");
+import { defineConfig } from "cypress";
+import { addMatchImageSnapshotPlugin } from "@simonsmith/cypress-image-snapshot/plugin";
 
 const envs = {
   "local": {
@@ -31,6 +32,7 @@ module.exports = defineConfig({
     },
     setupNodeEvents(on, config) {
       // implement node event listeners here
+      addMatchImageSnapshotPlugin(on);
     },
   },
   reporter: "cypress-multi-reporters",

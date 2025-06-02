@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "@simonsmith/cypress-image-snapshot": "^9.1.0",
     "cypress": "^14.3.3",
     "cypress-multi-reporters": "^2.0.5",
     "jszip": "^3.10.1",
