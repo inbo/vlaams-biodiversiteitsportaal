@@ -20,9 +20,10 @@ jobs:
     runs-on: [ self-hosted ]
     container:
       image: cypress/browsers:22.15.0
-      options: --user 1001
+#      options: --user 1001
     steps:
       - name: Install git LFS
+
         run: |
           apt-get update && apt-get install -y git-lfs
 
