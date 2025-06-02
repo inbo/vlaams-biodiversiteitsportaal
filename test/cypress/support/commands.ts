@@ -74,10 +74,26 @@ Cypress.Commands.add(
                 cy.get("#username").type(user.username);
                 cy.get("#password").type(user.password);
                 cy.get("#kc-login").click();
+
+                cy.url().should(
+                    "match",
+                    new RegExp(`^${Cypress.config("baseUrl")}.*`),
+                );
             },
             {
                 validate: () => {
-                    cy.getCookie("VBP-AUTH").should("exist");
+                    cy.getCookie("VBP-AUTH", {
+                        domain: Cypress.config("baseUrl").replace(
+                            "https://",
+                            "",
+                        ),
+                    }).should("exist");
+                    cy.getCookie("JSESSIONID", {
+                        domain: Cypress.config("baseUrl").replace(
+                            "https://",
+                            ".",
+                        ),
+                    }).should("exist");
                 },
             },
         );

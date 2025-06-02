@@ -45,7 +45,7 @@ describe("Spatial - Layers", () => {
             );
     });
 
-    it.only("Can add one specific species by name", () => {
+    it("Can add one specific species by name", () => {
         const speciesName = "vos";
         const speciesScientificName = "Vulpes vulpes";
 
