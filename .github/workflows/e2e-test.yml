@@ -23,6 +23,8 @@ jobs:
       options: --user 1001
     steps:
       - uses: actions/checkout@v4
+        with:
+          lfs: true
 
       - name: Cypress run
         uses: cypress-io/github-action@v6
