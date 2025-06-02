@@ -123,7 +123,7 @@ describe("Biocache - Advanced search", () => {
     });
 
     it("Type Status search", () => {
-        const searchInput = "HOLOTYPE";
+        const searchInput = "TYPE";
         cy.get("#type_status").select(searchInput);
         cy.get(".tab-pane.active").within(() => {
             cy.get("input.btn-primary[type='submit']").click();
@@ -181,7 +181,7 @@ describe("Biocache - Advanced search", () => {
     });
 
     it("CatalogNumber search", () => {
-        const searchInput = "94914";
+        const searchInput = "01422430";
         cy.get("#catalogue_number").type(`${searchInput}{enter}`);
         cy.url().should(
             "include",
@@ -195,7 +195,8 @@ describe("Biocache - Advanced search", () => {
         );
     });
 
-    it("Record Number search", () => {
+    // TODO: No data with record number available
+    it.skip("Record Number search", () => {
         const searchInput = "1818";
         cy.get("#record_number").type(`${searchInput}{enter}`);
         cy.url().should(
@@ -257,7 +258,7 @@ describe("Biocache - Advanced search", () => {
         cy.get("#country").select("Belgium");
 
         // Type status
-        cy.get("#type_status").select("HOLOTYPE");
+        cy.get("#type_status").select("TYPE");
 
         // Basis of record
         cy.get("#basis_of_record").select("Machine observation");
@@ -298,7 +299,7 @@ describe("Biocache - Advanced search", () => {
                 "Columba livia f. domestica",
                 "Dicots",
                 "Belgium",
-                "HOLOTYPE",
+                "TYPE",
                 "Machine observation",
                 "Chorus",
                 "94914",

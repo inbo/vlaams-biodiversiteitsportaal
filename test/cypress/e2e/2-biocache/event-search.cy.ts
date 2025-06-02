@@ -94,7 +94,8 @@ describe("Biocache - Event search", () => {
         );
     });
 
-    it("Event ID search, Field Numbers", () => {
+    // TODO: No data with field numbers, so skipping this test for now
+    it.skip("Event ID search, Field Numbers", () => {
         const searchInputs = [
             "JQ921217",
             "ZSM_HET_0846",

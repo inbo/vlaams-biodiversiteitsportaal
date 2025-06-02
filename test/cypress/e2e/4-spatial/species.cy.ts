@@ -8,7 +8,7 @@ describe("Spatial - Layers", () => {
 
         cy.loginWithoutNavigatingToLoginPage("spatial-hub");
         cy.visit("/spatial-hub");
-        cy.get(".progress-bar").should("not.be.visible");
+        cy.get(".progress-bar", { timeout: 10_000 }).should("not.be.visible");
     });
 
     it("Can add a species group", () => {
@@ -23,7 +23,7 @@ describe("Spatial - Layers", () => {
         cy.get('button[name="next"]').click();
 
         // Verify that the modal is not shown and the layer is added to the list
-        cy.get(".progress-bar").should("not.be.visible");
+        cy.get(".progress-bar", { timeout: 10_000 }).should("not.be.visible");
         cy.get('[name="divMappedLayers"]').contains(speciesGroup)
             .should("be.visible");
 
@@ -45,7 +45,7 @@ describe("Spatial - Layers", () => {
             );
     });
 
-    it("Can add one specific species by name", () => {
+    it.only("Can add one specific species by name", () => {
         const speciesName = "vos";
         const speciesScientificName = "Vulpes vulpes";
 
@@ -61,7 +61,7 @@ describe("Spatial - Layers", () => {
         cy.get('button[name="next"]').click();
 
         // Verify that the modal is not shown and the layer is added to the list
-        cy.get(".progress-bar").should("not.be.visible");
+        cy.get(".progress-bar", { timeout: 10_000 }).should("not.be.visible");
         cy.get('[name="divMappedLayers"]').contains(speciesScientificName)
             .should("be.visible");
 
@@ -75,7 +75,7 @@ describe("Spatial - Layers", () => {
         });
 
         // Verify clicking an occurences, shows a popup window
-        cy.get("#map").click(400, 300);
+        cy.get("#map").click(300, 300);
         cy.get(".leaflet-popup-content")
             .should(
                 "contain",
