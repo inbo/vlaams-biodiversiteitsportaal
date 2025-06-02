@@ -232,7 +232,8 @@ describe("Spatial - Layers", () => {
         cy.get("#file").selectFile(filePath);
         cy.get('input[testtag="datasetName"]')
             .clear()
-            .type(datasetName);
+            .type(datasetName)
+            .wait(100); // Really bad practice, but the input is not updated immediately, and the CI is too slow
 
         cy.get("[testtag='addPointsModal']")
             .parent()

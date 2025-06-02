@@ -91,7 +91,7 @@ Cypress.Commands.add(
                     cy.getCookie("JSESSIONID", {
                         domain: Cypress.config("baseUrl").replace(
                             "https://",
-                            ".",
+                            "",
                         ),
                     }).should("exist");
                 },
