@@ -75,7 +75,7 @@ describe("Spatial - Layers", () => {
         });
 
         // Verify clicking an occurences, shows a popup window
-        cy.get("#map").click(160, 260);
+        cy.get("#map").click(400, 300);
         cy.get(".leaflet-popup-content")
             .should(
                 "contain",

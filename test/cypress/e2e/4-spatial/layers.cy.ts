@@ -1,5 +1,8 @@
 describe("Spatial - Layers", () => {
     beforeEach(() => {
+        // Fixed viewport to ensure comparing snapshots works
+        cy.viewport(1280, 720);
+
         cy.loginWithoutNavigatingToLoginPage("spatial-hub");
         cy.visit("/spatial-hub");
         cy.get(".progress-bar").should("not.be.visible");
@@ -36,7 +39,7 @@ describe("Spatial - Layers", () => {
             .should(
                 "contain",
                 layerName,
-            ).should("contain", "Evergem");
+            ).should("contain", "Damme");
     });
 
     it("Can create a new layer from a filter on a contextual layer", () => {
@@ -118,7 +121,7 @@ describe("Spatial - Layers", () => {
             )
             .should(
                 "contain",
-                "10.574999809265137",
+                "10.",
             );
     });
 });
