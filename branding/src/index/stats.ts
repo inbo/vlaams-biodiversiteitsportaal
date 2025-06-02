@@ -26,10 +26,6 @@ async function loadStats(): Promise<void> {
   const dataResourceCountJson = await dataResourceCount.json();
   setCounter("stats_datasets", dataResourceCountJson.total || 0);
 
-  const institutionCount = await fetch(`/collectory/ws/institution/count`);
-  const institutionCountJson = await institutionCount.json();
-  setCounter("stats_institutions", institutionCountJson.total || 0);
-
   const speciesCount = await fetch(
     `/biocache-service/occurrence/facets?q=*:*&facets=species&pageSize=0`,
   );
