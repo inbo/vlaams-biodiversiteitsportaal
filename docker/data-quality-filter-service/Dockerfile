@@ -22,6 +22,8 @@ RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
 
 FROM amazoncorretto:11
 
+COPY --from=builder /opt/aws-xray-agent /opt/aws-xray-agent
+
 # Default based on repo structure, can be overridden at runtime
 ENV SPRING_CONFIG_ADDITIONAL-LOCATION="file:/config/common/common.yml,file:/config/data-quality-filter-service/data-quality-filter-service.yml"
 

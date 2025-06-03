@@ -28,6 +28,8 @@ RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
 
 FROM amazoncorretto:11
 
+COPY --from=builder /opt/aws-xray-agent /opt/aws-xray-agent
+
 # Default based on repo structure, can be overridden at runtime
 ENV SPRING_CONFIG_ADDITIONAL-LOCATION="file:/config/common/common.yml,file:/config/alerts/alerts.yml"
 # Symlink to i18n files location, unfortunately hard-coded at docker image build time

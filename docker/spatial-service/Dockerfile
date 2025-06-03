@@ -23,6 +23,8 @@ RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
     && rm /gradle-cache/modules-2/*.lock && rm /gradle-cache/modules-2/gc.properties
 FROM amazoncorretto:11
 
+COPY --from=builder /opt/aws-xray-agent /opt/aws-xray-agent
+
 # Default based on repo structure, can be overridden at runtime
 ENV SPRING_CONFIG_ADDITIONAL-LOCATION="file:/config/common/common.yml,file:/config/spatial-service/spatial-service.yml"
 # Symlink to i18n files location, unfortunately hard-coded at docker image build time
