@@ -17,9 +17,9 @@
 
     <!-- Disable flood of deprecation warnings-->
     <logger name="org.hibernate.orm.deprecation" level="OFF"/>
-    <logger name="org.hibernate.SQL" level="DEBUG"/>
-    <logger name="org.hibernate.stat" level="DEBUG"/>
-    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE"/>
+    <logger name="org.hibernate.SQL" level="INFO"/>
+    <logger name="org.hibernate.stat" level="INFO"/>
+    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="INFO"/>
     <logger name="au.org.ala.specieslist.RequestLoggingInterceptor" level="INFO"/>
 
     <logger name="org.grails.config.NavigableMap" level="ERROR"/>
