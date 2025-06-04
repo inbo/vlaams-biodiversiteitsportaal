@@ -47,7 +47,6 @@ target "portal-full" {
     "biocache-service"            = "target:biocache-service"
     "collectory"                  = "target:collectory"
     "data-quality-filter-service" = "target:data-quality-filter-service"
-    "doi-service"                 = "target:doi-service"
     "image-service"               = "target:image-service"
     "logger"                      = "target:logger"
     "regions"                     = "target:regions"
@@ -128,15 +127,6 @@ target "data-quality-filter-service" {
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-data-quality-filter-service:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-data-quality-filter-service:${TAG}"]
-}
-
-target "doi-service" {
-  context = "./doi-service"
-  contexts = {
-    "custom-gradle" = "target:custom-gradle-jdk11"
-  }
-  cache-from = ["${DOCKER_REPO}/inbo-vbp-doi-service:${CACHE_TAG}"]
-  tags = ["${DOCKER_REPO}/inbo-vbp-doi-service:${TAG}"]
 }
 
 target "image-service" {
@@ -229,7 +219,6 @@ group "all" {
     "biocache-service",
     "collectory",
     "data-quality-filter-service",
-    "doi-service",
     "image-service",
     "logger",
     "namematching-service",
@@ -253,7 +242,6 @@ group "services" {
     "biocache-service",
     "collectory",
     "data-quality-filter-service",
-    "doi-service",
     "image-service",
     "logger",
     "namematching-service",

@@ -112,12 +112,19 @@ services:
     build:
       context: alerts
     environment:
+      AWS_XRAY_TRACING_ENABLED: true
       ADDITIONAL_SPRING_CONFIG_LOCATIONS: "file:/config/common/common-docker.yml"
+      LOG_LEVEL: DEBUG
+      JAVA_OPTS: "-Dcom.amazonaws.xray.configFile=/config/common/xray-agent.json -javaagent:/opt/aws-xray-agent/disco/disco-java-agent.jar=pluginPath=/opt/aws-xray-agent/disco/disco-plugins"
     volumes:
       - ../config:/config:ro
     depends_on:
       mysql:
         condition: service_healthy
+#      nginx:
+#        condition: service_healthy
+      mock-oauth2-server:
+        condition: service_started
 
   collectory:
     image: ${DOCKER_REPO:-local}/inbo-vbp-collectory:dev
@@ -159,26 +166,6 @@ services:
       - ../config:/config:ro
     depends_on:
       postgis:
-        condition: service_healthy
-
-  doi-service:
-    image: ${DOCKER_REPO:-local}/inbo-vbp-doi-service:dev
-    networks:
-      default:
-        aliases:
-          - doi-service.vbp.internal
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-      # Use host, so we can easily swap in port-forwarded version of solr
-      - "solr.vbp.internal:host-gateway"
-    build:
-      context: doi-service
-    environment:
-      ADDITIONAL_SPRING_CONFIG_LOCATIONS: "file:/config/common/common-docker.yml"
-    volumes:
-      - ../config:/config:ro
-    depends_on:
-      mysql:
         condition: service_healthy
 
   logger:

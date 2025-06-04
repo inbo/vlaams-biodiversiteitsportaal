@@ -35,7 +35,6 @@ services:
           - biocache-hub.vbp.internal
           - biocache-service.vbp.internal
           - collectory.vbp.internal
-          - doi-service.vbp.internal
           - data-quality-filter-service.vbp.internal
           - image-service.vbp.internal
           - logger.vbp.internal
@@ -45,7 +44,6 @@ services:
           - spatial-hub.vbp.internal
           - spatial-service.vbp.internal
           - species-list.vbp.internal
-          - userdetails.vbp.internal
     depends_on:
       #      solr-init:
       #        condition: service_completed_successfully

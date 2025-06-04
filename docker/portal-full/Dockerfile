@@ -38,7 +38,7 @@ RUN mkdir -p ${CATALINA_HOME}/conf/portal/localhost
 RUN sh -x \
     && mkdir -p /opt/atlas/i18n \
     && mkdir -p /var/opt/atlas/i18n \
-    && for service in alerts apikey bie-index biocache-service collectory doi-service image-service logger regions spatial-hub spatial-service; do \
+    && for service in alerts apikey bie-index biocache-service collectory image-service logger regions spatial-hub spatial-service; do \
             ln -s /config/${service}/i18n/crowdin /opt/atlas/i18n/${service}; \
             ln -s /config/${service}/i18n/override /var/opt/atlas/i18n/${service}; \
         done \
@@ -63,7 +63,6 @@ COPY --from=biocache-service /biocache-service.war webapps
 RUN ln -s ./biocache-service webapps/sandbox-service
 COPY --from=collectory /collectory.war webapps
 COPY --from=data-quality-filter-service /data-quality-filter-service.war webapps
-COPY --from=doi-service /doi-service.war webapps
 COPY --from=image-service /image-service.war webapps
 COPY --from=logger /logger.war webapps
 COPY --from=regions /regions.war webapps
