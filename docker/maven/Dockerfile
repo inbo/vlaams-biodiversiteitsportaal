@@ -6,7 +6,7 @@ RUN mkdir ~/.m2
 COPY settings.xml /root/.m2/settings.xml
 
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
-    yum -y install git
+    yum -y install git unzip
 
 # Download and unzip aws x-ray agent for easy copy to runtime images
 RUN mkdir /opt/aws-xray-agent \
