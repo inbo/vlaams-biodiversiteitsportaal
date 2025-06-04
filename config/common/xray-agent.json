@@ -1,0 +1,12 @@
+{
+    "contextMissingStrategy": "IGNORE_ERROR",
+    "tracingEnabled": true,
+    "samplingStrategy": "CENTRAL",
+    "samplingRulesManifest": "/config/common/xray-rules.json",
+    "awsSdkVersion": 2,
+    "streamingThreshold": 100,
+    "traceIdInjection": true,
+    "pluginsEnabled": true,
+    "collectSqlQueries": false,
+    "contextPropagation": true
+}
