@@ -1,6 +1,7 @@
 import { defineConfig } from "cypress";
 import { addMatchImageSnapshotPlugin } from "@simonsmith/cypress-image-snapshot/plugin";
 import * as fs from "fs";
+import { dirname } from "path";
 
 const envs = {
   "local": {
@@ -56,6 +57,12 @@ module.exports = defineConfig({
           if (!failures) {
             // delete the video if the spec passed and no tests retried
             fs.unlinkSync(results.video);
+            fs.unlinkSync(results.video.replace("ts.mp4", "ts-compressed.mp4"));
+
+            if (fs.readdirSync(dirname(results.video)).length === 0) {
+              // If the directory is empty after deleting the video, remove it
+              fs.rmdirSync(dirname(results.video));
+            }
           }
         }
       });
