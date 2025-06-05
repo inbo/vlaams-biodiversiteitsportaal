@@ -12,14 +12,24 @@ RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} /project
 
 COPY resources.xml ./grails-app/conf/spring/resources.xml
 
+RUN <<EOR
+cat <<EOF >> build.gradle
+bootWar {
+    enabled = true
+}
+EOF
+EOR
+
 RUN --mount=type=cache,target=/gradle-cache,ro \
-    gradle build assetCompile assemble bootJar \
+    gradle build assetCompile assemble bootWar \
     -x test -x integrationTest
 
 # Copy dependencies to shared read-only cache
 RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
     rsync -a /home/gradle/.gradle/caches/modules-2 /gradle-cache \
     && rm /gradle-cache/modules-2/*.lock && rm /gradle-cache/modules-2/gc.properties
+
+RUN ls -la /project/build/libs
 
 FROM amazoncorretto:21
 
@@ -36,11 +46,11 @@ RUN mkdir -p /opt/atlas/i18n \
 ARG VERSION=4.0.0-SNAPSHOT
 LABEL ala.version=${VERSION}
 
-COPY --from=builder /project/build/libs/image-service-${VERSION}-exec.jar /image-service.jar
+COPY --from=builder /project/build/libs/image-service-${VERSION}.war /image-service.war
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/image-service/actuator/health || exit 1
 
-ENTRYPOINT ["sh", "-c", "java ${JAVA_OPTS} -jar /image-service.jar"]
+ENTRYPOINT ["sh", "-c", "java ${JAVA_OPTS} -jar /image-service.war"]
 
 RUN mkdir /data
 RUN chown 1000:1000 /data
