@@ -1,8 +1,5 @@
 describe("Spatial - Layers", () => {
     beforeEach(() => {
-        // Fixed viewport to ensure comparing snapshots works
-        cy.viewport(1280, 720);
-
         cy.loginWithoutNavigatingToLoginPage("spatial-hub");
         cy.visit("/spatial-hub");
         cy.get(".progress-bar").should("not.be.visible");

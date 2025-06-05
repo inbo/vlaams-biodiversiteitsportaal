@@ -1,20 +1,20 @@
 name: Run E2E tests against the VBP portal
-run-name: ${{ github.actor }} is testing the VBP portal @ ${{ github.event.inputs.host }}
+run-name: ${{ github.actor }} is testing the VBP portal @ ${{ github.event.inputs.env }}
 
 on:
   schedule:
     - cron: '0 5 * * 1-5'
   workflow_dispatch:
     inputs:
-      host:
-        description: 'Host endpoint to test'
+      env:
+        description: 'Environment to test'
         required: true
-        default: 'https://natuurdata.inbo.be'
+        default: prod
         type: choice
         options:
-          - 'https://natuurdata.dev.inbo.be'
-          - 'https://natuurdata.uat.inbo.be'
-          - 'https://natuurdata.inbo.be'
+          - dev
+          - uat
+          - prod
 jobs:
   e2e-test:
     runs-on: [ self-hosted ]
@@ -36,9 +36,9 @@ jobs:
         env:
           CYPRESS_VBP_USERNAME: ${{ secrets.CYPRESS_VBP_USERNAME }}
           CYPRESS_VBP_PASSWORD: ${{ secrets.CYPRESS_VBP_PASSWORD }}
+          CYPRESS_TARGET_ENV: ${{ github.event.inputs.env }}
         with:
           working-directory: ./test
-          config: baseUrl=${{ github.event.inputs.host }}
 
       - uses: actions/upload-artifact@v4
         id: upload-screen-captures
@@ -63,7 +63,7 @@ jobs:
               {
                 "card": {
                   "header": {
-                    "title": "Automated Regression Test Failed",
+                    "title": "Automated Regression Test Failed @ ${{ github.event.inputs.env }}",
                     "imageUrl": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.3TogH2tQvYaU5cv4-EEcvwHaHa%26pid%3DApi&f=1&ipt=39902d7c82156c8499eb40496594a16b7a1d97c47c7a284eb7d95465e04b0251",
                     "imageType": "SQUARE"
                   },

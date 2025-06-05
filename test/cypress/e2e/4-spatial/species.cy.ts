@@ -1,11 +1,8 @@
 import { time } from "console";
 import * as path from "path";
 
-describe("Spatial - Layers", () => {
+describe("Spatial - Species", () => {
     beforeEach(() => {
-        // Fixed viewport to ensure comparing snapshots works
-        cy.viewport(1280, 720);
-
         cy.loginWithoutNavigatingToLoginPage("spatial-hub");
         cy.visit("/spatial-hub");
         cy.get(".progress-bar", { timeout: 10_000 }).should("not.be.visible");
