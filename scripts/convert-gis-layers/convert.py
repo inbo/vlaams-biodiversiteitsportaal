@@ -17,6 +17,9 @@ BBOX_VLAANDEREN = (
     2.54133, 51.50511, 5.91200, 50.68767,
 )
 
+GEWEST_LAYER_PATH = "/home/stefan/Documents/2025 kaartlagen/gewesten/gewesten2025.shp"
+
+
 
 def process_grid(filename: str, output_folder: str):
     output_converted_folder = os.path.join(output_folder, Path(filename).stem)
@@ -34,11 +37,16 @@ def process_grid(filename: str, output_folder: str):
 def crop_and_covert(filename: str, output_folder: str):
     path = Path(filename)
     with tempfile.TemporaryDirectory() as tmpdirname:
-        gdal.Translate(
-            os.path.join(tmpdirname, path.stem + ".bil"),
+        output_file = os.path.join(tmpdirname, path.stem + ".bil")
+
+        # Use vector layer as mask instead of fixed bounding box
+        gdal.Warp(
+            output_file,
             filename,
-            projWin=BBOX_VLAANDEREN, projWinSRS="EPSG:4326",
-            format="eHdr"
+            cutlineDSName=GEWEST_LAYER_PATH,  # Use shapefile as clipping boundary
+            cutlineSQL="SELECT * FROM gewesten2025",
+            cropToCutline=True,         # Crop output to cutline boundary
+            format="eHdr"               # Output format
         )
 
         output = os.path.join(output_folder, path.stem + ".zip")
