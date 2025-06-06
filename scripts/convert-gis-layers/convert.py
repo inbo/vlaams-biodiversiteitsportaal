@@ -20,7 +20,6 @@ BBOX_VLAANDEREN = (
 GEWEST_LAYER_PATH = "/home/stefan/Documents/2025 kaartlagen/gewesten/gewesten2025.shp"
 
 
-
 def process_grid(filename: str, output_folder: str):
     output_converted_folder = os.path.join(output_folder, Path(filename).stem)
     if not os.path.exists(output_converted_folder):
@@ -45,8 +44,9 @@ def crop_and_covert(filename: str, output_folder: str):
             filename,
             cutlineDSName=GEWEST_LAYER_PATH,  # Use shapefile as clipping boundary
             cutlineSQL="SELECT * FROM gewesten2025",
-            cropToCutline=True,         # Crop output to cutline boundary
-            format="eHdr"               # Output format
+            cropToCutline=True,  # Crop output to cutline boundary
+            format="eHdr",  # Output format
+            warpOptions=["CUTLINE_ALL_TOUCHED=TRUE"],
         )
 
         output = os.path.join(output_folder, path.stem + ".zip")

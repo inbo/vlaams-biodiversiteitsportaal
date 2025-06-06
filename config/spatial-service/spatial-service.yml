@@ -15,8 +15,13 @@ server:
     contextPath: /spatial-service
 grails:
   serverURL: ${common.protocol}://${common.domain}/spatial-service
+  controllers:
+    upload:
+      maxFileSize: 5_000_000_000 # 5GB
+      maxRequestSize: 5_000_000_000
+
 google:
-  apikey: 'AIzaSyAJDtEeoy7Sc9pij2TAoVnmTwA34Q-2VHk'
+  apikey: 'xxx'
 
 api_key: xxxxxxxxxxxxx
 spatialHubUrl: ${common.protocol}://${common.domain}/spatial-hub/

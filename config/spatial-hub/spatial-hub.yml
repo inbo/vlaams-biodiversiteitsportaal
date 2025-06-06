@@ -18,6 +18,11 @@ grails:
   serverURL: "${common.protocol}://${common.domain}/spatial-hub"
   app:
     context: "/"
+    controllers:
+      upload:
+        maxFileSize: 50_000_000 # 50MB
+        maxRequestSize: 50_000_000
+
 i18n:
   region: 'nl'
 
@@ -284,9 +289,6 @@ skin:
   footer: true
   layout: vlaanderen
 #  layout: 'main'
-
-grails.controllers.upload.maxFileSize: 614400000
-grails.controllers.upload.maxRequestSize: 614400000
 
 speciesDotSize: 5
 speciesDotOpacity: 60
