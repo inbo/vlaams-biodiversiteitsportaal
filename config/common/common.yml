@@ -96,29 +96,28 @@ server:
         secure: true
         same-site: "lax" # Strict causes pac4j issues
 
+# Prevent automatically updating DB-schema on startup
+# Should be handled by liquibase / grails-db-migrations (But is not yet the case everywhere))
+dataSource:
+  dbCreate: validate
+
 # dbCreate option needs to be changed on first deployment to a new environment
 environments:
   local:
     common:
       protocol: http
       domain: localhost
-    datasource:
+    dataSource:
       dbCreate: update
   inbo_dev:
     common:
       protocol: https
       domain: natuurdata.dev.inbo.be
-    datasource:
-      dbCreate: validate
   inbo_uat:
     common:
       protocol: https
       domain: natuurdata.uat.inbo.be
-    datasource:
-      dbCreate: validate
   inbo_prod:
     common:
       protocol: https
       domain: natuurdata.inbo.be
-    datasource:
-      dbCreate: validate

@@ -83,8 +83,6 @@ ownerVisibleToEditor: false
 publicview:
   hidePrivateLists: true
 
-maxItemsPerPage: 25
-
 serverName: ${common.protocol}://${common.domain}/species-list
 serverURL: ${common.protocol}://${common.domain}/species-list
 skin:
@@ -103,4 +101,3 @@ hibernate:
     batch_size: 500
   order_inserts: true
   order_updates: true
-  generate_statistics: true
