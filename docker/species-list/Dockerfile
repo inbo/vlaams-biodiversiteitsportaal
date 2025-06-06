@@ -36,7 +36,7 @@ RUN mkdir -p /opt/atlas/i18n \
   && ln -s /config/species-list/i18n/override /var/opt/atlas/i18n/specieslist-webapp
 
 ARG VERSION=5.3.0-SNAPSHOT
-ARG COMMIT=c353fd4940dfe06853311997f2692affec822998
+ARG COMMIT=939a2b363a98debb16bff339984a3931edb9f365
 LABEL ala.version=inbo-${COMMIT}
 
 COPY --from=builder /project/build/libs/specieslist-webapp-${VERSION}.war /species-list.war
