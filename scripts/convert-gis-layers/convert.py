@@ -13,10 +13,6 @@ logging.basicConfig()
 logging.getLogger().setLevel(logging.INFO)
 LOGGER = logging.getLogger(__name__)
 
-BBOX_VLAANDEREN = (
-    2.54133, 51.50511, 5.91200, 50.68767,
-)
-
 GEWEST_LAYER_PATH = "/home/stefan/Documents/2025 kaartlagen/gewesten/gewesten2025.shp"
 
 

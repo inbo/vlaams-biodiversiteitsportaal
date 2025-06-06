@@ -31,7 +31,6 @@ dataSource:
   password: 'my-super-secret-password'
   pooled: true
   jmxExport: true
-  dbCreate: update
   properties:
     jmxEnabled: true
     initialSize: 5
