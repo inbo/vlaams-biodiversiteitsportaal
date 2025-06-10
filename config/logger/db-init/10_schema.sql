@@ -227,7 +227,7 @@ SET character_set_client = utf8;
 CREATE TABLE `log_detail` (
   `id` int(11) NOT NULL auto_increment,
   `entity_type` varchar(255) default NULL,
-  `entity_uid` LONG VARCHAR default NULL,
+  `entity_uid` varchar(255) default NULL,
   `record_count` bigint(20) default NULL,
   `log_event_id` int(11),
   PRIMARY KEY  (`id`),
