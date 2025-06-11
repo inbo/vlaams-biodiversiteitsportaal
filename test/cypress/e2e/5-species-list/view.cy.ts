@@ -1,6 +1,5 @@
 import * as path from "path";
 import { getFileNameTimeStamp } from "../../support/utils";
-import { file } from "jszip";
 
 describe("Species list - view", () => {
     beforeEach(() => {

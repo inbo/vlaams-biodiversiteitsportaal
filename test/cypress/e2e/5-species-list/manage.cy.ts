@@ -1,7 +1,7 @@
 import { getFileNameTimeStamp } from "cypress/support/utils";
 import * as path from "path";
 
-describe("Species list - create", () => {
+describe("Species list - manage", () => {
     const TEST_LIST_PREFIX = "E2E automated test list";
 
     beforeEach(() => {
