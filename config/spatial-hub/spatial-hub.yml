@@ -482,17 +482,17 @@ environments:
   local:
     lists:
       url: '' #prevent portal-full from deadlocking at startup
-  inbo-dev:
+  inbo_dev:
     assets:
       bundle: true
     quickLinksLayers:
       bwk: cl10070
       landbouw: cl10070
       vhga: cl10070
-  inbo-uat:
+  inbo_uat:
     assets:
       bundle: true
-  inbo-prod:
+  inbo_prod:
     assets:
       bundle: true
     quickLinksLayers:
