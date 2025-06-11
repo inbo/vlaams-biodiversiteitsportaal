@@ -84,8 +84,7 @@ describe("Spatial - Layers", () => {
     });
 
     it("Can add an environmental layer", () => {
-        const layerName =
-            "WorldClim jaarlijkse mediaan temperatuur 1970 - 2000";
+        const layerName = "Isothermie";
 
         // Add a layer
         cy.get("#menu-0").click();
@@ -118,7 +117,7 @@ describe("Spatial - Layers", () => {
             )
             .should(
                 "contain",
-                "10.",
+                "32.",
             );
     });
 });
