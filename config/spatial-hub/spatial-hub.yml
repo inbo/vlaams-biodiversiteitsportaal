@@ -485,9 +485,17 @@ environments:
   inbo-dev:
     assets:
       bundle: true
+    quickLinksLayers:
+      bwk: cl10070
+      landbouw: cl10070
+      vhga: cl10070
   inbo-uat:
     assets:
       bundle: true
   inbo-prod:
     assets:
       bundle: true
+    quickLinksLayers:
+      bwk: cl10036
+      landbouw: cl10016
+      vhga: cl10024
