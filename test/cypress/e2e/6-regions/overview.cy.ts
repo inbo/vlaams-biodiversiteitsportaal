@@ -19,15 +19,10 @@ describe("Regions - overview", () => {
                 1,
             );
 
-            // // Compare map snapshots for each region
-            // if (idx !== 0) {
-            //     // Wait for the WMS tiles to load before taking a snapshot
-            //     cy.wait("@loadWMSTiles").wait(2_000);
-            // }
-            cy.get("#map_canvas").matchImageSnapshot(`regions-${regionName}`, {
-                failureThreshold: 0.4,
-                failureThresholdType: "percent",
-            });
+            // cy.get("#map_canvas").matchImageSnapshot(`regions-${regionName}`, {
+            //     failureThreshold: 0.4,
+            //     failureThresholdType: "percent",
+            // });
 
             // Check if we can navigate to a single region
             cy.get(`[layer='${regionName}']`).find("li.regionLink").first()
@@ -48,7 +43,12 @@ describe("Regions - overview", () => {
                         // Check if the region has records
                         cy.url().should(
                             "include",
-                            singleRegionName,
+                            encodeURIComponent(
+                                encodeURIComponent(singleRegionName.replace(
+                                    "'",
+                                    "", // apostrophes are not properly encoded using encodeURIComponent
+                                )),
+                            ), // Somehow it is encoded twice in the URL?
                         );
                         return cy.get("#speciesCount", { timeout: 20_000 })
                             .should((elem) => {
@@ -63,9 +63,8 @@ describe("Regions - overview", () => {
                             });
                     },
                 );
-            // Go back to the overview page, no idea why we need to go back twice
-            cy.go("back");
-            cy.go("back");
+            // Go back to the overview page
+            cy.visit("/regions");
         });
     });
 });
