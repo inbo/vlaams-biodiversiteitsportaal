@@ -5,3 +5,12 @@ $fa-font-path: "@fortawesome/fontawesome-free/webfonts/";
 // our project needs Solid + Brands
 @import "@fortawesome/fontawesome-free/scss/solid.scss";
 @import "@fortawesome/fontawesome-free/scss/brands.scss";
+
+// backward compatibility
+.fa-square-o {
+    @extend .fa-square !optional;
+}
+
+.fa-check-square-o {
+    @extend .fa-square-check !optional;
+}
