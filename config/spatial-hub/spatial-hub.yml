@@ -486,9 +486,9 @@ environments:
     assets:
       bundle: true
     quickLinksLayers:
-      bwk: cl10070
-      landbouw: cl10070
-      vhga: cl10070
+      bwk: cl10034
+      landbouw: cl10033
+      vhga: cl10089
   inbo_uat:
     assets:
       bundle: true
