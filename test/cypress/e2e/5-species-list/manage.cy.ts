@@ -4,6 +4,13 @@ import * as path from "path";
 describe("Species list - manage", () => {
     const TEST_LIST_PREFIX = "E2E automated test list";
 
+    // Only run these tests if ENABLE_MUTATION_TESTS is set to true
+    // This is to prevent creating and deleting lists during normal test runs,
+    // resulting in a lot of test lists / uids being created.
+    if (Cypress.env("ENABLE_MUTATION_TESTS") !== "true") {
+        return;
+    }
+
     beforeEach(() => {
         // Ignore errors from auto-complete widget trying to attach to elements that cannot be found (I think)
         cy.on("uncaught:exception", (err, runnable) => {
