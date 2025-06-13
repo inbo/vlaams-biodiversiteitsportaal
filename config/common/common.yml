@@ -57,10 +57,10 @@ security:
     header:
       alternatives: "Authorization, X-Authorization"
     auth:
-      serviceUrl: ${common.protocol}://${common.domain}/apikey/
+      serviceUrl: http://apikey.vbp.internal:8080/apikey/
     check:
-      serviceUrl: ${common.protocol}://${common.domain}/apikey/ws/check?apikey=
-    serviceUrl: ${common.protocol}://${common.domain}/apikey/ws/check?apikey=
+      serviceUrl: http://apikey.vbp.internal:8080/apikey/ws/check?apikey=
+    serviceUrl: http://apikey.vbp.internal:8080/apikey/ws/check?apikey=
     userdetails:
       serviceUrl: ${common.protocol}://${common.domain}/userdetails/
 
