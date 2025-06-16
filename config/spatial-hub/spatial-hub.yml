@@ -254,7 +254,7 @@ biocacheService:
     Occurrence: [ 'Year;occurrence_year' ]
 
 namematching:
-    baseURL: '${common.protocol}://namematching.${common.domain}
+    baseURL: "${common.protocol}://namematching.${common.domain}"
     
 sampling:
   url: "${common.protocol}://${common.domain}/spatial-service"
