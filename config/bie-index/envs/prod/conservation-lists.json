@@ -3,11 +3,25 @@
   "defaultYearSourceField": "eventDate",
   "lists": [
     {
-      "uid": "dr6",
-      "field": "status",
+      "uid": "dr574",
+      "field": "threatStatus_iucn_s",
       "sourceField": "status",
       "term": "threatStatus",
-      "label": "SB"
+      "label": "IUCN"
+    },
+    {
+      "uid": "dr572",
+      "field": "threatStatus_nvrlf_s",
+      "sourceField": "status",
+      "term": "threatStatus",
+      "label": "NVRLF"
+    },
+    {
+      "uid": "dr552",
+      "field": "threatStatus_vrlf_s",
+      "sourceField": "status",
+      "term": "threatStatus",
+      "label": "VRLF"
     }
   ]
 }
