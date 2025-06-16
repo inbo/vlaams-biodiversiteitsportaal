@@ -157,7 +157,7 @@ eol:
     allowAttributes: href;a;^(http|https|mailto|#).+,class;span,id;span,src;img;^(http|https).+
 
 namematching:
-  serviceURL: http://namematching.biodiversiteitsportaal.dev.internal:9179
+  serviceURL: http://namematching.biodiversiteitsportaal.dev.internal
 
 dataquality:
   enabled: false
