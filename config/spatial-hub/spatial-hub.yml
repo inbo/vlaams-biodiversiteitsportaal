@@ -253,6 +253,9 @@ biocacheService:
     Location: [ 'Coordinate Uncertainty;coordinate_uncertainty' ]
     Occurrence: [ 'Year;occurrence_year' ]
 
+namematching:
+    baseURL: '${common.protocol}://namematching.${common.domain}
+    
 sampling:
   url: "${common.protocol}://${common.domain}/spatial-service"
 
