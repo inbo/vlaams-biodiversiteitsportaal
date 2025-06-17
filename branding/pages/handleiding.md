@@ -2,15 +2,8 @@
 
 ### 1\. Toegang tot het Portaal
 
-**URL:** [Vlaams Biodiversiteitsportaal](#)
+Uitleg mbt. gebruikersrechten en hoe in te loggen: [Toegang](/pages/toegang.html)
 
-**Inloggen / Registreren:**
-
-*   Registreren: Mail naar [support.natuurdata@inbo.be](mailto:support.natuurdata@inbo.be).
-*   Inloggen: Klik op "Inloggen" rechtsboven op de startpagina.
-
-![Inlogscherm](/images/pages/Afbeelding1.png) 
-![Startpagina](/images/pages/Afbeelding2.png)
 
 ### Navigatie
 
