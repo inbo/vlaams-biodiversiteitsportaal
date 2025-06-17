@@ -140,6 +140,8 @@ jobs:
             ]
           }
           EOF
+          
+          cat ./google-chat.json
 
           wget \
           --header="Content-Type: application/json" \
