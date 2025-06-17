@@ -49,6 +49,7 @@ jobs:
             ./test/cypress/screenshots
             ./test/cypress/videos
             ./test/cypress/snapshots/**/__diff_output__
+            ./test/test-results.json
           if-no-files-found: ignore # 'warn' or 'error' are also available, defaults to `warn`
           retention-days: 5
 
