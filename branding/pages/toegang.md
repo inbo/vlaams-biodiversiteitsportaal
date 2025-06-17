@@ -13,7 +13,7 @@ Voor meer geavanceerd functies, moet er echter ingelogd worden.
 - Eigen soorten-lijsten beheren
 
 
-### Toegang voor medewerkers Vlaamse overheid (Enkel Departemennt omgeving)
+### Toegang voor medewerkers Vlaamse overheid (Enkel Departement omgeving)
 
 Medewerkers van de Vlaamse overheid kunnen inloggen via het systeem voor interne gebruikersbeheer.  
 Je kan steeds jouw rechten nagaan op de [Mijn profiel pagina](https://mijnprofiel-gebruikersbeheer.vlaanderen.be/user/).  
