@@ -20,8 +20,12 @@ Je kan steeds jouw rechten nagaan op de [Mijn profiel pagina](https://mijnprofie
 Als je al toegang hebt, zie je op de pagina _"Mijn gebruikersrechten"_ een lijn met "Het Vlaams Biodiversiteitsportaal".
 ![Rechten in acm-idm](/images/pages/acm_idm_mijn_profiel.png)
 
-Inloggen kan dan door te klikken op de knop _"Medewerkers Vlaamse overheid"_ wanneer om gebruiks gegevens wordt gevraagd.
-![Login pagina](/images/pages/login.png)
+Inloggen kan dan door te klikken op de knop _"Medewerkers Vlaamse overheid"_ wanneer in het portaal om gebruiks gegevens wordt gevraagd.
+<p float="left">
+  <img src="/images/pages/login_button.png" alt="login knop" height="180" />
+  <img src="/images/pages/login_screen.png" alt="login scherm" height="180" /> 
+</p>
+
 
 Als je nog geen rechten hebt gekregen, moet je deze eerst aanvragen aan je lokale beheerder.  
 Deze kan je vinden op de [Mijn profiel pagina](https://mijnprofiel-gebruikersbeheer.vlaanderen.be/user/) via de knop _"Mijn lokale beheerders"_.
