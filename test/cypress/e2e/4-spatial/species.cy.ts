@@ -1,4 +1,5 @@
 import { time } from "console";
+import { getFileNameTimeStamp, TEST_LIST_PREFIX } from "cypress/support/utils";
 import * as path from "path";
 
 describe("Spatial - Species", () => {
@@ -117,8 +118,7 @@ describe("Spatial - Species", () => {
             );
     });
 
-    // TODO: https://github.com/inbo/vlaams-biodiversiteitsportaal/issues/575
-    it.skip("Can add species by creating a new species-list", () => {
+    it("Can add species by creating a new species-list", () => {
         const textareaSpecies = ["Vulpes vulpes", "Castor fiber"];
         const fileSpecies = ["Scutigera coleoptrata", "Oryctolagus cuniculus"];
         const autoCompleteSpeciesCommonName = "otter";
@@ -171,36 +171,45 @@ describe("Spatial - Species", () => {
 
         cy.get('button[name="next"]').click();
 
-        // Create the species-list
-        cy.get('input[name="newListName"]').clear().type(
-            "Test species list from Spatial Hub",
-        );
-        cy.get('input[ng-model="newListDescription"]').type("Some description");
-        cy.get('select[ng-model="newListType"]').select("Test list");
+        // Only run the remainder of the tests if ENABLE_MUTATION_TESTS is set to true
+        if (Cypress.env("ENABLE_MUTATION_TESTS") === "true") {
+            const speciesListName =
+                `${TEST_LIST_PREFIX} textarea ${getFileNameTimeStamp()}`;
+            // Create the species-list
+            cy.get('input[name="newListName"]').clear().type(
+                "Test species list from Spatial Hub",
+            );
+            cy.get('input[ng-model="newListDescription"]').type(
+                "Some description",
+            );
+            cy.get('select[ng-model="newListType"]').select("Test list");
 
-        cy.get('button[name="next"]').click();
+            cy.get('button[name="next"]').click();
 
-        // Verify that the modal is not shown and the layer is added to the list
-        cy.get(".progress-bar", { timeout: 10_000 }).should("not.be.visible");
-        cy.get('[name="divMappedLayers"]').contains(speciesListName)
-            .should("be.visible");
+            // Verify that the modal is not shown and the layer is added to the list
+            cy.get(".progress-bar", { timeout: 10_000 }).should(
+                "not.be.visible",
+            );
+            cy.get('[name="divMappedLayers"]').contains(speciesListName)
+                .should("be.visible");
 
-        // Verify that the legend is visible
-        cy.get("#legend").should("be.visible");
+            // Verify that the legend is visible
+            cy.get("#legend").should("be.visible");
 
-        // Verify that the layer is visible on the map
-        cy.get("#map").matchImageSnapshot({
-            failureThreshold: 0.4,
-            failureThresholdType: "percent",
-        });
+            // Verify that the layer is visible on the map
+            cy.get("#map").matchImageSnapshot({
+                failureThreshold: 0.4,
+                failureThresholdType: "percent",
+            });
 
-        // // Verify clicking an occurences, shows a popup window
-        // cy.get("#map").click(160, 260);
-        // cy.get(".leaflet-popup-content")
-        //     .should(
-        //         "contain",
-        //         speciesListName,
-        //     );
+            // // Verify clicking an occurences, shows a popup window
+            // cy.get("#map").click(160, 260);
+            // cy.get(".leaflet-popup-content")
+            //     .should(
+            //         "contain",
+            //         speciesListName,
+            //     );
+        }
     });
 
     it("Can add species from new imported points", () => {

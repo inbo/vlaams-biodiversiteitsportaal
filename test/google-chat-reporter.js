@@ -10,88 +10,124 @@ const {
     EVENT_SUITE_END,
 } = Mocha.Runner.constants;
 
+// Cards are limited to 100 elements, so we limit the output to 90
+const OUTPUT_LIMIT = 90;
+
 // this reporter outputs test results, indenting two spaces per suite
 class GoogleChatReporter {
     constructor(runner, options) {
-        const stats = runner.stats;
         const outputFile = options.outputFile || 'test-results.json';
         console.log(`Writing test results to ${outputFile}`, options);
 
         let output = [];
-        if(fs.existsSync(outputFile)) {
-             output = JSON.parse(fs.readFileSync(outputFile, 'utf8'));
+        if (fs.existsSync(outputFile)) {
+            output = JSON.parse(fs.readFileSync(outputFile, 'utf8'));
         }
 
-        runner
-            // .once(EVENT_RUN_BEGIN, () => {
+        let suite;
 
-            // })
+        runner
             .on(EVENT_SUITE_BEGIN, (test) => {
                 if (test.fullTitle()) {
-                    fs.appendFileSync(outputFile, `<b>${test.fullTitle()}</b>\n\n`);
-                output.push({
-                    "textParagraph": {
-                        "text": `<b>${test.fullTitle()}</b>`,
-                    }
-                });
+                    suite = {
+                        title: test.fullTitle(),
+                        tests: []
+                    };
                 }
             })
             .on(EVENT_SUITE_END, () => {
+                const passed = suite.tests.filter(t => t.result === 'passed').length;
+                const failed = suite.tests.filter(t => t.result === 'failed').length;
+                const pending = suite.tests.filter(t => t.result === 'skipped').length;
+
+                output.push({
+                    "textParagraph": {
+                        "text": `<b>${suite.title}</b>\n<i>${passed} passed, ${failed} failed, ${pending} skipped</i>`
+                    }
+                });
+                for (const test of suite.tests) {
+                    if (test.result === 'failed') {
+                        output.push({
+                            "decoratedText": {
+                                "text": `<font color=\"#b10000\">${test.title}</font>`,
+                                "bottomLabel": test.err.message,
+                                "startIcon": {
+                                    "materialIcon": {
+                                        "name": "cancel",
+                                        "fill": true,
+                                        "weight": 200,
+                                        "grade": -25
+                                    }
+                                }
+                            }
+                        });
+                    } else if (test.result === 'skipped') {
+//                        output.push({
+//                            "decoratedText": {
+//                                "text": `<font color=\"#cccccc\">${test.title}</font>`,
+//                                "bottomLabel": "skipped",
+//                                "startIcon": {
+//                                    "materialIcon": {
+//                                        "name": "step_over",
+//                                        "fill": true,
+//                                        "weight": 200,
+//                                        "grade": -25
+//                                    }
+//                                }
+//                            }
+//                        });
+                    } else if (test.result === 'passed') {
+//                        output.push({
+//                            "decoratedText": {
+//                                "text": `<font color=\"#00b100\">${test.title}</font>`,
+//                                "bottomLabel": "passed",
+//                                "startIcon": {
+//                                    "materialIcon": {
+//                                        "name": "check_circle",
+//                                        "fill": true,
+//                                        "weight": 200,
+//                                        "grade": -25
+//                                    }
+//                                }
+//                            }
+//                        });
+                    }
+                }
             })
             .on(EVENT_TEST_PASS, (test) => {
-                output.push({
-                    "decoratedText": {
-                        "text": `<font color=\"#008015\">${test.fullTitle()}</font>`,
-                        "startIcon": {
-                            "materialIcon": {
-                                "name": "check_circle",
-                                "fill": true,
-                                "weight": 300,
-                                "grade": -25
-                            }
-                        }
-                    }
+                suite.tests.push({
+                    title: test.fullTitle(),
+                    result: 'passed'
                 });
             })
             .on(EVENT_TEST_FAIL, (test, err) => {
-                output.push({
-                    "decoratedText": {
-                        "text": `<font color=\"#b10000\">${test.fullTitle()}</font>`,
-                        "bottomLabel": err.message,
-                        "startIcon": {
-                            "materialIcon": {
-                                "name": "cancel",
-                                "fill": true,
-                                "weight": 200,
-                                "grade": -25
-                            }
-                        }
+                test.err = err;
+                suite.tests.push({
+                    title: test.fullTitle(),
+                    result: 'failed',
+                    err: {
+                        message: err.message,
                     }
+
                 });
             })
             .on(EVENT_TEST_PENDING, (test) => {
-                output.push({
-                    "decoratedText": {
-                        "text": `<font color=\"#cccccc\">${test.fullTitle()}</font>`,
-                        "bottomLabel": "skipped",
-                        "startIcon": {
-                            "materialIcon": {
-                                "name": "step_over",
-                                "fill": true,
-                                "weight": 200,
-                                "grade": -25
-                            }
-                        }
-                    }
+                suite.tests.push({
+                    title: test.fullTitle(),
+                    result: 'skipped',
                 });
             })
-            
+
             .once(EVENT_RUN_END, () => {
-                output.push({
-                    "textParagraph": {
-                        "text": `<i>${stats.passes}/${stats.passes + stats.failures} ok</i>`,
-                    }
-                });
+                if (output.length > OUTPUT_LIMIT) {
+                    output.splice(OUTPUT_LIMIT);
+                    output.push({
+                        "textParagraph": {
+                            "text": `...`
+                        }
+                    });
+                }
+
                 fs.writeFileSync(outputFile, JSON.stringify(output));
             });
     }
