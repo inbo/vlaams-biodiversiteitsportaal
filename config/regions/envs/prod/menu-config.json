@@ -1,6 +1,6 @@
 [
   {
-    "label": "Gewest Vlaanderen (inclusief EEZ België)",
+    "label": "Gewest Vlaanderen, inclusief Belgische EEZ",
     "fid": "cl10103"
   },
   {
@@ -16,11 +16,11 @@
     "fid": "cl10104"
   },
   {
-    "label": "Natura 2000 gebieden (2013)",
+    "label": "Natura 2000 gebieden",
     "fid": "cl10006"
   },
   {
-    "label": "Openbaar bos en natuurgebieden (beheerd door ANB)",
+    "label": "Openbaar bos en natuurgebieden",
     "fid": "cl10076"
   },
   {
@@ -32,7 +32,7 @@
     "fid": "cl10005"
   },
   {
-    "label": "Vlaams Ecologisch Netwerk (VEN) en Integraal Verwevings- en Ondersteunend Netwerk (IVON)",
+    "label": "Vlaams Ecologisch Netwerk en Integraal Verwevings- en Ondersteunend Netwerk",
     "fid": "cl10005"
   }
 ]
