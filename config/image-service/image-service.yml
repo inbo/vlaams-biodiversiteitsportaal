@@ -70,6 +70,9 @@ biocache:
 bie:
   baseURL: "${common.protocol}://${common.domain}/bie-hub"
 
+userDetails:
+  url: "${common.protocol}://${common.domain}/userdetails/"
+
 dataSource:
   driverClassName: org.postgresql.Driver
   dialect: org.hibernate.spatial.dialect.postgis.PostgisPG9Dialect
