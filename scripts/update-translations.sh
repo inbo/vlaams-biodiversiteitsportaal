@@ -52,10 +52,6 @@ for lang in ${LANGUAGES}; do
   crowdin file download -l ${lang} --project-id=${PROJECT_ID} --token="${CROWDIN_TOKEN}" collectory/messages.properties -d ./config/collectory/i18n/crowdin
   mv ./config/collectory/i18n/crowdin/messages.properties ./config/collectory/i18n/crowdin/messages_${lang//-/_}.properties
 
-  # doi-service
-  crowdin file download -l ${lang} --project-id=${PROJECT_ID} --token="${CROWDIN_TOKEN}" doi-service/messages.properties -d ./config/doi-service/i18n/crowdin
-  mv ./config/doi-service/i18n/crowdin/messages.properties ./config/doi-service/i18n/crowdin/messages_${lang//-/_}.properties
-
   # image-service
   crowdin file download -l ${lang} --project-id=${PROJECT_ID} --token="${CROWDIN_TOKEN}" image-service/messages.properties -d ./config/image-service/i18n/crowdin
   mv ./config/image-service/i18n/crowdin/messages.properties ./config/image-service/i18n/crowdin/messages_${lang//-/_}.properties
