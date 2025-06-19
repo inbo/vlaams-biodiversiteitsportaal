@@ -89,7 +89,7 @@ skin:
   layout: ala-main
 spatial:
   baseURL: ${common.protocol}://${common.domain}/spatial-hub
-termsOfUseUrl: ''
+termsOfUseUrl: 'https://www.vlaanderen.be/inbo/normen-voor-datagebruik/'
 userdetails:
   api:
     url: ${common.protocol}://${common.domain}/userdetails/
