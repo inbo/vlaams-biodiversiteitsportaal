@@ -1,8 +1,12 @@
 describe("Regions - view", () => {
     const gemeente = "Balen";
+    const numberOfWMSRequestPerLoad = 9;
 
     beforeEach(() => {
-        cy.intercept("/geoserver/ALA/wms*").as("loadWMSTiles");
+        cy.intercept("/geoserver/ALA/wms*").as("loadGeoserverWMSTiles");
+        cy.intercept("/biocache-service/mapping/wms/*").as(
+            "loadBiocacheWMSTiles",
+        );
 
         cy.visit("https://natuurdata.inbo.be/regions/Gemeenten/Balen");
         cy.get(".spinner", { timeout: 10_000 }).should("not.be.visible");
@@ -25,7 +29,7 @@ describe("Regions - view", () => {
             });
 
         // Check map snapshot
-        cy.wait(1_000); // Unfortunately, the map takes a bit to load, no better way to wait
+        cy.wait(Array(numberOfWMSRequestPerLoad).fill("@loadBiocacheWMSTiles"));
         cy.get("#region-map").matchImageSnapshot({
             failureThreshold: 0.1,
             failureThresholdType: "percent",
@@ -51,7 +55,9 @@ describe("Regions - view", () => {
         cy.get("#speciesZone").find("tr.link").first().click();
 
         // Check map was updated to filter on species
-        cy.wait(1_000); // Unfortunately, the map takes a bit to load, no better way to wait
+        cy.wait(
+            Array(numberOfWMSRequestPerLoad * 2).fill("@loadBiocacheWMSTiles"),
+        );
         cy.get("#region-map").matchImageSnapshot({
             failureThreshold: 0.1,
             failureThresholdType: "percent",
@@ -60,17 +66,20 @@ describe("Regions - view", () => {
 
     it("Taxonomy tab", () => {
         cy.get("a#taxonomyTab").click();
-        cy.get(".spinner").should("not.be.visible");
-
-        // Should have a pie chart, click once to filter on largest group
-        cy.get("#taxonomyTabContent").find("svg").should("be.visible").click(
-            200,
-            200,
-        );
+        cy.get(".spinner").should("not.be.visible")
+            // Should have a pie chart, click once to filter on largest group
+            .get("#taxonomyTabContent").find("svg").as("svg").should(
+                "be.visible",
+            ).get("@svg").click(
+                200,
+                200,
+            );
         cy.get("#recordsLink").should("contain", "Animalia");
 
         // Check map was updated to filter on Animalia
-        cy.wait(1_000); // Unfortunately, the map takes a bit to load, no better way to wait
+        cy.wait(
+            Array(numberOfWMSRequestPerLoad * 3).fill("@loadBiocacheWMSTiles"),
+        ).wait(500); // Additional wait for map to update :(
         cy.get("#region-map").matchImageSnapshot({
             failureThreshold: 0.1,
             failureThresholdType: "percent",
@@ -110,7 +119,9 @@ describe("Regions - view", () => {
         );
 
         // Check map was updated to filter on List
-        cy.wait(1_000); // Unfortunately, the map takes a bit to load, no better way to wait
+        cy.wait(
+            Array(numberOfWMSRequestPerLoad * 2).fill("@loadBiocacheWMSTiles"),
+        );
         cy.get("#region-map").matchImageSnapshot({
             failureThreshold: 0.1,
             failureThresholdType: "percent",
@@ -157,7 +168,11 @@ describe("Regions - view", () => {
                     });
 
                 // Check map was updated to filter on List
-                cy.wait(1_000); // Unfortunately, the map takes a bit to load, no better way to wait
+                cy.wait(
+                    Array(numberOfWMSRequestPerLoad * 2).fill(
+                        "@loadBiocacheWMSTiles",
+                    ),
+                );
                 cy.get("#region-map").matchImageSnapshot({
                     failureThreshold: 0.1,
                     failureThresholdType: "percent",

@@ -77,7 +77,11 @@ describe("Bie - Species page", () => {
         cy.get(".taxon-tabs > ul").find("a[href='#records']").click();
         cy.get("#charts").children().each((chart) => {
             const chartId = chart.attr("id");
-            cy.get(`#${chartId}`).should("be.visible")
+            cy.get(`#${chartId}`).should(() => {
+                // Wait for the chart to be loaded properly
+                expect(chart).to.be.visible;
+                expect(chart.outerHeight()).to.be.greaterThan(300);
+            })
                 .matchImageSnapshot(`species-page-${chartId}`, {
                     failureThreshold: 0.4,
                     failureThresholdType: "percent",

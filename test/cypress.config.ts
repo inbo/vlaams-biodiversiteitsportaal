@@ -50,9 +50,9 @@ module.exports = defineConfig({
       // Delete videos of passing tests to save space
       on("after:spec", (spec, results) => {
         if (results && results.video) {
-          // Do we have failures for any retry attempts?
+          // Do we have any test failures?
           const failures = results.tests.some((test) =>
-            test.attempts.some((attempt) => attempt.state === "failed")
+            test.state === "failed"
           );
           if (!failures) {
             // delete the video if the spec passed and no tests retried
