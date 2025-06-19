@@ -16,6 +16,9 @@ server:
     contextPath: /spatial-hub
 grails:
   serverURL: "${common.protocol}://${common.domain}/spatial-hub"
+  cache:
+    ehcache:
+      ehcacheXmlLocation: 'file:///config/spatial-hub/ehcache.xml'
   app:
     context: "/"
     controllers:
@@ -501,4 +504,4 @@ environments:
     quickLinksLayers:
       bwk: cl10036
       landbouw: cl10016
-      vhga: cl10024
+      vhga: cl10037
