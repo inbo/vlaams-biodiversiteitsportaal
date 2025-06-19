@@ -13,10 +13,10 @@ Voor meer geavanceerd functies, moet er echter ingelogd worden.
 - Eigen soorten-lijsten beheren
 
 
-### Toegang voor medewerkers Vlaamse overheid (Enkel Departement omgeving)
+### Toegang voor medewerkers Vlaamse overheid <span style="font-size: small">(enkel Departement omgeving)</span>
 
 Medewerkers van de Vlaamse overheid kunnen inloggen via het systeem voor interne gebruikersbeheer.  
-Je kan steeds jouw rechten nagaan op de [Mijn profiel pagina](https://mijnprofiel-gebruikersbeheer.vlaanderen.be/user/).  
+Je kan steeds jouw rechten nagaan op de <a href="https://mijnprofiel-gebruikersbeheer.vlaanderen.be/user/" target="_blank">mijn profiel pagina</a>.  
 Als je al toegang hebt, zie je op de pagina _"Mijn gebruikersrechten"_ een lijn met "Het Vlaams Biodiversiteitsportaal".
 ![Rechten in acm-idm](/images/pages/acm_idm_mijn_profiel.png)
 
@@ -27,8 +27,11 @@ Inloggen kan dan door te klikken op de knop _"Medewerkers Vlaamse overheid"_ wan
 </p>
 
 
-Als je nog geen rechten hebt gekregen, moet je deze eerst aanvragen aan je lokale beheerder.  
-Deze kan je vinden op de [Mijn profiel pagina](https://mijnprofiel-gebruikersbeheer.vlaanderen.be/user/) via de knop _"Mijn lokale beheerders"_.
+Als je nog geen rechten hebt gekregen, moet je deze eerst aanvragen bij je lokale beheerder.  
+Doorgaans is dit de IT-helpdesk van de entiteit waar je voor werkt.  
+Je kan ze ook vinden op de <a href="https://mijnprofiel-gebruikersbeheer.vlaanderen.be/user/" target="_blank">mijn profiel pagina</a> via de knop _"Mijn lokale beheerders"_.  
+Hen e-mail je dan met de vraag het "Vlaams biodiversiteitsportaal gebruiker" recht te krijgen.
+ 
 
 ### Toegang voor andere gebruikers
 
