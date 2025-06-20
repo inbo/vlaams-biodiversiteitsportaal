@@ -170,4 +170,12 @@
             max-width: 32rem;
         }
     }
+
+    @media (max-width: 26rem) { // make sure that hamburger icon does not sink lower than the navbar on the mobile devices (iphone)
+        .navbar-toggle {
+            display: block;
+            float: none;
+        }
+    }
+
 }
