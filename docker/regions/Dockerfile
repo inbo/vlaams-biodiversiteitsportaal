@@ -7,7 +7,7 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 # ARG SOURCE=https://github.com/AtlasOfLivingAustralia/regions.git
 
 ARG VERSION=fix-species-list-table
-ARG COMMIT=03b238664d71213962ba283210c6cae58d444418
+ARG COMMIT=af92b31f3e76f2ef4c5975868af41a0a0f8daf29
 ARG SOURCE=https://github.com/StefanVanDyck/regions.git
 LABEL ala.version=inbo-${COMMIT}
 
