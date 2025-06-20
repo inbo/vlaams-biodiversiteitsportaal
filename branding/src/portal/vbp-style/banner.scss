@@ -99,6 +99,10 @@
         }
         .navbar-toggle {
             display: block;
+            position: absolute;
+            top: 10px;     /* adjust as needed */
+            right: 10px;   /* adjust as needed */
+            z-index: 9999; // to keep on top
         }
         .navbar-collapse {
             // border: 0;
@@ -170,12 +174,4 @@
             max-width: 32rem;
         }
     }
-
-    @media (max-width: 26rem) { // make sure that hamburger icon does not sink lower than the navbar on the mobile devices (iphone)
-        .navbar-toggle {
-            display: block;
-            float: none;
-        }
-    }
-
 }
