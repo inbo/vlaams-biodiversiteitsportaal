@@ -70,6 +70,8 @@ i18n.on("languageChanged", function (lng) {
     // Store in the cookie the selection
     i18n.services.languageDetector.cacheUserLanguage(lng);
   }
+  // Use correct github issue template based on language
+  $("#create-github-issue-link").attr("href", `https://github.com/inbo/vlaams-biodiversiteitsportaal/issues/new?template=user_bug_report_${lng}.md`)
 });
 
 (function ($) {
