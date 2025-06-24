@@ -1,8 +1,8 @@
 ---
 name: Bug report
-about: Create a report to help us improve
-title: ''
-labels: ''
+about: Create a report to help us improve VBP
+title: 'VBP user feedback bug report'
+labels: 'user-feedback'
 assignees: ''
 
 ---
