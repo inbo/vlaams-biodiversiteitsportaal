@@ -61,7 +61,7 @@
   "footer.bug-modal.intro": "Feel free to look and click around!\nBut, be aware that this is a test and development website and is not yet ready for official, public use.",
   "footer.bug-modal.contact-us": "If you have any questions or feedback, please contact us at ",
   "footer.bug-modal.report-bug": "In case you spot any bugs or issues, you are strongly encouraged to report them on ",
-  "footer.bug-modal.github-page": "our public Github page",
+  "footer.bug-modal.github-page": "our public Github page (login required).",
   "footer.bug-modal.login-button": "Click here to login",
   "my-profile.not-logged-in": "You are not logged in.",
   "my-profile.please-login": "Log in to view your profile.",
