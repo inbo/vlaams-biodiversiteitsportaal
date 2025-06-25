@@ -196,8 +196,19 @@ uriExclusionFilterPattern: /occurrences/shapeUpload,/images.*,/css.*,/js.*,.*jso
 uriFilterPattern: /admin/*,/alaAdmin/*,/download/*
 useDownloadPlugin: true
 userCharts: false
-userdetails:
-  url: ${common.protocol}://${common.domain}/userdetails
 searchTabs:
   catalogUpload: false
 
+environments:
+  inbo_prod:
+    userdetails:
+      url: https://natuurdata.inbo.be/userdetails
+  inbo_uat:
+    userdetails:
+      url: https://natuurdata.uat.inbo.be/userdetails
+  inbo_dev:
+    userdetails:
+      url: https://natuurdata.dev.inbo.be/userdetails
+  local:
+    userdetails:
+      url: http://localhost/userdetails
