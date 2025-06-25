@@ -115,10 +115,28 @@ describe("Biocache - Advanced search", () => {
         );
     });
 
-    // TODO: https://github.com/inbo/vlaams-biodiversiteitsportaal/issues/548
-    it.skip("States search", () => {
-        cy.fail(
-            "requires states endpoint to be fixed: https://github.com/orgs/inbo/projects/15?pane=issue&itemId=112534668&issue=inbo%7Cvlaams-biodiversiteitsportaal%7C548",
+    it("States search", () => {
+        const searchCountryInput = "Belgium";
+        const searchStatesInput = "Flanders";
+        cy.get("#country").select(searchCountryInput);
+        cy.get("#state").should((selectElem) => {
+            expect(selectElem.children()).to.have.length(4);
+        }).select(searchStatesInput);
+        cy.get(".tab-pane.active").within(() => {
+            cy.get("input.btn-primary[type='submit']").click();
+        });
+        cy.url().should(
+            "include",
+            "/biocache-hub/occurrences/search",
+        ).get(".queryDisplay").contains(
+            searchCountryInput,
+            { matchCase: false },
+        ).contains(
+            searchStatesInput,
+            { matchCase: false },
+        ).get("#results").children().should(
+            "have.length.greaterThan",
+            10,
         );
     });
 
