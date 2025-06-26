@@ -10,13 +10,6 @@
       "label": "IUCN"
     },
     {
-      "uid": "dr572",
-      "field": "threatStatus_nvrlf_s",
-      "sourceField": "status",
-      "term": "threatStatus",
-      "label": "NVRLF"
-    },
-    {
       "uid": "dr552",
       "field": "threatStatus_vrlf_s",
       "sourceField": "status",
