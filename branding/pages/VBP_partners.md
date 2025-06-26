@@ -1,3 +1,8 @@
+---
+title: "Partners"
+description: "Een overzicht van de partners van het Vlaams Biodiversiteitsportaal."
+---
+
 <h2>Over het Vlaams Biodiversiteitsportaal</h2>
 <h3>Het Vlaams Biodiversiteitsportaal is de centrale biodiversiteitsdatabank van Vlaanderen.</h3>
 

@@ -60,7 +60,9 @@ export default {
                 ...(await generateMarkdownPages({
                     globPattern: "./pages/**/*",
                     template: "src/pages/pages-layout.html",
-                    templateString: "{{{content}}}",
+                    templateTitleString: "{{{title}}}",
+                    templateDescriptionString: "{{{description}}}",
+                    templateContentString: "{{{content}}}",
                     outputFolder: "./src/pages",
                 })),
             },

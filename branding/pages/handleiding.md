@@ -1,3 +1,7 @@
+---
+title: "Handleiding"
+description: "Een beknopte handleiding voor het gebruik van het Vlaams Biodiversiteitsportaal"
+---
 ## Beknopte Handleiding voor het Vlaams Biodiversiteitsportaal
 
 ### 1\. Toegang tot het Portaal

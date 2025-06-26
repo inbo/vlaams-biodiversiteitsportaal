@@ -1,3 +1,7 @@
+---
+title: "Inbo Applicaties"
+description: "Een overzicht van de INBO-applicaties voor biodiversiteit en natuurbeheer."
+---
 <h2>
     Ontdek de INBO-applicaties
 </h2>

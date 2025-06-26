@@ -215,7 +215,7 @@ paths:
       tags:
       - List Items
       summary: 'Get distinct values for a field in species list item '
-      description: 'Get a list distinct values for a field in species list item '
+      description: "Get a list distinct values for a field in species list item "
       operationId: 'Get distinct values for a field in species list item '
       parameters:
       - name: field

@@ -1,3 +1,7 @@
+---
+title: "Problemen melden"
+description: "Uitleg hoe best problemen in het portaal te melden."
+---
 <h2>Handleiding: Gebruik van de GitHub Issue Tracker</h2>
 <p>Met de GitHub Issue Tracker kunt u eenvoudig problemen, suggesties en verbeterpunten rapporteren.</p>
 <h3>1. Toegang tot de Issue Tracker</h3>

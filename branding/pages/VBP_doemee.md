@@ -1,3 +1,7 @@
+---
+title: "Doe mee"
+description: "Een overzicht van de citizen science initiatieven van het Vlaams Biodiversiteitsportaal en INBO."
+---
 <h2>Doe mee met het Vlaams Biodiversiteitsportaal</h2>
 <h3>Ontdek en bescherm de biodiversiteit in Vlaanderen!</h3>
 <p>Het Vlaams Biodiversiteitsportaal is dé plek waar kennis over natuur in Vlaanderen samenkomt. Dit platform bundelt

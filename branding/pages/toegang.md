@@ -1,3 +1,7 @@
+---
+title: "Toegong tot het Portaal"
+description: "Een handleiding mbt. het verkrijgen van toegang tot het Vlaams Biodiversiteitsportaal"
+---
 ## Toegang tot geavanceerde functies van het biodiversiteitsportaal
 
 Eenvoudig raadplegen van onze biodiversiteitsdata is open voor iedereen.  

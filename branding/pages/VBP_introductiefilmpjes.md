@@ -1,3 +1,7 @@
+---
+title: "Indroductiefilmpjes"
+description: "Een aantal video's die uitleg geven bij de functionaliteit aangeboden door het VBP."
+---
 ## Introductiefilmpjes
 
 Hier kan je de introductiefilpjes nog eens herbekijken

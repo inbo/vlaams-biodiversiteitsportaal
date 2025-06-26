@@ -3,17 +3,22 @@ import markdownit from "markdown-it";
 import markdowItFrontMatter from "markdown-it-front-matter";
 import path, { basename } from "path";
 import fs from "fs/promises";
+import { parse } from "yaml";
 
 export async function generateMarkdownPages(
     {
         globPattern = "./pages/**/*",
         template = "src/pages/pages-layout.html",
-        templateString = "{{{content}}}",
+        templateTitleString = "{{{title}}}",
+        templateDescriptionString = "{{{description}}}",
+        templateContentString = "{{{content}}}",
         outputFolder = "./src/pages",
     }: {
         globPattern?: string;
         template?: string;
-        templateString?: string;
+        templateTitleString?: string;
+        templateDescriptionString?: string;
+        templateContentString?: string;
         outputFolder?: string;
     },
 ): Promise<Map<string, string>> {
@@ -27,18 +32,27 @@ export async function generateMarkdownPages(
             html: true,
         },
     ).use(markdowItFrontMatter, (frontMatter) => {
-        metaData = frontMatter;
+        metaData = parse(frontMatter);
     });
 
     const templateFile = await fs.readFile(template, "utf-8");
 
     const result = new Map<string, string>();
     for (const file of markdownFiles) {
-        const fileContent = await fs.readFile(file, "utf-8");
+        let fileContent = await fs.readFile(file, "utf-8");
+        if (file.endsWith(".md")) {
+            fileContent = md.render(fileContent);
+        }
 
         const output = templateFile.replace(
-            templateString,
-            file.endsWith(".md") ? md.render(fileContent) : fileContent,
+            templateTitleString,
+            metaData.title,
+        ).replace(
+            templateDescriptionString,
+            metaData.description,
+        ).replace(
+            templateContentString,
+            fileContent,
         );
 
         const fileBasename = basename(file)

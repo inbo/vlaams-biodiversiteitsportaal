@@ -1,3 +1,7 @@
+---
+title: "Uidagingen"
+description: "Een lijst van uitdagingen voor nieuwkomers in het Vlaams Biodiversiteitsportaal"
+---
 ## Uitdagingen voor Testers van het Vlaams Biodiversiteitsportaal
 
 #### 1. **Soortinformatie opzoeken**  
