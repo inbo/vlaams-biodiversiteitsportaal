@@ -10043,39 +10043,39 @@
     },
     {
       "isoCode": "NB",
-      "name": "Noord Brabant"
+      "name": "North Brabant"
     },
     {
       "isoCode": "NH",
-      "name": "Noord Holland"
+      "name": "North Holland"
     },
     {
       "isoCode": "DR",
-      "name": "Drenthe"
+      "name": "Provincie Drenthe"
     },
     {
       "isoCode": "FL",
-      "name": "Flevoland"
+      "name": "Provincie Flevoland"
     },
     {
       "isoCode": "GE",
-      "name": "Gelderland"
+      "name": "Provincie Gelderland"
     },
     {
       "isoCode": "OV",
-      "name": "Overijssel"
+      "name": "Provincie Overijssel"
     },
     {
       "isoCode": "UT",
-      "name": "Utrecht"
+      "name": "Provincie Utrecht"
     },
     {
       "isoCode": "ZE",
-      "name": "Zeeland"
+      "name": "Provincie Zeeland"
     },
     {
       "isoCode": "ZH",
-      "name": "Zuid Holland"
+      "name": "South Holland"
     }
   ],
   "BE": [
@@ -10085,15 +10085,15 @@
     },
     {
       "isoCode": "BRU",
-      "name": "Brussels hoofdstedelijk gewest"
+      "name": "Brussels Capital"
     },
     {
       "isoCode": "VLG",
-      "name": "Vlaanderen"
+      "name": "Flanders"
     },
     {
       "isoCode": "WAL",
-      "name": "Wallonië"
+      "name": "Wallonia"
     }
   ],
   "DE": [

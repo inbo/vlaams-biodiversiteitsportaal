@@ -5,15 +5,15 @@
   },
   {
     "isoCode": "AL",
-    "name": "Albanië"
+    "name": "Albania"
   },
   {
     "isoCode": "DZ",
-    "name": "Algerije"
+    "name": "Algeria"
   },
   {
     "isoCode": "AS",
-    "name": "Amerikaans-Samoa"
+    "name": "American Samoa"
   },
   {
     "isoCode": "AD",
@@ -33,15 +33,15 @@
   },
   {
     "isoCode": "AG",
-    "name": "Antigua en Barbuda"
+    "name": "Antigua and Barbuda"
   },
   {
     "isoCode": "AR",
-    "name": "Argentinië"
+    "name": "Argentina"
   },
   {
     "isoCode": "AM",
-    "name": "Armenië"
+    "name": "Armenia"
   },
   {
     "isoCode": "AW",
@@ -49,23 +49,23 @@
   },
   {
     "isoCode": "AU",
-    "name": "Australië"
+    "name": "Australia"
   },
   {
     "isoCode": "AT",
-    "name": "Oostenrijk"
+    "name": "Austria"
   },
   {
     "isoCode": "AZ",
-    "name": "Azerbeidzjan"
+    "name": "Azerbaijan"
   },
   {
     "isoCode": "BS",
-    "name": "Bahama's"
+    "name": "Bahamas"
   },
   {
     "isoCode": "BH",
-    "name": "Bahrein"
+    "name": "Bahrain"
   },
   {
     "isoCode": "BD",
@@ -77,11 +77,11 @@
   },
   {
     "isoCode": "BY",
-    "name": "Wit-Rusland"
+    "name": "Belarus"
   },
   {
     "isoCode": "BE",
-    "name": "België"
+    "name": "Belgium"
   },
   {
     "isoCode": "BZ",
@@ -105,11 +105,11 @@
   },
   {
     "isoCode": "BQ",
-    "name": "Bonaire, Sint Eustatius en Saba"
+    "name": "Bonaire, Sint Eustatius, and Saba"
   },
   {
     "isoCode": "BA",
-    "name": "Bosnië en Herzegovina"
+    "name": "Bosnia and Herzegovina"
   },
   {
     "isoCode": "BW",
@@ -117,19 +117,19 @@
   },
   {
     "isoCode": "BV",
-    "name": "Bouveteiland"
+    "name": "Bouvet Island"
   },
   {
     "isoCode": "BR",
-    "name": "Brazilië"
+    "name": "Brazil"
   },
   {
     "isoCode": "IO",
-    "name": "Brits Indische Oceaanterritorium"
+    "name": "British Indian Ocean Territory"
   },
   {
     "isoCode": "VG",
-    "name": "Britse Maagdeneilanden"
+    "name": "British Virgin Islands"
   },
   {
     "isoCode": "BN",
@@ -137,7 +137,7 @@
   },
   {
     "isoCode": "BG",
-    "name": "Bulgarije"
+    "name": "Bulgaria"
   },
   {
     "isoCode": "BF",
@@ -149,15 +149,15 @@
   },
   {
     "isoCode": "CV",
-    "name": "Kaapverdië"
+    "name": "Cabo Verde"
   },
   {
     "isoCode": "KH",
-    "name": "Cambodja"
+    "name": "Cambodia"
   },
   {
     "isoCode": "CM",
-    "name": "Kameroen"
+    "name": "Cameroon"
   },
   {
     "isoCode": "CA",
@@ -165,19 +165,19 @@
   },
   {
     "isoCode": "KY",
-    "name": "Kaaimaneilanden"
+    "name": "Cayman Islands"
   },
   {
     "isoCode": "CF",
-    "name": "Centraal-Afrikaanse Republiek"
+    "name": "Central African Republic"
   },
   {
     "isoCode": "TD",
-    "name": "Tsjaad"
+    "name": "Chad"
   },
   {
     "isoCode": "CL",
-    "name": "Chili"
+    "name": "Chile"
   },
   {
     "isoCode": "CN",
@@ -185,11 +185,11 @@
   },
   {
     "isoCode": "CX",
-    "name": "Christmaseiland"
+    "name": "Christmas Island"
   },
   {
     "isoCode": "CC",
-    "name": "Cocoseilanden"
+    "name": "Cocos [Keeling] Islands"
   },
   {
     "isoCode": "CO",
@@ -197,15 +197,15 @@
   },
   {
     "isoCode": "KM",
-    "name": "Comoren"
+    "name": "Comoros"
   },
   {
     "isoCode": "CD",
-    "name": "Congo-Kinshasa"
+    "name": "Congo"
   },
   {
     "isoCode": "CK",
-    "name": "Cookeilanden"
+    "name": "Cook Islands"
   },
   {
     "isoCode": "CR",
@@ -213,7 +213,7 @@
   },
   {
     "isoCode": "HR",
-    "name": "Kroatië"
+    "name": "Croatia"
   },
   {
     "isoCode": "CU",
@@ -229,15 +229,15 @@
   },
   {
     "isoCode": "CZ",
-    "name": "Tsjechië"
+    "name": "Czechia"
   },
   {
     "isoCode": "TL",
-    "name": "Oost-Timor"
+    "name": "Democratic Republic of Timor-Leste"
   },
   {
     "isoCode": "DK",
-    "name": "Denemarken"
+    "name": "Denmark"
   },
   {
     "isoCode": "DJ",
@@ -249,7 +249,7 @@
   },
   {
     "isoCode": "DO",
-    "name": "Dominicaanse Republiek"
+    "name": "Dominican Republic"
   },
   {
     "isoCode": "EC",
@@ -257,7 +257,7 @@
   },
   {
     "isoCode": "EG",
-    "name": "Egypte"
+    "name": "Egypt"
   },
   {
     "isoCode": "SV",
@@ -265,7 +265,7 @@
   },
   {
     "isoCode": "GQ",
-    "name": "Equatoriaal-Guinea"
+    "name": "Equatorial Guinea"
   },
   {
     "isoCode": "ER",
@@ -273,23 +273,23 @@
   },
   {
     "isoCode": "EE",
-    "name": "Estland"
+    "name": "Estonia"
   },
   {
     "isoCode": "ET",
-    "name": "Ethiopië"
+    "name": "Ethiopia"
   },
   {
     "isoCode": "FK",
-    "name": "Falklandeilanden"
+    "name": "Falkland Islands"
   },
   {
     "isoCode": "FO",
-    "name": "Faeröer"
+    "name": "Faroe Islands"
   },
   {
     "isoCode": "FM",
-    "name": "Micronesië"
+    "name": "Federated States of Micronesia"
   },
   {
     "isoCode": "FJ",
@@ -301,19 +301,19 @@
   },
   {
     "isoCode": "FR",
-    "name": "Frankrijk"
+    "name": "France"
   },
   {
     "isoCode": "GF",
-    "name": "Frans-Guyana"
+    "name": "French Guiana"
   },
   {
     "isoCode": "PF",
-    "name": "Frans-Polynesië"
+    "name": "French Polynesia"
   },
   {
     "isoCode": "TF",
-    "name": "Franse Zuidelijke Gebieden"
+    "name": "French Southern Territories"
   },
   {
     "isoCode": "GA",
@@ -325,11 +325,11 @@
   },
   {
     "isoCode": "GE",
-    "name": "Georgië"
+    "name": "Georgia"
   },
   {
     "isoCode": "DE",
-    "name": "Duitsland"
+    "name": "Germany"
   },
   {
     "isoCode": "GH",
@@ -341,11 +341,11 @@
   },
   {
     "isoCode": "GR",
-    "name": "Griekenland"
+    "name": "Greece"
   },
   {
     "isoCode": "GL",
-    "name": "Groenland"
+    "name": "Greenland"
   },
   {
     "isoCode": "GD",
@@ -369,11 +369,11 @@
   },
   {
     "isoCode": "GN",
-    "name": "Guinee"
+    "name": "Guinea"
   },
   {
     "isoCode": "GW",
-    "name": "Guinee-Bissau"
+    "name": "Guinea-Bissau"
   },
   {
     "isoCode": "GY",
@@ -381,15 +381,15 @@
   },
   {
     "isoCode": "HT",
-    "name": "Haïti"
+    "name": "Haiti"
   },
   {
     "isoCode": "JO",
-    "name": "Jordanië"
+    "name": "Hashemite Kingdom of Jordan"
   },
   {
     "isoCode": "HM",
-    "name": "Heard en McDonaldeilanden"
+    "name": "Heard Island and McDonald Islands"
   },
   {
     "isoCode": "HN",
@@ -397,15 +397,15 @@
   },
   {
     "isoCode": "HK",
-    "name": "Hongkong"
+    "name": "Hong Kong"
   },
   {
     "isoCode": "HU",
-    "name": "Hongarije"
+    "name": "Hungary"
   },
   {
     "isoCode": "IS",
-    "name": "IJsland"
+    "name": "Iceland"
   },
   {
     "isoCode": "IN",
@@ -413,7 +413,7 @@
   },
   {
     "isoCode": "ID",
-    "name": "Indonesië"
+    "name": "Indonesia"
   },
   {
     "isoCode": "IR",
@@ -421,11 +421,11 @@
   },
   {
     "isoCode": "IQ",
-    "name": "Irak"
+    "name": "Iraq"
   },
   {
     "isoCode": "IE",
-    "name": "Ierland"
+    "name": "Ireland"
   },
   {
     "isoCode": "IM",
@@ -433,15 +433,15 @@
   },
   {
     "isoCode": "IL",
-    "name": "Israël"
+    "name": "Israel"
   },
   {
     "isoCode": "IT",
-    "name": "Italië"
+    "name": "Italy"
   },
   {
     "isoCode": "CI",
-    "name": "Ivoorkust"
+    "name": "Ivory Coast"
   },
   {
     "isoCode": "JM",
@@ -457,11 +457,11 @@
   },
   {
     "isoCode": "KZ",
-    "name": "Kazachstan"
+    "name": "Kazakhstan"
   },
   {
     "isoCode": "KE",
-    "name": "Kenia"
+    "name": "Kenya"
   },
   {
     "isoCode": "KI",
@@ -473,11 +473,11 @@
   },
   {
     "isoCode": "KW",
-    "name": "Koeweit"
+    "name": "Kuwait"
   },
   {
     "isoCode": "KG",
-    "name": "Kirgizië"
+    "name": "Kyrgyzstan"
   },
   {
     "isoCode": "LA",
@@ -485,11 +485,11 @@
   },
   {
     "isoCode": "LV",
-    "name": "Letland"
+    "name": "Latvia"
   },
   {
     "isoCode": "LB",
-    "name": "Libanon"
+    "name": "Lebanon"
   },
   {
     "isoCode": "LS",
@@ -501,7 +501,7 @@
   },
   {
     "isoCode": "LY",
-    "name": "Libië"
+    "name": "Libya"
   },
   {
     "isoCode": "LI",
@@ -509,19 +509,19 @@
   },
   {
     "isoCode": "LU",
-    "name": "Luxemburg"
+    "name": "Luxembourg"
   },
   {
     "isoCode": "MO",
-    "name": "Macau"
+    "name": "Macao"
   },
   {
     "isoCode": "MK",
-    "name": "Noord-Macedonië"
+    "name": "Macedonia"
   },
   {
     "isoCode": "MG",
-    "name": "Madagaskar"
+    "name": "Madagascar"
   },
   {
     "isoCode": "MW",
@@ -529,11 +529,11 @@
   },
   {
     "isoCode": "MY",
-    "name": "Maleisië"
+    "name": "Malaysia"
   },
   {
     "isoCode": "MV",
-    "name": "Maldiven"
+    "name": "Maldives"
   },
   {
     "isoCode": "ML",
@@ -545,7 +545,7 @@
   },
   {
     "isoCode": "MH",
-    "name": "Marshalleilanden"
+    "name": "Marshall Islands"
   },
   {
     "isoCode": "MQ",
@@ -553,7 +553,7 @@
   },
   {
     "isoCode": "MR",
-    "name": "Mauritanië"
+    "name": "Mauritania"
   },
   {
     "isoCode": "MU",
@@ -573,7 +573,7 @@
   },
   {
     "isoCode": "MN",
-    "name": "Mongolië"
+    "name": "Mongolia"
   },
   {
     "isoCode": "ME",
@@ -585,7 +585,7 @@
   },
   {
     "isoCode": "MA",
-    "name": "Marokko"
+    "name": "Morocco"
   },
   {
     "isoCode": "MZ",
@@ -593,11 +593,11 @@
   },
   {
     "isoCode": "MM",
-    "name": "Myanmar"
+    "name": "Myanmar [Burma]"
   },
   {
     "isoCode": "NA",
-    "name": "Namibië"
+    "name": "Namibia"
   },
   {
     "isoCode": "NR",
@@ -609,15 +609,15 @@
   },
   {
     "isoCode": "NL",
-    "name": "Nederland"
+    "name": "Netherlands"
   },
   {
     "isoCode": "NC",
-    "name": "Nieuw-Caledonië"
+    "name": "New Caledonia"
   },
   {
     "isoCode": "NZ",
-    "name": "Nieuw-Zeeland"
+    "name": "New Zealand"
   },
   {
     "isoCode": "NI",
@@ -637,19 +637,19 @@
   },
   {
     "isoCode": "NF",
-    "name": "Norfolkeiland"
+    "name": "Norfolk Island"
   },
   {
     "isoCode": "KP",
-    "name": "Noord-Korea"
+    "name": "North Korea"
   },
   {
     "isoCode": "MP",
-    "name": "Noordelijke Marianen"
+    "name": "Northern Mariana Islands"
   },
   {
     "isoCode": "NO",
-    "name": "Noorwegen"
+    "name": "Norway"
   },
   {
     "isoCode": "OM",
@@ -665,7 +665,7 @@
   },
   {
     "isoCode": "PS",
-    "name": "Palestina"
+    "name": "Palestine"
   },
   {
     "isoCode": "PA",
@@ -673,7 +673,7 @@
   },
   {
     "isoCode": "PG",
-    "name": "Papoea-Nieuw-Guinea"
+    "name": "Papua New Guinea"
   },
   {
     "isoCode": "PY",
@@ -685,15 +685,15 @@
   },
   {
     "isoCode": "PH",
-    "name": "Filipijnen"
+    "name": "Philippines"
   },
   {
     "isoCode": "PN",
-    "name": "Pitcairneilanden"
+    "name": "Pitcairn Islands"
   },
   {
     "isoCode": "PL",
-    "name": "Polen"
+    "name": "Poland"
   },
   {
     "isoCode": "PT",
@@ -709,27 +709,27 @@
   },
   {
     "isoCode": "KR",
-    "name": "Zuid-Korea"
+    "name": "Republic of Korea"
   },
   {
     "isoCode": "LT",
-    "name": "Litouwen"
+    "name": "Republic of Lithuania"
   },
   {
     "isoCode": "MD",
-    "name": "Moldavië"
+    "name": "Republic of Moldova"
   },
   {
     "isoCode": "CG",
-    "name": "Congo-Brazzaville"
+    "name": "Republic of the Congo"
   },
   {
     "isoCode": "RO",
-    "name": "Roemenië"
+    "name": "Romania"
   },
   {
     "isoCode": "RU",
-    "name": "Rusland"
+    "name": "Russia"
   },
   {
     "isoCode": "RW",
@@ -741,7 +741,7 @@
   },
   {
     "isoCode": "SH",
-    "name": "Sint-Helena"
+    "name": "Saint Helena"
   },
   {
     "isoCode": "LC",
@@ -753,11 +753,11 @@
   },
   {
     "isoCode": "PM",
-    "name": "Saint-Pierre en Miquelon"
+    "name": "Saint Pierre and Miquelon"
   },
   {
     "isoCode": "VC",
-    "name": "Saint Vincent en de Grenadines"
+    "name": "Saint Vincent and the Grenadines"
   },
   {
     "isoCode": "BL",
@@ -773,7 +773,7 @@
   },
   {
     "isoCode": "SA",
-    "name": "Saoedi-Arabië"
+    "name": "Saudi Arabia"
   },
   {
     "isoCode": "SN",
@@ -781,11 +781,11 @@
   },
   {
     "isoCode": "RS",
-    "name": "Servië"
+    "name": "Serbia"
   },
   {
     "isoCode": "SC",
-    "name": "Seychellen"
+    "name": "Seychelles"
   },
   {
     "isoCode": "SL",
@@ -801,35 +801,35 @@
   },
   {
     "isoCode": "SK",
-    "name": "Slowakije"
+    "name": "Slovakia"
   },
   {
     "isoCode": "SI",
-    "name": "Slovenië"
+    "name": "Slovenia"
   },
   {
     "isoCode": "SB",
-    "name": "Salomonseilanden"
+    "name": "Solomon Islands"
   },
   {
     "isoCode": "SO",
-    "name": "Somalië"
+    "name": "Somalia"
   },
   {
     "isoCode": "ZA",
-    "name": "Zuid-Afrika"
+    "name": "South Africa"
   },
   {
     "isoCode": "GS",
-    "name": "Zuid-Georgië en Zuidelijke Sandwicheilanden"
+    "name": "South Georgia and the South Sandwich Islands"
   },
   {
     "isoCode": "SS",
-    "name": "Zuid-Soedan"
+    "name": "South Sudan"
   },
   {
     "isoCode": "ES",
-    "name": "Spanje"
+    "name": "Spain"
   },
   {
     "isoCode": "LK",
@@ -837,11 +837,11 @@
   },
   {
     "isoCode": "KN",
-    "name": "Saint Kitts en Nevis"
+    "name": "St Kitts and Nevis"
   },
   {
     "isoCode": "SD",
-    "name": "Soedan"
+    "name": "Sudan"
   },
   {
     "isoCode": "SR",
@@ -849,27 +849,27 @@
   },
   {
     "isoCode": "SJ",
-    "name": "Spitsbergen en Jan Mayen"
+    "name": "Svalbard and Jan Mayen"
   },
   {
     "isoCode": "SZ",
-    "name": "Eswatini"
+    "name": "Swaziland"
   },
   {
     "isoCode": "SE",
-    "name": "Zweden"
+    "name": "Sweden"
   },
   {
     "isoCode": "CH",
-    "name": "Zwitserland"
+    "name": "Switzerland"
   },
   {
     "isoCode": "SY",
-    "name": "Syrië"
+    "name": "Syria"
   },
   {
     "isoCode": "ST",
-    "name": "Sao Tomé en Principe"
+    "name": "São Tomé and Príncipe"
   },
   {
     "isoCode": "TW",
@@ -877,7 +877,7 @@
   },
   {
     "isoCode": "TJ",
-    "name": "Tadzjikistan"
+    "name": "Tajikistan"
   },
   {
     "isoCode": "TZ",
@@ -901,15 +901,15 @@
   },
   {
     "isoCode": "TT",
-    "name": "Trinidad en Tobago"
+    "name": "Trinidad and Tobago"
   },
   {
     "isoCode": "TN",
-    "name": "Tunesië"
+    "name": "Tunisia"
   },
   {
     "isoCode": "TR",
-    "name": "Turkije"
+    "name": "Turkey"
   },
   {
     "isoCode": "TM",
@@ -917,7 +917,7 @@
   },
   {
     "isoCode": "TC",
-    "name": "Turks- en Caicoseilanden"
+    "name": "Turks and Caicos Islands"
   },
   {
     "isoCode": "TV",
@@ -925,31 +925,31 @@
   },
   {
     "isoCode": "UM",
-    "name": "Kleine afgelegen eilanden van de Verenigde Staten"
+    "name": "U.S. Minor Outlying Islands"
   },
   {
     "isoCode": "VI",
-    "name": "Amerikaanse Maagdeneilanden"
+    "name": "U.S. Virgin Islands"
   },
   {
     "isoCode": "UG",
-    "name": "Oeganda"
+    "name": "Uganda"
   },
   {
     "isoCode": "UA",
-    "name": "Oekraïne"
+    "name": "Ukraine"
   },
   {
     "isoCode": "AE",
-    "name": "Verenigde Arabische Emiraten"
+    "name": "United Arab Emirates"
   },
   {
     "isoCode": "GB",
-    "name": "Verenigd Koninkrijk"
+    "name": "United Kingdom"
   },
   {
     "isoCode": "US",
-    "name": "Verenigde Staten"
+    "name": "United States"
   },
   {
     "isoCode": "UY",
@@ -957,7 +957,7 @@
   },
   {
     "isoCode": "UZ",
-    "name": "Oezbekistan"
+    "name": "Uzbekistan"
   },
   {
     "isoCode": "VU",
@@ -965,7 +965,7 @@
   },
   {
     "isoCode": "VA",
-    "name": "Vaticaanstad"
+    "name": "Vatican City"
   },
   {
     "isoCode": "VE",
@@ -977,15 +977,15 @@
   },
   {
     "isoCode": "WF",
-    "name": "Wallis en Futuna"
+    "name": "Wallis and Futuna"
   },
   {
     "isoCode": "EH",
-    "name": "Westelijke Sahara"
+    "name": "Western Sahara"
   },
   {
     "isoCode": "YE",
-    "name": "Jemen"
+    "name": "Yemen"
   },
   {
     "isoCode": "ZM",
@@ -997,6 +997,6 @@
   },
   {
     "isoCode": "AX",
-    "name": "Ålandeilanden"
+    "name": "Åland"
   }
 ]
