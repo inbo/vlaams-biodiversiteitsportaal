@@ -52,7 +52,7 @@ description: "Een overzicht van de partners van het Vlaams Biodiversiteitsportaa
     <img src="https://www.biodiversity.be/5127/download" alt="GBIF logo">
 </div>
 
-<h3>Departement Omgeving</h3>
+<h3>Beleidsdomein Omgeving</h3>
 <div class="vbp-partners-logos">
     <img src="https://assets.vlaanderen.be/image/upload/c_scale,q_auto:eco,w_1000/Vlaanderen_is_wetenschap_vol_xnbdq2"
         srcset="https://assets.vlaanderen.be/image/upload/c_scale,q_auto:eco,w_320/Vlaanderen_is_wetenschap_vol_xnbdq2 320w, https://assets.vlaanderen.be/image/upload/c_scale,q_auto:eco,w_480/Vlaanderen_is_wetenschap_vol_xnbdq2 480w, https://assets.vlaanderen.be/image/upload/c_scale,q_auto:eco,w_960/Vlaanderen_is_wetenschap_vol_xnbdq2 960w, https://assets.vlaanderen.be/image/upload/c_scale,q_auto:eco,w_1420/Vlaanderen_is_wetenschap_vol_xnbdq2 1420w, https://assets.vlaanderen.be/image/upload/c_scale,q_auto:eco,w_1920/Vlaanderen_is_wetenschap_vol_xnbdq2 1920w"
