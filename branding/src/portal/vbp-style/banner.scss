@@ -1,3 +1,6 @@
+@import "@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "@fortawesome/fontawesome-free/scss/regular.scss";
+
 .banner {
     // font-size: large;
 
@@ -28,7 +31,6 @@
 
         display: block;
         width: 100%;
-        min-width: 6em;
         height: 100%;
         padding: auto;
         padding: 1em;
@@ -53,22 +55,17 @@
         }
     }
 
+    /* Authentication menu items */
     #dropdown-auth-menu {
-        /* Authentication menu items */
-        &.signedIn > li > a.signUpBtn {
-            display: none;
+        i {
+            color: #888;
+            @extend .fa-user-xmark !optional;
         }
-
-        &.signedOut > li > a.myProfileBtn {
-            display: none;
-        }
-
-        &.signedIn > li > a.loginBtn {
-            display: none;
-        }
-
-        &.signedOut > li > a.logoutBtn {
-            display: none;
+        &.signedIn {
+            i {
+                color: $inbo-primary;
+                @extend .fa-user !optional;
+            }
         }
     }
 
@@ -87,7 +84,7 @@
     }
 
     // override breakpoint: https://stackoverflow.com/questions/19827605/how-to-change-bootstrap-navbar-collapse-breakpoint
-    @media (max-width: 80rem) {
+    @media (max-width: 60rem) {
         .navbar-left {
             border-bottom: solid 1px #bbb;
         }
@@ -100,8 +97,8 @@
         .navbar-toggle {
             display: block;
             position: absolute;
-            top: 10px;     /* adjust as needed */
-            right: 10px;   /* adjust as needed */
+            top: 10px; /* adjust as needed */
+            right: 10px; /* adjust as needed */
             z-index: 9999; // to keep on top
         }
         .navbar-collapse {
@@ -167,11 +164,96 @@
         .navbar-nav .open .dropdown-menu > li > a:focus {
             background-image: none;
         }
+
+        // Mobile search behavior
+        #banner-search-container {
+            .banner-search-input {
+                &.expanded {
+                    width: 150px; // Smaller width on mobile
+                }
+            }
+        }
     }
 
     @media only screen and (max-width: 400px) {
         .navbar .navbar-brand {
             max-width: 32rem;
         }
+    }
+}
+
+.help-icon {
+    font-size: 1.1em;
+    vertical-align: middle;
+}
+
+#geo-portal-link {
+    i {
+        color: #888;
+        @extend .fa-lock !optional;
+        margin-left: 0.5em;
+    }
+}
+
+.signedOut.hidden-on-logged-out {
+    display: none;
+}
+.signedIn.hidden-on-logged-in {
+    display: none;
+}
+
+#banner-search-container {
+    .banner-search-wrapper {
+        display: flex;
+        align-items: center;
+        height: $inbo-banner-height;
+        position: relative;
+    }
+
+    .banner-search-input {
+        border: 2px solid $inbo-primary;
+        border-radius: 20px;
+        padding: 8px 15px;
+        font-size: 14px;
+        outline: none;
+        transition: width 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        width: 0;
+        opacity: 0;
+        margin-right: 10px;
+        background-color: white;
+        overflow: hidden;
+
+        &.expanded {
+            width: 200px;
+            opacity: 1;
+        }
+
+        &:focus {
+            border-color: $inbo-secondary;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+    }
+}
+
+#banner-search {
+    // display: none;
+    font-size: 1.5em;
+    color: $inbo-primary;
+    margin-right: 1em;
+    cursor: pointer;
+    vertical-align: middle;
+    text-anchor: middle;
+    line-height: $inbo-banner-height;
+    display: flex;
+    align-items: center;
+    height: $inbo-banner-height;
+    transition: color 0.3s ease;
+
+    &:hover {
+        color: $inbo-secondary;
+    }
+
+    &.active {
+        color: $inbo-secondary;
     }
 }

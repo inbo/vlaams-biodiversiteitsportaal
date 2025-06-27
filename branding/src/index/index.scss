@@ -107,6 +107,49 @@
     font-weight: bold;
 }
 
+.data-summary-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+
+    width: 100%;
+
+    a.btn {
+        flex: 1;
+        max-width: 300px;
+        min-width: 150px;
+    }
+}
+
+ul.data-summary-links {
+    list-style: none;
+    display: flex;
+    width: 40%;
+    max-width: 30em;
+    margin-top: 0.5em;
+    justify-content: space-evenly;
+
+    font-size: larger;
+    font-weight: bold;
+
+    > li {
+        flex: 1;
+        display: inline-block;
+        padding-right: 2em;
+        min-width: fit-content;
+        &:before {
+            content: "›";
+            font-size: 1em;
+            font-weight: bold;
+        }
+    }
+
+    a {
+        color: white;
+        padding-left: 0.5em;
+    }
+}
+
 .data-summary::before {
     content: "";
     position: absolute;

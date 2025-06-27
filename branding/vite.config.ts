@@ -11,7 +11,7 @@ import { basename, dirname } from "node:path";
 import { createClient, defaultPlugins } from "@hey-api/openapi-ts";
 
 const replacements = {
-    loginStatus: "",
+    loginStatus: "login-status-dependent",
     loginURL: "",
     logoutURL: "",
 };
