@@ -4,8 +4,8 @@ description: "Een handleiding mbt. het verkrijgen van toegang tot het Vlaams Bio
 ---
 ## Toegang tot geavanceerde functies van het biodiversiteitsportaal
 
-Eenvoudig raadplegen van onze biodiversiteitsdata is open voor iedereen.  
-Hier is dus geen gebruiker voor nodig.  
+Eenvoudig raadplegen van de biodiversiteitsdata is mogelijk voor iedereen.  
+Hier is dus geen gebruikersaccount voor nodig.  
 
 Voor meer geavanceerd functies, moet er echter ingelogd worden.
 
@@ -17,7 +17,7 @@ Voor meer geavanceerd functies, moet er echter ingelogd worden.
 - Eigen soorten-lijsten beheren
 
 
-### Toegang voor medewerkers Vlaamse overheid <span style="font-size: small">(enkel Departement omgeving)</span>
+### Toegang voor medewerkers Vlaamse overheid <span style="font-size: small">(enkel beleidsdomein Omgeving)</span>
 
 Medewerkers van de Vlaamse overheid kunnen inloggen via het systeem voor interne gebruikersbeheer.  
 Je kan steeds jouw rechten nagaan op de <a href="https://mijnprofiel-gebruikersbeheer.vlaanderen.be/user/" target="_blank">mijn profiel pagina</a>.  
