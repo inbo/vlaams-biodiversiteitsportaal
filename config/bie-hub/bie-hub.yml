@@ -193,7 +193,7 @@ management:
         include: health
 
 sortFields: occurrenceCount,score,scientificName,commonNameSingle,rank
-defaultSortField: occurrenceCount
+defaultSortField: score
 
 environments:
   inbo_dev:
