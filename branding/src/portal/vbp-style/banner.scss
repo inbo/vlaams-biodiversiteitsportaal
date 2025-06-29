@@ -84,7 +84,7 @@
     }
 
     // override breakpoint: https://stackoverflow.com/questions/19827605/how-to-change-bootstrap-navbar-collapse-breakpoint
-    @media (max-width: 60rem) {
+    @media (max-width: 1025px) {
         .navbar-left {
             border-bottom: solid 1px #bbb;
         }
@@ -139,39 +139,45 @@
             padding-top: 10px;
             padding-bottom: 10px;
         }
-        .collapse.in {
-            display: block !important;
-        }
 
-        // sub-menus
-        .navbar-nav .open .dropdown-menu {
-            position: static;
-            float: none;
-            width: auto;
-            margin-top: 0;
-            background-color: transparent;
-            border: 0;
-            box-shadow: none;
-        }
-        .navbar-nav .open .dropdown-menu > li > a,
-        .navbar-nav .open .dropdown-menu .dropdown-header {
-            padding: 5px 15px 5px 25px;
-        }
-        .navbar-nav .open .dropdown-menu > li > a {
-            line-height: 20px;
-        }
-        .navbar-nav .open .dropdown-menu > li > a:hover,
-        .navbar-nav .open .dropdown-menu > li > a:focus {
-            background-image: none;
-        }
+        // Keep navbar-right items horizontal on mobile
+        ul.navbar-right {
+            display: flex !important;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: flex-start;
+            border-top: 1px solid #bbb;
 
-        // Mobile search behavior
-        #banner-search-container {
-            .banner-search-input {
-                &.expanded {
-                    width: 150px; // Smaller width on mobile
+            > li {
+                min-width: 6em;
+                flex: 1;
+
+                > a {
+                    padding: 0.5em 0.75em;
+                    margin: 0;
+                }
+
+                > ul {
+                    border-top: 2px solid #bbb !important;
+                    position: relative !important;
+                    width: 100vw !important;
+                    padding-top: 0;
+
+                    > li {
+                        position: relative !important;
+                        left: 0 !important;
+                        text-align: left;
+
+                        > a {
+                            padding: 0.5em 1em;
+                            display: block;
+                        }
+                    }
                 }
             }
+        }
+        .collapse.in {
+            display: block !important;
         }
     }
 
@@ -196,15 +202,16 @@
 }
 
 .signedOut.hidden-on-logged-out {
-    display: none;
+    display: none !important;
 }
 .signedIn.hidden-on-logged-in {
-    display: none;
+    display: none !important;
 }
 
 #banner-search-container {
     .banner-search-wrapper {
         display: flex;
+        justify-content: center;
         align-items: center;
         height: $inbo-banner-height;
         position: relative;

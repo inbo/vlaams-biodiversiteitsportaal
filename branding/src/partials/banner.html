@@ -89,49 +89,43 @@
                 <li><a data-i18n="nav.myprofile" class="myProfileBtn hidden-on-logged-out ::loginStatus::"
                     href="/my-profile.html">Jouw
                     profiel</a></li>
-                <li>
                 <li role="separator" class="divider hidden-on-logged-out ::loginStatus::"></li>
 
                 <li><a data-i18n="nav.species-lists" class="myProfileBtn hidden-on-logged-out ::loginStatus::"
                     href="/species-list/speciesList/list">Mijn
                     soortenlijsten</a></li>
-                <li>
 
                 <li><a id="my-annotated-records" data-i18n="nav.annotated-records"
                     class="myProfileBtn hidden-on-logged-out ::loginStatus::" href="">Mijn
                     annotaties</a>
                 </li>
-                <li>
 
                 <li><a data-i18n="nav.alerts" class="myProfileBtn hidden-on-logged-out ::loginStatus::"
                     href="/alerts/">Mijn meldingen</a></li>
-                <li>
 
                 <li><a data-i18n="nav.spatial-analysis" class="myProfileBtn hidden-on-logged-out ::loginStatus::"
                     href="/spatial-hub?tool=log">Mijn analyse</a></li>
-                <li>
                 <li role="separator" class="divider hidden-on-logged-out ::loginStatus::"></li>
                 <li>
                   <a id="logoutButton" data-i18n="nav.logout"
                     class="logoutBtn logout-button hidden-on-logged-out ::loginStatus::"
                     href="::logoutURL::">Uitloggen</a>
                 </li>
+              </ul>
             </li>
-          </ul>
-          </li>
 
-          <!-- Language selection -->
-          <li id="dropdown-lang" class="dropdown language-selection">
-            <a href=" #" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-              aria-expanded="false">NL<span class="caret"></span></a>
-            <ul class="locale-switcher dropdown-menu dropdown-lang-menu">
-              <li class="locale-link" data-locale="nl"><a class="nl-locale-link" href="#"><span
-                    class="lang_link_nl">Nederlands</span></a></li>
-              <!-- <li class="locale-link" data-locale="fr"><a class="fr-locale-link" href="#"><span class="lang_link_fr">Français</span></a></li> -->
-              <li class="locale-link" data-locale="en"><a class="en-locale-link" href="#"><span
-                    class="lang_link_en">English</span></a></li>
-            </ul>
-          </li>
+            <!-- Language selection -->
+            <li id="dropdown-lang" class="dropdown language-selection">
+              <a href=" #" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                aria-expanded="false">NL<span class="caret"></span></a>
+              <ul class="locale-switcher dropdown-menu dropdown-lang-menu">
+                <li class="locale-link" data-locale="nl"><a class="nl-locale-link" href="#"><span
+                      class="lang_link_nl">Nederlands</span></a></li>
+                <!-- <li class="locale-link" data-locale="fr"><a class="fr-locale-link" href="#"><span class="lang_link_fr">Français</span></a></li> -->
+                <li class="locale-link" data-locale="en"><a class="en-locale-link" href="#"><span
+                      class="lang_link_en">English</span></a></li>
+              </ul>
+            </li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
@@ -140,7 +134,10 @@
 </div>
 
 <!-- end site-banner -->
+<script type="module" src="{{ resolve-from-root 'portal/banner.ts' }}"></script>
 <script type="module" src="{{ resolve-from-root 'portal/banner-search.ts' }}"></script>
+
+
 <!-- maintenance -->
 <div id="mante-container" style="display: none;" class="container"></div>
 <!-- end maintenance -->
