@@ -274,3 +274,17 @@
         box-shadow: 0px 0px 5px $inbo-secondary;
     }
 }
+
+// only show the my location button on small screens (mobile devices)
+#banner-my-location-button {
+    display: none;
+    @extend .navbar-toggle;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    left: 5em !important;
+
+    @media only screen and (max-width: 767px) {
+        display: block;
+    }
+}

@@ -103,7 +103,7 @@ i18n.on("languageChanged", function (lng) {
       // used in clean theme
       if ($("#dropdown-lang").length) {
         $("#dropdown-lang").find(".dropdown-toggle").html(
-          i18n.language + ' <span class="caret"></span>',
+          i18n.language + '<span class="caret"></span>',
         );
       }
     });
