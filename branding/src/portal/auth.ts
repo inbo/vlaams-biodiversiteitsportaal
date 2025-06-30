@@ -117,18 +117,21 @@ async function loginIfAuthCookieIsSet() {
 }
 
 async function setAuthMenuStatus() {
-  const authMenu = document.getElementById("dropdown-auth-menu")!;
+  Array.from(document.getElementsByClassName("login-status-dependent"))
+    .forEach(async (element) => {
+      if (await isLoggedIn()) {
+        element.classList.remove(settings.auth.ala.logoutClass);
+        element.classList.add(settings.auth.ala.loginClass);
 
-  if (await isLoggedIn()) {
-    console.debug("User is logged in");
-
-    authMenu.classList.remove(settings.auth.ala.logoutClass);
-    authMenu.classList.add(settings.auth.ala.loginClass);
-  } else {
-    console.debug("User is logged out");
-    authMenu.classList.remove(settings.auth.ala.loginClass);
-    authMenu.classList.add(settings.auth.ala.logoutClass);
-  }
+        const profile = (await getUser())!.profile;
+        (document.getElementById("my-annotated-records")! as HTMLAnchorElement)
+          .href =
+            `/biocache-hub/occurrences/search/?q=*:*&fq=assertion_user_id:%22${profile.sub}%22`;
+      } else {
+        element.classList.remove(settings.auth.ala.loginClass);
+        element.classList.add(settings.auth.ala.logoutClass);
+      }
+    });
 }
 
 function getCurrentUrl() {

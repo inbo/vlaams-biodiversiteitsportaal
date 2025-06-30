@@ -22,26 +22,30 @@ async function setCounter(id: string, val: number): Promise<void> {
 }
 
 async function loadStats(): Promise<void> {
-  const dataResourceCount = await fetch(`/collectory/ws/dataResource/count`);
-  const dataResourceCountJson = await dataResourceCount.json();
-  setCounter("stats_datasets", dataResourceCountJson.total || 0);
+  fetch(`/collectory/ws/dataResource/count`).then(async (response) => {
+    const dataResourceCountJson = await response.json();
+    setCounter("stats_datasets", dataResourceCountJson.total || 0);
+  });
 
-  const institutionCount = await fetch(`/collectory/ws/institution/count`);
-  const institutionCountJson = await institutionCount.json();
-  setCounter("stats_institutions", institutionCountJson.total || 0);
+  fetch(
+    `/species-list/ws/speciesList?max=0`,
+  ).then(async (response) => {
+    const listCountJson = await response.json();
+    setCounter("stats_lists", listCountJson.listCount || 0);
+  });
 
-  const speciesCount = await fetch(
+  fetch(
     `/biocache-service/occurrence/facets?q=*:*&facets=species&pageSize=0`,
-  );
-  const speciesCountJson = await speciesCount.json();
-  setCounter("stats_species", speciesCountJson[0]?.count || 0);
-
-  const occurrenceCount = await fetch(
+  ).then(async (response) => {
+    const speciesCountJson = await response.json();
+    setCounter("stats_species", speciesCountJson[0]?.count || 0);
+  });
+  fetch(
     `/biocache-service/occurrences/search?q=*:*&pageSize=0`,
-  );
-
-  const occurrenceCountJson = await occurrenceCount.json();
-  setCounter("stats_occurrences", occurrenceCountJson.totalRecords || 0);
+  ).then(async (response) => {
+    const occurrenceCountJson = await response.json();
+    setCounter("stats_occurrences", occurrenceCountJson.totalRecords || 0);
+  });
 }
 
 $(() => {

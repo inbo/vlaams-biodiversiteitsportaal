@@ -41,7 +41,8 @@
         margin: 0;
         width: 100vw;
         position: absolute;
-        top: $inbo-banner-height;
+        // 1px to avoid overlap with banner bottom border
+        top: calc($inbo-banner-height + 1px);
         left: 0;
     }
 
