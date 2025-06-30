@@ -11,7 +11,7 @@ import { basename, dirname } from "node:path";
 import { createClient, defaultPlugins } from "@hey-api/openapi-ts";
 
 const replacements = {
-    loginStatus: "",
+    loginStatus: "login-status-dependent",
     loginURL: "",
     logoutURL: "",
 };
@@ -22,6 +22,7 @@ export default {
     build: {
         outDir: resolve(__dirname, "./dist"),
         emptyOutDir: true,
+        sourcemap: true, // Enable source maps for debugging
         rollupOptions: {
             input: {
                 index: resolve(__dirname, "./src/index.html"),
@@ -182,6 +183,7 @@ export default {
         },
     ],
     server: {
+        sourcemapIgnoreList: false, // Include all files in source maps
         proxy: {
             "^/(species-list|image-service)/": {
                 target: "https://natuurdata.dev.inbo.be",
@@ -193,4 +195,3 @@ export default {
         environment: "happy-dom",
     },
 };
-
