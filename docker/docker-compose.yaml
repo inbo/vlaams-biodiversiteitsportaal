@@ -152,46 +152,46 @@ services:
       cassandradb:
         condition: service_healthy
 
-  solr:
-    image: solr:8
-    networks:
-      default:
-        aliases:
-          - solr.vbp.internal
-    ports:
-      - "8983:8983"
-      - "9983:9983"
-    volumes:
-      - ../config/solr:/var/solr/init/docker/solr-data:ro
-      - solr-data:/var/solr/data
-    environment:
-      SOLR_HEAP: 2g
-      SOLR_MODE: solrcloud
-    healthcheck:
-      test: [ "CMD-SHELL", "curl -sf http://localhost:8983/solr/" ]
-
-  solr-init:
-    image: solr:8
-    entrypoint: [ "bash", "-c" ]
-    command:
-      - |-
-        set -e -x
-        ./server/scripts/cloud-scripts/zkcli.sh -zkhost solr:9983 -cmd upconfig -confdir /var/solr/init/docker/solr-data/bie/ -confname bie
-        ./server/scripts/cloud-scripts/zkcli.sh -zkhost solr:9983 -cmd clear /configs/bie/managed-schema || true
-
-        ./server/scripts/cloud-scripts/zkcli.sh -zkhost solr:9983 -cmd upconfig -confdir /var/solr/init/docker/solr-data/biocache/ -confname biocache
-        ./server/scripts/cloud-scripts/zkcli.sh -zkhost solr:9983 -cmd clear /configs/biocache/managed-schema || true
-
-        curl -X POST --fail 'http://solr:8983/solr/admin/collections?action=CREATE&numShards=4&maxShardsPerNode=4&collection.configName=biocache&name=biocache' || curl -X POST --fail 'http://solr:8983/solr/admin/collections?action=RELOAD&name=biocache'
-        curl -X POST --fail 'http://solr:8983/solr/admin/collections?action=CREATE&numShards=4&maxShardsPerNode=4&collection.configName=biocache&name=sandbox'  || curl -X POST --fail 'http://solr:8983/solr/admin/collections?action=RELOAD&name=sandbox'
-        curl -X POST --fail 'http://solr:8983/solr/admin/collections?action=CREATE&numShards=4&maxShardsPerNode=4&collection.configName=bie&name=bie'           || curl -X POST --fail 'http://solr:8983/solr/admin/collections?action=RELOAD&name=bie'
-        curl -X POST --fail 'http://solr:8983/solr/admin/collections?action=CREATE&numShards=4&maxShardsPerNode=4&collection.configName=bie&name=bie-offline'   || curl -X POST --fail 'http://solr:8983/solr/admin/collections?action=RELOAD&name=bie-offline'
-    volumes:
-      - ../config/solr:/var/solr/init/docker/solr-data:ro
-      - solr-data:/var/solr/data
-    depends_on:
-      solr:
-        condition: service_healthy
+#  solr:
+#    image: solr:8
+#    networks:
+#      default:
+#        aliases:
+#          - solr.vbp.internal
+#    ports:
+#      - "8983:8983"
+#      - "9983:9983"
+#    volumes:
+#      - ../config/solr:/var/solr/init/docker/solr-data:ro
+#      - solr-data:/var/solr/data
+#    environment:
+#      SOLR_HEAP: 2g
+#      SOLR_MODE: solrcloud
+#    healthcheck:
+#      test: [ "CMD-SHELL", "curl -sf http://localhost:8983/solr/" ]
+#
+#  solr-init:
+#    image: solr:8
+#    entrypoint: [ "bash", "-c" ]
+#    command:
+#      - |-
+#        set -e -x
+#        ./server/scripts/cloud-scripts/zkcli.sh -zkhost solr:9983 -cmd upconfig -confdir /var/solr/init/docker/solr-data/bie/ -confname bie
+#        ./server/scripts/cloud-scripts/zkcli.sh -zkhost solr:9983 -cmd clear /configs/bie/managed-schema || true
+#
+#        ./server/scripts/cloud-scripts/zkcli.sh -zkhost solr:9983 -cmd upconfig -confdir /var/solr/init/docker/solr-data/biocache/ -confname biocache
+#        ./server/scripts/cloud-scripts/zkcli.sh -zkhost solr:9983 -cmd clear /configs/biocache/managed-schema || true
+#
+#        curl -X POST --fail 'http://solr:8983/solr/admin/collections?action=CREATE&numShards=4&maxShardsPerNode=4&collection.configName=biocache&name=biocache' || curl -X POST --fail 'http://solr:8983/solr/admin/collections?action=RELOAD&name=biocache'
+#        curl -X POST --fail 'http://solr:8983/solr/admin/collections?action=CREATE&numShards=4&maxShardsPerNode=4&collection.configName=biocache&name=sandbox'  || curl -X POST --fail 'http://solr:8983/solr/admin/collections?action=RELOAD&name=sandbox'
+#        curl -X POST --fail 'http://solr:8983/solr/admin/collections?action=CREATE&numShards=4&maxShardsPerNode=4&collection.configName=bie&name=bie'           || curl -X POST --fail 'http://solr:8983/solr/admin/collections?action=RELOAD&name=bie'
+#        curl -X POST --fail 'http://solr:8983/solr/admin/collections?action=CREATE&numShards=4&maxShardsPerNode=4&collection.configName=bie&name=bie-offline'   || curl -X POST --fail 'http://solr:8983/solr/admin/collections?action=RELOAD&name=bie-offline'
+#    volumes:
+#      - ../config/solr:/var/solr/init/docker/solr-data:ro
+#      - solr-data:/var/solr/data
+#    depends_on:
+#      solr:
+#        condition: service_healthy
 
   mailhog:
     image: mailhog/mailhog
