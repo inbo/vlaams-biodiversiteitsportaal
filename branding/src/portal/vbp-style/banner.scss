@@ -72,12 +72,16 @@
         }
     }
 
+    .submenu-icon {
+        position: relative;
+        left: -0.5em;
+    }
+
     /* Authentication menu items */
-    #dropdown-auth-menu {
-        & > a > i {
-            color: #888;
-            @extend .fa-user-xmark !optional;
-        }
+    #login-icon {
+        color: #888;
+        @extend .fa-user-xmark !optional;
+
         &.signedIn {
             i {
                 color: $inbo-primary;
@@ -129,6 +133,9 @@
         // Submenu items
         .navbar-nav {
             .open .dropdown-menu > li > a {
+                padding-left: 2.5em;
+                margin: 0;
+                color: black;
                 &:hover {
                     background-color: #f7f7f7;
                 }
@@ -179,11 +186,6 @@
                     }
                 }
 
-                > a {
-                    padding: 0.5em 0.75em;
-                    margin: 0;
-                }
-
                 > ul {
                     border-top: 2px solid #bbb !important;
                     position: relative !important;
@@ -194,11 +196,6 @@
                         position: relative !important;
                         left: 0 !important;
                         text-align: left;
-
-                        > a {
-                            padding: 0.5em 1em;
-                            display: block;
-                        }
                     }
                 }
             }
@@ -231,15 +228,12 @@
     }
 }
 
-// add lock icon to geo-portal link
-#geo-portal-link {
-    i {
-        color: #888;
-        @extend .fa-lock !optional;
-        position: relative;
-        padding-left: 1em;
-        margin-left: auto;
-    }
+// style lock icon to geo-portal link
+#geo-locked {
+    color: #888;
+    position: relative;
+    padding-left: 1em;
+    margin-left: auto;
 }
 
 .help-icon {

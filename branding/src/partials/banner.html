@@ -40,11 +40,25 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
               aria-expanded="false"><span data-i18n="nav.places">Geografisch</span> <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a id="geo-portal-link" class="::loginStatus::" href="/spatial-hub/"><span
-                    data-i18n="nav.spatial">Portaal </span><i
-                    class="fa fa-lock hidden-on-logged-in ::loginStatus::"></i></a></li>
-              <li><a data-i18n="nav.regions" href="/regions/">Regio's</a></li>
-              <li><a data-i18n="nav.your-area" href="/biocache-hub/explore/your-area/">Verken je omgeving</a></li>
+              <li>
+                <a id="geo-portal-link" class="::loginStatus::" href="/spatial-hub/">
+                  <i class="fa fa-map submenu-icon"></i>
+                  <span data-i18n="nav.spatial">Geografisch portaal </span>
+                  <i id="geo-locked" class="fa fa-lock hidden-on-logged-in ::loginStatus::"></i>
+                </a>
+              </li>
+              <li>
+                <a href="/regions/">
+                  <i class="fa fa-signs-post submenu-icon"></i>
+                  <span data-i18n="nav.regions">Regio's</span>
+                </a>
+              </li>
+              <li>
+                <a href="/biocache-hub/explore/your-area/">
+                  <i class="fa fa-location-crosshairs submenu-icon"></i>
+                  <span data-i18n="nav.your-area">Verken je omgeving</span>
+                </a>
+              </li>
             </ul>
           </li>
         </ul>
@@ -63,19 +77,47 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
               aria-expanded="false"><i class="fa fa-circle-question help-icon"></i></a>
             <ul id="dropdown-news-menu" class="dropdown-menu">
-              <li><a data-i18n="nav.help.overview" href="/pages/handleiding.html">Overzicht</a></li>
-              <li><a data-i18n="nav.help.toegang" href="/pages/toegang.html">Toegang tot
-                  het portaal</a></li>
+              <li>
+                <a href="/pages/handleiding.html">
+                  <i class="fa-solid fa-circle-info submenu-icon"></i>
+                  <span data-i18n="nav.help.overview">Overzicht</span>
+                </a>
+              </li>
+              <li>
+                <a href="/pages/toegang.html">
+                  <i class="fa-solid fa-user-lock submenu-icon"></i>
+                  <span data-i18n="nav.help.toegang">Toegang tot het portaal</span>
+                </a>
+              </li>
               <li>
                 <!-- <li role="separator" class="divider"></li>
               <li><a data-i18n="nav.help.handleiding" href="/pages/handleiding.html">interactieve rondleiding</a></li> -->
               <li role="separator" class="divider"></li>
-              <li><a data-i18n="nav.help.VBP_challenges" href="/pages/VBP_challenges.html">Challenges</a></li>
-              <li><a data-i18n="nav.help.VBP_introductiefilmpjes"
-                  href="/pages/VBP_introductiefilmpjes.html">Introductiefilmpjes</a></li>
-              <li><a data-i18n="nav.help.VBP_survey" href="/pages/survey.html">Survey</a></li>
+              <li>
+                <a href="/pages/VBP_challenges.html">
+                  <i class="fa-solid fa-bullseye submenu-icon"></i>
+                  <span data-i18n="nav.help.VBP_challenges">Challenges</span>
+                </a>
+              </li>
+              <li>
+                <a href="/pages/VBP_introductiefilmpjes.html">
+                  <i class="fa-solid fa-clapperboard submenu-icon"></i>
+                  <span data-i18n="nav.help.VBP_introductiefilmpjes">Introductiefilmpjes</span>
+                </a>
+              </li>
+              <li>
+                <a href="/pages/survey.html">
+                  <i class="fa-solid fa-square-poll-vertical submenu-icon"></i>
+                  <span data-i18n="nav.help.VBP_survey">Survey</span>
+
+                </a>
+              </li>
               <li role="separator" class="divider"></li>
-              <li><a data-i18n="nav.help.VBP_testen" href="/pages/VBP_testen.html">Problemen melden</a></li>
+              <li>
+                <a href="/pages/VBP_testen.html">
+                  <i class="fa fa-bug submenu-icon"></i>
+                  <span data-i18n="nav.help.VBP_testen">Problemen melden</span></a>
+              </li>
               <!-- <li><a data-i18n="nav.help.about" href="/pages/about.html">Over</a></li>
               <li><a data-i18n="nav.help.contact" href="/pages/contact.html">Contact</a></li> -->
             </ul>
@@ -90,35 +132,53 @@
               <li>
                 <a id="loginButton" class="loginBtn login-button hidden-on-logged-in ::loginStatus::"
                   href="::loginURL::">
+                  <i class="fa fa-right-to-bracket submenu-icon"></i>
                   <span data-i18n="nav.login">Login</span>
                 </a>
               </li>
 
-              <li><a data-i18n="nav.myprofile" class="myProfileBtn hidden-on-logged-out ::loginStatus::"
-                  href="/my-profile.html">Jouw
-                  profiel</a></li>
+              <li>
+                <a class="myProfileBtn hidden-on-logged-out ::loginStatus::" href="/my-profile.html">
+                  <i class="fa fa-id-badge submenu-icon"></i>
+                  <span data-i18n="nav.myprofile">Jouw profiel</span>
+                </a>
+              </li>
               <li role="separator" class="divider hidden-on-logged-out ::loginStatus::"></li>
 
-              <li><a data-i18n="nav.profile.species-lists" class="myProfileBtn hidden-on-logged-out ::loginStatus::"
-                  href="/species-list/speciesList/list">Mijn
-                  soortenlijsten</a></li>
-
-              <li><a id="my-annotated-records" data-i18n="nav.profile.annotated-records"
-                  class="myProfileBtn hidden-on-logged-out ::loginStatus::" href="">Mijn
-                  annotaties</a>
+              <li>
+                <a class="myProfileBtn hidden-on-logged-out ::loginStatus::" href="/species-list/speciesList/list">
+                  <i class="fa fa-list-check submenu-icon"></i>
+                  <span data-i18n="nav.profile.species-lists">Mijn soortenlijsten</span>
+                </a>
               </li>
 
-              <li><a data-i18n="nav.profile.alerts" class="myProfileBtn hidden-on-logged-out ::loginStatus::"
-                  href="/alerts/">Mijn
-                  meldingen</a></li>
+              <li>
+                <a id="my-annotated-records" class="myProfileBtn hidden-on-logged-out ::loginStatus::" href="">
+                  <i class="fa fa-flag submenu-icon"></i>
+                  <span data-i18n="nav.profile.annotated-records">Mijn annotaties</span>
+                </a>
+              </li>
 
-              <li><a data-i18n="nav.profile.spatial-analysis" class="myProfileBtn hidden-on-logged-out ::loginStatus::"
-                  href="/spatial-hub?tool=log">Mijn analyse</a></li>
+              <li>
+                <a class="myProfileBtn hidden-on-logged-out ::loginStatus::" href="/alerts/">
+                  <i class="fa fa-bell submenu-icon"></i>
+                  <span data-i18n="nav.profile.alerts">Mijn meldingen</span>
+                </a>
+              </li>
+
+              <li>
+                <a class="myProfileBtn hidden-on-logged-out ::loginStatus::" href="/spatial-hub?tool=log">
+                  <i class="fa fa-map submenu-icon"></i>
+                  <span data-i18n="nav.profile.spatial-analysis">Mijn analyse</span>
+                </a>
+              </li>
               <li role="separator" class="divider hidden-on-logged-out ::loginStatus::"></li>
               <li>
-                <a id="logoutButton" data-i18n="nav.logout"
-                  class="logoutBtn logout-button hidden-on-logged-out ::loginStatus::"
-                  href="::logoutURL::">Uitloggen</a>
+                <a id="logoutButton" class="logoutBtn logout-button hidden-on-logged-out ::loginStatus::"
+                  href="::logoutURL::">
+                  <i class="fa fa-right-from-bracket submenu-icon"></i>
+                  <span data-i18n="nav.logout">Uitloggen</span>
+                </a>
               </li>
             </ul>
           </li>
