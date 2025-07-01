@@ -9,6 +9,9 @@ function toggleSearchInput() {
     const searchInput = document.getElementById(
         "banner-search-input",
     )! as HTMLInputElement;
+    const searchButton = document.getElementById(
+        "banner-search-container",
+    )! as HTMLDivElement;
 
     const isActive = searchInput.classList.toggle("active");
     if (isActive) {
@@ -29,9 +32,11 @@ function toggleSearchInput() {
                 performSearch();
             }
         };
+        searchButton.classList.add("active");
     } else {
         searchInput.onblur = null;
         searchInput.onkeydown = null;
+        searchButton.classList.remove("active");
     }
 }
 

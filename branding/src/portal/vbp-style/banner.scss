@@ -257,6 +257,17 @@
         position: relative;
         top: 3px;
     }
+    &.active {
+        a {
+            background-color: white;
+            &:hover {
+                background-color: #f7f7f7 !important;
+            }
+        }
+        i {
+            color: $inbo-secondary;
+        }
+    }
     &:hover {
         a {
             text-decoration: none;
