@@ -78,12 +78,13 @@
     }
 
     /* Authentication menu items */
-    #login-icon {
-        color: #888;
-        @extend .fa-user-xmark !optional;
-
+    #dropdown-auth-menu {
+        #login-icon {
+            color: #888;
+            @extend .fa-user-xmark !optional;
+        }
         &.signedIn {
-            i {
+            #login-icon {
                 color: $inbo-primary;
                 @extend .fa-user !optional;
             }
@@ -131,14 +132,12 @@
     // Modify hamburger menu
     @media only screen and (max-width: 767px) {
         // Submenu items
-        .navbar-nav {
-            .open .dropdown-menu > li > a {
-                padding-left: 2.5em;
-                margin: 0;
-                color: black;
-                &:hover {
-                    background-color: #f7f7f7;
-                }
+        .dropdown-menu > li > a {
+            padding-left: 2.5em !important;
+            margin: 0 !important;
+            color: black !important;
+            &:hover {
+                background-color: #f7f7f7;
             }
         }
 
