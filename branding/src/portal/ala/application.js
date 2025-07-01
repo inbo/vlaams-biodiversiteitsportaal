@@ -2,15 +2,15 @@
     Simple JavaScript Templating
     John Resig - https://johnresig.com/ - MIT Licensed
 */
-(function(){
+(function () {
     var cache = {};
 
-    window.tmpl = function tmpl(str, data){
+    window.tmpl = function tmpl(str, data) {
         // Figure out if we're getting a template, or if we need to
         // load the template - and be sure to cache the result.
         var fn = !/\W/.test(str) ?
             cache[str] = cache[str] ||
-                tmpl(document.getElementById(str).innerHTML) :
+            tmpl(document.getElementById(str).innerHTML) :
 
             // Generate a reusable function that will serve as a template
             // generator (and which will be cached).
@@ -32,7 +32,7 @@
                 + "');}return p.join('');");
 
         // Provide some basic currying to the user
-        return data ? fn( data ) : fn;
+        return data ? fn(data) : fn;
     };
 })();
 
@@ -57,50 +57,52 @@ jQuery(function () {
     var autoCompleteSelector = BC_CONF.autoCompleteSelector || "#autocompleteHeader",
         appendToSelector = BC_CONF.appendToSelector || "#autocompleteSearchALA",
         bieURL = BC_CONF.autocompleteURL || "https://bie-ws.ala.org.au/ws/search/auto.json",
-        templateId =  BC_CONF.templateId || "autoCompleteTemplate",
+        templateId = BC_CONF.templateId || "autoCompleteTemplate",
         autocomplete = $.ui && $.ui.autocomplete;
 
-    if( typeof autocomplete === "function") {
-        var instance = autocomplete({
-            appendTo: appendToSelector,
-            minLength: 0,
-            source: function (request, response) {
-                $.ajax( {
-                    url: bieURL,
-                    dataType: "json",
-                    data: {
-                        q: request.term
-                    },
-                    success: function( data ) {
-                        response( data.autoCompleteList );
+    if (typeof autocomplete === "function") {
+        $(autoCompleteSelector).each(function (_, elem) {
+            const instance = autocomplete({
+                appendTo: appendToSelector,
+                minLength: 0,
+                source: function (request, response) {
+                    $.ajax({
+                        url: bieURL,
+                        dataType: "json",
+                        data: {
+                            q: request.term
+                        },
+                        success: function (data) {
+                            response(data.autoCompleteList);
+                        }
+                    });
+                },
+                focus: function (event, ui) {
+                    var getName = $(this).data('ui-autocomplete').options.getMatchingName;
+                    $(elem).val(getName(ui.item));
+                    return false;
+                },
+                select: function (event, ui) {
+                    var getName = $(this).data('ui-autocomplete').options.getMatchingName;
+                    $(elem).val(getName(ui.item));
+                    return false;
+                },
+                getMatchingName: function (item) {
+                    if (item.commonNameMatches && item.commonNameMatches.length) {
+                        return item.commonName;
+                    } else {
+                        return item.name;
                     }
-                } );
-            },
-            focus: function( event, ui ) {
-                var getName = $(this).data('ui-autocomplete').options.getMatchingName;
-                $( autoCompleteSelector ).val( getName(ui.item) );
-                return false;
-            },
-            select: function( event, ui ) {
-                var getName = $(this).data('ui-autocomplete').options.getMatchingName;
-                $( autoCompleteSelector ).val( getName(ui.item) );
-                return false;
-            },
-            getMatchingName: function (item) {
-                if (item.commonNameMatches && item.commonNameMatches.length) {
-                    return item.commonName;
-                } else {
-                    return item.name;
                 }
-            }
-        }, $( autoCompleteSelector ));
-        instance._renderItem = function( ul, item ) {
-            return $( tmpl(templateId)(item) )
-                .appendTo( ul );
-        };
-        instance._resizeMenu = function () {
-            var ul = this.menu.element;
-            ul.outerWidth(this.element.outerWidth());
-        };
+            }, $(elem));
+            instance._renderItem = function (ul, item) {
+                return $(tmpl(templateId)(item))
+                    .appendTo(ul);
+            };
+            instance._resizeMenu = function () {
+                var ul = this.menu.element;
+                ul.outerWidth(this.element.outerWidth());
+            };
+        })
     }
 });

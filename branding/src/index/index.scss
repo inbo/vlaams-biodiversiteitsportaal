@@ -72,6 +72,8 @@
     width: 100%;
     border-top: 2px solid $inbo-primary;
     border-bottom: 2px solid $inbo-primary;
+    position: relative; // in order to allow auto-complete dropdowns to be displayed above the breakdown
+    z-index: 0;
 }
 
 .breakdown .row {
@@ -241,24 +243,5 @@ ul.socials {
         flex: 0 0 auto;
         min-width: 10em;
         padding: 0.5em 1em;
-    }
-}
-
-ul.ui-autocomplete {
-    background-color: white;
-    padding: 0;
-    z-index: 99999;
-    border: 2px solid $inbo-primary;
-    border-top: 1px solid #ccc;
-    border-radius: 6px;
-    overflow: hidden;
-
-    > li {
-        list-style: none;
-        padding: 0.5em 1em;
-        &:hover {
-            background-color: #ddd;
-            cursor: pointer;
-        }
     }
 }

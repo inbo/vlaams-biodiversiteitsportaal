@@ -135,6 +135,18 @@
             }
         }
 
+        // Overlay the breadcrumb section
+        .navbar-collapse {
+            position: relative;
+            z-index: 999;
+            background-color: white;
+        }
+
+        // Fix the overflow issue for search auto-complete
+        .navbar-collapse.in {
+            overflow-y: visible !important;
+        }
+
         // layout navbar-right items horizontal on small screen and fix submenu layout
         .navbar-right {
             display: flex !important;
@@ -198,6 +210,21 @@
 
                 &.active {
                     width: 290%;
+                }
+            }
+
+            #banner-search-container.ui-front > .ui-autocomplete {
+                border: 0 !important;
+                border-top: 1px solid #bbb !important;
+                border-bottom: 1px solid $inbo-primary !important;
+                border-radius: 0;
+                left: 0 !important;
+                & > li {
+                    list-style: none;
+                    padding: 0 !important;
+                }
+                .ui-menu-item-wrapper {
+                    padding: 0.5em 1em !important;
                 }
             }
         }
@@ -283,8 +310,46 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     left: 5em !important;
+    color: #333;
 
     @media only screen and (max-width: 767px) {
         display: block;
     }
+}
+
+#banner-search-container.ui-front > .ui-autocomplete {
+    position: absolute;
+    background-color: white;
+    padding: 0;
+    z-index: 999;
+    border: 2px solid $inbo-secondary;
+    border-top: 1px solid #ccc;
+    border-radius: 6px;
+    overflow: hidden;
+
+    & > li {
+        list-style: none;
+        padding: 0.5em 1em;
+    }
+}
+#index-search-container.ui-front > .ui-autocomplete {
+    position: absolute;
+    background-color: white;
+    padding: 0;
+    z-index: 999;
+    border: 2px solid $inbo-primary;
+    border-top: 1px solid #ccc;
+    border-radius: 6px;
+    overflow: hidden;
+
+    & > li {
+        list-style: none;
+        padding: 0.5em 1em;
+    }
+}
+
+.ui-menu-item-wrapper.ui-state-active {
+    background: #ddd !important;
+    color: black !important;
+    border: 0 !important;
 }

@@ -50,7 +50,7 @@
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
-          <li id="banner-search-container">
+          <li id="banner-search-container" class="ui-front">
             <input type="text" id="banner-search-input" class="banner-search-input ui-autocomplete-input"
               autocomplete="on" data-i18n="[placeholder]nav.banner-search-placeholder" placeholder="Zoek...">
             <a id="banner-search" role="button" href="#">
@@ -141,7 +141,21 @@
   </nav>
 </div>
 
-<script type="module" src="{{ resolve-from-root 'portal/banner-search.ts' }}"></script>
+<script type="text/html" id="autoCompleteTemplate">
+  <li class="autocomplete-item striped">
+    <div class="content-spacing">
+      <div class="autocomplete-heading">
+        <% if (commonNameMatches.length > 0) { %>
+        <%=commonNameMatches[0]%>
+        <% } else if (scientificNameMatches.length > 0) { %>
+        <%=scientificNameMatches[0]%>
+        <% } else { %>
+        <%=matchedNames[0]%>
+        <% } %>
+      </div>
+    </div>
+  </li>
+</script>
 <!-- end site-banner -->
 
 

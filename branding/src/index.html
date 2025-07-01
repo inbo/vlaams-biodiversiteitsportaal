@@ -17,36 +17,11 @@
 
   <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 
-  <script type="text/html" id="autoCompleteTemplate">
-      <li class="autocomplete-item striped">
-          <div class="content-spacing">
-              <div class="autocomplete-heading">
-                  <% if (commonNameMatches.length > 0) { %>
-                  <%=commonNameMatches[0]%>
-                  <% } else if (scientificNameMatches.length > 0) { %>
-                  <%=scientificNameMatches[0]%>
-                  <% } else { %>
-                  <%=matchedNames[0]%>
-                  <% } %>
-              </div>
-          </div>
-      </li>
-  </script>
-  <script type="text/javascript">
-    window.BC_CONF = {
-      autocompleteURL: "/bie-index/search/auto",
-      autoCompleteSelector: "#search",
-      appendToSelector: "#searchSuggestions",
-      templateId: "autoCompleteTemplate"
-    };
-
-  </script>
-
   <script type="text/javascript" src="/js/autocomplete.min.js"></script>
-  <script type="text/javascript" src="/js/application.js"></script>
-
 
   {{> head }}
+
+  <script type="text/javascript" src="/js/application.js"></script>
 
   <!-- Index specific stuff -->
   <script type="module" src="{{ resolve-from-root 'portal/auth.ts' }}"></script>
@@ -56,9 +31,6 @@
 </head>
 
 <body>
-
-  <div class="container-fluid ui-autocomplete" id="#searchSuggestions" class="collapse"></div>
-
   {{> banner }}
   {{> index-content }}
   {{> footer }}

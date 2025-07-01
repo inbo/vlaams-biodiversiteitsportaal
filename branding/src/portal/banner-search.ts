@@ -1,3 +1,10 @@
+// Extend the Window interface to include BC_CONF
+declare global {
+    interface Window {
+        BC_CONF: any;
+    }
+}
+
 function toggleSearchInput() {
     const searchInput = document.getElementById(
         "banner-search-input",
@@ -44,19 +51,28 @@ function performSearch() {
     }`;
 }
 
-$("#banner-search").on("click", (e) => {
-    e.preventDefault();
+window.BC_CONF = {
+    autocompleteURL: "/bie-index/search/auto",
+    autoCompleteSelector: "#banner-search-input,#search",
+    appendToSelector: null, // Will look for the closest parent with class 'ui-front'
+    templateId: "autoCompleteTemplate",
+};
 
-    const searchInput = document.getElementById(
-        "banner-search-input",
-    )! as HTMLInputElement;
+$(() => {
+    $("#banner-search").on("click", (e) => {
+        e.preventDefault();
 
-    if (
-        searchInput.classList.contains("active") &&
-        searchInput.value.trim() !== ""
-    ) {
-        performSearch();
-    } else {
-        toggleSearchInput();
-    }
+        const searchInput = document.getElementById(
+            "banner-search-input",
+        )! as HTMLInputElement;
+
+        if (
+            searchInput.classList.contains("active") &&
+            searchInput.value.trim() !== ""
+        ) {
+            performSearch();
+        } else {
+            toggleSearchInput();
+        }
+    });
 });
