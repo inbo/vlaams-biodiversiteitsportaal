@@ -9,11 +9,9 @@ $fa-font-path: "@fortawesome/fontawesome-free/webfonts/";
 
 // backward compatibility
 .fa-square-o {
-    @extend .fa-solid !optional;
-    @extend .fa-square !optional;
+    @include fa-icon-regular($fa-var-square);
 }
 
 .fa-check-square-o {
-    @extend .fa-solid !optional;
-    @extend .fa-square-check !optional;
+    @include fa-icon-regular($fa-var-square-check);
 }
