@@ -1,5 +1,5 @@
 ---
-title: "Toegong tot het Portaal"
+title: "Toegang tot het Portaal"
 description: "Een handleiding mbt. het verkrijgen van toegang tot het Vlaams Biodiversiteitsportaal"
 ---
 ## Toegang tot geavanceerde functies van het biodiversiteitsportaal
