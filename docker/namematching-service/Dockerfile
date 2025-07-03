@@ -23,6 +23,8 @@ FROM amazoncorretto:11
 ARG VERSION=1.8.1
 LABEL ala.version=${VERSION}
 
+COPY --from=builder /opt/aws-xray-agent /opt/aws-xray-agent
+
 RUN mkdir /data && mkdir /data/lucene && chown -R 1000:1000 /data
 
 COPY --from=builder \
@@ -38,7 +40,8 @@ RUN mkdir /data/ala-namematching-service && mkdir /data/ala-namematching-service
 COPY groups.json /data/ala-namematching-service/config/groups.json
 COPY subgroups.json /data/ala-namematching-service/config/subgroups.json
 
-ENTRYPOINT ["java", "-jar", "/app/app.jar", "server"]
+
+ENTRYPOINT ["sh", "-c", "java ${JAVA_OPTS} -jar /app/app.jar server"]
 CMD ["config.yml"]
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:9180 || exit 1

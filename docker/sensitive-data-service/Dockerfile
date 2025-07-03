@@ -21,6 +21,8 @@ RUN --mount=type=cache,target=/root/.m2/repository \
 
 FROM amazoncorretto:11
 
+COPY --from=builder /opt/aws-xray-agent /opt/aws-xray-agent
+
 ARG VERSION=1.1.1
 LABEL ala.version=${VERSION}
 
@@ -40,7 +42,7 @@ WORKDIR /app
 COPY --from=builder --chown=1000 \
     /project/ala-sensitive-data-server/target/ala-sensitive-data-server-${VERSION}.jar /app/app.jar
 
-ENTRYPOINT ["java", "-jar", "/app/app.jar", "server"]
+ENTRYPOINT ["sh", "-c", "java ${JAVA_OPTS} -jar /app/app.jar server"]
 CMD ["config.yml"]
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:9180 || exit 1
