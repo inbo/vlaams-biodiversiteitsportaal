@@ -42,7 +42,8 @@ WORKDIR /app
 COPY --from=builder --chown=1000 \
     /project/ala-sensitive-data-server/target/ala-sensitive-data-server-${VERSION}.jar /app/app.jar
 
-ENTRYPOINT ["sh", "-c", "java ${JAVA_OPTS} -jar /app/app.jar server"]
+ENV CONFIG_LOCATION=/config/sensitive-data-service/sds-config.properties
+ENTRYPOINT ["sh", "-c", "java ${JAVA_OPTS} -jar /app/app.jar server ${CONFIG_LOCATION}"]
 CMD ["config.yml"]
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:9180 || exit 1

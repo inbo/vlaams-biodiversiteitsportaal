@@ -40,8 +40,8 @@ RUN mkdir /data/ala-namematching-service && mkdir /data/ala-namematching-service
 COPY groups.json /data/ala-namematching-service/config/groups.json
 COPY subgroups.json /data/ala-namematching-service/config/subgroups.json
 
-
-ENTRYPOINT ["sh", "-c", "java ${JAVA_OPTS} -jar /app/app.jar server"]
+ENV CONFIG_LOCATIOM=/config/namematching-service/config.yml
+ENTRYPOINT ["sh", "-c", "java ${JAVA_OPTS} -jar /app/app.jar server ${CONFIG_LOCATIOM}"]
 CMD ["config.yml"]
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:9180 || exit 1
