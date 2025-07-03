@@ -205,3 +205,5 @@ environments:
     speciesList:
       preferredSpeciesListDruid: dr4
       preferredListName: Preferred Image List
+    dataquality:
+      enabled: false
