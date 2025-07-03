@@ -17,14 +17,18 @@
     z-index: 1;
 }
 
-.index-search {
+#index-search-container {
     max-width: 500px;
+    width: 100%;
+    margin: auto;
+}
+
+.index-search {
     width: 100%;
     background-color: white;
     border: 2px solid $inbo-primary;
     border-radius: 10em;
     overflow: hidden;
-    margin: auto;
     z-index: 2;
 }
 
