@@ -3,11 +3,11 @@ ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 #ARG VERSION=2.1.0
-#ARG SOURCE=https://github.com/AtlasOfLivingAustralia/spatial-hub.git
+#ARG SOURCE=https://github.com/AtlasOfLivingAustralia/spatial-hub.git1
 #LABEL ala.version=${VERSION}
 
-ARG VERSION=develop
-ARG COMMIT=e9e7a7e3abae7a9d8259873ce5434ed98ba7c123
+ARG VERSION=637-speedup-species-auto-complete
+ARG COMMIT=8f5897e2073797657d1d39d9e84ea6965d1956b1
 ARG SOURCE=https://github.com/katya-shaleninova/spatial-hub
 LABEL ala.version=inbo-${VERSION}
 
@@ -48,7 +48,7 @@ RUN mkdir -p /opt/atlas/i18n \
   && ln -s /config/spatial-hub/i18n/override /var/opt/atlas/i18n/spatial-hub
 
 ARG VERSION=2.2.0-SNAPSHOT
-ARG COMMIT=53d4aad16d6b1a704ef147923ed233a2d18d668d
+ARG COMMIT=8f5897e2073797657d1d39d9e84ea6965d1956b1
 LABEL ala.version=inbo-${VERSION}
 
 COPY --from=builder /project/build/libs/project-${VERSION}.war /spatial-hub.war
