@@ -161,7 +161,7 @@ namematching:
 
 dataquality:
   enabled: true
-  baseUrl: ${common.protocol}://${common.domain}/data-quality-filter-service/
+  baseUrl: http://data-quality-filter-service.${common.internalDomain}:8080/data-quality-filter-service/
 
 speciesParent: ${common.protocol}://${common.domain}/species-list/iconic-species
 
