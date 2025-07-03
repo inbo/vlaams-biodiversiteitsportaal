@@ -59,7 +59,7 @@ function performSearch() {
 window.BC_CONF = {
     ...window.BC_CONF || {},
     autocompleteURL: "/bie-index/search/auto",
-    autoCompleteSelector: "#banner-search-input,#search",
+    autoCompleteSelector: "#banner-search-input,#index-search",
     appendToSelector: null, // Will look for the closest parent with class 'ui-front'
     templateId: "autoCompleteTemplate",
 };

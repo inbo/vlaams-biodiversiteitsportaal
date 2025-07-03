@@ -8,14 +8,14 @@
                     <div class="input-group">
                         <div class="form-group is-empty">
                             <input data-i18n="[placeholder]nav.searchbox"
-                                placeholder="Zoeken in soorten, datasets, synoniemen en meer..." id="search"
+                                placeholder="Zoeken in soorten, datasets, synoniemen en meer..." id="index-search"
                                 class="form-control ac_input general-search ui-autocomplete-input" type="text"
                                 autocomplete="on">
                             <input id="actual-query" type="hidden" name="q">
                             <!-- Add wildcards to the search on the homepage to allow partial matching -->
                             <script type="module" type="text/javascript">
                                 $("#main_biosearch_form").on("submit", function (e) {
-                                    $("#actual-query").val("*" + $("#search").val() + "*");
+                                    $("#actual-query").val("*" + $("#index-search").val() + "*");
                                 });
                             </script>
                         </div>
@@ -44,11 +44,11 @@
                     wetenschappelijk onderbouwd biodiversiteitsbeleid.
                 </p>
                 <div class="data-summary-buttons">
-                    <a href="/biocache-hub/" class="btn btn-primary">
+                    <a href="/biocache-hub/occurrences/search?q=" class="btn btn-primary">
                         <h4 data-i18n="index.stats.occurrences">Waarnemingen</h4>
                         <p id="stats_occurrences">0</p>
                     </a>
-                    <a href="/bie-hub/" class="btn btn-primary">
+                    <a href="/bie-hub/search?q=&fq=idxtype:%22TAXON%22" class="btn btn-primary">
                         <h4 data-i18n="index.stats.species">Soorten</h4>
                         <p id="stats_species">0</p>
                     </a>

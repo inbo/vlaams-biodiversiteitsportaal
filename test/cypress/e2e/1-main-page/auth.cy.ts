@@ -4,8 +4,14 @@ describe("Can login from the homepage", () => {
     });
 
     it("Can login with email and password and adjust banner login status", () => {
-        cy.get(".navbar-toggle").click();
-        cy.get("li").contains("Meer").click();
+        // Verify the user icon is grey
+        cy.get("#login-icon").should("be.visible").should(
+            "have.css",
+            "color",
+            "rgb(136, 136, 136)",
+        );
+
+        cy.get("#dropdown-auth-menu").click();
         cy.get("#loginButton").should("be.visible").click();
 
         cy.log("Do stuff on login screen")
@@ -19,9 +25,14 @@ describe("Can login from the homepage", () => {
                 cy.get("#kc-login").click();
             });
 
-        cy.log("Back to homepage").get(".navbar-toggle").click();
-        cy.get("li").contains("Meer").click();
+        cy.log("Back to homepage").get("#dropdown-auth-menu").click();
         cy.get(".myProfileBtn").should("be.visible")
             .get("#logoutButton").should("be.visible");
+        // Check that the login icon is now the inbo primary color
+        cy.get("#login-icon").should("be.visible").should(
+            "have.css",
+            "color",
+            "rgb(192, 67, 132)",
+        );
     });
 });

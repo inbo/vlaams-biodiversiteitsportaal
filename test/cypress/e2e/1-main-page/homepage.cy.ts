@@ -5,7 +5,9 @@ describe("Visit the homepage", () => {
 
     it("Shows a working search bar", () => {
         const searchInput = "test";
-        cy.get("#search").should("be.visible").type(`${searchInput}{enter}`)
+        cy.get("#index-search").should("be.visible").type(
+            `${searchInput}{enter}`,
+        )
             .url().should(
                 "include",
                 "/bie-hub/search",
@@ -20,7 +22,7 @@ describe("Visit the homepage", () => {
 
     it("Search bar has working auto-complete", () => {
         const searchInput = "pica p";
-        cy.get("#search").should("be.visible").type(`${searchInput}`)
+        cy.get("#index-search").should("be.visible").type(`${searchInput}`)
             .get(".ui-autocomplete")
             .should("be.visible")
             .children().should("have.length", 10);

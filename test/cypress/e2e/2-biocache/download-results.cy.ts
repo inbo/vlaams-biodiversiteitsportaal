@@ -66,7 +66,7 @@ describe("Biocache - Download", () => {
         cy.get("#nextBtn").click();
 
         // Click the download button
-        cy.get("#queueStatus > a.btn").click();
+        cy.get("#queueStatus > a.btn", { timeout: 30_000 }).click();
 
         // Check download contents
         checkDownloadForOccurenceCount(filename, numberOfOccurrences);

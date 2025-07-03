@@ -20,8 +20,7 @@ Cypress.Commands.add(
             user.username,
             () => {
                 cy.visit(`/${subPath}`);
-                cy.get(".navbar-toggle").click();
-                cy.get("li").contains("Meer").click();
+                cy.get("#dropdown-auth-menu").click();
                 cy.get("#loginButton").should("be.visible").click();
 
                 cy.log("Do stuff on login screen")
@@ -39,8 +38,7 @@ Cypress.Commands.add(
                         },
                     );
 
-                cy.log("Back to homepage").get(".navbar-toggle").click();
-                cy.get("li").contains("Meer").click();
+                cy.get("#dropdown-auth-menu").click();
                 cy.get(".myProfileBtn").should("be.visible")
                     .get("#logoutButton").should("be.visible");
             },
