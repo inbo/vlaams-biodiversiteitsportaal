@@ -7,7 +7,7 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 #LABEL ala.version=${VERSION}
 
 ARG VERSION=637-speedup-species-auto-complete
-ARG COMMIT=bd34f673e607945b405b3c6a631171c95e08e213
+ARG COMMIT=90a40561e64753446fc1b54597110c76374ee9b2
 ARG SOURCE=https://github.com/katya-shaleninova/spatial-hub
 LABEL ala.version=inbo-${VERSION}
 
@@ -48,7 +48,7 @@ RUN mkdir -p /opt/atlas/i18n \
   && ln -s /config/spatial-hub/i18n/override /var/opt/atlas/i18n/spatial-hub
 
 ARG VERSION=2.2.0-SNAPSHOT
-ARG COMMIT=bd34f673e607945b405b3c6a631171c95e08e213
+ARG COMMIT=90a40561e64753446fc1b54597110c76374ee9b2
 LABEL ala.version=inbo-${VERSION}
 
 COPY --from=builder /project/build/libs/project-${VERSION}.war /spatial-hub.war
