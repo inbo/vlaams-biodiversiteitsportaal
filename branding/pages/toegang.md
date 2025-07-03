@@ -19,23 +19,32 @@ Voor meer geavanceerd functies, moet er echter ingelogd worden.
 
 ### Toegang voor medewerkers Vlaamse overheid <span style="font-size: small">(enkel beleidsdomein Omgeving)</span>
 
-Medewerkers van de Vlaamse overheid kunnen inloggen via het systeem voor interne gebruikersbeheer.  
-Je kan steeds jouw rechten nagaan op de <a href="https://mijnprofiel-gebruikersbeheer.vlaanderen.be/user/" target="_blank">mijn profiel pagina</a>.  
-Als je al toegang hebt, zie je op de pagina _"Mijn gebruikersrechten"_ een lijn met "Het Vlaams Biodiversiteitsportaal".
-![Rechten in acm-idm](/images/pages/acm_idm_mijn_profiel.png)
+Medewerkers van de Vlaamse overheid hebben toegang via het systeem voor intern gebruikersbeheer.  
+Aanmelden kan dan door middel van It's me of eID.
 
-Inloggen kan dan door te klikken op de knop _"Medewerkers Vlaamse overheid"_ wanneer in het portaal om gebruiks gegevens wordt gevraagd.
-<p float="left">
-  <img src="/images/pages/login_button.png" alt="login knop" height="180" />
-  <img src="/images/pages/login_screen.png" alt="login scherm" height="180" /> 
-</p>
+#### Normale login
+Inloggen doe je door rechtsboven op de inlogknop te klikken.
+<img src="/images/pages/toegang/homepage-login.png" alt="homepage login knop"/>  
+
+Vervolgens kies je: "Medewerkers van de Vlaamse overheid" en volge je de stappen.
+<img src="/images/pages/toegang/login-scherm.png" alt="login scherm"/>  
+
+#### Ontbrekende rechten
+Indien je de onderstaande foutcode krijgt, wil dit zeggen dat je lokale beheerder je nog geen toegang heeft verleend tot het Vlaams Biodiversiteitsportaal.
+<img src="/images/pages/toegang/ontbrekende-rechten-error.png" alt="onbrekende rechten foutboodschap"/>   
+In dit geval, dien je jouw lokale beheerder te vragen om het "Vlaams biodiversiteitsportaal gebruiker" recht. 
+
+Je lokale beheerder is doorgaans je ICT helpdesk maar de exacte contactpersonen kan je ook vinden via de <a href="https://mijnprofiel-gebruikersbeheer.vlaanderen.be/user/" target="_blank">mijn profiel pagina</a>.  
+
+Wanneer gevraagd, kies dan om je aan te melden via 'een entiteit van de Vlaamse overheid'
+<img src="/images/pages/toegang/kies-entiteit.png" alt="kies entiteit"/>  
+
+Op de hoofdpagina klik je op Mijn Lokale Beheerders, daar vind je de lijst van personen die je kan contacteren. Zij kunnen je toegang verlenen tot het portaal.
+<img src="/images/pages/toegang/idm-lokale-beheerders.png" alt="mijn profiel lokale beheerders knop"/>  
 
 
-Als je nog geen rechten hebt gekregen, moet je deze eerst aanvragen bij je lokale beheerder.  
-Doorgaans is dit de IT-helpdesk van de entiteit waar je voor werkt.  
-Je kan ze ook vinden op de <a href="https://mijnprofiel-gebruikersbeheer.vlaanderen.be/user/" target="_blank">mijn profiel pagina</a> via de knop _"Mijn lokale beheerders"_.  
-Hen e-mail je dan met de vraag het "Vlaams biodiversiteitsportaal gebruiker" recht te krijgen.
- 
+#### Andere fouten
+Indien je een andere fout krijgt dan ontbrekende rechten, contacteer ons dan rechstreeks via [support.natuurdata@inbo.be](mailto:support.natuurdata@inbo.be), dan helpen we je graag verder.
 
 ### Toegang voor andere gebruikers
 
