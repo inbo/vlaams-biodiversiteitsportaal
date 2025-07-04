@@ -294,6 +294,4 @@ spring:
 common:
   protocol: https
   domain: natuurdata.inbo.be
-dataquality:
-  enabled: false
 

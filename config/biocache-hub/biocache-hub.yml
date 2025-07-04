@@ -204,6 +204,8 @@ environments:
   inbo_prod:
     userdetails:
       url: https://natuurdata.inbo.be/userdetails
+    dataquality:
+      enabled: false
   inbo_uat:
     userdetails:
       url: https://natuurdata.uat.inbo.be/userdetails
