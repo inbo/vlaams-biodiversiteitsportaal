@@ -25,7 +25,7 @@ describe("Biocache - Download", () => {
             "have.length.greaterThan",
             10,
         );
-        cy.get("#returnedText > strong").should((elem) => {
+        cy.get("#returnedText > strong:first-of-type").should((elem) => {
             numberOfOccurrences = parseInt(elem.text().replace(/[.,]/g, ""));
             expect(numberOfOccurrences).to.be.greaterThan(10);
         });
