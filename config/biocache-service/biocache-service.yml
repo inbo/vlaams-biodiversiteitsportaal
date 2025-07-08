@@ -233,6 +233,9 @@ wms:
   uncertainty:
     max: 30000
 
+dataquality:
+  enabled: true
+
 cors:
   allowedOrigins: [ "*" ]
 
