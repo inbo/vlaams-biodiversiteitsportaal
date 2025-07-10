@@ -32,25 +32,35 @@ function showUserDetails(user: User) {
         document.getElementById("user-greeting-name")!
             .innerText = `${profile.given_name} ${profile.family_name}`;
 
-        (document.getElementById(
-            "update-profile-details",
-        )! as HTMLAnchorElement).addEventListener("click", (e) => {
-            e.preventDefault();
-            login({ "kc_action": "UPDATE_PROFILE" });
-        });
+        // Only allow the user to update their profile if they are not an ACM IDM user
+        if (!profile["acm_idm"]) {
+            const updateProfileButton = document.getElementById(
+                "update-profile-details",
+            )! as HTMLAnchorElement;
+            updateProfileButton.addEventListener("click", (e) => {
+                e.preventDefault();
+                login({ "kc_action": "UPDATE_PROFILE" });
+            });
 
-        (document.getElementById("update-password")! as HTMLAnchorElement)
-            .addEventListener("click", (e) => {
+            const changePasswordButton = document.getElementById(
+                "update-password",
+            )! as HTMLAnchorElement;
+            changePasswordButton.addEventListener("click", (e) => {
                 e.preventDefault();
                 login({ "kc_action": "UPDATE_PASSWORD" });
             });
 
+            document.getElementById("user-account-management-row")!
+                .classList.remove("hidden");
+        }
+
+        // Update link to my-annotated-records
         (document.getElementById("my-annotated-records")! as HTMLAnchorElement)
             .href =
                 `/biocache-hub/occurrences/search/?q=*:*&fq=assertion_user_id:%22${profile.sub}%22`;
 
+        // Show roles as badges
         const roles: string[] = (profile.realm_access as any)?.roles || [];
-
         const rolesElement = document.getElementById("my-roles")!;
         roles.forEach((role) => {
             const roleElement = document.createElement("span");

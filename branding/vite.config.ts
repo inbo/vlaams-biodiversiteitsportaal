@@ -9,6 +9,7 @@ import { console } from "node:inspector";
 import fg from "fast-glob";
 import { basename, dirname } from "node:path";
 import { createClient, defaultPlugins } from "@hey-api/openapi-ts";
+import type { PreRenderedChunk } from "rollup";
 
 const replacements = {
     loginStatus: "login-status-dependent",
@@ -30,6 +31,7 @@ export default {
                 banner: resolve(__dirname, "./src/banner.html"),
                 footer: resolve(__dirname, "./src/footer.html"),
                 settings: resolve(__dirname, "./src/settings.ts"),
+                sw: resolve(__dirname, "./src/portal/sw.ts"),
                 "user-profile": resolve(
                     __dirname,
                     "./src/my-profile.html",
@@ -68,7 +70,14 @@ export default {
                 })),
             },
             output: {
-                entryFileNames: `js/[name].js`,
+                entryFileNames: (chunkInfo: PreRenderedChunk) => {
+                    console.log("Chunk file name:", chunkInfo.name);
+                    if (chunkInfo.name === "sw") {
+                        return `[name].js`;
+                    }
+
+                    return `js/[name].js`;
+                },
                 chunkFileNames: `js/[name].js`,
                 assetFileNames: ({ name, originalFileName }) => {
                     // Some custom naming rules to match expectations for the ala services
