@@ -193,10 +193,6 @@
       },
       {
         "sort": "index",
-        "field": "dynamicProperties_level1Name"
-      },
-      {
-        "sort": "index",
         "field": "dynamicProperties_level2Name"
       },
       {
