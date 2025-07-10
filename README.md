@@ -1,6 +1,8 @@
 # Vlaams Biodiversiteitsportaal
 
 This project is the main source for developing the Flemish Biodiversity Portal.  
+https://natuurdata.inbo.be
+
 It is a customisation of the [Atlas of Living Australia](https://www.ala.org.au/) project.  
 That project, started in 2008 in Australia, was aimed at providing easy access to all their biodiversity data.  
 It has since been made open-source and [is currently used by a number of countries around the world](https://living-atlases.gbif.org/).
