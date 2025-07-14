@@ -4,7 +4,7 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 
 ARG VERSION=add-pac4j-cookie-matcher
-ARG COMMIT=adde12c7e0dab33b719669511fbc5f31693eb82e
+ARG COMMIT=93cb16c9271cb291abbb9065ddf6971da8984bde
 ARG SOURCE=https://github.com/StefanVanDyck/biocache-service.git
 LABEL ala.version=inbo-${COMMIT}
 
@@ -36,7 +36,7 @@ RUN mkdir -p /opt/atlas/i18n \
   && ln -s /config/biocache-service/i18n/override /var/opt/atlas/i18n/biocache-service
 
 ARG VERSION=3.7.0-SNAPSHOT
-ARG COMMIT=adde12c7e0dab33b719669511fbc5f31693eb82e
+ARG COMMIT=93cb16c9271cb291abbb9065ddf6971da8984bde
 LABEL ala.version=inbo-${COMMIT}
 
 COPY --from=builder /project/build/libs/biocache-service-${VERSION}-exec.war /biocache-service.war
