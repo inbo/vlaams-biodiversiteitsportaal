@@ -42,8 +42,8 @@ async function createUserManager() {
     clearAlaAuthCookie();
   });
 
-  await handleAuthCallbacks();
-  await loginIfAuthCookieIsSet();
+  await handleAuthCallbacks(manager);
+  await loginIfAuthCookieIsSet(manager);
 
   return manager;
 }
@@ -76,11 +76,11 @@ function addAuthButtonClickHandlers() {
   }
 }
 
-async function handleAuthCallbacks() {
+async function handleAuthCallbacks(manager: UserManager) {
   const urlParams = new URLSearchParams(window.location.search);
 
   if (urlParams.get("login")) {
-    const user = await userManager.then((mgr) => mgr.signinCallback());
+    const user = await manager.signinCallback();
     if (!user) {
       return;
     }
@@ -88,32 +88,28 @@ async function handleAuthCallbacks() {
 
     window.history.pushState(null, document.title, getCurrentUrl());
   } else if (urlParams.get("logout")) {
-    await userManager.then((mgr) => mgr.signoutCallback());
+    await manager.signoutCallback();
     clearAlaAuthCookie();
 
     window.history.pushState(null, document.title, getCurrentUrl());
   }
 }
 
-async function loginIfAuthCookieIsSet() {
-  userManager.then((mgr) =>
-    mgr.events.addSilentRenewError(async (user) => {
-      console.error("Silent renew error", user);
-      // If silent login fails, we need to clear the cookie
-      clearAlaAuthCookie();
-    })
-  );
+async function loginIfAuthCookieIsSet(manager: UserManager) {
+  manager.events.addSilentRenewError(async (user) => {
+    console.error("Silent renew error", user);
+    // If silent login fails, we need to clear the cookie
+    clearAlaAuthCookie();
+  });
   if (
     typeof Cookies.get(settings.auth.ala.authCookieName) !== "undefined" &&
-    (await getUser() === null)
+    (await manager.getUser() === null)
   ) {
-    await userManager.then((mgr) =>
-      mgr.signinSilent().catch((err) => {
-        console.error("Silent login failed", err);
-        // If silent login fails, we need to clear the cookie
-        clearAlaAuthCookie();
-      })
-    );
+    await manager.signinSilent().catch((err) => {
+      console.error("Silent login failed", err);
+      // If silent login fails, we need to clear the cookie
+      clearAlaAuthCookie();
+    });
   }
 }
 
