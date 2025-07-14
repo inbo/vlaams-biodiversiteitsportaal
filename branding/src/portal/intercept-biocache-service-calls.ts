@@ -1,22 +1,28 @@
-import { getUserManagerInstance } from "./auth";
+import { getUser, userManager } from "./auth";
 
 if ("serviceWorker" in navigator) {
-  window.addEventListener("load", function () {
-    navigator.serviceWorker.register("/sw.js", {
-      scope: "/",
-      type: "module",
-    }).then(function (registration) {
-      console.log("Service worker registered with scope: ", registration.scope);
-    }, function (err) {
-      console.log("ServiceWorker registration failed: ", err);
+  navigator.serviceWorker.register("/sw.js", {
+    scope: "/",
+    type: "module",
+  }).then(async (registration) => {
+    function updateAccessToken(accessToken: string | null) {
+      if (registration.active) {
+        registration.active.postMessage(accessToken);
+      }
+    }
+
+    const mgr = await userManager;
+    mgr.events.addUserLoaded(async (user) => {
+      updateAccessToken(user.access_token);
     });
+
+    mgr.events.addUserUnloaded(() => {
+      updateAccessToken(null);
+    });
+
+    const user = await getUser();
+    if (user) {
+      updateAccessToken(user.access_token);
+    }
   });
 }
-
-getUserManagerInstance().events.addUserLoaded(async (user) => {
-  navigator.serviceWorker.ready.then((registration) => {
-    registration.active!.postMessage(
-      user.access_token,
-    );
-  });
-});

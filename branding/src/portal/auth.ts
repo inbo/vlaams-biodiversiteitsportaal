@@ -12,48 +12,45 @@ Log.setLogger(console);
  * This logic is part of the ala-security project.
  */
 
+export const userManager = createUserManager();
+
 $(async () => {
-  await init();
+  await initUI();
 });
 
-let userManager: UserManager | undefined = undefined;
-export function getUserManagerInstance() {
-  if (!userManager) {
-    console.debug("Initializing OIDC UserManager");
-    const redirectUrl = getCurrentUrl();
-    redirectUrl.searchParams.set("login", "true");
+async function createUserManager() {
+  console.debug("Initializing OIDC UserManager");
+  const redirectUrl = getCurrentUrl();
+  redirectUrl.searchParams.set("login", "true");
 
-    const post_logout_redirect_uri = getCurrentUrl();
-    post_logout_redirect_uri.searchParams.set("logout", "true");
+  const post_logout_redirect_uri = getCurrentUrl();
+  post_logout_redirect_uri.searchParams.set("logout", "true");
 
-    userManager = new UserManager({
-      authority: settings.auth.oidc.authority,
-      client_id: settings.auth.oidc.clientId,
-      redirect_uri: redirectUrl.href,
-      post_logout_redirect_uri: post_logout_redirect_uri.href,
-      includeIdTokenInSilentSignout: true,
-      //       userStore: new WebStorageStateStore({
-      //         store: window.session,
-      //       }),
-      automaticSilentRenew: true,
-    });
-  }
-  return userManager;
+  const manager = new UserManager({
+    authority: settings.auth.oidc.authority,
+    client_id: settings.auth.oidc.clientId,
+    redirect_uri: redirectUrl.href,
+    post_logout_redirect_uri: post_logout_redirect_uri.href,
+    scope: "openid email ala/roles",
+    includeIdTokenInSilentSignout: true,
+    //       userStore: new WebStorageStateStore({
+    //         store: window.session,
+    //       }),
+    automaticSilentRenew: true,
+  });
+  manager.events.addAccessTokenExpired(function () {
+    clearAlaAuthCookie();
+  });
+
+  await handleAuthCallbacks();
+  await loginIfAuthCookieIsSet();
+
+  return manager;
 }
 
-let initialized = false;
-export async function init() {
-  if (!initialized) {
-    initialized = true;
-    getUserManagerInstance().events.addAccessTokenExpired(function () {
-      clearAlaAuthCookie();
-    });
-
-    addAuthButtonClickHandlers();
-    await handleAuthCallbacks();
-    await loginIfAuthCookieIsSet();
-    await setAuthMenuStatus();
-  }
+export async function initUI() {
+  addAuthButtonClickHandlers();
+  await setAuthMenuStatus();
 }
 
 function addAuthButtonClickHandlers() {
@@ -83,7 +80,7 @@ async function handleAuthCallbacks() {
   const urlParams = new URLSearchParams(window.location.search);
 
   if (urlParams.get("login")) {
-    const user = await getUserManagerInstance().signinCallback();
+    const user = await userManager.then((mgr) => mgr.signinCallback());
     if (!user) {
       return;
     }
@@ -91,7 +88,7 @@ async function handleAuthCallbacks() {
 
     window.history.pushState(null, document.title, getCurrentUrl());
   } else if (urlParams.get("logout")) {
-    await getUserManagerInstance().signoutCallback();
+    await userManager.then((mgr) => mgr.signoutCallback());
     clearAlaAuthCookie();
 
     window.history.pushState(null, document.title, getCurrentUrl());
@@ -99,20 +96,24 @@ async function handleAuthCallbacks() {
 }
 
 async function loginIfAuthCookieIsSet() {
-  getUserManagerInstance().events.addSilentRenewError(async (user) => {
-    console.error("Silent renew error", user);
-    // If silent login fails, we need to clear the cookie
-    clearAlaAuthCookie();
-  });
+  userManager.then((mgr) =>
+    mgr.events.addSilentRenewError(async (user) => {
+      console.error("Silent renew error", user);
+      // If silent login fails, we need to clear the cookie
+      clearAlaAuthCookie();
+    })
+  );
   if (
     typeof Cookies.get(settings.auth.ala.authCookieName) !== "undefined" &&
     (await getUser() === null)
   ) {
-    await getUserManagerInstance().signinSilent().catch((err) => {
-      console.error("Silent login failed", err);
-      // If silent login fails, we need to clear the cookie
-      clearAlaAuthCookie();
-    });
+    await userManager.then((mgr) =>
+      mgr.signinSilent().catch((err) => {
+        console.error("Silent login failed", err);
+        // If silent login fails, we need to clear the cookie
+        clearAlaAuthCookie();
+      })
+    );
   }
 }
 
@@ -183,16 +184,16 @@ export async function isLoggedIn() {
 }
 
 export async function getUser(): Promise<User | null> {
-  return await getUserManagerInstance().getUser();
+  return await userManager.then((mgr) => mgr.getUser());
 }
 
 export async function login(
   extraQueryParams: Record<string, string | number | boolean> | undefined =
     undefined,
 ) {
-  await getUserManagerInstance().signinRedirect({ extraQueryParams });
+  await userManager.then((mgr) => mgr.signinRedirect({ extraQueryParams }));
 }
 
 export async function logout() {
-  await getUserManagerInstance().signoutRedirect();
+  await userManager.then((mgr) => mgr.signoutRedirect());
 }

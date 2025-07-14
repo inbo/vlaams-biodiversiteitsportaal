@@ -1,19 +1,16 @@
 import { User } from "oidc-client-ts";
-import {
-    getUser,
-    getUserManagerInstance,
-    isLoggedIn,
-    login,
-} from "../portal/auth.ts";
+import { getUser, isLoggedIn, login, userManager } from "../portal/auth.ts";
 
 $(() => {
     initPage();
 });
 
 async function initPage() {
-    getUserManagerInstance().events.addUserLoaded(async (user) => {
-        showUserDetails(user);
-    });
+    await userManager.then((mgr) =>
+        mgr.events.addUserLoaded(async (user) => {
+            showUserDetails(user);
+        })
+    );
     if (await isLoggedIn()) {
         const user = await getUser();
         if (user) {
