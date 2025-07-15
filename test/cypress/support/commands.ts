@@ -32,6 +32,10 @@ Cypress.Commands.add(
                                 "match",
                                 new RegExp(`^${Cypress.env("AUTH_URL")}`),
                             );
+                            cy.get(".collapsable-header").contains(
+                                "Gebruikersnaam en wachtwoord",
+                            )
+                                .click();
                             cy.get("#username").type(user.username);
                             cy.get("#password").type(user.password);
                             cy.get("#kc-login").click();
@@ -69,6 +73,10 @@ Cypress.Commands.add(
                     "match",
                     new RegExp(`^${Cypress.env("AUTH_URL")}`),
                 );
+                cy.get(".collapsable-header").contains(
+                    "Gebruikersnaam en wachtwoord",
+                )
+                    .click();
                 cy.get("#username").type(user.username);
                 cy.get("#password").type(user.password);
                 cy.get("#kc-login").click();
