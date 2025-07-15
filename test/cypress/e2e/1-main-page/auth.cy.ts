@@ -20,8 +20,7 @@ describe("Can login from the homepage", () => {
                     "match",
                     new RegExp(`^${Cypress.env("AUTH_URL")}`),
                 );
-                cy.get(".collapsable-header").contains("Username and password")
-                    .click();
+                cy.get(".collapsable-header").click();
                 cy.get("#username").type(Cypress.env("VBP_USERNAME"));
                 cy.get("#password").type(Cypress.env("VBP_PASSWORD"));
                 cy.get("#kc-login").click();
