@@ -72,8 +72,7 @@ describe("Biocache - Download", () => {
         checkDownloadForOccurenceCount(filename, numberOfOccurrences);
     });
 
-    // TODO: https://github.com/inbo/vlaams-biodiversiteitsportaal/issues/562
-    it.skip("Download as legacy TSV has all records", () => {
+    it("Download as legacy TSV has all records", () => {
         // Click downloads button
         cy.get("#downloads").click();
 
@@ -97,14 +96,13 @@ describe("Biocache - Download", () => {
         cy.get("#nextBtn").click();
 
         // Click the download button
-        cy.get("#queueStatus > a.btn").click();
+        cy.get("#queueStatus > a.btn", { timeout: 30_000 }).click();
 
         // Check download contents
         checkDownloadForOccurenceCount(filename, numberOfOccurrences, "tsv");
     });
 
-    // TODO: https://github.com/inbo/vlaams-biodiversiteitsportaal/issues/562
-    it.skip("Download as custom archive has all records", () => {
+    it("Download as custom archive has all records", () => {
         // Click downloads button
         cy.get("#downloads").click();
 
@@ -135,7 +133,7 @@ describe("Biocache - Download", () => {
         cy.get(".next-btn").first().click();
 
         // Click the download button
-        cy.get("#queueStatus > a.btn").click();
+        cy.get("#queueStatus > a.btn", { timeout: 30_000 }).click();
 
         // Check download contents
         checkDownloadForOccurenceCount(filename, numberOfOccurrences);
