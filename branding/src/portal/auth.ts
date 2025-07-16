@@ -42,33 +42,8 @@ async function createUserManager() {
     console.error("Silent renew error", user);
   });
 
-  await handleAuthCallbacks(manager);
-  await loginIfAuthCookieIsSet(manager);
-
-  const user = await manager.getUser();
-  if (user) {
-    setAlaAuthCookie(user);
-  }
+  loginIfAuthCookieIsSet(manager);
   return manager;
-}
-
-async function handleAuthCallbacks(manager: UserManager) {
-  const urlParams = new URLSearchParams(window.location.search);
-
-  if (urlParams.get("login")) {
-    const user = await manager.signinCallback();
-    if (!user) {
-      return;
-    }
-    setAlaAuthCookie(user);
-
-    window.history.pushState(null, document.title, getCurrentUrl());
-  } else if (urlParams.get("logout")) {
-    await manager.signoutCallback();
-    clearAlaAuthCookie();
-
-    window.history.pushState(null, document.title, getCurrentUrl());
-  }
 }
 
 async function loginIfAuthCookieIsSet(manager: UserManager) {
@@ -91,7 +66,7 @@ async function loginIfAuthCookieIsSet(manager: UserManager) {
   }
 }
 
-function getCurrentUrl() {
+export function getCurrentUrl() {
   const cleanedUrl = new URL(window.location.href);
   cleanedUrl.searchParams.delete("login");
   cleanedUrl.searchParams.delete("logout");
@@ -100,36 +75,13 @@ function getCurrentUrl() {
   return cleanedUrl;
 }
 
-function setAlaAuthCookie(user: User) {
-  Cookies.set(
-    settings.auth.ala.authCookieName,
-    user.profile.sub,
-    {
-      path: "/",
-      sameSite: "strict",
-      secure: window.location.protocol === "https:",
-    },
-  );
-}
-
-function clearAlaAuthCookie() {
-  Cookies.remove(
-    settings.auth.ala.authCookieName,
-    {
-      path: "/",
-      sameSite: "strict",
-      secure: window.location.protocol === "https:",
-    },
-  );
-}
-
 export async function isLoggedIn() {
   // First check if the URL has a login or logout parameter
   // The cookie can be late to update
   const currentUrl = new URL(window.location.href);
-  if (currentUrl.searchParams.get("login")) {
+  if (currentUrl.searchParams.get("login") !== null) {
     return true;
-  } else if (currentUrl.searchParams.get("logout")) {
+  } else if (currentUrl.searchParams.get("logout") !== null) {
     return false;
   } else {
     const authCookie = Cookies.get(settings.auth.ala.authCookieName);

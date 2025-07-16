@@ -21,6 +21,7 @@
   <!-- Index specific stuff -->
   <script type="module">
     import {
+      handleAuthCallbacks,
       addAuthButtonClickHandlers,
       setAuthMenuStatus,
     } from "../portal/auth-ui";
@@ -28,6 +29,7 @@
     $(() => {
       setAuthMenuStatus();
       addAuthButtonClickHandlers();
+      handleAuthCallbacks();
     });
   </script>
 

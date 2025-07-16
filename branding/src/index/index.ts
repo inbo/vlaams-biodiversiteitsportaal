@@ -4,13 +4,15 @@ import { PictureCarousel } from "./picture-carousel";
 import settings from "../settings";
 import {
     addAuthButtonClickHandlers,
+    handleAuthCallbacks,
     setAuthMenuStatus,
 } from "../portal/auth-ui";
 
-$(() => {
+$(async () => {
     renderCarousel();
     setAuthMenuStatus();
     addAuthButtonClickHandlers();
+    handleAuthCallbacks();
 });
 
 async function renderCarousel() {
