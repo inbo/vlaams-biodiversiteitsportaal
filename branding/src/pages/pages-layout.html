@@ -19,7 +19,17 @@
   {{> head }}
 
   <!-- Index specific stuff -->
-  <script type="module" src="{{ resolve-from-root 'portal/auth.ts' }}"></script>
+  <script type="module">
+    import {
+      addAuthButtonClickHandlers,
+      setAuthMenuStatus,
+    } from "../portal/auth-ui";
+
+    $(() => {
+      setAuthMenuStatus();
+      addAuthButtonClickHandlers();
+    });
+  </script>
 
 
   <script type="module" src="{{ resolve-from-root 'pages/pages.scss' }}"></script>
