@@ -14,9 +14,9 @@ Log.setLogger(console);
 
 export const userManager = createUserManager();
 
-$(async () => {
-  await initUI();
-});
+const uiReady = new Promise<void>((resolve) =>
+  window.addEventListener("DOMContentLoaded", () => resolve())
+);
 
 async function createUserManager() {
   console.debug("Initializing OIDC UserManager");
@@ -38,22 +38,31 @@ async function createUserManager() {
     //       }),
     automaticSilentRenew: true,
   });
+
   manager.events.addAccessTokenExpired(function () {
-    clearAlaAuthCookie();
+    console.warn("Access token expired");
+  });
+  manager.events.addSilentRenewError((user) => {
+    console.error("Silent renew error", user);
   });
 
   await handleAuthCallbacks(manager);
   await loginIfAuthCookieIsSet(manager);
 
+  const user = await manager.getUser();
+  if (user) {
+    setAlaAuthCookie(user);
+  }
+
+  addAuthButtonClickHandlers();
+  setAuthMenuStatus();
+
   return manager;
 }
 
-export async function initUI() {
-  addAuthButtonClickHandlers();
-  await setAuthMenuStatus();
-}
+async function addAuthButtonClickHandlers() {
+  await uiReady;
 
-function addAuthButtonClickHandlers() {
   const loginButtons = document.getElementsByClassName("login-button");
   for (const button of loginButtons) {
     button.addEventListener(
@@ -96,24 +105,22 @@ async function handleAuthCallbacks(manager: UserManager) {
 }
 
 async function loginIfAuthCookieIsSet(manager: UserManager) {
-  manager.events.addSilentRenewError(async (user) => {
-    console.error("Silent renew error", user);
-    // If silent login fails, we need to clear the cookie
-    clearAlaAuthCookie();
-  });
   if (
     typeof Cookies.get(settings.auth.ala.authCookieName) !== "undefined" &&
     (await manager.getUser() === null)
   ) {
     await manager.signinSilent().catch((err) => {
-      console.error("Silent login failed", err);
-      // If silent login fails, we need to clear the cookie
-      clearAlaAuthCookie();
+      console.error(
+        "Failed to silently login based on presence of cookie and absence of user in browser session",
+        err,
+      );
     });
   }
 }
 
 async function setAuthMenuStatus() {
+  await uiReady;
+
   Array.from(document.getElementsByClassName("login-status-dependent"))
     .forEach(async (element) => {
       if (await isLoggedIn()) {
