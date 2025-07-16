@@ -14,10 +14,6 @@ Log.setLogger(console);
 
 export const userManager = createUserManager();
 
-const uiReady = new Promise<void>((resolve) =>
-  window.addEventListener("DOMContentLoaded", () => resolve())
-);
-
 async function createUserManager() {
   console.debug("Initializing OIDC UserManager");
   const redirectUrl = getCurrentUrl();
@@ -53,36 +49,7 @@ async function createUserManager() {
   if (user) {
     setAlaAuthCookie(user);
   }
-
-  addAuthButtonClickHandlers();
-  setAuthMenuStatus();
-
   return manager;
-}
-
-async function addAuthButtonClickHandlers() {
-  await uiReady;
-
-  const loginButtons = document.getElementsByClassName("login-button");
-  for (const button of loginButtons) {
-    button.addEventListener(
-      "click",
-      async (e) => {
-        e.preventDefault();
-        await login();
-      },
-    );
-  }
-  const logoutButtons = document.getElementsByClassName("logout-button");
-  for (const button of logoutButtons) {
-    button.addEventListener(
-      "click",
-      async (e) => {
-        e.preventDefault();
-        await logout();
-      },
-    );
-  }
 }
 
 async function handleAuthCallbacks(manager: UserManager) {
@@ -110,7 +77,7 @@ async function loginIfAuthCookieIsSet(manager: UserManager) {
     (await manager.getUser() === null)
   ) {
     await manager.signinSilent()
-      .then((user) => {
+      .then(() => {
         console.info(
           "Successfully logged in silently based on presence of cookie",
         );
@@ -122,26 +89,6 @@ async function loginIfAuthCookieIsSet(manager: UserManager) {
         );
       });
   }
-}
-
-async function setAuthMenuStatus() {
-  await uiReady;
-
-  Array.from(document.getElementsByClassName("login-status-dependent"))
-    .forEach(async (element) => {
-      if (await isLoggedIn()) {
-        element.classList.remove(settings.auth.ala.logoutClass);
-        element.classList.add(settings.auth.ala.loginClass);
-
-        const profile = (await getUser())!.profile;
-        (document.getElementById("my-annotated-records")! as HTMLAnchorElement)
-          .href =
-            `/biocache-hub/occurrences/search/?q=*:*&fq=assertion_user_id:%22${profile.sub}%22`;
-      } else {
-        element.classList.remove(settings.auth.ala.loginClass);
-        element.classList.add(settings.auth.ala.logoutClass);
-      }
-    });
 }
 
 function getCurrentUrl() {
