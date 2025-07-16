@@ -109,12 +109,18 @@ async function loginIfAuthCookieIsSet(manager: UserManager) {
     typeof Cookies.get(settings.auth.ala.authCookieName) !== "undefined" &&
     (await manager.getUser() === null)
   ) {
-    await manager.signinSilent().catch((err) => {
-      console.error(
-        "Failed to silently login based on presence of cookie and absence of user in browser session",
-        err,
-      );
-    });
+    await manager.signinSilent()
+      .then((user) => {
+        console.info(
+          "Successfully logged in silently based on presence of cookie",
+        );
+      })
+      .catch((err) => {
+        console.error(
+          "Failed to silently login based on presence of cookie and absence of user in browser session",
+          err,
+        );
+      });
   }
 }
 
