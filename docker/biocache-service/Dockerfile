@@ -3,8 +3,8 @@ ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 
-ARG VERSION=add-pac4j-cookie-matcher
-ARG COMMIT=93cb16c9271cb291abbb9065ddf6971da8984bde
+ARG VERSION=poc-rbac
+ARG COMMIT=5fad11c40bd1bc62d27cac7265723c220786c2f6
 ARG SOURCE=https://github.com/StefanVanDyck/biocache-service.git
 LABEL ala.version=inbo-${COMMIT}
 
