@@ -10,7 +10,16 @@ import {
 import settings from "../settings";
 import Cookies from "js-cookie";
 
-export async function handleAuthCallbacks() {
+const uiReady = new Promise<void>((resolve) =>
+    document.addEventListener("DOMContentLoaded", () => resolve())
+);
+export async function initAuthUi() {
+    handleAuthCallbacks();
+    addAuthButtonClickHandlers();
+    setAuthMenuStatus();
+}
+
+async function handleAuthCallbacks() {
     const urlParams = new URLSearchParams(window.location.search);
     const manager = await userManager;
 
@@ -32,7 +41,9 @@ export async function handleAuthCallbacks() {
     }
 }
 
-export async function setAuthMenuStatus() {
+async function setAuthMenuStatus() {
+    await uiReady;
+
     Array.from(document.getElementsByClassName("login-status-dependent"))
         .forEach(async (element) => {
             const user = await getUser();
@@ -52,7 +63,9 @@ export async function setAuthMenuStatus() {
         });
 }
 
-export async function addAuthButtonClickHandlers() {
+async function addAuthButtonClickHandlers() {
+    await uiReady;
+
     const loginButtons = document.getElementsByClassName("login-button");
     for (const button of loginButtons) {
         button.addEventListener(
