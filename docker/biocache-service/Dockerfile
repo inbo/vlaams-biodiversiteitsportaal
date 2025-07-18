@@ -3,8 +3,8 @@ ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 
-ARG VERSION=poc-rbac
-ARG COMMIT=5fad11c40bd1bc62d27cac7265723c220786c2f6
+ARG VERSION=try-deconflicting-beans
+ARG COMMIT=8af18a2f3957633241937d89fddf60b635ebf4ae
 ARG SOURCE=https://github.com/StefanVanDyck/biocache-service.git
 LABEL ala.version=inbo-${COMMIT}
 
@@ -37,7 +37,7 @@ RUN mkdir -p /opt/atlas/i18n \
   && ln -s /config/biocache-service/i18n/override /var/opt/atlas/i18n/biocache-service
 
 ARG VERSION=3.7.0-SNAPSHOT
-ARG COMMIT=5fad11c40bd1bc62d27cac7265723c220786c2f6
+ARG COMMIT=8af18a2f3957633241937d89fddf60b635ebf4ae
 LABEL ala.version=inbo-${COMMIT}
 
 COPY --from=builder /project/build/libs/biocache-service-${VERSION}-exec.war /biocache-service.war
