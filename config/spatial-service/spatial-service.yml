@@ -123,3 +123,6 @@ pipelinesConfig: "--config=/config/spatial-service/la-pipelines.yaml"
 
 logging:
   config: /config/spatial-service/logback.xml
+
+
+batch_thread_count: 1
