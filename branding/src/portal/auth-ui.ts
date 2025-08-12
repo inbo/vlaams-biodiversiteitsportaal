@@ -17,6 +17,11 @@ export async function initAuthUi() {
     handleAuthCallbacks();
     addAuthButtonClickHandlers();
     setAuthMenuStatus();
+
+    const mgr = await userManager;
+    mgr.events.addUserSessionChanged(() => {
+        setAuthMenuStatus();
+    });
 }
 
 async function handleAuthCallbacks() {

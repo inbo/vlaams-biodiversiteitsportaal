@@ -33,6 +33,7 @@ async function createUserManager() {
     //         store: window.session,
     //       }),
     automaticSilentRenew: true,
+    monitorSession: true,
   });
 
   manager.events.addAccessTokenExpired(function () {
@@ -52,10 +53,11 @@ async function loginIfAuthCookieIsSet(manager: UserManager) {
     (await manager.getUser() === null)
   ) {
     await manager.signinSilent()
-      .then(() => {
+      .then(async () => {
         console.info(
           "Successfully logged in silently based on presence of cookie",
         );
+        await manager.getUser();
       })
       .catch((err) => {
         console.error(
