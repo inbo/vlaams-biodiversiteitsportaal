@@ -28,6 +28,10 @@ RUN mkdir /data
 RUN chown ${UID}:${GID} /data
 VOLUME /data
 
+RUN mkdir /cache
+RUN chown ${UID}:${GID} /cache
+VOLUME /cache
+
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 
 COPY conf conf

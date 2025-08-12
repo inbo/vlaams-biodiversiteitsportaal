@@ -288,12 +288,16 @@ sessions:
 
 admin_role: ROLE_ADMIN
 
+
 skin:
-  orgNameLong: "Vlaams Biodiversiteitsportaal"
-  orgNameShort: "VBP"
-  header: true
-  footer: true
-  layout: vlaanderen
+  layout: ala-main
+  footer: false
+#skin:
+#  orgNameLong: "Vlaams Biodiversiteitsportaal"
+#  orgNameShort: "VBP"
+#  header: true
+#  footer: true
+#  layout: vlaanderen
 #  layout: 'main'
 
 speciesDotSize: 5
