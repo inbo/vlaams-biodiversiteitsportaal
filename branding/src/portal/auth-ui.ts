@@ -22,6 +22,9 @@ export async function initAuthUi() {
     mgr.events.addUserSessionChanged(() => {
         setAuthMenuStatus();
     });
+    mgr.events.addUserLoaded(() => {
+        setAuthMenuStatus();
+    });
 }
 
 async function handleAuthCallbacks() {
