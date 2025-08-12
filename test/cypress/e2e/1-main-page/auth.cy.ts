@@ -13,41 +13,43 @@ describe("Can login from the homepage", () => {
         assertIsNotLoggedIn();
     });
 
-    ["alerts", "bie-hub", "biocache-hub", "collectory"].forEach((service) => {
-        it(`[${service}] Login/logout on mainpage means logged in in ${service}`, () => {
-            cy.visit("/");
+    ["bie-hub", "biocache-hub", "collectory", "species-list"].forEach(
+        (service) => {
+            it(`[${service}] Login/logout on mainpage means logged in in ${service}`, () => {
+                cy.visit("/");
 
-            assertIsNotLoggedIn();
-            login();
-            assertIsLoggedIn();
+                assertIsNotLoggedIn();
+                login();
+                assertIsLoggedIn();
 
-            cy.visit(`/${service}/`);
+                cy.visit(`/${service}/`);
 
-            assertIsLoggedIn();
+                assertIsLoggedIn();
 
-            cy.visit("/");
+                cy.visit("/");
 
-            assertIsLoggedIn();
-            logout();
-            assertIsNotLoggedIn();
+                assertIsLoggedIn();
+                logout();
+                assertIsNotLoggedIn();
 
-            cy.visit(`/${service}/`);
+                cy.visit(`/${service}/`);
 
-            assertIsNotLoggedIn();
-        });
+                assertIsNotLoggedIn();
+            });
 
-        it(`[${service}] Login on service page means logged in on main page`, () => {
-            cy.visit(`/${service}/`);
+            it(`[${service}] Login on service page means logged in on main page`, () => {
+                cy.visit(`/${service}/`);
 
-            assertIsNotLoggedIn();
-            login();
-            assertIsLoggedIn();
+                assertIsNotLoggedIn();
+                login();
+                assertIsLoggedIn();
 
-            cy.visit("/");
+                cy.visit("/");
 
-            assertIsLoggedIn();
-        });
-    });
+                assertIsLoggedIn();
+            });
+        },
+    );
 });
 
 function login() {
