@@ -4,11 +4,15 @@ allprojects {
     repositories {
         mavenCentral().content {
             excludeGroup("au.org.ala")
+            excludeGroup("au.org.ala.plugins")
+            excludeModule("org.grails.plugins", "ala-admin-plugin")
         }
         maven {
             url "https://repo.grails.org/grails/core/"
             content {
                 excludeGroup("au.org.ala")
+                excludeGroup("au.org.ala.plugins")
+                excludeModule("org.grails.plugins", "ala-admin-plugin")
             }
         }
         maven { url "https://nexus.ala.org.au/content/groups/public/" }
@@ -16,6 +20,7 @@ allprojects {
   }
     repositories {
         mavenCentral().content {
+            excludeModule("org.grails.plugins", "ala-admin-plugin")
             excludeModule("javax.media", "jai_core")
             excludeModule("net.sf.json-lib", "json-lib")
         }
@@ -23,26 +28,34 @@ allprojects {
             url "https://repo.grails.org/grails/core/"
             content {
                 excludeGroup("au.org.ala")
+                excludeGroup("au.org.ala.plugins")
+                excludeModule("org.grails.plugins", "ala-admin-plugin")
                 excludeModule("javax.media", "jai_core")
                 excludeModule("net.sf.json-lib", "json-lib")
             }
         }
-        maven {
-            url "https://repository.jboss.org/"
-            content {
-                excludeGroup("au.org.ala")
-            }
-        }
+//         maven {
+//             url "https://repository.jboss.org/"
+//             content {
+//                 excludeGroup("au.org.ala")
+//                 excludeGroup("au.org.ala.plugins")
+//                 excludeModule("org.grails.plugins", "ala-admin-plugin")
+//             }
+//         }
         maven {
             url "https://repo.osgeo.org/repository/release/"
             content {
                 excludeGroup("au.org.ala")
+                excludeGroup("au.org.ala.plugins")
+                excludeModule("org.grails.plugins", "ala-admin-plugin")
             }
         }
         maven {
             url "https://maven.geo-solutions.it/"
             content {
                 excludeGroup("au.org.ala")
+                excludeGroup("au.org.ala.plugins")
+                excludeModule("org.grails.plugins", "ala-admin-plugin")
             }
         }
         maven { url "https://nexus.ala.org.au/content/groups/public/" }
