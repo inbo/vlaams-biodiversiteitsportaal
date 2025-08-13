@@ -60,9 +60,6 @@ caches:
     enabled: false
 cassandra:
   hosts: cassandradb
-  max:
-    connections: -1
-    retries: 6
   pool: biocache-store-pool
   port: 9042
 citations:
