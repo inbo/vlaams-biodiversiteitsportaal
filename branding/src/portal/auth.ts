@@ -38,6 +38,7 @@ async function createUserManager() {
 
   manager.events.addAccessTokenExpired(function () {
     console.warn("Access token expired");
+    manager.signinSilent();
   });
   manager.events.addSilentRenewError((user) => {
     console.error("Silent renew error", user);
