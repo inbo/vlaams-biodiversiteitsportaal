@@ -3,8 +3,8 @@ ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 
-ARG VERSION=update-cassandra-driver-too-work-with-aws-keyspaces
-ARG COMMIT=1e94124283ad94f06039786d24753a47fdcf7bfd
+ARG VERSION=699-fix-wms-caching-across-user-roles
+ARG COMMIT=1c47ebc0f9d120ab38ac3798516caf5e8bf695d1
 ARG SOURCE=https://github.com/StefanVanDyck/biocache-service.git
 LABEL ala.version=inbo-${COMMIT}
 
@@ -37,7 +37,7 @@ RUN mkdir -p /opt/atlas/i18n \
   && ln -s /config/biocache-service/i18n/override /var/opt/atlas/i18n/biocache-service
 
 ARG VERSION=3.7.0-SNAPSHOT
-ARG COMMIT=1e94124283ad94f06039786d24753a47fdcf7bfd
+ARG COMMIT=1c47ebc0f9d120ab38ac3798516caf5e8bf695d1
 LABEL ala.version=inbo-${COMMIT}
 
 COPY --from=builder /project/build/libs/biocache-service-${VERSION}-exec.war /biocache-service.war
