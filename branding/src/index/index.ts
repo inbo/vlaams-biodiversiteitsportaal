@@ -2,7 +2,7 @@ import "./stats";
 import "../settings";
 import { PictureCarousel } from "./picture-carousel";
 import settings from "../settings";
-import { initAuthUi } from "../portal/auth-ui";
+import { initAuthUi } from "../auth/auth-ui";
 
 initAuthUi();
 

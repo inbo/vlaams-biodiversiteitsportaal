@@ -1,5 +1,5 @@
 import { User } from "oidc-client-ts";
-import { getUser, isLoggedIn, login, userManager } from "../portal/auth.ts";
+import { getUser, isLoggedIn, login, userManager } from "../auth/auth.ts";
 
 $(() => {
     initPage();

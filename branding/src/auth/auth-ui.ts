@@ -6,7 +6,7 @@ import {
     login,
     logout,
     userManager,
-} from "../portal/auth";
+} from "./auth";
 import settings from "../settings";
 import Cookies from "js-cookie";
 
