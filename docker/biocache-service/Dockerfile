@@ -4,7 +4,7 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 
 ARG VERSION=699-try-adding-cookie-matcher-to-force-auth-of-wms
-ARG COMMIT=bc7bc65823359898021281eec96fbf18dfa34ae0
+ARG COMMIT=bcc7f634fc24a3bd416999797d751ca3ff0c59c9
 ARG SOURCE=https://github.com/StefanVanDyck/biocache-service.git
 LABEL ala.version=inbo-${COMMIT}
 
@@ -37,7 +37,7 @@ RUN mkdir -p /opt/atlas/i18n \
   && ln -s /config/biocache-service/i18n/override /var/opt/atlas/i18n/biocache-service
 
 ARG VERSION=3.7.0-SNAPSHOT
-ARG COMMIT=bc7bc65823359898021281eec96fbf18dfa34ae0
+ARG COMMIT=bcc7f634fc24a3bd416999797d751ca3ff0c59c9
 LABEL ala.version=inbo-${COMMIT}
 
 COPY --from=builder /project/build/libs/biocache-service-${VERSION}-exec.war /biocache-service.war
