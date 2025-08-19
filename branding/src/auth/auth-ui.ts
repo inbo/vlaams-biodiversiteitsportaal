@@ -33,7 +33,7 @@ async function handleAuthCallbacks() {
     const urlParams = new URLSearchParams(window.location.search);
     const manager = await userManager;
 
-    if (urlParams.get("code") !== null) {
+    if (urlParams.get("login") !== null) {
         const user = await manager.signinCallback();
         if (!user) {
             return;

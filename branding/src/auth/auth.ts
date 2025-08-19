@@ -18,10 +18,10 @@ export const userManager = createUserManager();
 async function createUserManager() {
   console.debug("Initializing OIDC UserManager");
   const redirectUrl = getCurrentUrl();
-  // redirectUrl.searchParams.set("login", "true");
+  redirectUrl.searchParams.set("login", "vbp");
 
   const post_logout_redirect_uri = getCurrentUrl();
-  post_logout_redirect_uri.searchParams.set("logout", "true");
+  post_logout_redirect_uri.searchParams.set("logout", "vbp");
 
   const manager = new UserManager({
     authority: settings.auth.oidc.authority,
@@ -105,7 +105,19 @@ function clearAlaAuthCookie() {
       secure: window.location.protocol === "https:",
     },
   );
-  document.cookie = document.cookie.split(";").filter((cookie) => {
-    !cookie.startsWith("JSESSIONID=");
-  }).join(";");
+  [
+    "alerts",
+    "bie-hub",
+    "bie-index",
+    "biocache-hub",
+    "biocache-service",
+    "spatial-hub",
+    "spatial-service",
+  ].forEach((path) => {
+    Cookies.remove("JSESSIONID", {
+      path: `/${path}`,
+      sameSite: "lax",
+      secure: window.location.protocol === "https:",
+    });
+  });
 }
