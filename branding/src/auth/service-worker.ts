@@ -4,7 +4,7 @@ import {
 } from "./service-worker-events";
 
 const jwtPaths = [
-    "/biocache-service/mapping/wms",
+    "/biocache-service/",
 ];
 
 let resolveAccessToken: (value: string | null) => void;

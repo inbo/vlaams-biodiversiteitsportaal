@@ -1,4 +1,3 @@
-import Cookies from "js-cookie";
 import settings from "../settings";
 import { Log, User, UserManager } from "oidc-client-ts";
 
@@ -17,7 +16,7 @@ export const userManager = createUserManager();
 async function createUserManager() {
   console.debug("Initializing OIDC UserManager");
   const redirectUrl = getCurrentUrl();
-  redirectUrl.searchParams.set("login", "true");
+  // redirectUrl.searchParams.set("login", "true");
 
   const post_logout_redirect_uri = getCurrentUrl();
   post_logout_redirect_uri.searchParams.set("logout", "true");
@@ -44,29 +43,7 @@ async function createUserManager() {
     console.error("Silent renew error", user);
   });
 
-  loginIfAuthCookieIsSet(manager);
   return manager;
-}
-
-async function loginIfAuthCookieIsSet(manager: UserManager) {
-  if (
-    typeof Cookies.get(settings.auth.ala.authCookieName) !== "undefined" &&
-    (await manager.getUser() === null)
-  ) {
-    await manager.signinSilent()
-      .then(async () => {
-        console.info(
-          "Successfully logged in silently based on presence of cookie",
-        );
-        await manager.getUser();
-      })
-      .catch((err) => {
-        console.error(
-          "Failed to silently login based on presence of cookie and absence of user in browser session",
-          err,
-        );
-      });
-  }
 }
 
 export function getCurrentUrl() {
@@ -79,19 +56,9 @@ export function getCurrentUrl() {
 }
 
 export async function isLoggedIn() {
-  // First check if the URL has a login or logout parameter
-  // The cookie can be late to update
-  const currentUrl = new URL(window.location.href);
-  if (currentUrl.searchParams.get("login") !== null) {
-    return true;
-  } else if (currentUrl.searchParams.get("logout") !== null) {
-    return false;
-  } else {
-    const authCookie = Cookies.get(settings.auth.ala.authCookieName);
-    const result = typeof authCookie !== "undefined" &&
-      (await getUser() !== null);
-    return result;
-  }
+  const mgr = await userManager;
+  const user = await mgr.getUser();
+  return user !== null;
 }
 
 export async function getUser(): Promise<User | null> {

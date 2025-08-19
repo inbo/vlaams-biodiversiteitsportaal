@@ -1,4 +1,3 @@
-import { User } from "oidc-client-ts";
 import {
     getCurrentUrl,
     getUser,
@@ -9,6 +8,7 @@ import {
 } from "./auth";
 import settings from "../settings";
 import Cookies from "js-cookie";
+import { User } from "oidc-client-ts";
 
 const uiReady = new Promise<void>((resolve) =>
     document.addEventListener("DOMContentLoaded", () => resolve())
@@ -27,11 +27,13 @@ export async function initAuthUi() {
     });
 }
 
+initAuthUi();
+
 async function handleAuthCallbacks() {
     const urlParams = new URLSearchParams(window.location.search);
     const manager = await userManager;
 
-    if (urlParams.get("login") !== null) {
+    if (urlParams.get("code") !== null) {
         const user = await manager.signinCallback();
         if (!user) {
             return;
@@ -39,13 +41,13 @@ async function handleAuthCallbacks() {
         setAlaAuthCookie(user);
         setAuthMenuStatus();
 
-        window.history.pushState(null, document.title, getCurrentUrl());
+        window.location.replace(getCurrentUrl());
     } else if (urlParams.get("logout") !== null) {
         await manager.signoutCallback();
         clearAlaAuthCookie();
         setAuthMenuStatus();
 
-        window.history.pushState(null, document.title, getCurrentUrl());
+        window.location.replace(getCurrentUrl());
     }
 }
 
