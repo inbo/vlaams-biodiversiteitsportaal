@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- apikey -->
-<Context reloadable="false">
+<Context reloadable="false" useHttpOnly="false">
 
     <Parameter name="spring.config.additional-location"
                value="file:/config/common/common.yml,file:/config/apikey/apikey.yml,${ADDITIONAL_SPRING_CONFIG_LOCATIONS}"

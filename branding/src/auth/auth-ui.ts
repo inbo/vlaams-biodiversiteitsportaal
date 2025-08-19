@@ -38,16 +38,14 @@ async function handleAuthCallbacks() {
         if (!user) {
             return;
         }
-        setAlaAuthCookie(user);
         setAuthMenuStatus();
 
-        window.location.replace(getCurrentUrl());
+        window.history.pushState(null, document.title, getCurrentUrl());
     } else if (urlParams.get("logout") !== null) {
         await manager.signoutCallback();
-        clearAlaAuthCookie();
         setAuthMenuStatus();
 
-        window.location.replace(getCurrentUrl());
+        window.history.pushState(null, document.title, getCurrentUrl());
     }
 }
 
@@ -102,17 +100,6 @@ function setAlaAuthCookie(user: User) {
     Cookies.set(
         settings.auth.ala.authCookieName,
         user.profile.sub,
-        {
-            path: "/",
-            sameSite: "strict",
-            secure: window.location.protocol === "https:",
-        },
-    );
-}
-
-function clearAlaAuthCookie() {
-    Cookies.remove(
-        settings.auth.ala.authCookieName,
         {
             path: "/",
             sameSite: "strict",

@@ -1,6 +1,8 @@
 import settings from "../settings";
 import { Log, User, UserManager } from "oidc-client-ts";
 
+import Cookies from "js-cookie";
+
 Log.setLogger(console);
 
 /**
@@ -69,9 +71,41 @@ export async function login(
   extraQueryParams: Record<string, string | number | boolean> | undefined =
     undefined,
 ) {
-  await userManager.then((mgr) => mgr.signinRedirect({ extraQueryParams }));
+  await userManager.then((mgr) => {
+    setAlaAuthCookie();
+    mgr.signinRedirect({ extraQueryParams });
+  });
 }
 
 export async function logout() {
-  await userManager.then((mgr) => mgr.signoutRedirect());
+  await userManager.then((mgr) => {
+    clearAlaAuthCookie();
+    mgr.signoutRedirect();
+  });
+}
+
+function setAlaAuthCookie(user?: User) {
+  Cookies.set(
+    settings.auth.ala.authCookieName,
+    user?.profile?.sub || "",
+    {
+      path: "/",
+      sameSite: "strict",
+      secure: window.location.protocol === "https:",
+    },
+  );
+}
+
+function clearAlaAuthCookie() {
+  Cookies.remove(
+    settings.auth.ala.authCookieName,
+    {
+      path: "/",
+      sameSite: "strict",
+      secure: window.location.protocol === "https:",
+    },
+  );
+  document.cookie = document.cookie.split(";").filter((cookie) => {
+    !cookie.startsWith("JSESSIONID=");
+  }).join(";");
 }

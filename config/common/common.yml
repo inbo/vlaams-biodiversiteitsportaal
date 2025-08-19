@@ -94,6 +94,7 @@ server:
     session:
       cookie:
         secure: true
+        http-only: false # Needed to allow front-end logout
         same-site: "lax" # Strict causes pac4j issues
 
 # Prevent automatically updating DB-schema on startup
