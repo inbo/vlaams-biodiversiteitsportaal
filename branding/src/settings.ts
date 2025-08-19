@@ -11,6 +11,7 @@ const environment: string = process.env.NODE_ENV === "development"
   : "::ENVIRONMENT::";
 
 const defaultConfig = {
+  domain: "http://localhost",
   enabledLangs: ["nl", "en"],
   auth: {
     // Replaced by terraform when deploying to the specific environment
@@ -36,21 +37,25 @@ const defaultConfig = {
 
 const environmentConfig: Record<Environment, object> = {
   local: {
+    domain: "http://localhost",
     pictureCarousel: {
       speciesListId: "dr383",
     },
   },
   dev: {
+    domain: "https://natuurdata.dev.inbo.be",
     pictureCarousel: {
       speciesListId: "dr383",
     },
   },
   uat: {
+    domain: "https://natuurdata.uat.inbo.be",
     pictureCarousel: {
       speciesListId: "dr1",
     },
   },
   prod: {
+    domain: "https://natuurdata.inbo.be",
     pictureCarousel: {
       speciesListId: "dr1",
     },

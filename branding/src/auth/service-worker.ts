@@ -3,6 +3,10 @@ import {
     ResetAuthLoadedMessage,
 } from "./service-worker-events";
 
+const jwtPaths = [
+    "/biocache-service/mapping/wms",
+];
+
 let resolveAccessToken: (value: string | null) => void;
 let accessTokenPromise: Promise<string | null>;
 
@@ -36,10 +40,8 @@ addEventListener("message", (event) => {
 });
 
 addEventListener("fetch", async (event: any) => {
-    if (
-        event.request.url.includes("/biocache-service/") &&
-        event.request.url.includes("/wms/")
-    ) {
+    console.info("Fetch event:", event.request.url);
+    if (jwtPaths.some((path) => event.request.url.includes(path))) {
         const accessToken = await accessTokenPromise;
         if (accessToken) {
             console.log("Service Worker: Fetch event for", event.request.url);
