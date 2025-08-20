@@ -90,7 +90,7 @@ export function setAlaAuthCookie(user?: User) {
     user?.profile?.sub || "vbp",
     {
       path: "/",
-      sameSite: "strict",
+      sameSite: "lax",
       secure: window.location.protocol === "https:",
     },
   );
@@ -101,7 +101,7 @@ function clearAlaAuthCookies() {
     settings.auth.ala.authCookieName,
     {
       path: "/",
-      sameSite: "strict",
+      sameSite: "lax",
       secure: window.location.protocol === "https:",
     },
   );
