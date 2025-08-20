@@ -39,7 +39,6 @@ async function initUserManager(authServiceWorker: AuthServiceWorker) {
     monitorSession: true,
   });
   await handleAuthCallbacks(manager);
-  authServiceWorker;
 
   if (
     Cookies.get(settings.auth.ala.authCookieName)
@@ -54,6 +53,8 @@ async function initUserManager(authServiceWorker: AuthServiceWorker) {
       }
     }
   }
+
+  authServiceWorker.setAccessToken(await manager.getUser());
 
   manager.events.addAccessTokenExpired(function () {
     console.warn("Access token expired");
@@ -73,12 +74,10 @@ async function handleAuthCallbacks(manager: UserManager) {
   if (urlParams.get("login") !== null) {
     const user = await manager.signinCallback();
     setAlaAuthCookie(user);
-    await authServiceWorker.setAccessToken(user);
 
     window.history.pushState(null, document.title, getCurrentUrl());
   } else if (urlParams.get("logout") !== null) {
     await manager.signoutCallback();
-    await authServiceWorker.setAccessToken(null);
 
     window.history.pushState(null, document.title, getCurrentUrl());
   }
@@ -138,6 +137,7 @@ function getCurrentUrl() {
   cleanedUrl.searchParams.delete("logout");
   cleanedUrl.searchParams.delete("code");
   cleanedUrl.searchParams.delete("state");
+  cleanedUrl.searchParams.delete("sessionState");
   return cleanedUrl;
 }
 
