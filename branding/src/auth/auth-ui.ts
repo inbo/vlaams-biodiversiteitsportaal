@@ -15,7 +15,6 @@ const uiReady = new Promise<void>((resolve) =>
     document.addEventListener("DOMContentLoaded", () => resolve())
 );
 export async function initAuthUi() {
-    handleAuthCallbacks();
     addAuthButtonClickHandlers();
     setAuthMenuStatus();
 
@@ -29,26 +28,6 @@ export async function initAuthUi() {
 }
 
 initAuthUi();
-
-async function handleAuthCallbacks() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const manager = await userManager;
-
-    if (urlParams.get("login") !== null) {
-        const user = await manager.signinCallback();
-        if (!user) {
-            return;
-        }
-        setAuthMenuStatus();
-
-        window.history.pushState(null, document.title, getCurrentUrl());
-    } else if (urlParams.get("logout") !== null) {
-        await manager.signoutCallback();
-        setAuthMenuStatus();
-
-        window.history.pushState(null, document.title, getCurrentUrl());
-    }
-}
 
 async function setAuthMenuStatus() {
     await uiReady;

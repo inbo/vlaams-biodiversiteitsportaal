@@ -37,6 +37,8 @@ async function createUserManager() {
     monitorSession: true,
   });
 
+  await handleAuthCallbacks(manager);
+
   manager.events.addAccessTokenExpired(function () {
     console.warn("Access token expired");
     manager.signinSilent();
@@ -46,6 +48,21 @@ async function createUserManager() {
   });
 
   return manager;
+}
+
+async function handleAuthCallbacks(manager: UserManager) {
+  const urlParams = new URLSearchParams(window.location.search);
+
+  if (urlParams.get("login") !== null) {
+    const user = await manager.signinCallback();
+    setAlaAuthCookie(user);
+
+    window.history.pushState(null, document.title, getCurrentUrl());
+  } else if (urlParams.get("logout") !== null) {
+    await manager.signoutCallback();
+
+    window.history.pushState(null, document.title, getCurrentUrl());
+  }
 }
 
 export function getCurrentUrl() {
@@ -73,7 +90,6 @@ export async function login(
 ) {
   const mgr = await userManager;
   clearAlaAuthCookies();
-  setAlaAuthCookie();
   await mgr.signinRedirect({ extraQueryParams });
 }
 
@@ -107,12 +123,22 @@ function clearAlaAuthCookies() {
   );
   [
     "alerts",
+    "apikey",
     "bie-hub",
     "bie-index",
     "biocache-hub",
     "biocache-service",
+    "collectory",
+    "data-quality-filter-service",
+    "image-service",
+    "logger",
+    "regions",
+    "sandbox-hub",
+    "sandbox-service",
+    "sensitive-data-service",
     "spatial-hub",
     "spatial-service",
+    "species-list",
   ].forEach((path) => {
     Cookies.remove("JSESSIONID", {
       path: `/${path}`,

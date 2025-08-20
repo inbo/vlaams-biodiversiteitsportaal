@@ -28,6 +28,10 @@ if ("serviceWorker" in navigator) {
       authLoadedMessage(null);
     });
 
+    mgr.events.addAccessTokenExpired(() => {
+      resetAuthLoaded();
+    });
+
     const user = await getUser();
     if (user) {
       authLoadedMessage(user.access_token);
