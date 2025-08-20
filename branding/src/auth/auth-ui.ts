@@ -9,6 +9,7 @@ import {
 import settings from "../settings";
 import Cookies from "js-cookie";
 import { User } from "oidc-client-ts";
+import { set } from "lodash";
 
 const uiReady = new Promise<void>((resolve) =>
     document.addEventListener("DOMContentLoaded", () => resolve())
@@ -94,16 +95,4 @@ async function addAuthButtonClickHandlers() {
             },
         );
     }
-}
-
-function setAlaAuthCookie(user: User) {
-    Cookies.set(
-        settings.auth.ala.authCookieName,
-        user.profile.sub,
-        {
-            path: "/",
-            sameSite: "strict",
-            secure: window.location.protocol === "https:",
-        },
-    );
 }

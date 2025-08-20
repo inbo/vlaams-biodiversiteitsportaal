@@ -71,23 +71,23 @@ export async function login(
   extraQueryParams: Record<string, string | number | boolean> | undefined =
     undefined,
 ) {
-  await userManager.then((mgr) => {
-    setAlaAuthCookie();
-    mgr.signinRedirect({ extraQueryParams });
-  });
+  const mgr = await userManager;
+  clearAlaAuthCookies();
+  setAlaAuthCookie();
+  await mgr.signinRedirect({ extraQueryParams });
 }
 
 export async function logout() {
   await userManager.then((mgr) => {
-    clearAlaAuthCookie();
+    clearAlaAuthCookies();
     mgr.signoutRedirect();
   });
 }
 
-function setAlaAuthCookie(user?: User) {
+export function setAlaAuthCookie(user?: User) {
   Cookies.set(
     settings.auth.ala.authCookieName,
-    user?.profile?.sub || "",
+    user?.profile?.sub || "vbp",
     {
       path: "/",
       sameSite: "strict",
@@ -96,7 +96,7 @@ function setAlaAuthCookie(user?: User) {
   );
 }
 
-function clearAlaAuthCookie() {
+function clearAlaAuthCookies() {
   Cookies.remove(
     settings.auth.ala.authCookieName,
     {
