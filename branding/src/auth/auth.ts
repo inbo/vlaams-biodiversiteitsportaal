@@ -73,10 +73,12 @@ async function handleAuthCallbacks(manager: UserManager) {
   if (urlParams.get("login") !== null) {
     const user = await manager.signinCallback();
     setAlaAuthCookie(user);
+    await authServiceWorker.setAccessToken(user);
 
     window.history.pushState(null, document.title, getCurrentUrl());
   } else if (urlParams.get("logout") !== null) {
     await manager.signoutCallback();
+    await authServiceWorker.setAccessToken(null);
 
     window.history.pushState(null, document.title, getCurrentUrl());
   }
@@ -142,12 +144,14 @@ function getCurrentUrl() {
 export async function login() {
   const mgr = await userManagerPromise;
   clearAlaAuthCookies();
+  authServiceWorker.reset();
   await mgr.signinRedirect();
 }
 
 export async function logout() {
   const mgr = await userManagerPromise;
   clearAlaAuthCookies();
+  authServiceWorker.reset();
   await mgr.signoutRedirect();
 }
 

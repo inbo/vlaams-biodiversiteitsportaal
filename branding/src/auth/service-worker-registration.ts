@@ -22,7 +22,7 @@ export class AuthServiceWorker {
     }
   }
 
-  async setAccessToken(user: User | null) {
+  async setAccessToken(user?: User | null) {
     const reg = await this.registrationPromise;
     if (reg.active) {
       if (user) {
