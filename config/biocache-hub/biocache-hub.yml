@@ -194,7 +194,7 @@ supportEmail: ${common.supportEmail}
 table:
   displayDynamicProperties: false
 uriExclusionFilterPattern: /occurrences/shapeUpload,/images.*,/css.*,/js.*,.*json,/help/.*
-uriFilterPattern: /admin/*,/alaAdmin/*,/download/*
+#uriFilterPattern: /admin/*,/alaAdmin/*,/download/*
 useDownloadPlugin: true
 userCharts: false
 searchTabs:
