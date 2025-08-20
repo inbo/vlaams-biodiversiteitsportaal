@@ -36,8 +36,21 @@ async function createUserManager() {
     automaticSilentRenew: true,
     monitorSession: true,
   });
-
   await handleAuthCallbacks(manager);
+
+  if (
+    Cookies.get(settings.auth.ala.authCookieName)
+  ) {
+    const user = await manager.getUser();
+    if (!user) {
+      try {
+        await manager.signinSilent();
+      } catch (error) {
+        console.error("Silent signin failed", error);
+        clearAlaAuthCookies();
+      }
+    }
+  }
 
   manager.events.addAccessTokenExpired(function () {
     console.warn("Access token expired");
@@ -45,6 +58,7 @@ async function createUserManager() {
   });
   manager.events.addSilentRenewError((user) => {
     console.error("Silent renew error", user);
+    clearAlaAuthCookies();
   });
 
   return manager;
