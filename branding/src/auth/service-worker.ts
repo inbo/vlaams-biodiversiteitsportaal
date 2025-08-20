@@ -19,6 +19,14 @@ function resetAuthLoaded() {
 
 resetAuthLoaded();
 
+addEventListener("install", () => {
+    console.log(`Service Worker: Installing...`);
+});
+
+addEventListener("active", () => {
+    console.log(`Service Worker: active...`);
+});
+
 addEventListener("message", (event) => {
     console.log(`Message received: ${event.data}`);
     const data = event.data as (AuthLoadedMessage | ResetAuthLoadedMessage);

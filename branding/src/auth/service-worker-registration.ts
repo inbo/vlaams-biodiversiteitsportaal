@@ -1,42 +1,43 @@
-import { getUser, userManager } from "./auth";
+import { User } from "oidc-client-ts";
 
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("/service-worker.js", {
-    scope: "/",
-    type: "module",
-  }).then(async (registration) => {
-    function resetAuthLoaded() {
-      if (registration.active) {
-        registration.active.postMessage({ type: "resetAuthLoaded" });
-      }
-    }
+export class AuthServiceWorker {
+  private registrationPromise: Promise<ServiceWorkerRegistration>;
 
-    resetAuthLoaded();
+  constructor() {
+    this.registrationPromise = navigator.serviceWorker.register(
+      "/service-worker.js",
+      {
+        scope: "/",
+        type: "module",
+      },
+    );
+  }
 
-    function authLoadedMessage(accessToken: string | null) {
-      if (registration.active) {
-        registration.active.postMessage({ type: "authLoaded", accessToken });
-      }
-    }
-
-    const mgr = await userManager;
-    mgr.events.addUserLoaded(async (user) => {
-      authLoadedMessage(user.access_token);
-    });
-
-    mgr.events.addUserUnloaded(() => {
-      authLoadedMessage(null);
-    });
-
-    mgr.events.addAccessTokenExpired(() => {
-      resetAuthLoaded();
-    });
-
-    const user = await getUser();
-    if (user) {
-      authLoadedMessage(user.access_token);
+  async reset() {
+    const reg = await this.registrationPromise;
+    if (reg.active) {
+      reg.active.postMessage({ type: "resetAuthLoaded" });
     } else {
-      authLoadedMessage(null);
+      console.warn("Service worker is not active");
     }
-  });
+  }
+
+  async setAccessToken(user: User | null) {
+    const reg = await this.registrationPromise;
+    if (reg.active) {
+      if (user) {
+        reg.active.postMessage({
+          type: "authLoaded",
+          accessToken: user.access_token,
+        });
+      } else {
+        reg.active.postMessage({
+          type: "authLoaded",
+          accessToken: null,
+        });
+      }
+    } else {
+      console.warn("Service worker is not active");
+    }
+  }
 }

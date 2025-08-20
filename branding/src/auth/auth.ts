@@ -2,6 +2,7 @@ import settings from "../settings";
 import { Log, User, UserManager } from "oidc-client-ts";
 
 import Cookies from "js-cookie";
+import { AuthServiceWorker } from "./service-worker-registration";
 
 Log.setLogger(console);
 
@@ -13,9 +14,10 @@ Log.setLogger(console);
  * This logic is part of the ala-security project.
  */
 
-export const userManager = createUserManager();
+const authServiceWorker = new AuthServiceWorker();
+const userManagerPromise = initUserManager(authServiceWorker);
 
-async function createUserManager() {
+async function initUserManager(authServiceWorker: AuthServiceWorker) {
   console.debug("Initializing OIDC UserManager");
   const redirectUrl = getCurrentUrl();
   redirectUrl.searchParams.set("login", "vbp");
@@ -37,6 +39,7 @@ async function createUserManager() {
     monitorSession: true,
   });
   await handleAuthCallbacks(manager);
+  authServiceWorker;
 
   if (
     Cookies.get(settings.auth.ala.authCookieName)
@@ -79,42 +82,7 @@ async function handleAuthCallbacks(manager: UserManager) {
   }
 }
 
-export function getCurrentUrl() {
-  const cleanedUrl = new URL(window.location.href);
-  cleanedUrl.searchParams.delete("login");
-  cleanedUrl.searchParams.delete("logout");
-  cleanedUrl.searchParams.delete("code");
-  cleanedUrl.searchParams.delete("state");
-  return cleanedUrl;
-}
-
-export async function isLoggedIn() {
-  const mgr = await userManager;
-  const user = await mgr.getUser();
-  return user !== null;
-}
-
-export async function getUser(): Promise<User | null> {
-  return await userManager.then((mgr) => mgr.getUser());
-}
-
-export async function login(
-  extraQueryParams: Record<string, string | number | boolean> | undefined =
-    undefined,
-) {
-  const mgr = await userManager;
-  clearAlaAuthCookies();
-  await mgr.signinRedirect({ extraQueryParams });
-}
-
-export async function logout() {
-  await userManager.then((mgr) => {
-    clearAlaAuthCookies();
-    mgr.signoutRedirect();
-  });
-}
-
-export function setAlaAuthCookie(user?: User) {
+function setAlaAuthCookie(user?: User) {
   Cookies.set(
     settings.auth.ala.authCookieName,
     user?.profile?.sub || "vbp",
@@ -160,4 +128,34 @@ function clearAlaAuthCookies() {
       secure: window.location.protocol === "https:",
     });
   });
+}
+
+function getCurrentUrl() {
+  const cleanedUrl = new URL(window.location.href);
+  cleanedUrl.searchParams.delete("login");
+  cleanedUrl.searchParams.delete("logout");
+  cleanedUrl.searchParams.delete("code");
+  cleanedUrl.searchParams.delete("state");
+  return cleanedUrl;
+}
+
+export async function login() {
+  const mgr = await userManagerPromise;
+  clearAlaAuthCookies();
+  await mgr.signinRedirect();
+}
+
+export async function logout() {
+  const mgr = await userManagerPromise;
+  clearAlaAuthCookies();
+  await mgr.signoutRedirect();
+}
+
+export async function getUser(): Promise<User | null> {
+  const mgr = await userManagerPromise;
+  return await mgr.getUser();
+}
+
+export async function isLoggedIn() {
+  return getUser() !== null;
 }

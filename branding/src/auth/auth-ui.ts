@@ -1,15 +1,5 @@
-import {
-    getCurrentUrl,
-    getUser,
-    isLoggedIn,
-    login,
-    logout,
-    userManager,
-} from "./auth";
+import { getUser, isLoggedIn, login, logout } from "./auth";
 import settings from "../settings";
-import Cookies from "js-cookie";
-import { User } from "oidc-client-ts";
-import { set } from "lodash";
 
 const uiReady = new Promise<void>((resolve) =>
     document.addEventListener("DOMContentLoaded", () => resolve())
@@ -17,14 +7,6 @@ const uiReady = new Promise<void>((resolve) =>
 export async function initAuthUi() {
     addAuthButtonClickHandlers();
     setAuthMenuStatus();
-
-    const mgr = await userManager;
-    mgr.events.addUserSessionChanged(() => {
-        setAuthMenuStatus();
-    });
-    mgr.events.addUserLoaded(() => {
-        setAuthMenuStatus();
-    });
 }
 
 initAuthUi();
