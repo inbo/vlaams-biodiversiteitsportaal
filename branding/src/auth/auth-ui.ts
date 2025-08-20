@@ -1,4 +1,4 @@
-import { getUser, isLoggedIn, login, logout } from "./auth";
+import { getUser, isLoggedIn, login, logout, userManagerPromise } from "./auth";
 import settings from "../settings";
 
 const uiReady = new Promise<void>((resolve) =>
@@ -7,6 +7,20 @@ const uiReady = new Promise<void>((resolve) =>
 export async function initAuthUi() {
     addAuthButtonClickHandlers();
     setAuthMenuStatus();
+
+    const mgr = await userManagerPromise;
+    mgr.events.addUserLoaded(async () => {
+        setAuthMenuStatus();
+    });
+    mgr.events.addUserUnloaded(async () => {
+        setAuthMenuStatus();
+    });
+    mgr.events.addUserSessionChanged(() => {
+        setAuthMenuStatus();
+    });
+    mgr.events.addSilentRenewError(async () => {
+        setAuthMenuStatus();
+    });
 }
 
 initAuthUi();

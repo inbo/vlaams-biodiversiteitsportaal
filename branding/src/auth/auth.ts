@@ -15,7 +15,7 @@ Log.setLogger(console);
  */
 
 const authServiceWorker = new AuthServiceWorker();
-const userManagerPromise = initUserManager(authServiceWorker);
+export const userManagerPromise = initUserManager(authServiceWorker);
 
 async function initUserManager(authServiceWorker: AuthServiceWorker) {
   console.debug("Initializing OIDC UserManager");
