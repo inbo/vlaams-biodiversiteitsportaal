@@ -72,6 +72,7 @@ async function handleAuthCallbacks(manager: UserManager) {
   const urlParams = new URLSearchParams(window.location.search);
 
   if (urlParams.get("login") !== null) {
+    setAlaAuthCookie();
     const user = await manager.signinCallback();
     setAlaAuthCookie(user);
 
