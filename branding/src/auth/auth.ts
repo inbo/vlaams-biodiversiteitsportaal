@@ -56,13 +56,20 @@ async function initUserManager(authServiceWorker: AuthServiceWorker) {
 
   authServiceWorker.setAccessToken(await manager.getUser());
 
-  manager.events.addAccessTokenExpired(function () {
+  manager.events.addAccessTokenExpired(async function () {
     console.warn("Access token expired");
-    manager.signinSilent();
+    try {
+      await manager.signinSilent();
+    } catch (error) {
+      console.error("Silent signin failed", error);
+      manager.removeUser();
+      clearAlaAuthCookies();
+    }
   });
   manager.events.addSilentRenewError((user) => {
     console.error("Silent renew error", user);
     clearAlaAuthCookies();
+    manager.removeUser();
   });
 
   return manager;
