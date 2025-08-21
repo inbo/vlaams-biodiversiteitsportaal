@@ -79,11 +79,10 @@ async function handleAuthCallbacks(manager: UserManager) {
   const urlParams = new URLSearchParams(window.location.search);
 
   if (urlParams.get("login") !== null) {
-    setAlaAuthCookie();
     const user = await manager.signinCallback();
     setAlaAuthCookie(user);
 
-    window.history.pushState(null, document.title, getCurrentUrl());
+    window.location.replace(getCurrentUrl());
   } else if (urlParams.get("logout") !== null) {
     await manager.signoutCallback();
 
@@ -149,7 +148,7 @@ function getCurrentUrl() {
   return cleanedUrl;
 }
 
-export async function login(args?: SigninRedirectArgs) {
+export async function login(args?: SigninRedirectArgs | any) {
   const mgr = await userManagerPromise;
   clearAlaAuthCookies();
   authServiceWorker.reset();
