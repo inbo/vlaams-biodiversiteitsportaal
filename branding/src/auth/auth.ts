@@ -35,8 +35,8 @@ async function initUserManager(authServiceWorker: AuthServiceWorker) {
     //       userStore: new WebStorageStateStore({
     //         store: window.session,
     //       }),
-    automaticSilentRenew: true,
-    monitorSession: true,
+    automaticSilentRenew: false,
+    monitorSession: false,
   });
   await handleAuthCallbacks(manager);
 
@@ -56,6 +56,18 @@ async function initUserManager(authServiceWorker: AuthServiceWorker) {
 
   authServiceWorker.setAccessToken(await manager.getUser());
 
+  manager.events.addAccessTokenExpiring(async () => {
+    console.warn("Access token expiring");
+    try {
+      const user = await manager.signinSilent();
+      authServiceWorker.setAccessToken(user!);
+      setAlaAuthCookie(user!);
+    } catch (error) {
+      console.error("Silent signin failed", error);
+      clearAlaAuthCookies();
+      authServiceWorker.setAccessToken(null);
+    }
+  });
   manager.events.addAccessTokenExpired(async function () {
     console.warn("Access token expired");
     try {
@@ -81,6 +93,7 @@ async function handleAuthCallbacks(manager: UserManager) {
   if (urlParams.get("login") !== null) {
     const user = await manager.signinCallback();
     setAlaAuthCookie(user);
+    authServiceWorker.setAccessToken(user);
 
     window.location.replace(getCurrentUrl());
   } else if (urlParams.get("logout") !== null) {
