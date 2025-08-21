@@ -1,5 +1,5 @@
 import settings from "../settings";
-import { Log, User, UserManager } from "oidc-client-ts";
+import { Log, SigninRedirectArgs, User, UserManager } from "oidc-client-ts";
 
 import Cookies from "js-cookie";
 import { AuthServiceWorker } from "./service-worker-registration";
@@ -149,11 +149,11 @@ function getCurrentUrl() {
   return cleanedUrl;
 }
 
-export async function login() {
+export async function login(args?: SigninRedirectArgs) {
   const mgr = await userManagerPromise;
   clearAlaAuthCookies();
   authServiceWorker.reset();
-  await mgr.signinRedirect();
+  await mgr.signinRedirect(args);
 }
 
 export async function logout() {
