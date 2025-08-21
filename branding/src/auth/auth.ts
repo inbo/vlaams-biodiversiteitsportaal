@@ -62,8 +62,8 @@ async function initUserManager(authServiceWorker: AuthServiceWorker) {
       await manager.signinSilent();
     } catch (error) {
       console.error("Silent signin failed", error);
-      manager.removeUser();
       clearAlaAuthCookies();
+      await manager.removeUser();
     }
   });
   manager.events.addSilentRenewError((user) => {
