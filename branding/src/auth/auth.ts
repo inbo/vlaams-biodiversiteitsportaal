@@ -165,9 +165,9 @@ export async function logout(reload: boolean = true) {
   clearAlaAuthCookies();
   authServiceWorker.setAccessToken(null);
   mgr.removeUser();
-  if (reload) {
-    window.location.reload();
-  }
+  // if (reload) {
+  //   window.location.reload();
+  // }
 }
 
 export async function getUser(): Promise<User | null> {
