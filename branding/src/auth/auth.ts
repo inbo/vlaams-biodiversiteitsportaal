@@ -73,11 +73,11 @@ async function handleAuthCallbacks(manager: UserManager) {
   if (urlParams.get("login") !== null) {
     const user = await manager.signinCallback();
     setAlaAuthCookie(user);
-    authServiceWorker.setAccessToken(user);
+    await authServiceWorker.setAccessToken(user);
 
     window.location.replace(getCurrentUrl());
   } else if (urlParams.get("logout") !== null) {
-    await manager.signoutCallback();
+    await logout();
 
     window.history.pushState(null, document.title, getCurrentUrl());
   }
@@ -154,20 +154,20 @@ function getCurrentUrl() {
 }
 
 export async function login(args?: SigninRedirectArgs | any) {
-  clearAlaAuthCookies();
-  authServiceWorker.reset();
+  await authServiceWorker.reset();
   const mgr = await userManagerPromise;
+  clearAlaAuthCookies();
   await mgr.signinRedirect(args);
 }
 
 export async function logout(reload: boolean = true) {
-  const mgr = await userManagerPromise;
+  await authServiceWorker.setAccessToken(null);
   clearAlaAuthCookies();
-  authServiceWorker.setAccessToken(null);
-  mgr.removeUser();
-  // if (reload) {
-  //   window.location.reload();
-  // }
+  const mgr = await userManagerPromise;
+  await mgr.removeUser();
+  if (reload) {
+    await mgr.signoutRedirect();
+  }
 }
 
 export async function getUser(): Promise<User | null> {
