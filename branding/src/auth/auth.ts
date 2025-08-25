@@ -29,7 +29,7 @@ async function initUserManager(authServiceWorker: AuthServiceWorker) {
     authority: settings.auth.oidc.authority,
     client_id: settings.auth.oidc.clientId,
     redirect_uri: redirectUrl.href,
-    post_logout_redirect_uri: post_logout_redirect_uri.href,
+    // post_logout_redirect_uri: post_logout_redirect_uri.href,
     scope: "openid email ala/roles",
     includeIdTokenInSilentSignout: true,
     //       userStore: new WebStorageStateStore({
@@ -40,29 +40,29 @@ async function initUserManager(authServiceWorker: AuthServiceWorker) {
   });
   await handleAuthCallbacks(manager);
 
-  if (
-    Cookies.get(settings.auth.ala.authCookieName)
-  ) {
-    const user = await manager.getUser();
-    if (!user || user.expired) {
-      silentLogin();
-    }
-  }
-
-  authServiceWorker.setAccessToken(await manager.getUser());
-
-  manager.events.addAccessTokenExpiring(() => {
+  manager.events.addAccessTokenExpiring(async () => {
     console.warn("Access token expiring");
-    silentLogin();
+    await silentLogin();
   });
-  manager.events.addAccessTokenExpired(function () {
+  manager.events.addAccessTokenExpired(async function () {
     console.warn("Access token expired");
-    silentLogin();
+    await silentLogin();
   });
-  manager.events.addSilentRenewError((user) => {
+  manager.events.addSilentRenewError(async (user) => {
     console.error("Silent renew error", user);
-    logout(false);
+    await handleLogout();
   });
+
+  const user = await manager.getUser();
+  await authServiceWorker.setAccessToken(user);
+
+  // Try to login silently when the cookie is present, but no user is available
+  if (
+    Cookies.get(settings.auth.ala.authCookieName) &&
+    (!user || user.expired)
+  ) {
+    silentLogin();
+  }
 
   return manager;
 }
@@ -72,12 +72,11 @@ async function handleAuthCallbacks(manager: UserManager) {
 
   if (urlParams.get("login") !== null) {
     const user = await manager.signinCallback();
-    setAlaAuthCookie(user);
-    await authServiceWorker.setAccessToken(user);
+    await handleLogin(user!);
 
-    window.location.replace(getCurrentUrl());
+    window.history.pushState(null, document.title, getCurrentUrl());
   } else if (urlParams.get("logout") !== null) {
-    await logout();
+    await handleLogout();
 
     window.history.pushState(null, document.title, getCurrentUrl());
   }
@@ -87,12 +86,22 @@ async function silentLogin() {
   const manager = await userManagerPromise;
   try {
     const user = await manager.signinSilent();
-    authServiceWorker.setAccessToken(user!);
+    await authServiceWorker.setAccessToken(user!);
     setAlaAuthCookie(user!);
   } catch (error) {
     console.error("Silent login failed", error);
-    logout(false);
+    await handleLogout();
   }
+}
+
+async function handleLogin(user: User) {
+  await authServiceWorker.setAccessToken(user);
+  setAlaAuthCookie(user);
+}
+
+async function handleLogout() {
+  await authServiceWorker.setAccessToken(null);
+  clearAlaAuthCookies();
 }
 
 function setAlaAuthCookie(user?: User) {
@@ -155,19 +164,15 @@ function getCurrentUrl() {
 
 export async function login(args?: SigninRedirectArgs | any) {
   await authServiceWorker.reset();
-  const mgr = await userManagerPromise;
   clearAlaAuthCookies();
+  const mgr = await userManagerPromise;
   await mgr.signinRedirect(args);
 }
 
 export async function logout(reload: boolean = true) {
-  await authServiceWorker.setAccessToken(null);
-  clearAlaAuthCookies();
+  await handleLogout();
   const mgr = await userManagerPromise;
-  await mgr.removeUser();
-  if (reload) {
-    await mgr.signoutRedirect();
-  }
+  await mgr.signoutRedirect();
 }
 
 export async function getUser(): Promise<User | null> {
