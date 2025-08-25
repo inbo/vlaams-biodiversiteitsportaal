@@ -44,44 +44,24 @@ async function initUserManager(authServiceWorker: AuthServiceWorker) {
     Cookies.get(settings.auth.ala.authCookieName)
   ) {
     const user = await manager.getUser();
-    if (!user) {
-      try {
-        await manager.signinSilent();
-      } catch (error) {
-        console.error("Silent signin failed", error);
-        clearAlaAuthCookies();
-      }
+    if (!user || user.expired) {
+      silentLogin();
     }
   }
 
   authServiceWorker.setAccessToken(await manager.getUser());
 
-  manager.events.addAccessTokenExpiring(async () => {
+  manager.events.addAccessTokenExpiring(() => {
     console.warn("Access token expiring");
-    try {
-      const user = await manager.signinSilent();
-      authServiceWorker.setAccessToken(user!);
-      setAlaAuthCookie(user!);
-    } catch (error) {
-      console.error("Silent signin failed", error);
-      clearAlaAuthCookies();
-      authServiceWorker.setAccessToken(null);
-    }
+    silentLogin();
   });
-  manager.events.addAccessTokenExpired(async function () {
+  manager.events.addAccessTokenExpired(function () {
     console.warn("Access token expired");
-    try {
-      await manager.signinSilent();
-    } catch (error) {
-      console.error("Silent signin failed", error);
-      clearAlaAuthCookies();
-      await manager.removeUser();
-    }
+    silentLogin();
   });
   manager.events.addSilentRenewError((user) => {
     console.error("Silent renew error", user);
-    clearAlaAuthCookies();
-    manager.removeUser();
+    logout(false);
   });
 
   return manager;
@@ -100,6 +80,18 @@ async function handleAuthCallbacks(manager: UserManager) {
     await manager.signoutCallback();
 
     window.history.pushState(null, document.title, getCurrentUrl());
+  }
+}
+
+async function silentLogin() {
+  const manager = await userManagerPromise;
+  try {
+    const user = await manager.signinSilent();
+    authServiceWorker.setAccessToken(user!);
+    setAlaAuthCookie(user!);
+  } catch (error) {
+    console.error("Silent login failed", error);
+    logout(false);
   }
 }
 
@@ -168,11 +160,14 @@ export async function login(args?: SigninRedirectArgs | any) {
   await mgr.signinRedirect(args);
 }
 
-export async function logout() {
+export async function logout(reload: boolean = true) {
   const mgr = await userManagerPromise;
   clearAlaAuthCookies();
-  authServiceWorker.reset();
-  await mgr.signoutRedirect();
+  authServiceWorker.setAccessToken(null);
+  mgr.removeUser();
+  if (reload) {
+    window.location.reload();
+  }
 }
 
 export async function getUser(): Promise<User | null> {

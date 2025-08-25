@@ -15,12 +15,6 @@ export async function initAuthUi() {
     mgr.events.addUserUnloaded(async () => {
         setAuthMenuStatus();
     });
-    mgr.events.addUserSessionChanged(() => {
-        setAuthMenuStatus();
-    });
-    mgr.events.addSilentRenewError(async () => {
-        setAuthMenuStatus();
-    });
 }
 
 initAuthUi();
