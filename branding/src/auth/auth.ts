@@ -29,7 +29,7 @@ async function initUserManager(authServiceWorker: AuthServiceWorker) {
     authority: settings.auth.oidc.authority,
     client_id: settings.auth.oidc.clientId,
     redirect_uri: redirectUrl.href,
-    // post_logout_redirect_uri: post_logout_redirect_uri.href,
+    post_logout_redirect_uri: post_logout_redirect_uri.href,
     scope: "openid email ala/roles",
     includeIdTokenInSilentSignout: true,
     //       userStore: new WebStorageStateStore({
