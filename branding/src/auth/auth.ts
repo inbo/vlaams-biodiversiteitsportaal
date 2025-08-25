@@ -154,9 +154,9 @@ function getCurrentUrl() {
 }
 
 export async function login(args?: SigninRedirectArgs | any) {
-  const mgr = await userManagerPromise;
   clearAlaAuthCookies();
   authServiceWorker.reset();
+  const mgr = await userManagerPromise;
   await mgr.signinRedirect(args);
 }
 
