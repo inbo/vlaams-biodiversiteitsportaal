@@ -104,7 +104,7 @@ async function handleLogout() {
   clearAlaAuthCookies();
   await authServiceWorker.setAccessToken(null);
   const manager = await userManagerPromise;
-  manager.removeUser();
+  await manager.removeUser();
 }
 
 function setAlaAuthCookie(user?: User) {
