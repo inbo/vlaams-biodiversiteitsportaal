@@ -20,6 +20,8 @@ export const userManagerPromise = initUserManager(authServiceWorker);
 async function initUserManager(
   authServiceWorker: AuthServiceWorker,
 ): Promise<UserManager> {
+  await authServiceWorker.reset();
+
   console.debug("Initializing OIDC UserManager");
   const redirectUrl = getCurrentUrl();
   redirectUrl.searchParams.set("login", "vbp");
