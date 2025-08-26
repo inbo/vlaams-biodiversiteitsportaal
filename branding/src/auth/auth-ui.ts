@@ -1,5 +1,6 @@
 import { getUser, isLoggedIn, login, logout, userManagerPromise } from "./auth";
 import settings from "../settings";
+import { redirect } from "happy-dom/lib/PropertySymbol.js";
 
 const uiReady = new Promise<void>((resolve) =>
     document.addEventListener("DOMContentLoaded", () => resolve())
@@ -50,7 +51,12 @@ async function addAuthButtonClickHandlers() {
             "click",
             async (e) => {
                 e.preventDefault();
-                await login();
+                const target = e.currentTarget as HTMLAnchorElement;
+                await login(
+                    target.href && target.href.length > 0
+                        ? { redirectUri: target.href }
+                        : undefined,
+                );
             },
         );
     }
@@ -60,7 +66,12 @@ async function addAuthButtonClickHandlers() {
             "click",
             async (e) => {
                 e.preventDefault();
-                await logout();
+                const target = e.currentTarget as HTMLAnchorElement;
+                await logout(
+                    target.href && target.href.length > 0
+                        ? { redirectUri: target.href }
+                        : undefined,
+                );
             },
         );
     }

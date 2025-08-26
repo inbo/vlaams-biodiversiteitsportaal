@@ -1,5 +1,11 @@
 import settings from "../settings";
-import { Log, SigninRedirectArgs, User, UserManager } from "oidc-client-ts";
+import {
+  Log,
+  SigninRedirectArgs,
+  SignoutRedirectArgs,
+  User,
+  UserManager,
+} from "oidc-client-ts";
 
 import Cookies from "js-cookie";
 import { AuthServiceWorker } from "./service-worker-registration";
@@ -23,10 +29,10 @@ async function initUserManager(
   await authServiceWorker.reset();
 
   console.debug("Initializing OIDC UserManager");
-  const redirectUrl = getCurrentUrl();
+  const redirectUrl = cleanupUrl(window.location.href);
   redirectUrl.searchParams.set("login", "vbp");
 
-  const post_logout_redirect_uri = getCurrentUrl();
+  const post_logout_redirect_uri = cleanupUrl(window.location.href);
   post_logout_redirect_uri.searchParams.set("logout", "vbp");
 
   const manager = new UserManager({
@@ -96,10 +102,18 @@ async function handleAuthCallbacks(manager: UserManager) {
 
   if (urlParams.get("login") === "vbp") {
     await manager.signinCallback();
-    window.history.pushState(null, document.title, getCurrentUrl());
+    window.history.pushState(
+      null,
+      document.title,
+      cleanupUrl(window.location.href),
+    );
   } else if (urlParams.get("logout") === "vbp") {
     await manager.signoutCallback();
-    window.history.pushState(null, document.title, getCurrentUrl());
+    window.history.pushState(
+      null,
+      document.title,
+      cleanupUrl(window.location.href),
+    );
   }
 }
 
@@ -160,8 +174,8 @@ function clearAlaAuthCookies() {
   });
 }
 
-function getCurrentUrl() {
-  const cleanedUrl = new URL(window.location.href);
+function cleanupUrl(url: string) {
+  const cleanedUrl = new URL(url);
   cleanedUrl.searchParams.delete("login");
   cleanedUrl.searchParams.delete("logout");
   cleanedUrl.searchParams.delete("code");
@@ -171,17 +185,29 @@ function getCurrentUrl() {
 }
 
 export async function login(args?: SigninRedirectArgs | any) {
+  if (args.redirect_uri) {
+    const redirectUrl = cleanupUrl(args.redirect_uri);
+    redirectUrl.searchParams.set("login", "vbp");
+    args.redirect_uri = redirectUrl.href;
+  }
+
   const mgr = await userManagerPromise;
   clearAlaAuthCookies();
   await authServiceWorker.reset();
   await mgr.signinRedirect(args);
 }
 
-export async function logout() {
+export async function logout(args?: SignoutRedirectArgs | any) {
+  if (args.redirect_uri) {
+    const redirectUrl = cleanupUrl(args.redirect_uri);
+    redirectUrl.searchParams.set("logout", "vbp");
+    args.redirect_uri = redirectUrl.href;
+  }
+
   const mgr = await userManagerPromise;
   clearAlaAuthCookies();
   await authServiceWorker.setAccessToken(null);
-  await mgr.signoutRedirect();
+  await mgr.signoutRedirect(args);
 }
 
 export async function getUser(): Promise<User | null> {
