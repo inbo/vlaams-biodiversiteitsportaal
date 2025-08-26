@@ -35,6 +35,7 @@ async function initUserManager(authServiceWorker: AuthServiceWorker) {
     //       userStore: new WebStorageStateStore({
     //         store: window.session,
     //       }),
+    silent_redirect_uri: `${settings.domain}?login=vbp`,
     automaticSilentRenew: false,
     monitorSession: false,
   });
