@@ -77,7 +77,7 @@ async function handleAuthCallbacks(manager: UserManager) {
 
     window.history.pushState(null, document.title, getCurrentUrl());
   } else if (urlParams.get("logout") !== null) {
-    await handleLogout();
+    await handleLogout(manager);
 
     window.history.pushState(null, document.title, getCurrentUrl());
   }
@@ -100,10 +100,10 @@ async function handleLogin(user: User) {
   await authServiceWorker.setAccessToken(user);
 }
 
-async function handleLogout() {
+async function handleLogout(providedManager?: UserManager) {
   clearAlaAuthCookies();
   await authServiceWorker.setAccessToken(null);
-  const manager = await userManagerPromise;
+  const manager = providedManager || (await userManagerPromise);
   await manager.removeUser();
 }
 
