@@ -95,8 +95,15 @@ async function handleAuthCallbacks(manager: UserManager) {
   const urlParams = new URLSearchParams(window.location.search);
 
   if (urlParams.get("login") === "vbp") {
+    const authCookie = Cookies.get(settings.auth.ala.authCookieName);
     await manager.signinCallback();
-    window.history.pushState(null, document.title, getCurrentUrl());
+
+    // If previously no auth-cookie was set, reload the page
+    if (authCookie) {
+      window.history.pushState(null, document.title, getCurrentUrl());
+    } else {
+      window.location.replace(getCurrentUrl());
+    }
   } else if (urlParams.get("logout") === "vbp") {
     await manager.signoutCallback();
     window.history.pushState(null, document.title, getCurrentUrl());
