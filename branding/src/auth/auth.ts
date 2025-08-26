@@ -147,6 +147,14 @@ function clearAlaAuthCookies() {
       secure: window.location.protocol === "https:",
     },
   );
+  Cookies.remove(
+    `.${settings.auth.ala.authCookieName}`,
+    {
+      path: "/",
+      sameSite: "lax",
+      secure: window.location.protocol === "https:",
+    },
+  );
   [
     "alerts",
     "apikey",
