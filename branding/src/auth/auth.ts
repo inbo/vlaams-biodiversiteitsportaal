@@ -95,15 +95,8 @@ async function handleAuthCallbacks(manager: UserManager) {
   const urlParams = new URLSearchParams(window.location.search);
 
   if (urlParams.get("login") === "vbp") {
-    const authCookie = Cookies.get(settings.auth.ala.authCookieName);
     await manager.signinCallback();
-
-    // If previously no auth-cookie was set, reload the page
-    if (authCookie) {
-      window.history.pushState(null, document.title, getCurrentUrl());
-    } else {
-      window.location.replace(getCurrentUrl());
-    }
+    window.history.pushState(null, document.title, getCurrentUrl());
   } else if (urlParams.get("logout") === "vbp") {
     await manager.signoutCallback();
     window.history.pushState(null, document.title, getCurrentUrl());
@@ -180,7 +173,6 @@ function getCurrentUrl() {
 export async function login(args?: SigninRedirectArgs | any) {
   const mgr = await userManagerPromise;
   clearAlaAuthCookies();
-  setAlaAuthCookie();
   await authServiceWorker.reset();
   await mgr.signinRedirect(args);
 }

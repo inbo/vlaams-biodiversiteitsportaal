@@ -11,6 +11,12 @@ import { basename, dirname } from "node:path";
 import { createClient, defaultPlugins } from "@hey-api/openapi-ts";
 import type { PreRenderedChunk } from "rollup";
 
+const replacements = {
+    loginStatus: "login-status-dependent",
+    loginURL: "",
+    logoutURL: "",
+};
+
 export default {
     root: resolve(__dirname, "src"),
     publicDir: resolve(__dirname, "./public"),
@@ -164,6 +170,29 @@ export default {
                 resolve(__dirname, "src/index"),
             ],
         }),
+        // Perform tag replacement on non template html files to match the ala services AlaTagLib erplacements
+        {
+            name: "AlaTagLibReplacement",
+            enforce: "post",
+            async transformIndexHtml(html, { path }) {
+                let result = html;
+
+                if (
+                    !["/banner.html", "/footer.html", "head.html"].includes(
+                        path,
+                    )
+                ) {
+                    console.log("Transforming HTML for:", path);
+
+                    console.log("Replacing TagLib entries in HTML for:", path);
+                    for (const [key, value] of Object.entries(replacements)) {
+                        result = result.replaceAll(`::${key}::`, value);
+                    }
+                }
+
+                return result;
+            },
+        },
     ],
     server: {
         sourcemapIgnoreList: false, // Include all files in source maps
