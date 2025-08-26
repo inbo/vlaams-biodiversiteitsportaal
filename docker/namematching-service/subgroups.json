@@ -293,7 +293,7 @@
     },
     {
         "speciesGroup": "Reptiles",
-        "taxonRank": "order",
+        "taxonRank": "class",
         "taxa": [
             {
                 "name": "CROCODYLIA",
