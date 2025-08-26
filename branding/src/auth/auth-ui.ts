@@ -49,13 +49,10 @@ async function addAuthButtonClickHandlers() {
         button.addEventListener(
             "click",
             async (e) => {
-                e.preventDefault();
+                // Use Service login by default
                 const target = e.currentTarget as HTMLAnchorElement;
-                if (target.href && target.href.length > 0) {
-                    await logout({
-                        redirectUri: modifyAlaServiceRedirectUri(target.href),
-                    });
-                } else {
+                if (target.href === `${settings.domain}/`) {
+                    e.preventDefault();
                     await login();
                 }
             },
@@ -66,27 +63,13 @@ async function addAuthButtonClickHandlers() {
         button.addEventListener(
             "click",
             async (e) => {
-                e.preventDefault();
+                // Use Service logout by default
                 const target = e.currentTarget as HTMLAnchorElement;
-                if (target.href && target.href.length > 0) {
-                    await logout({
-                        redirectUri: modifyAlaServiceRedirectUri(target.href),
-                    });
-                } else {
+                if (target.href === `${settings.domain}/`) {
+                    e.preventDefault();
                     await logout();
                 }
             },
         );
     }
-}
-
-function modifyAlaServiceRedirectUri(url: string): string {
-    let serviceActionUri = new URL(url);
-    let pathParam = serviceActionUri.searchParams.get("path");
-    if (pathParam) {
-        let redirectUri = new URL(pathParam);
-        redirectUri.searchParams.set("login", "service");
-        serviceActionUri.searchParams.set("path", redirectUri.href);
-    }
-    return serviceActionUri.href;
 }

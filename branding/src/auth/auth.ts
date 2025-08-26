@@ -9,7 +9,6 @@ import {
 
 import Cookies from "js-cookie";
 import { AuthServiceWorker } from "./service-worker-registration";
-import { r } from "happy-dom/lib/PropertySymbol.js";
 
 Log.setLogger(console);
 
@@ -31,10 +30,10 @@ async function initUserManager(
 
   console.debug("Initializing OIDC UserManager");
   const redirectUrl = cleanupUrl(window.location.href);
-  redirectUrl.searchParams.set("login", "vbp");
+  redirectUrl.searchParams.set("front-auth-action", "login");
 
   const post_logout_redirect_uri = cleanupUrl(window.location.href);
-  post_logout_redirect_uri.searchParams.set("logout", "vbp");
+  post_logout_redirect_uri.searchParams.set("front-auth-action", "logout");
 
   const manager = new UserManager({
     authority: settings.auth.oidc.authority,
@@ -46,7 +45,7 @@ async function initUserManager(
     //       userStore: new WebStorageStateStore({
     //         store: window.session,
     //       }),
-    silent_redirect_uri: `${settings.domain}?login=vbp`,
+    silent_redirect_uri: `${settings.domain}?front-auth-action=login`,
     automaticSilentRenew: false,
     monitorSession: false,
   });
@@ -78,22 +77,19 @@ async function initUserManager(
   await handleAuthCallbacks(manager);
 
   const user = await manager.getUser();
-
-  if (user) {
-    if (user.expired) {
-      await silentLogin(manager);
+  if (Cookies.get(settings.auth.ala.authCookieName)) {
+    if (!user || user.expired) {
+      silentLogin(manager);
     } else {
-      setAlaAuthCookie(user);
       await authServiceWorker.setAccessToken(user);
     }
   } else {
-    if (Cookies.get(settings.auth.ala.authCookieName)) {
-      await silentLogin(manager);
-    } else {
+    if (user) {
       await manager.removeUser();
+    } else {
+      await authServiceWorker.setAccessToken(null);
     }
   }
-  await authServiceWorker.setAccessToken(user);
 
   return manager;
 }
@@ -101,18 +97,22 @@ async function initUserManager(
 async function handleAuthCallbacks(manager: UserManager) {
   const urlParams = new URLSearchParams(window.location.search);
 
-  if (urlParams.get("login") === "vbp") {
-    await manager.signinCallback();
-    rewriteUrlHistory();
-  } else if (urlParams.get("logout") === "vbp") {
-    await manager.signoutCallback();
-    rewriteUrlHistory();
-  } else if (urlParams.get("login") === "service") {
-    await silentLogin(manager);
-    rewriteUrlHistory();
-  } else if (urlParams.get("logout") === "service") {
-    await manager.removeUser();
-    rewriteUrlHistory();
+  const frontAuthAction = urlParams.get("front-auth-action");
+  if (frontAuthAction) {
+    switch (frontAuthAction) {
+      case "login":
+        await manager.signinCallback();
+        break;
+      case "logout":
+        await manager.signoutCallback();
+        break;
+    }
+
+    window.history.pushState(
+      null,
+      document.title,
+      cleanupUrl(window.location.href),
+    );
   }
 }
 
@@ -181,18 +181,9 @@ function clearAlaAuthCookies() {
   });
 }
 
-function rewriteUrlHistory() {
-  window.history.pushState(
-    null,
-    document.title,
-    cleanupUrl(window.location.href),
-  );
-}
-
 function cleanupUrl(url: string) {
   const cleanedUrl = new URL(url);
-  cleanedUrl.searchParams.delete("login");
-  cleanedUrl.searchParams.delete("logout");
+  cleanedUrl.searchParams.delete("front-auth-action");
   cleanedUrl.searchParams.delete("code");
   cleanedUrl.searchParams.delete("state");
   cleanedUrl.searchParams.delete("sessionState");
