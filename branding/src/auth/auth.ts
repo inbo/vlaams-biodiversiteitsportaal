@@ -171,16 +171,17 @@ function getCurrentUrl() {
 }
 
 export async function login(args?: SigninRedirectArgs | any) {
+  const mgr = await userManagerPromise;
   clearAlaAuthCookies();
   setAlaAuthCookie();
   await authServiceWorker.reset();
-  const mgr = await userManagerPromise;
   await mgr.signinRedirect(args);
 }
 
 export async function logout() {
   const mgr = await userManagerPromise;
-  await mgr.removeUser();
+  clearAlaAuthCookies();
+  await authServiceWorker.setAccessToken(null);
   await mgr.signoutRedirect();
 }
 
