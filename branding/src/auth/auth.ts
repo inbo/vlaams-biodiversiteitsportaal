@@ -43,14 +43,12 @@ async function initUserManager(
     automaticSilentRenew: false,
     monitorSession: false,
   });
-  await handleAuthCallbacks(manager);
 
   manager.events.addUserLoaded(async (user) => {
     console.log("User loaded", user);
     setAlaAuthCookie(user);
     await authServiceWorker.setAccessToken(user);
   });
-
   manager.events.addUserUnloaded(async () => {
     console.log("User unloaded");
     clearAlaAuthCookies();
@@ -69,6 +67,8 @@ async function initUserManager(
     console.error("Silent renew error", user);
     await manager.removeUser();
   });
+
+  await handleAuthCallbacks(manager);
 
   const user = await manager.getUser();
 
