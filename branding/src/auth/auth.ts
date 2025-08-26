@@ -89,10 +89,10 @@ async function initUserManager(
 async function handleAuthCallbacks(manager: UserManager) {
   const urlParams = new URLSearchParams(window.location.search);
 
-  if (urlParams.get("login") !== null) {
+  if (urlParams.get("login") === "vbp") {
     await manager.signinCallback();
     window.history.pushState(null, document.title, getCurrentUrl());
-  } else if (urlParams.get("logout") !== null) {
+  } else if (urlParams.get("logout") === "vbp") {
     await manager.signoutCallback();
     window.history.pushState(null, document.title, getCurrentUrl());
   }
