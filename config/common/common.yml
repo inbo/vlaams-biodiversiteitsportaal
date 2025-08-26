@@ -89,6 +89,7 @@ webservice:
 
 server:
   port: 8080
+  use-forward-headers: true
   tomcat:
     use-relative-redirects: true
   servlet:
