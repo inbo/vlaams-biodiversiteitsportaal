@@ -43,6 +43,18 @@ async function initUserManager(
   });
   await handleAuthCallbacks(manager);
 
+  manager.events.addUserLoaded(async (user) => {
+    console.log("User loaded", user);
+    setAlaAuthCookie(user);
+    await authServiceWorker.setAccessToken(user);
+  });
+
+  manager.events.addUserUnloaded(async () => {
+    console.log("User unloaded");
+    clearAlaAuthCookies();
+    await authServiceWorker.setAccessToken(null);
+  });
+
   manager.events.addAccessTokenExpiring(async () => {
     console.warn("Access token expiring");
     await silentLogin(manager);
@@ -53,7 +65,7 @@ async function initUserManager(
   });
   manager.events.addSilentRenewError(async (user) => {
     console.error("Silent renew error", user);
-    await handleLogout(manager);
+    await manager.removeUser();
   });
 
   const user = await manager.getUser();
@@ -85,13 +97,10 @@ async function handleAuthCallbacks(manager: UserManager) {
   const urlParams = new URLSearchParams(window.location.search);
 
   if (urlParams.get("login") !== null) {
-    const user = await manager.signinCallback();
-    await handleLogin(user!);
-
+    await manager.signinCallback();
     window.history.pushState(null, document.title, getCurrentUrl());
   } else if (urlParams.get("logout") !== null) {
-    await handleLogout(manager);
-
+    await manager.signoutCallback();
     window.history.pushState(null, document.title, getCurrentUrl());
   }
 }
@@ -103,19 +112,8 @@ async function silentLogin(manager: UserManager) {
     await authServiceWorker.setAccessToken(user!);
   } catch (error) {
     console.error("Silent login failed", error);
-    await handleLogout(manager);
+    await manager.removeUser();
   }
-}
-
-async function handleLogin(user: User) {
-  setAlaAuthCookie(user);
-  await authServiceWorker.setAccessToken(user);
-}
-
-async function handleLogout(manager: UserManager) {
-  clearAlaAuthCookies();
-  await authServiceWorker.setAccessToken(null);
-  await manager.removeUser();
 }
 
 function setAlaAuthCookie(user?: User) {
@@ -186,7 +184,7 @@ export async function login(args?: SigninRedirectArgs | any) {
 
 export async function logout() {
   const mgr = await userManagerPromise;
-  await handleLogout(mgr);
+  await mgr.removeUser();
   await mgr.signoutRedirect();
 }
 
