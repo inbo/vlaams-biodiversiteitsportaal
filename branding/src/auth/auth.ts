@@ -69,26 +69,17 @@ async function initUserManager(
   });
 
   const user = await manager.getUser();
-  await authServiceWorker.setAccessToken(user);
 
-  if (
-    Cookies.get(settings.auth.ala.authCookieName) &&
-    !user
-  ) {
-    // Try to login silently when the cookie is present, but no user is available
-    silentLogin(manager);
-  } else if (
-    !Cookies.get(settings.auth.ala.authCookieName) &&
-    user && !user.expired
-  ) {
-    // Set missing auth cookie if user is logged in, but no cookie is present
-    setAlaAuthCookie(user);
-  } else if (
-    user && user.expired
-  ) {
-    // Try silently logging in if user session has expired
-    silentLogin(manager);
+  if (user) {
+    if (user.expired) {
+      await silentLogin(manager);
+    }
+  } else {
+    if (Cookies.get(settings.auth.ala.authCookieName)) {
+      await silentLogin(manager);
+    }
   }
+  await authServiceWorker.setAccessToken(user);
 
   return manager;
 }
@@ -107,9 +98,7 @@ async function handleAuthCallbacks(manager: UserManager) {
 
 async function silentLogin(manager: UserManager) {
   try {
-    const user = await manager.signinSilent();
-    setAlaAuthCookie(user!);
-    await authServiceWorker.setAccessToken(user!);
+    await manager.signinSilent();
   } catch (error) {
     console.error("Silent login failed", error);
     await manager.removeUser();
