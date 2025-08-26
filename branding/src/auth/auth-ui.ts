@@ -1,6 +1,5 @@
 import { getUser, isLoggedIn, login, logout, userManagerPromise } from "./auth";
 import settings from "../settings";
-import { redirect } from "happy-dom/lib/PropertySymbol.js";
 
 const uiReady = new Promise<void>((resolve) =>
     document.addEventListener("DOMContentLoaded", () => resolve())
@@ -52,11 +51,13 @@ async function addAuthButtonClickHandlers() {
             async (e) => {
                 e.preventDefault();
                 const target = e.currentTarget as HTMLAnchorElement;
-                await login(
-                    target.href && target.href.length > 0
-                        ? { redirectUri: target.href }
-                        : undefined,
-                );
+                if (target.href && target.href.length > 0) {
+                    await logout({
+                        redirectUri: modifyAlaServiceRedirectUri(target.href),
+                    });
+                } else {
+                    await login();
+                }
             },
         );
     }
@@ -67,12 +68,25 @@ async function addAuthButtonClickHandlers() {
             async (e) => {
                 e.preventDefault();
                 const target = e.currentTarget as HTMLAnchorElement;
-                await logout(
-                    target.href && target.href.length > 0
-                        ? { redirectUri: target.href }
-                        : undefined,
-                );
+                if (target.href && target.href.length > 0) {
+                    await logout({
+                        redirectUri: modifyAlaServiceRedirectUri(target.href),
+                    });
+                } else {
+                    await logout();
+                }
             },
         );
     }
+}
+
+function modifyAlaServiceRedirectUri(url: string): string {
+    let serviceActionUri = new URL(url);
+    let pathParam = serviceActionUri.searchParams.get("path");
+    if (pathParam) {
+        let redirectUri = new URL(pathParam);
+        redirectUri.searchParams.set("login", "service");
+        serviceActionUri.searchParams.set("path", redirectUri.href);
+    }
+    return serviceActionUri.href;
 }

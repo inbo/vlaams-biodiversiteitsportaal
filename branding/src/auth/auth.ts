@@ -9,6 +9,7 @@ import {
 
 import Cookies from "js-cookie";
 import { AuthServiceWorker } from "./service-worker-registration";
+import { r } from "happy-dom/lib/PropertySymbol.js";
 
 Log.setLogger(console);
 
@@ -102,18 +103,16 @@ async function handleAuthCallbacks(manager: UserManager) {
 
   if (urlParams.get("login") === "vbp") {
     await manager.signinCallback();
-    window.history.pushState(
-      null,
-      document.title,
-      cleanupUrl(window.location.href),
-    );
+    rewriteUrlHistory();
   } else if (urlParams.get("logout") === "vbp") {
     await manager.signoutCallback();
-    window.history.pushState(
-      null,
-      document.title,
-      cleanupUrl(window.location.href),
-    );
+    rewriteUrlHistory();
+  } else if (urlParams.get("login") === "service") {
+    await silentLogin(manager);
+    rewriteUrlHistory();
+  } else if (urlParams.get("logout") === "service") {
+    await manager.removeUser();
+    rewriteUrlHistory();
   }
 }
 
@@ -182,6 +181,14 @@ function clearAlaAuthCookies() {
   });
 }
 
+function rewriteUrlHistory() {
+  window.history.pushState(
+    null,
+    document.title,
+    cleanupUrl(window.location.href),
+  );
+}
+
 function cleanupUrl(url: string) {
   const cleanedUrl = new URL(url);
   cleanedUrl.searchParams.delete("login");
@@ -193,12 +200,6 @@ function cleanupUrl(url: string) {
 }
 
 export async function login(args?: SigninRedirectArgs | any) {
-  if (args.redirect_uri) {
-    const redirectUrl = cleanupUrl(args.redirect_uri);
-    redirectUrl.searchParams.set("login", "vbp");
-    args.redirect_uri = redirectUrl.href;
-  }
-
   const mgr = await userManagerPromise;
   clearAlaAuthCookies();
   await authServiceWorker.reset();
@@ -206,12 +207,6 @@ export async function login(args?: SigninRedirectArgs | any) {
 }
 
 export async function logout(args?: SignoutRedirectArgs | any) {
-  if (args.redirect_uri) {
-    const redirectUrl = cleanupUrl(args.redirect_uri);
-    redirectUrl.searchParams.set("logout", "vbp");
-    args.redirect_uri = redirectUrl.href;
-  }
-
   const mgr = await userManagerPromise;
   clearAlaAuthCookies();
   await authServiceWorker.setAccessToken(null);
