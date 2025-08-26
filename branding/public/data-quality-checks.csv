@@ -1,125 +1,125 @@
-code,name,description,wiki
-0,geospatialIssue,Geospatial issue,Wiki
-19,habitatMismatch,Habitat incorrect for species,Wiki
-20,detectedOutlier,Suspected outlier,Wiki
-1000,LOCATION_NOT_SUPPLIED,"no indication of location (coordinates, locality, polygon, location ID, verbatim coordinates) supplied",Wiki
-1001,COORDINATES_CENTRE_OF_STATEPROVINCE,Coordinates are the exact centre of the state or territory,Wiki
-1002,UNCERTAINTY_IN_PRECISION,Uncertainty value in precision field,Wiki
-1003,UNCERTAINTY_NOT_SPECIFIED,Uncertainty was not supplied with the record,Wiki
-1005,UNKNOWN_COUNTRY_NAME,Unrecognised or unparseable country name,Wiki
-1006,COORDINATES_CENTRE_OF_COUNTRY,Coordinates are the exact centre of the country,Wiki
-1007,MISSING_GEODETICDATUM,geodeticDatum not supplied for coordinates,Wiki
-1008,MISSING_GEOREFERENCE_DATE,GeoreferenceDate not supplied with the record,Wiki
-1009,MISSING_GEOREFERENCEDBY,GeoreferencedBy not supplied with the record,Wiki
-1010,MISSING_GEOREFERENCEPROTOCOL,GeoreferenceProtocol not supplied with the record,Wiki
-1011,MISSING_GEOREFERENCESOURCES,GeoreferenceSources not supplied with the record,Wiki
-1012,MISSING_GEOREFERENCEVERIFICATIONSTATUS,GeoreferenceVerificationStatus not supplied with the record,Wiki
-1013,MISSING_COLLECTION_DATE,Collection date field is missing or null,Wiki
-1014,GEOREFERENCE_POST_OCCURRENCE,"The record was georeferenced after recording - not an error but has implications for precision and accuracy. The amount of time may indicate severity? GeoreferenceDate isn't a current DwC field.",Wiki
-1015,ID_PRE_OCCURRENCE,"Identification predates the occurrence, possibly incorrect field mapping",Wiki
-1016,FIRST_OF_MONTH,"May indicate the date is only known or recorded to the Month. Flag if there is no precision data. datePrecision is not a curent DwC field",Wiki
-1017,FIRST_OF_YEAR,"May indicate the date is only known or recorded to the Year. Flag if there is no precision data. datePrecision is not a curent DwC field",Wiki
-1018,FIRST_OF_CENTURY,"May indicate the date is only known or recorded to the Century. Flag if there is no precision data. datePrecision is not a curent DwC field",Wiki
-1019,TAXON_AFFINITY_SPECIES,The scientific name has an aff. marker indicating a like-but-not identification,Wiki
-1020,TAXON_EXCLUDED_ASSOCIATED,"The taxon, while matched, also has an excluded match",Wiki
-1021,TAXON_CONFER_SPECIES,"The scientific name has a cf. marker, indicating uncertain identification",Wiki
-1022,TAXON_EXCLUDED,The taxon is excluded (should not be found in this location),Wiki
-1023,TAXON_ERROR,There has been a generic taxon matching error,Wiki
-1024,TAXON_HOMONYM,The supplied name and hierarchy is not enough to uniquely determine the name,Wiki
-1025,TAXON_INDETERMINATE_SPECIES,The supplied name contains an indeterminate species marker and an exact match could not be found,Wiki
-1026,TAXON_MISAPPLIED_MATCHED,The supplied name has been misapplied to another concept in the past,Wiki
-1027,TAXON_MISAPPLIED,The supplied name has been misapplied to another concept in the past with no accepted use,Wiki
-1028,TAXON_PARENT_CHILD_SYNONYM,The supplied name can be matched either onto the parent species or an autonymic subspecies,Wiki
-1029,TAXON_QUESTION_SPECIES,The supplied name contains a questionable identification marker (?),Wiki
-1030,TAXON_SPECIES_PLURAL,The supplied name contains a species plural marker and cannot be accuratey matched onto a single species,Wiki
-1031,MISSING_TAXONRANK,taxonRank not supplied with the record,Wiki
-1032,NAME_NOT_SUPPLIED,Neither scientific name or vernacular name were supplied,Wiki
-1033,UNKNOWN_KINGDOM,"Kingdom provided doesn't match a known kingdom e.g. Animalia, Plantae",Wiki
-1034,TAXON_SCOPE_MISMATCH,The supplied hints do not match the final name match,Wiki
-1035,TAXON_DEFAULT_MATCH,The ocurrence record was matched to a default value supplied by higher-order elements,Wiki
-1036,INVALID_SCIENTIFIC_NAME,"The scientific name provided is not structured as a valid scientific name. Also catches rank values or values such as ""UNKNOWN""",Wiki
-1037,SENSITIVITY_REPORT_INVALID,Sensitivity report invalid,Wiki
-1038,SENSITIVITY_REPORT_NOT_LOADABLE,Sensitivity report not loadable,Wiki
-1039,UNRECOGNISED_COLLECTION_CODE,Unrecognized collection code,Wiki
-1040,UNRECOGNISED_INSTITUTION_CODE,Unrecognized institution code,Wiki
-2000,ZERO_COORDINATE,Latitude and longitude provided are both zero,Wiki
-2001,COORDINATE_OUT_OF_RANGE,Latitude >90 or <-90 and Longitude >180 or <-180,Wiki
-2002,COORDINATE_INVALID,Coordinate value is given in some form but unable to interpret it,Wiki
-2003,COORDINATE_ROUNDED,Original coordinate modified by rounding,Wiki
-2004,GEODETIC_DATUM_INVALID,Geodetic datum not recognized,Wiki
-2005,GEODETIC_DATUM_ASSUMED_WGS84,Geodetic datum assumed to be WGS84 (EPSG:436),Wiki
-2006,COORDINATE_REPROJECTED,Decimal latitude and longitude were converted to WGS84,Wiki
-2007,COORDINATE_REPROJECTION_FAILED,Conversion of provided decimal latitude and longitude to WGS84 failed,Wiki
-2008,COORDINATE_REPROJECTION_SUSPICIOUS,"Indicates successful coordinate reprojection according to provided datum, but which results in a datum shift larger than 0.1 decimal degrees",Wiki
-2010,COORDINATE_PRECISION_INVALID,Indicates an invalid or very unlikely coordinatePrecision,Wiki
-2011,COORDINATE_UNCERTAINTY_METERS_INVALID,Indicates an invalid or very unlikely dwc:uncertaintyInMeters,Wiki
-2013,FOOTPRINT_SRS_INVALID,The Footprint Spatial Reference System given could not be interpreted,Wiki
-2014,FOOTPRINT_WKT_MISMATCH,The Footprint Well-Known-Text given is a POINT and does not match the decimalLatitude or decimalLongitude,Wiki
-2015,FOOTPRINT_WKT_INVALID,The Footprint Well-Known-Text given could not be interpreted,Wiki
-2016,COUNTRY_COORDINATE_MISMATCH,Coordinates outside the range for the reported country,Wiki
-2017,COUNTRY_MISMATCH,Interpreted country for dwc:country and dwc:countryCode contradict each other,Wiki
-2018,COUNTRY_INVALID,Uninterpretable country values found,Wiki
-2019,COUNTRY_DERIVED_FROM_COORDINATES,"Country field supplied was empty, but was inferred in processing by the supplied coordinates",Wiki
-2020,CONTINENT_COORDINATE_MISMATCH,CONTINENT_COORDINATE_MISMATCH,Wiki
-2021,CONTINENT_COUNTRY_MISMATCH,The interpreted continent and country do not match,Wiki
-2022,CONTINENT_INVALID,Uninterpretable continent values found,Wiki
-2023,CONTINENT_DERIVED_FROM_COUNTRY,CONTINENT_DERIVED_FROM_COUNTRY,Wiki
-2024,CONTINENT_DERIVED_FROM_COORDINATES,"The interpreted continent is based on the coordinates, not the verbatim string information",Wiki
-2025,PRESUMED_SWAPPED_COORDINATE,Latitude and longitude appear to be swapped,Wiki
-2026,PRESUMED_NEGATED_LONGITUDE,Record appears to be referencing a location in the wrong hemisphere,Wiki
-2027,PRESUMED_NEGATED_LATITUDE,Record appears to be referencing a location in the wrong hemisphere,Wiki
-2028,RECORDED_DATE_MISMATCH,"The recorded date specified as the eventDate string and the individual year, month, day are contradictory",Wiki
-2029,RECORDED_DATE_INVALID,"A (partial) invalid date is given, such as a non existing date, zero month, etc.",Wiki
-2030,RECORDED_DATE_UNLIKELY,"The recorded date is highly unlikely, falling either into the future or representing a very old date before 1600 thus predating modern taxonomy",Wiki
-2031,TAXON_MATCH_FUZZY,"Matching to the taxonomic backbone can only be done using a fuzzy, non exact match.",Wiki
-2032,TAXON_MATCH_HIGHERRANK,Matching to the taxonomic backbone can only be done on a higher rank and not the scientific name,Wiki
-2033,TAXON_MATCH_AGGREGATE,"Matching to the taxonomic backbone can only be done on a species level, but the occurrence was in fact considered a broader species aggregate/complex",Wiki
-2034,TAXON_MATCH_SCIENTIFIC_NAME_ID_IGNORED,TAXON_MATCH_SCIENTIFIC_NAME_ID_IGNORED,Wiki
-2035,TAXON_MATCH_TAXON_CONCEPT_ID_IGNORED,TAXON_MATCH_TAXON_CONCEPT_ID_IGNORED,Wiki
-2036,TAXON_MATCH_TAXON_ID_IGNORED,TAXON_MATCH_TAXON_ID_IGNORED,Wiki
-2037,SCIENTIFIC_NAME_ID_NOT_FOUND,SCIENTIFIC_NAME_ID_NOT_FOUND,Wiki
-2038,TAXON_CONCEPT_ID_NOT_FOUND,TAXON_CONCEPT_ID_NOT_FOUND,Wiki
-2039,TAXON_ID_NOT_FOUND,TAXON_ID_NOT_FOUND,Wiki
-2040,SCIENTIFIC_NAME_AND_ID_INCONSISTENT,SCIENTIFIC_NAME_AND_ID_INCONSISTENT,Wiki
-2041,TAXON_MATCH_NONE,"Matching to the taxonomic backbone cannot be done cause there was no match at all or severalmatches with too little information to keep them apart (homonyms).",Wiki
-2042,TAXON_MATCH_NAME_AND_ID_AMBIGUOUS,TAXON_MATCH_NAME_AND_ID_AMBIGUOUS,Wiki
-2043,DEPTH_NOT_METRIC,Darwin core specifies metres should be used,Wiki
-2044,DEPTH_UNLIKELY,Depth greater than 10000,Wiki
-2045,DEPTH_MIN_MAX_SWAPPED,Typically a column mapping issue,Wiki
-2046,DEPTH_NON_NUMERIC,Should be a numeric value in metres,Wiki
-2047,ELEVATION_UNLIKELY,"Altitude greater than 10000m, or less than -100m",Wiki
-2048,ELEVATION_MIN_MAX_SWAPPED,Typically a column mapping issue,Wiki
-2049,ELEVATION_NOT_METRIC,Darwin core specifies metres should be used,Wiki
-2050,ELEVATION_NON_NUMERIC,Should be a numeric value in metres,Wiki
-2051,MODIFIED_DATE_INVALID,"A (partial) invalid date is given for dc:modified, such as a nonexistent date, zero month, etc",Wiki
-2052,MODIFIED_DATE_UNLIKELY,The date given for dc:modified is in the future or predates Unix time (1970),Wiki
-2053,IDENTIFIED_DATE_UNLIKELY,The date given for dwc:dateIdentified is in the future or before Linnean times (1700),Wiki
-2054,IDENTIFIED_DATE_INVALID,The date given for dwc:dateIdentified is invalid and can't be interpreted at all,Wiki
-2055,BASIS_OF_RECORD_INVALID,Unable to map the supplied basis of record to the vocabulary in use,Wiki
-2056,TYPE_STATUS_INVALID,Unable to map the supplied type status to the vocabulary in use,Wiki
-2057,MULTIMEDIA_DATE_INVALID,An invalid date is given for dc:created of a multimedia object,Wiki
-2058,MULTIMEDIA_URI_INVALID,Multimedia uri invalid,Wiki
-2059,REFERENCES_URI_INVALID,An invalid URI is given for dc:references,Wiki
-2060,INTERPRETATION_ERROR,"An error occurred during interpretation, leaving the record interpretation incomplete",Wiki
-2061,INDIVIDUAL_COUNT_INVALID,The individual count value is not a positive integer,Wiki
-2062,INDIVIDUAL_COUNT_CONFLICTS_WITH_OCCURRENCE_STATUS,"Example: individual count value > 0, but occurrence status is absent.",Wiki
-2063,OCCURRENCE_STATUS_UNPARSABLE,"An occurrence status value supplied, but it was not a recognised value.",Wiki
-2064,OCCURRENCE_STATUS_INFERRED_FROM_INDIVIDUAL_COUNT,Occurrence status inferred from individual count,Wiki
-2065,OCCURRENCE_STATUS_INFERRED_FROM_BASIS_OF_RECORD,Occurrence status inferred from basis of record,Wiki
-2066,GEOREFERENCED_DATE_UNLIKELY,Georeferenced date unlikely,Wiki
-2067,GEOREFERENCED_DATE_INVALID,The date given for dwc:georeferencedDate is invalid and can't be interpreted at all,Wiki
-2068,AMBIGUOUS_INSTITUTION,The given institution matches with more than 1 GRSciColl institution,Wiki
-2069,AMBIGUOUS_COLLECTION,The given collection matches with more than 1 GRSciColl collection.,Wiki
-2070,INSTITUTION_MATCH_NONE,Code not recognised with ALA systems (Collectory),Wiki
-2071,COLLECTION_MATCH_NONE,Code not recognised with ALA systems (Collectory),Wiki
-2072,INSTITUTION_MATCH_FUZZY,The given institution was fuzzily matched to a GRSciColl institution,Wiki
-2073,COLLECTION_MATCH_FUZZY,The given collection was fuzzily matched to a GRSciColl collection,Wiki
-2074,INSTITUTION_COLLECTION_MISMATCH,The collection matched doesn't belong to the institution matched,Wiki
-2076,DIFFERENT_OWNER_INSTITUTION,"The given owner institution is different than the given institution. Therefore we assume it doesn't belong to the institution and we don't link it to the occurrence.",Wiki
-10000,taxonomicIssue,Taxonomic issue,Wiki
-10004,STATE_COORDINATE_MISMATCH,Coordinates dont match the supplied state,Wiki
-10007,identificationIncorrect,Taxon misidentified,Wiki
-20019,userAssertionOther,userAssertionOther,Wiki
-20020,userDuplicateRecord,userDuplicateRecord,Wiki
-20021,biosecurityIssue,biosecurityIssue,Wiki
-30000,temporalIssue,Temporal issue,Wiki
+code,name,description,wiki,,,,,,,,,,,
+0,geospatialIssue,Geospatial issue,Wiki,,,,,,,,,,,
+19,habitatMismatch,Habitat incorrect for species,Wiki,,,,,,,,,,,
+20,detectedOutlier,Suspected outlier,Wiki,,,,,,,,,,,
+1000,LOCATION_NOT_SUPPLIED,"no indication of location (coordinates, locality, polygon, location ID, verbatim coordinates) supplied",Wiki,,,,,,,,,,,
+1001,COORDINATES_CENTRE_OF_STATEPROVINCE,Coordinates are the exact centre of the state or territory,Wiki,,,,,,,,,,,
+1002,UNCERTAINTY_IN_PRECISION,Uncertainty value in precision field,Wiki,,,,,,,,,,,
+1003,UNCERTAINTY_NOT_SPECIFIED,Uncertainty was not supplied with the record,Wiki,,,,,,,,,,,
+1005,UNKNOWN_COUNTRY_NAME,Unrecognised or unparseable country name,Wiki,,,,,,,,,,,
+1006,COORDINATES_CENTRE_OF_COUNTRY,Coordinates are the exact centre of the country,Wiki,,,,,,,,,,,
+1007,MISSING_GEODETICDATUM,geodeticDatum not supplied for coordinates,Wiki,,,,,,,,,,,
+1008,MISSING_GEOREFERENCE_DATE,GeoreferenceDate not supplied with the record,Wiki,,,,,,,,,,,
+1009,MISSING_GEOREFERENCEDBY,GeoreferencedBy not supplied with the record,Wiki,,,,,,,,,,,
+1010,MISSING_GEOREFERENCEPROTOCOL,GeoreferenceProtocol not supplied with the record,Wiki,,,,,,,,,,,
+1011,MISSING_GEOREFERENCESOURCES,GeoreferenceSources not supplied with the record,Wiki,,,,,,,,,,,
+1012,MISSING_GEOREFERENCEVERIFICATIONSTATUS,GeoreferenceVerificationStatus not supplied with the record,Wiki,,,,,,,,,,,
+1013,MISSING_COLLECTION_DATE,Collection date field is missing or null,Wiki,,,,,,,,,,,
+1014,GEOREFERENCE_POST_OCCURRENCE,"The record was georeferenced after recording - not an error but has implications for precision and accuracy. The amount of time may indicate severity? GeoreferenceDate isn't a current DwC field.",Wiki,,,,,,,,,,,
+1015,ID_PRE_OCCURRENCE,"Identification predates the occurrence, possibly incorrect field mapping",Wiki,,,,,,,,,,,
+1016,FIRST_OF_MONTH,"May indicate the date is only known or recorded to the Month. Flag if there is no precision data. datePrecision is not a curent DwC field",Wiki,,,,,,,,,,,
+1017,FIRST_OF_YEAR,"May indicate the date is only known or recorded to the Year. Flag if there is no precision data. datePrecision is not a curent DwC field",Wiki,,,,,,,,,,,
+1018,FIRST_OF_CENTURY,"May indicate the date is only known or recorded to the Century. Flag if there is no precision data. datePrecision is not a curent DwC field",Wiki,,,,,,,,,,,
+1019,TAXON_AFFINITY_SPECIES,The scientific name has an aff. marker indicating a like-but-not identification,Wiki,,,,,,,,,,,
+1020,TAXON_EXCLUDED_ASSOCIATED,"The taxon, while matched, also has an excluded match",Wiki,,,,,,,,,,,
+1021,TAXON_CONFER_SPECIES,"The scientific name has a cf. marker, indicating uncertain identification",Wiki,,,,,,,,,,,
+1022,TAXON_EXCLUDED,The taxon is excluded (should not be found in this location),Wiki,,,,,,,,,,,
+1023,TAXON_ERROR,There has been a generic taxon matching error,Wiki,,,,,,,,,,,
+1024,TAXON_HOMONYM,The supplied name and hierarchy is not enough to uniquely determine the name,Wiki,,,,,,,,,,,
+1025,TAXON_INDETERMINATE_SPECIES,The supplied name contains an indeterminate species marker and an exact match could not be found,Wiki,,,,,,,,,,,
+1026,TAXON_MISAPPLIED_MATCHED,The supplied name has been misapplied to another concept in the past,Wiki,,,,,,,,,,,
+1027,TAXON_MISAPPLIED,The supplied name has been misapplied to another concept in the past with no accepted use,Wiki,,,,,,,,,,,
+1028,TAXON_PARENT_CHILD_SYNONYM,The supplied name can be matched either onto the parent species or an autonymic subspecies,Wiki,,,,,,,,,,,
+1029,TAXON_QUESTION_SPECIES,The supplied name contains a questionable identification marker (?),Wiki,,,,,,,,,,,
+1030,TAXON_SPECIES_PLURAL,The supplied name contains a species plural marker and cannot be accuratey matched onto a single species,Wiki,,,,,,,,,,,
+1031,MISSING_TAXONRANK,taxonRank not supplied with the record,Wiki,,,,,,,,,,,
+1032,NAME_NOT_SUPPLIED,Neither scientific name or vernacular name were supplied,Wiki,,,,,,,,,,,
+1033,UNKNOWN_KINGDOM,"Kingdom provided doesn't match a known kingdom e.g. Animalia, Plantae",Wiki,,,,,,,,,,,
+1034,TAXON_SCOPE_MISMATCH,The supplied hints do not match the final name match,Wiki,,,,,,,,,,,
+1035,TAXON_DEFAULT_MATCH,The ocurrence record was matched to a default value supplied by higher-order elements,Wiki,,,,,,,,,,,
+1036,INVALID_SCIENTIFIC_NAME,"The scientific name provided is not structured as a valid scientific name. Also catches rank values or values such as ""UNKNOWN""",Wiki,,,,,,,,,,,
+1037,SENSITIVITY_REPORT_INVALID,Sensitivity report invalid,Wiki,,,,,,,,,,,
+1038,SENSITIVITY_REPORT_NOT_LOADABLE,Sensitivity report not loadable,Wiki,,,,,,,,,,,
+1039,UNRECOGNISED_COLLECTION_CODE,Unrecognized collection code,Wiki,,,,,,,,,,,
+1040,UNRECOGNISED_INSTITUTION_CODE,Unrecognized institution code,Wiki,,,,,,,,,,,
+2000,ZERO_COORDINATE,Latitude and longitude provided are both zero,Wiki,,,,,,,,,,,
+2001,COORDINATE_OUT_OF_RANGE,Latitude >90 or <-90 and Longitude >180 or <-180,Wiki,,,,,,,,,,,
+2002,COORDINATE_INVALID,Coordinate value is given in some form but unable to interpret it,Wiki,,,,,,,,,,,
+2003,COORDINATE_ROUNDED,Original coordinate modified by rounding,Wiki,,,,,,,,,,,
+2004,GEODETIC_DATUM_INVALID,Geodetic datum not recognized,Wiki,,,,,,,,,,,
+2005,GEODETIC_DATUM_ASSUMED_WGS84,Geodetic datum assumed to be WGS84 (EPSG:436),Wiki,,,,,,,,,,,
+2006,COORDINATE_REPROJECTED,Decimal latitude and longitude were converted to WGS84,Wiki,,,,,,,,,,,
+2007,COORDINATE_REPROJECTION_FAILED,Conversion of provided decimal latitude and longitude to WGS84 failed,Wiki,,,,,,,,,,,
+2008,COORDINATE_REPROJECTION_SUSPICIOUS,"Indicates successful coordinate reprojection according to provided datum, but which results in a datum shift larger than 0.1 decimal degrees",Wiki,,,,,,,,,,,
+2010,COORDINATE_PRECISION_INVALID,Indicates an invalid or very unlikely coordinatePrecision,Wiki,,,,,,,,,,,
+2011,COORDINATE_UNCERTAINTY_METERS_INVALID,Indicates an invalid or very unlikely dwc:uncertaintyInMeters,Wiki,,,,,,,,,,,
+2013,FOOTPRINT_SRS_INVALID,The Footprint Spatial Reference System given could not be interpreted,Wiki,,,,,,,,,,,
+2014,FOOTPRINT_WKT_MISMATCH,The Footprint Well-Known-Text given is a POINT and does not match the decimalLatitude or decimalLongitude,Wiki,,,,,,,,,,,
+2015,FOOTPRINT_WKT_INVALID,The Footprint Well-Known-Text given could not be interpreted,Wiki,,,,,,,,,,,
+2016,COUNTRY_COORDINATE_MISMATCH,Coordinates outside the range for the reported country,Wiki,,,,,,,,,,,
+2017,COUNTRY_MISMATCH,Interpreted country for dwc:country and dwc:countryCode contradict each other,Wiki,,,,,,,,,,,
+2018,COUNTRY_INVALID,Uninterpretable country values found,Wiki,,,,,,,,,,,
+2019,COUNTRY_DERIVED_FROM_COORDINATES,"Country field supplied was empty, but was inferred in processing by the supplied coordinates",Wiki,,,,,,,,,,,
+2020,CONTINENT_COORDINATE_MISMATCH,CONTINENT_COORDINATE_MISMATCH,Wiki,,,,,,,,,,,
+2021,CONTINENT_COUNTRY_MISMATCH,The interpreted continent and country do not match,Wiki,,,,,,,,,,,
+2022,CONTINENT_INVALID,Uninterpretable continent values found,Wiki,,,,,,,,,,,
+2023,CONTINENT_DERIVED_FROM_COUNTRY,CONTINENT_DERIVED_FROM_COUNTRY,Wiki,,,,,,,,,,,
+2024,CONTINENT_DERIVED_FROM_COORDINATES,"The interpreted continent is based on the coordinates, not the verbatim string information",Wiki,,,,,,,,,,,
+2025,PRESUMED_SWAPPED_COORDINATE,Latitude and longitude appear to be swapped,Wiki,,,,,,,,,,,
+2026,PRESUMED_NEGATED_LONGITUDE,Record appears to be referencing a location in the wrong hemisphere,Wiki,,,,,,,,,,,
+2027,PRESUMED_NEGATED_LATITUDE,Record appears to be referencing a location in the wrong hemisphere,Wiki,,,,,,,,,,,
+2028,RECORDED_DATE_MISMATCH,"The recorded date specified as the eventDate string and the individual year, month, day are contradictory",Wiki,,,,,,,,,,,
+2029,RECORDED_DATE_INVALID,"A (partial) invalid date is given, such as a non existing date, zero month, etc.",Wiki,,,,,,,,,,,
+2030,RECORDED_DATE_UNLIKELY,"The recorded date is highly unlikely, falling either into the future or representing a very old date before 1600 thus predating modern taxonomy",Wiki,,,,,,,,,,,
+2031,TAXON_MATCH_FUZZY,"Matching to the taxonomic backbone can only be done using a fuzzy, non exact match.",Wiki,,,,,,,,,,,
+2032,TAXON_MATCH_HIGHERRANK,Matching to the taxonomic backbone can only be done on a higher rank and not the scientific name,Wiki,,,,,,,,,,,
+2033,TAXON_MATCH_AGGREGATE,"Matching to the taxonomic backbone can only be done on a species level, but the occurrence was in fact considered a broader species aggregate/complex",Wiki,,,,,,,,,,,
+2034,TAXON_MATCH_SCIENTIFIC_NAME_ID_IGNORED,TAXON_MATCH_SCIENTIFIC_NAME_ID_IGNORED,Wiki,,,,,,,,,,,
+2035,TAXON_MATCH_TAXON_CONCEPT_ID_IGNORED,TAXON_MATCH_TAXON_CONCEPT_ID_IGNORED,Wiki,,,,,,,,,,,
+2036,TAXON_MATCH_TAXON_ID_IGNORED,TAXON_MATCH_TAXON_ID_IGNORED,Wiki,,,,,,,,,,,
+2037,SCIENTIFIC_NAME_ID_NOT_FOUND,SCIENTIFIC_NAME_ID_NOT_FOUND,Wiki,,,,,,,,,,,
+2038,TAXON_CONCEPT_ID_NOT_FOUND,TAXON_CONCEPT_ID_NOT_FOUND,Wiki,,,,,,,,,,,
+2039,TAXON_ID_NOT_FOUND,TAXON_ID_NOT_FOUND,Wiki,,,,,,,,,,,
+2040,SCIENTIFIC_NAME_AND_ID_INCONSISTENT,SCIENTIFIC_NAME_AND_ID_INCONSISTENT,Wiki,,,,,,,,,,,
+2041,TAXON_MATCH_NONE,"Matching to the taxonomic backbone cannot be done cause there was no match at all or severalmatches with too little information to keep them apart (homonyms).",Wiki,,,,,,,,,,,
+2042,TAXON_MATCH_NAME_AND_ID_AMBIGUOUS,TAXON_MATCH_NAME_AND_ID_AMBIGUOUS,Wiki,,,,,,,,,,,
+2043,DEPTH_NOT_METRIC,Darwin core specifies metres should be used,Wiki,,,,,,,,,,,
+2044,DEPTH_UNLIKELY,Depth greater than 10000,Wiki,,,,,,,,,,,
+2045,DEPTH_MIN_MAX_SWAPPED,Typically a column mapping issue,Wiki,,,,,,,,,,,
+2046,DEPTH_NON_NUMERIC,Should be a numeric value in metres,Wiki,,,,,,,,,,,
+2047,ELEVATION_UNLIKELY,"Altitude greater than 10000m, or less than -100m",Wiki,,,,,,,,,,,
+2048,ELEVATION_MIN_MAX_SWAPPED,Typically a column mapping issue,Wiki,,,,,,,,,,,
+2049,ELEVATION_NOT_METRIC,Darwin core specifies metres should be used,Wiki,,,,,,,,,,,
+2050,ELEVATION_NON_NUMERIC,Should be a numeric value in metres,Wiki,,,,,,,,,,,
+2051,MODIFIED_DATE_INVALID,"A (partial) invalid date is given for dc:modified, such as a nonexistent date, zero month, etc",Wiki,,,,,,,,,,,
+2052,MODIFIED_DATE_UNLIKELY,The date given for dc:modified is in the future or predates Unix time (1970),Wiki,,,,,,,,,,,
+2053,IDENTIFIED_DATE_UNLIKELY,The date given for dwc:dateIdentified is in the future or before Linnean times (1700),Wiki,,,,,,,,,,,
+2054,IDENTIFIED_DATE_INVALID,The date given for dwc:dateIdentified is invalid and can't be interpreted at all,Wiki,,,,,,,,,,,
+2055,BASIS_OF_RECORD_INVALID,Unable to map the supplied basis of record to the vocabulary in use,Wiki,,,,,,,,,,,
+2056,TYPE_STATUS_INVALID,Unable to map the supplied type status to the vocabulary in use,Wiki,,,,,,,,,,,
+2057,MULTIMEDIA_DATE_INVALID,An invalid date is given for dc:created of a multimedia object,Wiki,,,,,,,,,,,
+2058,MULTIMEDIA_URI_INVALID,Multimedia uri invalid,Wiki,,,,,,,,,,,
+2059,REFERENCES_URI_INVALID,An invalid URI is given for dc:references,Wiki,,,,,,,,,,,
+2060,INTERPRETATION_ERROR,"An error occurred during interpretation, leaving the record interpretation incomplete",Wiki,,,,,,,,,,,
+2061,INDIVIDUAL_COUNT_INVALID,The individual count value is not a positive integer,Wiki,,,,,,,,,,,
+2062,INDIVIDUAL_COUNT_CONFLICTS_WITH_OCCURRENCE_STATUS,"Example: individual count value > 0, but occurrence status is absent.",Wiki,,,,,,,,,,,
+2063,OCCURRENCE_STATUS_UNPARSABLE,"An occurrence status value supplied, but it was not a recognised value.",Wiki,,,,,,,,,,,
+2064,OCCURRENCE_STATUS_INFERRED_FROM_INDIVIDUAL_COUNT,Occurrence status inferred from individual count,Wiki,,,,,,,,,,,
+2065,OCCURRENCE_STATUS_INFERRED_FROM_BASIS_OF_RECORD,Occurrence status inferred from basis of record,Wiki,,,,,,,,,,,
+2066,GEOREFERENCED_DATE_UNLIKELY,Georeferenced date unlikely,Wiki,,,,,,,,,,,
+2067,GEOREFERENCED_DATE_INVALID,The date given for dwc:georeferencedDate is invalid and can't be interpreted at all,Wiki,,,,,,,,,,,
+2068,AMBIGUOUS_INSTITUTION,The given institution matches with more than 1 GRSciColl institution,Wiki,,,,,,,,,,,
+2069,AMBIGUOUS_COLLECTION,The given collection matches with more than 1 GRSciColl collection.,Wiki,,,,,,,,,,,
+2070,INSTITUTION_MATCH_NONE,Code not recognised with ALA systems (Collectory),Wiki,,,,,,,,,,,
+2071,COLLECTION_MATCH_NONE,Code not recognised with ALA systems (Collectory),Wiki,,,,,,,,,,,
+2072,INSTITUTION_MATCH_FUZZY,The given institution was fuzzily matched to a GRSciColl institution,Wiki,,,,,,,,,,,
+2073,COLLECTION_MATCH_FUZZY,The given collection was fuzzily matched to a GRSciColl collection,Wiki,,,,,,,,,,,
+2074,INSTITUTION_COLLECTION_MISMATCH,The collection matched doesn't belong to the institution matched,Wiki,,,,,,,,,,,
+2076,DIFFERENT_OWNER_INSTITUTION,"The given owner institution is different than the given institution. Therefore we assume it doesn't belong to the institution and we don't link it to the occurrence.",Wiki,,,,,,,,,,,
+10000,taxonomicIssue,Taxonomic issue,Wiki,,,,,,,,,,,
+10004,STATE_COORDINATE_MISMATCH,Coordinates dont match the supplied state,Wiki,,,,,,,,,,,
+10007,identificationIncorrect,Taxon misidentified,Wiki,,,,,,,,,,,
+20019,userAssertionOther,userAssertionOther,Wiki,,,,,,,,,,,
+20020,userDuplicateRecord,userDuplicateRecord,Wiki,,,,,,,,,,,
+20021,biosecurityIssue,biosecurityIssue,Wiki,,,,,,,,,,,
+30000,temporalIssue,Temporal issue,Wiki,,,,,,,,,,,

@@ -222,3 +222,5 @@ environments:
   local:
     userdetails:
       url: http://localhost/userdetails
+
+    dataQualityChecksUrl: http://host.docker.internal/data-quality-checks.csv
