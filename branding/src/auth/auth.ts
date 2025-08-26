@@ -87,8 +87,8 @@ async function silentLogin() {
   const manager = await userManagerPromise;
   try {
     const user = await manager.signinSilent();
-    await authServiceWorker.setAccessToken(user!);
     setAlaAuthCookie(user!);
+    await authServiceWorker.setAccessToken(user!);
   } catch (error) {
     console.error("Silent login failed", error);
     await handleLogout();
@@ -96,13 +96,15 @@ async function silentLogin() {
 }
 
 async function handleLogin(user: User) {
-  await authServiceWorker.setAccessToken(user);
   setAlaAuthCookie(user);
+  await authServiceWorker.setAccessToken(user);
 }
 
 async function handleLogout() {
-  await authServiceWorker.setAccessToken(null);
   clearAlaAuthCookies();
+  await authServiceWorker.setAccessToken(null);
+  const manager = await userManagerPromise;
+  manager.removeUser();
 }
 
 function setAlaAuthCookie(user?: User) {
@@ -164,8 +166,9 @@ function getCurrentUrl() {
 }
 
 export async function login(args?: SigninRedirectArgs | any) {
-  await authServiceWorker.reset();
   clearAlaAuthCookies();
+  setAlaAuthCookie();
+  await authServiceWorker.reset();
   const mgr = await userManagerPromise;
   await mgr.signinRedirect(args);
 }
