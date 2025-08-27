@@ -4,7 +4,10 @@ import {
 } from "./service-worker-events";
 
 const jwtPaths = [
+    "/bie-index/",
     "/biocache-service/",
+    "/spatial-service/",
+    "/species-list/",
 ];
 
 let resolveAccessToken: (value: string | null) => void;
