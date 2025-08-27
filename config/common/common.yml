@@ -78,7 +78,6 @@ security:
     affiliation-survey:
       enabled: false
     authCookieName: VBP-AUTH
-    optionalFilterPattern: [ "/", "/*" ]
   cookie:
     enabled: true
     domain: .${common.domain}
