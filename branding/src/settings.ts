@@ -26,6 +26,7 @@ const defaultConfig = {
     },
     ala: {
       authCookieName: "VBP-AUTH",
+      authCookieDomain: "localhost",
       loginClass: "signedIn",
       logoutClass: "signedOut",
     },
@@ -42,21 +43,41 @@ const environmentConfig: Record<Environment, object> = {
     pictureCarousel: {
       speciesListId: "dr383",
     },
+    auth: {
+      ala: {
+        authCookieDomain: "localhost",
+      },
+    },
   },
   dev: {
     domain: "https://natuurdata.dev.inbo.be",
+    auth: {
+      ala: {
+        authCookieDomain: ".natuurdata.dev.inbo.be",
+      },
+    },
     pictureCarousel: {
       speciesListId: "dr383",
     },
   },
   uat: {
     domain: "https://natuurdata.uat.inbo.be",
+    auth: {
+      ala: {
+        authCookieDomain: ".natuurdata.uat.inbo.be",
+      },
+    },
     pictureCarousel: {
       speciesListId: "dr1",
     },
   },
   prod: {
     domain: "https://natuurdata.inbo.be",
+    auth: {
+      ala: {
+        authCookieDomain: ".natuurdata.prod.inbo.be",
+      },
+    },
     pictureCarousel: {
       speciesListId: "dr1",
     },

@@ -134,6 +134,7 @@ function setAlaAuthCookie(user?: User) {
       path: "/",
       sameSite: "lax",
       secure: window.location.protocol === "https:",
+      domain: settings.auth.cookieDomain,
     },
   );
 }
@@ -145,14 +146,7 @@ function clearAlaAuthCookies() {
       path: "/",
       sameSite: "lax",
       secure: window.location.protocol === "https:",
-    },
-  );
-  Cookies.remove(
-    `.${settings.auth.ala.authCookieName}`,
-    {
-      path: "/",
-      sameSite: "lax",
-      secure: window.location.protocol === "https:",
+      domain: settings.auth.cookieDomain,
     },
   );
   [
