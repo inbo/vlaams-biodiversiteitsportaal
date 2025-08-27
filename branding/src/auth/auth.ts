@@ -42,6 +42,7 @@ async function initUserManager(
     post_logout_redirect_uri: post_logout_redirect_uri.href,
     scope: "openid email ala/roles",
     includeIdTokenInSilentSignout: true,
+    prompt: settings.auth.oidc.prompt,
     //       userStore: new WebStorageStateStore({
     //         store: window.session,
     //       }),

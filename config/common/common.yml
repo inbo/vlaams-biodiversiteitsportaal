@@ -28,13 +28,13 @@ management:
     health:
       enabled: true
       show-details: never
-#    loggers:
-#      enabled: true
+  #    loggers:
+  #      enabled: true
   endpoints:
-#    jmx:
-#      domain: org.spring.${appName}
-#      exposure:
-#        include: loggers
+    #    jmx:
+    #      domain: org.spring.${appName}
+    #      exposure:
+    #        include: loggers
     web:
       exposure:
         include: health
@@ -78,7 +78,7 @@ security:
     affiliation-survey:
       enabled: false
     authCookieName: VBP-AUTH
-    optionalFilterPattern: ["/", "/*"]
+    optionalFilterPattern: [ "/", "/*" ]
   cookie:
     enabled: true
     domain: .${common.domain}
@@ -111,6 +111,10 @@ environments:
       domain: localhost
     dataSource:
       dbCreate: update
+    security:
+      oidc:
+        customParams:
+          prompt: "login"
   inbo_dev:
     common:
       protocol: https

@@ -22,6 +22,7 @@ const defaultConfig = {
       clientId: process.env.NODE_ENV === "development"
         ? "http://localhost:9999/mock-oauth2/"
         : "::KEYCLOAK_CLIENT_ID::",
+      prompt: process.env.NODE_ENV === "development" ? "login" : undefined,
     },
     ala: {
       authCookieName: "VBP-AUTH",
