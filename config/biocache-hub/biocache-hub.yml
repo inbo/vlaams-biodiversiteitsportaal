@@ -6,11 +6,10 @@ security:
   oidc:
     clientId: "ala_hub"
     secret: "ala_hub-oidc-super-secret"
-  cas:
-    gateway-if-cookie-filter-pattern: ["/", "/*"]
   core:
     uri-filter-pattern: /download/*
-    gateway-if-cookie-filter-pattern: ["/", "/*"]
+    optionalFilterPattern: [ "/", "/*" ]
+    uri-exclusion-filter-Pattern: ["^/ws/*"]
 webservice:
   client-id: "ala_hub"
   client-secret: "ala_hub-oidc-super-secret"
