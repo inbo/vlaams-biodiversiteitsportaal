@@ -46,8 +46,9 @@ async function initUserManager(
     //       userStore: new WebStorageStateStore({
     //         store: window.session,
     //       }),
+
     silent_redirect_uri: `${settings.domain}?front-auth-action=login`,
-    automaticSilentRenew: false,
+    automaticSilentRenew: true,
     monitorSession: false,
   });
 
@@ -62,10 +63,6 @@ async function initUserManager(
     await authServiceWorker.setAccessToken(null);
   });
 
-  manager.events.addAccessTokenExpiring(async () => {
-    console.warn("Access token expiring");
-    await silentLogin(manager);
-  });
   manager.events.addAccessTokenExpired(async function () {
     console.warn("Access token expired");
     await silentLogin(manager);
