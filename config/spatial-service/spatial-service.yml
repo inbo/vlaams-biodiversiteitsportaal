@@ -6,6 +6,8 @@ security:
   oidc:
     clientId: spatial_service
     secret: spatial_service-oidc-super-secret
+  core:
+    optionalFilterPattern: [ "/" ]
 webservice:
   client-id: spatial_service
   client-secret: xxx
