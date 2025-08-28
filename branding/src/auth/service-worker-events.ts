@@ -9,7 +9,7 @@ export interface ResetAuthLoadedMessage
 
 export interface AuthLoadedMessage extends BiocacheServiceInterceptorMessage {
     type: "authLoaded";
-    accessToken: string | null;
+    accessToken: string;
 }
 
 // interface SetAccessTokenMessage {

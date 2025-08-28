@@ -26,8 +26,6 @@ export const userManagerPromise = initUserManager(authServiceWorker);
 async function initUserManager(
   authServiceWorker: AuthServiceWorker,
 ): Promise<UserManager> {
-  await authServiceWorker.reset();
-
   console.debug("Initializing OIDC UserManager");
   const redirectUrl = cleanupUrl(window.location.href);
   redirectUrl.searchParams.set("front-auth-action", "login");
@@ -60,7 +58,6 @@ async function initUserManager(
   manager.events.addUserUnloaded(async () => {
     console.log("User unloaded");
     clearAlaAuthCookies();
-    await authServiceWorker.setAccessToken(null);
   });
 
   manager.events.addAccessTokenExpired(async function () {
@@ -78,14 +75,10 @@ async function initUserManager(
   if (Cookies.get(settings.auth.ala.authCookieName)) {
     if (!user || user.expired) {
       silentLogin(manager);
-    } else {
-      await authServiceWorker.setAccessToken(user);
     }
   } else {
     if (user) {
       await manager.removeUser();
-    } else {
-      await authServiceWorker.setAccessToken(null);
     }
   }
 
@@ -187,14 +180,12 @@ function cleanupUrl(url: string) {
 export async function login(args?: SigninRedirectArgs | any) {
   const mgr = await userManagerPromise;
   clearAlaAuthCookies();
-  await authServiceWorker.reset();
   await mgr.signinRedirect(args);
 }
 
 export async function logout(args?: SignoutRedirectArgs | any) {
   const mgr = await userManagerPromise;
   clearAlaAuthCookies();
-  await authServiceWorker.setAccessToken(null);
   await mgr.signoutRedirect(args);
 }
 

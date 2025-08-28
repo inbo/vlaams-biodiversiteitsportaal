@@ -1,5 +1,6 @@
 import { getUser, isLoggedIn, login, logout, userManagerPromise } from "./auth";
 import settings from "../settings";
+import { w } from "happy-dom/lib/PropertySymbol.js";
 
 const uiReady = new Promise<void>((resolve) =>
     document.addEventListener("DOMContentLoaded", () => resolve())
@@ -46,29 +47,33 @@ async function addAuthButtonClickHandlers() {
 
     const loginButtons = document.getElementsByClassName("login-button");
     for (const button of loginButtons) {
+        // Use JS based login when no href supplied
+        const target = button as HTMLAnchorElement;
         button.addEventListener(
             "click",
             async (e) => {
-                // Use Service login by default
-                const target = e.currentTarget as HTMLAnchorElement;
                 if (target.href === `${settings.domain}/`) {
                     e.preventDefault();
                     await login();
                 }
             },
         );
+
+        // Fix biocache-hub redirect
+        if (target.href.startsWith(`${settings.domain}/biocache-hub`)) {
+            const targetUrl = new URL(target.href);
+            targetUrl.searchParams.set("path", window.location.href);
+            target.href = targetUrl.toString();
+        }
     }
     const logoutButtons = document.getElementsByClassName("logout-button");
     for (const button of logoutButtons) {
+        // Always use JS based logout
         button.addEventListener(
             "click",
             async (e) => {
-                // Use Service logout by default
-                const target = e.currentTarget as HTMLAnchorElement;
-                if (target.href === `${settings.domain}/`) {
-                    e.preventDefault();
-                    await logout();
-                }
+                e.preventDefault();
+                await logout();
             },
         );
     }

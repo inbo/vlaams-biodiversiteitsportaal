@@ -1,3 +1,4 @@
+import settings from "../settings";
 import {
     AuthLoadedMessage,
     ResetAuthLoadedMessage,
@@ -7,12 +8,12 @@ const jwtPaths = [
     "/biocache-service/",
 ];
 
-let resolveAccessToken: (value: string | null) => void;
-let accessTokenPromise: Promise<string | null>;
+let resolveAccessToken: (value: string) => void;
+let accessTokenPromise: Promise<string>;
 
 function resetAuthLoaded() {
     console.warn("Resetting service worker auth state");
-    accessTokenPromise = new Promise<string | null>((resolve) => {
+    accessTokenPromise = new Promise<string>((resolve) => {
         resolveAccessToken = resolve;
     });
 }
@@ -47,31 +48,32 @@ addEventListener("message", (event) => {
     }
 });
 
-addEventListener("fetch", async (event: any) => {
+addEventListener("fetch", (event: any) => {
     console.info("Fetch event:", event.request.url);
+
     if (jwtPaths.some((path) => event.request.url.includes(path))) {
-        const accessToken = await accessTokenPromise;
-        if (accessToken) {
-            console.log("Service Worker: Fetch event for", event.request.url);
-            event.respondWith(customHeaderRequestFetch(event, accessToken));
-        }
+        event.respondWith(customHeaderRequestFetch(event));
     }
 });
 
-const customHeaderRequestFetch = (event: any, accessToken: string) => {
-    // decide for yourself which values you provide to mode and credentials
-    console.log(
-        "Service Worker: User is authenticated, using credentials.",
+const customHeaderRequestFetch = async (event: any) => {
+    let headers = new Headers(event.request.headers);
+
+    const authCookie = await cookieStore.get(
+        settings.auth.ala.authCookieName,
     );
+    if (authCookie) {
+        console.log(
+            "Service Worker: User is authenticated, using credentials.",
+        );
+        headers.append("Authorization", `Bearer ${await accessTokenPromise}`);
+    }
 
     const newRequest = new Request(event.request, {
-        headers: {
-            ...event.request.headers,
-            "Authorization": `Bearer ${accessToken}`,
-        },
+        headers,
         mode: "cors",
     });
-    return fetch(newRequest);
+    return await fetch(newRequest);
 };
 
 console.log("Service Worker: Registered and ready to handle requests.");
