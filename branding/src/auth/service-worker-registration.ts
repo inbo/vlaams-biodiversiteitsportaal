@@ -1,7 +1,7 @@
 import { User } from "oidc-client-ts";
 
 export class AuthServiceWorker {
-  private registrationPromise: Promise<ServiceWorkerRegistration>;
+  private registrationPromise: Promise<ServiceWorkerRegistration | void>;
 
   constructor() {
     this.registrationPromise = navigator.serviceWorker.register(
@@ -10,12 +10,14 @@ export class AuthServiceWorker {
         scope: "/",
         type: "module",
       },
-    );
+    ).catch((error) => {
+      console.error("Service Worker registration failed:", error);
+    });
   }
 
   async reset() {
     const reg = await this.registrationPromise;
-    if (reg.active) {
+    if (reg?.active) {
       reg.active.postMessage({ type: "resetAuthLoaded" });
     } else {
       console.warn("Service worker is not active");
@@ -24,7 +26,7 @@ export class AuthServiceWorker {
 
   async setAccessToken(user: User) {
     const reg = await this.registrationPromise;
-    if (reg.active) {
+    if (reg?.active) {
       reg.active.postMessage({
         type: "authLoaded",
         accessToken: user.access_token,

@@ -1,4 +1,3 @@
-import settings from "../settings";
 import {
     AuthLoadedMessage,
     ResetAuthLoadedMessage,
@@ -59,14 +58,16 @@ addEventListener("fetch", (event: any) => {
 const customHeaderRequestFetch = async (event: any) => {
     let headers = new Headers(event.request.headers);
 
-    const authCookie = await cookieStore.get(
-        settings.auth.ala.authCookieName,
-    );
+    // Cannot read from settings because firefox does not allow import
+    const authCookie = await cookieStore.get("VBP-AUTH");
     if (authCookie) {
         console.log(
             "Service Worker: User is authenticated, using credentials.",
         );
-        headers.append("Authorization", `Bearer ${await accessTokenPromise}`);
+        headers.append(
+            "Authorization",
+            `Bearer ${await accessTokenPromise}`,
+        );
     }
 
     const newRequest = new Request(event.request, {
