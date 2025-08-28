@@ -179,6 +179,8 @@ function cleanupUrl(url: string) {
   cleanedUrl.searchParams.delete("code");
   cleanedUrl.searchParams.delete("state");
   cleanedUrl.searchParams.delete("sessionState");
+  cleanedUrl.searchParams.delete("session_state");
+  cleanedUrl.searchParams.delete("iss");
   return cleanedUrl;
 }
 
