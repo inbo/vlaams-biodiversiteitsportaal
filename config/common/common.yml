@@ -66,6 +66,8 @@ security:
 
   cas:
     enabled: false
+    gateway-if-cookie-filter-pattern: ["/", "/*"]
+
   jwt:
     enabled: true
     discoveryUri: http://host.docker.internal:9999/default/.well-known/openid-configuration
@@ -78,6 +80,8 @@ security:
     affiliation-survey:
       enabled: false
     authCookieName: VBP-AUTH
+    gateway-if-cookie-filter-pattern: ["/", "/*"]
+    defaultLogoutRedirectUri: "?logout=vbp"
   cookie:
     enabled: true
     domain: .${common.domain}
