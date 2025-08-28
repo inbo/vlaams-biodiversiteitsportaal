@@ -79,7 +79,6 @@ security:
     affiliation-survey:
       enabled: false
     authCookieName: VBP-AUTH
-    defaultLogoutRedirectUri: "?logout=vbp"
   cookie:
     enabled: true
     domain: .${common.domain}
