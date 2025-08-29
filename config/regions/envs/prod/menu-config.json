@@ -1,4 +1,9 @@
 [
+  
+  {
+    "label": "Gewest Vlaanderen",
+    "fid": "cl10199"
+  },
   {
     "label": "Gewest Vlaanderen, inclusief Belgische EEZ",
     "fid": "cl10103"
@@ -16,9 +21,17 @@
     "fid": "cl10104"
   },
   {
-    "label": "Natura 2000 gebieden",
-    "fid": "cl10204"
-  },
+    "label" : "Natura 2000",
+        "submenu": [
+         {"label": "Natura 2000 categorieën",
+         "fid": "cl10204"
+         },
+         {"label": "Natura 2000 habitatrichtlijn (deel)gebieden",
+        "fid": "cl10093"
+         },
+         {"label": "Natura 2000 vogelrichtlijn gebieden",
+        "fid": "cl10007"
+         },
   {
     "label": "Openbaar bos en natuurgebieden",
     "fid": "cl10096"
