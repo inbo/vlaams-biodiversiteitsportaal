@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- regions -->
-<Context reloadable="false">
+<Context reloadable="false" useHttpOnly="false">
 
     <Parameter name="spring.config.additional-location"
                value="file:/config/common/common.yml,file:/config/regions/regions.yml,${ADDITIONAL_SPRING_CONFIG_LOCATIONS}"

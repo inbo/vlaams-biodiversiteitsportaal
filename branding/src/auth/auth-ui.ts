@@ -1,0 +1,80 @@
+import { getUser, isLoggedIn, login, logout, userManagerPromise } from "./auth";
+import settings from "../settings";
+import { w } from "happy-dom/lib/PropertySymbol.js";
+
+const uiReady = new Promise<void>((resolve) =>
+    document.addEventListener("DOMContentLoaded", () => resolve())
+);
+export async function initAuthUi() {
+    addAuthButtonClickHandlers();
+    setAuthMenuStatus();
+
+    const mgr = await userManagerPromise;
+    mgr.events.addUserLoaded(async () => {
+        setAuthMenuStatus();
+    });
+    mgr.events.addUserUnloaded(async () => {
+        setAuthMenuStatus();
+    });
+}
+
+initAuthUi();
+
+async function setAuthMenuStatus() {
+    await uiReady;
+
+    Array.from(document.getElementsByClassName("login-status-dependent"))
+        .forEach(async (element) => {
+            const user = await getUser();
+            if (user !== null && await isLoggedIn()) {
+                element.classList.remove(settings.auth.ala.logoutClass);
+                element.classList.add(settings.auth.ala.loginClass);
+
+                (document.getElementById(
+                    "my-annotated-records",
+                )! as HTMLAnchorElement)
+                    .href =
+                        `/biocache-hub/occurrences/search/?q=*:*&fq=assertion_user_id:%22${user.profile.sub}%22`;
+            } else {
+                element.classList.remove(settings.auth.ala.loginClass);
+                element.classList.add(settings.auth.ala.logoutClass);
+            }
+        });
+}
+
+async function addAuthButtonClickHandlers() {
+    await uiReady;
+
+    const loginButtons = document.getElementsByClassName("login-button");
+    for (const button of loginButtons) {
+        // Use JS based login when no href supplied
+        const target = button as HTMLAnchorElement;
+        button.addEventListener(
+            "click",
+            async (e) => {
+                if (target.href === `${settings.domain}/`) {
+                    e.preventDefault();
+                    await login();
+                }
+            },
+        );
+
+        // Fix biocache-hub redirect
+        if (target.href.startsWith(`${settings.domain}/biocache-hub`)) {
+            const targetUrl = new URL(target.href);
+            targetUrl.searchParams.set("path", window.location.href);
+            target.href = targetUrl.toString();
+        }
+    }
+    const logoutButtons = document.getElementsByClassName("logout-button");
+    for (const button of logoutButtons) {
+        // Always use JS based logout
+        button.addEventListener(
+            "click",
+            async (e) => {
+                e.preventDefault();
+                await logout();
+            },
+        );
+    }
+}

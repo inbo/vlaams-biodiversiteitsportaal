@@ -31,7 +31,10 @@ export default {
                 banner: resolve(__dirname, "./src/banner.html"),
                 footer: resolve(__dirname, "./src/footer.html"),
                 settings: resolve(__dirname, "./src/settings.ts"),
-                sw: resolve(__dirname, "./src/portal/sw.ts"),
+                "service-worker": resolve(
+                    __dirname,
+                    "./src/auth/service-worker.ts",
+                ),
                 "user-profile": resolve(
                     __dirname,
                     "./src/my-profile.html",
@@ -72,7 +75,7 @@ export default {
             output: {
                 entryFileNames: (chunkInfo: PreRenderedChunk) => {
                     console.log("Chunk file name:", chunkInfo.name);
-                    if (chunkInfo.name === "sw") {
+                    if (chunkInfo.name === "service-worker") {
                         return `[name].js`;
                     }
 

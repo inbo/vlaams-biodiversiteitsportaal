@@ -6,6 +6,9 @@ security:
   oidc:
     clientId: lists
     secret: lists-oidc-super-secret
+  core:
+    optionalFilterPattern: [ "/", "/*" ]
+    uri-exclusion-filter-Pattern: ["^/ws/*"]
 webservice:
   client-id: lists
   client-secret: xxx

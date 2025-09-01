@@ -8,6 +8,8 @@ security:
     secret: "ala_hub-oidc-super-secret"
   core:
     uri-filter-pattern: /download/*
+    optionalFilterPattern: [ "/", "/*" ]
+    uri-exclusion-filter-Pattern: ["^/ws/*"]
 webservice:
   client-id: "ala_hub"
   client-secret: "ala_hub-oidc-super-secret"
@@ -44,7 +46,7 @@ collections:
 collectory:
   baseUrl: ${common.protocol}://${common.domain}/collectory
   resources: ${common.protocol}://${common.domain}/collectory/public/resources.json
-dataQualityChecksUrl: https://docs.google.com/spreadsheet/pub?key=0AjNtzhUIIHeNdHJOYk1SYWE4dU1BMWZmb2hiTjlYQlE&single=true&gid=0&output=csv
+dataQualityChecksUrl: ${common.protocol}://${common.domain}/data-quality-checks.csv
 dataquality:
   enabled: true
   baseUrl: http://data-quality-filter-service.${common.internalDomain}:8080/data-quality-filter-service/
@@ -222,3 +224,5 @@ environments:
   local:
     userdetails:
       url: http://localhost/userdetails
+
+    dataQualityChecksUrl: http://host.docker.internal/data-quality-checks.csv
