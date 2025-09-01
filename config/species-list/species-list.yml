@@ -8,7 +8,7 @@ security:
     secret: lists-oidc-super-secret
   core:
     optionalFilterPattern: [ "/", "/*" ]
-    uri-exclusion-filter-Pattern: ["^/ws/*"]
+    uriExclusionFilterPattern: ["^/ws/.*"]
 webservice:
   client-id: lists
   client-secret: xxx

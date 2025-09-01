@@ -24,12 +24,14 @@
         },
   
   {
-    "label" : "Natura 2000",
-        "submenu": [
-         {"label": "Natura 2000 categorieën",
-         "fid": "cl10204"
-         },
-         {"label": "Natura 2000 habitatrichtlijn (deel)gebieden",
+    "label": "Natura 2000",
+    "submenu": [
+      {
+        "label": "Natura 2000 categorieën",
+        "fid": "cl10204"
+      },
+      {
+        "label": "Natura 2000 habitatrichtlijn (deel)gebieden",
         "fid": "cl10093"
          },
          {"label": "Natura 2000 vogelrichtlijn gebieden",

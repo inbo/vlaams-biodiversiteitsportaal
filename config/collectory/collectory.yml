@@ -7,7 +7,7 @@ security:
     clientId: collections
   core:
     optionalFilterPattern: [ "/", "/*" ]
-    uri-exclusion-filter-Pattern: ["^/ws/*"]
+    uriExclusionFilterPattern: ["^/ws/.*"]
 webservice:
   client-id: collections
   client-secret: xxx
