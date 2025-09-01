@@ -1,28 +1,34 @@
 [
   {
-    "label" : "Vlaanderen",
-        "submenu": [
-         {"label": "Gewest Vlaanderen",
-         "fid": "cl10199"
-         },
-         {"label": "Provincies",
+    "label": "Vlaanderen",
+    "submenu": [
+      {
+        "label": "Gewest Vlaanderen",
+        "fid": "cl10199"
+      },
+      {
+        "label": "Provincies",
         "fid": "cl101"
-         },
-         {"label": "Gemeenten",
-        "fid": "cl100"}]
-        },
-  
+      },
+      {
+        "label": "Gemeenten",
+        "fid": "cl100"
+      }
+    ]
+  },
   {
-    "label" : "Water",
-        "submenu": [
-         {"label": "Deelbekkens",
-         "fid": "cl10033"
-         },
-         {"label": "Belgische EEZ",
+    "label": "Water",
+    "submenu": [
+      {
+        "label": "Deelbekkens",
+        "fid": "cl10033"
+      },
+      {
+        "label": "Belgische EEZ",
         "fid": "cl10200"
-         }]
-        },
-  
+      }
+    ]
+  },
   {
     "label": "Natura 2000",
     "submenu": [
@@ -33,10 +39,13 @@
       {
         "label": "Natura 2000 habitatrichtlijn (deel)gebieden",
         "fid": "cl10093"
-         },
-         {"label": "Natura 2000 vogelrichtlijn gebieden",
-        "fid": "cl10007"}]
-         },
+      },
+      {
+        "label": "Natura 2000 vogelrichtlijn gebieden",
+        "fid": "cl10007"
+      }
+    ]
+  },
   {
     "label": "Kerngebieden van erkende nationale parken in Vlaanderen",
     "fid": "cl10104"
@@ -46,25 +55,33 @@
     "fid": "cl10096"
   },
   {
-    "label" : "Jacht",
-        "submenu": [
-         {"label": "Jachtterreinen",
-         "fid": "cl10004"
-         },
-         {"label": "Wildbeheereenheden",
-        "fid": "cl10005"}]
-         },
-   {
+    "label": "Jacht",
+    "submenu": [
+      {
+        "label": "Jachtterreinen",
+        "fid": "cl10004"
+      },
+      {
+        "label": "Wildbeheereenheden",
+        "fid": "cl10005"
+      }
+    ]
+  },
+  {
     "label": "Vlaams Ecologisch Netwerk en Integraal Verwevings- en Ondersteunend Netwerk",
     "fid": "cl10095"
   },
   {
-    "label" : "Rasters",
-        "submenu": [
-         {"label": "IFBL uurhokken",
-         "fid": "cl201"
-         },
-         {"label": "UTM 5km",
-        "fid": "cl200"}]
-         }
-  ]
+    "label": "Rasters",
+    "submenu": [
+      {
+        "label": "IFBL uurhokken",
+        "fid": "cl201"
+      },
+      {
+        "label": "UTM 5km",
+        "fid": "cl200"
+      }
+    ]
+  }
+]
