@@ -8,7 +8,7 @@ security:
     secret: apikey-oidc-super-secret
   core:
     optionalFilterPattern: [ "/", "/*" ]
-    uri-exclusion-filter-Pattern: ["^/ws/*"]
+    uriExclusionFilterPattern: ["^/ws/.*"]
 management:
   health:
     mongo:

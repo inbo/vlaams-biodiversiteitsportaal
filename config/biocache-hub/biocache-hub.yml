@@ -9,7 +9,7 @@ security:
   core:
     uri-filter-pattern: /download/*
     optionalFilterPattern: [ "/", "/*" ]
-    uri-exclusion-filter-Pattern: ["^/ws/*"]
+    uriExclusionFilterPattern: ["^/ws/.*"]
 webservice:
   client-id: "ala_hub"
   client-secret: "ala_hub-oidc-super-secret"
