@@ -4,7 +4,7 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 
 ARG VERSION=try-deconflicting-beans
-ARG COMMIT=13d9049cd8c86be79716ce38cee9f3e91d9f36ff
+ARG COMMIT=579a388241d57a3bfb778d750c4a940ef46d1500
 ARG SOURCE=https://github.com/StefanVanDyck/biocache-service.git
 LABEL ala.version=inbo-${COMMIT}
 
