@@ -4,7 +4,7 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 
 ARG VERSION=699-fix-wms-caching-across-user-roles
-ARG COMMIT=1c47ebc0f9d120ab38ac3798516caf5e8bf695d1
+ARG COMMIT=504b8457ef3cef44fdd31c78731bd68db977e539
 ARG SOURCE=https://github.com/StefanVanDyck/biocache-service.git
 LABEL ala.version=inbo-${COMMIT}
 
