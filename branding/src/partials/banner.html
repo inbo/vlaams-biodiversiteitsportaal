@@ -42,10 +42,10 @@
               aria-expanded="false"><span data-i18n="nav.places">Geografisch</span> <span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li>
-                <a id="geo-portal-link" class="::loginStatus::" href="/spatial-hub/">
+                <a id="geo-portal-link" class="login-status-dependent" href="/spatial-hub/">
                   <i class="fa fa-map submenu-icon"></i>
                   <span data-i18n="nav.spatial">Geografisch portaal </span>
-                  <i id="geo-locked" class="fa fa-lock hidden-on-logged-in ::loginStatus::"></i>
+                  <i id="geo-locked" class="fa fa-lock hidden-on-logged-in login-status-dependent"></i>
                 </a>
               </li>
               <li>
@@ -125,13 +125,13 @@
           </li>
 
           <!-- Authentication -->
-          <li id="dropdown-auth-menu" class="dropdown ::loginStatus::">
+          <li id="dropdown-auth-menu" class="dropdown login-status-dependent">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
               aria-expanded="false">
               <i id="login-icon" class="fa"></i></a>
             <ul class="dropdown-menu">
               <li>
-                <a id="loginButton" class="loginBtn login-button hidden-on-logged-in ::loginStatus::"
+                <a id="loginButton" class="loginBtn login-button hidden-on-logged-in login-status-dependent"
                   href="::loginURL::">
                   <i class="fa fa-right-to-bracket submenu-icon"></i>
                   <span data-i18n="nav.login">Login</span>
@@ -139,43 +139,44 @@
               </li>
 
               <li>
-                <a class="myProfileBtn hidden-on-logged-out ::loginStatus::" href="/my-profile.html">
+                <a class="myProfileBtn hidden-on-logged-out login-status-dependent" href="/my-profile.html">
                   <i class="fa fa-id-badge submenu-icon"></i>
                   <span data-i18n="nav.myprofile">Jouw profiel</span>
                 </a>
               </li>
-              <li role="separator" class="divider hidden-on-logged-out ::loginStatus::"></li>
+              <li role="separator" class="divider hidden-on-logged-out login-status-dependent"></li>
 
               <li>
-                <a class="myProfileBtn hidden-on-logged-out ::loginStatus::" href="/species-list/speciesList/list">
+                <a class="myProfileBtn hidden-on-logged-out login-status-dependent"
+                  href="/species-list/speciesList/list">
                   <i class="fa fa-list-check submenu-icon"></i>
                   <span data-i18n="nav.profile.species-lists">Mijn soortenlijsten</span>
                 </a>
               </li>
 
               <li>
-                <a id="my-annotated-records" class="myProfileBtn hidden-on-logged-out ::loginStatus::" href="">
+                <a id="my-annotated-records" class="myProfileBtn hidden-on-logged-out login-status-dependent" href="">
                   <i class="fa fa-flag submenu-icon"></i>
                   <span data-i18n="nav.profile.annotated-records">Mijn annotaties</span>
                 </a>
               </li>
 
               <li>
-                <a class="myProfileBtn hidden-on-logged-out ::loginStatus::" href="/alerts/">
+                <a class="myProfileBtn hidden-on-logged-out login-status-dependent" href="/alerts/">
                   <i class="fa fa-bell submenu-icon"></i>
                   <span data-i18n="nav.profile.alerts">Mijn meldingen</span>
                 </a>
               </li>
 
               <li>
-                <a class="myProfileBtn hidden-on-logged-out ::loginStatus::" href="/spatial-hub?tool=log">
+                <a class="myProfileBtn hidden-on-logged-out login-status-dependent" href="/spatial-hub?tool=log">
                   <i class="fa fa-map submenu-icon"></i>
                   <span data-i18n="nav.profile.spatial-analysis">Mijn analyse</span>
                 </a>
               </li>
-              <li role="separator" class="divider hidden-on-logged-out ::loginStatus::"></li>
+              <li role="separator" class="divider hidden-on-logged-out login-status-dependent"></li>
               <li>
-                <a id="logoutButton" class="logoutBtn logout-button hidden-on-logged-out ::loginStatus::"
+                <a id="logoutButton" class="logoutBtn logout-button hidden-on-logged-out login-status-dependent"
                   href="::logoutURL::">
                   <i class="fa fa-right-from-bracket submenu-icon"></i>
                   <span data-i18n="nav.logout">Uitloggen</span>

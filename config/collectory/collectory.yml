@@ -5,6 +5,9 @@ security:
     clientId: collections
   oidc:
     clientId: collections
+  core:
+    optionalFilterPattern: [ "/", "/*" ]
+    uriExclusionFilterPattern: ["^/ws/.*"]
 webservice:
   client-id: collections
   client-secret: xxx

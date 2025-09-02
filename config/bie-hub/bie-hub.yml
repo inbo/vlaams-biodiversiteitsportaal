@@ -6,6 +6,9 @@ security:
   oidc:
     clientId: "ala_bie"
     secret: "ala_bie-oidc-super-secret"
+  core:
+    optionalFilterPattern: [ "/", "/*" ]
+    uriExclusionFilterPattern: ["^/ws/.*"]
 webservice:
   client-id: "ala_bie"
   client-secret: "ala_bie-oidc-super-secret"

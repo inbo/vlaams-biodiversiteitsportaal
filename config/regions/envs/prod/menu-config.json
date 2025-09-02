@@ -1,38 +1,87 @@
 [
   {
-    "label": "Gewest Vlaanderen, inclusief Belgische EEZ",
-    "fid": "cl10103"
+    "label": "Vlaanderen",
+    "submenu": [
+      {
+        "label": "Gewest Vlaanderen",
+        "fid": "cl10199"
+      },
+      {
+        "label": "Provincies",
+        "fid": "cl101"
+      },
+      {
+        "label": "Gemeenten",
+        "fid": "cl100"
+      }
+    ]
   },
   {
-    "label": "Provincies",
-    "fid": "cl101"
+    "label": "Water",
+    "submenu": [
+      {
+        "label": "Deelbekkens",
+        "fid": "cl10033"
+      },
+      {
+        "label": "Belgische EEZ",
+        "fid": "cl10200"
+      }
+    ]
   },
   {
-    "label": "Gemeenten",
-    "fid": "cl100"
+    "label": "Natura 2000",
+    "submenu": [
+      {
+        "label": "Natura 2000 categorieën",
+        "fid": "cl10204"
+      },
+      {
+        "label": "Natura 2000 habitatrichtlijn (deel)gebieden",
+        "fid": "cl10093"
+      },
+      {
+        "label": "Natura 2000 vogelrichtlijn gebieden",
+        "fid": "cl10007"
+      }
+    ]
   },
   {
     "label": "Kerngebieden van erkende nationale parken in Vlaanderen",
     "fid": "cl10104"
   },
   {
-    "label": "Natura 2000 gebieden",
-    "fid": "cl10105"
-  },
-  {
     "label": "Openbaar bos en natuurgebieden",
     "fid": "cl10096"
   },
   {
-    "label": "Jachtterreinen",
-    "fid": "cl10004"
-  },
-  {
-    "label": "Wildbeheereenheden",
-    "fid": "cl10005"
+    "label": "Jacht",
+    "submenu": [
+      {
+        "label": "Jachtterreinen",
+        "fid": "cl10004"
+      },
+      {
+        "label": "Wildbeheereenheden",
+        "fid": "cl10005"
+      }
+    ]
   },
   {
     "label": "Vlaams Ecologisch Netwerk en Integraal Verwevings- en Ondersteunend Netwerk",
     "fid": "cl10095"
+  },
+  {
+    "label": "Rasters",
+    "submenu": [
+      {
+        "label": "IFBL uurhokken",
+        "fid": "cl201"
+      },
+      {
+        "label": "UTM 5km",
+        "fid": "cl200"
+      }
+    ]
   }
 ]

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- species-list -->
-<Context reloadable="false">
+<Context reloadable="false" useHttpOnly="false">
 
     <Parameter name="spring.config.additional-location"
                value="file:/config/common/common.yml,file:/config/species-list/species-list.yml,${ADDITIONAL_SPRING_CONFIG_LOCATIONS}"

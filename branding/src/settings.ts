@@ -11,6 +11,7 @@ const environment: string = process.env.NODE_ENV === "development"
   : "::ENVIRONMENT::";
 
 const defaultConfig = {
+  domain: "http://localhost",
   enabledLangs: ["nl", "en"],
   auth: {
     // Replaced by terraform when deploying to the specific environment
@@ -21,9 +22,11 @@ const defaultConfig = {
       clientId: process.env.NODE_ENV === "development"
         ? "http://localhost:9999/mock-oauth2/"
         : "::KEYCLOAK_CLIENT_ID::",
+      prompt: process.env.NODE_ENV === "development" ? "login" : undefined,
     },
     ala: {
       authCookieName: "VBP-AUTH",
+      authCookieDomain: "localhost",
       loginClass: "signedIn",
       logoutClass: "signedOut",
     },
@@ -36,21 +39,45 @@ const defaultConfig = {
 
 const environmentConfig: Record<Environment, object> = {
   local: {
+    domain: "http://localhost",
     pictureCarousel: {
       speciesListId: "dr383",
     },
+    auth: {
+      ala: {
+        authCookieDomain: "localhost",
+      },
+    },
   },
   dev: {
+    domain: "https://natuurdata.dev.inbo.be",
+    auth: {
+      ala: {
+        authCookieDomain: ".natuurdata.dev.inbo.be",
+      },
+    },
     pictureCarousel: {
       speciesListId: "dr383",
     },
   },
   uat: {
+    domain: "https://natuurdata.uat.inbo.be",
+    auth: {
+      ala: {
+        authCookieDomain: ".natuurdata.uat.inbo.be",
+      },
+    },
     pictureCarousel: {
       speciesListId: "dr1",
     },
   },
   prod: {
+    domain: "https://natuurdata.inbo.be",
+    auth: {
+      ala: {
+        authCookieDomain: ".natuurdata.prod.inbo.be",
+      },
+    },
     pictureCarousel: {
       speciesListId: "dr1",
     },

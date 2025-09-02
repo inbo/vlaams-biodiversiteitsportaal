@@ -6,6 +6,9 @@ security:
   oidc:
     clientId: apikey
     secret: apikey-oidc-super-secret
+  core:
+    optionalFilterPattern: [ "/", "/*" ]
+    uriExclusionFilterPattern: ["^/ws/.*"]
 management:
   health:
     mongo:

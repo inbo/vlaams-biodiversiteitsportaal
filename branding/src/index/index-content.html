@@ -173,7 +173,7 @@
 </div>
 
 <script type="module" type="text/javascript">
-    import { isLoggedIn } from "{{ resolve-from-root 'portal/auth.ts' }}";
+    import { isLoggedIn } from "{{ resolve-from-root 'auth/auth.ts' }}";
     $(window).on('load', function () {
         if (!isLoggedIn()) {
             $('#bug-modal').modal('show');

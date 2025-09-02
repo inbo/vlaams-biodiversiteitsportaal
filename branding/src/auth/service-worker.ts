@@ -1,0 +1,80 @@
+import {
+    AuthLoadedMessage,
+    ResetAuthLoadedMessage,
+} from "./service-worker-events";
+
+const jwtPaths = [
+    "/biocache-service/",
+];
+
+let resolveAccessToken: (value: string) => void;
+let accessTokenPromise: Promise<string>;
+
+function resetAuthLoaded() {
+    console.warn("Resetting service worker auth state");
+    accessTokenPromise = new Promise<string>((resolve) => {
+        resolveAccessToken = resolve;
+    });
+}
+
+resetAuthLoaded();
+
+addEventListener("install", () => {
+    console.log(`Service Worker: Installing...`);
+});
+
+addEventListener("active", () => {
+    console.log(`Service Worker: active...`);
+});
+
+addEventListener("message", (event) => {
+    console.log(`Message received: ${event.data}`);
+    const data = event.data as (AuthLoadedMessage | ResetAuthLoadedMessage);
+
+    switch (data.type) {
+        case "resetAuthLoaded":
+            console.info("Resetting service worker auth state");
+            resetAuthLoaded();
+            break;
+        case "authLoaded":
+            console.info(
+                `Setting service worker auth state: ${data.accessToken}`,
+            );
+            resolveAccessToken(data.accessToken);
+            break;
+        default:
+            console.error("Unknown message type:", data);
+    }
+});
+
+addEventListener("fetch", (event: any) => {
+    console.info("Fetch event:", event.request.url);
+
+    if (jwtPaths.some((path) => event.request.url.includes(path))) {
+        event.respondWith(customHeaderRequestFetch(event));
+    }
+});
+
+const customHeaderRequestFetch = async (event: any) => {
+    let headers = new Headers(event.request.headers);
+
+    // Cannot read from settings because firefox does not allow import
+    const authCookie = await cookieStore.get("VBP-AUTH");
+    if (authCookie) {
+        console.log(
+            "Service Worker: User is authenticated, using credentials.",
+        );
+        headers.append(
+            "Authorization",
+            `Bearer ${await accessTokenPromise}`,
+        );
+    }
+
+    const newRequest = new Request(event.request, {
+        headers,
+        mode: "cors",
+    });
+    return await fetch(newRequest);
+};
+
+console.log("Service Worker: Registered and ready to handle requests.");

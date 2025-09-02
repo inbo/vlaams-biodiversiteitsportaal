@@ -28,13 +28,13 @@ management:
     health:
       enabled: true
       show-details: never
-#    loggers:
-#      enabled: true
+  #    loggers:
+  #      enabled: true
   endpoints:
-#    jmx:
-#      domain: org.spring.${appName}
-#      exposure:
-#        include: loggers
+    #    jmx:
+    #      domain: org.spring.${appName}
+    #      exposure:
+    #        include: loggers
     web:
       exposure:
         include: health
@@ -66,6 +66,7 @@ security:
 
   cas:
     enabled: false
+
   jwt:
     enabled: true
     discoveryUri: http://host.docker.internal:9999/default/.well-known/openid-configuration
@@ -78,7 +79,6 @@ security:
     affiliation-survey:
       enabled: false
     authCookieName: VBP-AUTH
-    default-logout-redirect-uri: ${common.protocol}://${common.domain}/?logout
   cookie:
     enabled: true
     domain: .${common.domain}
@@ -88,12 +88,14 @@ webservice:
 
 server:
   port: 8080
+  use-forward-headers: true
   tomcat:
     use-relative-redirects: true
   servlet:
     session:
       cookie:
         secure: true
+        http-only: false # Needed to allow front-end logout
         same-site: "lax" # Strict causes pac4j issues
 
 # Prevent automatically updating DB-schema on startup
@@ -109,6 +111,10 @@ environments:
       domain: localhost
     dataSource:
       dbCreate: update
+    security:
+      oidc:
+        customParams:
+          prompt: "login"
   inbo_dev:
     common:
       protocol: https
