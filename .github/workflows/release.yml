@@ -358,3 +358,6 @@ jobs:
               issue_number: result.data.number,
               labels: ['versions', 'automated pr']
             });
+            await core.summary.addHeading("Update pipeline versions")
+                  .addLink('PR update', result.html_url)
+                  .write()
