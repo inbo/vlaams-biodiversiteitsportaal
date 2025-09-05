@@ -316,7 +316,8 @@ jobs:
           git config --global user.email "support.natuurdata@inbo.be"
           git config --global user.name "Github Actions"
 
-          jq <<< '${{ fromJSON(needs.get-versions.outputs.all_versions) }}' > ./versions.json
+          # Update versions.json
+          cat <<< $(jq '. = ${{ fromJSON(needs.get-versions.outputs.all_versions) }}' ./versions.json) > ./versions.json
 
           if [ -n "$(git status --porcelain)" ]; then
             git add versions.json
