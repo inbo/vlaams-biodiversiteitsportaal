@@ -224,5 +224,7 @@ environments:
   local:
     userdetails:
       url: http://localhost/userdetails
+    regionVlaanderen:
+      query: cl10103%3A%22Vlaams+Gewest%22
 
     dataQualityChecksUrl: http://host.docker.internal/data-quality-checks.csv
