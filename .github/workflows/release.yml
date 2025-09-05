@@ -342,6 +342,9 @@ jobs:
             });
             if (openPrs.data.length === 1) {
               console.log(`PR already exists: ${openPrs.data[0].html_url}`);
+              await core.summary.addHeading("Update pipeline versions")
+                    .addLink('PR update', result.html_url)
+                    .write()
               return;
             }
             const result = await github.rest.pulls.create({
