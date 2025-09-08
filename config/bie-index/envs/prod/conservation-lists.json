@@ -14,14 +14,14 @@
       "field": "threatStatus_vrlf_s",
       "sourceField": "status",
       "term": "threatStatus",
-      "label": "VRLF15"
+      "label": "RL18"
     },
     {
       "uid": "dr606",
       "field": "threatStatus_vrlf25_s",
       "sourceField": "status",
       "term": "threatStatus",
-      "label": "VRLF25"
+      "label": "RL25"
     }
   ]
 }
