@@ -112,7 +112,7 @@ jobs:
 
       - name: Archive failed test report
         uses: actions/upload-artifact@v4
-        if: failure()   
+        if: failure()
         with:
           name: branding-tests
           path: ./test-output.json
@@ -335,6 +335,13 @@ jobs:
         with:
           github-token: ${{ secrets.GIT_PAT_TOKEN }}
           script: |
+            async function summaryOutput(prUrl) {
+              await core.summary.addHeading("Update pipeline versions")
+                    .addLink('PR update', prUrl)
+                    .write()
+            }
+            
+            
             const openPrs = await github.rest.pulls.list({
               owner: 'inbo',
               repo: 'inbo-aws-biodiversiteitsportaal-terraform',
@@ -343,9 +350,7 @@ jobs:
             });
             if (openPrs.data.length === 1) {
               console.log(`PR already exists: ${openPrs.data[0].html_url}`);
-              await core.summary.addHeading("Update pipeline versions")
-                    .addLink('PR update', openPrs.data[0].html_url)
-                    .write()
+              await summaryOutput(openPrs.data[0].html_url)
               return;
             }
             const result = await github.rest.pulls.create({
@@ -362,6 +367,4 @@ jobs:
               issue_number: result.data.number,
               labels: ['versions', 'automated pr']
             });
-            await core.summary.addHeading("Update pipeline versions")
-                  .addLink('PR update', result.html_url)
-                  .write()
+            await summaryOutput(result.data.html_url)
