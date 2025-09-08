@@ -316,7 +316,8 @@ jobs:
           git config --global user.email "support.natuurdata@inbo.be"
           git config --global user.name "Github Actions"
 
-          jq <<< '${{ fromJSON(needs.get-versions.outputs.all_versions) }}' > ./versions.json
+          # Update versions.json
+          cat <<< $(jq '. = ${{ fromJSON(needs.get-versions.outputs.all_versions) }}' ./versions.json) > ./versions.json
 
           if [ -n "$(git status --porcelain)" ]; then
             git add versions.json
@@ -342,6 +343,9 @@ jobs:
             });
             if (openPrs.data.length === 1) {
               console.log(`PR already exists: ${openPrs.data[0].html_url}`);
+              await core.summary.addHeading("Update pipeline versions")
+                    .addLink('PR update', openPrs.data[0].html_url)
+                    .write()
               return;
             }
             const result = await github.rest.pulls.create({
@@ -358,3 +362,6 @@ jobs:
               issue_number: result.data.number,
               labels: ['versions', 'automated pr']
             });
+            await core.summary.addHeading("Update pipeline versions")
+                  .addLink('PR update', result.html_url)
+                  .write()
