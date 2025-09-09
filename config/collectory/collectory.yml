@@ -35,6 +35,27 @@ collectionsMap:
   defaultZoom: 9
 dataSource:
   url: jdbc:mysql://collectory:my-super-secret-password@mysql:3306/collectory?autoReconnect=true&connectTimeout=0&useUnicode=true&characterEncoding=UTF-8&allowPublicKeyRetrieval=true&useSSL=False&serverTimezone=Europe/Paris
+  pooled: true
+  jmxExport: true
+  properties:
+    jmxEnabled: true
+    initialSize: 5
+    maxActive: 50
+    minIdle: 5
+    maxIdle: 25
+    maxWait: 10000
+    maxAge: 600000
+    timeBetweenEvictionRunsMillis: 5000
+    minEvictableIdleTimeMillis: 60000
+    validationQuery: SELECT 1
+    validationQueryTimeout: 3
+    validationInterval: 15000
+    testOnBorrow: true
+    testWhileIdle: true
+    testOnReturn: false
+    jdbcInterceptors: ConnectionState
+    defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
+
 defaultLocale: en
 disableAlertLinks: true
 disableCAS: false
