@@ -212,7 +212,7 @@ environments:
     dataquality:
       enabled: false
     regionVlaanderen:
-      query: cl10103%3A%22Vlaams+Gewest%22+AND+cl10103%3A%5B*+TO+*%5D
+      query: cl10103:"Vlaams+Gewest"+AND+cl10103:[*+TO+*]
   inbo_uat:
     userdetails:
       url: https://natuurdata.uat.inbo.be/userdetails
@@ -220,11 +220,11 @@ environments:
     userdetails:
       url: https://natuurdata.dev.inbo.be/userdetails
     regionVlaanderen:
-      query: cl100%3A%22Vlaams+Gewest%22+AND+cl100%3A%5B*+TO+*%5D
+      query: cl100:"Vlaams+Gewest"+AND+cl100:[*+TO+*]
   local:
     userdetails:
       url: http://localhost/userdetails
     regionVlaanderen:
-      query: cl10103%3A%22Vlaams+Gewest%22+AND+cl10103%3A%5B*+TO+*%5D
+      query: cl10103:"Vlaams+Gewest"+AND+cl10103:[*+TO+*]
 
     dataQualityChecksUrl: http://host.docker.internal/data-quality-checks.csv
