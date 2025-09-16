@@ -292,7 +292,7 @@
         ]
     },
     {
-        "speciesGroup": "Reptiles",
+        "speciesGroup": "Reptiles1",
         "taxonRank": "classs",
         "taxa": [
             {
@@ -309,6 +309,36 @@
             }
         ]
     },
+    {
+       "speciesGroup": "Reptiles2",
+       "taxonRank": "family",
+       "taxa": [
+        {
+            "name": "LACERTIDAE",
+            "common": "Wall lizards"
+        },
+        {
+            "name": "ANGUIDAE",
+            "common": "Glass lizards"
+        },
+        {
+            "name": "COLUBRIDAE",
+            "common": "Colubrid snakes"
+        },
+        {
+            "name": "VIPERIDAE",
+            "common": "Vipers"
+        },
+        {
+            "name": "EMYDIDAE",
+            "common": "Pond turtles"
+        },
+        {
+            "name": "TESTUDINIDAE",
+            "common": "Tortoises"
+        }
+    ]
+},
     {
         "speciesGroup": "Fish",
         "taxonRank": "order",
