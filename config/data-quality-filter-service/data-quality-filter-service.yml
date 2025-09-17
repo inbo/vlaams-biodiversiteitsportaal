@@ -10,7 +10,7 @@ webservice:
   client-secret: xxx
 
 biocache:
-  baseUrl: ${common.protocol}://${common.domain}/biocache-hub
+  baseUrl: ${common.protocol}://${common.domain}/biocache-service
 biocacheService:
   baseURL: ${common.protocol}://${common.domain}/biocache-service
 
