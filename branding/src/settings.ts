@@ -75,7 +75,7 @@ const environmentConfig: Record<Environment, object> = {
     domain: "https://natuurdata.inbo.be",
     auth: {
       ala: {
-        authCookieDomain: ".natuurdata.prod.inbo.be",
+        authCookieDomain: ".natuurdata.inbo.be",
       },
     },
     pictureCarousel: {
