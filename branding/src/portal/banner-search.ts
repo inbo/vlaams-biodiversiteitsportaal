@@ -51,7 +51,7 @@ function performSearch() {
         return;
     }
 
-    window.location.href = `/bie-hub/search?q=${
+    window.location.href = `/bie-hub/search?sortField=occurrenceCount&q=${
         encodeURIComponent(`*${query}*`)
     }`;
 }
