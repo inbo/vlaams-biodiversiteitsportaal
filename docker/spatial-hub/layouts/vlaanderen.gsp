@@ -146,7 +146,7 @@
                                         class="account-mobile hidden-md hidden-lg loginBtn mobile-login-btn"/>
                     </g:if>
                     <g:if test="${request.userPrincipal != null}">
-                        <a href="/userdetails/profile" role="button"
+                        <a href="/my-profile.html" role="button"
                            class="account-mobile hidden-md hidden-lg myProfileBtn hideLoggedOut" title="My Account">
                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="18" viewBox="0 0 37 41">
                                 <defs>
