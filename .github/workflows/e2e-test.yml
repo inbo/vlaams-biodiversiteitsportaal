@@ -6,6 +6,11 @@ on:
     - cron: '0 5 * * 1-5'
   workflow_dispatch:
     inputs:
+      google_notification:
+        description: 'Notify Google Chat on failure'
+        required: false
+        default: true
+        type: boolean
       env:
         description: 'Environment to test'
         required: true
@@ -54,7 +59,7 @@ jobs:
           retention-days: 5
 
       - name: Notify Google Chat
-        if: failure()
+        if: failure() && github.event.inputs.google_notification == 'true'
         env:
           GOOGLE_CHAT_WEBHOOK_URL: ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
         run: |
