@@ -53,7 +53,9 @@ describe("Can login from the homepage", () => {
 });
 
 function login() {
-    cy.get("#dropdown-auth-menu").click();
+    cy.get("#dropdown-auth-menu").click().get(
+        "#dropdown-auth-menu > .dropdown-menu",
+    ).should("be.visible");
     cy.get("#loginButton").should("be.visible").click();
 
     cy.log("Do stuff on login screen")
@@ -70,12 +72,16 @@ function login() {
 }
 
 function logout() {
-    cy.get("#dropdown-auth-menu").click();
+    cy.get("#dropdown-auth-menu").click().get(
+        "#dropdown-auth-menu > .dropdown-menu",
+    ).should("be.visible");
     cy.get("#logoutButton").click();
 }
 
 function assertIsLoggedIn() {
-    cy.get("#dropdown-auth-menu").click();
+    cy.get("#dropdown-auth-menu").click().get(
+        "#dropdown-auth-menu > .dropdown-menu",
+    ).should("be.visible");
     cy.get("#loginButton").should("not.be.visible");
     cy.get("#logoutButton").should("be.visible");
     cy.get(".myProfileBtn").should("be.visible");
