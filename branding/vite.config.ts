@@ -63,6 +63,11 @@ export default {
                     __dirname,
                     "src/portal/ala/application.js",
                 ),
+                // To allow inclusion in spatial portal
+                "auth": resolve(
+                    __dirname,
+                    "src/auth/auth.ts",
+                ),
                 ...(await generateMarkdownPages({
                     globPattern: "./pages/**/*",
                     template: "src/pages/pages-layout.html",
