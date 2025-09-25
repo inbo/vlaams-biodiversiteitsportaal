@@ -21,6 +21,8 @@ resetAuthLoaded();
 
 addEventListener("install", () => {
     console.log(`Service Worker: Installing...`);
+    // Could be dangerous, but we want the latest version immediately
+    skipWaiting();
 });
 
 addEventListener("active", () => {
