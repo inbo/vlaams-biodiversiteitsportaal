@@ -14,7 +14,7 @@
     <!-- Favicon -->
     <link href="${config.skin.favicon}" rel="shortcut icon" type="image/x-icon"/>
 
-    <script src="/js/auth.js"></script>
+    <script type="module" src="/js/auth.js"></script>
     <title>
         <g:layoutTitle/>
     </title>
