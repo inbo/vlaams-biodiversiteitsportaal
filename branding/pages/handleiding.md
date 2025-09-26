@@ -17,10 +17,6 @@ Het portaal is ingedeeld in verschillende secties:
 
 ### 3\. Belangrijkste Modules
 
-#### Verzamelingen (Natuurhistorische collecties)
-
-Bekijk en beheer collectie data. Toegang tot gedigitaliseerde collecties.
-
 #### Waarnemingen
 
 Doorzoek en analyseer waarnemingsdata van soorten.
@@ -55,4 +51,5 @@ Gebruik de geavanceerde zoekfunctie en stel voorkeuren in.
 We nodigen u uit om het portaal te verkennen en feedback te geven via de [GitHub Issue Tracker](https://github.com/inbo/vlaams-biodiversiteitsportaal/issues).
 
 Vriendelijke groet,
+
 Het Vlaams Biodiversiteitsportaal Team
