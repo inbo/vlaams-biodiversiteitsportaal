@@ -3,34 +3,32 @@ title: "VBP workshop"
 description: "een workshop aanvragen."
 ---
 
-# Workshops aanvragen
+# Workshops Vlaams Biodiversiteitsportaal
+Wil je graag meer leren over het gebruik en de mogelijkheden van het Vlaams Biodiversiteitsportaal en 
+ben je actief binnen het beleidsdomein **Omgeving**, een **provincie**, of een **stad/gemeente**?  
+Dan kan je een workshop aanvragen over het Vlaams Biodiversiteitsportaal. 
 
-Wil je graag meer leren over het gebruik en de mogelijkheden van het Vlaams Biodiversiteitsportaal?  
-We bieden **workshops op aanvraag** aan voor organisaties, verenigingen, onderzoeksinstellingen en overheden.
+Tijdens de workshop bekijken we samen de verschillende modules van het portaal en leren we hoe je de beschikbare gegevens kan raadplegen, gebruiken en downloaden.
 
----
+## Wat kan je verwachten?
 
-## Wat mag je verwachten?
+- Introductie tot het Vlaams Biodiversiteitsportaal  
+- Uitleg over de verschillende modules en hun toepassingen  
+- Demonstratie van zoek- en filtermogelijkheden
+- Gebruik van soortenlijsten
+- Introductie tot het geografisch portaal
+- Praktische tips om gegevens te exporteren en te gebruiken
+- Voorbeelden van toepassingen in onderzoek en beleid
+- Ruimte voor vragen en concrete voorbeelden uit je eigen werk
 
-- Introductie tot het portaal en de beschikbare data  
-- Uitleg over hoe je zelf gegevens kan raadplegen en gebruiken  
-- Voorbeelden van toepassingen in onderzoek en beleid  
-- Ruimte voor vragen en praktische oefeningen  
+## Workshop aanvragen
 
----
+Wil je een workshop organiseren voor jouw organisatie of entiteit?  
+Contacteer ons via [email](mailto:dimitri.brosens@inbo.be)
 
-## Hoe aanvragen?
-
-Heb je interesse om een workshop te organiseren?  
-Klik dan op onderstaande knop en vul het aanvraagformulier in:
-
-<a href="https://docs.google.com/forms/d/e/voorbeeld-link" class="btn btn-fuchsia">
-  Workshop aanvragen
-</a>
-
----
+Wij komen tot bij u om de workshop te geven.
 
 ## Contact
 
 Heb je nog vragen of wil je meer informatie?  
-Neem gerust contact met ons op via [biodiversiteit@inbo.be](mailto:biodiversiteit@inbo.be).
+Neem gerust contact met ons op via [support.natuurdata@inbo.be](mailto:support.natuurdata@@inbo.be).
