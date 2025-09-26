@@ -12,21 +12,21 @@ Voor meer geavanceerd functies, moet er echter ingelogd worden.
 ### Functies die een gebuiker vereisen
 
 - Het Geografisch portaal
-- Downloaden van observatie-data
+- Downloaden van observatie-data en soortenlijsten
 - E-mail notificaties
-- Eigen soorten-lijsten beheren
+- Eigen soortenlijsten beheren
 
 
-### Toegang voor medewerkers Vlaamse overheid <span style="font-size: small">(enkel beleidsdomein Omgeving)</span>
+### Toegang voor medewerkers Vlaamse overheid en lokale besturen<span style="font-size: small">(enkel beleidsdomein Omgeving)</span>
 
-Medewerkers van de Vlaamse overheid hebben toegang via het systeem voor intern gebruikersbeheer.  
+Medewerkers van de Vlaamse overheid en lokale besturen hebben toegang via het systeem voor intern gebruikersbeheer.  
 Aanmelden kan dan door middel van It's me of eID.
 
 #### Normale login
 Inloggen doe je door rechtsboven op de inlogknop te klikken.
 <img src="/images/pages/toegang/homepage-login.png" alt="homepage login knop"/>  
 
-Vervolgens kies je: "Medewerkers van de Vlaamse overheid" en volge je de stappen.
+Vervolgens kies je: "Medewerkers van de Vlaamse overheid" en volg je de stappen.
 <img src="/images/pages/toegang/login-scherm.png" alt="login scherm"/>  
 
 #### Ontbrekende rechten
@@ -36,7 +36,9 @@ In dit geval, dien je jouw lokale beheerder te vragen om het "Vlaams biodiversit
 
 Je lokale beheerder is doorgaans je ICT helpdesk maar de exacte contactpersonen kan je ook vinden via de <a href="https://mijnprofiel-gebruikersbeheer.vlaanderen.be/user/" target="_blank">mijn profiel pagina</a>.  
 
-Wanneer gevraagd, kies dan om je aan te melden via 'een entiteit van de Vlaamse overheid'
+
+Wanneer gevraagd, kies dan om je aan te melden via 'een entiteit van de Vlaamse overheid' voor medewerkers van de Vlaamse overheid of voor een lokaal of provinciaal bestuur voor medewerkers een lokaal of provinciaal bestuur
+
 <img src="/images/pages/toegang/kies-entiteit.png" alt="kies entiteit"/>  
 
 Op de hoofdpagina klik je op Mijn Lokale Beheerders, daar vind je de lijst van personen die je kan contacteren. Zij kunnen je toegang verlenen tot het portaal.
@@ -51,8 +53,8 @@ Indien je een andere fout krijgt dan ontbrekende rechten, contacteer ons dan rec
 Indien je geen medewerker bent van de Vlaamse overheid, maar toch toegang wil tot het portaal.  
 [Stuur ons dan een e-mail om een gebruiker aan te vragen.](mailto:support.natuurdata@inbo.be).
 
-Momenteel bevindt het portaal zch in soft-launch modus.  
-Dit wil zeggen dat niet iedereen zomaar een gebruiker zal krijgen.
+Momenteel bevindt het portaal zich in soft-launch modus.  
+Dit wil zeggen dat niet iedereen zomaar gebruikerstoegang zal krijgen.
 Geef dus best aan wie je bent en waarom je graag toegang zou willen.
 
 
