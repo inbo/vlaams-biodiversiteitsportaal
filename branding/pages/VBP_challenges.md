@@ -2,7 +2,9 @@
 title: "Uidagingen"
 description: "Een lijst van uitdagingen voor nieuwkomers in het Vlaams Biodiversiteitsportaal"
 ---
-## Uitdagingen voor Testers van het Vlaams Biodiversiteitsportaal
+## Uitdagingen Vlaams Biodiversiteitsportaal
+
+Om wat wegwijs te geraken in dit portaal hebben we enkele uitdagingen samengesteld.
 
 #### 1. **Soortinformatie opzoeken**  
    - Zoek op de **boomkikker** (*Hyla arborea*) en controleer of de waarnemingen correct worden weergegeven.
@@ -87,3 +89,8 @@ description: "Een lijst van uitdagingen voor nieuwkomers in het Vlaams Biodivers
      - Uit welke datasets is de data afkomstig?
      - Mail jouw uitdagingen voor ons naar support.natuurdata@inbo.be.
 
+### 14. ** Kies een gegevensprofiel **
+
+Het portaal werkt met gegevensprofielen, die je onmiddelijk van een subset van de data voorzien. Zo kan je er bijvoorbeeld voor kiezen om enkel te werken met gevalideerde en dedetailleerde data, of om enkel te werken met gerasterde data, zoals UTM of IFBL hokdata.
+  - Kies als gegevensprofiel "VBP Enkel gevalideerde en gedetailleerde data" en onderzoek welke gegevens er werden uitgelaten.
+    - Pas de filters aan naar eigen goeddunken
