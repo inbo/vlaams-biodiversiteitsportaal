@@ -1,10 +1,26 @@
 # syntax=docker/dockerfile:1.14.0
 ARG BUILDPLATFORM=linux/amd64
-FROM --platform=${BUILDPLATFORM} custom-maven AS builder
+FROM --platform=${BUILDPLATFORM} maven:3.9-amazoncorretto-17 AS custom-maven-17
 
-ARG VERSION=fix-layer-sampling-oom
-ARG COMMIT=7257c97578bcfc98af48becb0ac4962ad1f7024c
-ARG SOURCE=https://github.com/StefanVanDyck/pipelines.git
+RUN mkdir ~/.m2
+COPY settings.xml /root/.m2/settings.xml
+
+RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
+    yum -y install git unzip
+
+# Download and unzip aws x-ray agent for easy copy to runtime images
+RUN mkdir /opt/aws-xray-agent \
+    && curl -fL https://github.com/aws/aws-xray-java-agent/releases/latest/download/xray-agent.zip -o /opt/aws-xray-agent/xray-agent.zip \
+    && unzip /opt/aws-xray-agent/xray-agent.zip -d /opt/aws-xray-agent \
+    && rm /opt/aws-xray-agent/xray-agent.zip
+
+# syntax=docker/dockerfile:1.14.0
+ARG BUILDPLATFORM=linux/amd64
+FROM --platform=${BUILDPLATFORM} custom-maven-17 as builder
+
+ARG VERSION=dev
+ARG COMMIT=d9b134f738416ee34f41dc116b5c106795fc487f
+ARG SOURCE=https://github.com/gbif/pipelines.git
 LABEL ala.version=inbo-${COMMIT}
 
 WORKDIR /app
@@ -27,9 +43,9 @@ RUN --mount=type=cache,target=/root/.m2/repository \
 # ARG test=2
 # RUN ls -la livingatlas/pipelines/target/pipelines-2.18.6-SNAPSHOT.jar
 #
-FROM amazoncorretto:8
+FROM amazoncorretto:17
 
-ARG COMMIT=7257c97578bcfc98af48becb0ac4962ad1f7024c
+ARG COMMIT=d9b134f738416ee34f41dc116b5c106795fc487f
 LABEL ala.version=inbo-${COMMIT}
 #
 # ARG VERSION=2.18.6-SNAPSHOT
