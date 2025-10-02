@@ -86,7 +86,7 @@ COPY --from=builder --chown=1000:1000 /app /app
 
 WORKDIR /app/livingatlas/scripts
 
-ENV EXTRA_JVM_OPTS_CONFIG="--add-opens=java.base/java.lang=ALL-UNNAMED \
+ENV EXTRA_JVM_CLI_ARGS="--add-opens=java.base/java.lang=ALL-UNNAMED \
 --add-opens=java.base/java.lang.invoke=ALL-UNNAMED \
 --add-opens=java.base/java.lang.reflect=ALL-UNNAMED \
 --add-opens=java.base/java.io=ALL-UNNAMED \
