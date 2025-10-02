@@ -502,6 +502,6 @@ environments:
     assets:
       bundle: true
     quickLinksLayers:
-      bwk: cl10036
+      bwk: cl10233
       landbouw: cl10016
       vhga: cl10037
