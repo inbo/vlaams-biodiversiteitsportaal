@@ -85,6 +85,8 @@ USER 1000
 COPY --from=builder --chown=1000:1000 /app /app
 
 WORKDIR /app/livingatlas/scripts
+
+ENV TZ="Europe/Brussels"
 ENV LOG_CONFIG="/app/livingatlas/pipelines/src/main/resources/log4j-colorized.properties"
 ENV EXTRA_JVM_CLI_ARGS="--add-opens=java.base/java.lang=ALL-UNNAMED \
 --add-opens=java.base/java.lang.invoke=ALL-UNNAMED \
