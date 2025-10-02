@@ -101,6 +101,8 @@ jobs:
 
       - name: Build branding website S3
         working-directory: ./branding
+        env:
+          SOURCE_DATE_EPOCH: ${{ env.TIMESTAMP }}
         run: |
           set -e -x -o pipefail
 
@@ -222,7 +224,7 @@ jobs:
       - name: Build and push docker images
         working-directory: ./docker
         env:
-          SOURCE_DATE_EPOCH: 0
+          SOURCE_DATE_EPOCH: ${{ env.TIMESTAMP }}
           COMPONENT: ${{ matrix.docker.name }}
           VERSION: ${{ matrix.docker.version }}
         run: |
