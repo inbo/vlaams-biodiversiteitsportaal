@@ -19,8 +19,9 @@ ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-maven-17 AS builder
 
 ARG VERSION=fix-issue-with-broken-timestamps-on-dependency
-ARG COMMIT=76b29dbd74edba6acf560a5db5292967798e3b7f
-ARG SOURCE=https://github.com/gbif/pipelines.git
+ARG COMMIT=2d8aea22d4a1c0a7512b605e91f9f6901f6349d1
+ARG SOURCE=https://github.com/StefanVanDyck/pipelines.git
+#ARG SOURCE=https://github.com/gbif/pipelines.git
 ARG SOURCE_DATE_EPOCH
 LABEL ala.version=inbo-${COMMIT}
 
@@ -52,7 +53,7 @@ RUN --mount=type=cache,target=/root/.m2/repository \
 #
 FROM amazoncorretto:17
 
-ARG COMMIT=76b29dbd74edba6acf560a5db5292967798e3b7f
+ARG COMMIT=2d8aea22d4a1c0a7512b605e91f9f6901f6349d1
 LABEL ala.version=inbo-${COMMIT}
 #
 # ARG VERSION=2.18.6-SNAPSHOT
