@@ -16,7 +16,7 @@ RUN mkdir /opt/aws-xray-agent \
 
 # syntax=docker/dockerfile:1.14.0
 ARG BUILDPLATFORM=linux/amd64
-FROM --platform=${BUILDPLATFORM} custom-maven-17 as builder
+FROM --platform=${BUILDPLATFORM} custom-maven-17 AS builder
 
 ARG VERSION=dev
 ARG COMMIT=d9b134f738416ee34f41dc116b5c106795fc487f
@@ -29,12 +29,16 @@ RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
 
 RUN --mount=type=cache,target=/root/.m2/repository \
     mvn --batch-mode --no-transfer-progress \
-        clean install -DskipTests -DskipITs -T 10 -U \
+        clean install \
+        -Dspotless.check.skip=true -Dmaven.test.skip=true -Dmaven.site.skip=true -Dmaven.javadoc.skip=true \
         -Dproject.build.outputTimestamp=${SOURCE_DATE_EPOCH} \
+        -T 10 -U \
     && cd livingatlas \
     && mvn --batch-mode --no-transfer-progress \
-        clean package -P livingatlas-artifacts -DskipTests -DskipITs -T 10 -U \
-        -Dproject.build.outputTimestamp=${SOURCE_DATE_EPOCH}
+        clean package -P livingatlas-artifacts \
+        -Dspotless.check.skip=true -Dmaven.test.skip=true -Dmaven.site.skip=true -Dmaven.javadoc.skip=true \
+        -Dproject.build.outputTimestamp=${SOURCE_DATE_EPOCH} \
+        -T 10 -U
 
 # ARG VERSION=pipelines-parent-2.18.5
 # RUN git clone --branch ${VERSION} --depth 1 https://github.com/gbif/pipelines.git /app
