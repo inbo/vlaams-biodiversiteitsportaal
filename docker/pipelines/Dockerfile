@@ -85,7 +85,7 @@ USER 1000
 COPY --from=builder --chown=1000:1000 /app /app
 
 WORKDIR /app/livingatlas/scripts
-
+ENV LOG_CONFIG="/app/livingatlas/pipelines/src/main/resources/log4j-colorized.properties"
 ENV EXTRA_JVM_CLI_ARGS="--add-opens=java.base/java.lang=ALL-UNNAMED \
 --add-opens=java.base/java.lang.invoke=ALL-UNNAMED \
 --add-opens=java.base/java.lang.reflect=ALL-UNNAMED \
@@ -99,6 +99,7 @@ ENV EXTRA_JVM_CLI_ARGS="--add-opens=java.base/java.lang=ALL-UNNAMED \
 --add-opens=java.base/sun.nio.cs=ALL-UNNAMED \
 --add-opens=java.base/sun.security.action=ALL-UNNAMED \
 --add-opens=java.base/sun.util.calendar=ALL-UNNAMED \
---add-opens=java.security.jgss/sun.security.krb5=ALL-UNNAMED"
+--add-opens=java.security.jgss/sun.security.krb5=ALL-UNNAMED \
+-Dlog4j.configuration=file://${LOG_CONFIG} -Dlog4j.configurationFile=file://${LOG_CONFIG}"
 
 ENTRYPOINT ["bash", "-c"]
