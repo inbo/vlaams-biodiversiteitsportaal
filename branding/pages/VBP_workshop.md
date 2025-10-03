@@ -1,36 +1,44 @@
 ---
-title: "VBP workshop"
-description: "een workshop aanvragen."
+title: "Workshop Vlaams Biodiversiteitsportaal"
+description: "Vraag een workshop aan voor maximaal 15 personen."
 ---
 
-# Workshops aanvragen
+# Workshop Vlaams Biodiversiteitsportaal
 
-Wil je graag meer leren over het gebruik en de mogelijkheden van het Vlaams Biodiversiteitsportaal?  
-We bieden **workshops op aanvraag** aan voor organisaties, verenigingen, onderzoeksinstellingen en overheden.
+Wil je de mogelijkheden van het **Vlaams Biodiversiteitsportaal** ten volle benutten? Vraag dan een **VBP workshop** aan!
+
+Deze workshop richt zich specifiek op medewerkers binnen het beleidsdomein **Omgeving**, **provincies**, en **steden/gemeenten**.
+
+Tijdens de sessie doorlopen we de verschillende modules van het portaal. Je leert hoe je de beschikbare **biodiversiteitsgegevens** efficiënt kunt raadplegen, gebruiken en downloaden voor jouw eigen werk.
+
+## Praktische Informatie
+
+De workshop wordt **ter plaatse** gegeven, bij jou op kantoor.
+
+* **Maximale Groepsgrootte:** Om de kwaliteit en interactie te garanderen, is er plaats voor **maximum 15 personen**.
+
+## Wat komt aan bod?
+
+Je krijgt een helder overzicht en leert praktisch aan de slag te gaan met het portaal:
+
+* **Introductie** tot het Vlaams Biodiversiteitsportaal.
+* Uitleg over de **modules** en hun toepassingen.
+* Demonstratie van de **zoek- en filtermogelijkheden**.
+* Werken met **soortenlijsten**.
+* Introductie tot het **geografisch portaal**.
+* **Praktische tips** voor het exporteren en efficiënt inzetten van data.
+* Ruimte voor **vragen** en het bespreken van **eigen, concrete werksituaties**.
 
 ---
 
-## Wat mag je verwachten?
+## Workshop Aanvragen
 
-- Introductie tot het portaal en de beschikbare data  
-- Uitleg over hoe je zelf gegevens kan raadplegen en gebruiken  
-- Voorbeelden van toepassingen in onderzoek en beleid  
-- Ruimte voor vragen en praktische oefeningen  
+Wil je een workshop organiseren voor jouw organisatie of entiteit?
 
----
-
-## Hoe aanvragen?
-
-Heb je interesse om een workshop te organiseren?  
-Klik dan op onderstaande knop en vul het aanvraagformulier in:
-
-<a href="https://docs.google.com/forms/d/e/voorbeeld-link" class="btn btn-fuchsia">
-  Workshop aanvragen
-</a>
+Contacteer ons via e-mail: **[dimitri.brosens@inbo.be](mailto:dimitri.brosens@inbo.be)**.
 
 ---
 
-## Contact
+## Vragen of Meer Info?
 
-Heb je nog vragen of wil je meer informatie?  
-Neem gerust contact met ons op via [biodiversiteit@inbo.be](mailto:biodiversiteit@inbo.be).
+Neem contact op met onze support: **[support.natuurdata@inbo.be](mailto:support.natuurdata@inbo.be)**.
