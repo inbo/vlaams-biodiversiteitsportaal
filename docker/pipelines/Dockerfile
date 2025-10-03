@@ -18,7 +18,7 @@ RUN mkdir /opt/aws-xray-agent \
 ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-maven-17 AS builder
 
-ARG VERSION=additional-log-to-debug-duplicate-records,
+ARG VERSION=additional-log-to-debug-duplicate-records
 ARG COMMIT=6f868baf16985f799311a3cd341b8f7243832b7b
 ARG SOURCE=https://github.com/StefanVanDyck/pipelines.git
 #ARG SOURCE=https://github.com/gbif/pipelines.git
