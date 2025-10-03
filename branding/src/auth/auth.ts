@@ -74,14 +74,14 @@ async function initUserManager(
   const user = await manager.getUser();
   if (Cookies.get(settings.auth.ala.authCookieName)) {
     if (!user || user.expired) {
-      await authServiceWorker.reset();
+      authServiceWorker.reset();
       silentLogin(manager);
     } else {
-      await authServiceWorker.setAccessToken(user);
+      authServiceWorker.setAccessToken(user);
     }
   } else {
     if (user) {
-      await manager.removeUser();
+      manager.removeUser();
     }
   }
 

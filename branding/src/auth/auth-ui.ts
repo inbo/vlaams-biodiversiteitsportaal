@@ -1,6 +1,5 @@
 import { getUser, isLoggedIn, login, logout, userManagerPromise } from "./auth";
 import settings from "../settings";
-import { w } from "happy-dom/lib/PropertySymbol.js";
 
 const uiReady = new Promise<void>((resolve) =>
     document.addEventListener("DOMContentLoaded", () => resolve())
