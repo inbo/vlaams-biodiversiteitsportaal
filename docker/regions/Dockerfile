@@ -7,7 +7,7 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 # ARG SOURCE=https://github.com/AtlasOfLivingAustralia/regions.git
 
 ARG VERSION=fix-non-working-pop-up-for-subregions
-ARG COMMIT=a06413cee0a3a833fba3c0a1dedca344369ce08a
+ARG COMMIT=df9c0ae7962ec25f5c48fcaebc6492ef816919bc
 ARG SOURCE=https://github.com/StefanVanDyck/regions.git
 LABEL ala.version=inbo-${COMMIT}
 
@@ -39,7 +39,7 @@ RUN mkdir -p /opt/atlas/i18n \
 
 # ARG VERSION=4.0.0
 ARG VERSION=4.1.0-SNAPSHOT
-ARG COMMIT=a06413cee0a3a833fba3c0a1dedca344369ce08a
+ARG COMMIT=df9c0ae7962ec25f5c48fcaebc6492ef816919bc
 LABEL ala.version=inbo-${COMMIT}
 
 COPY --from=builder /project/build/libs/regions-${VERSION}.war /regions.war
