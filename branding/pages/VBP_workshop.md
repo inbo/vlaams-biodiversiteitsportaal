@@ -1,34 +1,44 @@
 ---
-title: "VBP workshop"
-description: "een workshop aanvragen."
+title: "Workshop Vlaams Biodiversiteitsportaal"
+description: "Vraag een workshop aan voor maximaal 15 personen."
 ---
 
-# Workshops Vlaams Biodiversiteitsportaal
-Wil je graag meer leren over het gebruik en de mogelijkheden van het Vlaams Biodiversiteitsportaal en 
-ben je actief binnen het beleidsdomein **Omgeving**, een **provincie**, of een **stad/gemeente**?  
-Dan kan je een workshop aanvragen over het Vlaams Biodiversiteitsportaal. 
+# Workshop Vlaams Biodiversiteitsportaal
 
-Tijdens de workshop bekijken we samen de verschillende modules van het portaal en leren we hoe je de beschikbare gegevens kan raadplegen, gebruiken en downloaden.
+Wil je de mogelijkheden van het **Vlaams Biodiversiteitsportaal** ten volle benutten? Vraag dan een **VBP workshop** aan!
 
-## Wat kan je verwachten?
+Deze workshop richt zich specifiek op medewerkers binnen het beleidsdomein **Omgeving**, **provincies**, en **steden/gemeenten**.
 
-- Introductie tot het Vlaams Biodiversiteitsportaal  
-- Uitleg over de verschillende modules en hun toepassingen  
-- Demonstratie van zoek- en filtermogelijkheden
-- Gebruik van soortenlijsten
-- Introductie tot het geografisch portaal
-- Praktische tips om gegevens te exporteren en te gebruiken
-- Voorbeelden van toepassingen in onderzoek en beleid
-- Ruimte voor vragen en concrete voorbeelden uit je eigen werk
+Tijdens de sessie doorlopen we de verschillende modules van het portaal. Je leert hoe je de beschikbare **biodiversiteitsgegevens** efficiënt kunt raadplegen, gebruiken en downloaden voor jouw eigen werk.
 
-## Workshop aanvragen
+## Praktische Informatie
 
-Wil je een workshop organiseren voor jouw organisatie of entiteit?  
-Contacteer ons via [email](mailto:dimitri.brosens@inbo.be)
+De workshop wordt **ter plaatse** gegeven, bij jou op kantoor.
 
-Wij komen tot bij u om de workshop te geven.
+* **Maximale Groepsgrootte:** Om de kwaliteit en interactie te garanderen, is er plaats voor **maximum 15 personen**.
 
-## Contact
+## Wat komt aan bod?
 
-Heb je nog vragen of wil je meer informatie?  
-Neem gerust contact met ons op via [support.natuurdata@inbo.be](mailto:support.natuurdata@@inbo.be).
+Je krijgt een helder overzicht en leert praktisch aan de slag te gaan met het portaal:
+
+* **Introductie** tot het Vlaams Biodiversiteitsportaal.
+* Uitleg over de **modules** en hun toepassingen.
+* Demonstratie van de **zoek- en filtermogelijkheden**.
+* Werken met **soortenlijsten**.
+* Introductie tot het **geografisch portaal**.
+* **Praktische tips** voor het exporteren en efficiënt inzetten van data.
+* Ruimte voor **vragen** en het bespreken van **eigen, concrete werksituaties**.
+
+---
+
+## Workshop Aanvragen
+
+Wil je een workshop organiseren voor jouw organisatie of entiteit?
+
+Contacteer ons via e-mail: **[dimitri.brosens@inbo.be](mailto:dimitri.brosens@inbo.be)**.
+
+---
+
+## Vragen of Meer Info?
+
+Neem contact op met onze support: **[support.natuurdata@inbo.be](mailto:support.natuurdata@inbo.be)**.
