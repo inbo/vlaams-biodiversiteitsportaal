@@ -53,7 +53,7 @@ addEventListener("fetch", (event: any) => {
     console.info("Fetch event:", event.request.url);
 
     if (jwtPaths.some((path) => event.request.url.includes(path))) {
-        event.respondWith(customHeaderRequestFetch(event));
+        customHeaderRequestFetch(event);
     }
 });
 
@@ -77,7 +77,7 @@ const customHeaderRequestFetch = async (event: any) => {
                 headers,
                 mode: "cors",
             });
-            return await fetch(newRequest);
+            event.respondWith(await fetch(newRequest));
         }
     }
 };
