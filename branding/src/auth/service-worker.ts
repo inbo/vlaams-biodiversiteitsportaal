@@ -47,7 +47,7 @@ addEventListener("message", (event) => {
         default:
             console.error("Unknown message type:", data);
     }
-});
+}, { capture: true });
 
 addEventListener("fetch", (event: any) => {
     console.info("Fetch event:", event.request.url);
