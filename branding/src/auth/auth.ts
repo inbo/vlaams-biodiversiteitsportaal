@@ -27,6 +27,8 @@ async function initUserManager(
   authServiceWorker: AuthServiceWorker,
 ): Promise<UserManager> {
   console.debug("Initializing OIDC UserManager");
+  authServiceWorker.reset();
+
   const redirectUrl = cleanupUrl(window.location.href);
   redirectUrl.searchParams.set("front-auth-action", "login");
 
@@ -74,7 +76,6 @@ async function initUserManager(
   const user = await manager.getUser();
   if (Cookies.get(settings.auth.ala.authCookieName)) {
     if (!user || user.expired) {
-      authServiceWorker.reset();
       silentLogin(manager);
     } else {
       authServiceWorker.setAccessToken(user);
@@ -198,5 +199,6 @@ export async function getUser(): Promise<User | null> {
 }
 
 export async function isLoggedIn() {
-  return getUser() !== null;
+  return Cookies.get(settings.auth.ala.authCookieName) &&
+    (await getUser()) !== null;
 }

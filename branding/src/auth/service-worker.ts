@@ -7,12 +7,12 @@ const jwtPaths = [
     "/biocache-service/",
 ];
 
-let resolveAccessToken: (value: string) => void;
-let accessTokenPromise: Promise<string>;
+let resolveAccessToken: (value: string | null) => void;
+let accessTokenPromise: Promise<string | null>;
 
 function resetAuthLoaded() {
     console.warn("Resetting service worker auth state");
-    accessTokenPromise = new Promise<string>((resolve) => {
+    accessTokenPromise = new Promise<string | null>((resolve) => {
         resolveAccessToken = resolve;
     });
 }
@@ -66,17 +66,20 @@ const customHeaderRequestFetch = async (event: any) => {
         console.log(
             "Service Worker: User is authenticated, using credentials.",
         );
-        headers.append(
-            "Authorization",
-            `Bearer ${await accessTokenPromise}`,
-        );
-    }
+        const accessToken = await accessTokenPromise;
+        if (accessToken) {
+            headers.append(
+                "Authorization",
+                `Bearer ${accessToken}`,
+            );
 
-    const newRequest = new Request(event.request, {
-        headers,
-        mode: "cors",
-    });
-    return await fetch(newRequest);
+            const newRequest = new Request(event.request, {
+                headers,
+                mode: "cors",
+            });
+            return await fetch(newRequest);
+        }
+    }
 };
 
 console.log("Service Worker: Registered and ready to handle requests.");
