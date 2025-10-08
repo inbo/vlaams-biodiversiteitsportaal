@@ -63,37 +63,36 @@ self.addEventListener("install", (event) => {
 self.addEventListener("activate", () => {
     console.debug(`Service Worker: Activating...`);
     resetAuthLoaded();
-
-    self.addEventListener("message", (event) => {
-        const data = event.data as (AuthLoadedMessage | ResetAuthLoadedMessage);
-        switch (data.type) {
-            case "resetAuthLoaded":
-                console.info(
-                    "Service Worker: Resetting service worker auth state",
-                );
-                resetAuthLoaded();
-                break;
-            case "authLoaded":
-                console.info(
-                    `Service Worker: Setting service worker auth state: ${data.accessToken}`,
-                );
-                resolveAccessToken(data.accessToken);
-                break;
-            default:
-                console.error("Service Worker: Unknown message type:", data);
-        }
-    });
-
-    self.addEventListener("fetch", (event: any) => {
-        if (jwtPaths.some((path) => event.request.url.includes(path))) {
-            console.debug(
-                "Service Worker: Fetch from biocache-service:",
-                event.request.url,
-            );
-            console.warn(event.waitUntil);
-            event.waitUntil(customHeaderRequestFetch(event));
-        }
-    });
-
     console.info("Service Worker: Activated and ready to handle requests.");
 });
+
+self.addEventListener("message", (event) => {
+    const data = event.data as (AuthLoadedMessage | ResetAuthLoadedMessage);
+    switch (data.type) {
+        case "resetAuthLoaded":
+            console.info(
+                "Service Worker: Resetting service worker auth state",
+            );
+            resetAuthLoaded();
+            break;
+        case "authLoaded":
+            console.info(
+                `Service Worker: Setting service worker auth state: ${data.accessToken}`,
+            );
+            resolveAccessToken(data.accessToken);
+            break;
+        default:
+            console.error("Service Worker: Unknown message type:", data);
+    }
+});
+
+self.addEventListener("fetch", (event: any) => {
+    if (jwtPaths.some((path) => event.request.url.includes(path))) {
+        console.debug(
+            "Service Worker: Fetch from biocache-service:",
+            event.request.url,
+        );
+        console.warn(event.waitUntil);
+        event.waitUntil(customHeaderRequestFetch(event));
+    }
+}, { capture: true });
