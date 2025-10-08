@@ -11,7 +11,11 @@ const jwtPaths = [
 ];
 
 let resolveAccessToken: (value: string | null) => void;
-let accessTokenPromise: Promise<string | null>;
+let accessTokenPromise: Promise<string | null> = new Promise<string | null>(
+    (resolve) => {
+        resolveAccessToken = resolve;
+    },
+);
 
 function resetAuthLoaded() {
     console.info("Service Worker: Resetting service worker auth state");

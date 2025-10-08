@@ -27,7 +27,7 @@ async function initUserManager(
   authServiceWorker: AuthServiceWorker,
 ): Promise<UserManager> {
   console.debug("Initializing OIDC UserManager");
-  // authServiceWorker.reset();
+  authServiceWorker.reset();
 
   const redirectUrl = cleanupUrl(window.location.href);
   redirectUrl.searchParams.set("front-auth-action", "login");
