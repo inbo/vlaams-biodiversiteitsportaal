@@ -27,12 +27,14 @@ const customHeaderRequestFetch = async (event: any) => {
     if (authCookie) {
         console.debug(
             "Service Worker: User is authenticated, injecting access token",
+            event.request.url,
         );
 
         const accessToken = await accessTokenPromise;
         if (accessToken) {
             console.debug(
-                "Service Worker: Fetching biocache-service with access-token",
+                "Service Worker: Fetching with access-token | ",
+                event.request.url,
             );
 
             let headers = new Headers(event.request.headers);
@@ -49,6 +51,7 @@ const customHeaderRequestFetch = async (event: any) => {
         } else {
             console.error(
                 "Service Worker: User should be authenticated, but access token resolved to null",
+                event.request.url,
             );
         }
     }
