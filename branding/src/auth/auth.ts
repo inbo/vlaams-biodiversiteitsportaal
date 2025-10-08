@@ -77,7 +77,7 @@ async function initUserManager(
   const user = await manager.getUser();
   if (Cookies.get(settings.auth.ala.authCookieName)) {
     if (!user) {
-      await silentLogin(manager);
+      await manager.signinRedirect();
     } else {
       await authServiceWorker.setAccessToken(user);
     }
@@ -118,7 +118,7 @@ async function handleAuthCallbacks(manager: UserManager) {
 
 async function silentLogin(manager: UserManager) {
   try {
-    await manager.signinSilent();
+    await manager.signinSilent({ silentRequestTimeoutInSeconds: 2 });
   } catch (error) {
     console.error("Silent login failed", error);
     await manager.removeUser();
