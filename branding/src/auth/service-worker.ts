@@ -93,7 +93,7 @@ self.addEventListener("activate", () => {
             console.warn(event.waitUntil);
             event.waitUntil(customHeaderRequestFetch(event));
         }
-    }, { capture: true });
+    });
 
     console.info("Service Worker: Activated and ready to handle requests.");
 });
