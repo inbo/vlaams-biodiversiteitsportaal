@@ -42,8 +42,6 @@ const customHeaderRequestFetch = async (event: any) => {
                 mode: "cors",
             });
             const response = await fetch(newRequest);
-            console.debug("Response received from biocache-service", response);
-            console.debug(event);
             event.respondWith(response);
         } else {
             console.error(
@@ -83,7 +81,6 @@ self.addEventListener("activate", () => {
     });
 
     self.addEventListener("fetch", (event: any) => {
-        console.error("Fetch event:", event);
         if (jwtPaths.some((path) => event.request.url.includes(path))) {
             console.debug("Fetch from biocache-service:", event.request.url);
             console.warn(event.waitUntil);
