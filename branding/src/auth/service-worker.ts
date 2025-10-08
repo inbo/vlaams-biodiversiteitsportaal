@@ -14,7 +14,7 @@ let resolveAccessToken: (value: string | null) => void;
 let accessTokenPromise: Promise<string | null>;
 
 function resetAuthLoaded() {
-    console.info("Resetting service worker auth state");
+    console.info("Service Worker: Resetting service worker auth state");
     accessTokenPromise = new Promise<string | null>((resolve) => {
         resolveAccessToken = resolve;
     });
@@ -25,11 +25,15 @@ const customHeaderRequestFetch = async (event: any) => {
     const authCookie = await cookieStore.get("VBP-AUTH");
 
     if (authCookie) {
-        console.debug("User is authenticated, injecting access token");
+        console.debug(
+            "Service Worker: User is authenticated, injecting access token",
+        );
 
         const accessToken = await accessTokenPromise;
         if (accessToken) {
-            console.debug("Fetching biocache-service with access-token");
+            console.debug(
+                "Service Worker: Fetching biocache-service with access-token",
+            );
 
             let headers = new Headers(event.request.headers);
             headers.append(
@@ -45,7 +49,7 @@ const customHeaderRequestFetch = async (event: any) => {
             event.respondWith(response);
         } else {
             console.error(
-                "User should be authenticated, but access token resolved to null",
+                "Service Worker: User should be authenticated, but access token resolved to null",
             );
         }
     }
@@ -61,28 +65,31 @@ self.addEventListener("activate", () => {
     resetAuthLoaded();
 
     self.addEventListener("message", (event) => {
-        console.log(`Message received: ${event.data}`);
         const data = event.data as (AuthLoadedMessage | ResetAuthLoadedMessage);
-
         switch (data.type) {
             case "resetAuthLoaded":
-                console.info("Resetting service worker auth state");
+                console.info(
+                    "Service Worker: Resetting service worker auth state",
+                );
                 resetAuthLoaded();
                 break;
             case "authLoaded":
                 console.info(
-                    `Setting service worker auth state: ${data.accessToken}`,
+                    `Service Worker: Setting service worker auth state: ${data.accessToken}`,
                 );
                 resolveAccessToken(data.accessToken);
                 break;
             default:
-                console.error("Unknown message type:", data);
+                console.error("Service Worker: Unknown message type:", data);
         }
     });
 
     self.addEventListener("fetch", (event: any) => {
         if (jwtPaths.some((path) => event.request.url.includes(path))) {
-            console.debug("Fetch from biocache-service:", event.request.url);
+            console.debug(
+                "Service Worker: Fetch from biocache-service:",
+                event.request.url,
+            );
             console.warn(event.waitUntil);
             event.waitUntil(customHeaderRequestFetch(event));
         }
