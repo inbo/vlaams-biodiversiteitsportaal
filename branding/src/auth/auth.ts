@@ -106,6 +106,8 @@ async function handleAuthCallbacks(manager: UserManager) {
       document.title,
       cleanupUrl(window.location.href),
     );
+
+    await manager.clearStaleState();
   }
 }
 
