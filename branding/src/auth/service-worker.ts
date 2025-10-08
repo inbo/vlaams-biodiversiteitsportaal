@@ -92,7 +92,6 @@ self.addEventListener("fetch", (event: any) => {
             "Service Worker: Fetch from biocache-service:",
             event.request.url,
         );
-        console.warn(event.waitUntil);
         event.waitUntil(customHeaderRequestFetch(event));
     }
 });
