@@ -76,7 +76,7 @@ async function initUserManager(
   const user = await manager.getUser();
   if (Cookies.get(settings.auth.ala.authCookieName)) {
     if (!user) {
-      authServiceWorker.reset().then(() => manager.signinSilent());
+      await silentLogin(manager);
     }
   } else {
     if (user) {
