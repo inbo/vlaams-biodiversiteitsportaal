@@ -34,7 +34,6 @@ describe("Service Worker Auth Tests", () => {
         const request = new Request("http://test.com/biocache-service/test");
         const fetchEvent = {
             request,
-            waitUntil: vi.fn(),
             respondWith: vi.fn(),
         };
         const response = new Response("MOCKED", { status: 200 });
@@ -42,7 +41,6 @@ describe("Service Worker Auth Tests", () => {
 
         await mockSelf.trigger("install", { waitUntil: vi.fn() });
         await mockSelf.trigger("activate");
-        fetchEvent.waitUntil.mockClear();
 
         // Auth Cookie is set
         vi.mocked(cookieStore.get).mockResolvedValue({
@@ -54,10 +52,10 @@ describe("Service Worker Auth Tests", () => {
 
         // THEN
         let resolved = false;
-        expect(fetchEvent.waitUntil).toHaveBeenCalled();
-        fetchEvent.waitUntil.mock.calls[0][0].then(() => {
+        fetchEvent.respondWith.mock.calls[0][0].then(() => {
             resolved = true;
         });
+
         await new Promise((r) => setTimeout(r, 100));
         expect(resolved).toBe(false);
         expect(global.fetch).not.toHaveBeenCalledWith();
@@ -65,7 +63,7 @@ describe("Service Worker Auth Tests", () => {
         await mockSelf.trigger("message", {
             data: { type: "authLoaded", accessToken: "test-access-token" },
         });
-        await fetchEvent.waitUntil.mock.calls[0][0];
+        await new Promise((r) => setTimeout(r, 100));
         expect(resolved).toBe(true);
 
         expect(global.fetch).toHaveBeenCalledWith(
@@ -75,7 +73,9 @@ describe("Service Worker Auth Tests", () => {
                 }),
             }),
         );
-        expect(fetchEvent.respondWith).toHaveBeenCalledWith(response);
+        expect(fetchEvent.respondWith).toHaveBeenCalledWith(
+            new Promise((resolve) => resolve(response)),
+        );
     });
 
     test("Given auth cookie is set block untill access-token is explicitely set to null do not perform custom request", async () => {
@@ -83,14 +83,16 @@ describe("Service Worker Auth Tests", () => {
         const request = new Request("http://test.com/biocache-service/test");
         const fetchEvent = {
             request,
-            waitUntil: vi.fn(),
             respondWith: vi.fn(),
         };
+        const response = new Response("MOCKED", { status: 200 });
+        global.fetch = vi.fn().mockResolvedValue(response);
 
         // Auth Cookie is set
         vi.mocked(cookieStore.get).mockResolvedValue({
             value: "test-auth-cookie",
         });
+
         // Trigger service worker events and set access token
         await mockSelf.trigger("install", { waitUntil: vi.fn() });
         await mockSelf.trigger("activate");
@@ -100,13 +102,13 @@ describe("Service Worker Auth Tests", () => {
 
         // WHEN
         await mockSelf.trigger("fetch", fetchEvent);
+        await new Promise((r) => setTimeout(r, 100));
 
         // THEN
-        expect(fetchEvent.waitUntil).toHaveBeenCalled();
-        await fetchEvent.waitUntil.mock.calls[0][0]; // Await the promise passed to waitUntil
-
-        expect(global.fetch).not.toBeCalled();
-        expect(fetchEvent.respondWith).not.toBeCalled();
+        expect(global.fetch).toBeCalled();
+        expect(fetchEvent.respondWith).toHaveBeenCalledWith(
+            new Promise((resolve) => resolve(response)),
+        );
     });
 
     test("Given no auth cookie block, but perform custom request", async () => {
@@ -114,9 +116,10 @@ describe("Service Worker Auth Tests", () => {
         const request = new Request("http://test.com/biocache-service/test");
         const fetchEvent = {
             request,
-            waitUntil: vi.fn(),
             respondWith: vi.fn(),
         };
+        const response = new Response("MOCKED", { status: 200 });
+        global.fetch = vi.fn().mockResolvedValue(response);
 
         // Trigger service worker events and set access token
         await mockSelf.trigger("install", { waitUntil: vi.fn() });
@@ -124,13 +127,13 @@ describe("Service Worker Auth Tests", () => {
 
         // WHEN
         await mockSelf.trigger("fetch", fetchEvent);
+        await new Promise((r) => setTimeout(r, 100));
 
         // THEN
-        expect(fetchEvent.waitUntil).toHaveBeenCalled();
-        await fetchEvent.waitUntil.mock.calls[0][0]; // Await the promise passed to waitUntil
-
-        expect(global.fetch).not.toBeCalled();
-        expect(fetchEvent.respondWith).not.toBeCalled();
+        expect(global.fetch).toHaveBeenCalledWith(fetchEvent.request);
+        expect(fetchEvent.respondWith).toHaveBeenCalledWith(
+            new Promise((resolve) => resolve(response)),
+        );
     });
 
     test("Given url does not match biocache-service, do not block or perform custom request", async () => {
@@ -138,7 +141,6 @@ describe("Service Worker Auth Tests", () => {
         const request = new Request("http://test.com/some-other-service/test");
         const fetchEvent = {
             request,
-            waitUntil: vi.fn(),
             respondWith: vi.fn(),
         };
 
@@ -150,7 +152,6 @@ describe("Service Worker Auth Tests", () => {
         await mockSelf.trigger("fetch", fetchEvent);
 
         // THEN
-        expect(fetchEvent.waitUntil).not.toBeCalled();
         expect(global.fetch).not.toBeCalled();
         expect(fetchEvent.respondWith).not.toBeCalled();
     });

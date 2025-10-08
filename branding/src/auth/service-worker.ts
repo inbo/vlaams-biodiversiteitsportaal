@@ -45,14 +45,14 @@ const customHeaderRequestFetch = async (event: any) => {
                 headers,
                 mode: "cors",
             });
-            const response = await fetch(newRequest);
-            event.respondWith(response);
+            return await fetch(newRequest);
         } else {
             console.error(
                 "Service Worker: User should be authenticated, but access token resolved to null",
             );
         }
     }
+    return await fetch(event.request);
 };
 
 self.addEventListener("install", (event) => {
@@ -92,6 +92,6 @@ self.addEventListener("fetch", (event: any) => {
             "Service Worker: Fetch from biocache-service:",
             event.request.url,
         );
-        event.waitUntil(customHeaderRequestFetch(event));
+        event.respondWith(customHeaderRequestFetch(event));
     }
 });
