@@ -95,4 +95,4 @@ self.addEventListener("fetch", (event: any) => {
         console.warn(event.waitUntil);
         event.waitUntil(customHeaderRequestFetch(event));
     }
-}, { capture: true });
+});
