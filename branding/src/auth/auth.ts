@@ -73,16 +73,16 @@ async function initUserManager(
 
   await handleAuthCallbacks(manager);
 
-  // const user = await manager.getUser();
-  // if (Cookies.get(settings.auth.ala.authCookieName)) {
-  //   if (!user) {
-  //     authServiceWorker.reset().then(() => silentLogin(manager));
-  //   }
-  // } else {
-  //   if (user) {
-  //     manager.removeUser();
-  //   }
-  // }
+  const user = await manager.getUser();
+  if (Cookies.get(settings.auth.ala.authCookieName)) {
+    if (!user) {
+      authServiceWorker.reset().then(() => manager.signinSilent());
+    }
+  } else {
+    if (user) {
+      manager.removeUser();
+    }
+  }
 
   return manager;
 }
