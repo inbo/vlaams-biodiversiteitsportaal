@@ -11,6 +11,11 @@
 
         <a class="navbar-brand" href="/">
           <img src="/images/logo.png" alt="Vlaams Biodiversiteitsportaal logo" class="vbp-logo" />
+          <script>
+            // Preload hover logo to prevent delay/popping effect
+            const hoverLogo = new Image();
+            hoverLogo.src = '/images/logo-hover.png';
+          </script>
           <span class="vbp-name" data-i18n="general.orgfullname">
             Vlaams Biodiversiteitsportaal
           </span>
