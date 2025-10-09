@@ -102,6 +102,7 @@ jobs:
       - name: Build branding website S3
         working-directory: ./branding
         env:
+          VITE_APP_VERSION: ${{ needs.get-versions.outputs.branding_version }}
           SOURCE_DATE_EPOCH: ${{ env.TIMESTAMP }}
         run: |
           set -e -x -o pipefail

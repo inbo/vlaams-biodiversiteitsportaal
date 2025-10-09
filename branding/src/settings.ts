@@ -35,6 +35,11 @@ const defaultConfig = {
     interval: 10_000,
     speciesListId: "dr1",
   },
+  monitoring: {
+    awsRegion: "::AWS_REGION::",
+    awsRumAppId: "::AWS_RUM_APP_ID::",
+  },
+  appVersion: import.meta.env.VITE_APP_VERSION || "dev",
 };
 
 const environmentConfig: Record<Environment, object> = {
