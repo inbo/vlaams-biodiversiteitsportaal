@@ -13,7 +13,9 @@ if (process.env.NODE_ENV !== "development") {
                 enableRumClient: true,
                 sessionSampleRate: 0.1,
                 endpoint: settings.monitoring.awsRumEndpoint,
-                telemetries: ["performance", "errors", "http"],
+                telemetries: ["performance", "errors", ["http", {
+                    addXRayTraceIdHeader: true,
+                }]],
                 allowCookies: false,
                 enableXRay: true,
                 signing: true,
