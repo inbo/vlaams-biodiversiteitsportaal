@@ -9,12 +9,14 @@ if (process.env.NODE_ENV !== "development") {
             settings.appVersion,
             settings.monitoring.awsRegion,
             {
+                enableRumClient: true,
                 sessionSampleRate: 0.1,
                 endpoint: "https://dataplane.rum.eu-west-1.amazonaws.com",
                 telemetries: ["performance", "errors", "http"],
                 allowCookies: false,
                 enableXRay: true,
-                signing: true, // If you have a public resource policy and wish to send unsigned requests please set this to false
+                signing: false,
+                alias: "VBP-RUM",
             },
         );
     } catch (error) {
