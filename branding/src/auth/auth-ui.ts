@@ -48,7 +48,7 @@ async function addAuthButtonClickHandlers() {
     for (const button of loginButtons) {
         // Use JS based login when no href supplied
         const target = button as HTMLAnchorElement;
-        if (!target.href || target.href === "" || target.href === "#") {
+        if (target.href.includes("replace-with-authui-onclick")) {
             button.addEventListener(
                 "click",
                 async (e) => {
@@ -66,14 +66,17 @@ async function addAuthButtonClickHandlers() {
         }
     }
     const logoutButtons = document.getElementsByClassName("logout-button");
+
     for (const button of logoutButtons) {
-        // Always use JS based logout
-        button.addEventListener(
-            "click",
-            async (e) => {
-                e.preventDefault();
-                await logout();
-            },
-        );
+        const target = button as HTMLAnchorElement;
+        if (target.href.includes("replace-with-authui-onclick")) {
+            button.addEventListener(
+                "click",
+                async (e) => {
+                    e.preventDefault();
+                    await logout();
+                },
+            );
+        }
     }
 }

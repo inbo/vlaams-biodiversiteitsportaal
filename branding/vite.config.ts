@@ -13,8 +13,8 @@ import type { PreRenderedChunk } from "rollup";
 
 const replacements = {
     loginStatus: "login-status-dependent",
-    loginURL: "",
-    logoutURL: "",
+    loginURL: "replace-with-authui-onclick",
+    logoutURL: "replace-with-authui-onclick",
 };
 
 export default {
