@@ -48,15 +48,15 @@ async function addAuthButtonClickHandlers() {
     for (const button of loginButtons) {
         // Use JS based login when no href supplied
         const target = button as HTMLAnchorElement;
-        button.addEventListener(
-            "click",
-            async (e) => {
-                if (target.href === `${settings.domain}/`) {
+        if (!target.href || target.href === "" || target.href === "#") {
+            button.addEventListener(
+                "click",
+                async (e) => {
                     e.preventDefault();
                     await login();
-                }
-            },
-        );
+                },
+            );
+        }
 
         // Fix biocache-hub redirect
         if (target.href.startsWith(`${settings.domain}/biocache-hub`)) {
