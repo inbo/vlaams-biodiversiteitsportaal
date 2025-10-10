@@ -11,12 +11,13 @@ if (process.env.NODE_ENV !== "development") {
             {
                 enableRumClient: true,
                 sessionSampleRate: 0.1,
-                endpoint: "https://dataplane.rum.eu-west-1.amazonaws.com",
+                endpoint: settings.monitoring.awsRumEndpoint,
                 telemetries: ["performance", "errors", "http"],
                 allowCookies: false,
                 enableXRay: true,
-                signing: false,
+                signing: true,
                 alias: "VBP-RUM",
+                identityPoolId: settings.monitoring.awsCognitoIdentityPoolId,
             },
         );
     } catch (error) {

@@ -38,6 +38,8 @@ const defaultConfig = {
   monitoring: {
     awsRegion: "::AWS_REGION::",
     awsRumAppId: "::AWS_RUM_APP_ID::",
+    awsRumEndpoint: "https://dataplane.rum.::AWS_REGION::.amazonaws.com",
+    awsCognitoIdentityPoolId: "::AWS_COGNITO_IDENTITY_POOL_ID::",
   },
   appVersion: import.meta.env.VITE_APP_VERSION || "dev",
 };
