@@ -19,7 +19,6 @@ if (process.env.NODE_ENV !== "development") {
                 allowCookies: false,
                 enableXRay: true,
                 signing: true,
-                alias: "VBP-RUM",
                 identityPoolId: settings.monitoring.awsCognitoIdentityPoolId,
             },
         );
