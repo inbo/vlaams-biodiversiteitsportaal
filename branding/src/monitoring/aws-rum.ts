@@ -4,6 +4,7 @@ import settings from "../settings";
 let rumClient: AwsRum | undefined = undefined;
 if (process.env.NODE_ENV !== "development") {
     try {
+        console.info("Initializing CloudWatch RUM web client");
         rumClient = new AwsRum(
             settings.monitoring.awsRumAppId,
             settings.appVersion,
