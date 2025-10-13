@@ -1,15 +1,20 @@
 [
   {
-    "label": "Gewest",
-    "fid": "cl100"
-  },
-  {
-    "label": "Provincies",
-    "fid": "cl101"
-  },
-  {
-    "label": "Gemeenten",
-    "fid": "cl102"
+    "label": "Vlaanderen",
+    "submenu": [
+      {
+        "label": "Gewest Vlaanderen",
+        "fid": "cl100"
+      },
+      {
+        "label": "Provincies",
+        "fid": "cl101"
+      },
+      {
+        "label": "Gemeenten",
+        "fid": "cl100"
+      }
+    ]
   },
   {
     "label": "Openbaar bos en natuurgebieden",
