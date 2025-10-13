@@ -60,10 +60,10 @@ speciesList:
   baseURL: ${common.protocol}://${common.domain}/species-list
 
 map:
-  minLat: 49.5294835476
-  minLng: 2.51357303225
-  maxLat: 51.4750237087
-  maxLng: 6.15665815596
+  minLat: 50.5
+  minLng: 4
+  maxLat: 51.5
+  maxLng: 4.5
   minimal:
     url: "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
     attr: "Map data &copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a>, imagery &copy; <a href='https://cartodb.com/attributions'>CartoDB</a>"
