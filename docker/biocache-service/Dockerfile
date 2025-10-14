@@ -3,8 +3,8 @@ ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 
-ARG VERSION=699-fix-wms-caching-across-user-roles
-ARG COMMIT=99bc28b712144e0683a4c3b6aeee8ff5b8479fee
+ARG VERSION=allow-downloading-of-rbac-protected-records
+ARG COMMIT=a8eaa7f8a0f04bdad26883fad897ec87350323bb
 ARG SOURCE=https://github.com/StefanVanDyck/biocache-service.git
 LABEL ala.version=inbo-${COMMIT}
 
@@ -37,7 +37,7 @@ RUN mkdir -p /opt/atlas/i18n \
   && ln -s /config/biocache-service/i18n/override /var/opt/atlas/i18n/biocache-service
 
 ARG VERSION=3.7.0-SNAPSHOT
-ARG COMMIT=1c47ebc0f9d120ab38ac3798516caf5e8bf695d1
+ARG COMMIT=a8eaa7f8a0f04bdad26883fad897ec87350323bb
 LABEL ala.version=inbo-${COMMIT}
 
 COPY --from=builder /project/build/libs/biocache-service-${VERSION}-exec.war /biocache-service.war
