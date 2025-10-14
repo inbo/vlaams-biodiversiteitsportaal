@@ -10,8 +10,6 @@ LABEL ala.version=inbo-${COMMIT}
 WORKDIR /project/biocache-hubs
 RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
 
-COPY resources.xml ./grails-app/conf/spring/resources.xml
-
 RUN --mount=type=cache,target=/gradle-cache,ro \
     gradle build publishToMavenLocal \
     -x test
@@ -23,6 +21,8 @@ LABEL ala.version=inbo-${COMMIT}
 
 WORKDIR /project/ala-hub
 RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
+
+COPY resources.xml ./grails-app/conf/spring/resources.xml
 
 # # TODO: ugly fix for config values being overwritten by ala defaults
 RUN sed -i '10d' grails-app/conf/application.yml

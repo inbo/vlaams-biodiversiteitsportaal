@@ -50,7 +50,7 @@ dataQualityChecksUrl: ${common.protocol}://${common.domain}/data-quality-checks.
 dataquality:
   enabled: true
   baseUrl: http://data-quality-filter-service.${common.internalDomain}:8080/data-quality-filter-service/
-defaultLocale: nl
+defaultLocale: en
 disableCAS: true
 doi:
   mintDoi: true
