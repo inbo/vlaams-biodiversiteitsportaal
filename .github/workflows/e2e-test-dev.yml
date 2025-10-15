@@ -1,0 +1,22 @@
+---
+name: Scheduled E2E tests against the VBP portal
+run-name: ${{ github.actor }} is testing the VBP portal @ dev
+
+on:
+  schedule:
+    - cron: '0 5 * * 1-5'
+
+  workflow_dispatch:
+    inputs:
+      google_notification:
+        description: 'Notify Google Chat on failure'
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  test-dev:
+    uses: ./.github/workflows/e2e-test.yml
+    with:
+      env: 'dev'
+      google_notification: ${{ github.event.inputs.google_notification }}

@@ -15,16 +15,6 @@ on:
         default: prod
         type: string
 
-  workflow_dispatch:
-    inputs:
-      <<: *inputs
-      env:
-        type: choice
-        options:
-          - dev
-          - uat
-          - prod
-
 jobs:
   e2e-test:
     runs-on: [ self-hosted ]
