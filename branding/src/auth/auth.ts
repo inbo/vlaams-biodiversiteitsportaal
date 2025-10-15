@@ -100,9 +100,11 @@ async function handleAuthCallbacks(manager: UserManager) {
     switch (frontAuthAction) {
       case "login":
         await manager.signinCallback();
+        await manager.clearStaleState();
         break;
       case "logout":
         await manager.signoutCallback();
+        await manager.clearStaleState();
         break;
     }
 
@@ -111,8 +113,6 @@ async function handleAuthCallbacks(manager: UserManager) {
       document.title,
       cleanupUrl(window.location.href),
     );
-
-    await manager.clearStaleState();
   }
 }
 
