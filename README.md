@@ -1,3 +1,6 @@
+[![Prod](https://github.com/inbo/vlaams-biodiversiteitsportaal/actions/workflows/e2e-test-prod.yml/badge.svg)](https://github.com/inbo/vlaams-biodiversiteitsportaal/actions/workflows/e2e-test-prod.yml)
+[![Dev](https://github.com/inbo/vlaams-biodiversiteitsportaal/actions/workflows/e2e-test-dev.yml/badge.svg)](https://github.com/inbo/vlaams-biodiversiteitsportaal/actions/workflows/e2e-test-dev.yml)
+
 # Vlaams Biodiversiteitsportaal
 
 This project is the main source for developing the Flemish Biodiversity Portal.  
