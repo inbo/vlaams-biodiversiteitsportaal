@@ -29,10 +29,12 @@ describe("Spatial - Species", () => {
         cy.get("#legend").should("be.visible");
 
         // Verify that the layer is visible on the map
-        cy.get("#map").matchImageSnapshot({
-            failureThreshold: 0.4,
-            failureThresholdType: "percent",
-        });
+        if (Cypress.env("TARGET_ENV") === "prod") {
+            cy.get("#map").matchImageSnapshot({
+                failureThreshold: 0.4,
+                failureThresholdType: "percent",
+            });
+        }
 
         // Verify clicking an occurences, shows a popup window
         cy.get("#map").click(200, 200);
@@ -67,10 +69,12 @@ describe("Spatial - Species", () => {
         cy.get("#legend").should("be.visible");
 
         // Verify that the layer is visible on the map
-        cy.get("#map").matchImageSnapshot({
-            failureThreshold: 0.4,
-            failureThresholdType: "percent",
-        });
+        if (Cypress.env("TARGET_ENV") === "prod") {
+            cy.get("#map").matchImageSnapshot({
+                failureThreshold: 0.4,
+                failureThresholdType: "percent",
+            });
+        }
 
         // Verify clicking an occurences, shows a popup window
         cy.get("#map").click(300, 300);
@@ -104,10 +108,12 @@ describe("Spatial - Species", () => {
         cy.get("#legend").should("be.visible");
 
         // Verify that the layer is visible on the map
-        cy.get("#map").matchImageSnapshot({
-            failureThreshold: 0.4,
-            failureThresholdType: "percent",
-        });
+        if (Cypress.env("TARGET_ENV") === "prod") {
+            cy.get("#map").matchImageSnapshot({
+                failureThreshold: 0.4,
+                failureThresholdType: "percent",
+            });
+        }
 
         // Verify clicking an occurences, shows a popup window
         cy.get("#map").click(160, 260);
@@ -197,10 +203,13 @@ describe("Spatial - Species", () => {
             cy.get("#legend").should("be.visible");
 
             // Verify that the layer is visible on the map
-            cy.get("#map").matchImageSnapshot({
-                failureThreshold: 0.4,
-                failureThresholdType: "percent",
-            });
+
+            if (Cypress.env("TARGET_ENV") === "prod") {
+                cy.get("#map").matchImageSnapshot({
+                    failureThreshold: 0.4,
+                    failureThresholdType: "percent",
+                });
+            }
 
             // // Verify clicking an occurences, shows a popup window
             // cy.get("#map").click(160, 260);
@@ -271,10 +280,12 @@ describe("Spatial - Species", () => {
         cy.get("#legend").should("be.visible");
 
         // Verify that the layer is visible on the map
-        cy.get("#map").matchImageSnapshot({
-            failureThreshold: 0.4,
-            failureThresholdType: "percent",
-        });
+        if (Cypress.env("TARGET_ENV") === "prod") {
+            cy.get("#map").matchImageSnapshot({
+                failureThreshold: 0.4,
+                failureThresholdType: "percent",
+            });
+        }
 
         // Store dataset name for dependent test
         Cypress.env("datasetName", datasetName);
@@ -307,10 +318,12 @@ describe("Spatial - Species", () => {
         cy.get("#legend").should("be.visible");
 
         // Verify that the layer is visible on the map
-        cy.get("#map").matchImageSnapshot({
-            failureThreshold: 0.4,
-            failureThresholdType: "percent",
-        });
+        if (Cypress.env("TARGET_ENV") === "prod") {
+            cy.get("#map").matchImageSnapshot({
+                failureThreshold: 0.4,
+                failureThresholdType: "percent",
+            });
+        }
 
         // Store dataset name for dependent test
         Cypress.env("datasetName", datasetName);

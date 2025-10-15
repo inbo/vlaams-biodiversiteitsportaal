@@ -13,7 +13,6 @@ webservice:
   client-id: lists
   client-secret: xxx
 
-
 apiGateway:
   enabled: false
 auth:

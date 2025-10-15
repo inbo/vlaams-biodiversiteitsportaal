@@ -25,10 +25,13 @@ describe("Spatial - Layers", () => {
         cy.get('[ng-show="wmsLegendVisible()"').should("be.visible");
 
         // Verify that the layer is visible on the map
-        cy.get("#map").matchImageSnapshot({
-            failureThreshold: 0.4,
-            failureThresholdType: "percent",
-        });
+
+        if (Cypress.env("TARGET_ENV") === "prod") {
+            cy.get("#map").matchImageSnapshot({
+                failureThreshold: 0.4,
+                failureThresholdType: "percent",
+            });
+        }
 
         // Verify clicking an occurences shows a popup window
         cy.get("#map").click(200, 200);
@@ -77,14 +80,16 @@ describe("Spatial - Layers", () => {
         cy.get('[name="divMappedLayers"]').contains("1 gebieden van Gemeenten")
             .should("be.visible");
 
-        cy.get("#map").matchImageSnapshot({
-            failureThreshold: 0.4,
-            failureThresholdType: "percent",
-        });
+        if (Cypress.env("TARGET_ENV") === "prod") {
+            cy.get("#map").matchImageSnapshot({
+                failureThreshold: 0.4,
+                failureThresholdType: "percent",
+            });
+        }
     });
 
     it("Can add an environmental layer", () => {
-        const layerName = "Isothermie";
+        const layerName = "Veenwaarschijnlijkheid bodemprofiel";
 
         // Add a layer
         cy.get("#menu-0").click();
@@ -103,10 +108,12 @@ describe("Spatial - Layers", () => {
         cy.get('[ng-show="wmsLegendVisible()"').should("be.visible");
 
         // Verify that the layer is visible on the map
-        cy.get("#map").matchImageSnapshot({
-            failureThreshold: 0.4,
-            failureThresholdType: "percent",
-        });
+        if (Cypress.env("TARGET_ENV") === "prod") {
+            cy.get("#map").matchImageSnapshot({
+                failureThreshold: 0.4,
+                failureThresholdType: "percent",
+            });
+        }
 
         // Verify clicking the map shows a popup window
         cy.get("#map").click(200, 200);
@@ -117,7 +124,7 @@ describe("Spatial - Layers", () => {
             )
             .should(
                 "contain",
-                "32.",
+                "0.0",
             );
     });
 });

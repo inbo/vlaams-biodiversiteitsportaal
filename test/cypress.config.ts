@@ -34,6 +34,7 @@ module.exports = defineConfig({
   e2e: {
     baseUrl: envs[targetEnv].baseUrl,
     env: {
+      TARGET_ENV: targetEnv,
       AUTH_URL: envs[targetEnv].authUrl,
       VBP_USERNAME: process.env.CYPRESS_VBP_USERNAME,
       VBP_PASSWORD: process.env.CYPRESS_VBP_PASSWORD,

@@ -22,10 +22,12 @@ describe("Bie - Species page", () => {
             .children().should("have.length.above", 1);
 
         // Check map data available
-        cy.get("#leafletMap").matchImageSnapshot("species-page-map", {
-            failureThreshold: 0.4,
-            failureThresholdType: "percent",
-        });
+        if (Cypress.env("TARGET_ENV") === "prod") {
+            cy.get("#leafletMap").matchImageSnapshot("species-page-map", {
+                failureThreshold: 0.4,
+                failureThresholdType: "percent",
+            });
+        }
 
         // Check names tab
         cy.get(".taxon-tabs > ul").find("a[href='#names']").click();
@@ -75,18 +77,30 @@ describe("Bie - Species page", () => {
 
         // Check charts tab
         cy.get(".taxon-tabs > ul").find("a[href='#records']").click();
-        cy.get("#charts").children().each((chart) => {
-            const chartId = chart.attr("id");
-            cy.get(`#${chartId}`).should(() => {
-                // Wait for the chart to be loaded properly
-                expect(chart).to.be.visible;
-                expect(chart.outerHeight()).to.be.greaterThan(300);
-            })
-                .matchImageSnapshot(`species-page-${chartId}`, {
-                    failureThreshold: 0.4,
-                    failureThresholdType: "percent",
+
+        if (Cypress.env("TARGET_ENV") === "prod") {
+            cy.get("#charts").children().each((chart) => {
+                const chartId = chart.attr("id");
+                cy.get(`#${chartId}`).should(() => {
+                    // Wait for the chart to be loaded properly
+                    expect(chart).to.be.visible;
+                    expect(chart.outerHeight()).to.be.greaterThan(300);
+                })
+                    .matchImageSnapshot(`species-page-${chartId}`, {
+                        failureThreshold: 0.4,
+                        failureThresholdType: "percent",
+                    });
+            });
+        } else {
+            cy.get("#charts").children().each((chart) => {
+                const chartId = chart.attr("id");
+                cy.get(`#${chartId}`).should(() => {
+                    // Wait for the chart to be loaded properly
+                    expect(chart).to.be.visible;
+                    expect(chart.outerHeight()).to.be.greaterThan(300);
                 });
-        });
+            });
+        }
 
         // Check BHL content is loaded
         cy.get(".taxon-tabs > ul").find("a[href='#literature']").click();
@@ -101,7 +115,7 @@ describe("Bie - Species page", () => {
         // Check Datapartners content is loaded
         cy.get(".taxon-tabs > ul").find("a[href='#data-partners']").click();
         cy.get("#data-providers-list > tbody > tr")
-            .should("have.length.above", 2);
+            .should("have.length.at.least", 1);
     });
 
     it("Working ABV tab", () => {

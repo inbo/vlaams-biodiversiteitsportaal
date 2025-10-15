@@ -14,7 +14,7 @@ describe("Biocache - Occurrence ID search", () => {
     });
 
     it("Occurrence ID search", () => {
-        const searchInput = "INBO:FLORA:01422430";
+        const searchInput = "q-10577711334";
         cy.get("#occurrenceID").should("be.visible")
             .type(`${searchInput}{enter}`);
         cy.url().should(

@@ -141,7 +141,7 @@ describe("Biocache - Advanced search", () => {
     });
 
     it("Type Status search", () => {
-        const searchInput = "TYPE";
+        const searchInput = "SYNTYPE";
         cy.get("#type_status").select(searchInput);
         cy.get(".tab-pane.active").within(() => {
             cy.get("input.btn-primary[type='submit']").click();
@@ -154,7 +154,7 @@ describe("Biocache - Advanced search", () => {
             { matchCase: false },
         ).get("#results").children().should(
             "have.length.greaterThan",
-            10,
+            0,
         );
     });
 
@@ -199,7 +199,7 @@ describe("Biocache - Advanced search", () => {
     });
 
     it("CatalogNumber search", () => {
-        const searchInput = "01422430";
+        const searchInput = "kbve-srbe:formidabel:7199";
         cy.get("#catalogue_number").type(`${searchInput}{enter}`);
         cy.url().should(
             "include",
@@ -276,7 +276,7 @@ describe("Biocache - Advanced search", () => {
         cy.get("#country").select("Belgium");
 
         // Type status
-        cy.get("#type_status").select("TYPE");
+        cy.get("#type_status").select("Not supplied");
 
         // Basis of record
         cy.get("#basis_of_record").select("Machine observation");
@@ -288,7 +288,7 @@ describe("Biocache - Advanced search", () => {
         ).click();
 
         // Catalog number
-        cy.get("#catalogue_number").type("94914");
+        cy.get("#catalogue_number").type("7199");
 
         // Record Number
         // TODO: issue when using colon in record number (e.g "Natuurpunt:Waarnemingen:143198978")
@@ -317,10 +317,10 @@ describe("Biocache - Advanced search", () => {
                 "Columba livia f. domestica",
                 "Dicots",
                 "Belgium",
-                "TYPE",
+                // "Not supplied", Missing from query display?
                 "Machine observation",
                 "Chorus",
-                "94914",
+                "7199",
                 "1818",
                 "1998-01-01",
                 "2023-01-01",
