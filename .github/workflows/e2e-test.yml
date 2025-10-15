@@ -2,24 +2,29 @@ name: Run E2E tests against the VBP portal
 run-name: ${{ github.actor }} is testing the VBP portal @ ${{ github.event.inputs.env }}
 
 on:
-  schedule:
-    - cron: '0 5 * * 1-5'
-  workflow_dispatch:
-    inputs:
+  workflow_call:
+    inputs: &inputs
       google_notification:
         description: 'Notify Google Chat on failure'
         required: false
-        default: true
+        default: false
         type: boolean
       env:
         description: 'Environment to test'
         required: true
         default: prod
+        type: string
+
+  workflow_dispatch:
+    inputs:
+      <<: *inputs
+      env:
         type: choice
         options:
           - dev
           - uat
           - prod
+
 jobs:
   e2e-test:
     runs-on: [ self-hosted ]
