@@ -1,5 +1,5 @@
 describe("Regions - view", () => {
-    const gemeente = "Balen";
+    const gemeente = "Gent";
     const numberOfWMSRequestPerLoad = 9;
 
     beforeEach(() => {
@@ -8,7 +8,7 @@ describe("Regions - view", () => {
             "loadBiocacheWMSTiles",
         );
 
-        cy.visit("https://natuurdata.inbo.be/regions/Gemeenten/Balen");
+        cy.visit("/regions/Gemeenten/Gent?pid=217");
         cy.get(".spinner", { timeout: 10_000 }).should("not.be.visible");
     });
 

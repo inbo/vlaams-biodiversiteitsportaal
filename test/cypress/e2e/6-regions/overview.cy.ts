@@ -14,16 +14,12 @@ describe("Regions - overview", () => {
             cy.log(`Checking region: ${regionName}`)
                 .get("h2[role='tab']")
                 .contains(regionName).click();
-            cy.get(`[layer='${regionName}']`).find("li.regionLink").should(
+            cy.get(`[layer='${regionName}']`).find(
+                "li.regionLink",
+            ).should(
                 "have.length.at.least",
                 1,
             );
-
-            // cy.get("#map_canvas").matchImageSnapshot(`regions-${regionName}`, {
-            //     failureThreshold: 0.4,
-            //     failureThresholdType: "percent",
-            // });
-
             // Check if we can navigate to a single region
             cy.get(`[layer='${regionName}']`).find("li.regionLink").first()
                 .then(

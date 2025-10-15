@@ -42,6 +42,9 @@ describe("Can login from the homepage", () => {
 
                 assertIsNotLoggedIn();
                 login();
+
+                cy.wait(1000); // wait for the login to propagate
+
                 assertIsLoggedIn();
 
                 cy.visit("/");
@@ -53,10 +56,12 @@ describe("Can login from the homepage", () => {
 });
 
 function login() {
-    cy.get("#dropdown-auth-menu").click().get(
+    cy.get("#dropdown-auth-menu").click();
+    cy.get(
         "#dropdown-auth-menu > .dropdown-menu",
     ).should("be.visible");
     cy.get("#loginButton").should("be.visible").click();
+    cy.wait(1000); // wait for the login to propagate
 
     cy.log("Do stuff on login screen")
         .origin(Cypress.env("AUTH_URL"), () => {
