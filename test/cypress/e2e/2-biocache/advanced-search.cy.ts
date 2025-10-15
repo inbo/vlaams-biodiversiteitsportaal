@@ -199,7 +199,7 @@ describe("Biocache - Advanced search", () => {
     });
 
     it("CatalogNumber search", () => {
-        const searchInput = "kbve-srbe:formidabel:7199";
+        const searchInput = "102244166";
         cy.get("#catalogue_number").type(`${searchInput}{enter}`);
         cy.url().should(
             "include",
@@ -288,7 +288,7 @@ describe("Biocache - Advanced search", () => {
         ).click();
 
         // Catalog number
-        cy.get("#catalogue_number").type("7199");
+        cy.get("#catalogue_number").type("102244166");
 
         // Record Number
         // TODO: issue when using colon in record number (e.g "Natuurpunt:Waarnemingen:143198978")
