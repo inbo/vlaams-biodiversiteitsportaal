@@ -15,6 +15,14 @@ RUN curl ${TAXONOMY_ARCHIVE} -o /gbif-backbone.tgz \
 WORKDIR /project
 RUN git clone --branch v${VERSION} --depth 1 ${SOURCE} .
 
+# Add custom dependencies to the server POM
+RUN sed -i '/<\/dependencies>/i \
+        <dependency>\n\
+            <groupId>com.amazonaws</groupId>\n\
+            <artifactId>aws-xray-recorder-sdk-slf4j</artifactId>\n\
+            <version>2.20.0</version>\n\
+        </dependency>' server/pom.xml
+
 RUN --mount=type=cache,target=/root/.m2/repository \
     mvn --batch-mode --no-transfer-progress \
         clean package -DskipTests -T 4 -U
