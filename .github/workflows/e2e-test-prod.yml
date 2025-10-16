@@ -1,5 +1,5 @@
 ---
-name: E2E tests against the PROD VBP portal
+name: E2E tests | Prod
 run-name: ${{ github.actor }} is testing the VBP portal @ prod
 
 on:

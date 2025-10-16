@@ -3,7 +3,7 @@ run-name: ${{ github.actor }} is testing the VBP portal @ ${{ github.event.input
 
 on:
   workflow_call:
-    inputs: &inputs
+    inputs:
       google_notification:
         description: 'Notify Google Chat on failure'
         required: false
