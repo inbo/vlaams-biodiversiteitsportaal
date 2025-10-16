@@ -2,7 +2,9 @@
 .vbp-content-area {
     width: 100%;
 
-    background-image: url("../../assets/background-pattern_1_vdccrg.png");
+    background-image: url("../../assets/6em-pattern_1_vdccrg.png");
+    // Match background pattern with login screen
+    background-position: top calc(-$inbo-banner-height - 1px) left 0;
     background-color: #f5f5f5;
 
     .max-width {
