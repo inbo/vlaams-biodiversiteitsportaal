@@ -3,8 +3,8 @@ ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 
-ARG VERSION=allow-downloading-of-rbac-protected-records
-ARG COMMIT=057f24c79a6cb2cbbb2fcc9708527ba2de535c33
+ARG VERSION=develop-vbp
+ARG COMMIT=0cbd1d9f66d2c1d6b364e08769da9282128458af
 ARG SOURCE=https://github.com/StefanVanDyck/biocache-service.git
 LABEL ala.version=inbo-${COMMIT}
 
@@ -38,7 +38,7 @@ RUN mkdir -p /opt/atlas/i18n \
   && ln -s /config/biocache-service/i18n/override /var/opt/atlas/i18n/biocache-service
 
 ARG VERSION=3.7.0-SNAPSHOT
-ARG COMMIT=057f24c79a6cb2cbbb2fcc9708527ba2de535c33
+ARG COMMIT=0cbd1d9f66d2c1d6b364e08769da9282128458af
 LABEL ala.version=inbo-${COMMIT}
 
 COPY --from=builder /project/build/libs/biocache-service-${VERSION}-exec.war /biocache-service.war
