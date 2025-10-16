@@ -4,7 +4,7 @@ run-name: ${{ github.actor }} is testing the VBP portal @ prod
 
 on:
   schedule:
-    - cron: '0 5 * * 1-5'
+    - cron: '0 9 * * 1-5'
 
   workflow_dispatch:
     inputs:
@@ -19,4 +19,4 @@ jobs:
     uses: ./.github/workflows/e2e-test.yml
     with:
       env: 'prod'
-      google_notification: ${{ github.event.inputs.google_notification }}
+      google_notification: ${{ github.event.inputs.google_notification == null || github.event.inputs.google_notification }}
