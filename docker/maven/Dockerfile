@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1.14.0
 ARG BUILDPLATFORM=linux/amd64
-FROM --platform=${BUILDPLATFORM} maven:3.9-amazoncorretto-8 AS builder
+FROM --platform=${BUILDPLATFORM} maven:3.9-amazoncorretto-11 AS builder
 
 RUN mkdir ~/.m2
 COPY settings.xml /root/.m2/settings.xml

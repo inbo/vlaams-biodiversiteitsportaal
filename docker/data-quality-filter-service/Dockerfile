@@ -13,7 +13,8 @@ RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
 RUN --mount=type=cache,target=/gradle-cache,ro \
     gradle \
         build assemble \
-        -x test
+        -x test \
+        --include-build /vbp-utils
 
 # Copy dependencies to shared read-only cache
 RUN --mount=type=cache,target=/gradle-cache,sharing=locked \

@@ -6,13 +6,7 @@
         </encoder>
     </appender>
     <appender name="JSON" class="ch.qos.logback.core.ConsoleAppender">
-        <!-- JSON Encoder is missing from the classpath :( -->
-        <!-- <encoder class="ch.qos.logback.classic.encoder.JsonEncoder"/>-->
-        <encoder>
-            <pattern>
-                {"timestamp":"%date{yyyy-MM-dd'T'HH:mm:ss.SSSXXX}","level":"%level","logger":"%logger","location":"%file:%line","message":"%replace(%replace(%msg){'\n','\\n'}){'"','\"'}","ex":"%replace(%replace(%ex{full}){'\n','\\n'}){'"','\"'}", "traceId": "%X{AWS-XRAY-TRACE-ID}"}%n
-            </pattern>
-        </encoder>
+        <encoder class="ch.qos.logback.classic.encoder.JsonEncoder"/>
     </appender>
 
     <!-- Disable flood of deprecation warnings-->

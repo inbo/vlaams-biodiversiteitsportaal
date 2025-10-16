@@ -14,6 +14,7 @@ services:
       - vbp-data:/data
     environment:
       LOG_LEVEL: "INFO"
+      LOG_FORMAT: "JSON"
       JAVA_OPTS: "-Xmx6g"
       ADDITIONAL_SPRING_CONFIG_LOCATIONS: "file:/config/common/common-docker.yml" # Custom env var used in tomcat context
       SPRING_PROFILES_ACTIVE: "local"
@@ -241,6 +242,8 @@ services:
       - "9179:9179"
     volumes:
       - ../config/namematching-service:/config/namematching-service:ro
+    environment:
+      LOG_LEVEL: "WARN"
 
   #  sensitive-data-service:
   #    image: ${DOCKER_REPO:-local}/inbo-vbp-sensitive-data-service:dev
