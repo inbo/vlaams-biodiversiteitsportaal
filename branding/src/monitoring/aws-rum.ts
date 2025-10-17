@@ -1,5 +1,6 @@
 import { AwsRum } from "aws-rum-web";
 import settings from "../settings";
+import { userManagerPromise } from "../auth/auth";
 
 let rumClient: AwsRum | undefined = undefined;
 if (process.env.NODE_ENV !== "development") {
@@ -22,6 +23,16 @@ if (process.env.NODE_ENV !== "development") {
                 identityPoolId: settings.monitoring.awsCognitoIdentityPoolId,
             },
         );
+
+        const userManager = await userManagerPromise;
+        userManager.events.addUserLoaded((user) => {
+            if (user && rumClient) {
+                rumClient.addSessionAttributes({
+                    userId: user.profile.sub,
+                });
+                rumClient.allowCookies(true);
+            }
+        });
     } catch (error) {
         // Ignore errors thrown during CloudWatch RUM web client initialization
     }
