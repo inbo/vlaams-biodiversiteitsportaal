@@ -1,4 +1,4 @@
 apiVersion: 1
 
-apps:
-  - type: grafana-x-ray-datasource
+apps: []
+#  - type: grafana-x-ray-datasource
