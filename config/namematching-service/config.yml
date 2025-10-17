@@ -3,6 +3,10 @@ logging:
   loggers:
     au.org.ala: WARN
     org.reflections: ERROR
+  appenders:
+    - type: console
+      target: stdout
+      logFormat: "%date{yyyy-MM-dd HH:mm:ss,SSS} %highlight([%level]) %cyan([%logger{10} %file:%line]) %replace([%X{AWS-XRAY-TRACE-ID}]){'\\[\\]', ''}%msg%n"
 server:
 #  rootPath: '/namematching-service/*'
   applicationConnectors:

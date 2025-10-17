@@ -170,7 +170,7 @@ services:
       SOLR_MODE: solrcloud
       LOG4J_PROPS: /var/solr/init/docker/solr-data/log4j2.xml
       LOG_LEVEL: WARN
-      LOG_FORMAT: JSON
+      LOG_FORMAT: TEXT
     healthcheck:
       test: [ "CMD-SHELL", "curl -sf http://localhost:8983/solr/" ]
 
