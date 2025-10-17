@@ -20,7 +20,7 @@ COPY resources.xml ./grails-app/conf/spring/resources.xml
 RUN --mount=type=cache,target=/gradle-cache,ro \
     gradle build assemble \
     -x test -x integrationTest \
-    --include-build /vbp-utils
+    --init-script /vbp-utils/add-deps.gradle
 
 # Copy dependencies to shared read-only cache
 RUN --mount=type=cache,target=/gradle-cache,sharing=locked \

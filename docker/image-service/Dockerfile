@@ -23,7 +23,7 @@ EOR
 RUN --mount=type=cache,target=/gradle-cache,ro \
     gradle build assetCompile assemble bootWar \
     -x test -x integrationTest \
-    --include-build /vbp-utils
+    --init-script /vbp-utils/add-deps.gradle
 
 # Copy dependencies to shared read-only cache
 RUN --mount=type=cache,target=/gradle-cache,sharing=locked \

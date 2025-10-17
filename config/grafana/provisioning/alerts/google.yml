@@ -1,0 +1,10 @@
+apiVersion: 1
+contactPoints:
+    - orgId: 1
+      name: Google Chat
+      receivers:
+        - uid: google-chat-vb-alerts
+          type: googlechat
+          settings:
+            url: ${GOOGLE_CHAT_WEBHOOK_URL}
+          disableResolveMessage: true

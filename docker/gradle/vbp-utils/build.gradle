@@ -1,8 +1,0 @@
-plugins {
-    id("java-library")
-}
-dependencies {
-    implementation("com.amazonaws:aws-xray-recorder-sdk-slf4j:2.20.0")
-    implementation("ch.qos.logback:logback-classic:1.5.19")
-    implementation("ch.qos.logback:logback-core:1.5.19")
-}
