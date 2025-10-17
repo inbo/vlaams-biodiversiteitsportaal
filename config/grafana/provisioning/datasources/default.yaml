@@ -10,6 +10,14 @@ datasources:
       assumeRoleArn: arn:aws:iam::${AWS_ACCOUNT_ID_DEV}:role/inbo-vbp-grafana-dev-role
       customMetricsNamespaces: CWAgent
 
+  - name: X-Ray DEV
+    type: grafana-x-ray-datasource
+    uid: x-ray-dev
+    isDefault: false
+    jsonData:
+      defaultRegion: eu-west-1
+      assumeRoleArn: arn:aws:iam::${AWS_ACCOUNT_ID_DEV}:role/inbo-vbp-grafana-dev-role
+
   - name: cloudwatch UAT
     type: cloudwatch
     uid: cloudwatch-uat
@@ -19,6 +27,14 @@ datasources:
       assumeRoleArn: arn:aws:iam::${AWS_ACCOUNT_ID_UAT}:role/inbo-vbp-grafana-dev-role
       customMetricsNamespaces: CWAgent
 
+  - name: X-Ray UAT
+    type: grafana-x-ray-datasource
+    uid: x-ray-uat
+    isDefault: false
+    jsonData:
+      defaultRegion: eu-west-1
+      assumeRoleArn: arn:aws:iam::${AWS_ACCOUNT_ID_UAT}:role/inbo-vbp-grafana-dev-role
+
   - name: cloudwatch PROD
     type: cloudwatch
     uid: cloudwatch-prod
@@ -27,3 +43,11 @@ datasources:
       defaultRegion: eu-west-1
       assumeRoleArn: arn:aws:iam::${AWS_ACCOUNT_ID_PROD}:role/inbo-vbp-grafana-dev-role
       customMetricsNamespaces: CWAgent
+
+  - name: X-Ray PROD
+    type: grafana-x-ray-datasource
+    uid: x-ray-prod
+    isDefault: false
+    jsonData:
+      defaultRegion: eu-west-1
+      assumeRoleArn: arn:aws:iam::${AWS_ACCOUNT_ID_PROD}:role/inbo-vbp-grafana-prod-role
