@@ -4,7 +4,7 @@
 
     background-image: url("../../assets/6em-pattern_1_vdccrg.png");
     // Match background pattern with login screen
-    background-position: top calc(-$inbo-banner-height - 1px) left 0;
+    background-position: top calc(-1 * ($inbo-banner-height + 1px)) left 0;
     background-color: #f5f5f5;
 
     .max-width {
