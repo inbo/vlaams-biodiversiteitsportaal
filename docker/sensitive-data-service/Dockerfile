@@ -21,7 +21,7 @@ RUN sed -i '/<\/dependencies>/i \
             <groupId>com.amazonaws</groupId>\n\
             <artifactId>aws-xray-recorder-sdk-slf4j</artifactId>\n\
             <version>2.20.0</version>\n\
-        </dependency>' server/pom.xml
+        </dependency>' ala-sensitive-data-server/pom.xml
 
 RUN --mount=type=cache,target=/root/.m2/repository \
     mvn --batch-mode --no-transfer-progress \
