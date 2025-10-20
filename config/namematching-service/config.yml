@@ -6,7 +6,7 @@ logging:
   appenders:
     - type: console
       target: stdout
-      logFormat: "%date{ISO8601} %highlight([%level]) %cyan([%logger{10}])%msg%replace( [t=%X{trace_id},s=%X{span_id}]){' \\[t=,s=\\]',''}%n"
+      logFormat: "%date{ISO8601} %highlight([%level]) %cyan([%logger{10}]) %msg%replace( [t=%X{trace_id},s=%X{span_id}]){' \\[t=,s=\\]',''}%n"
 
 server:
 #  rootPath: '/namematching-service/*'
