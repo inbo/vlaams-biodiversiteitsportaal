@@ -5,7 +5,7 @@ groups:
       folder: VBP - DEV
       interval: 5m
       rules:
-        - uid: cloudwatch logs
+        - uid: cloudwatch-logs-dev
           title: Errors and warnings
           condition: C
           data:
