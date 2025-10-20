@@ -2,7 +2,7 @@
 <configuration scan="true">
     <appender name="TEXT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%date{ISO8601} %highlight([%level]) %cyan([%logger{10}]) %replace([%X{AWS-XRAY-TRACE-ID}]){'\[\]', ''}%msg%n</pattern>
+            <pattern>%date{ISO8601} %highlight([%level]) %cyan([%logger{10}]) %msg%replace( [t=%X{trace_id},s=%X{span_id}]){' \[t=,s=\]',''}%n</pattern>
         </encoder>
     </appender>
     <appender name="JSON" class="ch.qos.logback.core.ConsoleAppender">

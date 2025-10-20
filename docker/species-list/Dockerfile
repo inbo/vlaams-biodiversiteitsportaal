@@ -26,7 +26,7 @@ RUN ls -la /project/build/libs
 
 FROM amazoncorretto:11
 
-COPY --from=builder /opt/aws-xray-agent /opt/aws-xray-agent
+COPY --from=builder /opt/opentelemetry-agent /opt/opentelemetry-agent
 
 # Default based on repo structure, can be overridden at runtime
 ENV SPRING_CONFIG_ADDITIONAL-LOCATION="file:/config/common/common.yml,file:/config/species-list/species-list.yml"

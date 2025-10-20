@@ -29,7 +29,7 @@ RUN --mount=type=cache,target=/root/.m2/repository \
 
 FROM amazoncorretto:11
 
-COPY --from=builder /opt/aws-xray-agent /opt/aws-xray-agent
+COPY --from=builder /opt/opentelemetry-agent /opt/opentelemetry-agent
 
 ARG VERSION=1.1.1
 LABEL ala.version=${VERSION}

@@ -25,7 +25,7 @@ RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
 
 FROM amazoncorretto:11
 
-COPY --from=builder /opt/aws-xray-agent /opt/aws-xray-agent
+COPY --from=builder /opt/opentelemetry-agent /opt/opentelemetry-agent
 
 # Default based on repo structure, can be overridden at runtime
 ENV SPRING_CONFIG_ADDITIONAL-LOCATION="file:/config/common/common.yml,file:/config/apikey/apikey.yml"

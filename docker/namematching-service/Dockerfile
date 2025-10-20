@@ -31,7 +31,7 @@ FROM amazoncorretto:11
 ARG VERSION=1.8.1
 LABEL ala.version=${VERSION}
 
-COPY --from=builder /opt/aws-xray-agent /opt/aws-xray-agent
+COPY --from=builder /opt/opentelemetry-agent /opt/opentelemetry-agent
 
 RUN mkdir /data && mkdir /data/lucene && chown -R 1000:1000 /data
 

@@ -114,8 +114,8 @@ services:
     environment:
       AWS_XRAY_TRACING_ENABLED: true
       ADDITIONAL_SPRING_CONFIG_LOCATIONS: "file:/config/common/common-docker.yml"
-      LOG_LEVEL: DEBUG
-      JAVA_OPTS: "-Dcom.amazonaws.xray.configFile=/config/common/xray-agent.json -javaagent:/opt/aws-xray-agent/disco/disco-java-agent.jar=pluginPath=/opt/aws-xray-agent/disco/disco-plugins"
+      LOG_LEVEL: INFO
+      JAVA_OPTS: "-javaagent:/opt/opentelemetry-agent/opentelemetry-javaagent.jar -Dotel.service.name=alerts -Dotel.javaagent.logging=application -Dotel.resource.providers.aws.enabled=true -Dotel.metrics.exporter=none -Dotel.traces.exporter=none -Dotel.logs.exporter=none"
     volumes:
       - ../config:/config:ro
     depends_on:
