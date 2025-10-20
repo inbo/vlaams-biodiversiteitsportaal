@@ -10,6 +10,13 @@ logging:
 
 server:
 #  rootPath: '/sensitive-data-service/*'
+  requestLog:
+    appenders:
+      - type: console
+        filterFactories:
+          - type: uri
+            uris:
+              - "/"
   applicationConnectors:
     - type: http
       port: 9189

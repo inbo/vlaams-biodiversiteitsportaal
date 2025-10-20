@@ -7,8 +7,16 @@ logging:
     - type: console
       target: stdout
       logFormat: "%date{ISO8601} %highlight([%level]) %cyan([%logger{10}]) %replace([%X{AWS-XRAY-TRACE-ID}]){'\\[\\]', ''}%msg%n"
+
 server:
 #  rootPath: '/namematching-service/*'
+  requestLog:
+    appenders:
+      - type: console
+        filterFactories:
+          - type: uri
+            uris:
+              - "/"
   applicationConnectors:
     - type: http
       port: 9179
