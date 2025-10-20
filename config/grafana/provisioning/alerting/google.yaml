@@ -8,3 +8,6 @@ contactPoints:
           settings:
             url: ${GOOGLE_CHAT_WEBHOOK_URL}
           disableResolveMessage: true
+deleteContactPoints:
+  - orgId: 1
+    uid: bf1bg0vvz0vsxa
