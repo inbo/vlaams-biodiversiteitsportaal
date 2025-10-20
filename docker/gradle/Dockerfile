@@ -14,7 +14,7 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
     yum install -y \
         rsync
 
-# Download and unzip aws x-ray agent for easy copy to runtime images
+# Download opentelemetry agent for easy copy to runtime images
 RUN mkdir /opt/opentelemetry-agent \
     && curl -fL https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/download/v2.21.0/opentelemetry-javaagent.jar -o /opt/opentelemetry-agent/opentelemetry-javaagent.jar
 
