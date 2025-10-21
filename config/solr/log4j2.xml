@@ -22,7 +22,7 @@
     <Console name="TEXT" target="SYSTEM_OUT">
       <PatternLayout>
         <Pattern>
-          %maxLen{%d{ISO8601} %highlight{[%p]} %cyan{[%c{1.}]} (%t) [%X{collection} %X{shard} %X{replica} %X{core}] %m%notEmpty{ [AWS-XRAY-TRACE-ID: %X{AWS-XRAY-TRACE-ID}]}%notEmpty{ =>%ex{short}}}{10240}%n
+          %maxLen{%d{DEFAULT} %highlight{[%p]} %cyan{[%c{1.}]} (%t) [%X{collection} %X{shard} %X{replica} %X{core}] %m%notEmpty{ [AWS-XRAY-TRACE-ID: %X{AWS-XRAY-TRACE-ID}]}%notEmpty{ =>%ex{short}}}{10240}%n
         </Pattern>
       </PatternLayout>
     </Console>

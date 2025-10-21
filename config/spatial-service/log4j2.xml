@@ -4,7 +4,7 @@
     <Appenders>
         <Console name="TEXT" target="SYSTEM_OUT">
             <PatternLayout
-                    pattern="%date{ISO8601} %highlight{[%p]} %cyan{[%c{1.}]} %msg%notEmpty{ [AWS-XRAY-TRACE-ID: %X{AWS-XRAY-TRACE-ID}]}%n%throwable{filters(org.junit,org.apache.maven,sun.reflect,java.lang.reflect)}"/>
+                    pattern="%date{DEFAULT} %highlight{[%p]} %cyan{[%c{1.}]} %msg%notEmpty{ [AWS-XRAY-TRACE-ID: %X{AWS-XRAY-TRACE-ID}]}%n%throwable{filters(org.junit,org.apache.maven,sun.reflect,java.lang.reflect)}"/>
         </Console>
 
         <Console name="JSON" target="SYSTEM_OUT">
