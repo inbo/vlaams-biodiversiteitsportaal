@@ -83,10 +83,13 @@ services:
       # - ./spatial/geoserver/geoserver-files:/data/geoserver-files/
       #Spatials service data folder. If they are both in the same machine, some layers are not needed to be uploaded.
       - vbp-data:/data
+      - ../config:/config:ro
     ports:
       - "8079:8080"
     environment:
-      JAVA_OPTS: -Xmx1g -Xms128m -Xss256k
+      INITIAL_MEMORY: 128m
+      MAXIMUM_MEMORY: 1g
+      ADDITIONAL_JAVA_STARTUP_OPTIONS: -DRELINQUISH_LOG4J_CONTROL=true -Dlog4j2.configurationFile=/config/spatial-service/log4j2.xml
       #Geoserver
       GEOSERVER_ADMIN_USER: admin
       GEOSERVER_ADMIN_PASSWORD: geoserver
@@ -96,10 +99,8 @@ services:
       PASS: my-super-secret-password
       #Geoserver internal server url. It is used to run a local script to init geoserver
       GEOSERVER_URL: http://localhost:8080/geoserver
-      GEOSERVER_LOG_PROFILE: PRODUCTION_LOGGING
       GEOSERVER_DATA_DIR: /data/geoserver_data_dir
       GEOWEBCACHE_CACHE_DIR: /data/geoserver_data_dir/gwc
-      GEOSERVER_LOG_LOCATION: /data/geoserver_data_dir/logs/geoserver.log
       FOOTPRINTS_DATA_DIR: /data/geoserver_data_dir/footprints_dir
       CONSOLE_HANDLER_LEVEL: INFO
     healthcheck:
