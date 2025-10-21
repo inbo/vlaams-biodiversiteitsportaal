@@ -811,7 +811,7 @@
             "uid": "cloudwatch-uat"
           },
           "dimensions": {},
-          "expression": "fields @timestamp, @message, @logStream |\n filter @logStream like /$service\\/.*/ |\n filter @message like /\\[(?:ERROR|WARN)\\]/ |\n sort @timestamp desc |\n limit 100\n| parse @message /\\[AWS-XRAY-TRACE-ID: (?<@xrayTraceId>.+?)\\]\\n?/",
+          "expression": "fields @timestamp, @message, @logStream |\n filter @logStream like /$service\\/.*/ |\n filter @message like /\\[(?:ERROR|WARN)\\]/ |\n sort @timestamp desc |\n limit 100\n| parse @message /\\[AWS-XRAY-TRACE-ID: (?<@xrayTraceId>.+?)@(?<@xraySegementId>.+?)\\]/",
           "id": "",
           "label": "",
           "logGroups": [

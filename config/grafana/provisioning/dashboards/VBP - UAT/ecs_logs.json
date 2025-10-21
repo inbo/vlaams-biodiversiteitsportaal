@@ -175,7 +175,7 @@
             "uid": "cloudwatch-uat"
           },
           "dimensions": {},
-          "expression": "fields @timestamp, @message, @logStream\n| filter @logStream like /$service\\/$log_stream.*/\n| filter @message like /(?i)$query/\n| sort @timestamp desc\n| limit ${log_limit}\n| parse @message /\\[AWS-XRAY-TRACE-ID: (?<@xrayTraceId>.+?)\\]\\n?/",
+          "expression": "fields @timestamp, @message, @logStream\n| filter @logStream like /$service\\/$log_stream.*/\n| filter @message like /(?i)$query/\n| sort @timestamp desc\n| limit ${log_limit}\n| parse @message /\\[AWS-XRAY-TRACE-ID: (?<@xrayTraceId>.+?)@(?<@xraySegementId>.+?)\\]/",
           "id": "",
           "label": "",
           "logGroups": [
