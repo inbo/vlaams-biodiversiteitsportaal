@@ -2,7 +2,7 @@
 <configuration scan="true">
     <appender name="TEXT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%date{ISO8601} %highlight([%level]) %cyan([%logger{10}]) %msg%replace( [trace_id=%X{trace_id} span_id=%X{span_id} trace_flags=%X{trace_flags}]){' \[trace_id= span_id= trace_flags=\]',''}%n</pattern>
+            <pattern>%date{ISO8601} %highlight([%level]) %cyan([%logger{10}]) %msg%X{AWS-XRAY-TRACE-ID}%n</pattern>
         </encoder>
     </appender>
     <appender name="JSON" class="ch.qos.logback.core.ConsoleAppender">
@@ -10,7 +10,7 @@
         <!-- <encoder class="ch.qos.logback.classic.encoder.JsonEncoder"/>-->
         <encoder>
             <pattern>
-                {"timestamp":"%date{ISO8601}","level":"%level","logger":"%logger","message":"%replace(%replace(%msg){'\n','\\n'}){'"','\"'}","ex":"%replace(%replace(%ex{full}){'\n','\\n'}){'"','\"'}", "traceId": "%X{AWS-XRAY-TRACE-ID}"}%n
+                {"timestamp":"%date{ISO8601}","level":"%level","logger":"%logger","message":"%replace(%replace(%msg){'\n','\\n'}){'"','\"'}","ex":"%replace(%replace(%ex{full}){'\n','\\n'}){'"','\"'}", "traceId": "%X{trace_id}"}%n
             </pattern>
         </encoder>
     </appender>
