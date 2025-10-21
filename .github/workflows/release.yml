@@ -181,7 +181,7 @@ jobs:
             | docker login --username AWS --password-stdin ${{ secrets.ECR_REPO }}
           
           aws ecr get-login-password --region ${{ secrets.AWS_REGION }} \
-            | docker login --username AWS --password-stdin ${{ secrets.ECR_REPO }}
+            | docker login --username AWS --password-stdin ${{ secrets.ECR_MIRROR_REPO }}
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
