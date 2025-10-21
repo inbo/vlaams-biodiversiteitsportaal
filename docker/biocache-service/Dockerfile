@@ -4,7 +4,7 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 
 ARG VERSION=develop-vbp
-ARG COMMIT=0cbd1d9f66d2c1d6b364e08769da9282128458af
+ARG COMMIT=b0265449a20ec4ecb8456740e82bbf42fa411c39
 ARG SOURCE=https://github.com/StefanVanDyck/biocache-service.git
 LABEL ala.version=inbo-${COMMIT}
 
