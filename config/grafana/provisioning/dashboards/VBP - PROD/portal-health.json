@@ -1390,7 +1390,7 @@
   "timepicker": {},
   "timezone": "browser",
   "title": "Portal Health",
-  "uid": "portal-health",
+  "uid": "portal-health-prod",
   "version": 37,
   "weekStart": ""
 }
