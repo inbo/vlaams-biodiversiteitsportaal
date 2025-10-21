@@ -6,7 +6,7 @@ logging:
   appenders:
     - type: console
       target: stdout
-      logFormat: "%date{ISO8601} %highlight([%level]) %cyan([%logger{10}]) %msg%X{AWS-XRAY-TRACE-ID}%n"
+      logFormat: "%date{ISO8601} %highlight([%level]) %cyan([%logger{10}]) %msg%replace( [AWS-XRAY-TRACE-ID: %X{AWS-XRAY-TRACE-ID}]){' \\[AWS-XRAY-TRACE-ID: \\]',''}%n"
 
 server:
 #  rootPath: '/sensitive-data-service/*'
