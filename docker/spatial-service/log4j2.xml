@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This log4j configuration file needs to stay here, and is used as the default logging setup -->
+<!-- during data_dir upgrades and in case the chosen logging config isn't available.            -->
+<Configuration name="PRODUCTION_LOGGING" status="fatal" dest="out">
+    <Appenders>
+        <Console name="TEXT" target="SYSTEM_OUT">
+            <PatternLayout
+                    pattern="%date{ISO8601} %highlight{[%p]} %cyan{[%c{1.}]} %msg%replace{ [trace_id=%X{trace_id} span_id=%X{span_id} trace_flags=%X{trace_flags}]}{ [trace_id= span_id= trace_flags=]}{}%n%throwable{filters(org.junit,org.apache.maven,sun.reflect,java.lang.reflect)}"/>
+        </Console>
+
+        <Console name="JSON" target="SYSTEM_OUT">
+            <JsonTemplateLayout/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Logger name="org.geotools" level="warn" additivity="false">
+            <AppenderRef ref="${env:LOG_FORMAT:-TEXT}"/>
+        </Logger>
+        <Logger name="org.geotools.factory" level="warn" additivity="false">
+            <AppenderRef ref="${env:LOG_FORMAT:-TEXT}"/>
+        </Logger>
+
+        <Logger name="org.geoserver" level="warn" additivity="false">
+            <AppenderRef ref="${env:LOG_FORMAT:-TEXT}"/>
+        </Logger>
+        <Logger name="org.geoserver.config" level="warn" additivity="false">
+            <AppenderRef ref="${env:LOG_FORMAT:-TEXT}"/>
+        </Logger>
+        <Logger name="org.vfny.geoserver" level="warn" additivity="false">
+            <AppenderRef ref="${env:LOG_FORMAT:-TEXT}"/>
+        </Logger>
+
+        <Logger name="org.springframework" level="warn" additivity="false">
+            <AppenderRef ref="${env:LOG_FORMAT:-TEXT}"/>
+        </Logger>
+
+        <Logger name="org.geowebcache" level="error" additivity="false">
+            <AppenderRef ref="${env:LOG_FORMAT:-TEXT}"/>
+        </Logger>
+
+        <Root level="${env:LOG_LEVEL:-INFO}">
+            <AppenderRef ref="${env:LOG_FORMAT:-TEXT}"/>
+        </Root>
+    </Loggers>
+</Configuration>
