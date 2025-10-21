@@ -182,8 +182,6 @@ jobs:
           
           aws ecr get-login-password --region ${{ secrets.AWS_REGION }} \
             | docker login --username AWS --password-stdin ${{ secrets.ECR_MIRROR_REPO }}
-          
-          aws ecr create-repository --registry-id ${{ secrets.ECR_REPO }} --repository-name dockerhub/library/amazoncorretto
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
