@@ -16,7 +16,7 @@ datasources:
     jsonData:
       defaultRegion: eu-west-1
       assumeRoleArn: arn:aws:iam::${AWS_ACCOUNT_ID_DEV}:role/inbo-vbp-grafana-dev-role
-      customMetricsNamespaces: CWAgent
+      customMetricsNamespaces: Inbo/VBP
       tracingDatasourceUid: x-ray-dev
 
 
@@ -35,7 +35,7 @@ datasources:
     jsonData:
       defaultRegion: eu-west-1
       assumeRoleArn: arn:aws:iam::${AWS_ACCOUNT_ID_UAT}:role/inbo-vbp-grafana-dev-role
-      customMetricsNamespaces: CWAgent
+      customMetricsNamespaces: Inbo/VBP
       tracingDatasourceUid: x-ray-uat
 
   - name: X-Ray PROD
@@ -53,5 +53,5 @@ datasources:
     jsonData:
       defaultRegion: eu-west-1
       assumeRoleArn: arn:aws:iam::${AWS_ACCOUNT_ID_PROD}:role/inbo-vbp-grafana-dev-role
-      customMetricsNamespaces: CWAgent
+      customMetricsNamespaces: Inbo/VBP
       tracingDatasourceUid: x-ray-prod
