@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- This log4j configuration file needs to stay here, and is used as the default logging setup -->
-<!-- during data_dir upgrades and in case the chosen logging config isn't available.            -->
+<!--Log config for GeoServer-->
 <Configuration name="PRODUCTION_LOGGING" status="fatal" dest="out">
     <Appenders>
         <Console name="TEXT" target="SYSTEM_OUT">
             <PatternLayout
-                    pattern="%date{ISO8601} %highlight{[%p]} %cyan{[%c{1.}]} %msg%replace{ [trace_id=%X{trace_id} span_id=%X{span_id} trace_flags=%X{trace_flags}]}{ [trace_id= span_id= trace_flags=]}{}%n%throwable{filters(org.junit,org.apache.maven,sun.reflect,java.lang.reflect)}"/>
+                    pattern="%date{ISO8601} %highlight{[%p]} %cyan{[%c{1.}]} %msg%replace{ [trace_id=%X{trace_id} span_id=%X{span_id} trace_flags=%X{trace_flags}]}{ \[trace_id= span_id= trace_flags=\]}{}%n%throwable{filters(org.junit,org.apache.maven,sun.reflect,java.lang.reflect)}"/>
         </Console>
 
         <Console name="JSON" target="SYSTEM_OUT">
