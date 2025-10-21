@@ -179,6 +179,9 @@ jobs:
         run: |
           aws ecr get-login-password --region ${{ secrets.AWS_REGION }} \
             | docker login --username AWS --password-stdin ${{ secrets.ECR_REPO }}
+          
+          aws ecr get-login-password --region ${{ secrets.AWS_REGION }} \
+            | docker login --username AWS --password-stdin ${{ secrets.ECR_REPO }}
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -191,7 +194,7 @@ jobs:
           # Should probably make this our own docker pull-through
           buildkitd-config-inline: |
             [registry."docker.io"]
-              mirrors = ["632683202044.dkr.ecr.eu-west-1.amazonaws.com/docker-hub"]
+              mirrors = ["${{ secrets.ECR_MIRROR_REPO }}"]
       #          driver-opts: |
       #            image=moby/buildkit:buildx-stable-1
 
