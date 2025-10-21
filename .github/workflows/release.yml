@@ -194,7 +194,7 @@ jobs:
           # Should probably make this our own docker pull-through
           buildkitd-config-inline: |
             [registry."docker.io"]
-              mirrors = ["public.ecr.aws/docker", "${{ secrets.ECR_REPO }}/dockerhub", "${{ secrets.ECR_MIRROR_REPO }}/docker-hub"]
+              mirrors = ["${{ secrets.ECR_REPO }}/dockerhub", "${{ secrets.ECR_MIRROR_REPO }}/docker-hub"]
       #          driver-opts: |
       #            image=moby/buildkit:buildx-stable-1
 
