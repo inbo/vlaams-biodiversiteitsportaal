@@ -3,7 +3,7 @@ import handlebars from "vite-plugin-handlebars";
 
 import { viteStaticCopy } from "vite-plugin-static-copy";
 import { generateMarkdownPages } from "./template-pages";
-import { downloadAbvAssets } from "./abv-assets";
+import { downloadSpeciesPluginTabAssets } from "./plugin-tabs-assets";
 import { console } from "node:inspector";
 
 import fg from "fast-glob";
@@ -115,7 +115,8 @@ export default {
                 },
             },
         },
-        abvAssets: downloadAbvAssets({ outputFolder: "./dist" }),
+        abvAssets: downloadSpeciesPluginTabAssets({ outputFolder: "./dist/abv", assetsS3RelativePath: "ABV/abv-content.zip", assetsFilepath: "./abv-assets.zip" }),
+        faunabeheerAssets: downloadSpeciesPluginTabAssets({ outputFolder: "./dist/faunabeheer", assetsS3RelativePath: "faunabeheer/faunabeheer-content.zip", assetsFilepath: "./faunabeheer-assets.zip" }),
     },
     css: {
         preprocessorOptions: {

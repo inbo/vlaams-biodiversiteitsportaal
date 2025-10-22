@@ -1,6 +1,14 @@
-{"tabs": [
+{
+  "tabs": [
     {
       "tab": "abv",
       "speciesList": "dr5",
       "contentKey": "contentFilePath"
-    }]}
+    },
+    {
+      "tab": "faunabeheer",
+      "speciesList": "dr47",
+      "contentKey": "contentFilePath"
+    }
+  ]
+}

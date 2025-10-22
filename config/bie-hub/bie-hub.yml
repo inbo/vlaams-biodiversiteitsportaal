@@ -69,7 +69,7 @@ facets: idxtype,rank,locatedInHubCountry,imageAvailable,speciesGroup,taxonomicSt
 # Tabs displayed on species page
 show:
   tabs: overview,gallery,names,classification,records,literature,sequences,data-partners
-  pluginTabs: abv
+  pluginTabs: abv,faunabeheer
 
 pluginTabsConfig: file:///config/bie-hub/plugin-tabs.json
 
