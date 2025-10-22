@@ -20,21 +20,18 @@ groups:
                     uid: cloudwatch-dev
                 dimensions: {}
                 expression: |-
-                    fields @timestamp, @message, @logStream |
-                     filter @message like /\[ERROR\]/ |
-                     stats count() by @logStream, bin(1m) |
-                     sort @timestamp desc |
-                     limit 100
+                  fields @timestamp, @message, @logStream |
+                   filter @message like /\[ERROR\]/ |
+                   sort @timestamp desc |
+                   parse @message /\[ERROR\](?<@error>.+?)(?: \[AWS-XRAY-TRACE-ID: (?<@xrayTraceId>.+?)@(?<@xraySegementId>.+?)\])?\n/ |
+                   stats count(*) as count by @logStream, @error, bin(1m) |
+                   limit 100
                 id: ""
                 intervalMs: 60000
                 label: ""
                 logGroups:
                     - arn: /inbo/vbp/ecs
                       name: /inbo/vbp/ecs
-                    - arn: /inbo/vbp/lambda
-                      name: /inbo/vbp/lambda
-                    - arn: /inbo/vbp/pipelines
-                      name: /inbo/vbp/pipelines
                 matchExact: true
                 maxDataPoints: 43200
                 metricEditorMode: 0
@@ -44,11 +41,12 @@ groups:
                 period: ""
                 queryMode: Logs
                 refId: A
-                region: eu-west-1
+                region: default
                 sqlExpression: ""
                 statistic: Average
                 statsGroups:
                     - '@logStream'
+                    - '@error'
                     - bin(1m)
             - refId: B
               relativeTimeRange:
@@ -58,28 +56,27 @@ groups:
               model:
                 conditions:
                     - evaluator:
-                        params:
-                            - 0
-                            - 0
+                        params: []
                         type: gt
                       operator:
                         type: and
                       query:
-                        params: []
+                        params:
+                            - B
                       reducer:
                         params: []
-                        type: avg
+                        type: last
                       type: query
                 datasource:
-                    name: Expression
                     type: __expr__
                     uid: __expr__
                 expression: A
-                hide: false
-                intervalMs: 60000
+                intervalMs: 1000
                 maxDataPoints: 43200
                 reducer: sum
                 refId: B
+                settings:
+                    mode: dropNN
                 type: reduce
             - refId: C
               relativeTimeRange:
@@ -91,23 +88,21 @@ groups:
                     - evaluator:
                         params:
                             - 0
-                            - 0
                         type: gt
                       operator:
                         type: and
                       query:
-                        params: []
+                        params:
+                            - C
                       reducer:
                         params: []
-                        type: avg
+                        type: last
                       type: query
                 datasource:
-                    name: Expression
                     type: __expr__
                     uid: __expr__
                 expression: B
-                hide: false
-                intervalMs: 60000
+                intervalMs: 1000
                 maxDataPoints: 43200
                 refId: C
                 type: threshold
@@ -119,7 +114,8 @@ groups:
           annotations:
             __dashboardUid__: portal-health
             __panelId__: "170"
-            description: An error was logged by {{ $labels.@logStream }}
+            description: An error was logged by {{ $labels }}
             summary: Error occurred in the logs
-          labels: {}
+          labels:
+            env: dev
           isPaused: false

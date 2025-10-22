@@ -1,0 +1,18 @@
+apiVersion: 1
+templates:
+- orgID: 1
+  name: vbp.google.title
+  template: |
+    {{ define "vbp.google.title" }}
+    🚨 {{.CommonLabels.alertname }} is {{ .Status }}
+    {{ end }}
+- orgID: 1
+  name: vbp.google.message
+  template: |
+    {{ define "vbp.google.message" }}
+      {{ range .Alerts.Firing }}
+      {{ .Annotations.summary }}
+      {{ .Annotations.description }}
+      {{ .GeneratorURL }}
+      {{ end }}
+    {{ end }}
