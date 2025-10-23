@@ -1000,7 +1000,7 @@
     {
       "datasource": {
         "type": "cloudwatch",
-        "uid": "cloudwatch-prod"
+        "uid": "cloudwatch-dev"
       },
       "description": "",
       "fieldConfig": {
@@ -1093,7 +1093,7 @@
         {
           "datasource": {
             "type": "cloudwatch",
-            "uid": "cloudwatch-prod"
+            "uid": "cloudwatch-dev"
           },
           "dimensions": {
             "application_name": "inbo-vbp-portal"
@@ -1117,7 +1117,7 @@
         {
           "datasource": {
             "type": "cloudwatch",
-            "uid": "cloudwatch-prod"
+            "uid": "cloudwatch-dev"
           },
           "dimensions": {
             "application_name": "inbo-vbp-portal",
