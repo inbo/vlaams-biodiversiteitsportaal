@@ -20,3 +20,4 @@ jobs:
     with:
       target_env: 'prod'
       google_notification: ${{ github.event.inputs.google_notification == null || fromJSON(github.event.inputs.google_notification) }}
+    secrets: inherit
