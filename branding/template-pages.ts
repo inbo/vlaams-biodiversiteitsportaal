@@ -71,6 +71,9 @@ async function cleanupOutputFolder(
     outputFolder: string,
 ): Promise<void> {
     // Get the files as an array
+
+    await fs.mkdir(outputFolder, { recursive: true });
+
     const files = await fs.readdir(outputFolder);
 
     // Loop them all with the new for...of

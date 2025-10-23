@@ -76,6 +76,16 @@ export default {
                     templateContentString: "{{{content}}}",
                     outputFolder: "./src/pages",
                 })),
+                ...(await downloadSpeciesPluginTabAssets({
+                    outputFolder: "./src/abv",
+                    assetsS3RelativePath: "ABV/abv-content.zip",
+                    assetsFilepath: "./abv-assets.zip",
+                })),
+                ...(await downloadSpeciesPluginTabAssets({
+                    outputFolder: "./src/faunabeheer",
+                    assetsS3RelativePath: "faunabeheer/faunabeheer-content.zip",
+                    assetsFilepath: "./faunabeheer-assets.zip",
+                })),
             },
             output: {
                 entryFileNames: (chunkInfo: PreRenderedChunk) => {
@@ -90,6 +100,7 @@ export default {
                 assetFileNames: ({ name, originalFileName }) => {
                     // Some custom naming rules to match expectations for the ala services
                     console.log("Asset file name:", name);
+
                     if (name.endsWith(".css")) {
                         if (name === "ala-styles.css") {
                             return `css/${name}`;
@@ -115,8 +126,6 @@ export default {
                 },
             },
         },
-        abvAssets: downloadSpeciesPluginTabAssets({ outputFolder: "./dist/abv", assetsS3RelativePath: "ABV/abv-content.zip", assetsFilepath: "./abv-assets.zip" }),
-        faunabeheerAssets: downloadSpeciesPluginTabAssets({ outputFolder: "./dist/faunabeheer", assetsS3RelativePath: "faunabeheer/faunabeheer-content.zip", assetsFilepath: "./faunabeheer-assets.zip" }),
     },
     css: {
         preprocessorOptions: {

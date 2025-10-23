@@ -25,12 +25,18 @@ dist-ssr
 
 .vite
 
-abv-assets.zip
 
-src/pages/*
-!src/pages/pages-layout.html
-!src/pages/pages.scss
 
 src/common/clients/.generated
 
 test-output.json
+
+# Ignore generated multipage assets, vite requires their path in dist to match the one in src
+src/abv/*
+src/faunabeheer/*
+src/pages/*
+!src/pages/pages-layout.html
+!src/pages/pages.scss
+
+abv-assets.zip
+faunabeheer-assets.zip
