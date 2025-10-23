@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # This (very basic) script generates environment-specific Grafana provisioning files
-# by templating existing "dev" files for "uat" and "prod" environments.
+# by templating existing "dev" files for "prod" environments. (uat is currently not running, so simlpy removed it)
 
 function template() {
   file="$1"
