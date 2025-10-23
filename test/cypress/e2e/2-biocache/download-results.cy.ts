@@ -2,6 +2,25 @@ import * as path from "path";
 import * as JSZip from "jszip";
 import { getFileNameTimeStamp } from "../../support/utils";
 
+describe("Biocache - Download Auth", () => {
+    it("Download requires login", () => {
+        cy.session("unauthenticated", () => {
+            cy.visit(
+                "/biocache-hub/occurrences/search?q=taxa%3A%22vulpes%20vulpes",
+            );
+            // Expand the Attribution facet
+            cy.get("#downloads > a").click();
+
+            cy.origin(Cypress.env("AUTH_URL"), () => {
+                cy.url().should(
+                    "match",
+                    new RegExp(`^${Cypress.env("AUTH_URL")}`),
+                );
+            });
+        });
+    });
+});
+
 describe("Biocache - Download", () => {
     let numberOfOccurrences = 0;
     beforeEach(() => {
@@ -28,23 +47,6 @@ describe("Biocache - Download", () => {
         cy.get("#returnedText > strong:first-of-type").should((elem) => {
             numberOfOccurrences = parseInt(elem.text().replace(/[.,]/g, ""));
             expect(numberOfOccurrences).to.be.greaterThan(10);
-        });
-    });
-
-    it("Download requires login", () => {
-        cy.session("unauthenticated", () => {
-            cy.visit(
-                "/biocache-hub/occurrences/search?q=taxa%3A%22vulpes%20vulpes",
-            );
-            // Expand the Attribution facet
-            cy.get("#downloads > a").click();
-
-            cy.origin(Cypress.env("AUTH_URL"), () => {
-                cy.url().should(
-                    "match",
-                    new RegExp(`^${Cypress.env("AUTH_URL")}`),
-                );
-            });
         });
     });
 
