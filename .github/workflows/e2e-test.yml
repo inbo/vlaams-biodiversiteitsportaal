@@ -1,5 +1,5 @@
 name: Run E2E tests against the VBP portal
-run-name: ${{ github.actor }} is testing the VBP portal @ ${{ github.event.inputs.env }}
+run-name: ${{ github.actor }} is testing the VBP portal @ ${{ github.event.inputs.target_env }}
 
 on:
   workflow_call:
@@ -9,7 +9,7 @@ on:
         required: false
         default: false
         type: boolean
-      env:
+      target_env:
         description: 'Environment to test'
         required: true
         default: prod
@@ -36,7 +36,7 @@ jobs:
         env:
           CYPRESS_VBP_USERNAME: ${{ secrets.CYPRESS_VBP_USERNAME }}
           CYPRESS_VBP_PASSWORD: ${{ secrets.CYPRESS_VBP_PASSWORD }}
-          CYPRESS_TARGET_ENV: ${{ github.event.inputs.env }}
+          CYPRESS_TARGET_ENV: ${{ github.event.inputs.target_env }}
         with:
           working-directory: ./test
 
@@ -64,7 +64,7 @@ jobs:
               {
                 "card": {
                   "header": {
-                    "title": "Automated Regression Test Failed @ ${{ github.event.inputs.env }}",
+                    "title": "Automated Regression Test Failed @ ${{ github.event.inputs.target_env }}",
                     "imageUrl": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.3TogH2tQvYaU5cv4-EEcvwHaHa%26pid%3DApi&f=1&ipt=39902d7c82156c8499eb40496594a16b7a1d97c47c7a284eb7d95465e04b0251",
                     "imageType": "SQUARE"
                   },
