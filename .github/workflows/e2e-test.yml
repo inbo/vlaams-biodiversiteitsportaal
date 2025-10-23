@@ -15,21 +15,6 @@ on:
         default: prod
         type: string
 
-  workflow_dispatch:
-    inputs:
-      google_notification:
-        description: 'Notify Google Chat on failure'
-        required: false
-        default: false
-        type: boolean
-      target_env:
-        description: 'Environment to test'
-        required: true
-        default: prod
-        type: choice
-        options:
-          - dev
-          - prod
 jobs:
   e2e-test:
     runs-on: [ self-hosted ]
