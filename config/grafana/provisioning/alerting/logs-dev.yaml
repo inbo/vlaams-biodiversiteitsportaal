@@ -6,26 +6,24 @@ groups:
       interval: 5m
       rules:
         - uid: cloudwatch-logs-dev
-          title: Errors and warnings
+          title: Errors logged by portal services
           condition: C
           data:
             - refId: A
               relativeTimeRange:
-                from: 300
+                from: 900
                 to: 0
               datasourceUid: cloudwatch-dev
               model:
-                datasource:
-                    type: cloudwatch
-                    uid: cloudwatch-dev
                 dimensions: {}
                 expression: |-
-                  fields @timestamp, @message, @logStream |
-                   filter @message like /\[ERROR\]/ |
-                   sort @timestamp desc |
-                   parse @message /\[ERROR\](?<@error>.+?)(?: \[AWS-XRAY-TRACE-ID: (?<@xrayTraceId>.+?)@(?<@xraySegementId>.+?)\])?\n/ |
-                   stats count(*) as count by @logStream, @error, bin(1m) |
-                   limit 100
+                    fields @timestamp, @message, @logStream |
+                      filter @message like /\[ERROR\]/ |
+                      sort @timestamp desc |
+                      parse @message /\[ERROR\](?<error>.+?)(?: \[AWS-XRAY-TRACE-ID: (?<@xrayTraceId>.+?)@(?<@xraySegementId>.+?)\])?\n/ |
+                      parse @logStream /^(?<service>.+?)\/(?<container>.+?)\/(?<containerId>.+)/ |
+                      stats count(*) as count by service, container, containerId, error, bin(1m) |
+                      limit 10
                 id: ""
                 intervalMs: 60000
                 label: ""
@@ -33,7 +31,7 @@ groups:
                     - arn: /inbo/vbp/ecs
                       name: /inbo/vbp/ecs
                 matchExact: true
-                maxDataPoints: 43200
+                maxDataPoints: 100
                 metricEditorMode: 0
                 metricName: ""
                 metricQueryType: 0
@@ -45,29 +43,33 @@ groups:
                 sqlExpression: ""
                 statistic: Average
                 statsGroups:
-                    - '@logStream'
-                    - '@error'
+                    - service
+                    - container
+                    - containerId
+                    - error
                     - bin(1m)
             - refId: B
               relativeTimeRange:
-                from: 300
+                from: 900
                 to: 0
               datasourceUid: __expr__
               model:
                 conditions:
                     - evaluator:
-                        params: []
+                        params:
+                            - 0
+                            - 0
                         type: gt
                       operator:
                         type: and
                       query:
-                        params:
-                            - B
+                        params: []
                       reducer:
                         params: []
-                        type: last
+                        type: avg
                       type: query
                 datasource:
+                    name: Expression
                     type: __expr__
                     uid: __expr__
                 expression: A
@@ -80,7 +82,7 @@ groups:
                 type: reduce
             - refId: C
               relativeTimeRange:
-                from: 300
+                from: 900
                 to: 0
               datasourceUid: __expr__
               model:
@@ -88,17 +90,18 @@ groups:
                     - evaluator:
                         params:
                             - 0
+                            - 0
                         type: gt
                       operator:
                         type: and
                       query:
-                        params:
-                            - C
+                        params: []
                       reducer:
                         params: []
-                        type: last
+                        type: avg
                       type: query
                 datasource:
+                    name: Expression
                     type: __expr__
                     uid: __expr__
                 expression: B
@@ -106,16 +109,15 @@ groups:
                 maxDataPoints: 43200
                 refId: C
                 type: threshold
-          dashboardUid: portal-health
-          panelId: 170
-          noDataState: NoData
+          dashboardUid: ecs-logs-dev
+          panelId: 1
+          noDataState: OK
           execErrState: Error
           for: 0s
           annotations:
-            __dashboardUid__: portal-health
-            __panelId__: "170"
-            description: An error was logged by {{ $labels }}
-            summary: Error occurred in the logs
-          labels:
-            env: dev
+            __dashboardUid__: ecs-logs-dev
+            __panelId__: "1"
+            description: <code>{{ reReplaceAll "\\x1b\\[[;\\d]*[A-Za-z]" "" $labels.error }}</code>
+            summary: 'Container {{ $labels.container }} for service {{ $labels.service }} logged an error:'
+          labels: {}
           isPaused: false
