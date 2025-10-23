@@ -12,7 +12,6 @@ datasources:
   - name: cloudwatch PROD
     type: cloudwatch
     uid: cloudwatch-prod
-    isDefault: true
     jsonData:
       defaultRegion: eu-west-1
       assumeRoleArn: arn:aws:iam::${AWS_ACCOUNT_ID_PROD}:role/inbo-vbp-grafana-prod-role
