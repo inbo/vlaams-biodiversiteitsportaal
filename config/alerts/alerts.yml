@@ -77,7 +77,7 @@ userdetails:
     url: "${common.protocol}://${common.domain}/userdetails/"
 
 useSpeciesListsAlerts: true
-useSpatialAlerts: true
+useSpatialAlerts: false
 useBlogsAlerts: false
 useCitizenScienceAlerts: true
 biosecurity:
