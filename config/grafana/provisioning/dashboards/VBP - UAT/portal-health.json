@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 13,
+  "id": 14,
   "links": [],
   "panels": [
     {
@@ -1000,7 +1000,7 @@
     {
       "datasource": {
         "type": "cloudwatch",
-        "uid": "cloudwatch-uat"
+        "uid": "cloudwatch-prod"
       },
       "description": "",
       "fieldConfig": {
@@ -1162,7 +1162,7 @@
         "alertName": "",
         "dashboardAlerts": false,
         "folder": {
-          "title": "VBP - DEV",
+          "title": "VBP - UAT",
           "uid": "df1tnm7qrcjcwc"
         },
         "groupBy": [],
@@ -1194,7 +1194,7 @@
     {
       "datasource": {
         "type": "cloudwatch",
-        "uid": "cloudwatch-dev"
+        "uid": "cloudwatch-uat"
       },
       "description": "",
       "fieldConfig": {
