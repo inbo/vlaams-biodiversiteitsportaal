@@ -1,5 +1,5 @@
 describe("Can login from the homepage", () => {
-    it.skip("Can login/logout with email and password and adjust banner login status", () => {
+    it("Can login/logout with email and password and adjust banner login status", () => {
         cy.visit("/");
 
         assertIsNotLoggedIn();

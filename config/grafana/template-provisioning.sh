@@ -20,7 +20,7 @@ while IFS= LC_ALL=C read -r -d '' -u 9 file
 do
   # If the filepath contains "dev" (case insensitive), template it for other environments
   if [[ "${file,,}" == *"dev"* ]]; then
-    for env in "uat" "prod"; do
+    for env in "prod"; do
       template "$file" "$env"
     done
   fi

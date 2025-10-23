@@ -1,19 +1,19 @@
 apiVersion: 1
 groups:
     - orgId: 1
-      name: Test
-      folder: VBP - PROD
+      name: Cloudwatch alerts
+      folder: VBP - DEV
       interval: 1m
       rules:
-        - uid: bf1to65xbdiwwf
-          title: Test google chat
+        - uid: alerts-error-logs-dev
+          title: Errors in ECS logs
           condition: C
           data:
             - refId: A
               relativeTimeRange:
                 from: 900
                 to: 0
-              datasourceUid: cloudwatch-prod
+              datasourceUid: cloudwatch-dev
               model:
                 dimensions: {}
                 expression: |-
@@ -109,26 +109,26 @@ groups:
                 maxDataPoints: 43200
                 refId: C
                 type: threshold
-          dashboardUid: ecs-logs-prod
+          dashboardUid: ecs-logs-dev
           panelId: 1
           noDataState: OK
           execErrState: Error
           for: 0s
           annotations:
-            __dashboardUid__: ecs-logs-prod
+            __dashboardUid__: ecs-logs-dev
             __panelId__: "1"
             description: <code>{{ reReplaceAll "\\x1b\\[[;\\d]*[A-Za-z]" "" $labels.error }}</code>
             summary: 'Container {{ $labels.container }} for service {{ $labels.service }} logged an error:'
           isPaused: false
-        - uid: df1weyr65h4w0f
-          title: Running tasks
+        - uid: alerts-running-tasks-dev
+          title: Failing running tasks
           condition: E
           data:
             - refId: A
               relativeTimeRange:
                 from: 600
                 to: 0
-              datasourceUid: cloudwatch-prod
+              datasourceUid: cloudwatch-dev
               model:
                 dimensions:
                     ClusterName: inbo-vbp-cluster
@@ -154,16 +154,15 @@ groups:
               relativeTimeRange:
                 from: 600
                 to: 0
-              datasourceUid: cloudwatch-prod
+              datasourceUid: cloudwatch-dev
               model:
                 datasource:
                     type: cloudwatch
-                    uid: cloudwatch-prod
+                    uid: cloudwatch-dev
                 dimensions:
                     ClusterName: inbo-vbp-cluster
                     ServiceName: '*'
                 expression: ""
-                hide: false
                 id: ""
                 intervalMs: 60000
                 label: ""
@@ -205,7 +204,6 @@ groups:
                     type: __expr__
                     uid: __expr__
                 expression: $B - $A
-                hide: false
                 intervalMs: 1000
                 maxDataPoints: 43200
                 refId: C
@@ -235,7 +233,6 @@ groups:
                     type: __expr__
                     uid: __expr__
                 expression: C
-                hide: false
                 intervalMs: 1000
                 maxDataPoints: 43200
                 reducer: last
@@ -263,22 +260,25 @@ groups:
                     type: __expr__
                     uid: __expr__
                 expression: D
-                hide: false
                 intervalMs: 1000
                 maxDataPoints: 43200
                 refId: E
                 type: threshold
-          dashboardUid: portal-health-prod
+          dashboardUid: portal-health-dev
           panelId: 97
           noDataState: NoData
           execErrState: Error
           for: 5m
           annotations:
-            __dashboardUid__: portal-health-prod
+            __dashboardUid__: portal-health-dev
             __panelId__: "97"
+            description: ""
+            runbook_url: ""
             summary: '{{ $labels.ServiceName }} doesn''t have enough running tasks'
+          labels:
+            "": ""
           isPaused: false
-        - uid: bf1wf8w1j13pce
+        - uid: alerts-elb-target-health-dev
           title: Load Balancer Target Health
           condition: C
           data:
@@ -286,7 +286,7 @@ groups:
               relativeTimeRange:
                 from: 600
                 to: 0
-              datasourceUid: cloudwatch-prod
+              datasourceUid: cloudwatch-dev
               model:
                 dimensions:
                     LoadBalancer: app/inbo-vbp-public/a744d69ec78da33a
@@ -366,17 +366,17 @@ groups:
                 maxDataPoints: 43200
                 refId: C
                 type: threshold
-          dashboardUid: portal-health-prod
+          dashboardUid: portal-health-dev
           panelId: 168
           noDataState: NoData
           execErrState: Error
           for: 5m
           annotations:
-            __dashboardUid__: portal-health-prod
+            __dashboardUid__: portal-health-dev
             __panelId__: "168"
             summary: Load balancer target {{ $labels.TargetGroup }} has unhealthy hosts
           isPaused: false
-        - uid: ef1whc9e5reo0f
+        - uid: alerts-aws-rum-errors-dev
           title: AWS RUM Error
           condition: C
           data:
@@ -384,7 +384,7 @@ groups:
               relativeTimeRange:
                 from: 600
                 to: 0
-              datasourceUid: cloudwatch-prod
+              datasourceUid: cloudwatch-dev
               model:
                 dimensions:
                     application_name: inbo-vbp-portal
@@ -467,9 +467,5 @@ groups:
           execErrState: Error
           for: 0s
           annotations:
-            description: ""
-            runbook_url: ""
             summary: Some JS Errors were detected in the front-end
-          labels:
-            "": ""
           isPaused: false
