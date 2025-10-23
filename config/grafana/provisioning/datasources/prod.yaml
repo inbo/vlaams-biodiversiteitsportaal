@@ -7,13 +7,13 @@ datasources:
     isDefault: false
     jsonData:
       defaultRegion: eu-west-1
-      assumeRoleArn: arn:aws:iam::${AWS_ACCOUNT_ID_PROD}:role/inbo-vbp-grafana-role
+      assumeRoleArn: arn:aws:iam::${AWS_ACCOUNT_ID_PROD}:role/inbo-vbp-grafana-data-role
 
   - name: cloudwatch PROD
     type: cloudwatch
     uid: cloudwatch-prod
     jsonData:
       defaultRegion: eu-west-1
-      assumeRoleArn: arn:aws:iam::${AWS_ACCOUNT_ID_PROD}:role/inbo-vbp-grafana-role
+      assumeRoleArn: arn:aws:iam::${AWS_ACCOUNT_ID_PROD}:role/inbo-vbp-grafana-data-role
       customMetricsNamespaces: Inbo/VBP
       tracingDatasourceUid: x-ray-prod

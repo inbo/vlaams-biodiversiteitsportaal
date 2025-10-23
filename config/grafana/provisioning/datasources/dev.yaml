@@ -7,7 +7,7 @@ datasources:
     isDefault: false
     jsonData:
       defaultRegion: eu-west-1
-      assumeRoleArn: arn:aws:iam::${AWS_ACCOUNT_ID_DEV}:role/inbo-vbp-grafana-role
+      assumeRoleArn: arn:aws:iam::${AWS_ACCOUNT_ID_DEV}:role/inbo-vbp-grafana-data-role
 
   - name: cloudwatch DEV
     type: cloudwatch
@@ -15,6 +15,6 @@ datasources:
     isDefault: true
     jsonData:
       defaultRegion: eu-west-1
-      assumeRoleArn: arn:aws:iam::${AWS_ACCOUNT_ID_DEV}:role/inbo-vbp-grafana-role
+      assumeRoleArn: arn:aws:iam::${AWS_ACCOUNT_ID_DEV}:role/inbo-vbp-grafana-data-role
       customMetricsNamespaces: Inbo/VBP
       tracingDatasourceUid: x-ray-dev
