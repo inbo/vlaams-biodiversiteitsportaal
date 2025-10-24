@@ -14,16 +14,5 @@ contactPoints:
                 template: '{{ template "vbp.google.custom" . }}'
           disableResolveMessage: false
 
-policies:
-  - orgId: 1
-    receiver: grafana-default-email
-    group_by: ['grafana_folder', 'alertname']
-    group_wait: 30s
-    group_interval: 5m
-    repeat_interval: 4h
-    routes:
-      - receiver: google-chat-vbp-alerts
-        matchers:
-          - notify = "google"
-        mute_time_intervals:
-          - outside-working-hours
+resetPolicies:
+  - 1
