@@ -4,18 +4,26 @@ contactPoints:
       name: Google Chat
       receivers:
         - uid: google-chat-vbp-alerts
-          type: googlechat
-          settings:
-            url: ${GOOGLE_CHAT_WEBHOOK_URL}
-            title: |
-              {{ template "vbp.google.title" . }}
-            message: |
-              {{ template "vbp.google.message" . }}
-          disableResolveMessage: false
-        - uid: google-chat-vbp-alerts-custom
           type: webhook
           settings:
             url: ${GOOGLE_CHAT_WEBHOOK_URL}
-            customPayload: |
-              {{ template "vbp.google.custom" . }}
+            headers:
+                Content-Type: application/json
+            httpMethod: POST
+            payload:
+                template: '{{ template "vbp.google.custom" . }}'
           disableResolveMessage: false
+
+policies:
+  - orgId: 1
+    receiver: grafana-default-email
+    group_by: ['grafana_folder', 'alertname']
+    group_wait: 30s
+    group_interval: 5m
+    repeat_interval: 4h
+    routes:
+      - receiver: google-chat-vbp-alerts
+        matchers:
+          - notify = "google"
+        mute_time_intervals:
+          - outside-working-hours
