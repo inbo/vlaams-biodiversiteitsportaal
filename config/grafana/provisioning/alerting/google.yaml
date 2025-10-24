@@ -12,6 +12,10 @@ contactPoints:
             message: |
               {{ template "vbp.google.message" . }}
           disableResolveMessage: false
-deleteContactPoints:
-  - orgId: 1
-    uid: google-chat-vb-alerts
+        - uid: google-chat-vbp-alerts-custom
+          type: webhook
+          settings:
+            url: ${GOOGLE_CHAT_WEBHOOK_URL}
+            customPayload: |
+              {{ template "vbp.google.custom" . }}
+          disableResolveMessage: false
