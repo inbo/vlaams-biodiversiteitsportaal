@@ -20,7 +20,7 @@ groups:
                     fields @timestamp, @message, @logStream |
                       filter @message like /\[ERROR\]/ |
                       sort @timestamp desc |
-                      parse @message /\[ERROR\](?<error>.+?)(?: \[AWS-XRAY-TRACE-ID: (?<@xrayTraceId>.+?)@(?<@xraySegementId>.+?)\])?\n/ |
+                      parse @message /\[ERROR\].+\[(?<logger>.+?)\].+? (?<error>.+?)(?: \[AWS-XRAY-TRACE-ID: (?<@xrayTraceId>.+?)@(?<@xraySegementId>.+?)\])?\n/ |
                       parse @logStream /^(?<service>.+?)\/(?<container>.+?)\/(?<containerId>.+)/ |
                       stats count(*) as count by service, container, containerId, error, bin(1m) |
                       limit 10
@@ -117,7 +117,7 @@ groups:
           annotations:
             __dashboardUid__: ecs-logs-dev
             __panelId__: "1"
-            description: '{{ reReplaceAll "\\x1b\\[[;\\d]*[A-Za-z]" "" $labels.error }}'
+            description: '{{ $labels.error }}'
             summary: 'Container {{ $labels.container }} for service {{ $labels.service }} logged an error:'
           isPaused: false
           labels:
