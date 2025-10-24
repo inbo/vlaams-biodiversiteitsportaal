@@ -6,7 +6,7 @@ muteTimes:
     time_intervals:
       - times:
           - start_time: '18:00'
-            end_time: '9:00'
+            end_time: '09:00'
         weekdays: ['monday:friday']
         location: 'Europe/Brussels'
       - weekdays: ['saturday:sunday']
