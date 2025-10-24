@@ -3,7 +3,7 @@ groups:
     - orgId: 1
       name: Cloudwatch alerts
       folder: VBP - DEV
-      interval: 1m
+      interval: 10m
       rules:
         - uid: alerts-error-logs-dev
           title: Errors in ECS logs
