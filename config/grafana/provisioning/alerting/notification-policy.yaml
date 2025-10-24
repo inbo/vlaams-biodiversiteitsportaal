@@ -7,9 +7,9 @@ policies:
     group_wait: 30s
     group_interval: 5m
     repeat_interval: 4h
-#    routes:
-#      - receiver: google-chat-vbp-alerts
-#        matchers:
-#          - notify = "google"
-#        mute_time_intervals:
-#          - outside-working-hours
+    routes:
+      - receiver: google-chat-vbp-alerts
+        matchers:
+          - notify = "google"
+        mute_time_intervals:
+          - outside-working-hours
