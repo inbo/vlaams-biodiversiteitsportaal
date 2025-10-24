@@ -117,7 +117,7 @@ groups:
           annotations:
             __dashboardUid__: ecs-logs-dev
             __panelId__: "1"
-            description: <code>{{ reReplaceAll "\\x1b\\[[;\\d]*[A-Za-z]" "" $labels.error }}</code>
+            description: '{{ reReplaceAll "\\x1b\\[[;\\d]*[A-Za-z]" "" $labels.error }}'
             summary: 'Container {{ $labels.container }} for service {{ $labels.service }} logged an error:'
           isPaused: false
           labels:

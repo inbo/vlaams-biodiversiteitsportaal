@@ -27,8 +27,112 @@ templates:
       {{ end }}
     {{ end }}
 - orgId: 1
-  name: vbp.grafana.logsDashboardLink
+  name: vbp.google.cardsV2
   template: |-
-    {{ define "vbp.grafana.logsDashboardLink" }}
-      {{ .DashboardURL }}&var-service={{.Labels.service}}&var-log_stream={{.Labels.container}}%5C%2F{{.Labels.containerId}}
-    {{ end }}
+    {{ define "vbp.google.cardsV2" -}}
+    {
+      "cardsV2": [
+        {
+          "card": {
+            "header": {
+              "title": "{{ len .Alerts }} Problems(s) @ {{ .CommonLabels.grafana_folder }}",
+              "imageUrl": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.3TogH2tQvYaU5cv4-EEcvwHaHa%26pid%3DApi&f=1&ipt=39902d7c82156c8499eb40496594a16b7a1d97c47c7a284eb7d95465e04b0251",
+              "imageType": "SQUARE"
+            },
+            "sections": [
+              {
+                "collapsible": true,
+                "collapseControl": {
+                  "horizontalAlignment": "CENTER",
+                  "collapseButton": {
+                    "icon": {
+                      "materialIcon": {
+                        "name": "attachment"
+                      }
+                    },
+                    "text": "Show less",
+                    "type": "BORDERLESS"
+                  },
+                  "expandButton": {
+                    "icon": {
+                      "materialIcon": {
+                        "name": "attachment"
+                      }
+                    },
+                    "text": "Show more",
+                    "type": "BORDERLESS"
+                  }
+                },
+                "uncollapsibleWidgetsCount": 4,
+                "widgets": [
+                {{ range $idx, $alert := .Alerts -}}
+                {{- if gt $idx 0 -}},{{- end }}
+                {{ template "vbp.google.cardsV2.alert" $alert }}
+                {{- end }}
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+    {{- end }}
+    
+    {{ define "vbp.google.cardsV2.alert" -}}
+    {
+      "textParagraph": {
+        "text": "{{ .Labels.alertname }}"
+      }
+    },
+    {{ template "vbp.google.cardsV2.alert.instance" . }}
+    {{- end}}
+    
+    
+    {{ define "vbp.google.cardsV2.alert.instance" -}}
+    {
+      "decoratedText": {
+        "topLabel": "{{ .Annotations.summary }}",
+        "text": "<font color=\"#b10000\">{{ .Annotations.description }}</font> {{ . }}",
+        "startIcon": {
+          "materialIcon": {
+            "name": "{{ if eq .Status "firing" -}}error{{- else -}}ok{{- end }}",
+            "fill": true,
+            "weight": 200,
+            "grade": -25
+          }
+        }
+      }
+    },
+    {
+      "chipList": {
+        "chips": [
+          {
+            "label": "View in logs",
+            "icon": {
+              "materialIcon": {
+                "name": "format_align_left"
+              }
+            },
+            "onClick": {
+              "openLink": {
+                "url": "https://developers.google.com/workspace/chat/design-interactive-card-dialog"
+              }
+            }
+          },
+          {
+            "label": "Silence",
+            "icon": {
+              "materialIcon": {
+                "name": "notifications_off"
+              }
+            },
+            "onClick": {
+              "openLink": {
+                "url": "{{ .SilenceURL }}"
+              }
+            }
+          }
+        ]
+      }
+    }
+    {{- end}}
