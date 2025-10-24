@@ -1,12 +1,12 @@
 apiVersion: 1
 templates:
-- orgID: 1
+- orgId: 1
   name: vbp.google.title
   template: |-
     {{ define "vbp.google.title" }}
     🚨 {{.CommonLabels.alertname }} is {{ .Status }}
     {{ end }}
-- orgID: 1
+- orgId: 1
   name: vbp.google.message
   template: |-
     {{ define "vbp.google.message" }}
@@ -26,7 +26,7 @@ templates:
         {{- end }}
       {{ end }}
     {{ end }}
-- orgID: 1
+- orgId: 1
   name: vbp.grafana.logsDashboardLink
   template: |-
     {{ define "vbp.grafana.logsDashboardLink" }}

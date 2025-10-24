@@ -7,7 +7,7 @@ contactPoints:
           type: googlechat
           settings:
             url: ${GOOGLE_CHAT_WEBHOOK_URL}
-          disableResolveMessage: true
+          disableResolveMessage: false
           title: |-
             {{ template "vbp.google.title" . }}
           message: |-
