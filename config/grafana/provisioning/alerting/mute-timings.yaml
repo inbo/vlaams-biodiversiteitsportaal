@@ -11,5 +11,5 @@ muteTimes:
             end_time: '24:00'
         weekdays: ['monday:friday']
         location: 'Europe/Brussels'
-      - weekdays: ['saturday:sunday']
+      - weekdays: ['saturday', 'sunday']
         location: 'Europe/Brussels'
