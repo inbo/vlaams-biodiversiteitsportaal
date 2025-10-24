@@ -10,6 +10,6 @@ policies:
     routes:
       - receiver: google-chat-vbp-alerts
         matchers:
-          - alertname = "Errors logged by portal services"
+          - notify = "google"
         mute_time_intervals:
           - outside-working-hours

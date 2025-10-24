@@ -120,6 +120,8 @@ groups:
             description: <code>{{ reReplaceAll "\\x1b\\[[;\\d]*[A-Za-z]" "" $labels.error }}</code>
             summary: 'Container {{ $labels.container }} for service {{ $labels.service }} logged an error:'
           isPaused: false
+          labels:
+            "notify": "google"
         - uid: alerts-running-tasks-dev
           title: Failing running tasks
           condition: E
@@ -276,7 +278,7 @@ groups:
             runbook_url: ""
             summary: '{{ $labels.ServiceName }} doesn''t have enough running tasks'
           labels:
-            "": ""
+            "notify": "google"
           isPaused: false
         - uid: alerts-elb-target-health-dev
           title: Load Balancer Target Health
@@ -376,6 +378,8 @@ groups:
             __panelId__: "168"
             summary: Load balancer target {{ $labels.TargetGroup }} has unhealthy hosts
           isPaused: false
+          labels:
+            "notify": "google"
         - uid: alerts-aws-rum-errors-dev
           title: AWS RUM Error
           condition: C
@@ -469,3 +473,5 @@ groups:
           annotations:
             summary: Some JS Errors were detected in the front-end
           isPaused: false
+          labels:
+            "notify": "google"
