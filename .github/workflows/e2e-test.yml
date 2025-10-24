@@ -54,7 +54,7 @@ jobs:
           retention-days: 5
 
       - name: Notify Google Chat
-        if: failure() && github.event.inputs.google_notification
+        if: failure() && github.event.inputs.google_notification == null || github.event.inputs.google_notification == true
         env:
           GOOGLE_CHAT_WEBHOOK_URL: ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
         run: |
