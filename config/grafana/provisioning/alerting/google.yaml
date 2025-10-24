@@ -3,7 +3,7 @@ contactPoints:
     - orgId: 1
       name: Google Chat
       receivers:
-        - uid: google-chat-vb-alerts
+        - uid: google-chat-vbp-alerts
           type: googlechat
           settings:
             url: ${GOOGLE_CHAT_WEBHOOK_URL}
@@ -12,3 +12,6 @@ contactPoints:
             message: |
               {{ template "vbp.google.message" . }}
           disableResolveMessage: false
+deleteContactPoints:
+  - orgId: 1
+    uid: google-chat-vb-alerts
