@@ -5,8 +5,10 @@ muteTimes:
     name: outside-working-hours
     time_intervals:
       - times:
-          - start_time: '18:00'
+          - start_time: '00:00'
             end_time: '09:00'
+          - start_time: '18:00'
+            end_time: '24:00'
         weekdays: ['monday:friday']
         location: 'Europe/Brussels'
       - weekdays: ['saturday:sunday']
