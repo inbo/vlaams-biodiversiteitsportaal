@@ -13,12 +13,12 @@ templates:
       {{ if .Alerts.Firing -}}
         {{ len .Alerts.Firing }} firing alert(s)
         {{ range .Alerts.Firing }}
-        <b>{{ trimSpace .Annotations.summary }}</b> 
+        <b>{{ trimSpace .Annotations.summary }}</b>
         {{- if eq $.CommonLabels.alertname "Errors logged by portal services" -}}<a href={{ template "vbp.grafana.logsDashboardLink" . }}>🖹</a> <a href={{ .SilenceURL }}>🔕</a>{{ end }}
         {{ trimSpace .Annotations.description }}
         {{ end }}
       {{ end }}
-    
+
       {{ if .Alerts.Resolved -}}
         {{ len .Alerts.Resolved }} resolved alert(s)
         {{ range .Alerts.Resolved }}
