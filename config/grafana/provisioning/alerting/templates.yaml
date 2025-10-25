@@ -35,7 +35,7 @@ templates:
         {
           "card": {
             "header": {
-              "title": "{{ len .Alerts }} Problems(s) @ {{ .CommonLabels.grafana_folder }}",
+              "title": "{{ len .Alerts }} Problem(s) @ {{ .CommonLabels.grafana_folder }}",
               "imageUrl": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.3TogH2tQvYaU5cv4-EEcvwHaHa%26pid%3DApi&f=1&ipt=39902d7c82156c8499eb40496594a16b7a1d97c47c7a284eb7d95465e04b0251",
               "imageType": "SQUARE"
             },
@@ -47,7 +47,7 @@ templates:
                   "collapseButton": {
                     "icon": {
                       "materialIcon": {
-                        "name": "attachment"
+                        "name": "keyboard_arrow_up"
                       }
                     },
                     "text": "Show less",
@@ -56,18 +56,34 @@ templates:
                   "expandButton": {
                     "icon": {
                       "materialIcon": {
-                        "name": "attachment"
+                        "name": "keyboard_arrow_down"
                       }
                     },
                     "text": "Show more",
                     "type": "BORDERLESS"
                   }
                 },
-                "uncollapsibleWidgetsCount": 4,
+                "uncollapsibleWidgetsCount": 6,
                 "widgets": [
                 {{ range $idx, $alert := .Alerts -}}
-                {{- if gt $idx 0 -}},{{- end }}
-                {{ template "vbp.google.cardsV2.alert" $alert }}
+                {{- if gt $idx 0 -}}
+                  ,
+                  {{ $prev_index := len (slice (printf "%*s" $idx "") 1)}}
+                  {{- if ne (index $.Alerts $prev_index).Labels.alertname .Labels.alertname -}}
+                  {
+                    "textParagraph": {
+                      "text": "{{ .Labels.alertname }}"
+                    }
+                  },    
+                  {{- end -}}
+                  {{- else -}}
+                  {
+                    "textParagraph": {
+                      "text": "{{ .Labels.alertname }}"
+                    }
+                  },  
+                {{- end }}
+                {{ template "vbp.google.custom.alert" $alert }}
                 {{- end }}
                 ]
               }
@@ -78,24 +94,14 @@ templates:
     }
     {{- end }}
     
-    {{ define "vbp.google.cardsV2.alert" -}}
-    {
-      "textParagraph": {
-        "text": "{{ .Labels.alertname }}"
-      }
-    },
-    {{ template "vbp.google.cardsV2.alert.instance" . }}
-    {{- end}}
-    
-    
-    {{ define "vbp.google.cardsV2.alert.instance" -}}
+    {{ define "vbp.google.custom.alert" -}}
     {
       "decoratedText": {
-        "topLabel": "{{ .Annotations.summary }}",
-        "text": "<font color=\"#b10000\">{{ .Annotations.description }}</font> {{ . }}",
+        "topLabel": "<a href=\"{{ .PanelURL }}\">{{ reReplaceAll "\"" "\\\"" .Annotations.summary }}</a>",
+        "text": "<font color=\"{{ if eq .Status "resolved" -}}#00b11d{{- else -}}#b10000{{- end }}\">{{ reReplaceAll "\"" "\\\""  .Annotations.description }}</font>",
         "startIcon": {
           "materialIcon": {
-            "name": "{{ if eq .Status "firing" -}}error{{- else -}}ok{{- end }}",
+            "name": "{{ if eq .Status "resolved" -}}check{{- else -}}error{{- end }}",
             "fill": true,
             "weight": 200,
             "grade": -25
@@ -106,19 +112,6 @@ templates:
     {
       "chipList": {
         "chips": [
-          {
-            "label": "View in logs",
-            "icon": {
-              "materialIcon": {
-                "name": "format_align_left"
-              }
-            },
-            "onClick": {
-              "openLink": {
-                "url": "https://developers.google.com/workspace/chat/design-interactive-card-dialog"
-              }
-            }
-          },
           {
             "label": "Silence",
             "icon": {
