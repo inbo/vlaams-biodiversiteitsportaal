@@ -294,7 +294,7 @@ groups:
               datasourceUid: cloudwatch-prod
               model:
                 dimensions:
-                    LoadBalancer: app/inbo-vbp-public/a744d69ec78da33a
+                    LoadBalancer: app/inbo-vbp-public/fa1948ee28943b3f
                     TargetGroup: '*'
                 expression: ""
                 id: ""
