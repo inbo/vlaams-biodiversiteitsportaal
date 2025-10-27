@@ -127,6 +127,7 @@ templates:
       {{ if .Annotations.service }}&var-service{{ .Annotations.service }}{{ end -}}
       {{ if gt (len $log_stream) 0 }}&var-log_stream={{ $log_stream }}{{ end -}}
     {{ end }}
+    
 deleteTemplates:
   - orgId: 1
     name: vbp.google.title

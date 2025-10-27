@@ -54,7 +54,7 @@ policies:
             - 'false'
         active_time_intervals:
           - during-working-hours
-      - receiver: google-chat-vbp
+      - receiver: google-chat-vbp-alerts
         object_matchers:
           - - notify
             - =
