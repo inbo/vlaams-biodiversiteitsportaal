@@ -75,7 +75,7 @@ templates:
     {
       "decoratedText": {
         "text": "<font color=\"{{ if eq .Status "resolved" -}}#00b11d{{- else -}}#b10000{{- end }}\">{{ $summary }}</font>",
-        "bottomLabel": "{{ $description }}",
+        "bottomLabel": {{ $description }},
         "startIcon": {
           "materialIcon": {
             "name": "{{ if eq .Status "resolved" -}}check{{- else -}}error{{- end }}",
