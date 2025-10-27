@@ -3,7 +3,7 @@ templates:
 - orgId: 1
   name: vbp.google.cardsV2
   template: |-
-    {{ define "vbp.google.cardsV2" -}}
+    {{ define "vbp.google.custom" -}}
     {
       "cardsV2": [
         {
@@ -69,10 +69,14 @@ templates:
     {{- end }}
     
     {{ define "vbp.google.custom.alert" -}}
+    {{ $summary := data.ToJSON .Annotations.summary -}}
+    {{ $summary = slice $summary 1 (len (slice (printf "%*s" (len $summary) "") 1))  -}}
+    {{ $description := data.ToJSON .Annotations.description -}}
+    {{ $description = slice $description 1 (len (slice (printf "%*s" (len $description) "") 1))  -}}
     {
       "decoratedText": {
-        "topLabel": "{{ if .GeneratorURL }}<a href=\"{{ .GeneratorURL }}\">{{ end }}{{ reReplaceAll "\"" "\\\"" .Annotations.summary }}{{ if .GeneratorURL }}</a>{{ end }}",
-        "text": "<font color=\"{{ if eq .Status "resolved" -}}#00b11d{{- else -}}#b10000{{- end }}\">{{ reReplaceAll "\"" "\\\""  .Annotations.description }}</font>",
+        "topLabel": "{{ if .GeneratorURL }}<a href=\"{{ .GeneratorURL }}\">{{ end }}{{ $summary }}{{ if .GeneratorURL }}</a>{{ end }}",
+        "text": "<font color=\"{{ if eq .Status "resolved" -}}#00b11d{{- else -}}#b10000{{- end }}\">{{ $description }}</font>",
         "startIcon": {
           "materialIcon": {
             "name": "{{ if eq .Status "resolved" -}}check{{- else -}}error{{- end }}",
@@ -121,10 +125,10 @@ templates:
     
     {{ define "logs-dashboard-link" -}}
       {{ $log_stream:= "" -}}
-      {{ if .Annotations.container }}{{ $log_stream = .Annotations.container }}{{ end -}}
-      {{ if .Annotations.containerId }}{{ $log_stream = print $log_stream "%5C%2F" .Annotations.containerId }}{{ end -}}
+      {{ if .Labels.container }}{{ $log_stream = .Labels.container }}{{ end -}}
+      {{ if .Labels.containerId }}{{ $log_stream = print $log_stream "%5C%2F" .Labels.containerId }}{{ end -}}
       {{ .PanelURL -}}
-      {{ if .Annotations.service }}&var-service{{ .Annotations.service }}{{ end -}}
+      {{ if .Labels.service }}&var-service{{ .Labels.service }}{{ end -}}
       {{ if gt (len $log_stream) 0 }}&var-log_stream={{ $log_stream }}{{ end -}}
     {{ end }}
     
