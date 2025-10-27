@@ -63,7 +63,7 @@ templates:
                     "type": "BORDERLESS"
                   }
                 },
-                "uncollapsibleWidgetsCount": 6,
+                "uncollapsibleWidgetsCount": 4,
                 "widgets": [
                 {{ range $idx, $alert := .Alerts -}}
                 {{- if gt $idx 0 -}}
@@ -97,7 +97,7 @@ templates:
     {{ define "vbp.google.custom.alert" -}}
     {
       "decoratedText": {
-        "topLabel": "<a href=\"{{ .PanelURL }}\">{{ reReplaceAll "\"" "\\\"" .Annotations.summary }}</a>",
+        "topLabel": "{{ if .GeneratorURL }}<a href=\"{{ .GeneratorURL }}\">{{ end }}{{ reReplaceAll "\"" "\\\"" .Annotations.summary }}{{ if .GeneratorURL }}</a>{{ end }}",
         "text": "<font color=\"{{ if eq .Status "resolved" -}}#00b11d{{- else -}}#b10000{{- end }}\">{{ reReplaceAll "\"" "\\\""  .Annotations.description }}</font>",
         "startIcon": {
           "materialIcon": {
@@ -112,6 +112,21 @@ templates:
     {
       "chipList": {
         "chips": [
+          {{ if .PanelURL }}
+          {
+            "label": "View in dashboard",
+            "icon": {
+              "materialIcon": {
+                "name": "monitoring"
+              }
+            },
+            "onClick": {
+              "openLink": {
+                "url": "{{ if eq .Labels.alertname "Errors in ECS logs" }}{{ template "logs-dashboard-link" . }}{{ else }}{{ .PanelURL }}{{ end }}"
+              }
+            }
+          },
+          {{ end }}
           {
             "label": "Silence",
             "icon": {
@@ -129,3 +144,12 @@ templates:
       }
     }
     {{- end}}
+    
+    {{ define "logs-dashboard-link" -}}
+      {{ $log_stream:= "" -}}
+      {{ if .Annotations.container }}{{ $log_stream = .Annotations.container }}{{ end -}}
+      {{ if .Annotations.containerId }}{{ $log_stream = print $log_stream "%5C%2F" .Annotations.containerId }}{{ end -}}
+      {{ .PanelURL -}}
+      {{ if .Annotations.service }}&var-service{{ .Annotations.service }}{{ end -}}
+      {{ if gt (len $log_stream) 0 }}&var-log_stream={{ $log_stream }}{{ end -}}
+    {{ end }}
