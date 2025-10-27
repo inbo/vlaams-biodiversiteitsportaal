@@ -49,7 +49,7 @@ groups:
                     - service
                     - container
                     - containerId
-                    - error
+                    - e
                     - bin(1m)
             - refId: B
               relativeTimeRange:

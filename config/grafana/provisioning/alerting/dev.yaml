@@ -25,7 +25,7 @@ groups:
                     fields coalesce(traceLog, '') as t |
                     fields replace(error, t, '') as e |
                     parse @logStream /^(?<service>.+?)\/(?<container>.+?)\/(?<containerId>.+)/ |
-                    stats count(*) as c by bin(1m) as ts, service, container, containerId, e |
+                    stats count(*) as count by bin(1m), service, container, containerId, e |
                     limit 10
                 id: ""
                 intervalMs: 60000
@@ -49,7 +49,7 @@ groups:
                     - service
                     - container
                     - containerId
-                    - error
+                    - e
                     - bin(1m)
             - refId: B
               relativeTimeRange:
