@@ -129,7 +129,8 @@ templates:
       {{ .PanelURL -}}
       {{ if .Labels.service }}&var-service{{ .Labels.service }}{{ end -}}
       {{ if gt (len $log_stream) 0 }}&var-log_stream={{ $log_stream }}{{ end -}}
-    {{ end }}
+      &var.query=%5C%5BERROR%5C%5D
+    {{- end }}
     
 deleteTemplates:
   - orgId: 1
