@@ -13,6 +13,10 @@ contactPoints:
             payload:
                 template: '{{ template "vbp.google.cardsV2" . }}'
           disableResolveMessage: false
+
+    - orgId: 1
+      name: Google Chat Without Resolve
+      receivers:
         - uid: google-chat-vbp-alerts-without-resolve
           type: webhook
           settings:
