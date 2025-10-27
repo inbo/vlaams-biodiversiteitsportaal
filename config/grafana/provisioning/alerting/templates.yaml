@@ -3,7 +3,7 @@ templates:
 - orgId: 1
   name: vbp.google.cardsV2
   template: |-
-    {{ define "vbp.google.custom" -}}
+    {{ define "vbp.google.cardsV2" -}}
     {
       "cardsV2": [
         {
@@ -57,7 +57,7 @@ templates:
                     }
                   },  
                 {{- end }}
-                {{ template "vbp.google.custom.alert" $alert }}
+                {{ template "vbp.google.cardsV2.alert" $alert }}
                 {{- end }}
                 ]
               }
@@ -68,7 +68,7 @@ templates:
     }
     {{- end }}
     
-    {{ define "vbp.google.custom.alert" -}}
+    {{ define "vbp.google.cardsV2.alert" -}}
     {{ $summary := data.ToJSON .Annotations.summary -}}
     {{ $summary = slice $summary 1 (len (slice (printf "%*s" (len $summary) "") 1))  -}}
     {{ $description := data.ToJSON .Annotations.description -}}
