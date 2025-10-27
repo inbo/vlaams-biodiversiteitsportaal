@@ -20,7 +20,7 @@ groups:
                     fields @timestamp, @message, @logStream |
                       filter @message like /\[ERROR\]/ |
                       sort @timestamp desc |
-                      parse @message /\[ERROR\](?<error>.+?)(?: \[AWS-XRAY-TRACE-ID: (?<@xrayTraceId>.+?)@(?<@xraySegementId>.+?)\])?\n/ |
+                      parse @message /\[ERROR\](?:\x1b\[[;\d]*[A-Za-z] \x1b\[[;\d]*[A-Za-z]\[(?<logger>[^]]+)\]\x1b\[[;\d]*[A-Za-z] )?(?<error>.*?)(?: \[AWS-XRAY-TRACE-ID: (?<@xrayTraceId>.+?)@(?<@xraySegementId>.+?)\])?\n/ |
                       parse @logStream /^(?<service>.+?)\/(?<container>.+?)\/(?<containerId>.+)/ |
                       stats count(*) as count by service, container, containerId, error, bin(1m) |
                       limit 10
@@ -117,9 +117,11 @@ groups:
           annotations:
             __dashboardUid__: ecs-logs-prod
             __panelId__: "1"
-            description: '{{ reReplaceAll "\\x1b\\[[;\\d]*[A-Za-z]" "" $labels.error }}'
+            description: '{{ $labels.error }}'
             summary: 'Container {{ $labels.container }} for service {{ $labels.service }} logged an error:'
           isPaused: false
+          labels:
+            "notify": "google"
         - uid: alerts-running-tasks-prod
           title: Failing running tasks
           condition: E
@@ -276,7 +278,7 @@ groups:
             runbook_url: ""
             summary: '{{ $labels.ServiceName }} doesn''t have enough running tasks'
           labels:
-            "": ""
+            "notify": "google"
           isPaused: false
         - uid: alerts-elb-target-health-prod
           title: Load Balancer Target Health
@@ -376,6 +378,8 @@ groups:
             __panelId__: "168"
             summary: Load balancer target {{ $labels.TargetGroup }} has unhealthy hosts
           isPaused: false
+          labels:
+            "notify": "google"
         - uid: alerts-aws-rum-errors-prod
           title: AWS RUM Error
           condition: C
@@ -469,3 +473,5 @@ groups:
           annotations:
             summary: Some JS Errors were detected in the front-end
           isPaused: false
+          labels:
+            "notify": "google"

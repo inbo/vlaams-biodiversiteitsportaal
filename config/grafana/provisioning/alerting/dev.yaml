@@ -20,7 +20,7 @@ groups:
                     fields @timestamp, @message, @logStream |
                       filter @message like /\[ERROR\]/ |
                       sort @timestamp desc |
-                      parse @message /\[ERROR\](?:\x1b\[[;\d]*[A-Za-z] \x1b\[[;\d]*[A-Za-z]\[(?<logger>[^]]+)\]\x1b\[[;\d]*[A-Za-z] )?(?<error>.+?)(?: \[AWS-XRAY-TRACE-ID: (?<@xrayTraceId>.+?)@(?<@xraySegementId>.+?)\])?\n/ |
+                      parse @message /\[ERROR\](?:\x1b\[[;\d]*[A-Za-z] \x1b\[[;\d]*[A-Za-z]\[(?<logger>[^]]+)\]\x1b\[[;\d]*[A-Za-z] )?(?<error>.*?)(?: \[AWS-XRAY-TRACE-ID: (?<@xrayTraceId>.+?)@(?<@xraySegementId>.+?)\])?\n/ |
                       parse @logStream /^(?<service>.+?)\/(?<container>.+?)\/(?<containerId>.+)/ |
                       stats count(*) as count by service, container, containerId, error, bin(1m) |
                       limit 10
