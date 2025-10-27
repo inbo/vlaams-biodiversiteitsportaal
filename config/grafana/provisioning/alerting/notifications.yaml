@@ -11,7 +11,7 @@ contactPoints:
                 Content-Type: application/json
             httpMethod: POST
             payload:
-                template: '{{ template "vbp.google.custom" . }}'
+                template: '{{ template "vbp.google.cardsV2" . }}'
           disableResolveMessage: false
         - uid: google-chat-vbp-alerts-without-resolve
           type: webhook
@@ -21,7 +21,7 @@ contactPoints:
                 Content-Type: application/json
             httpMethod: POST
             payload:
-                template: '{{ template "vbp.google.custom" . }}'
+                template: '{{ template "vbp.google.cardsV2" . }}'
           disableResolveMessage: true
 
 deleteContactPoints:

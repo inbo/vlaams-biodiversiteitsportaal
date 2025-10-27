@@ -1,32 +1,6 @@
 apiVersion: 1
 templates:
 - orgId: 1
-  name: vbp.google.title
-  template: |-
-    {{ define "vbp.google.title" }}
-    🚨 {{.CommonLabels.alertname }} is {{ .Status }}
-    {{ end }}
-- orgId: 1
-  name: vbp.google.message
-  template: |-
-    {{ define "vbp.google.message" }}
-      {{ if .Alerts.Firing -}}
-        {{ len .Alerts.Firing }} firing alert(s)
-        {{ range .Alerts.Firing }}
-        <b>{{ trimSpace .Annotations.summary }}</b>
-        {{- if eq $.CommonLabels.alertname "Errors logged by portal services" -}}<a href={{ template "vbp.grafana.logsDashboardLink" . }}>🖹</a> <a href={{ .SilenceURL }}>🔕</a>{{ end }}
-        {{ trimSpace .Annotations.description }}
-        {{ end }}
-      {{ end }}
-
-      {{ if .Alerts.Resolved -}}
-        {{ len .Alerts.Resolved }} resolved alert(s)
-        {{ range .Alerts.Resolved }}
-        {{ trimSpace .Annotations.summary }}
-        {{- end }}
-      {{ end }}
-    {{ end }}
-- orgId: 1
   name: vbp.google.cardsV2
   template: |-
     {{ define "vbp.google.cardsV2" -}}
@@ -153,3 +127,8 @@ templates:
       {{ if .Annotations.service }}&var-service{{ .Annotations.service }}{{ end -}}
       {{ if gt (len $log_stream) 0 }}&var-log_stream={{ $log_stream }}{{ end -}}
     {{ end }}
+deleteTemplates:
+  - orgId: 1
+    name: vbp.google.title
+  - orgId: 1
+    name: vbp.google.message
