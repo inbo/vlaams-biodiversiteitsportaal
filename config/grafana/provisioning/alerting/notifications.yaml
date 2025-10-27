@@ -38,29 +38,31 @@ muteTimes:
         weekdays: ['monday:friday']
         location: 'Europe/Brussels'
 
-policies:
-  - orgId: 1
-    receiver: grafana-default-email
-    group_by:
-      - grafana_folder
-    routes:
-      - receiver: google-chat-vbp-alerts-without-resolve
-        object_matchers:
-          - - notify
-            - =
-            - google
-          - - resolve
-            - =
-            - 'false'
-        active_time_intervals:
-          - during-working-hours
-      - receiver: google-chat-vbp-alerts
-        object_matchers:
-          - - notify
-            - =
-            - google
-        active_time_intervals:
-          - during-working-hours
-    group_wait: 30s
-    group_interval: 5m
-    repeat_interval: 4h
+#policies:
+#  - orgId: 1
+#    receiver: grafana-default-email
+#    group_by:
+#      - grafana_folder
+#    routes:
+#      - receiver: google-chat-vbp-alerts-without-resolve
+#        object_matchers:
+#          - - notify
+#            - =
+#            - google
+#          - - resolve
+#            - =
+#            - 'false'
+#        active_time_intervals:
+#          - during-working-hours
+#      - receiver: google-chat-vbp-alerts
+#        object_matchers:
+#          - - notify
+#            - =
+#            - google
+#        active_time_intervals:
+#          - during-working-hours
+#    group_wait: 30s
+#    group_interval: 5m
+#    repeat_interval: 4h
+resetPolicies:
+  - 1
