@@ -26,8 +26,7 @@ groups:
                     fields replace(error, t, '') as e |
                     parse @logStream /^(?<service>.+?)\/(?<container>.+?)\/(?<containerId>.+)/ |
                     stats count(*) as c by bin(1m) as ts, service, container, containerId, e |
-                    limit 10 |
-                    display service, container, containerId, e, ts, c
+                    limit 10
                 id: ""
                 intervalMs: 60000
                 label: ""
@@ -126,6 +125,7 @@ groups:
           isPaused: false
           labels:
             "notify": "google"
+            "resolve": "false"
         - uid: alerts-running-tasks-prod
           title: Failing running tasks
           condition: E

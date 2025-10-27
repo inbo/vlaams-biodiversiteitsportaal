@@ -13,6 +13,20 @@ contactPoints:
             payload:
                 template: '{{ template "vbp.google.custom" . }}'
           disableResolveMessage: false
+        - uid: google-chat-vbp-alerts-without-resolve
+          type: webhook
+          settings:
+            url: ${GOOGLE_CHAT_WEBHOOK_URL}
+            headers:
+                Content-Type: application/json
+            httpMethod: POST
+            payload:
+                template: '{{ template "vbp.google.custom" . }}'
+          disableResolveMessage: true
+
+deleteContactPoints:
+  - orgId: 1
+    uid: google-chat-vbp-alerts-custom
 
 muteTimes:
   - orgId: 1
@@ -30,7 +44,17 @@ policies:
     group_by:
       - grafana_folder
     routes:
-      - receiver: test webhook
+      - receiver: google-chat-vbp-alerts-without-resolve
+        object_matchers:
+          - - notify
+            - =
+            - google
+          - - resolve
+            - =
+            - 'false'
+        active_time_intervals:
+          - during-working-hours
+      - receiver: google-chat-vbp
         object_matchers:
           - - notify
             - =
