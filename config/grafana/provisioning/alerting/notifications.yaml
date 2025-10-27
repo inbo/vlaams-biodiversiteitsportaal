@@ -49,15 +49,5 @@ policies:
           - - notify
             - =
             - google
-          - - resolve
-            - =
-            - "false"
-        active_time_intervals:
-          - during-working-hours
-      - receiver: Google Chat
-        object_matchers:
-          - - notify
-            - =
-            - google
         mute_time_intervals:
           - during-working-hours
