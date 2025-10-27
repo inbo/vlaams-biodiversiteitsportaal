@@ -120,7 +120,7 @@ groups:
           annotations:
             __dashboardUid__: ecs-logs-prod
             __panelId__: "1"
-            description: '{{ $labels.error }}'
+            description: '{{ $labels.e }}'
             summary: 'Container {{ $labels.container }} for service {{ $labels.service }} logged an error:'
           isPaused: false
           labels:
