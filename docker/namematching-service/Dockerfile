@@ -2,8 +2,9 @@
 ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-maven AS builder
 
-ARG VERSION=1.8.1
-ARG SOURCE=https://github.com/AtlasOfLivingAustralia/ala-namematching-service.git
+ARG VERSION=remove-error-log
+#ARG SOURCE=https://github.com/AtlasOfLivingAustralia/ala-namematching-service.git
+ARG SOURCE=git@github.com:StefanVanDyck/ala-namematching-service.git
 LABEL ala.version=${VERSION}
 
 RUN curl https://inbo-vbp-global-public-artifacts.s3.eu-west-1.amazonaws.com/taxonomy/namematching-gbif-backbone-lucene-8-2024-09-11.tgz -o /namematching-nm.tgz \
@@ -12,7 +13,7 @@ RUN curl https://inbo-vbp-global-public-artifacts.s3.eu-west-1.amazonaws.com/tax
     && rm /namematching-nm.tgz
 
 WORKDIR /project
-RUN git clone --branch v${VERSION} --depth 1 ${SOURCE} .
+RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} .
 
 RUN --mount=type=cache,target=/root/.m2/repository \
     mvn --batch-mode --no-transfer-progress \
