@@ -11,12 +11,7 @@ logging:
 server:
 #  rootPath: '/namematching-service/*'
   requestLog:
-    appenders:
-      - type: console
-        filterFactories:
-          - type: uri
-            uris:
-              - "/"
+    appenders: []
   applicationConnectors:
     - type: http
       port: 9179
