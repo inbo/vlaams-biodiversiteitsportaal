@@ -296,7 +296,7 @@ groups:
               datasourceUid: cloudwatch-prod
               model:
                 dimensions:
-                    LoadBalancer: app/inbo-vbp-public/a744d69ec78da33a
+                    LoadBalancer: app/inbo-vbp-public/fa1948ee28943b3f
                     TargetGroup: '*'
                 expression: ""
                 id: ""
@@ -386,7 +386,7 @@ groups:
           labels:
             "notify": "google"
         - uid: alerts-aws-rum-errors-prod
-          title: AWS RUM Error
+          title: AWS RUM Errors
           condition: C
           data:
             - refId: A
@@ -411,6 +411,63 @@ groups:
                 period: ""
                 queryMode: Metrics
                 refId: A
+                region: default
+                sqlExpression: ""
+                statistic: Sum
+            - refId: D
+              relativeTimeRange:
+                from: 600
+                to: 0
+              datasourceUid: cloudwatch-prod
+              model:
+                datasource:
+                    type: cloudwatch
+                    uid: cloudwatch-prod
+                dimensions:
+                    application_name: inbo-vbp-portal
+                expression: ""
+                id: ""
+                intervalMs: 1000
+                label: ""
+                logGroups: []
+                matchExact: true
+                maxDataPoints: 43200
+                metricEditorMode: 0
+                metricName: Http5xxCount
+                metricQueryType: 0
+                namespace: AWS/RUM
+                period: ""
+                queryLanguage: CWLI
+                queryMode: Metrics
+                refId: D
+                region: default
+                sqlExpression: ""
+                statistic: Sum
+            - refId: E
+              relativeTimeRange:
+                from: 600
+                to: 0
+              datasourceUid: cloudwatch-prod
+              model:
+                datasource:
+                    type: cloudwatch
+                    uid: cloudwatch-prod
+                dimensions: {}
+                expression: ""
+                id: ""
+                intervalMs: 1000
+                label: ""
+                logGroups: []
+                matchExact: true
+                maxDataPoints: 43200
+                metricEditorMode: 0
+                metricName: Http4xxCount
+                metricQueryType: 0
+                namespace: AWS/RUM
+                period: ""
+                queryLanguage: CWLI
+                queryMode: Metrics
+                refId: E
                 region: default
                 sqlExpression: ""
                 statistic: Sum
@@ -474,12 +531,12 @@ groups:
                 type: threshold
           noDataState: OK
           execErrState: Error
-          for: 0s
           annotations:
-            summary: Some JS Errors were detected in the front-end
-          isPaused: false
+            consoleLink: https://eu-west-1.console.aws.amazon.com/cloudwatch/home?region=eu-west-1#rum:dashboard/inbo-vbp-portal?~&appMonitorName=inbo-vbp-portal&tab=errors&segment=errors
+            summary: Errors were detected in the front-end
           labels:
-            "notify": "google"
+            notify: google
+          isPaused: false
         - uid: failing-deployment-prod
           title: Failing deployment
           condition: C
