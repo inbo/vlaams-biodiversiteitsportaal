@@ -62,7 +62,9 @@ COPY --from=builder /project/ala-hub/build/libs/ala-hub-${VERSION}.war /biocache
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/biocache-hub/actuator/health || exit 1
 
-ENTRYPOINT ["sh", "-c", "java ${JAVA_OPTS} -jar /biocache-hub.war"]
+ENV JAVA_RELECT_OPTS="--add-opens java.base/java.lang=ALL-UNNAMED --add-opensjava.base/java.lang.reflect=ALL-UNNAMED"
+
+ENTRYPOINT ["sh", "-c", "java ${JAVA_OPTS} ${JAVA_RELECT_OPTS} -jar /biocache-hub.war"]
 
 RUN mkdir /data
 RUN chown 1000:1000 /data
