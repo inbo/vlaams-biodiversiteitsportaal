@@ -2,6 +2,7 @@ User-agent: *
 
 Disallow: /image-service/
 Disallow: /collectory/admin/
+Disallow: /biocache-hub/occurrences/
 Disallow: /biocache-service/
 Disallow: /bie-index/
 Disallow: /spatial-hub/
