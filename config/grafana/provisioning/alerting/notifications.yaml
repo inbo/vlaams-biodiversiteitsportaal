@@ -49,5 +49,5 @@ policies:
           - - notify
             - =
             - google
-        mute_time_intervals:
+        active_time_intervals:
           - during-working-hours
