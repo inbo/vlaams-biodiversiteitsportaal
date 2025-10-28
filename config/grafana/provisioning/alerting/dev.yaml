@@ -480,3 +480,99 @@ groups:
           isPaused: false
           labels:
             "notify": "google"
+        - uid: failing-deployment-dev
+          title: Failing deployment
+          condition: C
+          data:
+            - refId: A
+              relativeTimeRange:
+                from: 600
+                to: 0
+              datasourceUid: cloudwatch-dev
+              model:
+                dimensions:
+                    ClusterName: inbo-vbp-cluster
+                    ServiceName: '*'
+                expression: ""
+                id: ""
+                intervalMs: 60000
+                label: ""
+                logGroups: []
+                matchExact: true
+                maxDataPoints: 43200
+                metricEditorMode: 0
+                metricName: DeploymentCount
+                metricQueryType: 0
+                namespace: ECS/ContainerInsights
+                period: ""
+                queryLanguage: CWLI
+                queryMode: Metrics
+                refId: A
+                region: default
+                sqlExpression: ""
+                statistic: Maximum
+            - refId: B
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 0
+                            - 0
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params: []
+                      reducer:
+                        params: []
+                        type: avg
+                      type: query
+                datasource:
+                    name: Expression
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                intervalMs: 1000
+                maxDataPoints: 43200
+                reducer: mean
+                refId: B
+                type: reduce
+            - refId: C
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 1.8
+                            - 0
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params: []
+                      reducer:
+                        params: []
+                        type: avg
+                      type: query
+                datasource:
+                    name: Expression
+                    type: __expr__
+                    uid: __expr__
+                expression: B
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: C
+                type: threshold
+          dashboardUid: portal-health-dev
+          panelId: 97
+          noDataState: NoData
+          execErrState: Error
+          for: 10m
+          annotations:
+            __dashboardUid__: portal-health-dev
+            __panelId__: "97"
+            summary: '{{ $labels.ServiceName }} has a failing deployment'
+          labels:
+            notify: google
+          isPaused: false
