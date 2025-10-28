@@ -89,6 +89,21 @@ templates:
     {
       "chipList": {
         "chips": [
+          {{ if .Annotations.consoleLink }}
+          {
+            "label": "View on AWS",
+            "icon": {
+              "materialIcon": {
+                "name": "cloud"
+              }
+            },
+            "onClick": {
+              "openLink": {
+                "url": "{{ .Annotations.consoleLink }}"
+              }
+            }
+          },
+          {{ end }}
           {{ if .PanelURL }}
           {
             "label": "View in dashboard",
