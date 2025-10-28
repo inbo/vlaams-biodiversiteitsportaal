@@ -50,7 +50,7 @@ COPY --from=builder /project/build/libs/image-service-${VERSION}.war /image-serv
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/image-service/actuator/health || exit 1
 
-ENV JAVA_RELECT_OPTS="--add-opens java.base/java.lang=ALL-UNNAMED --add-opensjava.base/java.lang.reflect=ALL-UNNAMED"
+ENV JAVA_RELECT_OPTS="--add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED"
 
 ENTRYPOINT ["sh", "-c", "java ${JAVA_OPTS} ${JAVA_RELECT_OPTS} -jar /image-service.war"]
 
