@@ -24,8 +24,9 @@ groups:
                     parse error /(?<traceLog> \[AWS-XRAY-TRACE-ID: .+?@.+?\])/ |
                     fields coalesce(traceLog, '') as t |
                     fields replace(error, t, '') as e |
+                    fields substr(e, 0, 100) as shortError |
                     parse @logStream /^(?<service>.+?)\/(?<container>.+?)\/(?<containerId>.+)/ |
-                    stats count(*) as count by bin(1m), service, container, containerId, e |
+                    stats count(*) as count by bin(1m), service, container, containerId, shortError |
                     limit 10
                 id: ""
                 intervalMs: 60000
@@ -49,7 +50,7 @@ groups:
                     - service
                     - container
                     - containerId
-                    - e
+                    - shortError
                     - bin(1m)
             - refId: B
               relativeTimeRange:
