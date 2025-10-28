@@ -20,6 +20,16 @@ target "custom-gradle-jdk11" {
   }
 }
 
+target "custom-gradle-jdk17" {
+  context = "./gradle"
+  cache-from = ["${DOCKER_REPO}/inbo-vbp-custom-gradle:jdk17-${CACHE_TAG}"]
+  tags = ["custom-gradle-jdk17:${TAG}"]
+  args = {
+    JDK_VERSION = "17"
+    GRADLE_VERSION = "7"
+  }
+}
+
 target "custom-gradle-jdk21" {
   context = "./gradle"
   cache-from = ["${DOCKER_REPO}/inbo-vbp-custom-gradle:jdk21-${CACHE_TAG}"]
@@ -96,7 +106,7 @@ target "bie-index" {
 target "biocache-hub" {
   context = "./biocache-hub"
   contexts = {
-    "custom-gradle" = "target:custom-gradle-jdk11"
+    "custom-gradle-jdk17" = "target:custom-gradle-jdk17"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-biocache-hub:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-biocache-hub:${TAG}"]
@@ -132,7 +142,7 @@ target "data-quality-filter-service" {
 target "image-service" {
   context = "./image-service"
   contexts = {
-    "custom-gradle" = "target:custom-gradle-jdk21"
+    "custom-gradle-jdk21" = "target:custom-gradle-jdk21"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-image-service:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-image-service:${TAG}"]

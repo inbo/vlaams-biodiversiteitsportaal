@@ -1,9 +1,9 @@
 # syntax=docker/dockerfile:1.14.0
 ARG BUILDPLATFORM=linux/amd64
-FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
+FROM --platform=${BUILDPLATFORM} custom-gradle-jdk17 AS builder
 
-ARG VERSION=poc-rbac
-ARG COMMIT=609685cfaa4c929d074d879590da169414fdd53c
+ARG VERSION=develop-vbp
+ARG COMMIT=38b573fc6b8545eff69ccfb9f0fb870e9cc54211
 ARG SOURCE=https://github.com/StefanVanDyck/biocache-hubs.git
 LABEL ala.version=inbo-${COMMIT}
 
@@ -15,8 +15,8 @@ RUN --mount=type=cache,target=/gradle-cache,ro \
     -x test
 
 ARG VERSION=develop
-ARG COMMIT=8af1cfe2a61e39ba69f8ee534d32e20a36acfc7f
-ARG SOURCE=https://github.com/inbo/ala-hub.git
+ARG COMMIT=acc4e25421dd15a375adfbe83567a587d5b145bd
+ARG SOURCE=https://github.com/AtlasOfLivingAustralia/ala-hub
 LABEL ala.version=inbo-${COMMIT}
 
 WORKDIR /project/ala-hub
@@ -40,7 +40,7 @@ RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
     rsync -a /home/gradle/.gradle/caches/modules-2 /gradle-cache \
     && rm /gradle-cache/modules-2/*.lock && rm /gradle-cache/modules-2/gc.properties
 
-FROM amazoncorretto:11
+FROM amazoncorretto:21
 
 COPY --from=builder /opt/opentelemetry-agent /opt/opentelemetry-agent
 
@@ -54,8 +54,8 @@ RUN mkdir -p /opt/atlas/i18n \
   && ln -s /config/biocache-hub/i18n/downloads-plugin/override /var/opt/atlas/i18n/downloads-plugin \
   && ln -s /config/biocache-hub/i18n/override /var/opt/atlas/i18n/biocache-hubs
 
-ARG VERSION=7.1.1
-ARG COMMIT=6a473fbb17deeebcadecc28dbe3d0b05740816f5
+ARG VERSION=8.1.0-SNAPSHOT
+ARG COMMIT=38b573fc6b8545eff69ccfb9f0fb870e9cc54211
 LABEL ala.version=inbo-${COMMIT}
 
 COPY --from=builder /project/ala-hub/build/libs/ala-hub-${VERSION}.war /biocache-hub.war
