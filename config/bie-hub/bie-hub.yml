@@ -107,10 +107,10 @@ image:
   thumbnailUrl: ${common.protocol}://${common.domain}/image-service/image/
 
 ausTraits:
-  baseURL: http://traitdata.austraits.cloud.edu.au
-  homeURL: https://austraits.org/
-  sourceURL: https://doi.org/10.5281/zenodo.3568417
-  definitionsURL: https://traitecoevo.github.io/austraits.build/articles/trait_definitions.html
+  baseURL: null
+  homeURL: null
+  sourceURL: null
+  definitionsURL: null
 
 # External Literature and reference sources
 synonymsTypes: synonym,homotypicSynonym,objectiveSynonym,heterotypicSynonym,subjectiveSynonym,proParteSynonym,inferredSynonym
