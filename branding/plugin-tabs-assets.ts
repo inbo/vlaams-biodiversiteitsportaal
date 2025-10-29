@@ -1,6 +1,7 @@
 import fs from "fs/promises";
 import decompress from "decompress";
 import { open } from "fs/promises";
+import { basename, dirname } from "path";
 
 export async function downloadSpeciesPluginTabAssets(
   { outputFolder, assetsS3RelativePath, assetsFilepath }: {
@@ -10,7 +11,8 @@ export async function downloadSpeciesPluginTabAssets(
   },
 ): Promise<Map<string, string>> {
   try {
-    await open(assetsFilepath);
+    const fileHandle = await open(assetsFilepath);
+    await fileHandle.close();
   } catch (e) {
     console.log(assetsFilepath + " not found, downloading...");
 
@@ -35,7 +37,10 @@ export async function downloadSpeciesPluginTabAssets(
   const files = await fs.readdir(outputFolder);
   return files.reduce((acc, file) => {
     if (file.endsWith(".html")) {
-      acc[file] = outputFolder + "/" + file;
+      const lastSlash = outputFolder.lastIndexOf("/");
+      const directoryName = outputFolder.substring(lastSlash + 1);
+      const name = `${directoryName}/${basename(file, ".html")}`;
+      acc[name] = outputFolder + "/" + file;
     }
     return acc;
   }, new Map<string, string>());

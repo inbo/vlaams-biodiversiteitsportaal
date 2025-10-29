@@ -15,6 +15,7 @@
   },
   "devDependencies": {
     "@hey-api/openapi-ts": "^0.66.5",
+    "@types/decompress": "^4.2.7",
     "@types/js-cookie": "^3.0.6",
     "@types/lodash": "^4.17.16",
     "@types/node": "^22.14.0",
