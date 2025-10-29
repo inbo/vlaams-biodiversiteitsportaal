@@ -6,4 +6,5 @@ Allow: /index.html
 Allow: /$
 Allow: /pages/
 Allow: /bie-hub/
+Disallow: /bie-hub/externalSite/
 Allow: /species-list/
