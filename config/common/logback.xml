@@ -18,6 +18,7 @@
     <!-- Disable flood of deprecation warnings-->
     <logger name="org.hibernate.orm.deprecation" level="OFF"/>
     <logger name="org.grails.config.NavigableMap" level="ERROR"/>
+    <logger name="au.org.ala.bie.BieTagLib" level="ERROR"/>
 
     <!-- Reduce AWS X-Ray logging verbosity -->
     <logger name="com.amazonaws.xray.strategy.sampling.pollers.RulePoller" level="WARN"/>
