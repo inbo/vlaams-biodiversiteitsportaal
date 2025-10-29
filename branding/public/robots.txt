@@ -7,4 +7,5 @@ Allow: /$
 Allow: /pages/
 Allow: /bie-hub/
 Disallow: /bie-hub/externalSite/
+Allow: /collectory/
 Allow: /species-list/
