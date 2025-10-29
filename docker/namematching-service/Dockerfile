@@ -4,7 +4,7 @@ FROM --platform=${BUILDPLATFORM} custom-maven AS builder
 
 ARG VERSION=remove-error-log
 #ARG SOURCE=https://github.com/AtlasOfLivingAustralia/ala-namematching-service.git
-ARG SOURCE=git@github.com:StefanVanDyck/ala-namematching-service.git
+ARG SOURCE=https://github.com/StefanVanDyck/ala-namematching-service.git
 LABEL ala.version=${VERSION}
 
 RUN curl https://inbo-vbp-global-public-artifacts.s3.eu-west-1.amazonaws.com/taxonomy/namematching-gbif-backbone-lucene-8-2024-09-11.tgz -o /namematching-nm.tgz \
