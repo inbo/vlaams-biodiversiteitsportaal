@@ -1,9 +1,9 @@
 User-agent: *
+Disallow: /
 
-Disallow: /image-service/
-Disallow: /collectory/admin/
-Disallow: /biocache-hub/occurrences/
-Disallow: /biocache-service/
-Disallow: /bie-index/
-Disallow: /spatial-hub/
-Disallow: /spatial-service/
+# Explicit allows
+Allow: /index.html
+Allow: /$
+Allow: /pages/
+Allow: /bie-hub/
+Allow: /species-list/
