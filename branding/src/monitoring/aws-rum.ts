@@ -12,10 +12,9 @@ async function initRum() {
         settings.monitoring.awsRegion,
         {
             enableRumClient: true,
-            sessionSampleRate: 0.1,
             endpoint: settings.monitoring.awsRumEndpoint,
             telemetries: ["performance", "errors", ["http", {
-                addXRayTraceIdHeader: true,
+                addXRayTraceIdHeader: false,
             }]],
             allowCookies: false,
             enableXRay: true,
