@@ -10,9 +10,9 @@ LABEL ala.version=inbo-${COMMIT}
 WORKDIR /project/biocache-hubs
 RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
 
-RUN --mount=type=cache,target=/gradle-cache,ro \
-    gradle build publishToMavenLocal \
-    -x test
+#RUN --mount=type=cache,target=/gradle-cache,ro \
+#    gradle build publishToMavenLocal \
+#    -x test
 
 ARG VERSION=develop
 ARG COMMIT=acc4e25421dd15a375adfbe83567a587d5b145bd
@@ -33,7 +33,8 @@ COPY alaBs.js ./grails-app/assets/javascripts/alaBs.js
 
 RUN --mount=type=cache,target=/gradle-cache,ro \
     gradle build assemble \
-    -x test -x integrationTest
+    -x test -x integrationTest \
+    --include-build ../biocache-hubs
 
 # Copy dependencies to shared read-only cache
 RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
