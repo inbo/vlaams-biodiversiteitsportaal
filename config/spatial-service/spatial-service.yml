@@ -124,4 +124,4 @@ sandboxThreadCount: 2
 pipelinesCmd: "java -Dspark.local.dir=/data/spatial-data/sandbox/tmp -Djava.io.tmpdir=/data/spatial-data/sandbox/tmp -cp /opt/vbp/pipelines/pipelines.jar"
 pipelinesConfig: "--config=/config/spatial-service/la-pipelines.yaml"
 
-batch_thread_count: 1
+batch_thread_count: 2
