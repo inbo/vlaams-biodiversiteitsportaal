@@ -14,7 +14,16 @@ async function initRum() {
             enableRumClient: true,
             endpoint: settings.monitoring.awsRumEndpoint,
             telemetries: ["performance", "errors", ["http", {
-                addXRayTraceIdHeader: false,
+                addXRayTraceIdHeader: [
+                    new RegExp(
+                        `^${
+                            settings.domain.replace(
+                                /[-[\]{}()*+?.,\\^$|#\s]/g,
+                                "\\$&",
+                            )
+                        }.*`,
+                    ),
+                ],
             }]],
             allowCookies: false,
             enableXRay: true,
