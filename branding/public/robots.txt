@@ -1,6 +1,8 @@
 User-agent: *
 Disallow: /
 
+Crawl-delay: 10
+
 # Explicit allows
 Allow: /index.html
 Allow: /$
