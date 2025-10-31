@@ -3,7 +3,7 @@ ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-gradle-jdk17 AS builder
 
 ARG VERSION=develop-vbp
-ARG COMMIT=10421e1fec87ea2b2785dcd28aa1b0b3fbb094cf
+ARG COMMIT=6d479a7f04394b9a1e279def1e8d4bfbc89f92bd
 ARG SOURCE=https://github.com/StefanVanDyck/biocache-hubs.git
 LABEL ala.version=inbo-${COMMIT}
 
