@@ -11,3 +11,4 @@ Allow: /bie-hub/
 Disallow: /bie-hub/externalSite/
 Allow: /collectory/
 Allow: /species-list/
+Disallow: /species-list/speciesListItem/
