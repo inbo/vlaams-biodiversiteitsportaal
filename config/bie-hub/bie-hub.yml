@@ -71,8 +71,6 @@ show:
   tabs: overview,gallery,names,classification,records,literature,sequences,data-partners
   pluginTabs: abv,faunabeheer
 
-pluginTabsConfig: file:///config/bie-hub/plugin-tabs.json
-
 # ALA services
 biocache:
   baseURL: ${common.protocol}://${common.domain}/biocache-hub
@@ -204,9 +202,11 @@ environments:
     speciesList:
       preferredSpeciesListDruid: dr384
       preferredListName: Preferred Species Images
+    pluginTabsConfig: file:///config/bie-hub/envs/dev/plugin-tabs.json
   inbo_prod:
     speciesList:
       preferredSpeciesListDruid: dr4
       preferredListName: Preferred Image List
     dataquality:
       enabled: false
+    pluginTabsConfig: file:///config/bie-hub/envs/prod/plugin-tabs.json
