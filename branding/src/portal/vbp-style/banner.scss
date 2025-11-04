@@ -37,6 +37,11 @@
             text-decoration-color: $inbo-primary;
             background-color: #f7f7f7;
         }
+
+        &.standalone-link {
+            color: $inbo-primary;
+            font-weight: bold;
+        }
     }
 
     .navbar .navbar-header {
