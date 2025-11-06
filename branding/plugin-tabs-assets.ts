@@ -34,6 +34,7 @@ export async function downloadSpeciesPluginTabAssets(
     assetsFilepath + " assets unzipped successfully into " + outputFolder,
   );
 
+
   const files = await fs.readdir(outputFolder);
   return files.reduce((acc, file) => {
     if (file.endsWith(".html")) {
