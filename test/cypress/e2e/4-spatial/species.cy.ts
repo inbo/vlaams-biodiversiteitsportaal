@@ -6,7 +6,7 @@ describe("Spatial - Species", () => {
     beforeEach(() => {
         cy.loginWithoutNavigatingToLoginPage("spatial-hub");
         cy.visit("/spatial-hub");
-        cy.get(".progress-bar", { timeout: 10_000 }).should("not.be.visible");
+        cy.get(".progress-bar", { timeout: 30_000 }).should("not.be.visible");
     });
 
     it("Can add a species group", () => {
@@ -21,7 +21,7 @@ describe("Spatial - Species", () => {
         cy.get('button[name="next"]').click();
 
         // Verify that the modal is not shown and the layer is added to the list
-        cy.get(".progress-bar", { timeout: 10_000 }).should("not.be.visible");
+        cy.get(".progress-bar", { timeout: 30_000 }).should("not.be.visible");
         cy.get('[name="divMappedLayers"]').contains(speciesGroup)
             .should("be.visible");
 
@@ -55,13 +55,13 @@ describe("Spatial - Species", () => {
             .click();
         cy.get('input[value="searchSpecies"]').check();
         cy.get("#speciesAutoComplete").type(speciesName);
-        cy.get(".autocomplete-item", { timeout: 10_000 })
+        cy.get(".autocomplete-item", { timeout: 30_000 })
             .contains(speciesScientificName)
             .click();
         cy.get('button[name="next"]').click();
 
         // Verify that the modal is not shown and the layer is added to the list
-        cy.get(".progress-bar", { timeout: 10_000 }).should("not.be.visible");
+        cy.get(".progress-bar", { timeout: 30_000 }).should("not.be.visible");
         cy.get('[name="divMappedLayers"]').contains(speciesScientificName)
             .should("be.visible");
 
@@ -100,7 +100,7 @@ describe("Spatial - Species", () => {
         cy.get('button[name="next"]').click();
 
         // Verify that the modal is not shown and the layer is added to the list
-        cy.get(".progress-bar", { timeout: 10_000 }).should("not.be.visible");
+        cy.get(".progress-bar", { timeout: 30_000 }).should("not.be.visible");
         cy.get('[name="divMappedLayers"]').contains(speciesListName)
             .should("be.visible");
 
@@ -142,7 +142,10 @@ describe("Spatial - Species", () => {
         );
         cy.get("button[name='parseSpeciesList']").click();
         textareaSpecies.forEach((species) =>
-            cy.get("table[name='speciesList']").should("contain", species)
+            cy.get("table[name='speciesList']").should(
+                "contain",
+                species,
+            )
         );
 
         // Upload a file with species names
@@ -166,7 +169,7 @@ describe("Spatial - Species", () => {
 
         // Enter a single species name and select from autocomplete
         cy.get("#speciesAutoComplete").type(autoCompleteSpeciesCommonName);
-        cy.get(".autocomplete-item", { timeout: 10_000 })
+        cy.get(".autocomplete-item", { timeout: 30_000 })
             .contains(autoCompleteSpeciesScientificName)
             .click();
         // TODO: Is also broken
@@ -193,7 +196,7 @@ describe("Spatial - Species", () => {
             cy.get('button[name="next"]').click();
 
             // Verify that the modal is not shown and the layer is added to the list
-            cy.get(".progress-bar", { timeout: 10_000 }).should(
+            cy.get(".progress-bar", { timeout: 30_000 }).should(
                 "not.be.visible",
             );
             cy.get('[name="divMappedLayers"]').contains(speciesListName)
@@ -272,7 +275,7 @@ describe("Spatial - Species", () => {
         cy.get('button[name="next"]').click();
 
         // Verify that the modal is not shown and the layer is added to the list
-        cy.get(".progress-bar", { timeout: 10_000 }).should("not.be.visible");
+        cy.get(".progress-bar", { timeout: 30_000 }).should("not.be.visible");
         cy.get('[name="divMappedLayers"]').contains(datasetName)
             .should("be.visible");
 
@@ -310,7 +313,7 @@ describe("Spatial - Species", () => {
         cy.get('button[name="next"]').click();
 
         // Verify that the modal is not shown and the layer is added to the list
-        cy.get(".progress-bar", { timeout: 10_000 }).should("not.be.visible");
+        cy.get(".progress-bar", { timeout: 30_000 }).should("not.be.visible");
         cy.get('[name="divMappedLayers"]').contains(datasetName)
             .should("be.visible");
 

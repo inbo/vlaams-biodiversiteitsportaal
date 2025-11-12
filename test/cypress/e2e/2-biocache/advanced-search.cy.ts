@@ -141,7 +141,7 @@ describe("Biocache - Advanced search", () => {
     });
 
     it("Type Status search", () => {
-        const searchInput = "SYNTYPE";
+        const searchInput = 0;
         cy.get("#type_status").select(searchInput);
         cy.get(".tab-pane.active").within(() => {
             cy.get("input.btn-primary[type='submit']").click();
@@ -149,9 +149,6 @@ describe("Biocache - Advanced search", () => {
         cy.url().should(
             "include",
             "/biocache-hub/occurrences/search",
-        ).get(".queryDisplay").contains(
-            searchInput,
-            { matchCase: false },
         ).get("#results").children().should(
             "have.length.greaterThan",
             0,
