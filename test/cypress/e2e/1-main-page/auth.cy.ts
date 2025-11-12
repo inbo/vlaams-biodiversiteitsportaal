@@ -74,6 +74,7 @@ function login() {
             cy.get("#password").type(Cypress.env("VBP_PASSWORD"));
             cy.get("#kc-login").click();
         });
+    cy.wait(1000); // wait for the login to propagate
 }
 
 function logout() {
@@ -81,6 +82,7 @@ function logout() {
         "#dropdown-auth-menu > .dropdown-menu",
     ).should("be.visible");
     cy.get("#logoutButton").click();
+    cy.wait(1000); // wait for the logout to propagate
 }
 
 function assertIsLoggedIn() {
@@ -100,7 +102,9 @@ function assertIsLoggedIn() {
 }
 
 function assertIsNotLoggedIn() {
-    cy.get("#dropdown-auth-menu").click();
+    cy.get("#dropdown-auth-menu").click().get(
+        "#dropdown-auth-menu > .dropdown-menu",
+    ).should("be.visible");
     cy.get("#loginButton").should("be.visible");
     cy.get("#logoutButton").should("not.be.visible");
     cy.get(".myProfileBtn").should("not.be.visible");
