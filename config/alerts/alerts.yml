@@ -58,6 +58,8 @@ spatial:
   baseURL: "${common.protocol}://${common.domain}/spatial-hub"
 collectory:
   baseURL: "${common.protocol}://${common.domain}/collectory"
+collectoryService:
+  baseURL: "${common.protocol}://${common.domain}/collectory/ws"
 lists:
   baseURL: "${common.protocol}://${common.domain}/species-list"
 speciesPages:
