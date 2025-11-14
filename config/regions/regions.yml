@@ -42,6 +42,8 @@ biocache:
   baseURL: ${common.protocol}://${common.domain}/biocache-hub
   enableQueryContext: 'false'
   queryContext: ''
+  occurrences:
+    sort: "count"
 spatial:
   baseURL: ${common.protocol}://${common.domain}/spatial-hub
 images:
