@@ -2,7 +2,7 @@
 ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-maven AS builder
 
-ARG BACKBONE_VERSION=${BACKBONE_VERSION}
+ARG BACKBONE_VERSION=2025-11-17
 ARG VERSION=remove-error-log
 #ARG SOURCE=https://github.com/AtlasOfLivingAustralia/ala-namematching-service.git
 ARG SOURCE=https://github.com/StefanVanDyck/ala-namematching-service.git
