@@ -7,7 +7,7 @@ ARG VERSION=remove-error-log
 ARG SOURCE=https://github.com/StefanVanDyck/ala-namematching-service.git
 LABEL ala.version=${VERSION}
 
-RUN curl https://inbo-vbp-global-public-artifacts.s3.eu-west-1.amazonaws.com/taxonomy/namematching-gbif-backbone-lucene-8-2024-09-11.tgz -o /namematching-nm.tgz \
+RUN curl https://inbo-vbp-global-public-artifacts.s3.eu-west-1.amazonaws.com/taxonomy/namematching-gbif-backbone-lucene-8-2025-11-17.tgz -o /namematching-nm.tgz \
     && tar -xzf /namematching-nm.tgz \
     && mv namematching-gbif-backbone-lucene-8-2024-09-11 /namematching-nm \
     && rm /namematching-nm.tgz
