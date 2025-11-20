@@ -128,7 +128,7 @@ export class PictureCarousel {
         url: "/images/VlaamseGaai.png",
         species: {
             id: "5229493",
-            commonName: "Vlaamse gaai",
+            commonName: "Gaai",
             scientificName: "Garrulus glandarius",
         },
         attribution: {
