@@ -202,6 +202,14 @@
       {
         "sort": "index",
         "field": "cl100"
+      },
+      {
+        "sort": "index",
+        "field": "locality"
+      },
+      {
+        "sort": "index",
+        "field": "municipality"
       }
     ]
   },
