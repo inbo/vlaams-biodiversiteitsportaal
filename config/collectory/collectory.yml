@@ -69,9 +69,9 @@ eml:
   electronicMailAddress: ${common.supportEmail}
   organizationName: Vlaams Biodiversiteitsportaal
   postalCode: 2601
-gbifApiPassword: "EOiGb4NUZ3MQcEhrEWnN"
+gbifApiPassword: ""
 gbifApiUrl: https://api.gbif.org/v1/
-gbifApiUser: "stefanvd"
+gbifApiUser: ""
 gbifDefaultEntityCountry: BEL
 gbifEndorsingNodeKey: ""
 gbifExportUrlBase: ""
