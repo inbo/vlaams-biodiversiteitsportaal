@@ -213,7 +213,7 @@ jobs:
             cache-docker-${{ matrix.docker.component }}
 
       - name: inject cache into docker
-        uses: reproducible-containers/buildkit-cache-dance@v3
+        uses: reproducible-containers/buildkit-cache-dance@v3.1.0
         with:
           cache-map: |
             {
@@ -224,7 +224,6 @@ jobs:
               "maven-cache": "/root/.m2/repository"
             }
           skip-extraction: ${{ steps.cache.outputs.cache-hit }}
-          utility-image: "public.ecr.aws/docker/library/busybox:stable"
 
       - name: Build and push docker images
         working-directory: ./docker
