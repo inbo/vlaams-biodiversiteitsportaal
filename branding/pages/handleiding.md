@@ -2,6 +2,10 @@
 title: "Handleiding"
 description: "Een beknopte handleiding voor het gebruik van het Vlaams Biodiversiteitsportaal"
 ---
+
+*Het Vlaams Biodiversiteitsportaal streeft ernaar om gegevens van de hoogste kwaliteit aan te leveren. Ondanks onze zorgvuldige validatie- en kwaliteitsprocedures kunnen in elke databank onvermijdelijk fouten of onnauwkeurigheden voorkomen. Gebruikers worden daarom verzocht om de beschikbare data steeds met de nodige aandacht en kritische beoordeling te interpreteren. Het portaal kan niet aansprakelijk worden gesteld voor eventuele gevolgen van het gebruik van deze informatie.*
+
+
 ## Beknopte Handleiding voor het Vlaams Biodiversiteitsportaal
 
 ### 1\. Toegang tot het Portaal

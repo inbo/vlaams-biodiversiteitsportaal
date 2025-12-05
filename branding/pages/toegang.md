@@ -42,8 +42,11 @@ Wanneer gevraagd, kies dan om je aan te melden via 'een entiteit van de Vlaamse 
 <img src="/images/pages/toegang/kies-entiteit.png" alt="kies entiteit"/>  
 
 Op de hoofdpagina klik je op Mijn Lokale Beheerders, daar vind je de lijst van personen die je kan contacteren. Zij kunnen je toegang verlenen tot het portaal.
-<img src="/images/pages/toegang/idm-lokale-beheerders.png" alt="mijn profiel lokale beheerders knop"/>  
+<img src="/images/pages/toegang/idm-lokale-beheerders.png" alt="mijn profiel lokale beheerders knop"/>
 
+## Toegang tot hoge resolutiedata
+Om toegang te krijgen tot de hoge resolutiedata in het VBP dien je dit extra te vermelden of te laten weten aan je lokale beheerder. De lokale beheerder dient de context  "VBP Gevoelige Data" toe te voegen per gebruiker.
+ 
 
 #### Andere fouten
 Indien je een andere fout krijgt dan ontbrekende rechten, contacteer ons dan rechstreeks via [support.natuurdata@inbo.be](mailto:support.natuurdata@inbo.be), dan helpen we je graag verder.

@@ -8,6 +8,6 @@ Klik op de link om de survey te starten
 
 
 
-Heeft u nog vragen over het gebruik van het VBP? Neem contact op met het VBP-team via [support@vlaamsbiodiversiteit.be](mailto:support.natuurdata@inbo.be).
+Heeft u nog vragen over het gebruik van het VBP? Neem contact op met het VBP-team via [support.natuurdata@inbo.be.be](mailto:support.natuurdata@inbo.be).
 
 Dank u voor uw bijdrage aan het verbeteren van het Vlaams Biodiversiteitsportaal\!
