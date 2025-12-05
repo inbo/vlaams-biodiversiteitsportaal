@@ -45,7 +45,7 @@ Op de hoofdpagina klik je op Mijn Lokale Beheerders, daar vind je de lijst van p
 <img src="/images/pages/toegang/idm-lokale-beheerders.png" alt="mijn profiel lokale beheerders knop"/>
 
 ## Toegang tot hoge resolutiedata
-Om toegang te krijgen tot de hoge resolutiedata in het VBP dien je dit extra te vermelden of te laten weten aan je lokale beheerder. De lokale beheerder dient de context  "VBP Gevoelige Data" toe te voegen per gebruiker.
+Om toegang te krijgen tot de hoge resolutiedata in het VBP dien je dit extra te vermelden of te laten weten aan je lokale beheerder. De lokale beheerder dient de context  "VBP Gevoelige Data" toe te voegen per gebruiker. Let op! Hoge resolutiedata kan niet zomaar gedeeld worden.
  
 
 #### Andere fouten
