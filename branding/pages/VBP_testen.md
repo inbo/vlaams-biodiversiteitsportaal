@@ -39,5 +39,5 @@ description: "Uitleg hoe best problemen in het portaal te melden."
     <li>Blijf beleefd en constructief.</li>
 </ul>
 <h3>6. Hulp en Ondersteuning</h3>
-<p>Neem contact op met het BVP-team via <a href="mailto:support.natuurdata@inbo.be">support.natuurdata@inbo.be</a>.</p>
+<p>Neem contact op met het VBP-team via <a href="mailto:support.natuurdata@inbo.be">support.natuurdata@inbo.be</a>.</p>
 <p>Dank u voor uw bijdrage aan de verbetering van het Vlaams Biodiversiteitsportaal!</p>
