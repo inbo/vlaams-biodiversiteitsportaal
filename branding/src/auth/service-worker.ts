@@ -41,11 +41,21 @@ const customHeaderRequestFetch = async (event: any) => {
         if (accessToken) {
             if (accessToken.expiresAt && accessToken.expiresAt < Date.now()) {
                 console.warn(
-                    "Service Worker: Access token is expired, Resetting auth state",
+                    "Service Worker: Access token is expired, using outdated token anyway",
                     event.request.url,
                 );
-                resetAuthLoaded();
-                return customHeaderRequestFetch(event);
+                // resetAuthLoaded();
+                // // Get the client.
+                // const client = await self.clients.get(event.clientId);
+                // // Exit early if we don't get the client.
+                // // Eg, if it closed.
+                // if (!client) return;
+
+                // // Send a message to the client.
+                // client.postMessage({
+                //     type: "accessTokenExpired",
+                // });
+                // return customHeaderRequestFetch(event);
             }
             console.debug(
                 "Service Worker: Fetching with access-token | ",
