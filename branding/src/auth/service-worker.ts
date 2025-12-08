@@ -2,6 +2,7 @@
 declare const self: ServiceWorkerGlobalScope;
 
 import {
+    AccessToken,
     AuthLoadedMessage,
     ResetAuthLoadedMessage,
 } from "./service-worker-events";
@@ -10,8 +11,10 @@ const jwtPaths = [
     "/biocache-service/",
 ];
 
-let resolveAccessToken: (value: string | null) => void;
-let accessTokenPromise: Promise<string | null> = new Promise<string | null>(
+let resolveAccessToken: (value: AccessToken | null) => void;
+let accessTokenPromise: Promise<AccessToken | null> = new Promise<
+    AccessToken | null
+>(
     (resolve) => {
         resolveAccessToken = resolve;
     },
@@ -19,7 +22,7 @@ let accessTokenPromise: Promise<string | null> = new Promise<string | null>(
 
 function resetAuthLoaded() {
     console.info("Service Worker: Resetting service worker auth state");
-    accessTokenPromise = new Promise<string | null>((resolve) => {
+    accessTokenPromise = new Promise<AccessToken | null>((resolve) => {
         resolveAccessToken = resolve;
     });
 }
@@ -34,8 +37,16 @@ const customHeaderRequestFetch = async (event: any) => {
             event.request.url,
         );
 
-        const accessToken = await accessTokenPromise;
+        let accessToken = await accessTokenPromise;
         if (accessToken) {
+            if (accessToken.expiresAt && accessToken.expiresAt < Date.now()) {
+                console.warn(
+                    "Service Worker: Access token is expired, Resetting auth state",
+                    event.request.url,
+                );
+                resetAuthLoaded();
+                return customHeaderRequestFetch(event);
+            }
             console.debug(
                 "Service Worker: Fetching with access-token | ",
                 event.request.url,
@@ -44,7 +55,7 @@ const customHeaderRequestFetch = async (event: any) => {
             let headers = new Headers(event.request.headers);
             headers.append(
                 "Authorization",
-                `Bearer ${accessToken}`,
+                `Bearer ${accessToken.token}`,
             );
 
             const newRequest = new Request(event.request, {
