@@ -8,7 +8,7 @@ security:
     secret: images-oidc-super-secret
   core:
     optionalFilterPattern: [ "/", "/*" ]
-    uriExclusionFilterPattern: ["^\/ws\/.*", "^\/image-service\/ws\/.*"]
+    uriExclusionFilterPattern: ["^/ws/.*", "^/image-service/ws/.*"]
 
   ip:
     whitelist: '10.30.0.0/20'
