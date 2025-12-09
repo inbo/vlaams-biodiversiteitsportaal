@@ -61,8 +61,10 @@ async function initUserManager(
   }
 
   window.addEventListener("focus", async function () {
-    const user = await manager.getUser();
-    if (user && user.expires_at && user.expires_at > Date.now() - 60_000) {
+    const user = await manager.getUser(true);
+    if (
+      user && user.expires_at && (user.expires_at * 1_000 > Date.now() - 60_000)
+    ) {
       console.debug("Window focused, and access token expired, refreshing");
       refreshToken();
     }
