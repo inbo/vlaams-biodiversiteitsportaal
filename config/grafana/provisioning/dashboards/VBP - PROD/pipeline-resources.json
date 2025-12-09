@@ -964,6 +964,10 @@
             "$__all"
           ]
         },
+        "datasource": {
+          "type": "cloudwatch",
+          "uid": "cloudwatch-prod"
+        },
         "definition": "",
         "includeAll": true,
         "multi": true,
