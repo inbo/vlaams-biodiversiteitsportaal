@@ -5,6 +5,7 @@ import {
   SignoutRedirectArgs,
   User,
   UserManager,
+  WebStorageStateStore,
 } from "oidc-client-ts";
 
 import Cookies from "js-cookie";
@@ -50,6 +51,7 @@ async function initUserManager(
     silent_redirect_uri: `${settings.domain}?front-auth-action=login`,
     automaticSilentRenew: false,
     monitorSession: false,
+    userStore: new WebStorageStateStore({ store: localStorage }),
   });
 
   async function refreshToken() {
