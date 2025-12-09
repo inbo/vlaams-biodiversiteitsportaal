@@ -55,12 +55,15 @@ async function initUserManager(
   manager.events.addUserLoaded(async (user) => {
     console.log("User loaded", user);
     setAlaAuthCookie(user);
-    await authServiceWorker.setAccessToken(user);
+    await authServiceWorker.setAccessToken(
+      user,
+      () => silentLogin(manager),
+    );
   });
   manager.events.addUserUnloaded(async () => {
     console.log("User unloaded");
     clearAlaAuthCookies();
-    await authServiceWorker.setAccessToken(null);
+    await authServiceWorker.setAccessToken(null, null);
   });
 
   manager.events.addAccessTokenExpired(async function () {
@@ -79,13 +82,13 @@ async function initUserManager(
     if (!user) {
       await manager.signinRedirect();
     } else {
-      await authServiceWorker.setAccessToken(user);
+      await authServiceWorker.setAccessToken(user, () => silentLogin(manager));
     }
   } else {
     if (user) {
       await manager.removeUser();
     } else {
-      await authServiceWorker.setAccessToken(null);
+      await authServiceWorker.setAccessToken(null, null);
     }
   }
 
