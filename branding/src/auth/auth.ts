@@ -53,8 +53,11 @@ async function initUserManager(
   });
 
   async function refreshToken() {
-    await silentLogin(manager);
-    const user = await manager.getUser();
+    let user = await manager.getUser();
+    if (!user || user.expired) {
+      await silentLogin(manager);
+    }
+    user = await manager.getUser();
     await authServiceWorker.setAccessToken(user, refreshToken);
   }
 
