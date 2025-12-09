@@ -48,17 +48,14 @@ async function initUserManager(
     //       }),
 
     silent_redirect_uri: `${settings.domain}?front-auth-action=login`,
-    automaticSilentRenew: true,
+    automaticSilentRenew: false,
     monitorSession: false,
   });
 
   async function refreshToken() {
-    let user = await manager.getUser();
-    if (!user || user.expired) {
+    if (!document.hidden) {
       await silentLogin(manager);
     }
-    user = await manager.getUser();
-    await authServiceWorker.setAccessToken(user, refreshToken);
   }
 
   manager.events.addUserLoaded(async (user) => {
@@ -73,6 +70,11 @@ async function initUserManager(
     console.log("User unloaded");
     clearAlaAuthCookies();
     await authServiceWorker.setAccessToken(null, null);
+  });
+
+  manager.events.addAccessTokenExpiring(async () => {
+    console.warn("Access token expiring soon");
+    await refreshToken();
   });
 
   manager.events.addAccessTokenExpired(async function () {
