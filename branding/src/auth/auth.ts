@@ -52,12 +52,18 @@ async function initUserManager(
     monitorSession: false,
   });
 
+  async function refreshToken() {
+    await silentLogin(manager);
+    const user = await manager.getUser();
+    await authServiceWorker.setAccessToken(user, refreshToken);
+  }
+
   manager.events.addUserLoaded(async (user) => {
     console.log("User loaded", user);
     setAlaAuthCookie(user);
     await authServiceWorker.setAccessToken(
       user,
-      () => silentLogin(manager),
+      refreshToken,
     );
   });
   manager.events.addUserUnloaded(async () => {
@@ -68,7 +74,7 @@ async function initUserManager(
 
   manager.events.addAccessTokenExpired(async function () {
     console.warn("Access token expired");
-    await silentLogin(manager);
+    await refreshToken();
   });
   manager.events.addSilentRenewError(async (user) => {
     console.error("Silent renew error", user);
@@ -82,7 +88,7 @@ async function initUserManager(
     if (!user) {
       await manager.signinRedirect();
     } else {
-      await authServiceWorker.setAccessToken(user, () => silentLogin(manager));
+      await authServiceWorker.setAccessToken(user, refreshToken);
     }
   } else {
     if (user) {
