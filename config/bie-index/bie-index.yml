@@ -29,7 +29,7 @@ collectory:
   # A list of uids for the national species list datasets
   nationalSpeciesDatsets:
 layers:
-  service: http://spatial-service.${common.internalDomain}/spatial-service
+  service: http://spatial-service.${common.internalDomain}:8080/spatial-service
   gazetteerId:
 images:
   # URL of image configuration file
