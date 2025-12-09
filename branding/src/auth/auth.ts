@@ -60,6 +60,14 @@ async function initUserManager(
     }
   }
 
+  window.addEventListener("focus", async function () {
+    const user = await manager.getUser();
+    if (user && user.expires_at && user.expires_at > Date.now() - 60_000) {
+      console.debug("Window focused, and access token expired, refreshing");
+      refreshToken();
+    }
+  }, false);
+
   manager.events.addUserLoaded(async (user) => {
     console.log("User loaded", user);
     setAlaAuthCookie(user);

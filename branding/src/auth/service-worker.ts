@@ -41,7 +41,7 @@ const customHeaderRequestFetch = async (event: any) => {
         if (accessToken) {
             if (accessToken.expiresAt && accessToken.expiresAt < Date.now()) {
                 console.warn(
-                    "Service Worker: Access token is expired, using outdated token anyway",
+                    "Service Worker: Access token is expired, resetting",
                     event.request.url,
                 );
                 resetAuthLoaded();
