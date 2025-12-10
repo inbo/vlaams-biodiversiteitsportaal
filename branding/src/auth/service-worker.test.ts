@@ -2,11 +2,6 @@ import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 
 describe("Service Worker Auth Tests", () => {
     let mockSelf: any;
-    let localStorageMock = {
-        setItem: vi.fn(),
-        getItem: vi.fn(),
-        removeItem: vi.fn(),
-    };
 
     beforeEach(async () => {
         ({ mockSelf } = createServiceWorkerEnvironment());
@@ -16,13 +11,11 @@ describe("Service Worker Auth Tests", () => {
         await import("./service-worker");
 
         vi.useFakeTimers({ shouldAdvanceTime: true });
-        global.localStorage = localStorageMock as any;
     });
 
     afterEach(() => {
         vi.restoreAllMocks();
         vi.useRealTimers();
-        delete (global as any).localStorage;
     });
 
     test("should add listeners", async () => {

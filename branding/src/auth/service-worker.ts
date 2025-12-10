@@ -11,21 +11,108 @@ const jwtPaths = [
     "/biocache-service/",
 ];
 
-let resolveAccessToken: (value: AccessToken | null) => void;
-let accessTokenPromise: Promise<AccessToken | null> = new Promise<
-    AccessToken | null
->(
-    (resolve) => {
-        resolveAccessToken = resolve;
-    },
-);
+const DB_NAME = "VBP_AUTH_DB";
+const DB_VERSION = 1;
+const STORE_NAME = "auth_tokens";
+const TOKEN_KEY = "biocache_access_token";
 
-function resetAuthLoaded() {
+// IndexedDB helper functions
+async function openDB(): Promise<IDBDatabase> {
+    return new Promise((resolve, reject) => {
+        const request = indexedDB.open(DB_NAME, DB_VERSION);
+
+        request.onerror = () => reject(request.error);
+        request.onsuccess = () => resolve(request.result);
+
+        request.onupgradeneeded = () => {
+            const db = request.result;
+            if (!db.objectStoreNames.contains(STORE_NAME)) {
+                db.createObjectStore(STORE_NAME);
+            }
+        };
+    });
+}
+
+async function storeAccessToken(token: AccessToken | null): Promise<void> {
+    try {
+        const db = await openDB();
+        const transaction = db.transaction([STORE_NAME], "readwrite");
+        const store = transaction.objectStore(STORE_NAME);
+
+        if (token) {
+            store.put(token, TOKEN_KEY);
+        } else {
+            store.delete(TOKEN_KEY);
+        }
+
+        return new Promise((resolve, reject) => {
+            transaction.oncomplete = () => resolve();
+            transaction.onerror = () => reject(transaction.error);
+        });
+    } catch (error) {
+        console.error("Service Worker: Failed to store access token:", error);
+    }
+}
+
+async function getStoredAccessToken(): Promise<AccessToken | null> {
+    try {
+        const db = await openDB();
+        const transaction = db.transaction([STORE_NAME], "readonly");
+        const store = transaction.objectStore(STORE_NAME);
+        const request = store.get(TOKEN_KEY);
+
+        return new Promise((resolve, reject) => {
+            request.onsuccess = () => {
+                const token = request.result;
+                // Check if token is expired
+                if (
+                    token && token.expiresAtMs && token.expiresAtMs < Date.now()
+                ) {
+                    console.warn(
+                        "Service Worker: Stored token is expired, removing",
+                    );
+                    storeAccessToken(null); // Remove expired token
+                    resolve(null);
+                } else {
+                    resolve(token || null);
+                }
+            };
+            request.onerror = () => reject(request.error);
+        });
+    } catch (error) {
+        console.error(
+            "Service Worker: Failed to retrieve access token:",
+            error,
+        );
+        return null;
+    }
+}
+
+let resolveAccessToken: (value: AccessToken | null) => void;
+let accessTokenPromise: Promise<AccessToken | null> =
+    initializeAccessTokenPromise();
+
+async function initializeAccessTokenPromise(): Promise<AccessToken | null> {
+    // Try to load from IndexedDB first
+    const storedToken = await getStoredAccessToken();
+
+    if (storedToken) {
+        console.info("Service Worker: Initialized with stored access token");
+        return storedToken;
+    }
+
+    // If no stored token, wait for it to be provided via message
+    return new Promise<AccessToken | null>((resolve) => {
+        resolveAccessToken = resolve;
+    });
+}
+
+async function resetAuthLoaded() {
     console.info("Service Worker: Resetting service worker auth state");
+    await storeAccessToken(null);
     accessTokenPromise = new Promise<AccessToken | null>((resolve) => {
         resolveAccessToken = resolve;
     });
-    localStorage.removeItem("biocache-interceptor-token");
 }
 
 const customHeaderRequestFetch = async (event: any) => {
@@ -58,7 +145,7 @@ const customHeaderRequestFetch = async (event: any) => {
                     accessToken.token,
                     accessToken.expiresAtMs,
                 );
-                resetAuthLoaded();
+                await resetAuthLoaded();
                 return customHeaderRequestFetch(event);
             }
             console.debug(
@@ -92,13 +179,9 @@ self.addEventListener("install", (event) => {
     event.waitUntil(self.skipWaiting());
 });
 
-self.addEventListener("activate", () => {
+self.addEventListener("activate", (event) => {
     console.debug(`Service Worker: Activating...`);
-    const accessToken = localStorage.getItem("biocache-interceptor-token");
-    if (accessToken) {
-        resolveAccessToken(JSON.parse(accessToken) as AccessToken);
-    }
-
+    event.waitUntil(self.clients.claim());
     console.info("Service Worker: Activated and ready to handle requests.");
 });
 
@@ -117,10 +200,7 @@ self.addEventListener("message", (event) => {
                 data.accessToken,
             );
             resolveAccessToken(data.accessToken);
-            localStorage.setItem(
-                "biocache-interceptor-token",
-                JSON.stringify(data.accessToken),
-            );
+            storeAccessToken(data.accessToken);
             break;
         default:
             console.error("Service Worker: Unknown message type:", data);
