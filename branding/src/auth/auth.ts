@@ -5,12 +5,10 @@ import {
   SignoutRedirectArgs,
   User,
   UserManager,
-  WebStorageStateStore,
 } from "oidc-client-ts";
 
 import Cookies from "js-cookie";
 import { AuthServiceWorker } from "./service-worker-registration";
-import { w } from "happy-dom/lib/PropertySymbol.js";
 
 Log.setLogger(console);
 
