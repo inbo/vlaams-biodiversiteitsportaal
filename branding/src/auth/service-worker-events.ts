@@ -16,3 +16,8 @@ export interface AccessToken {
     token: string;
     expiresAtMs: number;
 }
+
+export interface accessTokenExpiredMessage
+    extends BiocacheServiceInterceptorMessage {
+    type: "accessTokenExpired";
+}

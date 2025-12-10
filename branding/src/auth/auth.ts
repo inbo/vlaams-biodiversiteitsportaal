@@ -20,15 +20,11 @@ Log.setLogger(console);
  * This logic is part of the ala-security project.
  */
 
-const authServiceWorker = new AuthServiceWorker();
-export const userManagerPromise = initUserManager(authServiceWorker);
+export const userManagerPromise = initUserManager();
+let authServiceWorker;
 
-async function initUserManager(
-  authServiceWorker: AuthServiceWorker,
-): Promise<UserManager> {
+async function initUserManager(): Promise<UserManager> {
   console.debug("Initializing OIDC UserManager");
-  authServiceWorker.reset();
-
   const redirectUrl = cleanupUrl(window.location.href);
   redirectUrl.searchParams.set("front-auth-action", "login");
 
@@ -59,14 +55,10 @@ async function initUserManager(
   manager.events.addUserLoaded(async (user) => {
     console.log("User loaded", user);
     setAlaAuthCookie(user);
-    await authServiceWorker.setAccessToken(
-      user,
-    );
   });
   manager.events.addUserUnloaded(async () => {
     console.log("User unloaded");
     clearAlaAuthCookies();
-    await authServiceWorker.setAccessToken(null);
   });
 
   manager.events.addAccessTokenExpired(async function () {
@@ -86,16 +78,14 @@ async function initUserManager(
   if (Cookies.get(settings.auth.ala.authCookieName)) {
     if (!user) {
       await manager.signinRedirect();
-    } else {
-      await authServiceWorker.setAccessToken(user);
     }
   } else {
     if (user) {
       await manager.removeUser();
-    } else {
-      await authServiceWorker.setAccessToken(null);
     }
   }
+
+  authServiceWorker = new AuthServiceWorker(manager);
 
   return manager;
 }
