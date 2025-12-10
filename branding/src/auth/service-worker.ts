@@ -1,6 +1,7 @@
 /// <reference lib="webworker" />
 declare const self: ServiceWorkerGlobalScope;
 
+import { error } from "console";
 import {
     AccessToken,
     AuthLoadedMessage,
@@ -37,7 +38,15 @@ const customHeaderRequestFetch = async (event: any) => {
             event.request.url,
         );
 
-        let accessToken = await accessTokenPromise;
+        let accessToken = await Promise.race([
+            accessTokenPromise,
+            new Promise<null>((_, reject) =>
+                setTimeout(
+                    () => reject(new Error("Timeout waiting for access token")),
+                    5_000,
+                )
+            ),
+        ]);
         if (accessToken) {
             if (accessToken.expiresAt && accessToken.expiresAt < Date.now()) {
                 console.warn(
@@ -45,20 +54,6 @@ const customHeaderRequestFetch = async (event: any) => {
                     event.request.url,
                 );
                 resetAuthLoaded();
-                // Get the client.
-                const client = await self.clients.get(event.clientId);
-                // Exit early if we don't get the client.
-                // Eg, if it closed.
-                if (!client) {
-                    throw new Error(
-                        "Service Worker: Could not get client to notify about expired access token",
-                    );
-                }
-
-                // Send a message to the client.
-                client.postMessage({
-                    type: "accessTokenExpired",
-                });
                 return customHeaderRequestFetch(event);
             }
             console.debug(

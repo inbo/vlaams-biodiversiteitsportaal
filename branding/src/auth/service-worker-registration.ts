@@ -27,7 +27,6 @@ export class AuthServiceWorker {
 
   async setAccessToken(
     user: User | null,
-    refreshToken: (() => Promise<void>) | null,
   ) {
     const reg = await this.registrationPromise;
     if (reg?.active) {
@@ -39,19 +38,6 @@ export class AuthServiceWorker {
             expiresAt: user.expires_at ? user.expires_at * 1000 : 0,
           }
           : null,
-      });
-      reg.active.addEventListener("message", (event: any) => {
-        const data = event.data as AccessTokenExpiredMessage;
-        console.debug("Service Worker Message:", event.data);
-        switch (data.type) {
-          case "accessTokenExpired":
-            console.info("Service Worker: Access token has expired");
-            refreshToken?.();
-            break;
-          default:
-            console.error("Unknown message type from service worker:", data);
-            break;
-        }
       });
     } else {
       console.warn("Service worker is not active");

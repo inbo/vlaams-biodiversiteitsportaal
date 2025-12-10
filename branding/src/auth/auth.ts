@@ -44,30 +44,17 @@ async function initUserManager(
     scope: "openid email ala/roles",
     includeIdTokenInSilentSignout: true,
     prompt: settings.auth.oidc.prompt,
-    //       userStore: new WebStorageStateStore({
-    //         store: window.session,
-    //       }),
-
     silent_redirect_uri: `${settings.domain}?front-auth-action=login`,
-    automaticSilentRenew: false,
+    automaticSilentRenew: true,
     monitorSession: false,
-    userStore: new WebStorageStateStore({ store: localStorage }),
   });
 
-  async function refreshToken() {
-    if (!document.hidden) {
-      await silentLogin(manager);
-    }
-  }
-
   window.addEventListener("focus", async function () {
-    const user = await manager.getUser(true);
-    if (
-      user && user.expires_at && (user.expires_at * 1_000 > Date.now() - 60_000)
-    ) {
-      console.debug("Window focused, and access token expired, refreshing");
-      refreshToken();
-    }
+    manager.startSilentRenew();
+    await manager.getUser(true);
+  }, false);
+  window.addEventListener("blur", async function () {
+    manager.stopSilentRenew();
   }, false);
 
   manager.events.addUserLoaded(async (user) => {
@@ -75,7 +62,6 @@ async function initUserManager(
     setAlaAuthCookie(user);
     await authServiceWorker.setAccessToken(
       user,
-      refreshToken,
     );
   });
   manager.events.addUserUnloaded(async () => {
