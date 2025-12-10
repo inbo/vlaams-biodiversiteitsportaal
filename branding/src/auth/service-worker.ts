@@ -54,15 +54,15 @@ const customHeaderRequestFetch = async (event: any) => {
             ) {
                 console.warn(
                     "Service Worker: Access token is expired, resetting",
-                    accessToken.token,
-                    accessToken.expiresAtMs,
+                    accessToken,
                 );
                 resetAuthLoaded();
                 return customHeaderRequestFetch(event);
             }
             console.debug(
-                "Service Worker: Fetching with access-token | ",
+                "Service Worker: Fetching with access-token",
                 event.request.url,
+                accessToken,
             );
 
             let headers = new Headers(event.request.headers);
