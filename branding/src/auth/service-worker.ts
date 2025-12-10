@@ -48,10 +48,14 @@ const customHeaderRequestFetch = async (event: any) => {
             },
         );
         if (accessToken) {
-            if (accessToken.expiresAt && accessToken.expiresAt < Date.now()) {
+            if (
+                accessToken.expiresAt &&
+                accessToken.expiresAt * 1000 < Date.now()
+            ) {
                 console.warn(
                     "Service Worker: Access token is expired, resetting",
-                    event.request.url,
+                    accessToken.token,
+                    accessToken.expiresAt,
                 );
                 resetAuthLoaded();
                 return customHeaderRequestFetch(event);
@@ -104,7 +108,8 @@ self.addEventListener("message", (event) => {
             break;
         case "authLoaded":
             console.info(
-                `Service Worker: Setting service worker auth state: ${data.accessToken}`,
+                "Service Worker: Setting service worker auth state",
+                data.accessToken,
             );
             resolveAccessToken(data.accessToken);
             break;

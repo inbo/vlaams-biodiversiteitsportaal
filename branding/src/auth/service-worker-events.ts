@@ -12,21 +12,7 @@ export interface AuthLoadedMessage extends BiocacheServiceInterceptorMessage {
     accessToken: AccessToken;
 }
 
-export interface AccessTokenExpiredMessage
-    extends BiocacheServiceInterceptorMessage {
-    type: "accessTokenExpired";
-}
-
 export interface AccessToken {
     token: string;
     expiresAt: number;
 }
-
-// interface SetAccessTokenMessage {
-//     type: "setAccessToken";
-//     accessToken: string;
-// }
-
-// interface ClearAccessTokenMessage {
-//     type: "clearAccessToken";
-// }

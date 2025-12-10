@@ -1,5 +1,4 @@
 import { User } from "oidc-client-ts";
-import { AccessTokenExpiredMessage } from "./service-worker-events";
 
 export class AuthServiceWorker {
   private registrationPromise: Promise<ServiceWorkerRegistration | void>;
