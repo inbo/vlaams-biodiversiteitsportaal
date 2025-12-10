@@ -1,7 +1,6 @@
 /// <reference lib="webworker" />
 declare const self: ServiceWorkerGlobalScope;
 
-import { error } from "console";
 import {
     AccessToken,
     AuthLoadedMessage,
@@ -38,15 +37,16 @@ const customHeaderRequestFetch = async (event: any) => {
             event.request.url,
         );
 
-        let accessToken = await Promise.race([
-            accessTokenPromise,
-            new Promise<null>((_, reject) =>
-                setTimeout(
-                    () => reject(new Error("Timeout waiting for access token")),
-                    5_000,
-                )
-            ),
-        ]);
+        const accessToken = await new Promise<AccessToken | null>(
+            async (resolve, reject) => {
+                const timeout = setTimeout(() => {
+                    reject("Service Worker: Timeout waiting for access token");
+                }, 5000);
+                const token = await accessTokenPromise;
+                clearTimeout(timeout);
+                resolve(token);
+            },
+        );
         if (accessToken) {
             if (accessToken.expiresAt && accessToken.expiresAt < Date.now()) {
                 console.warn(
@@ -119,6 +119,20 @@ self.addEventListener("fetch", (event: any) => {
             "Service Worker: Fetch from biocache-service:",
             event.request.url,
         );
-        event.respondWith(customHeaderRequestFetch(event));
+        event.respondWith(
+            customHeaderRequestFetch(event).catch((error) => {
+                console.error(
+                    "Service Worker: Error in customHeaderRequestFetch:",
+                    error,
+                );
+                if (typeof error === "string" && error.includes("Timeout")) {
+                    return new Response("Timed out waiting for access token", {
+                        status: 401,
+                    });
+                } else {
+                    throw error;
+                }
+            }),
+        );
     }
 });
