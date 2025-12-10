@@ -14,5 +14,5 @@ export interface AuthLoadedMessage extends BiocacheServiceInterceptorMessage {
 
 export interface AccessToken {
     token: string;
-    expiresAt: number;
+    expiresAtMs: number;
 }

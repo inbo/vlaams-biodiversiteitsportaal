@@ -34,7 +34,7 @@ export class AuthServiceWorker {
         accessToken: user?.access_token
           ? {
             token: user.access_token,
-            expiresAt: user.expires_at ? user.expires_at * 1000 : 0,
+            expiresAtMs: user.expires_at ? user.expires_at * 1000 : 0,
           }
           : null,
       });

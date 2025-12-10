@@ -49,13 +49,13 @@ const customHeaderRequestFetch = async (event: any) => {
         );
         if (accessToken) {
             if (
-                accessToken.expiresAt &&
-                accessToken.expiresAt * 1000 < Date.now()
+                accessToken.expiresAtMs &&
+                accessToken.expiresAtMs < Date.now()
             ) {
                 console.warn(
                     "Service Worker: Access token is expired, resetting",
                     accessToken.token,
-                    accessToken.expiresAt,
+                    accessToken.expiresAtMs,
                 );
                 resetAuthLoaded();
                 return customHeaderRequestFetch(event);
