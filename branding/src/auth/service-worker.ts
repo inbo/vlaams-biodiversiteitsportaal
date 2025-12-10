@@ -113,9 +113,9 @@ self.addEventListener("message", (event) => {
             const oldResolveAccessToken = resolveAccessToken;
             accessTokenPromise = new Promise<AccessToken | null>((resolve) => {
                 resolveAccessToken = resolve;
+                oldResolveAccessToken(data.accessToken);
                 resolve(data.accessToken);
             });
-            oldResolveAccessToken(data.accessToken);
             break;
         default:
             console.error("Service Worker: Unknown message type:", data);
