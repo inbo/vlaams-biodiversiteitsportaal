@@ -123,7 +123,7 @@ describe("Service Worker Auth Tests", () => {
                 type: "authLoaded",
                 accessToken: {
                     token: "expired-access-token",
-                    expiresAt: Date.now() - 60_000,
+                    expiresAt: Date.now() / 1_000 - 60,
                 },
             },
         });
@@ -135,7 +135,7 @@ describe("Service Worker Auth Tests", () => {
                 type: "authLoaded",
                 accessToken: {
                     token: "test-access-token",
-                    expiresAt: Date.now() + 60_000,
+                    expiresAt: Date.now() / 1_000 + 60,
                 },
             },
         });
