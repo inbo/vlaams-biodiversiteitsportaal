@@ -58,19 +58,6 @@ const customHeaderRequestFetch = async (event: any) => {
                     accessToken.expiresAtMs,
                 );
                 resetAuthLoaded();
-                // Eg, if it's cross-origin.
-                if (!event.clientId) return;
-
-                // Get the client.
-                const client = await self.clients.get(event.clientId);
-                // Exit early if we don't get the client.
-                // Eg, if it closed.
-                if (!client) return;
-
-                // Send a message to the client.
-                client.postMessage({
-                    type: "accessTokenExpired",
-                });
                 return customHeaderRequestFetch(event);
             }
             console.debug(
@@ -101,10 +88,10 @@ const customHeaderRequestFetch = async (event: any) => {
 
 self.addEventListener("install", (event) => {
     console.debug(`Service Worker: Installing...`);
-    event.waitUntil(self.skipWaiting());
+    // event.waitUntil(self.skipWaiting());
 });
 
-self.addEventListener("activate", () => {
+self.addEventListener("activate", (event) => {
     console.debug(`Service Worker: Activating...`);
     console.info("Service Worker: Activated and ready to handle requests.");
 });
@@ -123,6 +110,7 @@ self.addEventListener("message", (event) => {
                 "Service Worker: Setting service worker auth state",
                 data.accessToken,
             );
+            resetAuthLoaded();
             resolveAccessToken(data.accessToken);
             break;
         default:
