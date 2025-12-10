@@ -11,7 +11,6 @@ const jwtPaths = [
     "/biocache-service/",
 ];
 
-let resolved = false;
 let resolveAccessToken: (value: AccessToken | null) => void;
 let accessTokenPromise: Promise<AccessToken | null> = new Promise<
     AccessToken | null
@@ -24,7 +23,6 @@ let accessTokenPromise: Promise<AccessToken | null> = new Promise<
 function resetAuthLoaded() {
     console.info("Service Worker: Resetting service worker auth state");
     accessTokenPromise = new Promise<AccessToken | null>((resolve) => {
-        resolved = false;
         resolveAccessToken = resolve;
     });
 }
@@ -112,12 +110,12 @@ self.addEventListener("message", (event) => {
                 "Service Worker: Setting service worker auth state",
                 data.accessToken,
             );
-            resolveAccessToken(data.accessToken);
+            const oldResolveAccessToken = resolveAccessToken;
             accessTokenPromise = new Promise<AccessToken | null>((resolve) => {
-                resolved = true;
                 resolveAccessToken = resolve;
                 resolve(data.accessToken);
             });
+            oldResolveAccessToken(data.accessToken);
             break;
         default:
             console.error("Service Worker: Unknown message type:", data);
