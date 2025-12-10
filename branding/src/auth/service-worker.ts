@@ -25,6 +25,7 @@ function resetAuthLoaded() {
     accessTokenPromise = new Promise<AccessToken | null>((resolve) => {
         resolveAccessToken = resolve;
     });
+    localStorage.removeItem("biocache-interceptor-token");
 }
 
 const customHeaderRequestFetch = async (event: any) => {
@@ -93,7 +94,11 @@ self.addEventListener("install", (event) => {
 
 self.addEventListener("activate", () => {
     console.debug(`Service Worker: Activating...`);
-    resetAuthLoaded();
+    const accessToken = localStorage.getItem("biocache-interceptor-token");
+    if (accessToken) {
+        resolveAccessToken(JSON.parse(accessToken) as AccessToken);
+    }
+
     console.info("Service Worker: Activated and ready to handle requests.");
 });
 
@@ -112,6 +117,10 @@ self.addEventListener("message", (event) => {
                 data.accessToken,
             );
             resolveAccessToken(data.accessToken);
+            localStorage.setItem(
+                "biocache-interceptor-token",
+                JSON.stringify(data.accessToken),
+            );
             break;
         default:
             console.error("Service Worker: Unknown message type:", data);
