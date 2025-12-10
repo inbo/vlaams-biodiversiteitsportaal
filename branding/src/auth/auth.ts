@@ -43,19 +43,25 @@ async function initUserManager(
     scope: "openid email ala/roles",
     includeIdTokenInSilentSignout: true,
     prompt: settings.auth.oidc.prompt,
-    //       userStore: new WebStorageStateStore({
-    //         store: window.session,
-    //       }),
-
     silent_redirect_uri: `${settings.domain}?front-auth-action=login`,
     automaticSilentRenew: true,
     monitorSession: false,
   });
 
+  window.addEventListener("focus", async function () {
+    manager.startSilentRenew();
+    await manager.getUser(true);
+  }, false);
+  window.addEventListener("blur", async function () {
+    manager.stopSilentRenew();
+  }, false);
+
   manager.events.addUserLoaded(async (user) => {
     console.log("User loaded", user);
     setAlaAuthCookie(user);
-    await authServiceWorker.setAccessToken(user);
+    await authServiceWorker.setAccessToken(
+      user,
+    );
   });
   manager.events.addUserUnloaded(async () => {
     console.log("User unloaded");
@@ -65,7 +71,9 @@ async function initUserManager(
 
   manager.events.addAccessTokenExpired(async function () {
     console.warn("Access token expired");
-    await silentLogin(manager);
+    if (!document.hidden) {
+      await silentLogin(manager);
+    }
   });
   manager.events.addSilentRenewError(async (user) => {
     console.error("Silent renew error", user);

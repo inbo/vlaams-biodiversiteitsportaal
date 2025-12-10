@@ -2,6 +2,7 @@
 declare const self: ServiceWorkerGlobalScope;
 
 import {
+    AccessToken,
     AuthLoadedMessage,
     ResetAuthLoadedMessage,
 } from "./service-worker-events";
@@ -10,8 +11,10 @@ const jwtPaths = [
     "/biocache-service/",
 ];
 
-let resolveAccessToken: (value: string | null) => void;
-let accessTokenPromise: Promise<string | null> = new Promise<string | null>(
+let resolveAccessToken: (value: AccessToken | null) => void;
+let accessTokenPromise: Promise<AccessToken | null> = new Promise<
+    AccessToken | null
+>(
     (resolve) => {
         resolveAccessToken = resolve;
     },
@@ -19,9 +22,10 @@ let accessTokenPromise: Promise<string | null> = new Promise<string | null>(
 
 function resetAuthLoaded() {
     console.info("Service Worker: Resetting service worker auth state");
-    accessTokenPromise = new Promise<string | null>((resolve) => {
+    accessTokenPromise = new Promise<AccessToken | null>((resolve) => {
         resolveAccessToken = resolve;
     });
+    localStorage.removeItem("biocache-interceptor-token");
 }
 
 const customHeaderRequestFetch = async (event: any) => {
@@ -34,8 +38,29 @@ const customHeaderRequestFetch = async (event: any) => {
             event.request.url,
         );
 
-        const accessToken = await accessTokenPromise;
+        const accessToken = await new Promise<AccessToken | null>(
+            async (resolve, reject) => {
+                const timeout = setTimeout(() => {
+                    reject("Service Worker: Timeout waiting for access token");
+                }, 5000);
+                const token = await accessTokenPromise;
+                clearTimeout(timeout);
+                resolve(token);
+            },
+        );
         if (accessToken) {
+            if (
+                accessToken.expiresAtMs &&
+                accessToken.expiresAtMs < Date.now()
+            ) {
+                console.warn(
+                    "Service Worker: Access token is expired, resetting",
+                    accessToken.token,
+                    accessToken.expiresAtMs,
+                );
+                resetAuthLoaded();
+                return customHeaderRequestFetch(event);
+            }
             console.debug(
                 "Service Worker: Fetching with access-token | ",
                 event.request.url,
@@ -44,7 +69,7 @@ const customHeaderRequestFetch = async (event: any) => {
             let headers = new Headers(event.request.headers);
             headers.append(
                 "Authorization",
-                `Bearer ${accessToken}`,
+                `Bearer ${accessToken.token}`,
             );
 
             const newRequest = new Request(event.request, {
@@ -69,7 +94,11 @@ self.addEventListener("install", (event) => {
 
 self.addEventListener("activate", () => {
     console.debug(`Service Worker: Activating...`);
-    resetAuthLoaded();
+    const accessToken = localStorage.getItem("biocache-interceptor-token");
+    if (accessToken) {
+        resolveAccessToken(JSON.parse(accessToken) as AccessToken);
+    }
+
     console.info("Service Worker: Activated and ready to handle requests.");
 });
 
@@ -84,9 +113,14 @@ self.addEventListener("message", (event) => {
             break;
         case "authLoaded":
             console.info(
-                `Service Worker: Setting service worker auth state: ${data.accessToken}`,
+                "Service Worker: Setting service worker auth state",
+                data.accessToken,
             );
             resolveAccessToken(data.accessToken);
+            localStorage.setItem(
+                "biocache-interceptor-token",
+                JSON.stringify(data.accessToken),
+            );
             break;
         default:
             console.error("Service Worker: Unknown message type:", data);
@@ -99,6 +133,20 @@ self.addEventListener("fetch", (event: any) => {
             "Service Worker: Fetch from biocache-service:",
             event.request.url,
         );
-        event.respondWith(customHeaderRequestFetch(event));
+        event.respondWith(
+            customHeaderRequestFetch(event).catch((error) => {
+                console.error(
+                    "Service Worker: Error in customHeaderRequestFetch:",
+                    error,
+                );
+                if (typeof error === "string" && error.includes("Timeout")) {
+                    return new Response("Timed out waiting for access token", {
+                        status: 401,
+                    });
+                } else {
+                    throw error;
+                }
+            }),
+        );
     }
 });

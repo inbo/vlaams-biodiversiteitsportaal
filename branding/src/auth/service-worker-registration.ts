@@ -24,12 +24,19 @@ export class AuthServiceWorker {
     }
   }
 
-  async setAccessToken(user: User | null) {
+  async setAccessToken(
+    user: User | null,
+  ) {
     const reg = await this.registrationPromise;
     if (reg?.active) {
       reg.active.postMessage({
         type: "authLoaded",
-        accessToken: user?.access_token || null,
+        accessToken: user?.access_token
+          ? {
+            token: user.access_token,
+            expiresAtMs: user.expires_at ? user.expires_at * 1000 : 0,
+          }
+          : null,
       });
     } else {
       console.warn("Service worker is not active");

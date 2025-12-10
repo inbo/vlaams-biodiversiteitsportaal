@@ -2,6 +2,11 @@ import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 
 describe("Service Worker Auth Tests", () => {
     let mockSelf: any;
+    let localStorageMock = {
+        setItem: vi.fn(),
+        getItem: vi.fn(),
+        removeItem: vi.fn(),
+    };
 
     beforeEach(async () => {
         ({ mockSelf } = createServiceWorkerEnvironment());
@@ -9,10 +14,15 @@ describe("Service Worker Auth Tests", () => {
         // Import your service worker after setting up mocks
         vi.resetModules();
         await import("./service-worker");
+
+        vi.useFakeTimers({ shouldAdvanceTime: true });
+        global.localStorage = localStorageMock as any;
     });
 
     afterEach(() => {
         vi.restoreAllMocks();
+        vi.useRealTimers();
+        delete (global as any).localStorage;
     });
 
     test("should add listeners", async () => {
@@ -61,8 +71,82 @@ describe("Service Worker Auth Tests", () => {
         expect(global.fetch).not.toHaveBeenCalledWith();
 
         await mockSelf.trigger("message", {
-            data: { type: "authLoaded", accessToken: "test-access-token" },
+            data: {
+                type: "authLoaded",
+                accessToken: {
+                    token: "test-access-token",
+                    expiresAt: Date.now() + 60_000,
+                },
+            },
         });
+        await new Promise((r) => setTimeout(r, 100));
+        expect(resolved).toBe(true);
+
+        expect(global.fetch).toHaveBeenCalledWith(
+            expect.objectContaining({
+                headers: new Headers({
+                    Authorization: "Bearer test-access-token",
+                }),
+            }),
+        );
+        expect(fetchEvent.respondWith).toHaveBeenCalledWith(
+            new Promise((resolve) => resolve(response)),
+        );
+    });
+
+    test("Given auth cookie is set, access token is set, but expired block untill access-token is reset and inject user credentials in request header", async () => {
+        // GIVEN
+        const request = new Request("http://test.com/biocache-service/test");
+        const fetchEvent = {
+            request,
+            respondWith: vi.fn(),
+        };
+        const response = new Response("MOCKED", { status: 200 });
+        global.fetch = vi.fn().mockResolvedValue(response);
+
+        await mockSelf.trigger("install", { waitUntil: vi.fn() });
+        await mockSelf.trigger("activate");
+
+        // Auth Cookie is set
+        vi.mocked(cookieStore.get).mockResolvedValue({
+            value: "test-auth-cookie",
+        });
+
+        // WHEN
+        await mockSelf.trigger("fetch", fetchEvent);
+
+        // THEN
+        let resolved = false;
+        fetchEvent.respondWith.mock.calls[0][0].then(() => {
+            resolved = true;
+        });
+
+        await new Promise((r) => setTimeout(r, 100));
+        expect(resolved).toBe(false);
+        expect(global.fetch).not.toHaveBeenCalledWith();
+
+        await mockSelf.trigger("message", {
+            data: {
+                type: "authLoaded",
+                accessToken: {
+                    token: "expired-access-token",
+                    expiresAtMs: Date.now() - 60_000,
+                },
+            },
+        });
+        await new Promise((r) => setTimeout(r, 100));
+        expect(resolved).toBe(false);
+
+        await mockSelf.trigger("message", {
+            data: {
+                type: "authLoaded",
+                accessToken: {
+                    token: "test-access-token",
+                    expiresAtMs: Date.now() + 60_000,
+                },
+            },
+        });
+
         await new Promise((r) => setTimeout(r, 100));
         expect(resolved).toBe(true);
 
@@ -108,6 +192,40 @@ describe("Service Worker Auth Tests", () => {
         expect(global.fetch).toBeCalled();
         expect(fetchEvent.respondWith).toHaveBeenCalledWith(
             new Promise((resolve) => resolve(response)),
+        );
+    });
+
+    test("Given auth cookie is set block untill timeout", async () => {
+        // GIVEN
+        const request = new Request("http://test.com/biocache-service/test");
+        const fetchEvent = {
+            request,
+            respondWith: vi.fn(),
+        };
+
+        // Auth Cookie is set
+        vi.mocked(cookieStore.get).mockResolvedValue({
+            value: "test-auth-cookie",
+        });
+
+        // Trigger service worker events and set access token
+        await mockSelf.trigger("install", { waitUntil: vi.fn() });
+        await mockSelf.trigger("activate");
+
+        // WHEN
+        await mockSelf.trigger("fetch", fetchEvent);
+        await vi.runAllTimersAsync();
+
+        // THEN
+        expect(global.fetch).not.toBeCalled();
+        expect(fetchEvent.respondWith).toHaveBeenCalledWith(
+            new Promise((resolve) =>
+                resolve(
+                    new Response("Timed out waiting for access token", {
+                        status: 401,
+                    }),
+                )
+            ),
         );
     });
 
