@@ -10,6 +10,7 @@ import {
 
 import Cookies from "js-cookie";
 import { AuthServiceWorker } from "./service-worker-registration";
+import { w } from "happy-dom/lib/PropertySymbol.js";
 
 Log.setLogger(console);
 
@@ -67,17 +68,14 @@ async function initUserManager(
   manager.events.addUserUnloaded(async () => {
     console.log("User unloaded");
     clearAlaAuthCookies();
-    await authServiceWorker.setAccessToken(null, null);
-  });
-
-  manager.events.addAccessTokenExpiring(async () => {
-    console.warn("Access token expiring soon");
-    await refreshToken();
+    await authServiceWorker.setAccessToken(null);
   });
 
   manager.events.addAccessTokenExpired(async function () {
     console.warn("Access token expired");
-    await refreshToken();
+    if (!document.hidden) {
+      await silentLogin(manager);
+    }
   });
   manager.events.addSilentRenewError(async (user) => {
     console.error("Silent renew error", user);
@@ -91,13 +89,13 @@ async function initUserManager(
     if (!user) {
       await manager.signinRedirect();
     } else {
-      await authServiceWorker.setAccessToken(user, refreshToken);
+      await authServiceWorker.setAccessToken(user);
     }
   } else {
     if (user) {
       await manager.removeUser();
     } else {
-      await authServiceWorker.setAccessToken(null, null);
+      await authServiceWorker.setAccessToken(null);
     }
   }
 
