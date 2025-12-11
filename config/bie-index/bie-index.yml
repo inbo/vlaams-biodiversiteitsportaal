@@ -129,10 +129,22 @@ import:
   sequenceWeekly: occurrences,layers,regions,localities,suggest-index
   dailyRunHour: 2
   weeklyRunDay: 6
-  favouritesConfigUrl: file:///config/bie-index/envs/local/favourites.json
   enableTasks: false
   taxonomy:
     dir: /data/bie/import
+  priority:
+    norm: 4000
+    min: 0.25
+    max: 5.0
+  weightConfigUrl: file:///config/bie-index/weights.json
+  favouritesConfigUrl: file:///config/biindex/envs/local/favourites.json
+  vernacularName:
+    statusUrl: file:///config/bie-index/vernacular-name-status.json
+    common: common
+    legislated: legislated
+    preferred: preferred
+    deprecated: deprecated
+
 ala:
   baseURL: ${common.protocol}://${common.domain}
 bie:

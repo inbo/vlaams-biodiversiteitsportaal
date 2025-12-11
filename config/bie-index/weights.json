@@ -1,0 +1,176 @@
+{
+  "script": "nashorn",
+  "global": {
+    "rules": [
+      {
+        "term": "idxtype",
+        "exists": true,
+        "rules": [
+          {
+            "value": "TAXON",
+            "weight": 2.0
+          },
+          {
+            "value": "COMMON",
+            "weight": 1.5
+          },
+          {
+            "value": "TAXONVARIANT",
+            "weight": 0.01
+          },
+          {
+            "value": "IDENTIFIER",
+            "weight": 0.01
+          }
+        ]
+      },
+      {
+        "term": "taxonomicStatus",
+        "exists": true,
+        "rules": [
+          {
+            "value": "accepted",
+            "weight": 2.0
+          },
+          {
+            "value": "misapplied",
+            "weight": 0.5
+          },
+          {
+            "value": "miscellaneousLiterature",
+            "weight": 0.5
+          },
+          {
+            "value": "excluded",
+            "weight": 0.3
+          },
+          {
+            "value": "invalid",
+            "weight": 0.1
+          },
+          {
+            "value": "inferredSynonym",
+            "weight": 0.8
+          },
+          {
+            "value": "inferredExcluded",
+            "weight": 0.3
+          },
+          {
+            "value": "inferredInvalid",
+            "weight": 0.1
+          }
+        ]
+      },
+      {
+        "term": "rankID",
+        "exists": true,
+        "rules": [
+          {
+            "value": 6000,
+            "weight": 2.5
+          },
+          {
+            "value": 7000,
+            "weight": 1.8
+          },
+          {
+            "condition": "_value > 8001",
+            "weight": 0.5
+          }
+        ]
+      },
+      {
+        "term": "nameType",
+        "exists": true,
+        "rules": [
+          {
+            "value": "hybrid",
+            "weight": 0.2
+          }
+        ]
+      },
+      {
+        "term": "occurrenceCount",
+        "exists": true,
+        "rules": [
+          {
+            "weight": 0.01,
+            "weightExpression": "_value * _weight"
+          }
+        ]
+      }
+]
+  },
+  "weights": [
+    {
+      "field": "searchWeight",
+      "rules": [
+        {
+          "term": "idxtype",
+          "exists": true,
+          "value": "COMMON",
+          "rules": [
+            {
+              "term": "favourite",
+              "exists": true,
+              "comment": "Boosts common names for popular species",
+              "rules": [
+                {
+                  "value": "interest",
+                  "weight": 1.1
+                },
+                {
+                  "value": "preferred",
+                  "weight": 1.5
+                },
+                {
+                  "value": "favourite",
+                  "weight": 2.5
+                },
+                {
+                  "value": "iconic",
+                  "weight": 10.0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "term": "idxtype",
+          "exists": true,
+          "value": "TAXON",
+          "rules": [
+            {
+              "term": "favourite",
+              "exists": true,
+              "comment": "Favourite species slightly more likely to be on top",
+              "rules": [
+                {
+                  "value": "favourite",
+                  "weight": 1.1
+                },
+                {
+                  "value": "iconic",
+                  "weight": 1.5
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "field": "suggestWeight",
+      "rules": [
+        {
+          "term": "scientificName",
+          "exists": true,
+          "condition": "_value.length() > 4",
+          "weightExpression": "_weight * 1.0 / (1.0 + Math.log(_value.length() * 0.01 + 1.0))",
+          "comment": "The longer the name, the less it should be suggested. Mean name length is 16"
+        }
+      ]
+    }
+  ]
+}
