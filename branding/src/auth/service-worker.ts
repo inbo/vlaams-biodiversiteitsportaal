@@ -100,7 +100,7 @@ self.addEventListener("message", (event) => {
                 "Service Worker: Setting service worker auth state",
                 data.accessToken,
             );
-            if (data.accessToken.expiresAtMs < Date.now()) {
+            if (data.accessToken && data.accessToken.expiresAtMs < Date.now()) {
                 console.warn(
                     "Tried to set expired access token, ignoring",
                     data.accessToken,
