@@ -138,12 +138,6 @@ import:
     max: 5.0
   weightConfigUrl: file:///config/bie-index/weights.json
   favouritesConfigUrl: file:///config/biindex/envs/local/favourites.json
-  vernacularName:
-    statusUrl: file:///config/bie-index/vernacular-name-status.json
-    common: common
-    legislated: legislated
-    preferred: preferred
-    deprecated: deprecated
 
 ala:
   baseURL: ${common.protocol}://${common.domain}
