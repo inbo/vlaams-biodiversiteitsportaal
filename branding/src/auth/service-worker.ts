@@ -7,18 +7,13 @@ import {
     ResetAuthLoadedMessage,
 } from "./service-worker-events";
 
-const jwtPaths = [
-    "/biocache-service/",
-];
+const jwtPaths = ["/biocache-service/"];
 
 let resolveAccessToken: (value: AccessToken | null) => void;
-let accessTokenPromise: Promise<AccessToken | null> = new Promise<
-    AccessToken | null
->(
-    (resolve) => {
+let accessTokenPromise: Promise<AccessToken | null> =
+    new Promise<AccessToken | null>((resolve) => {
         resolveAccessToken = resolve;
-    },
-);
+    });
 
 function resetAuthLoaded() {
     console.info("Service Worker: Resetting service worker auth state");
@@ -66,10 +61,7 @@ const customHeaderRequestFetch = async (event: any) => {
             );
 
             let headers = new Headers(event.request.headers);
-            headers.append(
-                "Authorization",
-                `Bearer ${accessToken.token}`,
-            );
+            headers.append("Authorization", `Bearer ${accessToken.token}`);
 
             const newRequest = new Request(event.request, {
                 headers,
@@ -88,21 +80,19 @@ const customHeaderRequestFetch = async (event: any) => {
 
 self.addEventListener("install", (event) => {
     console.debug(`Service Worker: Installing...`);
-    // event.waitUntil(self.skipWaiting());
+    event.waitUntil(self.skipWaiting());
 });
 
-self.addEventListener("activate", (event) => {
+self.addEventListener("activate", () => {
     console.debug(`Service Worker: Activating...`);
     console.info("Service Worker: Activated and ready to handle requests.");
 });
 
 self.addEventListener("message", (event) => {
-    const data = event.data as (AuthLoadedMessage | ResetAuthLoadedMessage);
+    const data = event.data as AuthLoadedMessage | ResetAuthLoadedMessage;
     switch (data.type) {
         case "resetAuthLoaded":
-            console.info(
-                "Service Worker: Resetting service worker auth state",
-            );
+            console.info("Service Worker: Resetting service worker auth state");
             resetAuthLoaded();
             break;
         case "authLoaded":
@@ -110,6 +100,13 @@ self.addEventListener("message", (event) => {
                 "Service Worker: Setting service worker auth state",
                 data.accessToken,
             );
+            if (data.accessToken.expiresAtMs < Date.now()) {
+                console.warn(
+                    "Tried to set expired access token, ignoring",
+                    data.accessToken,
+                );
+                break;
+            }
             const oldResolveAccessToken = resolveAccessToken;
             accessTokenPromise = new Promise<AccessToken | null>((resolve) => {
                 resolveAccessToken = resolve;
