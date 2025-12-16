@@ -9,6 +9,7 @@ import {
 
 const jwtPaths = ["/biocache-service/"];
 
+let resolved = false;
 let resolveAccessToken: (value: AccessToken | null) => void;
 let accessTokenPromise: Promise<AccessToken | null> =
     new Promise<AccessToken | null>((resolve) => {
@@ -16,9 +17,31 @@ let accessTokenPromise: Promise<AccessToken | null> =
     });
 
 function resetAuthLoaded() {
-    console.info("Service Worker: Resetting service worker auth state");
+    if (resolved) {
+        resolved = false;
+        console.info("Service Worker: Resetting service worker auth state");
+        accessTokenPromise = new Promise<AccessToken | null>((resolve) => {
+            resolveAccessToken = resolve;
+        });
+    }
+}
+
+function setAuthAccessToken(accessToken: AccessToken) {
+    if (accessToken && accessToken.expiresAtMs < Date.now()) {
+        console.warn(
+            "Tried to set expired access token, ignoring",
+            accessToken,
+        );
+        return;
+    }
+    const oldResolveAccessToken = resolveAccessToken;
     accessTokenPromise = new Promise<AccessToken | null>((resolve) => {
         resolveAccessToken = resolve;
+        if (!resolved) {
+            resolved = true;
+            oldResolveAccessToken(accessToken);
+        }
+        resolve(accessToken);
     });
 }
 
@@ -100,19 +123,7 @@ self.addEventListener("message", (event) => {
                 "Service Worker: Setting service worker auth state",
                 data.accessToken,
             );
-            if (data.accessToken && data.accessToken.expiresAtMs < Date.now()) {
-                console.warn(
-                    "Tried to set expired access token, ignoring",
-                    data.accessToken,
-                );
-                break;
-            }
-            const oldResolveAccessToken = resolveAccessToken;
-            accessTokenPromise = new Promise<AccessToken | null>((resolve) => {
-                resolveAccessToken = resolve;
-                oldResolveAccessToken(data.accessToken);
-                resolve(data.accessToken);
-            });
+            setAuthAccessToken(data.accessToken);
             break;
         default:
             console.error("Service Worker: Unknown message type:", data);

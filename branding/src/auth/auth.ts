@@ -48,20 +48,26 @@ async function initUserManager(
     monitorSession: false,
   });
 
-  window.addEventListener("focus", async function() {
-    manager.startSilentRenew();
-    await manager.getUser(true);
-  }, false);
-  window.addEventListener("blur", async function() {
-    manager.stopSilentRenew();
-  }, false);
+  window.addEventListener(
+    "focus",
+    async function() {
+      manager.startSilentRenew();
+      await manager.getUser(true);
+    },
+    false,
+  );
+  window.addEventListener(
+    "blur",
+    async function() {
+      manager.stopSilentRenew();
+    },
+    false,
+  );
 
   manager.events.addUserLoaded(async (user) => {
     console.log("User loaded", user);
     setAlaAuthCookie(user);
-    await authServiceWorker.setAccessToken(
-      user,
-    );
+    await authServiceWorker.setAccessToken(user);
   });
   manager.events.addUserUnloaded(async () => {
     console.log("User unloaded");
@@ -134,28 +140,21 @@ async function silentLogin(manager: UserManager) {
 }
 
 function setAlaAuthCookie(user?: User) {
-  Cookies.set(
-    settings.auth.ala.authCookieName,
-    user?.profile?.sub || "vbp",
-    {
-      path: "/",
-      sameSite: "lax",
-      secure: window.location.protocol === "https:",
-      domain: settings.auth.ala.authCookieDomain,
-    },
-  );
+  Cookies.set(settings.auth.ala.authCookieName, user?.profile?.sub || "vbp", {
+    path: "/",
+    sameSite: "lax",
+    secure: window.location.protocol === "https:",
+    domain: settings.auth.ala.authCookieDomain,
+  });
 }
 
 function clearAlaAuthCookies() {
-  Cookies.remove(
-    settings.auth.ala.authCookieName,
-    {
-      path: "/",
-      sameSite: "lax",
-      secure: window.location.protocol === "https:",
-      domain: settings.auth.ala.authCookieDomain,
-    },
-  );
+  Cookies.remove(settings.auth.ala.authCookieName, {
+    path: "/",
+    sameSite: "lax",
+    secure: window.location.protocol === "https:",
+    domain: settings.auth.ala.authCookieDomain,
+  });
   [
     "alerts",
     "apikey",
@@ -212,6 +211,8 @@ export async function getUser(): Promise<User | null> {
 }
 
 export async function isLoggedIn() {
-  return Cookies.get(settings.auth.ala.authCookieName) &&
-    (await getUser()) !== null;
+  return (
+    Cookies.get(settings.auth.ala.authCookieName) &&
+    (await getUser()) !== null
+  );
 }
