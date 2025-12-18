@@ -7,11 +7,11 @@
         "exists": true,
         "rules": [
           {
-            "value": "TAXON",
+            "value": "COMMON",
             "weight": 2.0
           },
           {
-            "value": "COMMON",
+            "value": "TAXON",
             "weight": 1.5
           },
           {
@@ -100,7 +100,7 @@
           }
         ]
       }
-]
+    ]
   },
   "weights": [
     {
