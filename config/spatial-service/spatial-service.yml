@@ -7,7 +7,7 @@ security:
     clientId: spatial_service
     secret: spatial_service-oidc-super-secret
   core:
-    optionalFilterPattern: [ "/" ]
+    optionalFilterPattern: ["/"]
 webservice:
   client-id: spatial_service
   client-secret: xxx
@@ -23,7 +23,7 @@ grails:
       maxRequestSize: 5_000_000_000
 
 google:
-  apikey: 'xxx'
+  apikey: "xxx"
 
 api_key: xxxxxxxxxxxxx
 spatialHubUrl: ${common.protocol}://${common.domain}/spatial-hub/
@@ -37,8 +37,8 @@ spatialHubUrl: ${common.protocol}://${common.domain}/spatial-hub/
 geoserver:
   # Needs to be externally accessible, as it ends up being used by the browser client too
   url: "${common.protocol}://${common.domain}/geoserver"
-  username: 'admin'
-  password: 'geoserver'
+  username: "admin"
+  password: "geoserver"
   canDeploy: true
 
   spatialservice:
@@ -51,9 +51,9 @@ geoserver:
 dataSource:
   driverClassName: org.postgresql.Driver
   dialect: org.hibernate.spatial.dialect.postgis.PostgisPG9Dialect
-  url: 'jdbc:postgresql://postgis:5432/layersdb'
-  username: 'spatial'
-  password: 'my-super-secret-password'
+  url: "jdbc:postgresql://postgis:5432/layersdb"
+  username: "spatial"
+  password: "my-super-secret-password"
   pooled: true
   jmxExport: true
   properties:
@@ -77,17 +77,17 @@ dataSource:
 
 batch_sampling_passwords: ""
 
-ala.baseURL: '${common.protocol}://${common.domain}'
-bie.baseURL: '${common.protocol}://bie.${common.domain}'
-bie.searchPath: '/search'
+ala.baseURL: "${common.protocol}://${common.domain}"
+bie.baseURL: "${common.protocol}://bie.${common.domain}"
+bie.searchPath: "/search"
 
 namematching.url: http://namematching-service.${common.internalDomain}:9179
 
-records.url: '${common.protocol}://archives.${common.domain}/archives/exports/lat_lon_taxon.zip'
+records.url: "${common.protocol}://archives.${common.domain}/archives/exports/lat_lon_taxon.zip"
 
-lists.url: '${common.protocol}://${common.domain}/species-list'
-collections.url: '${common.protocol}://${common.domain}/collectory'
-phyloServiceUrl: '${common.protocol}://phylolink.${common.domain}'
+lists.url: "${common.protocol}://${common.domain}/species-list"
+collections.url: "${common.protocol}://${common.domain}/collectory"
+phyloServiceUrl: "${common.protocol}://phylolink.${common.domain}"
 
 # au.org.ala.spatial.process config
 spatialService.url: "${common.protocol}://${common.domain}/spatial-service"
@@ -98,10 +98,10 @@ slaveKey: "xxxxxxxxxxxxxx"
 serviceKey: "xxxxxxxxxxxxxx"
 
 layers_store:
-  GEONETWORK_URL: '${common.protocol}://${common.domain}/spatial-hub/geonetwork'
+  GEONETWORK_URL: "${common.protocol}://${common.domain}/spatial-hub/geonetwork"
   LAYER_INDEX_URL: ${common.protocol}://${common.domain}/spatial-hub/layers-service
 
-apiKeyCheckUrlTemplate: 'http://apikey.${common.internalDomain}:8080/apikey/ws/check?apikey={0}'
+apiKeyCheckUrlTemplate: "http://apikey.${common.internalDomain}:8080/apikey/ws/check?apikey={0}"
 spatialService:
   remote: "${common.protocol}://${common.domain}/spatial-service"
 
@@ -124,4 +124,4 @@ sandboxThreadCount: 2
 pipelinesCmd: "java -Dspark.local.dir=/data/spatial-data/sandbox/tmp -Djava.io.tmpdir=/data/spatial-data/sandbox/tmp -cp /opt/vbp/pipelines/pipelines.jar"
 pipelinesConfig: "--config=/config/spatial-service/la-pipelines.yaml"
 
-batch_thread_count: 2
+batch_thread_count: 1
