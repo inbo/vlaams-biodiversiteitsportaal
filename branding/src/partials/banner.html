@@ -1,240 +1,402 @@
 <!-- site-banner -->
 <div class="banner">
-
-  <!-- BootStrap 3 Classic Navbar addapted from sample:
+    <!-- BootStrap 3 Classic Navbar addapted from sample:
       https://getbootstrap.com/docs/3.3/components/#navbar -->
 
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-
-        <a class="navbar-brand" href="/">
-          <img src="/images/logo.png" alt="Vlaams Biodiversiteitsportaal logo" class="vbp-logo" />
-          <script>
-            // Preload hover logo to prevent delay/popping effect
-            const hoverLogo = new Image();
-            hoverLogo.src = '/images/logo-hover.png';
-          </script>
-          <span class="vbp-name" data-i18n="general.orgfullname">
-            Vlaams Biodiversiteitsportaal
-          </span>
-        </a>
-        <a href="/biocache-hub/explore/your-area/">
-          <button id="banner-my-location-button" type="button">
-            <i class="fa-solid fa-location-crosshairs"></i>
-          </button>
-        </a>
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-          data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <i class="fa-solid fa-bars"></i>
-        </button>
-      </div>
-
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav navbar-left">
-          <!-- Main buttons -->
-          <li><a data-i18n="nav.species"
-              href="/bie-hub/search?q=&fq=idxtype:%22TAXON%22&sortField=occurrenceCount">Soorten</a></li>
-          <li><a data-i18n="nav.biocache"
-              href="/biocache-hub/occurrences/search?q=&vlaanderen=true&fq=cl102%3A%22Vlaams+Gewest%22+AND+cl102%3A%5B*+TO+*%5D">Waarnemingen</a>
-          </li>
-
-          <!-- Places dropdown -->
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-              aria-expanded="false"><span data-i18n="nav.places">Geografisch</span> <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li>
-                <a id="geo-portal-link" class="login-status-dependent" href="/spatial-hub/">
-                  <i class="fa fa-map submenu-icon"></i>
-                  <span data-i18n="nav.spatial">Geografisch portaal </span>
-                  <i id="geo-locked" class="fa fa-lock hidden-on-logged-in login-status-dependent"></i>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">
+                    <img
+                        src="/images/logo.png"
+                        alt="Vlaams Biodiversiteitsportaal logo"
+                        class="vbp-logo"
+                    />
+                    <script>
+                        // Preload hover logo to prevent delay/popping effect
+                        const hoverLogo = new Image();
+                        hoverLogo.src = "/images/logo-hover.png";
+                    </script>
+                    <span class="vbp-name" data-i18n="general.orgfullname">
+                        Vlaams Biodiversiteitsportaal
+                    </span>
                 </a>
-              </li>
-              <li>
-                <a href="/regions/">
-                  <i class="fa fa-signs-post submenu-icon"></i>
-                  <span data-i18n="nav.regions">Regio's</span>
-                </a>
-              </li>
-              <li>
                 <a href="/biocache-hub/explore/your-area/">
-                  <i class="fa fa-location-crosshairs submenu-icon"></i>
-                  <span data-i18n="nav.your-area">Verken je omgeving</span>
+                    <button id="banner-my-location-button" type="button">
+                        <i class="fa-solid fa-location-crosshairs"></i>
+                    </button>
                 </a>
-              </li>
-            </ul>
-          </li>
-        </ul>
+                <button
+                    type="button"
+                    class="navbar-toggle collapsed"
+                    data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1"
+                    aria-expanded="false"
+                >
+                    <span class="sr-only">Toggle navigation</span>
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
 
-        <ul class="nav navbar-nav navbar-right">
-          <li id="banner-search-container" class="ui-front">
-            <input type="text" id="banner-search-input" class="banner-search-input ui-autocomplete-input"
-              autocomplete="on" data-i18n="[placeholder]nav.banner-search-placeholder" placeholder="Zoek...">
-            <a id="banner-search" role="button" href="#">
-              <i class="fa-solid fa-magnifying-glass"></i>
-            </a>
-          </li>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div
+                class="collapse navbar-collapse"
+                id="bs-example-navbar-collapse-1"
+            >
+                <ul class="nav navbar-nav navbar-left">
+                    <!-- Main buttons -->
+                    <li>
+                        <a
+                            data-i18n="nav.species"
+                            href="/bie-hub/search?q=&fq=idxtype:%22TAXON%22&sortField=occurrenceCount"
+                            >Soorten</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            data-i18n="nav.biocache"
+                            href="/biocache-hub/occurrences/search?q=&vlaanderen=true&fq=cl102%3A%22Vlaams+Gewest%22+AND+cl102%3A%5B*+TO+*%5D"
+                            >Waarnemingen</a
+                        >
+                    </li>
 
-          <!-- Help dropdown -->
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-              aria-expanded="false"><i class="fa fa-circle-question help-icon"></i></a>
-            <ul id="dropdown-news-menu" class="dropdown-menu">
-              <li>
-                <a href="/pages/handleiding.html">
-                  <i class="fa-solid fa-circle-info submenu-icon"></i>
-                  <span data-i18n="nav.help.overview">Overzicht</span>
-                </a>
-              </li>
-              <li>
-                <a href="/pages/toegang.html">
-                  <i class="fa-solid fa-user-lock submenu-icon"></i>
-                  <span data-i18n="nav.help.toegang">Toegang tot het portaal</span>
-                </a>
-              </li>
-              <li>
-                <!-- <li role="separator" class="divider"></li>
+                    <!-- Places dropdown -->
+                    <li class="dropdown">
+                        <a
+                            href="#"
+                            class="dropdown-toggle"
+                            data-toggle="dropdown"
+                            role="button"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                            ><span data-i18n="nav.places">Geografisch</span>
+                            <span class="caret"></span
+                        ></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a
+                                    id="geo-portal-link"
+                                    class="login-status-dependent"
+                                    href="/spatial-hub/"
+                                >
+                                    <i class="fa fa-map submenu-icon"></i>
+                                    <span data-i18n="nav.spatial"
+                                        >Geografisch portaal
+                                    </span>
+                                    <i
+                                        id="geo-locked"
+                                        class="fa fa-lock hidden-on-logged-in login-status-dependent"
+                                    ></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/regions/">
+                                    <i
+                                        class="fa fa-signs-post submenu-icon"
+                                    ></i>
+                                    <span data-i18n="nav.regions">Regio's</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/biocache-hub/explore/your-area/">
+                                    <i
+                                        class="fa fa-location-crosshairs submenu-icon"
+                                    ></i>
+                                    <span data-i18n="nav.your-area"
+                                        >Verken je omgeving</span
+                                    >
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li id="banner-search-container" class="ui-front">
+                        <input
+                            type="text"
+                            id="banner-search-input"
+                            class="banner-search-input ui-autocomplete-input"
+                            autocomplete="on"
+                            data-i18n="[placeholder]nav.banner-search-placeholder"
+                            placeholder="Zoek..."
+                        />
+                        <a id="banner-search" role="button" href="#">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </a>
+                    </li>
+
+                    <!-- Help dropdown -->
+                    <li class="dropdown">
+                        <a
+                            href="#"
+                            class="dropdown-toggle"
+                            data-toggle="dropdown"
+                            role="button"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                            ><i class="fa fa-circle-question help-icon"></i
+                        ></a>
+                        <ul id="dropdown-news-menu" class="dropdown-menu">
+                            <li>
+                                <a href="/pages/handleiding.html">
+                                    <i
+                                        class="fa-solid fa-circle-info submenu-icon"
+                                    ></i>
+                                    <span data-i18n="nav.help.overview"
+                                        >Overzicht</span
+                                    >
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/pages/toegang.html">
+                                    <i
+                                        class="fa-solid fa-user-lock submenu-icon"
+                                    ></i>
+                                    <span data-i18n="nav.help.toegang"
+                                        >Toegang tot het portaal</span
+                                    >
+                                </a>
+                            </li>
+                            <li>
+                                <!-- <li role="separator" class="divider"></li>
               <li><a data-i18n="nav.help.handleiding" href="/pages/handleiding.html">interactieve rondleiding</a></li> -->
-              <li role="separator" class="divider"></li>
-              <li>
-                <a href="/pages/VBP_challenges.html">
-                  <i class="fa-solid fa-bullseye submenu-icon"></i>
-                  <span data-i18n="nav.help.VBP_challenges">Challenges</span>
-                </a>
-              </li>
-              <li>
-                <a href="/pages/VBP_introductiefilmpjes.html">
-                  <i class="fa-solid fa-clapperboard submenu-icon"></i>
-                  <span data-i18n="nav.help.VBP_introductiefilmpjes">Introductiefilmpjes</span>
-                </a>
-              </li>
-              <li>
-                <a href="/pages/survey.html">
-                  <i class="fa-solid fa-square-poll-vertical submenu-icon"></i>
-                  <span data-i18n="nav.help.VBP_survey">Survey</span>
-                </a>
-              </li>
-              <li>
-                <a href="/pages/VBP_workshop.html">
-                  <i class="fa-solid fa-trowel-bricks submenu-icon"></i>
-                  <span data-i18n="nav.help.VBP_workshop">Workshop aanvragen</span>
-                </a>
-              </li>
-              <li role="separator" class="divider"></li>
-              <li>
-                <a href="/pages/VBP_testen.html">
-                  <i class="fa fa-bug submenu-icon"></i>
-                  <span data-i18n="nav.help.VBP_testen">Problemen melden</span></a>
-              </li>
-              <!-- <li><a data-i18n="nav.help.about" href="/pages/about.html">Over</a></li>
+                            </li>
+
+                            <li role="separator" class="divider"></li>
+                            <li>
+                                <a href="/pages/VBP_challenges.html">
+                                    <i
+                                        class="fa-solid fa-bullseye submenu-icon"
+                                    ></i>
+                                    <span data-i18n="nav.help.VBP_challenges"
+                                        >Challenges</span
+                                    >
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/pages/VBP_introductiefilmpjes.html">
+                                    <i
+                                        class="fa-solid fa-clapperboard submenu-icon"
+                                    ></i>
+                                    <span
+                                        data-i18n="nav.help.VBP_introductiefilmpjes"
+                                        >Introductiefilmpjes</span
+                                    >
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/pages/survey.html">
+                                    <i
+                                        class="fa-solid fa-square-poll-vertical submenu-icon"
+                                    ></i>
+                                    <span data-i18n="nav.help.VBP_survey"
+                                        >Survey</span
+                                    >
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/pages/VBP_workshop.html">
+                                    <i
+                                        class="fa-solid fa-trowel-bricks submenu-icon"
+                                    ></i>
+                                    <span data-i18n="nav.help.VBP_workshop"
+                                        >Workshop aanvragen</span
+                                    >
+                                </a>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li>
+                                <a href="/pages/VBP_testen.html">
+                                    <i class="fa fa-bug submenu-icon"></i>
+                                    <span data-i18n="nav.help.VBP_testen"
+                                        >Problemen melden</span
+                                    ></a
+                                >
+                            </li>
+                            <!-- <li><a data-i18n="nav.help.about" href="/pages/about.html">Over</a></li>
               <li><a data-i18n="nav.help.contact" href="/pages/contact.html">Contact</a></li> -->
-            </ul>
-          </li>
+                        </ul>
+                    </li>
 
-          <!-- Authentication -->
-          <li id="dropdown-auth-menu" class="dropdown login-status-dependent">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-              aria-expanded="false">
-              <i id="login-icon" class="fa"></i></a>
-            <ul class="dropdown-menu">
-              <li>
-                <a id="loginButton" class="loginBtn login-button hidden-on-logged-in login-status-dependent"
-                  href="::loginURL::">
-                  <i class="fa fa-right-to-bracket submenu-icon"></i>
-                  <span data-i18n="nav.login">Login</span>
-                </a>
-              </li>
+                    <!-- Authentication -->
+                    <li
+                        id="dropdown-auth-menu"
+                        class="dropdown login-status-dependent"
+                    >
+                        <a
+                            href="#"
+                            class="dropdown-toggle"
+                            data-toggle="dropdown"
+                            role="button"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                        >
+                            <i id="login-icon" class="fa"></i
+                        ></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a
+                                    id="loginButton"
+                                    class="loginBtn login-button hidden-on-logged-in login-status-dependent"
+                                    href="::loginURL::"
+                                >
+                                    <i
+                                        class="fa fa-right-to-bracket submenu-icon"
+                                    ></i>
+                                    <span data-i18n="nav.login">Login</span>
+                                </a>
+                            </li>
 
-              <li>
-                <a class="myProfileBtn hidden-on-logged-out login-status-dependent" href="/my-profile.html">
-                  <i class="fa fa-id-badge submenu-icon"></i>
-                  <span data-i18n="nav.myprofile">Jouw profiel</span>
-                </a>
-              </li>
-              <li role="separator" class="divider hidden-on-logged-out login-status-dependent"></li>
+                            <li>
+                                <a
+                                    class="myProfileBtn hidden-on-logged-out login-status-dependent"
+                                    href="/my-profile.html"
+                                >
+                                    <i class="fa fa-id-badge submenu-icon"></i>
+                                    <span data-i18n="nav.myprofile"
+                                        >Jouw profiel</span
+                                    >
+                                </a>
+                            </li>
+                            <li
+                                role="separator"
+                                class="divider hidden-on-logged-out login-status-dependent"
+                            ></li>
 
-              <li>
-                <a class="myProfileBtn hidden-on-logged-out login-status-dependent"
-                  href="/species-list/speciesList/list">
-                  <i class="fa fa-list-check submenu-icon"></i>
-                  <span data-i18n="nav.profile.species-lists">Mijn soortenlijsten</span>
-                </a>
-              </li>
+                            <li>
+                                <a
+                                    class="myProfileBtn hidden-on-logged-out login-status-dependent"
+                                    href="/species-list/speciesList/list"
+                                >
+                                    <i
+                                        class="fa fa-list-check submenu-icon"
+                                    ></i>
+                                    <span data-i18n="nav.profile.species-lists"
+                                        >Mijn soortenlijsten</span
+                                    >
+                                </a>
+                            </li>
 
-              <li>
-                <a id="my-annotated-records" class="myProfileBtn hidden-on-logged-out login-status-dependent" href="">
-                  <i class="fa fa-flag submenu-icon"></i>
-                  <span data-i18n="nav.profile.annotated-records">Mijn annotaties</span>
-                </a>
-              </li>
+                            <li>
+                                <a
+                                    id="my-annotated-records"
+                                    class="myProfileBtn hidden-on-logged-out login-status-dependent"
+                                    href=""
+                                >
+                                    <i class="fa fa-flag submenu-icon"></i>
+                                    <span
+                                        data-i18n="nav.profile.annotated-records"
+                                        >Mijn annotaties</span
+                                    >
+                                </a>
+                            </li>
 
-              <li>
-                <a class="myProfileBtn hidden-on-logged-out login-status-dependent" href="/alerts/">
-                  <i class="fa fa-bell submenu-icon"></i>
-                  <span data-i18n="nav.profile.alerts">Mijn meldingen</span>
-                </a>
-              </li>
+                            <li>
+                                <a
+                                    class="myProfileBtn hidden-on-logged-out login-status-dependent"
+                                    href="/alerts/"
+                                >
+                                    <i class="fa fa-bell submenu-icon"></i>
+                                    <span data-i18n="nav.profile.alerts"
+                                        >Mijn meldingen</span
+                                    >
+                                </a>
+                            </li>
 
-              <li>
-                <a class="myProfileBtn hidden-on-logged-out login-status-dependent" href="/spatial-hub?tool=log">
-                  <i class="fa fa-map submenu-icon"></i>
-                  <span data-i18n="nav.profile.spatial-analysis">Mijn analyse</span>
-                </a>
-              </li>
-              <li role="separator" class="divider hidden-on-logged-out login-status-dependent"></li>
-              <li>
-                <a id="logoutButton" class="logoutBtn logout-button hidden-on-logged-out login-status-dependent"
-                  href="::logoutURL::">
-                  <i class="fa fa-right-from-bracket submenu-icon"></i>
-                  <span data-i18n="nav.logout">Uitloggen</span>
-                </a>
-              </li>
-            </ul>
-          </li>
+                            <li>
+                                <a
+                                    class="myProfileBtn hidden-on-logged-out login-status-dependent"
+                                    href="/spatial-hub?tool=log"
+                                >
+                                    <i class="fa fa-map submenu-icon"></i>
+                                    <span
+                                        data-i18n="nav.profile.spatial-analysis"
+                                        >Mijn analyse</span
+                                    >
+                                </a>
+                            </li>
+                            <li
+                                role="separator"
+                                class="divider hidden-on-logged-out login-status-dependent"
+                            ></li>
+                            <li>
+                                <a
+                                    id="logoutButton"
+                                    class="logoutBtn logout-button hidden-on-logged-out login-status-dependent"
+                                    href="::logoutURL::"
+                                >
+                                    <i
+                                        class="fa fa-right-from-bracket submenu-icon"
+                                    ></i>
+                                    <span data-i18n="nav.logout"
+                                        >Uitloggen</span
+                                    >
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
 
-          <!-- Language selection -->
-          <li id="dropdown-lang" class="dropdown language-selection">
-            <a href=" #" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-              aria-expanded="false">NL<span class="caret"></span></a>
-            <ul class="locale-switcher dropdown-menu dropdown-lang-menu">
-              <li class="locale-link" data-locale="nl"><a class="nl-locale-link" href="#"><span
-                    class="lang_link_nl">Nederlands</span></a></li>
-              <!-- <li class="locale-link" data-locale="fr"><a class="fr-locale-link" href="#"><span class="lang_link_fr">Français</span></a></li> -->
-              <li class="locale-link" data-locale="en"><a class="en-locale-link" href="#"><span
-                    class="lang_link_en">English</span></a></li>
-            </ul>
-          </li>
-        </ul>
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-  </nav>
+                    <!-- Language selection -->
+                    <li id="dropdown-lang" class="dropdown language-selection">
+                        <a
+                            href=" #"
+                            class="dropdown-toggle"
+                            data-toggle="dropdown"
+                            role="button"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                            >NL<span class="caret"></span
+                        ></a>
+                        <ul
+                            class="locale-switcher dropdown-menu dropdown-lang-menu"
+                        >
+                            <li class="locale-link" data-locale="nl">
+                                <a class="nl-locale-link" href="#"
+                                    ><span class="lang_link_nl"
+                                        >Nederlands</span
+                                    ></a
+                                >
+                            </li>
+                            <!-- <li class="locale-link" data-locale="fr"><a class="fr-locale-link" href="#"><span class="lang_link_fr">Français</span></a></li> -->
+                            <li class="locale-link" data-locale="en">
+                                <a class="en-locale-link" href="#"
+                                    ><span class="lang_link_en"
+                                        >English</span
+                                    ></a
+                                >
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
 </div>
 
 <script type="text/html" id="autoCompleteTemplate">
-  <li class="autocomplete-item striped">
-    <div class="content-spacing">
-      <div class="autocomplete-heading">
-        <% if (commonNameMatches.length > 0) { %>
-        <%=commonNameMatches[0]%>
-        <% } else if (scientificNameMatches.length > 0) { %>
-        <%=scientificNameMatches[0]%>
-        <% } else { %>
-        <%=matchedNames[0]%>
-        <% } %>
-      </div>
-    </div>
-  </li>
+    <li class="autocomplete-item striped">
+        <div class="content-spacing">
+            <div class="autocomplete-heading">
+                <% if (commonNameMatches.length > 0) { %>
+                <%=commonNameMatches[0]%> <% } else if
+                (scientificNameMatches.length > 0) { %>
+                <%=scientificNameMatches[0]%> <% } else { %>
+                <%=matchedNames[0]%> <% } %>
+            </div>
+        </div>
+    </li>
 </script>
 <!-- end site-banner -->
 
-
 <!-- maintenance -->
-<div id="mante-container" style="display: none;" class="container"></div>
+<div id="mante-container" style="display: none" class="container"></div>
 <!-- end maintenance -->
 <div class="vbp-content-area">
-  <div class="max-width">
-    <div class="vbp-content">
+    <div class="max-width">
+        <div class="vbp-content"></div>
+    </div>
+</div>
