@@ -95,7 +95,7 @@
         "exists": true,
         "rules": [
           {
-            "weightExpression": "(1.0000001 * _value) * _weight"
+            "weightExpression": "(0.0000001 * _value) + _weight"
           }
         ]
       }
