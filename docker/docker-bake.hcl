@@ -204,7 +204,7 @@ target "spatial-hub" {
 target "spatial-service" {
   context = "./spatial-service"
   contexts = {
-    "custom-gradle" = "target:custom-gradle-jdk11"
+    "custom-gradle" = "target:custom-gradle-jdk17"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-spatial-service:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-spatial-service:${TAG}"]

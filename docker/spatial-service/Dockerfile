@@ -4,8 +4,8 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 # ARG VERSION=2.1.5
 # ARG SOURCE=https://github.com/AtlasOfLivingAustralia/spatial-service.git
 
-ARG VERSION=fix-bbox-for-certain-fields
-ARG COMMIT=d2bbec302551fc3b9b77ee5b7e9ead2dfad4df45
+ARG VERSION=improve-intersect
+ARG COMMIT=ace684e3d5a2505db3ddb73a3894b1192b46f4f6
 ARG SOURCE=https://github.com/StefanVanDyck/spatial-service.git
 LABEL ala.version=inbo-${VERSION}
 
@@ -21,7 +21,10 @@ RUN --mount=type=cache,target=/gradle-cache,ro \
 RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
     rsync -a /home/gradle/.gradle/caches/modules-2 /gradle-cache/ \
     && rm /gradle-cache/modules-2/*.lock && rm /gradle-cache/modules-2/gc.properties
-FROM amazoncorretto:11
+
+RUN ls -la /project/build/libs/
+
+FROM amazoncorretto:17
 
 COPY --from=builder /opt/opentelemetry-agent /opt/opentelemetry-agent
 
@@ -34,8 +37,8 @@ RUN mkdir -p /opt/atlas/i18n \
   && ln -s /config/spatial-service/i18n/override /var/opt/atlas/i18n/spatial-service
 
 # ARG VERSION=2.1.5
-ARG VERSION=2.2.0-SNAPSHOT
-ARG COMMIT=d2bbec302551fc3b9b77ee5b7e9ead2dfad4df45
+ARG VERSION=3.1.0-SNAPSHOT
+ARG COMMIT=ace684e3d5a2505db3ddb73a3894b1192b46f4f6
 ARG PIPELINES_VERSION=2.19.0-SNAPSHOT
 LABEL ala.version=inbo-${COMMIT}
 LABEL pipelines.version=${PIPELINES_VERSION}
@@ -72,7 +75,7 @@ RUN curl -f https://inbo-vbp-global-public-artifacts.s3.eu-west-1.amazonaws.com/
 
 COPY pipelines/vocabularies/* /opt/vbp/pipelines/vocabularies/
 
-COPY --from=builder /project/build/libs/project-${VERSION}.war /spatial-service.war
+COPY --from=builder /project/build/libs/spatial-service-${VERSION}.war /spatial-service.war
 COPY link-libs.sh /opt/vbp/spatial-service/link-libs.sh
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/spatial-service/actuator/health || exit 1
