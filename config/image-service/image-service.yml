@@ -7,11 +7,11 @@ security:
     clientId: images
     secret: images-oidc-super-secret
   core:
-    optionalFilterPattern: [ "/", "/*" ]
+    optionalFilterPattern: ["/", "/*"]
     uriExclusionFilterPattern: ["^/ws/.*", "^/image-service/ws/.*"]
 
   ip:
-    whitelist: '10.30.0.0/20'
+    whitelist: "10.30.0.0/20"
 webservice:
   client-id: images
   client-secret: xxx
@@ -20,29 +20,37 @@ server:
   servlet:
     contextPath: /image-service
 grails:
-  serverURL: '${common.protocol}://${common.domain}/image-service'
+  serverURL: "${common.protocol}://${common.domain}/image-service"
 
 imageservice:
   imagestore:
-    root: '/data/image-service/store'
-    inbox: '/data/image-service/incoming'
-    staging: '/data/image-service/store/staging'
-  batchUpload: '/data/image-service/upload'
-  exportDir: '/data/image-service/exports'
+    root: "/data/image-service/store"
+    inbox: "/data/image-service/incoming"
+    staging: "/data/image-service/store/staging"
+  batchUpload: "/data/image-service/upload"
+  exportDir: "/data/image-service/exports"
   apache:
-    root: '${grails.serverURL}${grails.contextPath}/store/'
+    root: "${grails.serverURL}${grails.contextPath}/store/"
     # space separated list
-    multiple_roots: '${grails.serverURL}${grails.contextPath}/store/'
+    multiple_roots: "${grails.serverURL}${grails.contextPath}/store/"
   thumbnail:
     size: 300
 
-serverName: '${common.protocol}://${common.domain}/image-service'
+serverName: "${common.protocol}://${common.domain}/image-service"
 
 skin:
-  layout: 'ala-main'
+  layout: "ala-main"
 
-
-facets: [ "recognisedLicence", "dataResourceUid", "creator.keyword", "imageSize", "fileType", "format", "dateUploadedYearMonth" ]
+facets:
+  [
+    "recognisedLicence",
+    "dataResourceUid",
+    "creator.keyword",
+    "imageSize",
+    "fileType",
+    "format",
+    "dateUploadedYearMonth",
+  ]
 
 management:
   health:
@@ -56,13 +64,13 @@ elasticsearch:
   defaultPageSize: 10
   batchIndexSize: 1000
   hosts:
-      - host: "elasticsearch"
-        scheme: "http"
-        port: 9200
+    - host: "elasticsearch"
+      scheme: "http"
+      port: 9200
 
 # The URLs to recognise as image service URL for the purposes of recognising incoming
 # URLs for images (to avoid re-downloading the images)
-imageServiceUrls: [ "${common.protocol}://${common.domain}/image-service" ]
+imageServiceUrls: ["${common.protocol}://${common.domain}/image-service"]
 
 # External links
 collectory:
@@ -70,7 +78,7 @@ collectory:
 biocache:
   baseURL: "${common.protocol}://${common.domain}/biocache-hub"
   service:
-      baseURL: "http://biocache-service.${common.internalDomain}:8080/biocache-service"
+    baseURL: "http://biocache-service.${common.internalDomain}:8080/biocache-service"
 bie:
   baseURL: "${common.protocol}://${common.domain}/bie-hub"
 
@@ -80,9 +88,9 @@ userDetails:
 dataSource:
   driverClassName: org.postgresql.Driver
   dialect: org.hibernate.spatial.dialect.postgis.PostgisPG9Dialect
-  url: 'jdbc:postgresql://postgis:5432/images'
-  username: 'images'
-  password: 'my-super-secret-password'
+  url: "jdbc:postgresql://postgis:5432/images"
+  username: "images"
+  password: "my-super-secret-password"
   pooled: true
   jmxExport: true
   properties:
@@ -106,4 +114,4 @@ dataSource:
 
 background:
   tasks:
-    threads: 1
+    threads: 2
