@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 0,
+  "id": 11,
   "links": [],
   "panels": [
     {
@@ -63,9 +63,7 @@
         "orientation": "auto",
         "percentChangeColorMode": "standard",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "",
           "values": false
         },
@@ -844,8 +842,8 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "barWidthFactor": 0.6,
-            "drawStyle": "bars",
-            "fillOpacity": 76,
+            "drawStyle": "line",
+            "fillOpacity": 80,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
@@ -853,7 +851,7 @@
               "viz": false
             },
             "insertNulls": false,
-            "lineInterpolation": "linear",
+            "lineInterpolation": "smooth",
             "lineWidth": 1,
             "pointSize": 5,
             "scaleDistribution": {
@@ -871,6 +869,7 @@
             }
           },
           "mappings": [],
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -881,12 +880,30 @@
               {
                 "color": "red",
                 "value": 80
+              },
+              {
+                "color": "#EAB839",
+                "value": 90
               }
             ]
           },
-          "unit": "decbytes"
+          "unit": "bytes"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": ["diskio_io_time"],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": []
+          }
+        ]
       },
       "gridPos": {
         "h": 8,
@@ -894,7 +911,7 @@
         "x": 19,
         "y": 12
       },
-      "id": 6,
+      "id": 9,
       "options": {
         "legend": {
           "calcs": [],
@@ -913,19 +930,31 @@
       "repeatDirection": "v",
       "targets": [
         {
-          "dimensions": {
-            "InstanceId": "$instanceId"
+          "datasource": {
+            "type": "cloudwatch",
+            "uid": "cloudwatch-dev"
           },
-          "label": "",
+          "dimensions": {
+            "InstanceId": "$instanceId",
+            "path": "/mnt"
+          },
+          "expression": "",
+          "hide": false,
+          "id": "",
+          "label": "Free ${PROP('Dim.path')} ",
+          "logGroups": [],
           "matchExact": false,
           "metricEditorMode": 0,
-          "metricName": "EBSReadBytes",
+          "metricName": "disk_free",
           "metricQueryType": 0,
-          "namespace": "AWS/EC2",
+          "namespace": "Inbo/VBP",
+          "period": "",
+          "queryLanguage": "CWLI",
           "queryMode": "Metrics",
           "refId": "A",
           "region": "default",
-          "statistic": "Average"
+          "sqlExpression": "",
+          "statistic": "Minimum"
         },
         {
           "datasource": {
@@ -933,21 +962,29 @@
             "uid": "cloudwatch-dev"
           },
           "dimensions": {
-            "InstanceId": "$instanceId"
+            "InstanceId": "$instanceId",
+            "path": "/mnt"
           },
+          "expression": "",
           "hide": false,
-          "label": "",
+          "id": "",
+          "label": "Used ${PROP('Dim.path')} ",
+          "logGroups": [],
+          "matchExact": false,
           "metricEditorMode": 0,
-          "metricName": "EBSWriteBytes",
+          "metricName": "disk_used",
           "metricQueryType": 0,
-          "namespace": "AWS/EC2",
+          "namespace": "Inbo/VBP",
+          "period": "",
+          "queryLanguage": "CWLI",
           "queryMode": "Metrics",
           "refId": "B",
           "region": "default",
-          "statistic": "Average"
+          "sqlExpression": "",
+          "statistic": "Maximum"
         }
       ],
-      "title": "Disk $instanceId",
+      "title": "Disk",
       "type": "timeseries"
     }
   ],
@@ -960,9 +997,7 @@
         "allValue": "*",
         "current": {
           "text": "All",
-          "value": [
-            "$__all"
-          ]
+          "value": ["$__all"]
         },
         "datasource": {
           "type": "cloudwatch",
@@ -976,9 +1011,7 @@
         "query": {
           "attributeName": "InstanceId",
           "ec2Filters": {
-            "tag:Application": [
-              "vbp"
-            ]
+            "tag:Application": ["vbp"]
           },
           "queryType": "ec2InstanceAttributes",
           "refId": "CloudWatchVariableQueryEditor-VariableQuery",
@@ -1042,5 +1075,5 @@
   "timezone": "browser",
   "title": "Pipeline Resources",
   "uid": "pipeline-resources-dev",
-  "version": 70
+  "version": 6
 }
