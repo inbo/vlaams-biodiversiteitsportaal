@@ -165,15 +165,15 @@
         {
           "term": "commonName",
           "exists": true,
-          "condition": "_value.length() > 4",
-          "weightExpression": "_weight * 1.0 / (1.0 + Math.log(_value.length() * 0.01 + 1.0))",
+          "condition": "_value.length() > 3",
+          "weightExpression": "_weight * 1.0 / (1.0 + Math.log(_value.length() * 0.02 + 1.0))",
           "comment": "The longer the name, the less it should be suggested. Mean name length is 16"
         },
         {
           "term": "scientificName",
           "exists": true,
-          "condition": "_value.length() > 4",
-          "weightExpression": "_weight * 1.0 / (1.0 + Math.log(_value.length() * 0.01 + 1.0))",
+          "condition": "_value.length() > 3",
+          "weightExpression": "_weight * 1.0 / (1.0 + Math.log(_value.length() * 0.02 + 1.0))",
           "comment": "The longer the name, the less it should be suggested. Mean name length is 16"
         }
       ]
