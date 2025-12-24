@@ -43,7 +43,7 @@ RUN mkdir -p /opt/atlas/i18n \
   && mkdir -p /var/opt/atlas/i18n \
   && ln -s /config/image-service/i18n/override /var/opt/atlas/i18n/image-service
 
-ARG VERSION=4.0.0-SNAPSHOT
+ARG VERSION=4.2.0-SNAPSHOT
 LABEL ala.version=${VERSION}
 
 COPY --from=builder /project/build/libs/image-service-${VERSION}.war /image-service.war
