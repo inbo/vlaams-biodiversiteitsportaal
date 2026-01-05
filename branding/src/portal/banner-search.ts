@@ -51,9 +51,7 @@ function performSearch() {
         return;
     }
 
-    window.location.href = `/bie-hub/search?sortField=score&q=${encodeURIComponent(
-        `*${query}*`,
-    )}`;
+    window.location.href = `/bie-hub/search?sortField=score&q=${encodeURIComponent(query)}`;
 }
 
 window.BC_CONF = {
