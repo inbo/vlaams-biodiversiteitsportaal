@@ -5,7 +5,7 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 # ARG SOURCE=https://github.com/AtlasOfLivingAustralia/spatial-service.git
 
 ARG VERSION=improve-intersect
-ARG COMMIT=ace684e3d5a2505db3ddb73a3894b1192b46f4f6
+ARG COMMIT=eabfddb4248eabdc2553a9f1c2c23e402bea01f9
 ARG SOURCE=https://github.com/StefanVanDyck/spatial-service.git
 LABEL ala.version=inbo-${VERSION}
 
@@ -38,7 +38,7 @@ RUN mkdir -p /opt/atlas/i18n \
 
 # ARG VERSION=2.1.5
 ARG VERSION=3.1.0-SNAPSHOT
-ARG COMMIT=ace684e3d5a2505db3ddb73a3894b1192b46f4f6
+ARG COMMIT=eabfddb4248eabdc2553a9f1c2c23e402bea01f9
 ARG PIPELINES_VERSION=2.19.0-SNAPSHOT
 LABEL ala.version=inbo-${COMMIT}
 LABEL pipelines.version=${PIPELINES_VERSION}
