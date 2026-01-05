@@ -65,9 +65,15 @@ async function initUserManager(
             await silentLogin(manager);
         }
     });
-    manager.events.addSilentRenewError(async (user) => {
-        console.error("Silent renew error", user);
-        await manager.removeUser();
+    manager.events.addSilentRenewError(async (error) => {
+        console.error("Silent renew error", error);
+        if (error.name === "NetworkError") {
+            setTimeout(async () => {
+                await manager.signinSilent();
+            }, 1_000);
+        } else {
+            await manager.removeUser();
+        }
     });
 
     await handleAuthCallbacks(manager);
