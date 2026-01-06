@@ -3,8 +3,8 @@ name: E2E tests | Prod
 run-name: ${{ github.actor }} is testing the VBP portal @ prod
 
 on:
-  # schedule:
-  #   - cron: '0 9 * * 1-5'
+  schedule:
+    - cron: "0 9 * * 1-5"
 
   workflow_dispatch:
     inputs:
