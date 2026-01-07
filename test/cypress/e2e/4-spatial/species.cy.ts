@@ -1,4 +1,3 @@
-import { time } from "console";
 import { getFileNameTimeStamp, TEST_LIST_PREFIX } from "cypress/support/utils";
 import * as path from "path";
 
