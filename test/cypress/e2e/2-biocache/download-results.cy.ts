@@ -3,220 +3,199 @@ import * as JSZip from "jszip";
 import { getFileNameTimeStamp } from "../../support/utils";
 
 describe("Biocache - Download Auth", () => {
-    it("Download requires login", () => {
-        cy.session("unauthenticated", () => {
-            cy.visit(
-                "/biocache-hub/occurrences/search?q=taxa%3A%22vulpes%20vulpes",
-            );
-            // Expand the Attribution facet
-            cy.get("#downloads > a").click();
+  it("Download requires login", () => {
+    cy.session("unauthenticated", () => {
+      cy.visit("/biocache-hub/occurrences/search?q=taxa%3A%22vulpes%20vulpes");
+      // Expand the Attribution facet
+      cy.get("#downloads > a").click();
 
-            cy.origin(Cypress.env("AUTH_URL"), () => {
-                cy.url().should(
-                    "match",
-                    new RegExp(`^${Cypress.env("AUTH_URL")}`),
-                );
-            });
-        });
+      cy.origin(Cypress.env("AUTH_URL"), () => {
+        cy.url().should("match", new RegExp(`^${Cypress.env("AUTH_URL")}`));
+      });
     });
+  });
 });
 
 describe("Biocache - Download", () => {
-    let numberOfOccurrences = 0;
-    beforeEach(() => {
-        cy.login("biocache-hub");
-        cy.visit(
-            "/biocache-hub/occurrences/search?q=taxa%3A%22vulpes%20vulpes",
-        );
-        // Ignore errors from auto-complete widget and missing google-analytics
-        cy.on("uncaught:exception", (err, runnable) => {
-            if (
-                err.message.includes("Cannot read properties of undefined") ||
-                err.message.includes("ga is not defined")
-            ) {
-                return false; // Prevents Cypress from failing the test
-            } else {
-                return true; // Allows other errors to fail the test
-            }
-        });
-
-        cy.get("#results").children().should(
-            "have.length.greaterThan",
-            10,
-        );
-        cy.get("#returnedText > strong:first-of-type").should((elem) => {
-            numberOfOccurrences = parseInt(elem.text().replace(/[.,]/g, ""));
-            expect(numberOfOccurrences).to.be.greaterThan(10);
-        });
+  let numberOfOccurrences = 0;
+  beforeEach(() => {
+    cy.login("biocache-hub");
+    cy.visit("/biocache-hub/occurrences/search?q=taxa%3A%22vulpes%20vulpes");
+    // Ignore errors from auto-complete widget and missing google-analytics
+    cy.on("uncaught:exception", (err, runnable) => {
+      if (
+        err.message.includes("Cannot read properties of undefined") ||
+        err.message.includes("ga is not defined")
+      ) {
+        return false; // Prevents Cypress from failing the test
+      } else {
+        return true; // Allows other errors to fail the test
+      }
     });
 
-    it("Download as DWCA has all records", () => {
-        // Click downloads button
-        cy.get("#downloads").click();
-
-        // Select the DWCA download option
-        cy.get("#select-records").click();
-
-        // Set filename
-        const filename = `dwca_download_${getFileNameTimeStamp()}`;
-        cy.get("#file").clear().type(filename);
-
-        // Select download reason
-        cy.get("#downloadReason").select("testen");
-
-        // Click the next button
-        cy.get("#nextBtn").click();
-
-        // Click the download button
-        cy.get("#queueStatus > a.btn", { timeout: 30_000 }).click();
-
-        // Check download contents
-        checkDownloadForOccurenceCount(filename, numberOfOccurrences);
+    cy.get("#results").children().should("have.length.greaterThan", 10);
+    cy.get("#returnedText > strong:first-of-type").should((elem) => {
+      numberOfOccurrences = parseInt(elem.text().replace(/[.,]/g, ""));
+      expect(numberOfOccurrences).to.be.greaterThan(10);
     });
+  });
 
-    it("Download as legacy TSV has all records", () => {
-        // Click downloads button
-        cy.get("#downloads").click();
+  it("Download as DWCA has all records", () => {
+    // Click downloads button
+    cy.get("#downloads").click();
 
-        // Select the DWCA download option
-        cy.get("#select-records").click();
+    // Select the DWCA download option
+    cy.get("#select-records").click();
 
-        // Set filename
-        const filename = `legacy_download_${getFileNameTimeStamp()}`;
-        cy.get("#file").clear().type(filename);
+    // Set filename
+    const filename = `dwca_download_${getFileNameTimeStamp()}`;
+    cy.get("#file").clear().type(filename);
 
-        // Select legacy download format
-        cy.get("#downloadFormat[value=legacy]").check();
+    // Select download reason
+    cy.get("#downloadReason").select("testen");
 
-        // Dowload as tsv
-        cy.get("#fileType_tsv").check();
+    // Click the next button
+    cy.get("#nextBtn").click();
 
-        // Select download reason
-        cy.get("#downloadReason").select("testen");
+    // Click the download button
+    cy.get("#queueStatus > a.btn", { timeout: 30_000 }).click();
 
-        // Click the next button
-        cy.get("#nextBtn").click();
+    // Check download contents
+    checkDownloadForOccurenceCount(filename, numberOfOccurrences);
+  });
 
-        // Click the download button
-        cy.get("#queueStatus > a.btn", { timeout: 30_000 }).click();
+  it("Download as legacy TSV has all records", () => {
+    // Click downloads button
+    cy.get("#downloads").click();
 
-        // Check download contents
-        checkDownloadForOccurenceCount(filename, numberOfOccurrences, "tsv");
-    });
+    // Select the DWCA download option
+    cy.get("#select-records").click();
 
-    it("Download as custom archive has all records", () => {
-        // Click downloads button
-        cy.get("#downloads").click();
+    // Set filename
+    const filename = `legacy_download_${getFileNameTimeStamp()}`;
+    cy.get("#file").clear().type(filename);
 
-        // Select the DWCA download option
-        cy.get("#select-records").click();
+    // Select legacy download format
+    cy.get("#downloadFormat[value=legacy]").check();
 
-        // Set filename
-        const filename = `custom_download_${getFileNameTimeStamp()}`;
-        cy.get("#file").clear().type(filename);
+    // Dowload as tsv
+    cy.get("#fileType_tsv").check();
 
-        // Select custom download format
-        cy.get("#downloadFormat[value=custom]").check();
+    // Select download reason
+    cy.get("#downloadReason").select("testen");
 
-        // Select download reason
-        cy.get("#downloadReason").select("testen");
+    // Click the next button
+    cy.get("#nextBtn").click();
 
-        // Click the next button
-        cy.get("#nextBtn").click();
+    // Click the download button
+    cy.get("#queueStatus > a.btn", { timeout: 30_000 }).click();
 
-        // Select all fields
-        cy.get(".select-all-btn").first().click();
+    // Check download contents
+    checkDownloadForOccurenceCount(filename, numberOfOccurrences, "tsv");
+  });
 
-        // Deselect misccellaneous fields, as it causes the download to be empty
-        // TODO: https://github.com/inbo/vlaams-biodiversiteitsportaal/issues/565
-        cy.get("a.list-group-item").contains("Diversen velden").click();
+  it("Download as custom archive has all records", () => {
+    // Click downloads button
+    cy.get("#downloads").click();
 
-        // Click the next button
-        cy.get(".next-btn").first().click();
+    // Select the DWCA download option
+    cy.get("#select-records").click();
 
-        // Click the download button
-        cy.get("#queueStatus > a.btn", { timeout: 30_000 }).click();
+    // Set filename
+    const filename = `custom_download_${getFileNameTimeStamp()}`;
+    cy.get("#file").clear().type(filename);
 
-        // Check download contents
-        checkDownloadForOccurenceCount(filename, numberOfOccurrences);
-    });
+    // Select custom download format
+    cy.get("#downloadFormat[value=custom]").check();
 
-    // TODO: https://github.com/inbo/vlaams-biodiversiteitsportaal/issues/563
-    it.skip("Save Custom download preferences", () => {
-        // Click downloads button
-        cy.get("#downloads").click();
+    // Select download reason
+    cy.get("#downloadReason").select("testen");
 
-        // Select the DWCA download option
-        cy.get("#select-records").click();
+    // Click the next button
+    cy.get("#nextBtn").click();
 
-        // Set filename
-        const filename = `custom_download_${getFileNameTimeStamp()}`;
-        cy.get("#file").clear().type(filename);
+    // Select all fields
+    cy.get(".select-all-btn").first().click();
 
-        // Select custom download format
-        cy.get("#downloadFormat[value=custom]").check();
+    // Deselect misccellaneous fields, as it causes the download to be empty
+    // TODO: https://github.com/inbo/vlaams-biodiversiteitsportaal/issues/565
+    cy.get("a.list-group-item").contains("Diversen velden").click();
 
-        // Select download reason
-        cy.get("#downloadReason").select("testen");
+    // Click the next button
+    cy.get(".next-btn").first().click();
 
-        // Click the next button
-        cy.get("#nextBtn").click();
+    // Click the download button
+    cy.get("#queueStatus > a.btn", { timeout: 30_000 }).click();
 
-        // Select some fields
-        cy.get("a.list-group-item").contains("Andere kenmerken").click();
-        cy.get("a.list-group-item").contains("Diversen velden").click();
-        // Ensure the fields are selected
-        cy.get('input[type="checkbox"][value="otherTraits"]').should(
-            "be.checked",
-        );
-        cy.get('input[type="checkbox"][value="miscellaneousFields"]').should(
-            "be.checked",
-        );
+    // Check download contents
+    checkDownloadForOccurenceCount(filename, numberOfOccurrences);
+  });
 
-        // Save preferences
-        cy.get(".save-btn").first().click();
-        cy.get('button[data-bb-handler="ok"]').click();
+  // TODO: https://github.com/inbo/vlaams-biodiversiteitsportaal/issues/563
+  it.skip("Save Custom download preferences", () => {
+    // Click downloads button
+    cy.get("#downloads").click();
 
-        // Referesh the page
-        cy.reload();
+    // Select the DWCA download option
+    cy.get("#select-records").click();
 
-        // Check if the previously selected fields are still selected
-        cy.get('input[type="checkbox"][value="otherTraits"]').should(
-            "be.checked",
-        );
-        cy.get('input[type="checkbox"][value="miscellaneousFields"]').should(
-            "be.checked",
-        );
-    });
+    // Set filename
+    const filename = `custom_download_${getFileNameTimeStamp()}`;
+    cy.get("#file").clear().type(filename);
+
+    // Select custom download format
+    cy.get("#downloadFormat[value=custom]").check();
+
+    // Select download reason
+    cy.get("#downloadReason").select("testen");
+
+    // Click the next button
+    cy.get("#nextBtn").click();
+
+    // Select some fields
+    cy.get("a.list-group-item").contains("Andere kenmerken").click();
+    cy.get("a.list-group-item").contains("Diversen velden").click();
+    // Ensure the fields are selected
+    cy.get('input[type="checkbox"][value="otherTraits"]').should("be.checked");
+    cy.get('input[type="checkbox"][value="miscellaneousFields"]').should(
+      "be.checked",
+    );
+
+    // Save preferences
+    cy.get(".save-btn").first().click();
+    cy.get('button[data-bb-handler="ok"]').click();
+
+    // Referesh the page
+    cy.reload();
+
+    // Check if the previously selected fields are still selected
+    cy.get('input[type="checkbox"][value="otherTraits"]').should("be.checked");
+    cy.get('input[type="checkbox"][value="miscellaneousFields"]').should(
+      "be.checked",
+    );
+  });
 });
 
 function checkDownloadForOccurenceCount(
-    filename: string,
-    numberOfOccurrences: number,
-    format: string = "csv",
+  filename: string,
+  numberOfOccurrences: number,
+  format: string = "csv",
 ) {
-    cy.readFile(
-        path.join(
-            Cypress.config("downloadsFolder"),
-            `${filename}.zip`,
-        ),
-        null,
-    ).then((zipBuffer) => {
-        return JSZip.loadAsync(zipBuffer).then((zip) => {
-            return cy
-                .log(Object.keys(zip.files).join(", "))
-                .then(() => {
-                    // Check the CSV content
-                    return zip.file(
-                        `${filename}.${format}`,
-                    ).async("string").then((csvContent) => {
-                        const numberOfLines = csvContent.match(/\n/g)?.length ||
-                            0;
-                        expect(numberOfLines).to.equal(
-                            numberOfOccurrences + 1,
-                        );
-                    });
-                });
-        });
+  cy.readFile(
+    path.join(Cypress.config("downloadsFolder"), `${filename}.zip`),
+    null,
+  ).then((zipBuffer) => {
+    return JSZip.loadAsync(zipBuffer).then((zip) => {
+      return cy.log(Object.keys(zip.files).join(", ")).then(() => {
+        // Check the CSV content
+        return zip
+          .file(`${filename}.${format}`)
+          .async("string")
+          .then((csvContent) => {
+            const numberOfLines = csvContent.match(/\n/g)?.length || 0;
+            expect(numberOfLines).to.equal(numberOfOccurrences + 1);
+          });
+      });
     });
+  });
 }
