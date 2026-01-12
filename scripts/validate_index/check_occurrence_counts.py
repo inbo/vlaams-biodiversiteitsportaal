@@ -21,8 +21,12 @@ def main():
            solr_count = solr_counts[data_resource_id]
 
         if solr_count != s3_count:
-            print(f"MISMATCH! {data_resource_id} - {data_resource['name']}") 
-            print(f"{solr_count} - {s3_count}") 
+            print(f"MISMATCH! {data_resource_id} - {data_resource['name']}")
+            if solr_count == 0:
+                print("MISSING")
+            else:
+                print(f"DUPLICATES, multiple: {solr_count/s3_count}")
+            print(f"Solr: {solr_count} - S3: {s3_count}") 
             mismatches.append(data_resource_id)
 
     print(f"Total number of mismatches: {len(mismatches)}")
@@ -39,7 +43,7 @@ def get_collectory_data_resources():
     return data_resources
 
 def get_solr_counts():
-    url = 'http://localhost:8983/solr/biocache/select?facet.field=dataResourceUid&facet=true&indent=true&q.op=OR&q=*%3A*&rows=0'
+    url = 'http://localhost:8983/solr/biocache/select?facet.field=dataResourceUid&facet.limit=500&facet=true&indent=true&q.op=OR&q=*%3A*&rows=0'
     response = requests.get(url)
 
     if response.status_code != 200:
@@ -52,14 +56,14 @@ def get_s3_counts(data_resource_id: str):
     try:
         response = s3.get_object(
             Bucket="inbo-vbp-prod-pipelines",
-            Key=f"data/pipelines-data/{data_resource_id}/0/interpretation-metrics.yml",
+            Key=f"data/pipelines-data/{data_resource_id}/0/dwca-metrics.yml",
         )
         if response["ResponseMetadata"]["HTTPStatusCode"] != 200:
             raise Exception(f"S3 Get failed {response}")
 
         metrics = yaml.safe_load(response["Body"].read())
-        if "basicRecordsCountAttempted" in metrics:
-            return metrics["basicRecordsCountAttempted"]
+        if "archiveToErCountAttempted" in metrics:
+            return metrics["archiveToErCountAttempted"]
         else:
             return 0
     except Exception:
