@@ -25,7 +25,7 @@ def main():
             if solr_count == 0:
                 print("MISSING")
             else:
-                print(f"DUPLICATES, multiple: {solr_count/s3_count}")
+                print(f"DUPLICATES")
             print(f"Solr: {solr_count} - S3: {s3_count}") 
             mismatches.append(data_resource_id)
 
