@@ -3,7 +3,7 @@ ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-gradle-jdk17 AS builder
 
 ARG VERSION=develop-vbp
-ARG COMMIT=5663e6594edcd89f5e43265e79934c660a8d5311
+ARG COMMIT=460529e67330ffdc3f9840d0e53dcb036447346c
 ARG SOURCE=https://github.com/StefanVanDyck/biocache-hubs.git
 LABEL ala.version=inbo-${COMMIT}
 
@@ -15,7 +15,7 @@ RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
 #    -x test
 
 ARG VERSION=develop
-ARG COMMIT=460529e67330ffdc3f9840d0e53dcb036447346c
+ARG COMMIT=acc4e25421dd15a375adfbe83567a587d5b145bd
 ARG SOURCE=https://github.com/AtlasOfLivingAustralia/ala-hub
 LABEL ala.version=inbo-${COMMIT}
 
