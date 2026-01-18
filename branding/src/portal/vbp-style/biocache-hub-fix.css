@@ -1,4 +1,8 @@
 /* Hide link to my downloads as we're currently not supporting it */
 #mydownloads {
-	display: none;
+    display: none;
+}
+
+i.dwc-logo {
+    background-color: rgb(192, 67, 132);
 }
