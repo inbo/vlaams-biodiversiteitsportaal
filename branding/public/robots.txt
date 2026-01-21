@@ -5,6 +5,7 @@ Crawl-delay: 10
 
 # Explicit allows
 Allow: /index.html
+Allow: /favicon.ico
 Allow: /$
 Allow: /pages/
 Allow: /bie-hub/
