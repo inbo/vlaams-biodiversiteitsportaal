@@ -62,4 +62,11 @@
     </repository>
   </backup>
 
+  <circuitBreaker class="solr.CircuitBreakerManager" enabled="true">
+    <str name="memEnabled">true</str>
+    <str name="memThreshold">80</str>
+    <str name="cpuEnabled">true</str>
+    <str name="cpuThreshold">90</str>
+  </circuitBreaker>
+
 </solr>
