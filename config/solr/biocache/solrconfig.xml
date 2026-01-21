@@ -396,6 +396,12 @@
           -->
         <maxBooleanClauses>1024</maxBooleanClauses>
 
+        <circuitBreaker class="solr.CircuitBreakerManager" enabled="true">
+            <str name="memEnabled">true</str>
+            <str name="memThreshold">80</str>
+            <str name="cpuEnabled">true</str>
+            <str name="cpuThreshold">90</str>
+        </circuitBreaker>
 
         <!-- Solr Internal Query Caches
              There are two implementations of cache available for Solr,

@@ -37,6 +37,13 @@
     -->
     <luceneMatchVersion>6.6.5</luceneMatchVersion>
 
+    <circuitBreaker class="solr.CircuitBreakerManager" enabled="true">
+        <str name="memEnabled">true</str>
+        <str name="memThreshold">80</str>
+        <str name="cpuEnabled">true</str>
+        <str name="cpuThreshold">90</str>
+    </circuitBreaker>
+
     <!-- <lib/> directives can be used to instruct Solr to load an Jars
          identified and use them to resolve any "plugins" specified in
          your solrconfig.xml or schema.xml (ie: Analyzers, Request
