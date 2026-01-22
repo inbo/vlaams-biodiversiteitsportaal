@@ -120,20 +120,18 @@ describe("Biocache - Advanced search", () => {
             .should("have.length.greaterThan", 10);
     });
 
-    // it("Type Status search", () => {
-    //     const searchInput = 0;
-    //     cy.get("#type_status").select(searchInput);
-    //     cy.get(".tab-pane.active").within(() => {
-    //         cy.get("input.btn-primary[type='submit']").click();
-    //     });
-    //     cy.url().should(
-    //         "include",
-    //         "/biocache-hub/occurrences/search",
-    //     ).get("#results").children().should(
-    //         "have.length.greaterThan",
-    //         0,
-    //     );
-    // });
+    it.skip("Type Status search", () => {
+        const searchInput = 0;
+        cy.get("#type_status").select(searchInput);
+        cy.get(".tab-pane.active").within(() => {
+            cy.get("input.btn-primary[type='submit']").click();
+        });
+        cy.url()
+            .should("include", "/biocache-hub/occurrences/search")
+            .get("#results")
+            .children()
+            .should("have.length.greaterThan", 0);
+    });
 
     it("Basis of record search", () => {
         const searchInput = "Machine observation";
