@@ -78,9 +78,19 @@ describe("Biocache - Advanced search", () => {
             .should("have.length.greaterThan", 10);
     });
 
-    // TODO: https://github.com/inbo/vlaams-biodiversiteitsportaal/issues/552
-    it.skip("Institutions search", () => {
-        cy.fail("requires institutions to be configured in the test environment");
+    it("Institutions search", () => {
+        const searchInput = "VMM";
+        cy.get("#institution_collection").select(searchInput);
+        cy.get(".tab-pane.active").within(() => {
+            cy.get("input.btn-primary[type='submit']").click();
+        });
+        cy.url()
+            .should("include", "/biocache-hub/occurrences/search")
+            .get(".queryDisplay")
+            .contains(searchInput, { matchCase: false })
+            .get("#results")
+            .children()
+            .should("have.length.greaterThan", 10);
     });
 
     it("Country search", () => {
@@ -120,6 +130,7 @@ describe("Biocache - Advanced search", () => {
             .should("have.length.greaterThan", 10);
     });
 
+    // The type_status search option has dissapeared??
     it.skip("Type Status search", () => {
         const searchInput = 0;
         cy.get("#type_status").select(searchInput);
@@ -182,7 +193,7 @@ describe("Biocache - Advanced search", () => {
     });
 
     // TODO: No data with record number available
-    it.skip("Record Number search", () => {
+    it("Record Number search", () => {
         const searchInput = "1818";
         cy.get("#record_number").type(`${searchInput}{enter}`);
         cy.url()
@@ -231,6 +242,9 @@ describe("Biocache - Advanced search", () => {
         // Species group
         cy.get("#species_group").select("Dicots");
 
+        // Institutions
+        cy.get("#institution_collection").select("INBO");
+
         // Country
         cy.get("#country").select("Belgium");
 
@@ -278,6 +292,7 @@ describe("Biocache - Advanced search", () => {
                 "Columba livia f. domestica",
                 "Dicots",
                 "Belgium",
+                "INBO",
                 // "Not supplied", Missing from query display?
                 "Machine observation",
                 "Chorus",
