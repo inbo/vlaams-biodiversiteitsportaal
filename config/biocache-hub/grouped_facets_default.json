@@ -193,23 +193,15 @@
       },
       {
         "sort": "index",
-        "field": "dynamicProperties_level2Name"
+        "field": "cl10199"
       },
       {
         "sort": "index",
-        "field": "verbatimCoordinateSystem"
+        "field": "cl101"
       },
       {
         "sort": "index",
         "field": "cl100"
-      },
-      {
-        "sort": "index",
-        "field": "locality"
-      },
-      {
-        "sort": "index",
-        "field": "municipality"
       }
     ]
   },
