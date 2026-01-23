@@ -216,7 +216,7 @@ environments:
     dataquality:
       enabled: true
     regionVlaanderen:
-      query: cl102:"Vlaams Gewest" AND cl102:[* TO *]
+      query: cl10199:"Vlaams Gewest"
   inbo_uat:
     userdetails:
       url: https://natuurdata.uat.inbo.be/userdetails
