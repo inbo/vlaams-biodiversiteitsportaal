@@ -471,7 +471,7 @@
   <field name="subfamily"   type="string" docValues="true" indexed="true"/>
 
   <!-- ALA Sensitive data fields -->
-  <field name="sensitive"                             type="string"   docValues="false" indexed="false"/>
+  <field name="sensitive"                             type="string"   docValues="true" indexed="false"/>
   <field name="sensitive_dataGeneralizations"         type="string"   docValues="false" indexed="false"/>
   <field name="sensitive_day"                         type="string"   docValues="false" indexed="false"/>
   <field name="sensitive_decimalLatitude"             type="string"   docValues="false" indexed="false"/>
