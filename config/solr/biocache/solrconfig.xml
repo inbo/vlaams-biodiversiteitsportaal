@@ -400,7 +400,7 @@
             <str name="memEnabled">true</str>
             <str name="memThreshold">98</str>
             <str name="cpuEnabled">true</str>
-            <str name="cpuThreshold">90</str>
+            <str name="cpuThreshold">95</str>
         </circuitBreaker>
 
         <!-- Solr Internal Query Caches
