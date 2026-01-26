@@ -32,6 +32,6 @@ jobs:
           aws ecr get-login-password --region ${{ secrets.AWS_REGION }} \
             | docker login --username AWS --password-stdin ${{ secrets.ECR_REPO }}
 
-          docker pull ${{ secrets.ECR_REPO }}/dockerhub/library/git:2
-          docker pull ${{ secrets.ECR_REPO }}/dockerhub/library/mysql
-          docker pull ${{ secrets.ECR_REPO }}/dockerhub/library/postgresql
+          aws ecr create-repository --repository-name ${{ secrets.ECR_REPO }}/dockerhub/library/git:2
+          aws ecr create-repository --repository-name ${{ secrets.ECR_REPO }}/dockerhub/library/mysql
+          aws ecr create-repository --repository-name ${{ secrets.ECR_REPO }}/dockerhub/library/postgresql
