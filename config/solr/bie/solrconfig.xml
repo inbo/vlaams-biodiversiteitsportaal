@@ -39,9 +39,9 @@
 
     <circuitBreaker class="solr.CircuitBreakerManager" enabled="true">
         <str name="memEnabled">true</str>
-        <str name="memThreshold">80</str>
+        <str name="memThreshold">98</str>
         <str name="cpuEnabled">true</str>
-        <str name="cpuThreshold">90</str>
+        <str name="cpuThreshold">95</str>
     </circuitBreaker>
 
     <!-- <lib/> directives can be used to instruct Solr to load an Jars
