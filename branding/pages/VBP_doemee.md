@@ -113,15 +113,17 @@ description: "Een overzicht van de citizen science initiatieven van het Vlaams B
 <div class="vbp-doemee-initiatieven vbp-doemee-projecten">
 
 
-  <div class="vbp-doemee-initiatieven-item">
-    <h3><a href="https://www.gbif.org" target="_blank">GBIF</a></h3>
-    <p>GBIF (Global Biodiversity Information Facility) is een internationaal netwerk en dataplatform dat open toegang
-      biedt tot gegevens over alle vormen van leven op aarde. Het helpt onderzoekers, beleidsmakers en burgers om
-      biodiversiteit beter te begrijpen en te beschermen via vrij beschikbare data. Contacteer de Belgische GBIF node
-      indien je organisatie data wil publiceren op GBIF en het VBP.</p>
-    <img src="/images/gbif-dot-org-green-logo.svg" alt="GBIF Logo">
-
-  </div>
+<div class="vbp-doemee-initiatieven-item">
+  <h3><a href="https://www.gbif.org" target="_blank">GBIF</a></h3>
+  <p>
+    GBIF (Global Biodiversity Information Facility) is een internationaal netwerk en dataplatform dat open toegang
+    biedt tot gegevens over alle vormen van leven op aarde. Het helpt onderzoekers, beleidsmakers en burgers om
+    biodiversiteit beter te begrijpen en te beschermen via vrij beschikbare data. Contacteer de
+    <a href="https://www.biodiversity.be/3511/" target="_blank">Belgische GBIF node</a>
+    indien je organisatie data wil publiceren op GBIF en het VBP.
+  </p>
+  <img src="/images/gbif-dot-org-green-logo.svg" alt="GBIF-logo">
+</div>
   <div class="vbp-doemee-initiatieven-item">
     <h3><a href="https://oscibio.inbo.be/" target="_blank">Open science lab for Biodiversity</a></h3>
     <p>Het Open Science Lab for Biodiversity ondersteunt professionals bij het duurzaam beheren en open publiceren van
