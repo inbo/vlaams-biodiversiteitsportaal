@@ -35,7 +35,11 @@ description: "Een overzicht van de partners van het Vlaams Biodiversiteitsportaa
     <li>Onderzoekers</li>
     <li>Individuele burgers</li>
 </ul>
-<p>Wil je zelf data aanleveren, contacteer ons via <a href="mailto:support.natuurdata@inbo.be">email</a></p>
+<p>
+  Wil je zelf data aanleveren, contacteer ons via <a href="mailto:support.natuurdata@inbo.be">email</a> 
+  of neem een kijkje op de <a href="https://natuurdata.inbo.be/pages/VBP_doemee.html">“Doe mee”</a> pagina.
+</p>
+
 
 <h2>Partners</h2>
 <h3>Living Atlas Community</h3>
