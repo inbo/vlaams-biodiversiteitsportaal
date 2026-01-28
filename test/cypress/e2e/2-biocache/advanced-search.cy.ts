@@ -192,7 +192,6 @@ describe("Biocache - Advanced search", () => {
             .should("have.length.of.at.least", 1);
     });
 
-    // TODO: No data with record number available
     it("Record Number search", () => {
         const searchInput = "1818";
         cy.get("#record_number").type(`${searchInput}{enter}`);
@@ -266,9 +265,7 @@ describe("Biocache - Advanced search", () => {
         cy.get("#catalogue_number").type("102244166");
 
         // Record Number
-        // TODO: issue when using colon in record number (e.g "Natuurpunt:Waarnemingen:143198978")
-        // https://github.com/inbo/vlaams-biodiversiteitsportaal/issues/551
-        cy.get("#record_number").type("1818");
+        cy.get("#record_number").type("Natuurpunt:Waarnemingen:143198978");
 
         // Date range
         cy.get("#startDate").type("1998-01-01");
@@ -297,7 +294,7 @@ describe("Biocache - Advanced search", () => {
                 "Machine observation",
                 "Chorus",
                 "102244166",
-                "1818",
+                "Natuurpunt:Waarnemingen:143198978",
                 "1998-01-01",
                 "2023-01-01",
             ];
