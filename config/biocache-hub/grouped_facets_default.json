@@ -123,11 +123,12 @@
       {
         "sort": "count",
         "field": "state_conservation"
-      },,
+      },
+      ,
       {
         "sort": "count",
         "field": "country_conservation"
-      }
+      },
       {
         "sort": "count",
         "field": "behavior"
