@@ -206,7 +206,11 @@ describe("Biocache - Advanced search", () => {
 
     it("Start Date search", () => {
         const searchInput = "1998-01-01";
-        cy.get("#startDate").type(`${searchInput}{enter}`);
+        cy.get("#startDate").type(`${searchInput}`);
+        // Submit search
+        cy.get(".tab-pane.active").within(() => {
+            cy.get("input.btn-primary[type='submit']").click();
+        });
         cy.url()
             .should("include", "/biocache-hub/occurrences/search")
             .get(".queryDisplay")
@@ -218,7 +222,11 @@ describe("Biocache - Advanced search", () => {
 
     it("End Date search", () => {
         const searchInput = "2023-01-01";
-        cy.get("#endDate").type(`${searchInput}{enter}`);
+        cy.get("#endDate").type(`${searchInput}`);
+        // Submit search
+        cy.get(".tab-pane.active").within(() => {
+            cy.get("input.btn-primary[type='submit']").click();
+        });
         cy.url()
             .should("include", "/biocache-hub/occurrences/search")
             .get(".queryDisplay")
