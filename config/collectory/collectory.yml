@@ -5,8 +5,11 @@ security:
     clientId: collections
   oidc:
     clientId: collections
+
+  cas:
+    uriFilterPattern: "/admin,/admin/*,/collection/*,/institution/*,/contact/*,/reports/*,/providerCode/*,/providerMap/*,/dataProvider/*,/dataResource/*,/dataHub/*,/manage/*,/alaAdmin,/alaAdmin/*,/ws/ipt/scan/*,/upload/*"
   core:
-    optionalFilterPattern: [ "/", "/*" ]
+    optionalFilterPattern: ["/", "/*"]
     uriExclusionFilterPattern: ["^/ws/.*"]
 webservice:
   client-id: collections
@@ -98,7 +101,7 @@ grails:
     adhoc:
       patterns:
         "['/images/*', '/data/*', '/img/*', '/theme/default/*', '/css/*',
-                '/js/*', '/plugins/*' ]"
+        '/js/*', '/plugins/*' ]"
   serverURL: ${common.protocol}://${common.domain}/collectory
 isPipelinesCompatible: false
 loggerURL: ${common.protocol}://${common.domain}/logger/service
@@ -137,7 +140,6 @@ rifcs:
   excludeBounds: true
 serverName: ${common.protocol}://${common.domain}/collectory
 
-
 showExtraInfoInDataSetsView:
   enabled: "true "
   relativeTime: true
@@ -148,13 +150,13 @@ spatial:
   baseURL: ${common.protocol}://${common.domain}/spatial-hub
 speciesListToolUrl: ${common.protocol}://${common.domain}/species-list/speciesListItem/list/
 suitableFor: '[{"spListNational":"Species list national"}, {"spListState":
-    "Species list state"}, {"spListGreaterThan1000": "Species list >1000km
-    radius"}, {"spList100to1000": "Species list 100-1000km radius"},
-    {"spList10to100":"Species list 10k to 100km radius"},
-    {"spListLessThan10":"Species list <10km radius"},
-    {"speciesDistribution":"Defining a species distribution"},
-    {"quantifyAbundance":"Quantifying abundance at a point in time"},
-    {"quantifyChange": "Quantifying change over time"}, {"other":"Other"}]'
+  "Species list state"}, {"spListGreaterThan1000": "Species list >1000km
+  radius"}, {"spList100to1000": "Species list 100-1000km radius"},
+  {"spList10to100":"Species list 10k to 100km radius"},
+  {"spListLessThan10":"Species list <10km radius"},
+  {"speciesDistribution":"Defining a species distribution"},
+  {"quantifyAbundance":"Quantifying abundance at a point in time"},
+  {"quantifyChange": "Quantifying change over time"}, {"other":"Other"}]'
 uploadExternalUrlPath: /upload/
 uploadFilePath: /data/collectory/upload/
 useGbifDoi: false
