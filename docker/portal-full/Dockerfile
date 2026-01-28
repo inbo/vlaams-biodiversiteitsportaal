@@ -15,8 +15,8 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
 ARG PROJ_VERSION=6.1.1
 ARG GDAL_VERSION=3.2.1
 ARG TARGETARCH
-RUN yum -y install https://inbo-vbp-global-public-artifacts.s3.eu-west-1.amazonaws.com/spatial-service/gdal/proj-${PROJ_VERSION}-1.amzn2.$TARGETARCH.rpm &&\
-    yum -y install https://inbo-vbp-global-public-artifacts.s3.eu-west-1.amazonaws.com/spatial-service/gdal/gdal-${GDAL_VERSION}-1.amzn2.$TARGETARCH.rpm
+RUN yum -y install https://build.natuurdata.dev.inbo.be/spatial-service/gdal/proj-${PROJ_VERSION}-1.amzn2.$TARGETARCH.rpm &&\
+    yum -y install https://build.natuurdata.dev.inbo.be/spatial-service/gdal/gdal-${GDAL_VERSION}-1.amzn2.$TARGETARCH.rpm
 
 # Default user and group id
 ENV UID=1000

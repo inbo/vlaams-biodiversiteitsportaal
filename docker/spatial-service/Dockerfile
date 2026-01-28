@@ -57,21 +57,21 @@ ARG PROJ_VERSION=6.1.1
 ARG GDAL_VERSION=3.2.1
 ARG TARGETARCH
 ARG CACHE_BUSTING=1
-RUN yum -y install https://inbo-vbp-global-public-artifacts.s3.eu-west-1.amazonaws.com/spatial-service/gdal/proj-${PROJ_VERSION}-1.amzn2.$TARGETARCH.rpm &&\
-    yum -y install https://inbo-vbp-global-public-artifacts.s3.eu-west-1.amazonaws.com/spatial-service/gdal/gdal-${GDAL_VERSION}-1.amzn2.$TARGETARCH.rpm
+RUN yum -y install https://build.natuurdata.dev.inbo.be/spatial-service/gdal/proj-${PROJ_VERSION}-1.amzn2.$TARGETARCH.rpm &&\
+    yum -y install https://build.natuurdata.dev.inbo.be/spatial-service/gdal/gdal-${GDAL_VERSION}-1.amzn2.$TARGETARCH.rpm
 
 RUN mkdir -p /opt/vbp/pipelines/shp && \
-    curl https://inbo-vbp-global-public-artifacts.s3.eu-west-1.amazonaws.com/spatial-service/pipelines-shapefiles.zip -o /opt/vbp/pipelines/shp/pipelines-shapefiles.zip && \
+    curl https://build.natuurdata.dev.inbo.be/spatial-service/pipelines-shapefiles.zip -o /opt/vbp/pipelines/shp/pipelines-shapefiles.zip && \
     unzip /opt/vbp/pipelines/shp/pipelines-shapefiles.zip -d /opt/vbp/pipelines/shp && \
     rm /opt/vbp/pipelines/shp/pipelines-shapefiles.zip
 
 RUN mkdir -p /opt/vbp/spatial-service/libs \
     && curl -L https://nexus.ala.org.au/repository/releases/au/org/ala/spatial/ala-aloc/1.0/ala-aloc-1.0.jar -o /opt/vbp/spatial-service/libs/aloc.jar \
-    && curl https://inbo-vbp-global-public-artifacts.s3.eu-west-1.amazonaws.com/spatial-service/maxent.zip -o /tmp/maxent.zip \
+    && curl https://build.natuurdata.dev.inbo.be/spatial-service/maxent.zip -o /tmp/maxent.zip \
     && unzip -j /tmp/maxent.zip maxent/maxent.jar -d /opt/vbp/spatial-service/libs \
     && rm /tmp/maxent.zip
 
-RUN curl -f https://inbo-vbp-global-public-artifacts.s3.eu-west-1.amazonaws.com/spatial-service/pipelines-2.19.0-SNAPSHOT-shaded.jar -o /opt/vbp/pipelines/pipelines.jar
+RUN curl -f https://build.natuurdata.dev.inbo.be/spatial-service/pipelines-2.19.0-SNAPSHOT-shaded.jar -o /opt/vbp/pipelines/pipelines.jar
 
 COPY pipelines/vocabularies/* /opt/vbp/pipelines/vocabularies/
 

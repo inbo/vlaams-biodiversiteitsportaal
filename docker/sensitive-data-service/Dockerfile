@@ -6,7 +6,7 @@ ARG VERSION=1.1.1
 ARG SOURCE=https://github.com/AtlasOfLivingAustralia/ala-sensitive-data-service.git
 LABEL ala.version=${VERSION}
 
-ARG TAXONOMY_ARCHIVE=https://inbo-vbp-global-public-artifacts.s3.eu-west-1.amazonaws.com/taxonomy/namematching-gbif-backbone-lucene-8-2024-09-11.tgz
+ARG TAXONOMY_ARCHIVE=https://build.natuurdata.dev.inbo.be/taxonomy/namematching-gbif-backbone-lucene-8-2024-09-11.tgz
 RUN curl ${TAXONOMY_ARCHIVE} -o /gbif-backbone.tgz \
     && tar -xzf /gbif-backbone.tgz \
     && mv /namematching-gbif-backbone-lucene-8-2024-09-11 /gbif-backbone \
