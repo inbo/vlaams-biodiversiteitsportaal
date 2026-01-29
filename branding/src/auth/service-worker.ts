@@ -7,11 +7,7 @@ import {
     ResetAuthLoadedMessage,
 } from "./service-worker-events";
 
-const jwtPaths = [
-    "/biocache-service/",
-    "/spatial-hub/portal/",
-    "/image-service/image/proxyImage",
-];
+const jwtPaths = ["/biocache-service/", "/spatial-hub/portal/"];
 
 let resolved = false;
 let resolveAccessToken: (value: AccessToken | null) => void;
