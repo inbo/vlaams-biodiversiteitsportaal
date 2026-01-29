@@ -3,27 +3,19 @@
     "view": [
       {
         "name": "Apply to an area",
-        "inputs": [
-          "area"
-        ]
+        "inputs": ["area"]
       },
       {
         "name": "Select species",
-        "inputs": [
-          "species"
-        ]
+        "inputs": ["species"]
       },
       {
         "name": "AOO grid resolution",
-        "inputs": [
-          "resolution"
-        ]
+        "inputs": ["resolution"]
       },
       {
         "name": "Alpha value",
-        "inputs": [
-          "coverage"
-        ]
+        "inputs": ["coverage"]
       }
     ],
     "input": {
@@ -37,28 +29,19 @@
     "view": [
       {
         "name": "Apply to an area",
-        "inputs": [
-          "area"
-        ]
+        "inputs": ["area"]
       },
       {
         "name": "Select species",
-        "inputs": [
-          "species1"
-        ]
+        "inputs": ["species1"]
       },
       {
         "name": "Select background species",
-        "inputs": [
-          "species2"
-        ]
+        "inputs": ["species2"]
       },
       {
         "name": "Select 2 environmental layers",
-        "inputs": [
-          "grid",
-          "layer"
-        ]
+        "inputs": ["grid", "layer"]
       }
     ],
     "input": {
@@ -72,27 +55,19 @@
     "view": [
       {
         "name": "Area to restrict the scatterplot list.",
-        "inputs": [
-          "area"
-        ]
+        "inputs": ["area"]
       },
       {
         "name": "Foreground species.",
-        "inputs": [
-          "species1"
-        ]
+        "inputs": ["species1"]
       },
       {
         "name": "Layers to use in the scatterplot. Between 2 and 10 layers.",
-        "inputs": [
-          "layer"
-        ]
+        "inputs": ["layer"]
       },
       {
         "name": "Select background species",
-        "inputs": [
-          "species2"
-        ]
+        "inputs": ["species2"]
       }
     ],
     "input": {
@@ -106,15 +81,11 @@
     "view": [
       {
         "name": "Area to restrict the points.",
-        "inputs": [
-          "area"
-        ]
+        "inputs": ["area"]
       },
       {
         "name": "Occurrences to use in points to grid.",
-        "inputs": [
-          "species"
-        ]
+        "inputs": ["species"]
       },
       {
         "name": "Other settings",
@@ -133,15 +104,11 @@
     "view": [
       {
         "name": "Apply to an area",
-        "inputs": [
-          "area"
-        ]
+        "inputs": ["area"]
       },
       {
         "name": "Select Phylogenetic trees",
-        "inputs": [
-          "phylo"
-        ]
+        "inputs": ["phylo"]
       }
     ],
     "input": {
@@ -157,21 +124,15 @@
     "view": [
       {
         "name": "Apply to an area",
-        "inputs": [
-          "area"
-        ]
+        "inputs": ["area"]
       },
       {
         "name": "Select layers",
-        "inputs": [
-          "layer"
-        ]
+        "inputs": ["layer"]
       },
       {
         "name": "Number of groups",
-        "inputs": [
-          "groups"
-        ]
+        "inputs": ["groups"]
       }
     ],
     "input": {
@@ -194,28 +155,19 @@
     "view": [
       {
         "name": "Area to restrict prediction",
-        "inputs": [
-          "area"
-        ]
+        "inputs": ["area"]
       },
       {
         "name": "Occurrences to use in the prediction.",
-        "inputs": [
-          "species"
-        ]
+        "inputs": ["species"]
       },
       {
         "name": "Layers to use in the prediction. Between 1 and 20 layers.",
-        "inputs": [
-          "layer"
-        ]
+        "inputs": ["layer"]
       },
       {
         "name": "MaxEnt options",
-        "inputs": [
-          "testPercentage",
-          "resolution"
-        ]
+        "inputs": ["testPercentage", "resolution"]
       }
     ],
     "input": {
@@ -230,12 +182,7 @@
       },
       "resolution": {
         "constraints": {
-          "labels": [
-            "0.01 °",
-            "0.1 °",
-            "0.5 °",
-            "1.0 °"
-          ]
+          "labels": ["0.01 °", "0.1 °", "0.5 °", "1.0 °"]
         }
       },
       "jackknife": {
@@ -250,15 +197,7 @@
       }
     }
   },
-  "MergeAreas": {
-    "input": {
-      "name": {
-        "constraints": {
-          "default": "my merged area"
-        }
-      }
-    }
-  },
+  "MergeAreas": {},
   "Envelope": {
     "input": {
       "resolution": {
@@ -271,53 +210,35 @@
   "TaxonFrequency": {
     "view": [
       {
-        "inputs": [
-          "area"
-        ]
+        "inputs": ["area"]
       },
       {
-        "inputs": [
-          "minYear"
-        ]
+        "inputs": ["minYear"]
       },
       {
-        "inputs": [
-          "species1"
-        ]
+        "inputs": ["species1"]
       },
       {
-        "inputs": [
-          "species2"
-        ]
+        "inputs": ["species2"]
       }
     ]
   },
   "DoubleGridding": {
     "view": [
       {
-        "inputs": [
-          "area"
-        ]
+        "inputs": ["area"]
       },
       {
-        "inputs": [
-          "species"
-        ]
+        "inputs": ["species"]
       },
       {
-        "inputs": [
-          "primaryGridCellSize"
-        ]
+        "inputs": ["primaryGridCellSize"]
       },
       {
-        "inputs": [
-          "secondaryGridCellSize"
-        ]
+        "inputs": ["secondaryGridCellSize"]
       },
       {
-        "inputs": [
-          "yearSize"
-        ]
+        "inputs": ["yearSize"]
       }
     ]
   },
@@ -330,5 +251,3 @@
     }
   }
 }
-
-
