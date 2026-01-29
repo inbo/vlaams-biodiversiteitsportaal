@@ -653,7 +653,7 @@
   <field name="raw_rightsHolder"			             type="string"  docValues="false" indexed="false" />
   <field name="raw_sampleSizeUnit"			             type="string"  docValues="false" indexed="false" />
   <field name="raw_sampleSizeValue"			             type="string"  docValues="false" indexed="false" />
-  <field name="raw_scientificName"			             type="string"  docValues="false" indexed="false" />
+  <field name="raw_scientificName"			             type="string"  docValues="true" indexed="true" />
   <field name="raw_scientificNameAuthorship"		     type="string"  docValues="false" indexed="false" />
   <field name="raw_sensitive"					         type="string"  docValues="false" indexed="false" />
   <field name="raw_sex"					                 type="string"  docValues="false" indexed="false" />
