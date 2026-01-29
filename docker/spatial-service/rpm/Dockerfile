@@ -1,5 +1,6 @@
 FROM amazoncorretto:11
 
+# trivy:ignore:AVD-DS-0015  # using BuildKit yum cache
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
     yum -y install \
     gcc-c++ \

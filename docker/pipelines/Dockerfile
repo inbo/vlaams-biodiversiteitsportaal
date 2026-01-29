@@ -28,6 +28,7 @@ LABEL ala.version=inbo-${COMMIT}
 WORKDIR /app
 RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
 
+## trivy:ignore:AVD-DS-0013  # temporary cd in single RUN to avoid extra layers
 RUN --mount=type=cache,target=/root/.m2/repository \
     mvn --batch-mode --no-transfer-progress \
         clean install \
@@ -57,6 +58,7 @@ ARG COMMIT=d9b134f738416ee34f41dc116b5c106795fc487f
 LABEL ala.version=inbo-${COMMIT}
 #
 # ARG VERSION=2.18.6-SNAPSHOT
+## trivy:ignore:AVD-DS-0015  # using BuildKit yum cache
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
     yum update -y && \
     yum install -y \

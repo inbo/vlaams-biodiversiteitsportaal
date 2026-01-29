@@ -1,0 +1,19 @@
+#!/bin/sh
+
+if ! command -v trivy >/dev/null 2>&1
+then
+    echo "trivy not installed, skipping trivy checks"
+else
+    status=0
+    trivy config . --disable-telemetry --skip-dirs '**/node_modules' --exit-code 1 -q --table-mode detailed || status=1
+    # skip node_modules (root and test/) to avoid noise from third-party packages
+    trivy fs . --disable-telemetry --skip-dirs '**/node_modules' --exit-code 1 -q --table-mode detailed || status=1
+    exit $status
+fi
+
+if ! command -v tfsec >/dev/null 2>&1
+then
+    echo "tfsec not installed, skipping tfsec checks"
+else
+  tfsec --concise-output -m MEDIUM
+fi

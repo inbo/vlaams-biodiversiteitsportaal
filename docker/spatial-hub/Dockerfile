@@ -11,6 +11,7 @@ ARG COMMIT=df3923ef32530ff38d8a3b532f50d31a10e649b3
 ARG SOURCE=https://github.com/inbo/spatial-hub
 LABEL ala.version=inbo-${VERSION}
 
+# trivy:ignore:AVD-DS-0015  # using BuildKit yum cache
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
     yum update -y && \
     yum install -y \

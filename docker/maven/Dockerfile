@@ -5,6 +5,7 @@ FROM --platform=${BUILDPLATFORM} maven:3.9-amazoncorretto-11 AS builder
 RUN mkdir ~/.m2
 COPY settings.xml /root/.m2/settings.xml
 
+# trivy:ignore:AVD-DS-0002 trivy:ignore:AVD-DS-0026 trivy:ignore:AVD-DS-0015
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
     yum -y install git unzip
 

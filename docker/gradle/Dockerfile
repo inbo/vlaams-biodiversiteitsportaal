@@ -4,11 +4,13 @@ ARG GRADLE_VERSION=8
 ARG JDK_VERSION=21
 FROM --platform=${BUILDPLATFORM} gradle:${GRADLE_VERSION}-jdk${JDK_VERSION}-corretto AS builder
 
+# trivy:ignore:AVD-DS-0002 trivy:ignore:AVD-DS-0026  # builder-stage
 COPY gradle.properties /home/gradle/.gradle/gradle.properties
 COPY init.gradle /home/gradle/.gradle/init.gradle
 
 ENV GRADLE_RO_DEP_CACHE=/gradle-cache
 
+# trivy:ignore:AVD-DS-0015  # using BuildKit yum cache
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
     yum update -y && \
     yum install -y \
