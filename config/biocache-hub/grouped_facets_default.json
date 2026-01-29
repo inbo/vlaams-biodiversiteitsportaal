@@ -8,10 +8,6 @@
       },
       {
         "sort": "index",
-        "field": "raw_taxon_name"
-      },
-      {
-        "sort": "index",
         "field": "subspecies_name"
       },
       {
