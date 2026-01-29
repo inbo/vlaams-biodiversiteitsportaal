@@ -6,9 +6,10 @@ security:
   oidc:
     clientId: images
     secret: images-oidc-super-secret
-  core
+  core:
     optionalFilterPattern: ["/", "/*"]
-    uriExclusionFilterPattern: ["^/ws/.*", "^/image-service/ws/.*", ".*proxyImage.*"]
+    uriExclusionFilterPattern:
+      ["^/ws/.*", "^/image-service/ws/.*", ".*proxyImage.*"]
 
   ip:
     whitelist: "10.30.0.0/20"
