@@ -8,7 +8,7 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 ARG VERSION=741-fix-merge-areas
 ARG COMMIT=df3923ef32530ff38d8a3b532f50d31a10e649b3
-ARG SOURCE=https://github.com/katya-shaleninova/spatial-hub
+ARG SOURCE=https://github.com/inbo/spatial-hub
 LABEL ala.version=inbo-${VERSION}
 
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
