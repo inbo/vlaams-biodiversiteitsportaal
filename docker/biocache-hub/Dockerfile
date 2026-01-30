@@ -3,7 +3,7 @@ ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-gradle-jdk17 AS builder
 
 ARG VERSION=fix-audio-player
-ARG COMMIT=48565ccbdb89e44a22bc97c569884e2f3c113341
+ARG COMMIT=d30d4a1c14eaa77660d078292b7c707d122f7aae
 ARG SOURCE=https://github.com/StefanVanDyck/biocache-hubs.git
 LABEL ala.version=inbo-${COMMIT}
 
