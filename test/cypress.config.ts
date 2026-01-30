@@ -4,19 +4,19 @@ import * as fs from "fs";
 import { dirname } from "path";
 
 const envs = {
-  "local": {
+  local: {
     baseUrl: "http://localhost",
-    authUrl: "http://localhost/mock-oauth2",
+    authUrl: "http://localhost:9999/mock-oauth2",
   },
-  "dev": {
+  dev: {
     baseUrl: "https://natuurdata.dev.inbo.be",
     authUrl: "https://auth-dev.inbo.be",
   },
-  "uat": {
+  uat: {
     baseUrl: "https://natuurdata.uat.inbo.be",
     authUrl: "https://auth-uat.inbo.be",
   },
-  "prod": {
+  prod: {
     baseUrl: "https://natuurdata.inbo.be",
     authUrl: "https://auth.inbo.be",
   },
@@ -52,8 +52,8 @@ module.exports = defineConfig({
       on("after:spec", (spec, results) => {
         if (results && results.video) {
           // Do we have any test failures?
-          const failures = results.tests.some((test) =>
-            test.state === "failed"
+          const failures = results.tests.some(
+            (test) => test.state === "failed",
           );
           if (!failures) {
             // delete the video if the spec passed and no tests retried
