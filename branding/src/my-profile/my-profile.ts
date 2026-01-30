@@ -1,4 +1,4 @@
-import { SigninRedirectArgs, User } from "oidc-client-ts";
+import { User } from "oidc-client-ts";
 import { login, userManagerPromise } from "../auth/auth.ts";
 
 $(() => {
@@ -36,23 +36,17 @@ function showUserDetails(user: User) {
             const updateProfileButton = document.getElementById(
                 "update-profile-details",
             )! as HTMLAnchorElement;
-            updateProfileButton.addEventListener("click", async (e) => {
+            updateProfileButton.addEventListener("click", (e) => {
                 e.preventDefault();
-                const userManager = await userManagerPromise;
-                await userManager.signinRedirect({
-                    kc_action: "UPDATE_PROFILE",
-                } as SigninRedirectArgs);
+                login({ extraQueryParams: { kc_action: "UPDATE_PROFILE" } });
             });
 
             const changePasswordButton = document.getElementById(
                 "update-password",
             )! as HTMLAnchorElement;
-            changePasswordButton.addEventListener("click", async (e) => {
+            changePasswordButton.addEventListener("click", (e) => {
                 e.preventDefault();
-                const userManager = await userManagerPromise;
-                await userManager.signinRedirect({
-                    kc_action: "UPDATE_PASSWORD",
-                } as SigninRedirectArgs);
+                login({ extraQueryParams: { kc_action: "UPDATE_PASSWORD" } });
             });
 
             document

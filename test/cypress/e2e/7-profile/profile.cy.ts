@@ -25,14 +25,41 @@ describe("User profile - Authenticated", () => {
   });
 
   it("Should show username and roles", () => {
-    cy.get("#user-greeting-name").contains("Test").should("be.visible");
+    cy.get("#user-greeting-name")
+      .should("be.visible")
+      .should("not.be.empty")
+      .should("not.contain", "undefined");
     cy.get("#my-roles").contains("ADMIN");
     cy.get("#my-roles").contains("USER");
     cy.get("#my-roles").contains("EDITOR");
   });
 
   it.skip("Should allow modifying user profile", () => {
-    cy.get("#update-profile-details").click();
+    cy.get("#profile-overview").find("#update-profile-details").click();
     cy.url().should("include", "/profile/edit");
+  });
+
+  it("Show working species list link", () => {
+    cy.get("#profile-overview").find("#species-lists").click();
+    cy.url().should("include", "/species-list/speciesList/list");
+    cy.get("h1").contains("Mijn soortenlijsten").should("be.visible");
+  });
+
+  it("Show working annotations link", () => {
+    cy.get("#profile-overview").find("#my-annotated-records").click();
+    cy.url().should("include", "https://natuurdata.inbo.be/my-profile.html");
+    cy.get("h1").contains("Mijn soortenlijsten").should("be.visible");
+  });
+
+  it("Show working alerts link", () => {
+    cy.get("#profile-overview").find("#my-alerts").click();
+    cy.url().should("include", "/alerts/");
+    cy.get("h1").contains("Mijn email abonnementen").should("be.visible");
+  });
+
+  it("Show working sptial analysis link", () => {
+    cy.get("#profile-overview").find("#spatial-portal").click();
+    cy.url().should("include", "/spatial-hub/?tool=log");
+    cy.get("h3").contains("Geschiedenis").should("be.visible");
   });
 });

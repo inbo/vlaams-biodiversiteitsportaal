@@ -183,13 +183,13 @@ function cleanupUrl(url: string) {
     return cleanedUrl;
 }
 
-export async function login(args?: SigninRedirectArgs | any) {
+export async function login(args?: SigninRedirectArgs) {
     const mgr = await userManagerPromise;
     clearAlaAuthCookies();
     await mgr.signinRedirect(args);
 }
 
-export async function logout(args?: SignoutRedirectArgs | any) {
+export async function logout(args?: SignoutRedirectArgs) {
     const mgr = await userManagerPromise;
     clearAlaAuthCookies();
     await mgr.signoutRedirect(args);

@@ -65,19 +65,16 @@ Cypress.Commands.add(
             cy.get("#kc-login").click();
           }
         });
+        cy.url().should("not.include", Cypress.env("AUTH_URL"));
+
+        cy.get("#dropdown-auth-menu").should("have.class", "signedIn").click();
+        cy.get(".myProfileBtn")
+          .should("be.visible")
+          .get("#logoutButton")
+          .should("be.visible");
       },
       {
         validate: () => {
-          // Verify that the cy.url().should("not.include", Cypress.env("AUTH_URL"));user is logged in based on menu state
-          cy.url().should("not.include", Cypress.env("AUTH_URL"));
-          cy.get("#dropdown-auth-menu")
-            .should("have.class", "signedIn")
-            .click();
-          cy.get(".myProfileBtn")
-            .should("be.visible")
-            .get("#logoutButton")
-            .should("be.visible");
-
           // Verify authentication cookies
           cy.getCookie("VBP-AUTH").should("exist");
           if (validateSessionCookie) {
