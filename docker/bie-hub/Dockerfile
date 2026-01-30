@@ -8,7 +8,7 @@ WORKDIR /project
 # ARG SOURCE=https://github.com/AtlasOfLivingAustralia/ala-bie-hub.git
 
 ARG VERSION=develop
-ARG COMMIT=6893efe6fba7203ea70cafe08579d0a0f66eae89
+ARG COMMIT=2abbe63b8f9c0b97d862350fa5ee36df46ea48fa
 ARG SOURCE=https://github.com/inbo/ala-bie-hub.git
 LABEL ala.version=inbo-${COMMIT}
 
@@ -38,7 +38,7 @@ RUN mkdir -p /opt/atlas/i18n \
   && ln -s /config/bie-hub/i18n/override /var/opt/atlas/i18n/bie-plugin
 
 ARG VERSION=4.2.0-SNAPSHOT
-ARG COMMIT=6893efe6fba7203ea70cafe08579d0a0f66eae89
+ARG COMMIT=2abbe63b8f9c0b97d862350fa5ee36df46ea48fa
 LABEL ala.version=inbo-${COMMIT}
 
 COPY --from=builder /project/build/libs/ala-bie-hub-${VERSION}.war /bie-hub.war
