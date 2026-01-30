@@ -3,7 +3,7 @@ import * as path from "path";
 
 describe("Spatial - Species", () => {
   beforeEach(() => {
-    cy.loginWithoutNavigatingToLoginPage("spatial-hub");
+    cy.login("spatial-hub", undefined, false, true);
     cy.visit("/spatial-hub");
     cy.get(".progress-bar", { timeout: 30_000 }).should("not.be.visible");
   });

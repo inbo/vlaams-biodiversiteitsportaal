@@ -34,7 +34,7 @@ function showUserDetails(user: User) {
         // Only allow the user to update their profile if they are not an ACM IDM user
         if (!profile["acm_idm"]) {
             const updateProfileButton = document.getElementById(
-                "update-profile-details",
+                "my-profile-update-profile-details",
             )! as HTMLAnchorElement;
             updateProfileButton.addEventListener("click", (e) => {
                 e.preventDefault();
@@ -42,7 +42,7 @@ function showUserDetails(user: User) {
             });
 
             const changePasswordButton = document.getElementById(
-                "update-password",
+                "my-profile-update-password",
             )! as HTMLAnchorElement;
             changePasswordButton.addEventListener("click", (e) => {
                 e.preventDefault();
@@ -57,7 +57,7 @@ function showUserDetails(user: User) {
         // Update link to my-annotated-records
         (
             document.getElementById(
-                "my-annotated-records",
+                "my-profile-my-annotated-records",
             )! as HTMLAnchorElement
         ).href =
             `/biocache-hub/occurrences/search/?q=*:*&fq=assertion_user_id:%22${profile.sub}%22`;

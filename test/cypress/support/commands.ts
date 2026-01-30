@@ -15,7 +15,7 @@ declare global {
         subPath?: string,
         user?: User,
         navigateToLoginPage?: boolean,
-        validateSessionCookie?: false,
+        validateSessionCookie?: boolean,
       ): void;
       loginPageActions(user?: User): void;
     }
@@ -30,7 +30,7 @@ Cypress.Commands.add(
       username: Cypress.env("VBP_USERNAME"),
       password: Cypress.env("VBP_PASSWORD"),
     },
-    navigateToLoginPage: boolean = true,
+    navigateToLoginPage: boolean = true, // Allows relying on automatic redirects and not use the header menu
     validateSessionCookie: boolean = false,
   ): void => {
     cy.log(`Logging in user: ${user.username}`);
@@ -39,13 +39,22 @@ Cypress.Commands.add(
       () => {
         cy.visit(`/${subPath}`);
 
+        let originWrapper = (fn) => fn({ user });
+
         if (navigateToLoginPage) {
           cy.get("#dropdown-auth-menu").click();
           cy.get("#loginButton").should("be.visible").click();
+
+          originWrapper = (fn) =>
+            cy.origin(Cypress.env("AUTH_URL"), { args: { user } }, fn);
+        } else {
+          // When not manually navigating, wait for the redirect to complete
+          // This ensures Cypress detects the origin change before cy.origin() is called
+          cy.url().should("include", Cypress.env("AUTH_URL"));
         }
 
         // Perform login actions on the login page
-        cy.origin(Cypress.env("AUTH_URL"), { args: { user } }, ({ user }) => {
+        originWrapper(({ user }) => {
           if (Cypress.env("TARGET_ENV") === "local") {
             cy.get("textarea[name='claims']")
               .invoke("val")
@@ -67,20 +76,25 @@ Cypress.Commands.add(
         });
         cy.url().should("not.include", Cypress.env("AUTH_URL"));
 
-        cy.get("#dropdown-auth-menu").should("have.class", "signedIn").click();
-        cy.get(".myProfileBtn")
-          .should("be.visible")
-          .get("#logoutButton")
-          .should("be.visible");
+        if (navigateToLoginPage) {
+          cy.get("#dropdown-auth-menu")
+            .should("have.class", "signedIn")
+            .click();
+          cy.get(".myProfileBtn")
+            .should("be.visible")
+            .get("#logoutButton")
+            .should("be.visible");
+        }
+
+        cy.getCookie("VBP-AUTH").should("exist");
       },
       {
         validate: () => {
+          const domain = Cypress.config("baseUrl").replace("https://", "");
           // Verify authentication cookies
-          cy.getCookie("VBP-AUTH").should("exist");
+          cy.getCookie("VBP-AUTH", { domain }).should("exist");
           if (validateSessionCookie) {
-            cy.getCookie("JSESSIONID", {
-              domain: Cypress.config("baseUrl").replace("https://", ""),
-            }).should("exist");
+            cy.getCookie("JSESSIONID", { domain }).should("exist");
           }
         },
       },
