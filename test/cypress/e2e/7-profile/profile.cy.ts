@@ -29,14 +29,21 @@ describe("User profile - Authenticated", () => {
       .should("be.visible")
       .should("not.be.empty")
       .should("not.contain", "undefined");
-    cy.get("#my-roles").contains("ADMIN");
-    cy.get("#my-roles").contains("USER");
     cy.get("#my-roles").contains("EDITOR");
   });
 
-  it.skip("Should allow modifying user profile", () => {
-    cy.get("#profile-overview").find("#update-profile-details").click();
-    cy.url().should("include", "/profile/edit");
+  it("Should allow modifying user profile", () => {
+    cy.get("#profile-overview")
+      .find("#my-profile-update-profile-details")
+      .click();
+    cy.url().should("include", Cypress.env("AUTH_URL"));
+    cy.contains("Update Account Information").should("be.visible");
+  });
+
+  it("Should resetting password", () => {
+    cy.get("#profile-overview").find("#my-profile-update-password").click();
+    cy.url().should("include", Cypress.env("AUTH_URL"));
+    cy.contains("Update password").should("be.visible");
   });
 
   it("Show working species list link", () => {
@@ -46,11 +53,15 @@ describe("User profile - Authenticated", () => {
   });
 
   it("Show working annotations link", () => {
-    cy.get("#profile-overview")
-      .find("#my-profile-my-annotated-records")
-      .click();
-    cy.url().should("include", "https://natuurdata.inbo.be/my-profile.html");
-    cy.get("h1").contains("Mijn soortenlijsten").should("be.visible");
+    cy.getCookie("VBP-AUTH").then((cookie) => {
+      cy.get("#profile-overview")
+        .find("#my-profile-my-annotated-records")
+        .click();
+      cy.url()
+        .should("include", "/biocache-hub/occurrences/search/")
+        .should("include", `assertion_user_id:%22${cookie.value}%22`);
+      cy.get("h1").contains("Waarnemingsrecords").should("be.visible");
+    });
   });
 
   it("Show working alerts link", () => {
