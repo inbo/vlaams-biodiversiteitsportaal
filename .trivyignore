@@ -1,21 +1,21 @@
 # Accepted intentional exceptions for Trivy scans
 # Format: <RULE_ID> <path>
-AVD-DS-0002 docker/gradle/Dockerfile
-AVD-DS-0026 docker/gradle/Dockerfile
-AVD-DS-0015 docker/gradle/Dockerfile
-AVD-DS-0002 docker/maven/Dockerfile
-AVD-DS-0026 docker/maven/Dockerfile
-AVD-DS-0015 docker/maven/Dockerfile
-AVD-DS-0013 docker/pipelines/Dockerfile
-AVD-DS-0015 docker/pipelines/Dockerfile
-AVD-DS-0015 docker/portal-full/Dockerfile
-AVD-DS-0015 docker/spatial-hub/Dockerfile
-AVD-DS-0015 docker/spatial-service/Dockerfile
-AVD-DS-0015 docker/spatial-service/rpm/Dockerfile
-AVD-DS-0002 docker/spatial-service/rpm/Dockerfile
-AVD-DS-0026 docker/spatial-service/rpm/Dockerfile
+DS-0002 docker/gradle/Dockerfile
+DS-0026 docker/gradle/Dockerfile
+DS-0015 docker/gradle/Dockerfile
+DS-0002 docker/maven/Dockerfile
+DS-0026 docker/maven/Dockerfile
+DS-0015 docker/maven/Dockerfile
+DS-0013 docker/pipelines/Dockerfile
+DS-0015 docker/pipelines/Dockerfile
+DS-0015 docker/portal-full/Dockerfile
+DS-0015 docker/spatial-hub/Dockerfile
+DS-0015 docker/spatial-service/Dockerfile
+DS-0015 docker/spatial-service/rpm/Dockerfile
+DS-0002 docker/spatial-service/rpm/Dockerfile
+DS-0026 docker/spatial-service/rpm/Dockerfile
 ## Suppress noisy findings from test fixtures
-AVD-DS-0005 test/node_modules
-AVD-DS-0017 test/node_modules
-AVD-DS-0022 test/node_modules
-AVD-DS-0029 test/node_modules
+DS-0005 test/node_modules
+DS-0017 test/node_modules
+DS-0022 test/node_modules
+DS-0029 test/node_modules

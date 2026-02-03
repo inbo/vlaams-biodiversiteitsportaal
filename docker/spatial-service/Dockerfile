@@ -43,7 +43,7 @@ ARG PIPELINES_VERSION=2.19.0-SNAPSHOT
 LABEL ala.version=inbo-${COMMIT}
 LABEL pipelines.version=${PIPELINES_VERSION}
 
-# trivy:ignore:AVD-DS-0015  # using BuildKit yum cache
+# trivy:ignore:DS-0015  # using BuildKit yum cache
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
     yum -y install \
     libtiff \
@@ -58,7 +58,7 @@ ARG PROJ_VERSION=6.1.1
 ARG GDAL_VERSION=3.2.1
 ARG TARGETARCH
 ARG CACHE_BUSTING=1
-# trivy:ignore:AVD-DS-0015  # using BuildKit yum cache
+# trivy:ignore:DS-0015  # using BuildKit yum cache
 RUN yum -y install https://build.natuurdata.dev.inbo.be/spatial-service/gdal/proj-${PROJ_VERSION}-1.amzn2.$TARGETARCH.rpm &&\
     yum -y install https://build.natuurdata.dev.inbo.be/spatial-service/gdal/gdal-${GDAL_VERSION}-1.amzn2.$TARGETARCH.rpm
 

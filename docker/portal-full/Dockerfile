@@ -1,7 +1,7 @@
 ######################################### TOMCAT BASE #########################################
 FROM tomcat:9-jdk11-corretto AS base
 
-## trivy:ignore:AVD-DS-0015  # using BuildKit yum cache
+## trivy:ignore:DS-0015  # using BuildKit yum cache
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
     amazon-linux-extras install epel -y && \
     yum update -y && \
@@ -16,7 +16,7 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
 ARG PROJ_VERSION=6.1.1
 ARG GDAL_VERSION=3.2.1
 ARG TARGETARCH
-## trivy:ignore:AVD-DS-0015  # using BuildKit yum cache
+## trivy:ignore:DS-0015  # using BuildKit yum cache
 RUN yum -y install https://build.natuurdata.dev.inbo.be/spatial-service/gdal/proj-${PROJ_VERSION}-1.amzn2.$TARGETARCH.rpm &&\
     yum -y install https://build.natuurdata.dev.inbo.be/spatial-service/gdal/gdal-${GDAL_VERSION}-1.amzn2.$TARGETARCH.rpm
 
