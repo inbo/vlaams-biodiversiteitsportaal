@@ -171,15 +171,18 @@ sitemap:
   dir: /data/bie-index
   enabled: true
 
-
 management:
-    endpoint:
-        health:
-            enabled: true
-    endpoints:
-        web:
-            exposure:
-                include: health
+  endpoint:
+    health:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health
+
+websocket:
+  cors:
+    allowedOrigins: ${common.protocol}://${common.domain}
 
 environments:
   inbo_prod:
