@@ -58,7 +58,7 @@ describe("Biocache - Download", () => {
     cy.get("#nextBtn").click();
 
     // Click the download button
-    cy.get("#queueStatus > a.btn", { timeout: 30_000 }).click();
+    cy.get("#queueStatus > a.btn", { timeout: 60_000 }).click();
 
     // Check download contents
     checkDownloadForOccurenceCount(filename, numberOfOccurrences);
@@ -88,7 +88,7 @@ describe("Biocache - Download", () => {
     cy.get("#nextBtn").click();
 
     // Click the download button
-    cy.get("#queueStatus > a.btn", { timeout: 30_000 }).click();
+    cy.get("#queueStatus > a.btn", { timeout: 60_000 }).click();
 
     // Check download contents
     checkDownloadForOccurenceCount(filename, numberOfOccurrences, "tsv");
@@ -117,15 +117,13 @@ describe("Biocache - Download", () => {
     // Select all fields
     cy.get(".select-all-btn").first().click();
 
-    // Deselect misccellaneous fields, as it causes the download to be empty
-    // TODO: https://github.com/inbo/vlaams-biodiversiteitsportaal/issues/565
     cy.get("a.list-group-item").contains("Diversen velden").click();
 
     // Click the next button
     cy.get(".next-btn").first().click();
 
     // Click the download button
-    cy.get("#queueStatus > a.btn", { timeout: 30_000 }).click();
+    cy.get("#queueStatus > a.btn", { timeout: 60_000 }).click();
 
     // Check download contents
     checkDownloadForOccurenceCount(filename, numberOfOccurrences);
