@@ -5,7 +5,7 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 ARG VERSION=Fix-admin-page-websockets
 
-ARG COMMIT=17d6fc9d4d029aa44f429a38bf0baf1d37a1d45d
+ARG COMMIT=02014ac47187138f6490425013c34c0cd659cfe4
 ARG SOURCE=https://github.com/inbo/bie-index.git
 LABEL ala.version=inbo-${COMMIT}
 
@@ -36,7 +36,7 @@ RUN mkdir -p /opt/atlas/i18n \
   && ln -s /config/bie-index/i18n/override /var/opt/atlas/i18n/bie-index
 
 ARG VERSION=3.1.0
-ARG COMMIT=17d6fc9d4d029aa44f429a38bf0baf1d37a1d45d
+ARG COMMIT=02014ac47187138f6490425013c34c0cd659cfe4
 LABEL ala.version=inbo-${COMMIT}
 
 COPY --from=builder /project/build/libs/bie-index-${VERSION}.war /bie-index.war
