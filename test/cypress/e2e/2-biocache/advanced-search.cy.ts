@@ -160,12 +160,10 @@ describe("Biocache - Advanced search", () => {
   });
 
   it("Dataset search", () => {
-    const searchInput = "Chorus";
+    const searchInput = "ABV";
     cy.get("#datasetundefined").type(searchInput);
     cy.get("ul.typeahead > li.active > a.dropdown-item")
-      .contains(
-        "Meetnetten.be - Chorus counts for Amphibia in Flanders, Belgium",
-      )
+      .contains("ABV - Common breeding birds in Flanders, Belgium")
       .click();
 
     cy.get(".tab-pane.active").within(() => {
