@@ -37,13 +37,15 @@ describe("User profile - Authenticated", () => {
       .find("#my-profile-update-profile-details")
       .click();
     cy.url().should("include", Cypress.env("AUTH_URL"));
-    cy.contains("Update Account Information").should("be.visible");
+    cy.get("#kc-page-title").should("be.visible");
+    cy.get("#email").should("be.visible");
   });
 
   it("Should resetting password", () => {
     cy.get("#profile-overview").find("#my-profile-update-password").click();
     cy.url().should("include", Cypress.env("AUTH_URL"));
-    cy.contains("Update password").should("be.visible");
+    cy.get("#kc-page-title").should("be.visible");
+    cy.get("#password-new").should("be.visible");
   });
 
   it("Show working species list link", () => {

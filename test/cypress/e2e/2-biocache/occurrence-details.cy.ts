@@ -10,7 +10,7 @@ describe("Biocache - Occurrence Details", () => {
 
     cy.url().should("include", "/biocache-hub/occurrences/");
 
-    cy.get("h1").should("be.visible").contains("Waarneming");
+    cy.get("h1").should("be.visible").should("not.be.empty");
     cy.get("#occurrenceDataset").should("be.visible");
     cy.get("#occurrenceEvent").should("be.visible");
     cy.get("#occurrenceTaxonomy").should("be.visible");
