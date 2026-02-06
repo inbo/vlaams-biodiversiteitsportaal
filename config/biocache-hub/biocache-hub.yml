@@ -92,7 +92,7 @@ facets:
   # ALL: taxon_name,raw_taxon_name,subspecies_name,species,genus,family,order,class,phylum,kingdom,rank,name_match_metric,species_group,common_name,species_subgroup,interaction,species_list_uid,identified_by,raw_identification_qualifier,taxonomic_issue,type_status,original_name_usage,identificationVerificationStatus,collector,raw_sex,life_stage,establishment_means,state_conservation,country_conservation,dataset_name,parent_event_id,field_number,event_id,eventHierarchy,eventTypeHierarchy,month,year,date_precision,occurrence_decade_i,annotationsUid,country,dynamicProperties_level2Name,verbatimCoordinateSystem,cl100,locality,municipality,basis_of_record,multimedia,occurrence_status,contentTypes,sensitive,assertions,outlier_layer,outlier_layer_count,user_assertions,assertion_user_id,duplicate_status,license,alau_user_id,collection_uid,institution_uid,data_provider_uid,data_resource_uid,establishment_means,user_assertions,assertion_user_id,name_match_metric,duplicate_type,alau_user_id,raw_datum,raw_sex,life_stage,elevation_d_rng,identified_by,species_subgroup,cl1048
 
   #  hide: ''
-  include: "cl100,cl101,cl10199"
+  include: "cl100,cl101,cl102"
   includeDynamicFacets: true
   limit: 20
   max: 32
@@ -216,7 +216,7 @@ environments:
     dataquality:
       enabled: true
     regionVlaanderen:
-      query: cl10199:"Vlaams Gewest"
+      query: cl102:"Vlaams Gewest"
   inbo_uat:
     userdetails:
       url: https://natuurdata.uat.inbo.be/userdetails
