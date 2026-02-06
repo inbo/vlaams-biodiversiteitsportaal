@@ -119,6 +119,8 @@ environments:
     common:
       protocol: https
       domain: natuurdata.dev.inbo.be
+    regionVlaanderen:
+      query: cl100:"Vlaams Gewest" AND cl100:[* TO *]
   inbo_uat:
     common:
       protocol: https
@@ -127,3 +129,5 @@ environments:
     common:
       protocol: https
       domain: natuurdata.inbo.be
+    regionVlaanderen:
+      query: cl102:"Vlaams Gewest"
