@@ -21,6 +21,11 @@
         min-height: calc(
             100vh - $inbo-banner-height - $inbo-footer-height - 2em
         );
+
+        @media (max-width: 768px) {
+            padding-left: 0;
+            padding-right: 0;
+        }
     }
 
     #main {
