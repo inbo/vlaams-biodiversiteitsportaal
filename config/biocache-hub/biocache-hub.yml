@@ -94,7 +94,7 @@ facets:
   #  hide: ''
   include: "cl100,cl101,cl102"
   includeDynamicFacets: true
-  limit: 20
+  limit: 25
   max: 32
 fieldguide:
   url: ""
