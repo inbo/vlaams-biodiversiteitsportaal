@@ -5,7 +5,7 @@ async function setCounter(id: string, val: number): Promise<void> {
   const options = {
     separator: ",", // FIXME  locale === 'en' ? ',': '.',
     duration: 1,
-    startVal: Math.round(val - val * 4 / 100),
+    startVal: Math.round(val - (val * 4) / 100),
   };
 
   const countUp = new CountUp(id, val, options);
@@ -27,25 +27,26 @@ async function loadStats(): Promise<void> {
     setCounter("stats_datasets", dataResourceCountJson.total || 0);
   });
 
-  fetch(
-    `/species-list/ws/speciesList?max=0`,
-  ).then(async (response) => {
+  fetch(`/species-list/ws/speciesList?max=0`).then(async (response) => {
     const listCountJson = await response.json();
     setCounter("stats_lists", listCountJson.listCount || 0);
   });
 
   fetch(
-    `/biocache-service/occurrence/facets?q=*:*&facets=species&pageSize=0`,
+    `/biocache-service/occurrence/facets?q=*%3A*&fq=cl102%3A%22Vlaams%2BGewest%22&facets=species&pageSize=0&flimit=0`,
   ).then(async (response) => {
     const speciesCountJson = await response.json();
     setCounter("stats_species", speciesCountJson[0]?.count || 0);
   });
-  fetch(
-    `/biocache-service/occurrences/search?q=*:*&pageSize=0`,
-  ).then(async (response) => {
-    const occurrenceCountJson = await response.json();
-    setCounter("stats_occurrences", occurrenceCountJson.totalRecords || 0);
-  });
+  fetch(`/biocache-service/occurrences/search?q=*:*&pageSize=0`).then(
+    async (response) => {
+      const occurrenceCountJson = await response.json();
+      setCounter(
+        "stats_occurrences",
+        occurrenceCountJson.totalRecords || 0,
+      );
+    },
+  );
 }
 
 $(() => {
