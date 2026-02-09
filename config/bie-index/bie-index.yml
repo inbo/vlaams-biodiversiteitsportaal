@@ -125,7 +125,7 @@ skin:
 useLegacyAuto: false
 import:
   sequence: collectory,taxonomy-all,vernacular,denormalise,layers,localities,conservation-lists,knowledgebase,species-lists,favourites,weights,link-identifiers,images,occurrences,hidden-images,wiki-urls,suggest-index
-  sequenceDaily: conservation-lists,wordpress,knowledgebase,biocollect,species-lists,favourites,suggest-index,images,hidden-images,wiki-urls,sitemap
+  sequenceDaily: conservation-lists,wordpress,knowledgebase,biocollect,species-lists,favourites,suggest-index,hidden-images,wiki-urls,sitemap
   sequenceWeekly: occurrences,layers,regions,localities,suggest-index
   dailyRunHour: 2
   weeklyRunDay: 6
