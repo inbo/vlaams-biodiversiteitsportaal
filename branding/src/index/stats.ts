@@ -38,15 +38,12 @@ async function loadStats(): Promise<void> {
     const speciesCountJson = await response.json();
     setCounter("stats_species", speciesCountJson[0]?.count || 0);
   });
-  fetch(`/biocache-service/occurrences/search?q=*%253A*&pageSize=0`).then(
-    async (response) => {
-      const occurrenceCountJson = await response.json();
-      setCounter(
-        "stats_occurrences",
-        occurrenceCountJson.totalRecords || 0,
-      );
-    },
-  );
+  fetch(
+    `/biocache-service/occurrences/search?q=*%3A*&fq=cl102%3A%22Vlaams%20Gewest%22&pageSize=0`,
+  ).then(async (response) => {
+    const occurrenceCountJson = await response.json();
+    setCounter("stats_occurrences", occurrenceCountJson.totalRecords || 0);
+  });
 }
 
 $(() => {
