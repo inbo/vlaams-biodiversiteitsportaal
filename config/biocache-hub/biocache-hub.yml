@@ -232,3 +232,5 @@ environments:
       query: cl10103:"Vlaams Gewest" AND cl10103:[* TO *]
 
     dataQualityChecksUrl: http://host.docker.internal/data-quality-checks.csv
+
+maxPaginationSteps: 5
