@@ -33,12 +33,12 @@ async function loadStats(): Promise<void> {
   });
 
   fetch(
-    `/biocache-service/occurrence/facets?q=*%3A*&fq=cl102%3A%22Vlaams%2BGewest%22&facets=species&pageSize=0&flimit=0`,
+    `/biocache-service/occurrence/facets?q=*%3A*&fq=cl102%3A%22Vlaams%20Gewest%22&facets=species&pageSize=0&flimit=0`,
   ).then(async (response) => {
     const speciesCountJson = await response.json();
     setCounter("stats_species", speciesCountJson[0]?.count || 0);
   });
-  fetch(`/biocache-service/occurrences/search?q=*:*&pageSize=0`).then(
+  fetch(`/biocache-service/occurrences/search?q=*%253A*&pageSize=0`).then(
     async (response) => {
       const occurrenceCountJson = await response.json();
       setCounter(
