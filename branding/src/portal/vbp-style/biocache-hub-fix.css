@@ -2,3 +2,7 @@
 #mydownloads {
     display: none;
 }
+
+#taxaQuery {
+    width: 100%;
+}
