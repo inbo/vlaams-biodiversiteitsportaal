@@ -7,7 +7,7 @@ security:
     clientId: "ala_bie"
     secret: "ala_bie-oidc-super-secret"
   core:
-    optionalFilterPattern: [ "/", "/*" ]
+    optionalFilterPattern: ["/", "/*"]
     uriExclusionFilterPattern: ["^/ws/.*"]
 webservice:
   client-id: "ala_bie"
@@ -22,7 +22,7 @@ grails:
     enabled: true
   cache:
     ehcache:
-      ehcacheXmlLocation: 'file:///config/bie-hub/ehcache.xml'
+      ehcacheXmlLocation: "file:///config/bie-hub/ehcache.xml"
 
 serverName: ${common.protocol}://${common.domain}/bie-hub
 
@@ -145,8 +145,6 @@ map:
   records:
     colour: a83d7a
 
-
-
 eol:
   lang: nl
   # Sanitise EOL content
@@ -184,7 +182,6 @@ userdetails:
     url: ${common.protocol}://${common.domain}/userdetails/
 imageFilter: "&qualityProfile=LA"
 
-
 management:
   endpoint:
     health:
@@ -210,3 +207,5 @@ environments:
     dataquality:
       enabled: false
     pluginTabsConfig: file:///config/bie-hub/envs/prod/plugin-tabs.json
+
+maxPaginationSteps: 5
