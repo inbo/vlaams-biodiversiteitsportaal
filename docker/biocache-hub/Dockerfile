@@ -3,7 +3,7 @@ ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-gradle-jdk17 AS builder
 
 ARG VERSION=fix-flanders-filter
-ARG COMMIT=222a641f0d4438eb5dd38f287e4abd2b0c5a1300
+ARG COMMIT=fc1dfdb0cfbb48c020dbc441971ce5494c1f10a5
 
 ARG SOURCE=https://github.com/StefanVanDyck/biocache-hubs.git
 LABEL ala.version=inbo-${COMMIT}
