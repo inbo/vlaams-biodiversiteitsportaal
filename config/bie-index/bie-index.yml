@@ -95,22 +95,22 @@ solr:
     connection: http://solr.${common.internalDomain}:8983/solr
     type: HTTP
     queueSize: 10
-    threadCount: 4
+    threadCount: 1
   live:
     connection: http://solr.${common.internalDomain}:8983/solr/bie
     type: HTTP
     queueSize: 10
-    threadCount: 4
+    threadCount: 1
   updatingLive:
     connection: http://solr.${common.internalDomain}:8983/solr/bie
     type: UPDATE
     queueSize: 10
-    threadCount: 4
+    threadCount: 1
   offline:
     connection: http://solr.${common.internalDomain}:8983/solr/bie-offline
     type: UPDATE
     queueSize: 10
-    threadCount: 4
+    threadCount: 1
   search:
     qf:
       - exact_text
@@ -124,8 +124,8 @@ skin:
 
 useLegacyAuto: false
 import:
-  sequence: collectory,taxonomy-all,vernacular,denormalise,layers,localities,conservation-lists,knowledgebase,species-lists,favourites,weights,link-identifiers,images,occurrences,hidden-images,wiki-urls,suggest-index
-  sequenceDaily: conservation-lists,wordpress,knowledgebase,biocollect,species-lists,favourites,suggest-index,hidden-images,wiki-urls,sitemap
+  sequence: collectory,vernacular,layers,localities,conservation-lists,species-lists,favourites,weights,link-identifiers,occurrences,hidden-images,wiki-urls,suggest-index
+  sequenceDaily: conservation-lists,species-lists,favourites,hidden-images,wiki-urls
   sequenceWeekly: occurrences,layers,regions,localities,suggest-index
   dailyRunHour: 2
   weeklyRunDay: 6
