@@ -3,6 +3,7 @@
 .page-content {
     max-width: $inbo-page-max-width;
     margin: auto;
+    padding: 0 1em;
 
     h1 {
         position: relative;
@@ -34,7 +35,9 @@
 
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 
     img {
         max-width: 10em;
@@ -200,7 +203,9 @@
 
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 
     img {
         max-width: 10em;
