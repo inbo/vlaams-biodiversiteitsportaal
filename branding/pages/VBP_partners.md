@@ -15,18 +15,10 @@ instellingen tot burgerwetenschappers - en maakt deze vrij toegankelijk
 via een gebruiksvriendelijk platform...</p>
 
 <div class="vbp-natuurfoto-container">
-<a href="/biocache-hub/occurrences/fbc5f5e2-43e0-4e9b-a6b2-95fc3be44133">
     <img src="https://inaturalist-open-data.s3.amazonaws.com/photos/431119134/medium.jpeg" alt="Aeshna mixta">
-</a>
-<a href="/biocache-hub/occurrences/05b4c659-c4e3-4548-8dcf-eeba660ada24">
     <img src="https://inaturalist-open-data.s3.amazonaws.com/photos/285252232/medium.jpg" alt="Xylocopa violacea">
-</a>
-<a href="/biocache-hub/occurrences/e6a75446-4dc5-4dc6-8503-d22608c44469">
     <img src="https://inaturalist-open-data.s3.amazonaws.com/photos/244910202/medium.jpg" alt="Ardea cinerea">
-</a>
-<a href="/biocache-hub/occurrences/4da9bb01-d0ab-46eb-a1ec-5e8e171562a9">
     <img src="https://inaturalist-open-data.s3.amazonaws.com/photos/219432858/medium.jpg" alt="Drosera intermedia">
-</a>
 </div>
 
 <h2>Data</h2>
