@@ -6,3 +6,20 @@
 #taxaQuery {
     width: 100%;
 }
+
+@media (min-width: 768px) {
+    #headingBar {
+        .side.right {
+            float: none;
+            margin-top: -1em;
+            margin-bottom: 1em;
+        }
+    }
+}
+
+.occurrenceTable {
+    td.value {
+        word-wrap: break-word;
+        max-width: 50vw;
+    }
+}
