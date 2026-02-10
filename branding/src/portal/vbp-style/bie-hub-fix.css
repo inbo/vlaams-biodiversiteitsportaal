@@ -1,5 +1,5 @@
 /* Small devices (tablets, 768px and up) */
-@media (min-width: 768px) {
+@media (max-width: 768px) {
     #refine-options {
         display: block;
         visibility: visible;
