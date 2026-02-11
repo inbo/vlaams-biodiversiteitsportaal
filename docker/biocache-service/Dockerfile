@@ -4,7 +4,7 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 
 ARG VERSION=improve-request-limits
-ARG COMMIT=d0edbc28da17a7efbbfc72f20ae573c7717abe2c
+ARG COMMIT=f017663cfea7ab78043ba84e7512a984dacf27b8
 ARG SOURCE=https://github.com/StefanVanDyck/biocache-service.git
 LABEL ala.version=inbo-${COMMIT}
 
@@ -37,7 +37,7 @@ RUN mkdir -p /opt/atlas/i18n \
   && ln -s /config/biocache-service/i18n/override /var/opt/atlas/i18n/biocache-service
 
 ARG VERSION=3.7.0-SNAPSHOT
-ARG COMMIT=d0edbc28da17a7efbbfc72f20ae573c7717abe2c
+ARG COMMIT=f017663cfea7ab78043ba84e7512a984dacf27b8
 LABEL ala.version=inbo-${COMMIT}
 
 COPY --from=builder /project/build/libs/biocache-service-${VERSION}-exec.war /biocache-service.war
