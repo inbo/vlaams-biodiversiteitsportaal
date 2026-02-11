@@ -38,7 +38,7 @@ grails:
 security:
   cas:
     adminRole: ROLE_ADMIN
-    uriFilterPattern: ['/notification/*', '/admin/*']
+    uriFilterPattern: ["/notification/*", "/admin/*"]
     appServerName: "${common.protocol}://${common.domain}"
     contextPath: "/alerts"
 skin:
@@ -76,14 +76,14 @@ occurrence:
   searchTitle: occurrence search
 userdetails:
   web:
-    url: "${common.protocol}://${common.domain}/userdetails/"
+    url: "${common.protocol}://${common.domain}/userdetails"
 
 useSpeciesListsAlerts: true
 useSpatialAlerts: false
 useBlogsAlerts: false
 useCitizenScienceAlerts: true
 biosecurity:
-  cronExpression: '0 30 9 ? * WED'
+  cronExpression: "0 30 9 ? * WED"
   query:
     template:
       authoritativeList: /occurrences/search?q=species_list_uid:___LISTIDPARAM___&fq=decade:2020&fq=country:Australia&fq=first_loaded_date:[___DATEPARAM___%20TO%20*]&fq=occurrence_date:[___LASTYEARPARAM___%20TO%20*]&sort=first_loaded_date&dir=desc&disableAllQualityFilters=true
@@ -119,4 +119,3 @@ biosecurity:
 
 dataSource:
   url: jdbc:mysql://alerts:my-super-secret-password@mysql/alerts
-
