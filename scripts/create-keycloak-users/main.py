@@ -116,6 +116,10 @@ async def send_email(session: aiohttp.ClientSession, access_token: str, user_id:
 
 
 async def get_oidc_token() -> str:
+    if OIDC_CLIENT_SECRET:
+        oidc_client_secret = OIDC_CLIENT_SECRET
+    else:
+        oidc_client_secret = input("Enter the oidc client secret: ")
     if KEYCLOAK_USERNAME:
         username = KEYCLOAK_USERNAME
     else:
@@ -131,13 +135,17 @@ async def get_oidc_token() -> str:
             data={
                 "grant_type": "password",
                 "client_id": OIDC_CLIENT_ID,
-                "client_secret": OIDC_CLIENT_SECRET,
+                "client_secret": oidc_client_secret,
                 "username": username,
                 "password": password,
                 "scope": "openid",
             },
         ) as response:
             token_response = await response.json()
+            if response.status != 200:
+                raise Exception(
+                    f"Failed to obtain access token. Status: {response.status}, Response: {token_response}"
+                )
             return token_response["access_token"]
 
 
