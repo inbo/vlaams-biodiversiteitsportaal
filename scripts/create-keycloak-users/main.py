@@ -26,7 +26,6 @@ USERS = {
         "first_name": "Testerde",
         "last_name": "Test",
     },
-
 }
 
 
@@ -40,7 +39,7 @@ async def main():
                     user_id = await create_user(
                         session,
                         access_token,
-                        {"username": username, **user_info},
+                        {"username": username, **user_info}, 
                     )
                 user_id = await get_user_id(session, access_token, username)
                 assert user_id is not None, f"User ID for {username} should not be None after creation."
@@ -79,6 +78,7 @@ async def create_user(
             "lastName": user_info["last_name"],
             "email": user_info["email"],
             "enabled": True,
+            "emailVerified": True,
             "credentials": [
                 {
                     "type": "password",
