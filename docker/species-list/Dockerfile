@@ -3,7 +3,7 @@ ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 ARG VERSION=develop-vbp
-ARG COMMIT=d792641ae922c27be6c1b265de4ff6850e0b054b
+ARG COMMIT=d57d6ed03d6e6c52671630dde36005689ed993f9
 ARG SOURCE=https://github.com/inbo/specieslist-webapp.git
 LABEL ala.version=inbo-${COMMIT}
 
@@ -36,7 +36,7 @@ RUN mkdir -p /opt/atlas/i18n \
   && ln -s /config/species-list/i18n/override /var/opt/atlas/i18n/specieslist-webapp
 
 ARG VERSION=5.3.0-SNAPSHOT
-ARG COMMIT=2932f84fcdfe6b61bc33677fdf7a9c6e99b7297b
+ARG COMMIT=d57d6ed03d6e6c52671630dde36005689ed993f9
 LABEL ala.version=inbo-${COMMIT}
 
 COPY --from=builder /project/build/libs/specieslist-webapp-${VERSION}.war /species-list.war
