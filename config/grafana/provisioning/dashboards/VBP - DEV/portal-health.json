@@ -117,7 +117,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.1.0",
+      "pluginVersion": "12.2.1",
       "targets": [
         {
           "datasource": {
@@ -449,6 +449,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "bars",
             "fillOpacity": 100,
             "gradientMode": "none",
@@ -465,6 +466,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -480,7 +482,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               }
             ]
           }
@@ -578,6 +580,13 @@
               {
                 "id": "custom.insertNulls",
                 "value": 1800000
+              },
+              {
+                "id": "custom.stacking",
+                "value": {
+                  "group": "A",
+                  "mode": "none"
+                }
               }
             ]
           }
@@ -593,15 +602,13 @@
       "maxDataPoints": 100,
       "options": {
         "legend": {
-          "calcs": [
-            "mean",
-            "sum"
-          ],
+          "calcs": ["mean", "sum"],
           "displayMode": "table",
           "placement": "bottom",
           "showLegend": false
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
@@ -795,6 +802,7 @@
       "id": 170,
       "options": {
         "dedupStrategy": "none",
+        "enableInfiniteScrolling": false,
         "enableLogDetails": true,
         "prettifyLogMessage": false,
         "showCommonLabels": false,
@@ -961,14 +969,6 @@
       "id": 171,
       "options": {
         "cellHeight": "sm",
-        "footer": {
-          "countRows": false,
-          "fields": "",
-          "reducer": [
-            "sum"
-          ],
-          "show": false
-        },
         "showHeader": true,
         "sortBy": []
       },
@@ -1035,7 +1035,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -1071,9 +1071,7 @@
         "fullHighlight": false,
         "groupWidth": 0.7,
         "legend": {
-          "calcs": [
-            "sum"
-          ],
+          "calcs": ["sum"],
           "displayMode": "list",
           "placement": "bottom",
           "showLegend": true
@@ -1082,6 +1080,7 @@
         "showValue": "never",
         "stacking": "normal",
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         },
@@ -1168,26 +1167,19 @@
         "groupBy": [],
         "groupMode": "default",
         "maxItems": 20,
+        "showInactiveAlerts": false,
         "sortOrder": 1,
         "stateFilter": {
           "error": true,
           "firing": true,
           "noData": false,
           "normal": false,
-          "pending": true
+          "pending": true,
+          "recovering": true
         },
         "viewMode": "list"
       },
-      "targets": [
-        {
-          "datasource": {
-            "type": "datasource",
-            "uid": "grafana"
-          },
-          "queryType": "randomWalk",
-          "refId": "A"
-        }
-      ],
+      "pluginVersion": "12.2.1",
       "title": "Active alerts",
       "type": "alertlist"
     },
@@ -1203,6 +1195,7 @@
             "mode": "thresholds"
           },
           "custom": {
+            "axisPlacement": "auto",
             "fillOpacity": 100,
             "hideFrom": {
               "legend": false,
@@ -1219,7 +1212,7 @@
             "steps": [
               {
                 "color": "red",
-                "value": null
+                "value": 0
               },
               {
                 "color": "green",
@@ -1254,11 +1247,12 @@
         "rowHeight": 0.7,
         "showValue": "never",
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.1.0",
+      "pluginVersion": "12.2.1",
       "targets": [
         {
           "datasource": {
@@ -1320,6 +1314,7 @@
             "mode": "thresholds"
           },
           "custom": {
+            "axisPlacement": "auto",
             "fillOpacity": 100,
             "hideFrom": {
               "legend": false,
@@ -1337,7 +1332,7 @@
             "steps": [
               {
                 "color": "red",
-                "value": null
+                "value": 0
               },
               {
                 "color": "green",
@@ -1371,11 +1366,12 @@
         "rowHeight": 0.7,
         "showValue": "never",
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.1.0",
+      "pluginVersion": "12.2.1",
       "targets": [
         {
           "datasource": {
@@ -1421,16 +1417,189 @@
         }
       ],
       "type": "state-timeline"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 46
+      },
+      "id": 175,
+      "panels": [
+        {
+          "datasource": {
+            "type": "cloudwatch",
+            "uid": "cloudwatch-prod"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "fixedColor": "green",
+                "mode": "fixed"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "axisSoftMax": 100,
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 2,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "showValues": false,
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": 0
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Memory"
+                },
+                "properties": [
+                  {
+                    "id": "custom.fillOpacity",
+                    "value": 52
+                  },
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "yellow",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 47
+          },
+          "id": 176,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "hideZeros": false,
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "12.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "cloudwatch",
+                "uid": "cloudwatch-prod"
+              },
+              "dimensions": {
+                "ClusterName": "$cluster",
+                "ServiceName": "$service"
+              },
+              "label": "CPU",
+              "matchExact": true,
+              "metricEditorMode": 0,
+              "metricName": "CPUUtilization",
+              "metricQueryType": 0,
+              "namespace": "AWS/ECS",
+              "queryMode": "Metrics",
+              "refId": "A",
+              "region": "default",
+              "statistic": "Maximum"
+            },
+            {
+              "datasource": {
+                "type": "cloudwatch",
+                "uid": "cloudwatch-prod"
+              },
+              "dimensions": {
+                "ClusterName": "$cluster",
+                "ServiceName": "$service"
+              },
+              "expression": "",
+              "hide": false,
+              "id": "",
+              "label": "Memory",
+              "logGroups": [],
+              "matchExact": false,
+              "metricEditorMode": 0,
+              "metricName": "MemoryUtilization",
+              "metricQueryType": 0,
+              "namespace": "AWS/ECS",
+              "period": "",
+              "queryLanguage": "CWLI",
+              "queryMode": "Metrics",
+              "refId": "B",
+              "region": "default",
+              "sqlExpression": "",
+              "statistic": "Maximum"
+            }
+          ],
+          "title": "Service resource usage",
+          "type": "timeseries"
+        }
+      ],
+      "repeat": "service",
+      "title": "$service",
+      "type": "row"
     }
   ],
+  "preload": false,
   "refresh": "",
-  "schemaVersion": 39,
+  "schemaVersion": 42,
   "tags": [],
   "templating": {
     "list": [
       {
         "current": {
-          "selected": false,
           "text": "inbo-vbp-cluster",
           "value": "inbo-vbp-cluster"
         },
@@ -1442,7 +1611,6 @@
         "hide": 2,
         "includeAll": false,
         "label": "Cluster",
-        "multi": false,
         "name": "cluster",
         "options": [],
         "query": {
@@ -1455,27 +1623,19 @@
         },
         "refresh": 1,
         "regex": ".*vbp.*",
-        "skipUrlSync": false,
-        "sort": 0,
         "type": "query"
       },
       {
         "allValue": ".*",
         "current": {
-          "selected": true,
-          "text": [
-            "All"
-          ],
-          "value": [
-            "$__all"
-          ]
+          "text": ["All"],
+          "value": ["$__all"]
         },
         "datasource": {
           "type": "cloudwatch",
           "uid": "cloudwatch-dev"
         },
         "definition": "",
-        "hide": 0,
         "includeAll": true,
         "label": "Service",
         "multi": true,
@@ -1494,8 +1654,6 @@
         },
         "refresh": 1,
         "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
         "type": "query"
       },
       {
@@ -1511,7 +1669,6 @@
         "definition": "",
         "hide": 2,
         "includeAll": false,
-        "multi": false,
         "name": "loadbalancer",
         "options": [],
         "query": {
@@ -1524,31 +1681,18 @@
         },
         "refresh": 1,
         "regex": "/^app\\/inbo-vbp-public\\/.*/",
-        "skipUrlSync": false,
-        "sort": 0,
         "type": "query"
       },
       {
         "allValue": ".*",
         "current": {
-          "selected": true,
-          "text": [
-            "All"
-          ],
-          "value": [
-            "$__all"
-          ]
+          "text": ["$__all"],
+          "value": ["$__all"]
         },
-        "hide": 0,
         "includeAll": true,
         "multi": true,
         "name": "responseCode",
         "options": [
-          {
-            "selected": true,
-            "text": "All",
-            "value": "$__all"
-          },
           {
             "selected": false,
             "text": "2XX",
@@ -1571,8 +1715,6 @@
           }
         ],
         "query": "2XX,3XX,4XX,5XX",
-        "queryValue": "",
-        "skipUrlSync": false,
         "type": "custom"
       }
     ]
