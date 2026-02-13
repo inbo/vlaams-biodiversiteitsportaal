@@ -633,3 +633,97 @@ groups:
           labels:
             notify: google
           isPaused: false
+        - uid: slow-service-response-time-prod
+          title: Slow service response time 
+          condition: C
+          data:
+            - refId: A
+              relativeTimeRange:
+                from: 600
+                to: 0
+              datasourceUid: cloudwatch-prod
+              model:
+                dimensions:
+                    LoadBalancer: app/inbo-vbp-public/a744d69ec78da33a
+                    TargetGroup: '*'
+                expression: ""
+                id: ""
+                intervalMs: 1000
+                label: ""
+                logGroups: []
+                matchExact: true
+                maxDataPoints: 43200
+                metricEditorMode: 0
+                metricName: TargetResponseTime
+                metricQueryType: 0
+                namespace: AWS/ApplicationELB
+                period: ""
+                queryLanguage: CWLI
+                queryMode: Metrics
+                refId: A
+                region: default
+                sqlExpression: ""
+                statistic: Average
+            - refId: B
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params: []
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - B
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                intervalMs: 1000
+                maxDataPoints: 43200
+                reducer: last
+                refId: B
+                type: reduce
+            - refId: C
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 1
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - C
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: B
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: C
+                type: threshold
+          dashboardUid: portal-health-prod
+          panelId: 98
+          noDataState: NoData
+          execErrState: Error
+          for: 5m
+          annotations:
+            __dashboardUid__: portal-health-prod
+            __panelId__: "98"
+            summary: '''{{ $labels.TargetGroup }} is slow to respond'
+          labels: {}
+          isPaused: false
+          notification_settings:
+            receiver: Google Chat
