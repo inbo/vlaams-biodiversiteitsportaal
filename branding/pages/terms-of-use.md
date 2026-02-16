@@ -13,7 +13,7 @@ data steeds met de nodige aandacht en kritische beoordeling te interpreteren.
 Het portaal kan niet aansprakelijk worden gesteld voor eventuele gevolgen van
 het gebruik van deze informatie._
 
-## Open data in INBO-VBP
+<h2 style="text-decoration: underline;">Open data in INBO-VBP</h2>
 
 ### **1\. Gebruik binnen de licentievoorwaarden**
 
@@ -73,7 +73,7 @@ Bij verdere verspreiding:
 - worden geen bijkomende restricties opgelegd die strijdig zijn met de open
   licentie.
 
-## Hoge resolutie data INBO-VBP
+<h2 style="text-decoration: underline;">Hoge resolutie data INBO-VBP</h2>
 
 ### **1\. Gebruik binnen het aangegeven kader**
 
