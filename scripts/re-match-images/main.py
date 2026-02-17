@@ -14,6 +14,8 @@ DB_NAME = os.getenv('DB_NAME', 'testdb')
 DB_HOST = os.getenv('DB_HOST', 'localhost')
 DB_PORT = os.getenv('DB_PORT', '5432')
 
+DATA_RESOURCE_UID = "dr12"
+
 BATCH_SIZE = 200
 
 CsvEntry = NamedTuple("CsvEntry", [("gbif_id", str), ("image_url", str)])
@@ -24,7 +26,7 @@ SolrUpdateEntry = NamedTuple("SolrUpdateEntry", [("solr_id", str), ("image_id", 
 async def get_image_mappings() -> dict[str, str]:
     if not os.path.exists("mapping.csv"):
         async with aiohttp.ClientSession() as session:
-            async with session.get("https://natuurdata.inbo.be/image-service/ws/exportDatasetMapping/dr12") as response:
+            async with session.get(f"https://natuurdata.inbo.be/image-service/ws/exportDatasetMapping/{DATA_RESOURCE_UID}") as response:
                 if response.status != 200:
                     raise Exception(f"Failed to get mappings from image-service: {response.status} - {response.text}")
 
@@ -64,7 +66,7 @@ async def read_multimedia_csv() -> AsyncGenerator[list[CsvEntry], None]:
 
 async def get_solr_occurrence_id(session: aiohttp.ClientSession, gbif_ids: list[str]) -> dict[str, SolrEntry]:
     response = await session.post("http://localhost:8983/solr/biocache/select", json={
-        "query": f"dataResourceUid:dr12 AND dynamicProperties_gbifID:({" ".join(gbif_ids)})",
+        "query": f"dataResourceUid:{DATA_RESOURCE_UID} AND dynamicProperties_gbifID:({" ".join(gbif_ids)})",
         "fields": "id,occurrenceID,dynamicProperties_gbifID",
         "limit": BATCH_SIZE
     })
