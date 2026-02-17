@@ -1,6 +1,7 @@
 from collections.abc import AsyncGenerator
 import gzip
 import logging
+from typing import NamedTuple
 import asyncpg
 import os
 import aiohttp
@@ -12,6 +13,13 @@ DB_PASSWORD = os.getenv('DB_PASSWORD', 'password')
 DB_NAME = os.getenv('DB_NAME', 'testdb')
 DB_HOST = os.getenv('DB_HOST', 'localhost')
 DB_PORT = os.getenv('DB_PORT', '5432')
+
+BATCH_SIZE = 200
+
+CsvEntry = NamedTuple("CsvEntry", [("gbif_id", str), ("image_url", str)])
+SolrEntry = NamedTuple("SolrEntry", [("solr_id", str), ("occurrence_id", str)])
+DbEntry = NamedTuple("DbEntry", [("image_identifier", str), ("occurrence_id", str)])
+SolrUpdateEntry = NamedTuple("SolrUpdateEntry", [("solr_id", str), ("image_id", str)])
 
 async def get_image_mappings() -> dict[str, str]:
     if not os.path.exists("mapping.csv"):
@@ -43,38 +51,42 @@ async def get_image_mappings() -> dict[str, str]:
             result[value[1].strip("\"")] = value[0].strip("\"")
     return result
 
-async def read_multimedia_csv() -> AsyncGenerator[tuple[str,str], None]:
+async def read_multimedia_csv() -> AsyncGenerator[list[CsvEntry], None]:
     with open("multimedia.txt", "r") as file:
         next(file)  # Skip header
+        batch = []
         for line in file:
-            value = line.strip().split("\t")
-            yield value[0].strip("\""), value[3].strip("\"")
+            value= line.strip().split("\t")
+            batch.append((value[0].strip("\""), value[3].strip("\"")))
+            if len(batch) >= BATCH_SIZE:
+                yield batch
+                batch = []
 
-async def get_solr_occurrence_id(session: aiohttp.ClientSession, gbif_id: str) -> tuple[str, str]:
+async def get_solr_occurrence_id(session: aiohttp.ClientSession, gbif_ids: list[str]) -> dict[str, SolrEntry]:
     response = await session.post("http://localhost:8983/solr/biocache/select", json={
-        "query": f"dataResourceUid:dr12 AND dynamicProperties_gbifID:{gbif_id}",
-        "fields": "id,occurrenceID",
-        "limit": 2
+        "query": f"dataResourceUid:dr12 AND dynamicProperties_gbifID:({" ".join(gbif_ids)})",
+        "fields": "id,occurrenceID,dynamicProperties_gbifID",
+        "limit": BATCH_SIZE
     })
 
     if response.status != 200:
         raise Exception(f"Failed to get data from Solr: {response.status} - {response.text}")
 
     result = await response.json()
-    if result["response"]["numFound"] == 0:
-        raise Exception(f"No results found in Solr for gbif_id {gbif_id}")
-    elif result["response"]["numFound"] > 1:
-        raise Exception(f"Multiple results found in Solr for gbif_id {gbif_id}: {result['response']['numFound']}")
+    # if result["response"]["numFound"] != BATCH_SIZE:
+    #     logging.warning(f"Non matching number of records found in Solr for GBIF IDs {gbif_ids}: {result['response']['numFound']} found")
 
-    return result["response"]["docs"][0]["id"], result["response"]["docs"][0]["occurrenceID"]
-    
+    result = { doc["dynamicProperties_gbifID"]: SolrEntry(doc["id"], doc["occurrenceID"]) for doc in result["response"]["docs"] }
 
-async def updat_solr_image_id(session: aiohttp.ClientSession, solr_id: str, image_id: str):
+
+    return   result  
+
+async def updat_solr_image_id(session: aiohttp.ClientSession, ids: list[SolrUpdateEntry]) -> str:
     response = await session.post("http://localhost:8983/solr/biocache/update", json=[{
         "id": solr_id, 
         "imageID": { "set": image_id },
         "imageIDs": { "add-distinct": image_id }
-    }])
+    } for solr_id, image_id in ids])
 
     if response.status != 200:
         raise Exception(f"Failed to get data from Solr: {response.status} - {await response.text()}")
@@ -82,17 +94,15 @@ async def updat_solr_image_id(session: aiohttp.ClientSession, solr_id: str, imag
     result = await response.text()
     return result
 
-async def update_image_db_and_get_image_id(connection: asyncpg.Connection, image_url: str, occurrence_id: str) -> str:
-    updated_record =  await connection.fetchrow("""
+async def update_image_db_and_get_image_id(connection: asyncpg.Connection, ids: list[tuple[str,str,str]]) -> dict[str, DbEntry]:
+    updated_records =  await connection.fetchmany("""
         UPDATE image
-        SET occurrence_id = $1
-        WHERE original_filename = $2
-        RETURNING image_identifier
-    """, occurrence_id, image_url)
-    if not updated_record:
-        raise Exception(f"No record found in the database for image URL {image_url}")
+        SET occurrence_id = $2
+        WHERE original_filename = $3
+        RETURNING $1 as gbif_id, image_identifier, occurrence_id
+    """, ids)
 
-    return updated_record["image_identifier"] 
+    return {record["gbif_id"]: DbEntry(record["image_identifier"], record["occurrence_id"]) for record in updated_records}
 
 async def main():
     mappings = await get_image_mappings()
@@ -103,16 +113,22 @@ async def main():
         connection =  await asyncpg.connect(user=DB_USER, password=DB_PASSWORD, database=DB_NAME, host=DB_HOST, port=DB_PORT)
         
         update_count = 0
-        async for gbif_id, image_url in read_multimedia_csv():
-            try:
-                solr_id, occurrence_id = await get_solr_occurrence_id(http_session, gbif_id)
-                image_id = await update_image_db_and_get_image_id(connection, image_url, occurrence_id)
-                _ = await updat_solr_image_id(http_session, solr_id, image_id)
-                update_count += 1
-            except:
-                logging.error(f"Failed to process record with gbif_id {gbif_id} and image_url {image_url}")
+        async for batch in read_multimedia_csv():
+            solr_ids = await get_solr_occurrence_id(http_session, [gbif_id for gbif_id, _ in batch])
+            image_ids = await update_image_db_and_get_image_id(connection, [(gbif_id, solr_ids[gbif_id].occurrence_id, image_url) for gbif_id, image_url in batch])
 
-            if update_count % 100 == 0:
+            for gbif_id, image_url in batch:
+                if gbif_id not in solr_ids:
+                    logging.warning(f"Could not find Solr record for {gbif_id}, {image_url}")
+                if gbif_id not in image_ids:
+                    logging.warning(f"Could not find DB record for {gbif_id}, {image_url}")
+
+
+            _ = await updat_solr_image_id(http_session, [SolrUpdateEntry(solr_ids[gbif_id].solr_id, image_ids[gbif_id].image_identifier) for gbif_id in solr_ids if gbif_id in image_ids and gbif_id in solr_ids])
+
+            update_count += len(batch) 
+
+            if update_count % 2000 == 0:
                 logging.info(f"Updated {update_count} records of {len(mappings)}")
 
     finally:
