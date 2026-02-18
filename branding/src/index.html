@@ -1,39 +1,60 @@
 <!doctype html>
 <html lang="nl">
+    <head>
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://natuurdata.inbo.be" />
+        <meta property="og:title" content="Vlaams Biodiversiteitsportaal" />
+        <meta
+            property="og:description"
+            content="Het Vlaams Biodiversiteitsportaal is het centrale toegangspunt voor uitgebreide en actuele informatie over de biodiversiteit in Vlaanderen."
+        />
+        <meta
+            property="og:image"
+            content="https://natuurdata.inbo.be/images/logo.png"
+        />
+        <meta
+            name="description"
+            content="Het Vlaams Biodiversiteitsportaal is het centrale toegangspunt voor uitgebreide en actuele informatie over de biodiversiteit in Vlaanderen."
+        />
+        <meta name="author" content="Instituut voor Natuur- en Bosonderzoek" />
 
-<head>
-  <meta name="description"
-    content="Het Vlaams Biodiversiteitsportaal is het centrale toegangspunt voor uitgebreide en actuele informatie over de biodiversiteit in Vlaanderen." />
-  <meta name="author" content="Instituut voor Natuur- en Bosonderzoek">
+        <!-- Make sure google uses the prod version as the canonical version for indexing -->
+        <link rel="canonical" href="https://natuurdata.inbo.be/" />
 
-  <!-- Make sure google uses the prod version as the canonical version for indexing -->
-  <link rel="canonical" href="https://natuurdata.inbo.be/" />
+        <title>Vlaams Biodiversiteitsportaal</title>
 
-  <title>Vlaams Biodiversiteitsportaal</title>
+        <!-- Loaded by grails pages automatically  -->
+        <link
+            rel="stylesheet"
+            href="{{ resolve-from-root 'portal/bootstrap.scss' }}"
+        />
+        <link
+            rel="stylesheet"
+            href="{{ resolve-from-root 'portal/font-awesome.scss' }}"
+        />
 
-  <!-- Loaded by grails pages automatically  -->
-  <link rel="stylesheet" href="{{ resolve-from-root 'portal/bootstrap.scss' }}">
-  <link rel="stylesheet" href="{{ resolve-from-root 'portal/font-awesome.scss' }}">
+        <script type="text/javascript" src="/js/jquery.min.js"></script>
 
-  <script type="text/javascript" src="/js/jquery.min.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 
-  <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/js/autocomplete.min.js"></script>
 
-  <script type="text/javascript" src="/js/autocomplete.min.js"></script>
+        {{> head }}
 
-  {{> head }}
+        <script type="text/javascript" src="/js/application.js"></script>
 
-  <script type="text/javascript" src="/js/application.js"></script>
+        <!-- Index specific stuff -->
+        <script
+            type="module"
+            src="{{ resolve-from-root 'index/index.ts' }}"
+        ></script>
+        <script
+            type="module"
+            src="{{ resolve-from-root 'index/index.scss' }}"
+        ></script>
+    </head>
 
-  <!-- Index specific stuff -->
-  <script type="module" src="{{ resolve-from-root 'index/index.ts' }}"></script>
-  <script type="module" src="{{ resolve-from-root 'index/index.scss' }}"></script>
-</head>
-
-<body>
-  {{> banner }}
-  {{> index-content }}
-  {{> footer }}
-</body>
-
+    <body>
+        {{> banner }} {{> index-content }} {{> footer }}
+    </body>
 </html>
