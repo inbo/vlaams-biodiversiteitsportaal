@@ -53,6 +53,7 @@ function showUserDetails(user: User) {
                 e.preventDefault();
                 login({
                     extraQueryParams: {
+                        prompt: "login",
                         kc_idp_hint: "acm-idm",
                         login_hint: "eyJzd2l0Y2hfaWQiOiB0cnVlfQ==",
                     },
