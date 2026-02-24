@@ -3,28 +3,22 @@
   "defaultYearSourceField": "eventDate",
   "lists": [
     {
-      "uid": "drt1739347223262",
-      "field": "threatStatus_VRLF_s",
-      "sourceField": "threatStatus",
-      "yearSourceField": "eventDate",
-      "term": "threatStatus",
-      "label": "VRLF"
-    },
-    {
       "uid": "drt1739347616892",
       "field": "threatStatus_VRLF_s",
       "sourceField": "threatStatus",
+      "yearField": "year_vrlf_peridae_i",
       "yearSourceField": "eventDate",
       "term": "threatStatus",
-      "label": "VRLF"
+      "label": "VRLF-Peridae"
     },
     {
       "uid": "dr411",
       "field": "threatStatus_VRLF_s",
       "sourceField": "threatStatus",
+      "yearField": "year_vrlf_insects_i",
       "yearSourceField": "eventDate",
       "term": "threatStatus",
-      "label": "VRLF"
+      "label": "VRLF-Insects"
     }
 
   ]
