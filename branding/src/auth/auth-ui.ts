@@ -2,7 +2,7 @@ import { getUser, isLoggedIn, login, logout, userManagerPromise } from "./auth";
 import settings from "../settings";
 
 const uiReady = new Promise<void>((resolve) =>
-    document.addEventListener("DOMContentLoaded", () => resolve())
+    document.addEventListener("DOMContentLoaded", () => resolve()),
 );
 export async function initAuthUi() {
     addAuthButtonClickHandlers();
@@ -22,23 +22,25 @@ initAuthUi();
 async function setAuthMenuStatus() {
     await uiReady;
 
-    Array.from(document.getElementsByClassName("login-status-dependent"))
-        .forEach(async (element) => {
-            const user = await getUser();
-            if (user !== null && await isLoggedIn()) {
-                element.classList.remove(settings.auth.ala.logoutClass);
-                element.classList.add(settings.auth.ala.loginClass);
+    Array.from(
+        document.getElementsByClassName("login-status-dependent"),
+    ).forEach(async (element) => {
+        const user = await getUser();
+        if (user !== null && (await isLoggedIn())) {
+            element.classList.remove(settings.auth.ala.logoutClass);
+            element.classList.add(settings.auth.ala.loginClass);
 
-                (document.getElementById(
+            (
+                document.getElementById(
                     "my-annotated-records",
-                )! as HTMLAnchorElement)
-                    .href =
-                        `/biocache-hub/occurrences/search/?q=*:*&fq=assertion_user_id:%22${user.profile.sub}%22`;
-            } else {
-                element.classList.remove(settings.auth.ala.loginClass);
-                element.classList.add(settings.auth.ala.logoutClass);
-            }
-        });
+                )! as HTMLAnchorElement
+            ).href =
+                `/biocache-hub/occurrences/search/?q=*:*&fq=assertion_user_id:%22${user.profile.sub}%22`;
+        } else {
+            element.classList.remove(settings.auth.ala.loginClass);
+            element.classList.add(settings.auth.ala.logoutClass);
+        }
+    });
 }
 
 async function addAuthButtonClickHandlers() {
@@ -49,13 +51,16 @@ async function addAuthButtonClickHandlers() {
         // Use JS based login when no href supplied
         const target = button as HTMLAnchorElement;
         if (target.href.includes("replace-with-authui-onclick")) {
-            button.addEventListener(
-                "click",
-                async (e) => {
-                    e.preventDefault();
+            button.addEventListener("click", async (e) => {
+                e.preventDefault();
+                if ((e as MouseEvent).ctrlKey) {
+                    await login({
+                        extraQueryParams: { kc_idp_hint: "" },
+                    });
+                } else {
                     await login();
-                },
-            );
+                }
+            });
         }
 
         // Fix biocache-hub redirect
@@ -70,13 +75,10 @@ async function addAuthButtonClickHandlers() {
     for (const button of logoutButtons) {
         const target = button as HTMLAnchorElement;
         if (target.href.includes("replace-with-authui-onclick")) {
-            button.addEventListener(
-                "click",
-                async (e) => {
-                    e.preventDefault();
-                    await logout();
-                },
-            );
+            button.addEventListener("click", async (e) => {
+                e.preventDefault();
+                await logout();
+            });
         }
     }
 }
