@@ -5,7 +5,7 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 ARG VERSION=Fix-admin-page-websockets
 
-ARG COMMIT=c9249d01e75e1168f49255c190a3dd035c6ed31a
+ARG COMMIT=db835176a56995408bf5d239e1238731195e96f4
 ARG SOURCE=https://github.com/inbo/bie-index.git
 LABEL ala.version=inbo-${COMMIT}
 
