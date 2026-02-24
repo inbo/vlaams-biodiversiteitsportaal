@@ -16,7 +16,7 @@ RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
 #    -x test
 
 ARG VERSION=develop
-ARG COMMIT=39fabb2dbf5fc5f75019b8e10994d4f0be679ab5
+ARG COMMIT=acc4e25421dd15a375adfbe83567a587d5b145bd
 ARG SOURCE=https://github.com/AtlasOfLivingAustralia/ala-hub
 LABEL ala.version=inbo-${COMMIT}
 
