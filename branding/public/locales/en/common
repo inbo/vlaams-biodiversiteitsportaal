@@ -90,6 +90,8 @@
   "my-profile.update-details-description": "Update your email, organization, and contact information.",
   "my-profile.update-password": "Change my password",
   "my-profile.update-password-description": "Change your FBP password.",
+  "my-profile.acm-idm-switch-context": "Change ACM/IDM-context",
+  "my-profile.acm-idm-switch-context-description": "If you have multiple ACM/IDM-contexts, you can switch here. For example citizen or member of an organization",
   "my-profile.admin-tools": "Admin tools",
   "my-profile.admin-tools-description": "Admin tools for the FBP.",
   "my-profile.species-lists": "My species lists",

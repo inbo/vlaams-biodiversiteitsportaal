@@ -31,16 +31,8 @@ function showUserDetails(user: User) {
         document.getElementById("user-greeting-name")!.innerText =
             `${profile.given_name} ${profile.family_name}`;
 
-        // Only allow the user to update their profile if they are not an ACM IDM user
+        // Only allow the user to change their password if they are not an ACM IDM user
         if (!profile["acm_idm"]) {
-            const updateProfileButton = document.getElementById(
-                "my-profile-update-profile-details",
-            )! as HTMLAnchorElement;
-            updateProfileButton.addEventListener("click", (e) => {
-                e.preventDefault();
-                login({ extraQueryParams: { kc_action: "UPDATE_PROFILE" } });
-            });
-
             const changePasswordButton = document.getElementById(
                 "my-profile-update-password",
             )! as HTMLAnchorElement;
@@ -50,9 +42,35 @@ function showUserDetails(user: User) {
             });
 
             document
-                .getElementById("user-account-management-row")!
+                .getElementById("my-profile-update-password-item")!
+                .classList.remove("hidden");
+        } else {
+            // Allow the user to update their profile details
+            const acmIdmSwitchContext = document.getElementById(
+                "my-profile-acm-idm-switch-context",
+            )! as HTMLAnchorElement;
+            acmIdmSwitchContext.addEventListener("click", (e) => {
+                e.preventDefault();
+                login({
+                    extraQueryParams: {
+                        kc_idp_hint: "acm-idm",
+                        login_hint: "eyJzd2l0Y2hfaWQiOiB0cnVlfQ==",
+                    },
+                });
+            });
+            document
+                .getElementById("my-profile-acm-idm-switch-context-item")!
                 .classList.remove("hidden");
         }
+
+        // Allow the user to update their profile details
+        const updateProfileButton = document.getElementById(
+            "my-profile-update-profile-details",
+        )! as HTMLAnchorElement;
+        updateProfileButton.addEventListener("click", (e) => {
+            e.preventDefault();
+            login({ extraQueryParams: { kc_action: "UPDATE_PROFILE" } });
+        });
 
         // Update link to my-annotated-records
         (
