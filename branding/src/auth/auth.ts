@@ -41,13 +41,14 @@ async function initUserManager(
         client_id: settings.auth.oidc.clientId,
         redirect_uri: redirectUrl.href,
         post_logout_redirect_uri: post_logout_redirect_uri.href,
-        scope: "openid email ala/roles offline_access",
+        scope: "openid email ala/roles",
         includeIdTokenInSilentSignout: true,
         prompt: settings.auth.oidc.prompt,
         silent_redirect_uri: `${settings.domain}?front-auth-action=login`,
         automaticSilentRenew: true,
         monitorSession: false,
-        userStore: new WebStorageStateStore({ store: window.localStorage }),
+        // Only session storage makes sense as all the ALA services use server side sessions, so it would never work properly
+        // userStore: new WebStorageStateStore({ store: window.localStorage }),
     });
 
     manager.events.addUserLoaded(async (user) => {
@@ -148,7 +149,6 @@ function setAlaAuthCookie(user?: User) {
         sameSite: "lax",
         secure: window.location.protocol === "https:",
         domain: settings.auth.ala.authCookieDomain,
-        expires: 30,
     });
 }
 
