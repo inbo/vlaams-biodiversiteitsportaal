@@ -41,7 +41,7 @@ async function initUserManager(
         client_id: settings.auth.oidc.clientId,
         redirect_uri: redirectUrl.href,
         post_logout_redirect_uri: post_logout_redirect_uri.href,
-        scope: "openid email ala/roles",
+        scope: "openid email ala/roles offline_access",
         includeIdTokenInSilentSignout: true,
         prompt: settings.auth.oidc.prompt,
         silent_redirect_uri: `${settings.domain}?front-auth-action=login`,
@@ -61,7 +61,7 @@ async function initUserManager(
         await authServiceWorker.setAccessToken(null);
     });
 
-    manager.events.addAccessTokenExpired(async function () {
+    manager.events.addAccessTokenExpired(async function() {
         console.warn("Access token expired");
         if (!document.hidden) {
             await silentLogin(manager);
@@ -148,6 +148,7 @@ function setAlaAuthCookie(user?: User) {
         sameSite: "lax",
         secure: window.location.protocol === "https:",
         domain: settings.auth.ala.authCookieDomain,
+        expires: 30,
     });
 }
 
