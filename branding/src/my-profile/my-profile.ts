@@ -82,7 +82,9 @@ function showUserDetails(user: User) {
             `/biocache-hub/occurrences/search/?q=*:*&fq=assertion_user_id:%22${profile.sub}%22`;
 
         // Show roles as badges
-        const roles: string[] = (profile.realm_access as any)?.roles || [];
+        const roles: string[] = (
+            (profile.realm_access as any)?.roles || []
+        ).filter((role: string) => role !== "offline_access");
         const rolesElement = document.getElementById("my-roles")!;
         roles.forEach((role) => {
             const roleElement = document.createElement("span");
