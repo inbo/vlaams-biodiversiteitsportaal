@@ -9,7 +9,7 @@
       "yearField": "year_vrlf_peridae_s",
       "yearSourceField": "eventDate",
       "term": "threatStatus",
-      "label": "VRLF-P"
+      "label": "VRLFP"
     },
     {
       "uid": "dr411",
@@ -18,7 +18,7 @@
       "yearField": "year_vrlf_insects_s",
       "yearSourceField": "eventDate",
       "term": "threatStatus",
-      "label": "VRLF-I"
+      "label": "VRLFI"
     }
 
   ]
