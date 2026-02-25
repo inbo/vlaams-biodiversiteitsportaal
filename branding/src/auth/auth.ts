@@ -5,6 +5,7 @@ import {
     SignoutRedirectArgs,
     User,
     UserManager,
+    WebStorageStateStore,
 } from "oidc-client-ts";
 
 import Cookies from "js-cookie";
@@ -46,6 +47,7 @@ async function initUserManager(
         silent_redirect_uri: `${settings.domain}?front-auth-action=login`,
         automaticSilentRenew: true,
         monitorSession: false,
+        userStore: new WebStorageStateStore({ store: window.localStorage }),
     });
 
     manager.events.addUserLoaded(async (user) => {
@@ -101,17 +103,28 @@ async function handleAuthCallbacks(manager: UserManager) {
 
     const frontAuthAction = urlParams.get("front-auth-action");
     if (frontAuthAction) {
-        switch (frontAuthAction) {
-            case "login":
-                await manager.signinCallback();
-                await manager.clearStaleState();
-                break;
-            case "logout":
-                await manager.signoutCallback();
-                await manager.clearStaleState();
-                break;
+        try {
+            switch (frontAuthAction) {
+                case "login":
+                    await manager.signinCallback();
+                    break;
+                case "logout":
+                    await manager.signoutCallback();
+                    break;
+            }
+        } catch (error) {
+            // Can occur in case of refresh / old url in history, etc.
+            if (
+                error.message &&
+                error.message.includes("No matching state found in storage")
+            ) {
+                console.warn(error.message);
+            } else {
+                console.error("Error handling auth callback", error);
+            }
         }
 
+        await manager.clearStaleState();
         window.history.pushState(
             null,
             document.title,
