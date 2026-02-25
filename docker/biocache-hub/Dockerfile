@@ -2,8 +2,8 @@
 ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-gradle-jdk17 AS builder
 
-ARG VERSION=add-range-slider-to-filter-year-facet
-ARG COMMIT=92c53373714953c949161f613e622898067f9371
+ARG VERSION=develop-vbp
+ARG COMMIT=98ac324e6a159cb126186773b9f967e021273970
 
 ARG SOURCE=https://github.com/StefanVanDyck/biocache-hubs.git
 LABEL ala.version=inbo-${COMMIT}
