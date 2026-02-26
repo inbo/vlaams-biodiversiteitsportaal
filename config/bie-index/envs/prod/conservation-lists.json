@@ -13,6 +13,8 @@
       "uid": "dr552",
       "field": "threatStatus_vrlf_s",
       "sourceField": "status",
+      "yearField": "year_vrlf18_s",
+      "yearSourceField": "eventDate",
       "term": "threatStatus",
       "label": "RL18"
     },
@@ -20,6 +22,8 @@
       "uid": "dr606",
       "field": "threatStatus_vrlf25_s",
       "sourceField": "status",
+      "yearField": "year_vrlf25_s",
+      "yearSourceField": "eventDate",
       "term": "threatStatus",
       "label": "RL25"
     }
