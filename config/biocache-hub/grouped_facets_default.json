@@ -172,6 +172,10 @@
       {
         "sort": "index",
         "field": "occurrence_decade_i"
+      },
+      {
+        "sort": "index",
+        "field": "sampling_protocol"
       }
     ]
   },
