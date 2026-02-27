@@ -23,7 +23,7 @@
       "field": "threatStatus_vrlf25_s",
       "sourceField": "status",
       "yearField": "year_vrlf25_s",
-      "yearSourceField": "eventDate",
+      "yearSourceField": "JaarPublicatie",
       "term": "threatStatus",
       "label": "RL25"
     }
