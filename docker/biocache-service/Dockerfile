@@ -3,8 +3,8 @@ ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 
-ARG VERSION=develop-vbp
-ARG COMMIT=e4ffd9a7556b4467a53f711021ced4c0271850b5
+ARG VERSION=911_eya_specieslists_filter
+ARG COMMIT=8304e269feb5b766bf1b1b4ed1cec4959398b988
 ARG SOURCE=https://github.com/StefanVanDyck/biocache-service.git
 LABEL ala.version=inbo-${COMMIT}
 
