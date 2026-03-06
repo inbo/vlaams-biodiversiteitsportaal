@@ -22,7 +22,7 @@ const envs = {
   prod: {
     baseUrl: "https://natuurdata.inbo.be",
     keycloakAuthUrl: "https://auth.inbo.be",
-    vlaanderenAuthUrl: "https://authenticatie-ti.vlaanderen.be/",
+    vlaanderenAuthUrl: "https://authenticatie.vlaanderen.be/",
   },
 };
 
