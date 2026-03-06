@@ -9,8 +9,8 @@ describe("Biocache - Download Auth", () => {
       // Expand the Attribution facet
       cy.get("#downloads > a").click();
 
-      cy.origin(Cypress.env("AUTH_URL"), () => {
-        cy.url().should("match", new RegExp(`^${Cypress.env("AUTH_URL")}`));
+      cy.origin(Cypress.env("KEYCLOAK_AUTH_URL"), () => {
+        cy.url().should("match", new RegExp(`^${Cypress.env("KEYCLOAK_AUTH_URL")}`));
       });
     });
   });
@@ -19,7 +19,7 @@ describe("Biocache - Download Auth", () => {
 describe("Biocache - Download", () => {
   let numberOfOccurrences = 0;
   beforeEach(() => {
-    cy.login("biocache-hub");
+    cy.login();
     cy.visit("/biocache-hub/occurrences/search?q=taxa%3A%22vulpes%20vulpes");
     // Ignore errors from auto-complete widget and missing google-analytics
     cy.on("uncaught:exception", (err, runnable) => {

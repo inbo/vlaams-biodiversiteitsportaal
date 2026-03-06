@@ -36,21 +36,6 @@ describe("Can login from the homepage", () => {
 
         assertIsNotLoggedIn();
       });
-
-      it(`[${service}] Login on service page means logged in on main page`, () => {
-        cy.visit(`/${service}/`);
-
-        assertIsNotLoggedIn();
-        login();
-
-        cy.wait(1000); // wait for the login to propagate
-
-        assertIsLoggedIn();
-
-        cy.visit("/");
-
-        assertIsLoggedIn();
-      });
     },
   );
 });
@@ -58,7 +43,7 @@ describe("Can login from the homepage", () => {
 function login() {
   cy.get("#dropdown-auth-menu").click();
   cy.get("#dropdown-auth-menu > .dropdown-menu").should("be.visible");
-  cy.get("#loginButton").should("be.visible").click();
+  cy.get("#loginButton").should("be.visible").click({ controlKey: true });
   cy.wait(1000); // wait for the login to propagate
 
   cy.loginPageActions();

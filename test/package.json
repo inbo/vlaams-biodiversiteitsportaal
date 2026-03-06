@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "test": "cypress run"
+    "test": "cypress run",
+    "dev": "cypress open"
   },
   "devDependencies": {
     "@simonsmith/cypress-image-snapshot": "^9.1.0",

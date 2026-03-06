@@ -6,19 +6,23 @@ import { dirname } from "path";
 const envs = {
   local: {
     baseUrl: "http://localhost",
-    authUrl: "http://localhost:9999/mock-oauth2",
+    keycloakAuthUrl: "http://localhost:9999/mock-oauth2",
+    vlaanderenAuthUrl: "http://localhost:9999/mock-oauth2",
   },
   dev: {
     baseUrl: "https://natuurdata.dev.inbo.be",
-    authUrl: "https://auth-dev.inbo.be",
+    keycloakAuthUrl: "https://auth-dev.inbo.be",
+    vlaanderenAuthUrl: "https://authenticatie-ti.vlaanderen.be/",
   },
   uat: {
     baseUrl: "https://natuurdata.uat.inbo.be",
-    authUrl: "https://auth-uat.inbo.be",
+    keycloakAuthUrl: "https://auth-uat.inbo.be",
+    vlaanderenAuthUrl: "https://authenticatie-ti.vlaanderen.be/",
   },
   prod: {
     baseUrl: "https://natuurdata.inbo.be",
-    authUrl: "https://auth.inbo.be",
+    keycloakAuthUrl: "https://auth.inbo.be",
+    vlaanderenAuthUrl: "https://authenticatie-ti.vlaanderen.be/",
   },
 };
 
@@ -35,7 +39,9 @@ module.exports = defineConfig({
     baseUrl: envs[targetEnv].baseUrl,
     env: {
       TARGET_ENV: targetEnv,
-      AUTH_URL: envs[targetEnv].authUrl,
+      BASE_URL: envs[targetEnv].baseUrl,
+      KEYCLOAK_AUTH_URL: envs[targetEnv].keycloakAuthUrl,
+      VLAANDEREN_AUTH_URL: envs[targetEnv].vlaanderenAuthUrl,
       VBP_USERNAME: process.env.CYPRESS_VBP_USERNAME,
       VBP_PASSWORD: process.env.CYPRESS_VBP_PASSWORD,
     },
