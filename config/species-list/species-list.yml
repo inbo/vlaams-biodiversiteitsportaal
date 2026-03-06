@@ -7,7 +7,7 @@ security:
     clientId: lists
     secret: lists-oidc-super-secret
   core:
-    optionalFilterPattern: [ "/", "/*" ]
+    optionalFilterPattern: ["/", "/*"]
     uriExclusionFilterPattern: ["^/ws/.*"]
 webservice:
   client-id: lists
@@ -35,9 +35,9 @@ collectory:
 dataSource:
   url: jdbc:mysql://species:my-super-secret-password@mysql:3306/specieslists?allowPublicKeyRetrieval=true&autoReconnect=true&connectTimeout=0&useUnicode=true&characterEncoding=UTF-8&useSSL=False
   properties:
-    initialSize: 2
-    maxActive: 20
-    minIdle: 5
+    initialSize: 10
+    maxActive: 100
+    minIdle: 10
     maxIdle: 25
     maxWait: 10000
     maxAge: 600000
@@ -53,7 +53,7 @@ dataSource:
     defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
 downloadLimit: 200
 fieldGuide:
-  baseURL: ''
+  baseURL: ""
 
 server:
   servlet:
@@ -62,7 +62,7 @@ grails:
   serverURL: ${common.protocol}://${common.domain}/species-list
   cache:
     ehcache:
-      ehcacheXmlLocation: 'file:///config/species-list/ehcache.xml'
+      ehcacheXmlLocation: "file:///config/species-list/ehcache.xml"
 
 iconicSpecies:
   uid: dr781
@@ -78,7 +78,7 @@ openapi:
         baseUrl: ${common.protocol}://auth.${common.domain}/cas/oidc
   contact:
     email: ${common.supportEmail}
-  terms: ''
+  terms: ""
 outboundhttp:
   timeout: 8000
 ownerVisibleToEditor: false
@@ -91,7 +91,7 @@ skin:
   layout: ala-main
 spatial:
   baseURL: ${common.protocol}://${common.domain}/spatial-hub
-termsOfUseUrl: 'https://www.vlaanderen.be/inbo/normen-voor-datagebruik/'
+termsOfUseUrl: "https://www.vlaanderen.be/inbo/normen-voor-datagebruik/"
 userdetails:
   api:
     url: ${common.protocol}://${common.domain}/userdetails/
