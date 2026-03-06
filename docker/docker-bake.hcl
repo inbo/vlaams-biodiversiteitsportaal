@@ -184,14 +184,6 @@ target "regions" {
   tags = ["${DOCKER_REPO}/inbo-vbp-regions:${TAG}"]
 }
 
-target "sensitive-data-service" {
-  context = "./sensitive-data-service"
-  contexts = {
-    "custom-maven" = "target:custom-maven"
-  }
-  tags = ["${DOCKER_REPO}/inbo-vbp-sensitive-data-service:${TAG}"]
-}
-
 target "spatial-hub" {
   context = "./spatial-hub"
   contexts = {
@@ -234,7 +226,6 @@ group "all" {
     "namematching-service",
     "pipelines",
     "regions",
-    "sensitive-data-service",
     "spatial-hub",
     "spatial-service",
     "species-list",
@@ -256,7 +247,6 @@ group "services" {
     "logger",
     "namematching-service",
     "regions",
-    "sensitive-data-service",
     "spatial-hub",
     "spatial-service",
     "species-list",
@@ -267,7 +257,6 @@ group "local-dev" {
   targets = [
     "namematching-service",
     "portal-full",
-    "sensitive-data-service",
   ]
 }
 
