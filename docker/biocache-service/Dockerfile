@@ -4,7 +4,7 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 
 ARG VERSION=911_eya_specieslists_filter
-ARG COMMIT=8304e269feb5b766bf1b1b4ed1cec4959398b988
+ARG COMMIT=057b026e2b66513e27c6ad67012a29ef37778a0f
 ARG SOURCE=https://github.com/StefanVanDyck/biocache-service.git
 LABEL ala.version=inbo-${COMMIT}
 
