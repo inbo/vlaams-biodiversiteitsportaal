@@ -3,8 +3,8 @@ ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 
-ARG VERSION=911_eya_specieslists_filter
-ARG COMMIT=057b026e2b66513e27c6ad67012a29ef37778a0f
+ARG VERSION=use-solr-10
+ARG COMMIT=6847f6ac1094e57d09b2bc121235de6092ee7707
 ARG SOURCE=https://github.com/StefanVanDyck/biocache-service.git
 LABEL ala.version=inbo-${COMMIT}
 
@@ -37,7 +37,7 @@ RUN mkdir -p /opt/atlas/i18n \
   && ln -s /config/biocache-service/i18n/override /var/opt/atlas/i18n/biocache-service
 
 ARG VERSION=3.7.0-SNAPSHOT
-ARG COMMIT=e4ffd9a7556b4467a53f711021ced4c0271850b5
+ARG COMMIT=6847f6ac1094e57d09b2bc121235de6092ee7707
 LABEL ala.version=inbo-${COMMIT}
 
 COPY --from=builder /project/build/libs/biocache-service-${VERSION}-exec.war /biocache-service.war
