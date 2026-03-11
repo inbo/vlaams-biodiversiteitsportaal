@@ -63,8 +63,8 @@ services:
       - "host.docker.internal:host-gateway"
       # Use host, so we can easily swap in port-forwarded version of solr
       - "solr.vbp.internal:host-gateway"
-#    build:
-#      context: biocache-service
+    #    build:
+    #      context: biocache-service
     environment:
       SPRING_CONFIG_ADDITIONAL-LOCATION: "file:/config/common/common.yml,file:/config/biocache-service/biocache-service.yml,file:/config/common/common-docker.yml"
       JAVA_OPTS: "-Xms128m -Xmx256m -Dspring.profiles.active=local"
@@ -121,8 +121,8 @@ services:
     depends_on:
       mysql:
         condition: service_healthy
-#      nginx:
-#        condition: service_healthy
+      #      nginx:
+      #        condition: service_healthy
       mock-oauth2-server:
         condition: service_started
 
@@ -266,7 +266,7 @@ services:
     environment:
       SPRING_CONFIG_ADDITIONAL-LOCATION: "file:/config/common/common.yml,file:/config/biocache-service/biocache-service.yml,file:/config/biocache-service/sandbox.yml,file:/config/common/common-docker.yml"
       JAVA_OPTS: "-Xms128m -Xmx256m -Dspring.profiles.active=local"
-      SECURITY_JWT_ENABLED: 'false'
+      SECURITY_JWT_ENABLED: "false"
     volumes:
       - ../config:/config:ro
     depends_on:
@@ -419,7 +419,7 @@ services:
     volumes:
       - cassandra:/var/lib/cassandra
     healthcheck:
-      test: [ "CMD-SHELL", "[ $$(nodetool statusgossip) = running ]" ]
+      test: ["CMD-SHELL", "[ $$(nodetool statusgossip) = running ]"]
 
   cassandra-load-keyspace:
     image: cassandra:3
@@ -431,7 +431,7 @@ services:
     command: bash -c "cqlsh cassandradb -f /docker-entrypoint-initdb.d/*.cql"
 
   solr:
-    image: solr:8
+    image: solr:10-slim
     networks:
       default:
         aliases:
@@ -440,22 +440,22 @@ services:
       - "8983:8983"
     volumes:
       - ../config/solr:/var/solr/init/docker/solr-data:ro
-      - solr-data:/var/solr/data
+      - solr-data:/var/solr
     environment:
       SOLR_HEAP: 2g
       SOLR_MODE: solrcloud
     healthcheck:
-      test: [ "CMD-SHELL", "curl -sf http://localhost:8983/solr/" ]
+      test: ["CMD-SHELL", "curl -sf http://localhost:8983/solr/"]
 
   solr-init:
-    image: solr:8
+    image: solr:10-
     entrypoint: ["bash", "-c"]
     command:
       - |-
         set -e -x
-        ./server/scripts/cloud-scripts/zkcli.sh -zkhost solr:9983 -cmd upconfig -confdir /var/solr/init/docker/solr-data/bie/ -confname bie
-        ./server/scripts/cloud-scripts/zkcli.sh -zkhost solr:9983 -cmd upconfig -confdir /var/solr/init/docker/solr-data/biocache/ -confname biocache
-  
+        solr zk upconfig -z solr:9983 -d /var/solr/init/docker/solr-data/bie/ -n bie
+        solr zk upconfig -z solr:9983 -d /var/solr/init/docker/solr-data/biocache/ -n biocache
+
         curl -X POST --fail 'http://solr:8983/solr/admin/collections?action=CREATE&name=biocache&collection.configName=biocache&numShards=1' || curl -X POST --fail 'http://solr:8983/solr/admin/collections?action=RELOAD&name=biocache'
         curl -X POST --fail 'http://solr:8983/solr/admin/collections?action=CREATE&name=bie&collection.configName=bie&numShards=1' || curl -X POST --fail 'http://solr:8983/solr/admin/collections?action=RELOAD&name=bie'
         curl -X POST --fail 'http://solr:8983/solr/admin/collections?action=CREATE&name=bie-offline&collection.configName=bie&numShards=1' || curl -X POST --fail 'http://solr:8983/solr/admin/collections?action=RELOAD&name=bie-offline'
@@ -499,7 +499,7 @@ services:
       - "9200:9200"
       - "9300:9300"
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://elasticsearch:9200" ]
+      test: ["CMD", "curl", "-f", "http://elasticsearch:9200"]
       interval: 30s
       timeout: 10s
       retries: 5

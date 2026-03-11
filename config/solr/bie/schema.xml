@@ -63,12 +63,12 @@
       <filter class="solr.LowerCaseFilterFactory"/>
     </analyzer>
   </fieldType>
-  <fieldType name="date" class="solr.TrieDateField" omitNorms="true" positionIncrementGap="0" precisionStep="0"/>
-  <fieldType name="double" class="solr.TrieDoubleField" omitNorms="true" positionIncrementGap="0" precisionStep="0"/>
-  <fieldType name="float" class="solr.TrieFloatField" omitNorms="true" positionIncrementGap="0" precisionStep="0"/>
+  <fieldType name="date" class="solr.DatePointField" omitNorms="true"/>
+  <fieldType name="double" class="solr.DoublePointField" omitNorms="true"/>
+  <fieldType name="float" class="solr.FloatPointField" omitNorms="true"/>
   <fieldType name="ignored" class="solr.StrField" indexed="false" stored="false" multiValued="true"/>
-  <fieldType name="int" class="solr.TrieIntField" omitNorms="true" positionIncrementGap="0" precisionStep="0"/>
-  <fieldType name="long" class="solr.TrieLongField" omitNorms="true" positionIncrementGap="0" precisionStep="0"/>
+  <fieldType name="int" class="solr.IntPointField" omitNorms="true"/>
+  <fieldType name="long" class="solr.LongPointField" omitNorms="true"/>
   <fieldType name="lowercase" class="solr.TextField" positionIncrementGap="100">
     <analyzer>
       <tokenizer class="solr.KeywordTokenizerFactory"/>
@@ -115,8 +115,8 @@
     </analyzer>
   </fieldType>
   <fieldType name="string" class="solr.StrField" omitNorms="true" sortMissingLast="true"/>
-  <fieldType name="tdate" class="solr.TrieDateField" omitNorms="true" positionIncrementGap="0" precisionStep="6"/>
-  <fieldType name="tdouble" class="solr.TrieDoubleField" omitNorms="true" positionIncrementGap="0" precisionStep="8"/>
+  <fieldType name="tdate" class="solr.DatePointField" omitNorms="true"/>
+  <fieldType name="tdouble" class="solr.DoublePointField" omitNorms="true"/>
   <fieldType name="text" class="solr.TextField" positionIncrementGap="100">
     <analyzer type="index">
       <tokenizer class="solr.StandardTokenizerFactory"/>
@@ -126,16 +126,16 @@
     <analyzer type="query">
       <tokenizer class="solr.StandardTokenizerFactory"/>
       <filter class="solr.StopFilterFactory" words="stopwords.txt" ignoreCase="true"/>
-      <filter class="solr.SynonymFilterFactory" expand="true" ignoreCase="true" synonyms="synonyms.txt"/>
+      <filter class="solr.SynonymGraphFilterFactory" expand="true" ignoreCase="true" synonyms="synonyms.txt"/>
       <filter class="solr.LowerCaseFilterFactory"/>
     </analyzer>
   </fieldType>
   <fieldType name="textTight" class="solr.TextField" positionIncrementGap="100">
     <analyzer>
       <tokenizer class="solr.WhitespaceTokenizerFactory"/>
-      <filter class="solr.SynonymFilterFactory" expand="false" ignoreCase="true" synonyms="synonyms.txt"/>
+      <filter class="solr.SynonymGraphFilterFactory" expand="false" ignoreCase="true" synonyms="synonyms.txt"/>
       <filter class="solr.StopFilterFactory" words="stopwords.txt" ignoreCase="true"/>
-      <filter class="solr.WordDelimiterFilterFactory" catenateNumbers="1" generateNumberParts="0" generateWordParts="0" catenateAll="0" catenateWords="1"/>
+      <filter class="solr.WordDelimiterGraphFilterFactory" catenateNumbers="1" generateNumberParts="0" generateWordParts="0" catenateAll="0" catenateWords="1"/>
       <filter class="solr.LowerCaseFilterFactory"/>
       <filter class="solr.SnowballPorterFilterFactory" language="English" protected="protwords.txt"/>
       <filter class="solr.RemoveDuplicatesTokenFilterFactory"/>
@@ -145,14 +145,14 @@
     <analyzer type="index">
       <charFilter class="solr.MappingCharFilterFactory" mapping="mapping-ISOLatin1Accent.txt"/>
       <tokenizer class="solr.StandardTokenizerFactory"/>
-      <filter class="solr.WordDelimiterFilterFactory" catenateNumbers="1" generateNumberParts="1" splitOnCaseChange="1" generateWordParts="1" splitOnNumerics="1" preserveOriginal="1" catenateAll="1" catenateWords="1"/>
+      <filter class="solr.WordDelimiterGraphFilterFactory" catenateNumbers="1" generateNumberParts="1" splitOnCaseChange="1" generateWordParts="1" splitOnNumerics="1" preserveOriginal="1" catenateAll="1" catenateWords="1"/>
       <filter class="solr.LowerCaseFilterFactory"/>
       <filter class="solr.PatternReplaceFilterFactory" pattern="([^\w\d\*æøåÆØÅ ])" replace="all" replacement=" "/>
     </analyzer>
     <analyzer type="query">
       <charFilter class="solr.MappingCharFilterFactory" mapping="mapping-ISOLatin1Accent.txt"/>
       <tokenizer class="solr.StandardTokenizerFactory"/>
-      <filter class="solr.WordDelimiterFilterFactory" catenateNumbers="0" generateNumberParts="0" splitOnCaseChange="0" generateWordParts="0" splitOnNumerics="0" catenateAll="0" catenateWords="0"/>
+      <filter class="solr.WordDelimiterGraphFilterFactory" catenateNumbers="0" generateNumberParts="0" splitOnCaseChange="0" generateWordParts="0" splitOnNumerics="0" catenateAll="0" catenateWords="0"/>
       <filter class="solr.LowerCaseFilterFactory"/>
       <filter class="solr.PatternReplaceFilterFactory" pattern="([^\w\d\*æøåÆØÅ ])" replace="all" replacement=" "/>
     </analyzer>
@@ -179,7 +179,7 @@
     <analyzer type="index">
       <charFilter class="solr.MappingCharFilterFactory" mapping="mapping-ISOLatin1Accent.txt"/>
       <tokenizer class="solr.StandardTokenizerFactory"/>
-      <filter class="solr.WordDelimiterFilterFactory" catenateNumbers="0" generateNumberParts="1" splitOnCaseChange="1" generateWordParts="1" catenateAll="0" catenateWords="0"/>
+      <filter class="solr.WordDelimiterGraphFilterFactory" catenateNumbers="0" generateNumberParts="1" splitOnCaseChange="1" generateWordParts="1" catenateAll="0" catenateWords="0"/>
       <filter class="solr.LowerCaseFilterFactory"/>
       <filter class="solr.EdgeNGramFilterFactory" maxGramSize="20" minGramSize="1"/>
       <filter class="solr.PatternReplaceFilterFactory" pattern="([^\w\d\*æøåÆØÅ ])" replace="all" replacement=""/>
@@ -187,15 +187,15 @@
     <analyzer type="query">
       <charFilter class="solr.MappingCharFilterFactory" mapping="mapping-ISOLatin1Accent.txt"/>
       <tokenizer class="solr.StandardTokenizerFactory"/>
-      <filter class="solr.WordDelimiterFilterFactory" catenateNumbers="0" generateNumberParts="0" splitOnCaseChange="0" generateWordParts="0" catenateAll="0" catenateWords="0"/>
+      <filter class="solr.WordDelimiterGraphFilterFactory" catenateNumbers="0" generateNumberParts="0" splitOnCaseChange="0" generateWordParts="0" catenateAll="0" catenateWords="0"/>
       <filter class="solr.LowerCaseFilterFactory"/>
       <filter class="solr.PatternReplaceFilterFactory" pattern="([^\w\d\*æøåÆØÅ ])" replace="all" replacement=""/>
       <filter class="solr.PatternReplaceFilterFactory" pattern="^(.{20})(.*)?" replace="all" replacement="$1"/>
     </analyzer>
   </fieldType>
-  <fieldType name="tfloat" class="solr.TrieFloatField" omitNorms="true" positionIncrementGap="0" precisionStep="8"/>
-  <fieldType name="tint" class="solr.TrieIntField" omitNorms="true" positionIncrementGap="0" precisionStep="8"/>
-  <fieldType name="tlong" class="solr.TrieLongField" omitNorms="true" positionIncrementGap="0" precisionStep="8"/>
+  <fieldType name="tfloat" class="solr.FloatPointField" omitNorms="true"/>
+  <fieldType name="tint" class="solr.IntPointField" omitNorms="true"/>
+  <fieldType name="tlong" class="solr.LongPointField" omitNorms="true"/>
   <field name="_version_" type="long" multiValued="false" indexed="true" stored="true"/>
   <field name="acceptedConceptID" type="string" omitNorms="false" multiValued="false" indexed="true" stored="true"/>
   <field name="acceptedConceptName" type="lowercase" omitNorms="false" multiValued="false" indexed="true" stored="true"/>
