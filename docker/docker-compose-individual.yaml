@@ -55,6 +55,7 @@ services:
 
   biocache-service:
     image: ${DOCKER_REPO:-local}/inbo-vbp-biocache-service:dev
+    read_only: true
     networks:
       default:
         aliases:
