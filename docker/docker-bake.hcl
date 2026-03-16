@@ -166,15 +166,6 @@ target "namematching-service" {
   tags = ["${DOCKER_REPO}/inbo-vbp-namematching-service:${TAG}"]
 }
 
-target "pipelines" {
-  context = "./pipelines"
-  contexts = {
-    "custom-maven" = "target:custom-maven"
-  }
-  cache-from = ["${DOCKER_REPO}/inbo-vbp-pipelines:${CACHE_TAG}"]
-  tags = ["${DOCKER_REPO}/inbo-vbp-pipelines:${TAG}"]
-}
-
 target "regions" {
   context = "./regions"
   contexts = {
@@ -224,7 +215,6 @@ group "all" {
     "image-service",
     "logger",
     "namematching-service",
-    "pipelines",
     "regions",
     "spatial-hub",
     "spatial-service",

@@ -1,3 +1,4 @@
 [worker.oci]
   platforms = [ "linux/amd64", "linux/arm64" ]
   max-parallelism = 4
+  memory = "8GB"
