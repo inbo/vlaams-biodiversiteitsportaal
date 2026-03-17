@@ -8,8 +8,6 @@ ARG COMMIT=057b026e2b66513e27c6ad67012a29ef37778a0f
 ARG SOURCE=https://github.com/StefanVanDyck/biocache-service.git
 LABEL ala.version=inbo-${COMMIT}
 
-
-
 WORKDIR /project
 RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
 
