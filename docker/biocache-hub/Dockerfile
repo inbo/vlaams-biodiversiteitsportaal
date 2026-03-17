@@ -2,6 +2,16 @@
 ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-gradle-jdk17 AS builder
 
+# downloads-plugin
+ARG VERSION=develop-vbp
+ARG COMMIT=9bb51ec42ea4a64a76dab769a58bc14203ab820a
+
+ARG SOURCE=https://github.com/inbo/downloads-plugin.git
+
+WORKDIR /project/downloads-plugin
+RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
+
+# biocache-hubs
 ARG VERSION=develop-vbp
 ARG COMMIT=f9f396b6b34e8aa21c3864abd7c96a2bb1b3de77
 
@@ -35,7 +45,8 @@ COPY alaBs.js ./grails-app/assets/javascripts/alaBs.js
 RUN --mount=type=cache,target=/gradle-cache,ro \
     gradle build assemble \
     -x test -x integrationTest \
-    --include-build ../biocache-hubs
+    --include-build ../biocache-hubs \
+    --include-build ../downloads-plugin
 
 # Copy dependencies to shared read-only cache
 RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
