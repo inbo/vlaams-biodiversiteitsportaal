@@ -55,4 +55,9 @@ RUN mkdir /cache
 RUN chown 1000:1000 /cache
 VOLUME /cache
 
+RUN mkdir /catalina
+RUN chown 1000:1000 /data
+VOLUME /catalina
+ENV CATALINA_BASE=/catalina
+
 USER 1000:1000

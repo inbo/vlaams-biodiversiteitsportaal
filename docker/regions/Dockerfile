@@ -51,4 +51,10 @@ ENTRYPOINT ["sh", "-c", "java ${JAVA_OPTS} -jar /regions.war"]
 RUN mkdir /data
 RUN chown 1000:1000 /data
 VOLUME /data
+
+RUN mkdir /catalina
+RUN chown 1000:1000 /data
+VOLUME /catalina
+ENV CATALINA_BASE=/catalina
+
 USER 1000:1000

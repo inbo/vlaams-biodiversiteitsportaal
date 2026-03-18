@@ -89,4 +89,10 @@ RUN groupadd --gid 1000 app && useradd --no-create-home --gid 1000 --uid 1000 ap
 RUN mkdir /data
 RUN chown 1000:1000 /data
 VOLUME /data
+
+RUN mkdir /catalina
+RUN chown 1000:1000 /data
+VOLUME /catalina
+ENV CATALINA_BASE=/catalina
+
 USER 1000:1000

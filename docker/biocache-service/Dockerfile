@@ -51,6 +51,7 @@ VOLUME /data
 RUN mkdir /catalina
 RUN chown 1000:1000 /data
 VOLUME /catalina
-ENV CATALINA_BASE=/catalina 
+ENV CATALINA_BASE=/catalina
+
 USER 1000:1000
 
