@@ -45,8 +45,8 @@ COPY alaBs.js ./grails-app/assets/javascripts/alaBs.js
 RUN --mount=type=cache,target=/gradle-cache,ro \
     gradle build assemble \
     -x test -x integrationTest \
-    --include-build ../biocache-hubs #\
-    #--include-build ../downloads-plugin
+    --include-build ../biocache-hubs \
+    --include-build ../downloads-plugin
 
 # Copy dependencies to shared read-only cache
 RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
