@@ -1,6 +1,7 @@
 services:
   biocache-hub:
     image: ${DOCKER_REPO:-local}/inbo-vbp-biocache-hub:dev
+    read_only: true
     networks:
       default:
         aliases:
@@ -18,6 +19,7 @@ services:
 
   bie-hub:
     image: ${DOCKER_REPO:-local}/inbo-vbp-bie-hub:dev
+    read_only: true
     networks:
       default:
         aliases:
@@ -35,6 +37,7 @@ services:
 
   bie-index:
     image: ${DOCKER_REPO:-local}/inbo-vbp-bie-index:dev
+    read_only: true
     networks:
       default:
         aliases:
@@ -81,6 +84,7 @@ services:
 
   apikey:
     image: ${DOCKER_REPO:-local}/inbo-vbp-apikey:dev
+    read_only: true
     networks:
       default:
         aliases:
@@ -102,6 +106,7 @@ services:
 
   alerts:
     image: ${DOCKER_REPO:-local}/inbo-vbp-alerts:dev
+    read_only: true
     networks:
       default:
         aliases:
@@ -129,6 +134,7 @@ services:
 
   collectory:
     image: ${DOCKER_REPO:-local}/inbo-vbp-collectory:dev
+    read_only: true
     networks:
       default:
         aliases:
@@ -151,6 +157,7 @@ services:
 
   data-quality-filter-service:
     image: ${DOCKER_REPO:-local}/inbo-vbp-data-quality-filter-service:dev
+    read_only: true
     networks:
       default:
         aliases:
@@ -171,6 +178,7 @@ services:
 
   logger:
     image: ${DOCKER_REPO:-local}/inbo-vbp-logger:dev
+    read_only: true
     networks:
       default:
         aliases:
@@ -191,6 +199,7 @@ services:
 
   species-list:
     image: ${DOCKER_REPO:-local}/inbo-vbp-species-list:dev
+    read_only: true
     networks:
       default:
         aliases:
@@ -212,6 +221,7 @@ services:
 
   regions:
     image: ${DOCKER_REPO:-local}/inbo-vbp-regions:dev
+    read_only: true
     networks:
       default:
         aliases:
@@ -235,6 +245,7 @@ services:
 
   image-service:
     image: ${DOCKER_REPO:-local}/inbo-vbp-image-service:dev
+    read_only: true
     networks:
       default:
         aliases:
@@ -256,6 +267,7 @@ services:
 
   sandbox:
     image: ${DOCKER_REPO:-local}/inbo-vbp-biocache-service:dev
+    read_only: true
     networks:
       default:
         aliases:
@@ -280,6 +292,7 @@ services:
 
   spatial-hub:
     image: ${DOCKER_REPO:-local}/inbo-vbp-spatial-hub:dev
+    read_only: true
     networks:
       default:
         aliases:
@@ -300,6 +313,7 @@ services:
 
   spatial-service:
     image: ${DOCKER_REPO:-local}/inbo-vbp-spatial-service:dev
+    read_only: true
     networks:
       default:
         aliases:
@@ -326,6 +340,7 @@ services:
 
   userdetails:
     image: ${DOCKER_REPO:-local}/inbo-vbp-userdetails:dev
+    read_only: true
     networks:
       default:
         aliases:
@@ -365,6 +380,7 @@ services:
 
   geoserver:
     image: kartoza/geoserver:2.23.2
+    read_only: true
     networks:
       default:
         aliases:
@@ -433,6 +449,7 @@ services:
 
   solr:
     image: solr:8
+    read_only: true
     networks:
       default:
         aliases:
@@ -477,6 +494,7 @@ services:
 
   elasticsearch:
     image: elasticsearch:7.17.20
+    read_only: true
     networks:
       default:
         aliases:
@@ -507,6 +525,7 @@ services:
 
   namematching-service:
     image: ${DOCKER_REPO:-local}/inbo-vbp-namematching-service:dev
+    read_only: true
     networks:
       default:
         aliases:
@@ -516,6 +535,7 @@ services:
 
   nginx:
     image: nginx
+    read_only: true
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d
       - ../branding/public:/srv/branding.la-flanders.org/www/
