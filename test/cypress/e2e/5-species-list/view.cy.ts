@@ -111,10 +111,10 @@ describe("Species list - view", () => {
 
     it("Adding a list requires login", () => {
         cy.get("a").contains("Upload").click();
-        cy.origin(Cypress.env("AUTH_URL"), () => {
+        cy.origin(Cypress.env("VLAANDEREN_AUTH_URL"), () => {
             cy.url().should(
                 "match",
-                new RegExp(`^${Cypress.env("AUTH_URL")}`),
+                new RegExp(`^${Cypress.env("VLAANDEREN_AUTH_URL")}`),
             );
         });
     });

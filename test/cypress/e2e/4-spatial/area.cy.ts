@@ -1,6 +1,6 @@
 describe("Spatial - Layers", () => {
   beforeEach(() => {
-    cy.login("spatial-hub", undefined, false, true);
+    cy.login();
     cy.visit("/spatial-hub");
     cy.get(".progress-bar").should("not.be.visible");
   });

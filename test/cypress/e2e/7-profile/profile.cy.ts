@@ -10,11 +10,11 @@ describe("User profile - Anonymous", () => {
       .should("be.visible")
       .click();
 
-    // Login
-    cy.loginPageActions();
-
-    // Should be redirected back to profile page
-    cy.url().should("include", "/my-profile.html");
+    // Should navigate to Vlaanderen login
+    cy.url().should(
+      "match",
+      new RegExp(`^${Cypress.env("VLAANDEREN_AUTH_URL")}`),
+    );
   });
 });
 
@@ -36,14 +36,14 @@ describe("User profile - Authenticated", () => {
     cy.get("#profile-overview")
       .find("#my-profile-update-profile-details")
       .click();
-    cy.url().should("include", Cypress.env("AUTH_URL"));
+    cy.url().should("include", Cypress.env("KEYCLOAK_AUTH_URL"));
     cy.get("#kc-page-title").should("be.visible");
     cy.get("#email").should("be.visible");
   });
 
   it("Should resetting password", () => {
     cy.get("#profile-overview").find("#my-profile-update-password").click();
-    cy.url().should("include", Cypress.env("AUTH_URL"));
+    cy.url().should("include", Cypress.env("KEYCLOAK_AUTH_URL"));
     cy.get("#kc-page-title").should("be.visible");
     cy.get("#password-new").should("be.visible");
   });
