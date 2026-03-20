@@ -60,7 +60,7 @@ downloads:
   checklistDownloadUrl: ${common.protocol}://${common.domain}/biocache-service/occurrences/facets/download
   customSections:
     misc: qualityAssertions,miscellaneousFields
-  defaultDownloadFormat: dwc
+  defaultDownloadFormat: minimal
   dwcExtraFields: data_resource_uid
   fieldguideDownloadUrl: ""
   indexedDownloadUrl: ${common.protocol}://${common.domain}/biocache-service/occurrences/offline/download
