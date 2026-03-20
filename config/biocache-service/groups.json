@@ -161,6 +161,48 @@
     "parent": "Arthropods"
   },
   {
+  "name": "MacroInvertebrates",
+  "rank": "family",
+  "included": [
+    "Acroloxidae", "Aeshnidae", "Ameletidae", "Ampharetidae", "Ancylidae", 
+    "Anisitsiellidae", "Aphelocheiridae", "Argulidae", "Arrenuridae", "Asellidae", 
+    "Astacidae", "Athericidae", "Athienemanniidae", "Aturidae", "Atyidae", 
+    "Baetidae", "Beraeidae", "Bithyniidae", "Blephariceridae", "Brachycentridae", 
+    "Branchiobdellidae", "Caenidae", "Calopterygidae", "Cambaridae", "Ceratopogonidae", 
+    "Chaoboridae", "Chirocephalidae", "Chironomidae", "Chloroperlidae", "Coenagrionidae", 
+    "Corbiculidae", "Cordulegastridae", "Corduliidae", "Corixidae", "Corophiidae", 
+    "Crangonyctidae", "Culicidae", "Cylindrotomidae", "Dendrocoelidae", "Dixidae", 
+    "Dolichopodidae", "Dreissenidae", "Dryopidae", "Dugesiidae", "Dytiscidae", 
+    "Ecnomidae", "Elmidae", "Empididae", "Enchytraeidae", "Ephemerellidae", 
+    "Ephemeridae", "Ephydridae", "Erpobdellidae", "Eylaidae", "Feltriidae", 
+    "Gammaridae", "Gerridae", "Glossiphoniidae", "Glossosomatidae", "Goeridae", 
+    "Gomphidae", "Gyrinidae", "Haemopidae", "Haliplidae", "Haplotaxidae", 
+    "Hebridae", "Heptageniidae", "Hirudinidae", "Hydrachnidae", "Hydraenidae", 
+    "Hydrobiidae", "Hydrodromidae", "Hydrometridae", "Hydrophilidae", "Hydropsychidae", 
+    "Hydroptilidae", "Hydryphantidae", "Hygrobatiidae", "Hygrobiidae", "Janiridae", 
+    "Lebertiidae", "Lepidostomatidae", "Leptestheriidae", "Leptoceridae", "Leptophlebiidae", 
+    "Lestidae", "Leuctridae", "Libellulidae", "Limnadiidae", "Limnephilidae", 
+    "Limnesiidae", "Limoniidae", "Lithoglyphidae", "Lumbricidae", "Lumbriculidae", 
+    "Lymnaeidae", "Mactridae", "Margaritiferidae", "Mesoveliidae", "Micronectidae", 
+    "Mideidae", "Mideopsidae", "Molannidae", "Muscidae", "Mysidae", 
+    "Naididae", "Naucoridae", "Nemouridae", "Nepidae", "Noteridae", 
+    "Notonectidae", "Odontoceridae", "Oligoneuriidae", "Osmylidae", "Oxidae", 
+    "Palaemonidae", "Panopeidae", "Perlidae", "Perlodidae", "Philopotamidae", 
+    "Phryganeidae", "Physidae", "Piersigiidae", "Pionidae", "Piscicolidae", 
+    "Planariidae", "Planorbidae", "Platycnemididae", "Pleidae", "Polycentropodidae", 
+    "Polymitarcyidae", "Potamanthidae", "Psephenidae", "Psychodidae", "Psychomyiidae", 
+    "Ptychopteridae", "Rhagionidae", "Rhyacophilidae", "Sabellidae", "Salifidae", 
+    "Scathophagidae", "Sciomyzidae", "Scirtidae", "Sericostomatidae", "Sialidae", 
+    "Simuliidae", "Siphlonuridae", "Sisyridae", "Sperchontidae", "Sphaeriidae", 
+    "Sphaeromatidae", "Stratiomyidae", "Syrphidae", "Tabanidae", "Taeniopterygidae", 
+    "Talitridae", "Tanaidae", "Teutoniidae", "Thaumaleidae", "Tipulidae", 
+    "Torrenticolidae", "Triopsidae", "Tubificidae", "Unionicolidae", "Unionidae", 
+    "Valvatidae", "Varunidae", "Veliidae", "Viviparidae", "Wettinidae"
+  ],
+  "excluded": [],
+  "parent": "Animals"
+},
+  {
     "name": "Plants",
     "rank": "kingdom",
     "included": [
@@ -190,7 +232,7 @@
     "parent": "Plants"
   },
   {
-    "name": "fernsAndAllies",
+    "name": "ferns",
     "rank": "phylum",
     "included": [
       "Equisetophyta",
@@ -279,47 +321,5 @@
       "Cyanobacteria"
     ],
     "excluded": []
-  },
-  {
-  "name": "MacroInvertebrates",
-  "rank": "family",
-  "included": [
-    "Acroloxidae", "Aeshnidae", "Ameletidae", "Ampharetidae", "Ancylidae", 
-    "Anisitsiellidae", "Aphelocheiridae", "Argulidae", "Arrenuridae", "Asellidae", 
-    "Astacidae", "Athericidae", "Athienemanniidae", "Aturidae", "Atyidae", 
-    "Baetidae", "Beraeidae", "Bithyniidae", "Blephariceridae", "Brachycentridae", 
-    "Branchiobdellidae", "Caenidae", "Calopterygidae", "Cambaridae", "Ceratopogonidae", 
-    "Chaoboridae", "Chirocephalidae", "Chironomidae", "Chloroperlidae", "Coenagrionidae", 
-    "Corbiculidae", "Cordulegastridae", "Corduliidae", "Corixidae", "Corophiidae", 
-    "Crangonyctidae", "Culicidae", "Cylindrotomidae", "Dendrocoelidae", "Dixidae", 
-    "Dolichopodidae", "Dreissenidae", "Dryopidae", "Dugesiidae", "Dytiscidae", 
-    "Ecnomidae", "Elmidae", "Empididae", "Enchytraeidae", "Ephemerellidae", 
-    "Ephemeridae", "Ephydridae", "Erpobdellidae", "Eylaidae", "Feltriidae", 
-    "Gammaridae", "Gerridae", "Glossiphoniidae", "Glossosomatidae", "Goeridae", 
-    "Gomphidae", "Gyrinidae", "Haemopidae", "Haliplidae", "Haplotaxidae", 
-    "Hebridae", "Heptageniidae", "Hirudinidae", "Hydrachnidae", "Hydraenidae", 
-    "Hydrobiidae", "Hydrodromidae", "Hydrometridae", "Hydrophilidae", "Hydropsychidae", 
-    "Hydroptilidae", "Hydryphantidae", "Hygrobatiidae", "Hygrobiidae", "Janiridae", 
-    "Lebertiidae", "Lepidostomatidae", "Leptestheriidae", "Leptoceridae", "Leptophlebiidae", 
-    "Lestidae", "Leuctridae", "Libellulidae", "Limnadiidae", "Limnephilidae", 
-    "Limnesiidae", "Limoniidae", "Lithoglyphidae", "Lumbricidae", "Lumbriculidae", 
-    "Lymnaeidae", "Mactridae", "Margaritiferidae", "Mesoveliidae", "Micronectidae", 
-    "Mideidae", "Mideopsidae", "Molannidae", "Muscidae", "Mysidae", 
-    "Naididae", "Naucoridae", "Nemouridae", "Nepidae", "Noteridae", 
-    "Notonectidae", "Odontoceridae", "Oligoneuriidae", "Osmylidae", "Oxidae", 
-    "Palaemonidae", "Panopeidae", "Perlidae", "Perlodidae", "Philopotamidae", 
-    "Phryganeidae", "Physidae", "Piersigiidae", "Pionidae", "Piscicolidae", 
-    "Planariidae", "Planorbidae", "Platycnemididae", "Pleidae", "Polycentropodidae", 
-    "Polymitarcyidae", "Potamanthidae", "Psephenidae", "Psychodidae", "Psychomyiidae", 
-    "Ptychopteridae", "Rhagionidae", "Rhyacophilidae", "Sabellidae", "Salifidae", 
-    "Scathophagidae", "Sciomyzidae", "Scirtidae", "Sericostomatidae", "Sialidae", 
-    "Simuliidae", "Siphlonuridae", "Sisyridae", "Sperchontidae", "Sphaeriidae", 
-    "Sphaeromatidae", "Stratiomyidae", "Syrphidae", "Tabanidae", "Taeniopterygidae", 
-    "Talitridae", "Tanaidae", "Teutoniidae", "Thaumaleidae", "Tipulidae", 
-    "Torrenticolidae", "Triopsidae", "Tubificidae", "Unionicolidae", "Unionidae", 
-    "Valvatidae", "Varunidae", "Veliidae", "Viviparidae", "Wettinidae"
-  ],
-  "excluded": [],
-  "parent": "Animals"
-}
+  }
 ]
