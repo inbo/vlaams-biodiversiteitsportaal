@@ -25,6 +25,12 @@ RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
 
 FROM amazoncorretto:11
 
+# trivy:ignore:DS-0015  # using BuildKit yum cache
+RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
+    yum -y install \
+    tar \
+    unzip
+
 COPY --from=builder /opt/opentelemetry-agent /opt/opentelemetry-agent
 
 # Default based on repo structure, can be overridden at runtime
