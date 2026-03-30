@@ -170,7 +170,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: ${{ secrets.AWS_REGION }}
-          role-to-assume: ${{ secrets.AWS_SHARED_INFRA_ROLE_ARN_2 }}
+          role-to-assume: ${{ secrets.AWS_SHARED_INFRA_ROLE_ARN }}
           role-skip-session-tagging: true
 
       - name: Docker login to Amazon ECR
