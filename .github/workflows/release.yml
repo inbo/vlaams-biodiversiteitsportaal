@@ -154,6 +154,7 @@ jobs:
     needs: get-versions
     if: needs.get-versions.outputs.docker_build_matrix != '[]'
     permissions:
+      id-token: write
       contents: write
       actions: write
     strategy:
