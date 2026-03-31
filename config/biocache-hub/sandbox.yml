@@ -13,3 +13,7 @@ downloads:
   checklistDownloadUrl: ${common.protocol}://${common.domain}/sandbox-service/occurrences/facets/download
   indexedDownloadUrl: ${common.protocol}://${common.domain}/sandbox-service/occurrences/offline/download
   indexedFieldsUrl: ${common.protocol}://${common.domain}/sandbox-service/index/fields
+
+dataquality:
+  enabled: false
+
