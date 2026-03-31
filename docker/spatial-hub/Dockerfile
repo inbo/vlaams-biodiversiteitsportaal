@@ -6,16 +6,16 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 #ARG SOURCE=https://github.com/AtlasOfLivingAustralia/spatial-hub.git1
 #LABEL ala.version=${VERSION}
 
-ARG VERSION=741-fix-merge-areas
-ARG COMMIT=df3923ef32530ff38d8a3b532f50d31a10e649b3
+ARG VERSION=develop-vbp
+ARG COMMIT=08b77bb5da6300847597ee1f83c8b2ec47698fd9
 ARG SOURCE=https://github.com/inbo/spatial-hub
 LABEL ala.version=inbo-${VERSION}
 
 # trivy:ignore:DS-0015  # using BuildKit yum cache
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
-    yum update -y && \
-    yum install -y \
-    npm
+  yum update -y && \
+  yum install -y \
+  npm
 
 WORKDIR /project
 RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
@@ -27,14 +27,14 @@ COPY ./assets/images/icon_flanders.png ./grails-app/assets/images/icon_wms-layer
 COPY ./assets/javascripts/* ./grails-app/assets/javascripts/
 
 RUN --mount=type=cache,target=/gradle-cache,ro \
-    gradle \
-        build assemble \
-        -x test -x integrationTest
+  gradle \
+  build assemble \
+  -x test -x integrationTest
 
 # Copy dependencies to shared read-only cache
 RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
-    rsync -a /home/gradle/.gradle/caches/modules-2 /gradle-cache \
-    && rm /gradle-cache/modules-2/*.lock && rm /gradle-cache/modules-2/gc.properties
+  rsync -a /home/gradle/.gradle/caches/modules-2 /gradle-cache \
+  && rm /gradle-cache/modules-2/*.lock && rm /gradle-cache/modules-2/gc.properties
 
 FROM amazoncorretto:11
 
@@ -49,7 +49,7 @@ RUN mkdir -p /opt/atlas/i18n \
   && ln -s /config/spatial-hub/i18n/override /var/opt/atlas/i18n/spatial-hub
 
 ARG VERSION=2.2.0-SNAPSHOT
-ARG COMMIT=df3923ef32530ff38d8a3b532f50d31a10e649b3
+ARG COMMIT=08b77bb5da6300847597ee1f83c8b2ec47698fd9
 LABEL ala.version=inbo-${VERSION}
 
 COPY --from=builder /project/build/libs/project-${VERSION}.war /spatial-hub.war
