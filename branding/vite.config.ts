@@ -1,5 +1,6 @@
 import { resolve } from "path";
 import handlebars from "vite-plugin-handlebars";
+import fs from "node:fs/promises";
 
 import { viteStaticCopy } from "vite-plugin-static-copy";
 import { generateMarkdownPages, loadNewsItems } from "./template-pages";
@@ -7,7 +8,7 @@ import { downloadSpeciesPluginTabAssets } from "./plugin-tabs-assets";
 import { console } from "node:inspector";
 
 import fg from "fast-glob";
-import { basename, dirname } from "node:path";
+import { basename, dirname, extname } from "node:path";
 import { createClient, defaultPlugins } from "@hey-api/openapi-ts";
 import type { PreRenderedChunk } from "rollup";
 
@@ -18,6 +19,22 @@ const replacements = {
 };
 
 const newsItems = await loadNewsItems();
+const newsCardsHtml = newsItems.length > 0
+    ? newsItems.map((item) =>
+        `<article class="news-card">
+                    <div class="news-card-body">
+                        <span class="news-card-date">${item.dateFormatted}</span>
+                        <h3 class="news-card-title"><a href="${item.url}">${item.title}</a></h3>
+                        <p class="news-card-excerpt">${item.excerpt}</p>
+                    </div>
+                </article>`,
+    ).join("\n                ")
+    : "<p>Geen nieuws beschikbaar.</p>";
+await fs.writeFile(
+    resolve(__dirname, "src/index/news-cards.html"),
+    newsCardsHtml,
+    "utf-8",
+);
 
 export default {
     root: resolve(__dirname, "src"),
@@ -176,18 +193,47 @@ export default {
                 },
             ],
         }),
+        // Workaround for vite-plugin-handlebars@1.5.0 Windows path separator bug:
+        // The plugin uses `replace(`${dir}/`, '')` with a hardcoded forward slash,
+        // which never strips the directory on Windows (backslash paths).
+        // Pre-registering partials with the correct names via the shared Handlebars
+        // instance ensures they are found when templates are compiled.
+        {
+            name: "register-handlebars-partials",
+            enforce: "pre",
+            async buildStart() {
+                const { default: Handlebars } = await import("handlebars");
+                const validExts = new Set([".html", ".hbs"]);
+                const partialDirs = [
+                    resolve(__dirname, "src/partials"),
+                    resolve(__dirname, "src/index"),
+                ];
+                for (const dir of partialDirs) {
+                    try {
+                        const entries = await fs.readdir(dir, { withFileTypes: true });
+                        for (const entry of entries) {
+                            if (!entry.isFile()) continue;
+                            const ext = extname(entry.name);
+                            if (!validExts.has(ext)) continue;
+                            const name = basename(entry.name, ext);
+                            const content = await fs.readFile(
+                                resolve(dir, entry.name),
+                                "utf-8",
+                            );
+                            Handlebars.registerPartial(name, content);
+                        }
+                    } catch {
+                        // Directory may not exist yet
+                    }
+                }
+            },
+        },
         // Allow using partials to construct html files similar to what the ala services do
         handlebars({
             partialDirectory: [
                 resolve(__dirname, "src/partials"),
                 resolve(__dirname, "src/index"),
             ],
-            context: (pagePath: string) => {
-                if (pagePath === "/index.html") {
-                    return { news: newsItems };
-                }
-                return {};
-            },
         }),
         // Perform tag replacement on non template html files to match the ala services AlaTagLib erplacements
         {
