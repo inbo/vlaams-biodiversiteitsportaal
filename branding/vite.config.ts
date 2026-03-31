@@ -2,7 +2,7 @@ import { resolve } from "path";
 import handlebars from "vite-plugin-handlebars";
 
 import { viteStaticCopy } from "vite-plugin-static-copy";
-import { generateMarkdownPages } from "./template-pages";
+import { generateMarkdownPages, loadNewsItems } from "./template-pages";
 import { downloadSpeciesPluginTabAssets } from "./plugin-tabs-assets";
 import { console } from "node:inspector";
 
@@ -16,6 +16,8 @@ const replacements = {
     loginURL: "replace-with-authui-onclick",
     logoutURL: "replace-with-authui-onclick",
 };
+
+const newsItems = await loadNewsItems();
 
 export default {
     root: resolve(__dirname, "src"),
@@ -180,6 +182,12 @@ export default {
                 resolve(__dirname, "src/partials"),
                 resolve(__dirname, "src/index"),
             ],
+            context: (pagePath: string) => {
+                if (pagePath === "/index.html") {
+                    return { news: newsItems };
+                }
+                return {};
+            },
         }),
         // Perform tag replacement on non template html files to match the ala services AlaTagLib erplacements
         {

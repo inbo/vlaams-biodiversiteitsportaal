@@ -5,6 +5,54 @@ import path, { basename } from "path";
 import fs from "fs/promises";
 import { parse } from "yaml";
 
+const MONTHS_NL = [
+    "januari", "februari", "maart", "april", "mei", "juni",
+    "juli", "augustus", "september", "oktober", "november", "december",
+];
+
+export interface NewsItem {
+    title: string;
+    date: string;
+    dateFormatted: string;
+    excerpt: string;
+    url: string;
+}
+
+export async function loadNewsItems(
+    globPattern = "./pages/news/*.md",
+): Promise<NewsItem[]> {
+    const files = await glob(globPattern);
+    const items: NewsItem[] = [];
+
+    for (const file of files) {
+        let frontMatter: Record<string, string> = {};
+        const md = markdownit({ html: true }).use(
+            markdowItFrontMatter,
+            (fm) => { frontMatter = parse(fm); },
+        );
+        const content = await fs.readFile(file, "utf-8");
+        md.render(content);
+
+        const slug = basename(file).replace(/\.md$/, "");
+        const dateStr = frontMatter.date ?? "";
+        let dateFormatted = dateStr;
+        if (dateStr) {
+            const [year, month, day] = dateStr.split("-").map(Number);
+            dateFormatted = `${day} ${MONTHS_NL[month - 1]} ${year}`;
+        }
+
+        items.push({
+            title: frontMatter.title ?? "",
+            date: dateStr,
+            dateFormatted,
+            excerpt: frontMatter.excerpt ?? "",
+            url: frontMatter.url ?? `/pages/${slug}.html`,
+        });
+    }
+
+    return items.sort((a, b) => b.date.localeCompare(a.date));
+}
+
 export async function generateMarkdownPages(
     {
         globPattern = "./pages/**/*",

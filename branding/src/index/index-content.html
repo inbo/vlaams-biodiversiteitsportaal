@@ -82,6 +82,24 @@
             </div>
         </div>
     </div>
+    <!-- news section -->
+    <div class="news-section">
+        <div class="container-md">
+            <h2 class="news-section-title" data-i18n="index.news.title">Nieuws</h2>
+            <div class="news-grid" id="news-grid">
+                {{#each news}}
+                <article class="news-card">
+                    <div class="news-card-body">
+                        <span class="news-card-date">{{this.dateFormatted}}</span>
+                        <h3 class="news-card-title"><a href="{{this.url}}">{{this.title}}</a></h3>
+                        <p class="news-card-excerpt">{{this.excerpt}}</p>
+                    </div>
+                </article>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+
     <div class="index-footer">
         <div class="container">
             <div class="col-md-6 contact-block">

@@ -204,6 +204,77 @@ ul.data-summary-links {
     background-repeat: no-repeat;
 }
 
+.news-section {
+    padding: 40px 0;
+    background-color: #f5f5f5;
+    border-bottom: 2px solid $inbo-primary;
+}
+
+.news-section-title {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #0d0d0d;
+    margin-bottom: 24px;
+    font-size: 22px;
+}
+
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+}
+
+.news-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-top: 4px solid $inbo-primary;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.2s ease;
+
+    &:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    }
+}
+
+.news-card-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.news-card-date {
+    font-size: 0.85em;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.news-card-title {
+    font-size: 1em;
+    font-weight: bold;
+    margin-bottom: 12px;
+    line-height: 1.4;
+
+    a {
+        color: $inbo-primary;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+            color: $inbo-secondary;
+        }
+    }
+}
+
+.news-card-excerpt {
+    font-size: 0.9em;
+    color: #444;
+    line-height: 1.6;
+    flex: 1;
+}
+
 .index-footer {
     padding-top: 40px;
     padding-bottom: 20px;
