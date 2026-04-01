@@ -3,7 +3,7 @@ import handlebars from "vite-plugin-handlebars";
 import fs from "node:fs/promises";
 
 import { viteStaticCopy } from "vite-plugin-static-copy";
-import { generateMarkdownPages, loadNewsItems } from "./template-pages";
+import { generateMarkdownPages, loadNewsItems, fetchRandomNewsBackground } from "./template-pages";
 import { downloadSpeciesPluginTabAssets } from "./plugin-tabs-assets";
 import { console } from "node:inspector";
 
@@ -18,8 +18,7 @@ const replacements = {
     logoutURL: "replace-with-authui-onclick",
 };
 
-const NEWS_BG_IMAGE_ID = "ed41f341-5f2d-4649-a70a-5b23570dacf9";
-const NEWS_BG_IMAGE_URL = `https://natuurdata.inbo.be/image-service/image/${NEWS_BG_IMAGE_ID}/large`;
+const NEWS_BG_IMAGE_URL = await fetchRandomNewsBackground("dr1");
 
 const newsItems = await loadNewsItems();
 const newsCardsHtml = newsItems.length > 0

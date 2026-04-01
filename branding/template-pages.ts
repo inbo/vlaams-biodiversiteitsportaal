@@ -57,6 +57,36 @@ export async function loadNewsItems(
     return items.sort((a, b) => b.date.localeCompare(a.date));
 }
 
+export async function fetchRandomNewsBackground(
+    listId = "dr1",
+): Promise<string> {
+    try {
+        const response = await fetch(
+            `https://natuurdata.inbo.be/species-list/ws/speciesListItems/${listId}?includeKVP=true`,
+        );
+        const items: any[] = await response.json();
+
+        const urls: string[] = [];
+        for (const item of items) {
+            for (const { key, value } of item.kvpValues ?? []) {
+                if (key?.toLowerCase() === "imageurl" && value) {
+                    urls.push(value);
+                } else if (key?.toLowerCase() === "imageid" && value) {
+                    urls.push(
+                        `https://natuurdata.inbo.be/image-service/image/${value}/large`,
+                    );
+                }
+            }
+        }
+
+        if (urls.length === 0) return "";
+        return urls[Math.floor(Math.random() * urls.length)];
+    } catch (e) {
+        console.warn("Could not fetch news background image:", e);
+        return "";
+    }
+}
+
 export async function generateMarkdownPages(
     {
         globPattern = "./pages/**/*",
