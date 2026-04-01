@@ -193,16 +193,24 @@ export default {
                 },
             ],
         }),
-        // Workaround for vite-plugin-handlebars@1.5.0 Windows path separator bug:
-        // The plugin uses `replace(`${dir}/`, '')` with a hardcoded forward slash,
-        // which never strips the directory on Windows (backslash paths).
-        // Pre-registering partials with the correct names via the shared Handlebars
-        // instance ensures they are found when templates are compiled.
+        // Workaround for vite-plugin-handlebars@1.5.0 Windows path separator bugs:
+        // 1. Partial registration uses `replace(`${dir}/`, '')` with a hardcoded forward
+        //    slash which never matches Windows backslash paths, so partials get registered
+        //    under their full path instead of short name.
+        // 2. The `resolve-from-root` helper emits absolute Windows paths (C:\...) which
+        //    Rollup cannot resolve as module imports.
+        // Both are fixed by pre-registering partials and overriding the helper here,
+        // using the shared Handlebars instance (Node.js CJS module cache).
         {
             name: "register-handlebars-partials",
             enforce: "pre",
             async buildStart() {
                 const { default: Handlebars } = await import("handlebars");
+                // Override to emit root-relative URLs (/auth/auth.ts) instead of
+                // absolute Windows filesystem paths that Rollup cannot resolve.
+                Handlebars.registerHelper("resolve-from-root", function (filePath: string) {
+                    return "/" + filePath;
+                });
                 const validExts = new Set([".html", ".hbs"]);
                 const partialDirs = [
                     resolve(__dirname, "src/partials"),
