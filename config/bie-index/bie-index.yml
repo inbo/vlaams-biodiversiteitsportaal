@@ -236,3 +236,7 @@ environments:
       config: file:///config/bie-index/envs/local/wiki-lists.json
     import:
       favouritesConfigUrl: file:///config/bie-index/envs/local/favourites.json
+
+species:
+  groups:
+    location: file:///config/bie-index/groups.json

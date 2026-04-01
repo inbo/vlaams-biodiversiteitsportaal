@@ -1,0 +1,325 @@
+[
+  {
+    "name": "Animals",
+    "rank": "kingdom",
+    "included": [
+      "Animalia"
+    ],
+    "excluded": []
+  },
+  {
+    "name": "Mammals",
+    "rank": "classs",
+    "included": [
+      "Mammalia"
+    ],
+    "excluded": [],
+    "parent": "Animals"
+  },
+  {
+    "name": "Birds",
+    "rank": "classs",
+    "included": [
+      "Aves"
+    ],
+    "excluded": [],
+    "parent": "Animals"
+  },
+  {
+    "name": "Reptiles",
+    "rank": "classs",
+    "included": [
+      "Testudines",
+      "Crocodylia",
+      "Sphenodontia",
+      "Squamata"
+    ],
+    "excluded": [],
+    "parent": "Animals"
+  },
+  {
+    "name": "Amphibians",
+    "rank": "classs",
+    "included": [
+      "Amphibia"
+    ],
+    "excluded": [],
+    "parent": "Animals"
+  },
+  {
+    "name": "Former Fishes",
+    "rank": "classs",
+    "included": [
+      "Coelacanthi",
+      "Dipneusti",
+      "Elasmobranchii",
+      "Holocephali",
+      "Myxini",
+      "Petromyzonti"
+    ],
+    "excluded": [],
+    "parent": "Animals"
+  },
+  {
+     "name": "Fish",
+     "rank": "order",
+     "included": [
+        "MYXINIFORMES",
+        "CARCHARHINIFORMES",
+        "HETERODONTIFORMES",
+        "HEXANCHIFORMES",
+        "LAMNIFORMES",
+        "MYLIOBATIFORMES",
+        "ORECTOLOBIFORMES",
+        "PRISTIFORMES",
+        "PRISTIOPHORIFORMES",
+        "RAJIFORMES",
+        "RHINOBATIFORMES",
+        "SQUALIFORMES",
+        "SQUATINIFORMES",
+        "TORPEDINIFORMES",
+        "CHIMAERIFORMES",
+        "CERATODONTIFORMES",
+        "CLUPEIFORMES",
+        "ALBULIFORMES",
+        "ANGUILLIFORMES",
+        "ELOPIFORMES",
+        "NOTACANTHIFORMES",
+        "SACCOPHARYNGIFORMES",
+        "ATHERINIFORMES",
+        "BELONIFORMES",
+        "BERYCIFORMES",
+        "CYPRINODONTIFORMES",
+        "GASTEROSTEIFORMES",
+        "MUGILIFORMES",
+        "PERCIFORMES",
+        "PLEURONECTIFORMES",
+        "SCORPAENIFORMES",
+        "STEPHANOBERYCIFORMES",
+        "SYNBRANCHIFORMES",
+        "TETRAODONTIFORMES",
+        "ZEIFORMES",
+        "AULOPIFORMES",
+        "LAMPRIDIFORMES",
+        "CYPRINIFORMES",
+        "GONORHYNCHIFORMES",
+        "SILURIFORMES",
+        "BATRACHOIDIFORMES",
+        "GADIFORMES",
+        "LOPHIIFORMES",
+        "OPHIDIIFORMES",
+        "POLYMIXIIFORMES",
+        "ARGENTINIFORMES",
+        "SALMONIFORMES",
+        "MYCTOPHIFORMES",
+        "ATELEOPODIFORMES",
+        "STOMIIFORMES",
+        "OSTEOGLOSSIFORMES",
+        "Acipenseriformes"
+        ],
+    "excluded": [],
+    "parent": "Animals"
+  },
+  {
+    "name": "Molluscs",
+    "rank": "phylum",
+    "included": [
+      "Mollusca"
+    ],
+    "excluded": [],
+    "parent": "Animals"
+  },
+  {
+    "name": "Arthropods",
+    "rank": "phylum",
+    "included": [
+      "Arthropoda"
+    ],
+    "excluded": [],
+    "parent": "Animals"
+  },
+  {
+    "name": "Crustaceans",
+    "rank": "classs",
+    "included": [
+      "Branchiopoda",
+      "Remipedia",
+      "Maxillopoda",
+      "Ostracoda",
+      "Malacostraca"
+    ],
+    "excluded": [],
+    "parent": "Arthropods"
+  },
+  {
+    "name": "Insects",
+    "rank": "classs",
+    "included": [
+      "Insecta"
+    ],
+    "excluded": [],
+    "parent": "Arthropods"
+  },
+  {
+  "name": "MacroInvertebrates",
+  "rank": "family",
+  "included": [
+    "Acroloxidae", "Aeshnidae", "Ameletidae", "Ampharetidae", "Ancylidae", 
+    "Anisitsiellidae", "Aphelocheiridae", "Argulidae", "Arrenuridae", "Asellidae", 
+    "Astacidae", "Athericidae", "Athienemanniidae", "Aturidae", "Atyidae", 
+    "Baetidae", "Beraeidae", "Bithyniidae", "Blephariceridae", "Brachycentridae", 
+    "Branchiobdellidae", "Caenidae", "Calopterygidae", "Cambaridae", "Ceratopogonidae", 
+    "Chaoboridae", "Chirocephalidae", "Chironomidae", "Chloroperlidae", "Coenagrionidae", 
+    "Corbiculidae", "Cordulegastridae", "Corduliidae", "Corixidae", "Corophiidae", 
+    "Crangonyctidae", "Culicidae", "Cylindrotomidae", "Dendrocoelidae", "Dixidae", 
+    "Dolichopodidae", "Dreissenidae", "Dryopidae", "Dugesiidae", "Dytiscidae", 
+    "Ecnomidae", "Elmidae", "Empididae", "Enchytraeidae", "Ephemerellidae", 
+    "Ephemeridae", "Ephydridae", "Erpobdellidae", "Eylaidae", "Feltriidae", 
+    "Gammaridae", "Gerridae", "Glossiphoniidae", "Glossosomatidae", "Goeridae", 
+    "Gomphidae", "Gyrinidae", "Haemopidae", "Haliplidae", "Haplotaxidae", 
+    "Hebridae", "Heptageniidae", "Hirudinidae", "Hydrachnidae", "Hydraenidae", 
+    "Hydrobiidae", "Hydrodromidae", "Hydrometridae", "Hydrophilidae", "Hydropsychidae", 
+    "Hydroptilidae", "Hydryphantidae", "Hygrobatiidae", "Hygrobiidae", "Janiridae", 
+    "Lebertiidae", "Lepidostomatidae", "Leptestheriidae", "Leptoceridae", "Leptophlebiidae", 
+    "Lestidae", "Leuctridae", "Libellulidae", "Limnadiidae", "Limnephilidae", 
+    "Limnesiidae", "Limoniidae", "Lithoglyphidae", "Lumbricidae", "Lumbriculidae", 
+    "Lymnaeidae", "Mactridae", "Margaritiferidae", "Mesoveliidae", "Micronectidae", 
+    "Mideidae", "Mideopsidae", "Molannidae", "Muscidae", "Mysidae", 
+    "Naididae", "Naucoridae", "Nemouridae", "Nepidae", "Noteridae", 
+    "Notonectidae", "Odontoceridae", "Oligoneuriidae", "Osmylidae", "Oxidae", 
+    "Palaemonidae", "Panopeidae", "Perlidae", "Perlodidae", "Philopotamidae", 
+    "Phryganeidae", "Physidae", "Piersigiidae", "Pionidae", "Piscicolidae", 
+    "Planariidae", "Planorbidae", "Platycnemididae", "Pleidae", "Polycentropodidae", 
+    "Polymitarcyidae", "Potamanthidae", "Psephenidae", "Psychodidae", "Psychomyiidae", 
+    "Ptychopteridae", "Rhagionidae", "Rhyacophilidae", "Sabellidae", "Salifidae", 
+    "Scathophagidae", "Sciomyzidae", "Scirtidae", "Sericostomatidae", "Sialidae", 
+    "Simuliidae", "Siphlonuridae", "Sisyridae", "Sperchontidae", "Sphaeriidae", 
+    "Sphaeromatidae", "Stratiomyidae", "Syrphidae", "Tabanidae", "Taeniopterygidae", 
+    "Talitridae", "Tanaidae", "Teutoniidae", "Thaumaleidae", "Tipulidae", 
+    "Torrenticolidae", "Triopsidae", "Tubificidae", "Unionicolidae", "Unionidae", 
+    "Valvatidae", "Varunidae", "Veliidae", "Viviparidae", "Wettinidae"
+  ],
+  "excluded": [],
+  "parent": "Animals"
+},
+  {
+    "name": "Plants",
+    "rank": "kingdom",
+    "included": [
+      "Plantae"
+    ],
+    "excluded": []
+  },
+  {
+    "name": "Bryophytes",
+    "rank": "phylum",
+    "included": [
+      "Bryophyta",
+      "Marchantiophyta",
+      "Anthocerotophyta"
+    ],
+    "excluded": [],
+    "parent": "Plants"
+  },
+  {
+    "name": "Gymnosperms",
+    "rank": "classs",
+    "included": [
+      "Pinopsida",
+      "Cycadopsida"
+    ],
+    "excluded": [],
+    "parent": "Plants"
+  },
+  {
+    "name": "ferns",
+    "rank": "phylum",
+    "included": [
+      "Equisetophyta",
+      "Lycopodiophyta",
+      "Polypodiophyta",
+      "Psilophyta"
+    ],
+    "excluded": [],
+    "parent": "Plants"
+  },
+  {
+    "name": "Angiosperms",
+    "rank": "phylum",
+    "included": [
+      "Magnoliophyta"
+    ],
+    "excluded": [],
+    "parent": "Plants"
+  },
+  {
+    "name": "Monocots",
+    "rank": "class",
+    "included": [
+      "Liliopsida"
+    ],
+    "excluded": [],
+    "parent": "Angiosperms"
+  },
+  {
+    "name": "Dicots",
+    "rank": "classs",
+    "included": [
+      "Eudicotidae",
+      "Eudicotyledonae",
+      "Eudicotyledons"
+    ],
+    "excluded": [
+      "Liliopsida"
+    ],
+    "parent": "Angiosperms"
+  },
+  {
+    "name": "Fungi",
+    "rank": "kingdom",
+    "included": [
+      "Fungi"
+    ],
+    "excluded": []
+  },
+  {
+    "name": "Chromista",
+    "rank": "kingdom",
+    "included": [
+      "Chromista"
+    ],
+    "excluded": []
+  },
+  {
+    "name": "Protozoa",
+    "rank": "kingdom",
+    "included": [
+      "Protozoa"
+    ],
+    "excluded": []
+  },
+  {
+    "name": "Bacteria",
+    "rank": "kingdom",
+    "included": [
+      "Bacteria"
+    ],
+    "excluded": []
+  },
+  {
+    "name": "Algae",
+    "rank": "phylum",
+    "included": [
+      "Bacillariophyta",
+      "Chlorophyta",
+      "Prasinophyta",
+      "Rhodophyta",
+      "Cryptophyta",
+      "Ochrophyta",
+      "Cercozoa",
+      "Euglenozoa",
+      "Cyanobacteria"
+    ],
+    "excluded": []
+  }
+]
