@@ -6,114 +6,54 @@ import fs from "fs/promises";
 import { parse } from "yaml";
 
 const MONTHS_NL = [
-    "januari", "februari", "maart", "april", "mei", "juni",
-    "juli", "augustus", "september", "oktober", "november", "december",
+    "januari",
+    "februari",
+    "maart",
+    "april",
+    "mei",
+    "juni",
+    "juli",
+    "augustus",
+    "september",
+    "oktober",
+    "november",
+    "december",
 ];
 
-export interface NewsItem {
-    title: string;
-    date: string;
-    dateFormatted: string;
-    excerpt: string;
-    url: string;
-    imageUrl: string;
-}
-
-export async function loadNewsItems(
-    globPattern = "./pages/news/*.md",
-): Promise<NewsItem[]> {
-    const files = await glob(globPattern);
-    const items: NewsItem[] = [];
-
-    for (const file of files) {
-        let frontMatter: Record<string, string> = {};
-        const md = markdownit({ html: true }).use(
-            markdowItFrontMatter,
-            (fm) => { frontMatter = parse(fm); },
-        );
-        const content = await fs.readFile(file, "utf-8");
-        md.render(content);
-
-        const slug = basename(file).replace(/\.md$/, "");
-        const dateStr = frontMatter.date ?? "";
-        let dateFormatted = dateStr;
-        if (dateStr) {
-            const [year, month, day] = dateStr.split("-").map(Number);
-            dateFormatted = `${day} ${MONTHS_NL[month - 1]} ${year}`;
-        }
-
-        items.push({
-            title: frontMatter.title ?? "",
-            date: dateStr,
-            dateFormatted,
-            excerpt: frontMatter.excerpt ?? "",
-            url: frontMatter.url ?? `/pages/${slug}.html`,
-            imageUrl: frontMatter.imageId
-                ? `https://natuurdata.inbo.be/image-service/image/${frontMatter.imageId}/large`
-                : "",
-        });
+export function formatDate(dateString?: string) {
+    if (dateString) {
+        const date = new Date(dateString);
+        return `${date.getDate()} <span class="news-date" data-i18n="${MONTHS_NL[date.getMonth()]}">${MONTHS_NL[date.getMonth()]}</span> ${date.getFullYear()}`;
     }
 
-    return items.sort((a, b) => b.date.localeCompare(a.date));
+    return "";
 }
 
-export async function fetchRandomNewsBackground(
-    listId = "dr1",
-): Promise<string> {
-    try {
-        const response = await fetch(
-            `https://natuurdata.inbo.be/species-list/ws/speciesListItems/${listId}?includeKVP=true`,
-        );
-        const items: any[] = await response.json();
-
-        const urls: string[] = [];
-        for (const item of items) {
-            for (const { key, value } of item.kvpValues ?? []) {
-                if (key?.toLowerCase() === "imageurl" && value) {
-                    urls.push(value);
-                } else if (key?.toLowerCase() === "imageid" && value) {
-                    urls.push(
-                        `https://natuurdata.inbo.be/image-service/image/${value}/large`,
-                    );
-                }
-            }
-        }
-
-        if (urls.length === 0) return "";
-        return urls[Math.floor(Math.random() * urls.length)];
-    } catch (e) {
-        console.warn("Could not fetch news background image:", e);
-        return "";
-    }
-}
-
-export async function generateMarkdownPages(
-    {
-        globPattern = "./pages/**/*",
-        template = "src/pages/pages-layout.html",
-        templateTitleString = "{{{title}}}",
-        templateDescriptionString = "{{{description}}}",
-        templateContentString = "{{{content}}}",
-        outputFolder = "./src/pages",
-    }: {
-        globPattern?: string;
-        template?: string;
-        templateTitleString?: string;
-        templateDescriptionString?: string;
-        templateContentString?: string;
-        outputFolder?: string;
-    },
-): Promise<Map<string, string>> {
+export async function generateMarkdownPages({
+    globPattern = "./pages/**/*",
+    template = "src/pages/pages-layout.html",
+    templateTitleString = "{{{title}}}",
+    templateDescriptionString = "{{{description}}}",
+    templateContentString = "{{{content}}}",
+    templateDateString = "{{{date}}}",
+    outputFolder = "./src/pages",
+}: {
+    globPattern?: string;
+    template?: string;
+    templateTitleString?: string;
+    templateDescriptionString?: string;
+    templateContentString?: string;
+    templateDateString?: string;
+    outputFolder?: string;
+}): Promise<Map<string, string>> {
     await cleanupOutputFolder(outputFolder);
 
     const markdownFiles = await glob(globPattern);
 
     let metaData = {};
-    const md = markdownit(
-        {
-            html: true,
-        },
-    ).use(markdowItFrontMatter, (frontMatter) => {
+    const md = markdownit({
+        html: true,
+    }).use(markdowItFrontMatter, (frontMatter: any) => {
         metaData = parse(frontMatter);
     });
 
@@ -126,16 +66,11 @@ export async function generateMarkdownPages(
             fileContent = md.render(fileContent);
         }
 
-        const output = templateFile.replace(
-            templateTitleString,
-            metaData.title,
-        ).replace(
-            templateDescriptionString,
-            metaData.description,
-        ).replace(
-            templateContentString,
-            fileContent,
-        );
+        const output = templateFile
+            .replaceAll(templateTitleString, metaData.title)
+            .replaceAll(templateDescriptionString, metaData.description)
+            .replaceAll(templateDateString, formatDate(metaData.date))
+            .replaceAll(templateContentString, fileContent);
 
         const fileBasename = basename(file)
             .replace(/\.md$/, "")
@@ -149,9 +84,7 @@ export async function generateMarkdownPages(
     return result;
 }
 
-async function cleanupOutputFolder(
-    outputFolder: string,
-): Promise<void> {
+async function cleanupOutputFolder(outputFolder: string): Promise<void> {
     // Get the files as an array
 
     await fs.mkdir(outputFolder, { recursive: true });

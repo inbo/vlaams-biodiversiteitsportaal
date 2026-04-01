@@ -1,8 +1,10 @@
 ---
-title: "Doe mee"
-description: "Een overzicht van de citizen science initiatieven van het Vlaams Biodiversiteitsportaal en INBO."
+title: "Doe mee met het Vlaams Biodiversiteitsportaal"
+description:
+    "Een overzicht van de citizen science initiatieven van het Vlaams
+    Biodiversiteitsportaal en INBO."
 ---
-<h2>Doe mee met het Vlaams Biodiversiteitsportaal</h2>
+
 <h3>Ontdek en bescherm de biodiversiteit in Vlaanderen!</h3>
 <p>Het Vlaams Biodiversiteitsportaal is dé plek waar kennis over natuur in Vlaanderen samenkomt. Dit platform bundelt
   waarnemingen van alles wat leeft (planten, dieren, schimmels...) en helpt onderzoekers, beleidsmakers en
@@ -65,12 +67,10 @@ description: "Een overzicht van de citizen science initiatieven van het Vlaams B
   </div>
 </div>
 
-
 <h3>
   Andere citizen science initiatieven!
 </h3>
 <div class="vbp-doemee-initiatieven vbp-doemee-projecten">
-
 
   <div class="vbp-doemee-initiatieven-item">
     <h3><a href="https://www.inaturalist.org" target="_blank">iNaturalist</a></h3>
@@ -112,7 +112,6 @@ description: "Een overzicht van de citizen science initiatieven van het Vlaams B
 </h3>
 <div class="vbp-doemee-initiatieven vbp-doemee-projecten">
 
-
 <div class="vbp-doemee-initiatieven-item">
   <h3><a href="https://www.gbif.org" target="_blank">GBIF</a></h3>
   <p>
@@ -140,9 +139,9 @@ description: "Een overzicht van de citizen science initiatieven van het Vlaams B
   </div>
 </div>
 
-
 <p>
   Iedereen kan meedoen! Of je nu een beginnende natuurliefhebber bent of een doorgewinterde expert, jouw
   waarnemingen
   zijn waardevol. Doe mee en help mee bouwen aan kennis over de natuur!
 </p>
+

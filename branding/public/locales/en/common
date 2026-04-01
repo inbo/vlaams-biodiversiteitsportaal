@@ -102,5 +102,17 @@
   "my-profile.alerts": "My notifications",
   "my-profile.alerts-description": "Update your notification settings for emails you receive from the FBP.",
   "my-profile.spatial-analysis": "My analysis",
-  "my-profile.spatial-analysis-description": "Tabulate and graph all features you've used in the Spatial Portal."
+  "my-profile.spatial-analysis-description": "Tabulate and graph all features you've used in the Spatial Portal.",
+  "januari": "January",
+  "februari": "February",
+  "maart": "March",
+  "april": "April",
+  "mei": "May",
+  "juni": "June",
+  "juli": "July",
+  "augustus": "August",
+  "september": "September",
+  "oktober": "October",
+  "november": "November",
+  "december": "December"
 }

@@ -3,7 +3,7 @@ import handlebars from "vite-plugin-handlebars";
 import fs from "node:fs/promises";
 
 import { viteStaticCopy } from "vite-plugin-static-copy";
-import { generateMarkdownPages, loadNewsItems, fetchRandomNewsBackground } from "./template-pages";
+import { generateMarkdownPages } from "./template-pages";
 import { downloadSpeciesPluginTabAssets } from "./plugin-tabs-assets";
 import { console } from "node:inspector";
 
@@ -11,37 +11,13 @@ import fg from "fast-glob";
 import { basename, dirname, extname } from "node:path";
 import { createClient, defaultPlugins } from "@hey-api/openapi-ts";
 import type { PreRenderedChunk } from "rollup";
+import { generateNewsPartial } from "./template-news";
 
 const replacements = {
     loginStatus: "login-status-dependent",
     loginURL: "replace-with-authui-onclick",
     logoutURL: "replace-with-authui-onclick",
 };
-
-const NEWS_BG_IMAGE_URL = await fetchRandomNewsBackground("dr1");
-
-const newsItems = await loadNewsItems();
-const newsCardsHtml = newsItems.length > 0
-    ? newsItems.map((item) =>
-        `<article class="news-card">
-                    <div class="news-card-body">
-                        <span class="news-card-date">${item.dateFormatted}</span>
-                        <h3 class="news-card-title"><a href="${item.url}">${item.title}</a></h3>
-                        <p class="news-card-excerpt">${item.excerpt}</p>
-                    </div>
-                </article>`,
-    ).join("\n                ")
-    : "<p>Geen nieuws beschikbaar.</p>";
-await fs.writeFile(
-    resolve(__dirname, "src/index/news-cards.html"),
-    newsCardsHtml,
-    "utf-8",
-);
-await fs.writeFile(
-    resolve(__dirname, "src/index/news-section-bg.html"),
-    `<style>.news-section { background-image: url('${NEWS_BG_IMAGE_URL}'); }</style>`,
-    "utf-8",
-);
 
 export default {
     root: resolve(__dirname, "src"),
@@ -61,14 +37,8 @@ export default {
                     __dirname,
                     "./src/auth/service-worker.ts",
                 ),
-                "user-profile": resolve(
-                    __dirname,
-                    "./src/my-profile.html",
-                ),
-                "bootstrap": resolve(
-                    __dirname,
-                    "./src/portal/bootstrap.scss",
-                ),
+                "user-profile": resolve(__dirname, "./src/my-profile.html"),
+                bootstrap: resolve(__dirname, "./src/portal/bootstrap.scss"),
                 "bootstrap-theme": resolve(
                     __dirname,
                     "./src/portal/ala/bootstrap-theme.css",
@@ -81,15 +51,12 @@ export default {
                     __dirname,
                     "./src/portal/ala/ala-styles.css",
                 ),
-                "application": resolve(
+                application: resolve(
                     __dirname,
                     "src/portal/ala/application.js",
                 ),
                 // To allow inclusion in spatial portal
-                "auth": resolve(
-                    __dirname,
-                    "src/auth/auth.ts",
-                ),
+                auth: resolve(__dirname, "src/auth/auth.ts"),
                 ...(await generateMarkdownPages({
                     globPattern: "./pages/**/*",
                     template: "src/pages/pages-layout.html",
@@ -130,14 +97,18 @@ export default {
 
                         return `css/${name.replace(/\.css$/, ".min.css")}`;
                     } else if (
-                        name.endsWith(".woff") || name.endsWith(".woff2") ||
-                        name.endsWith(".ttf") || name.endsWith(".eot") ||
+                        name.endsWith(".woff") ||
+                        name.endsWith(".woff2") ||
+                        name.endsWith(".ttf") ||
+                        name.endsWith(".eot") ||
                         originalFileName.includes("fonts/bootstrap")
                     ) {
                         return `fonts/${name}`;
                     } else if (
-                        name.endsWith(".jpg") || name.endsWith(".webp") ||
-                        name.endsWith(".png") || name.endsWith(".svg")
+                        name.endsWith(".jpg") ||
+                        name.endsWith(".webp") ||
+                        name.endsWith(".png") ||
+                        name.endsWith(".svg")
                     ) {
                         return `images/${name}`;
                     } else if (name.endsWith(".js")) {
@@ -171,8 +142,7 @@ export default {
                         const serviceName = basename(schema, ".yml");
                         await createClient({
                             input: schema,
-                            output:
-                                `./src/common/clients/.generated/${serviceName}`,
+                            output: `./src/common/clients/.generated/${serviceName}`,
                             plugins: [
                                 ...defaultPlugins,
                                 "@hey-api/client-fetch",
@@ -200,6 +170,13 @@ export default {
                 },
             ],
         }),
+        {
+            name: "generate-news-items-partial",
+            enforce: "pre",
+            async buildStart() {
+                generateNewsPartial();
+            },
+        },
         // Workaround for vite-plugin-handlebars@1.5.0 Windows path separator bugs:
         // 1. Partial registration uses `replace(`${dir}/`, '')` with a hardcoded forward
         //    slash which never matches Windows backslash paths, so partials get registered
@@ -215,9 +192,12 @@ export default {
                 const { default: Handlebars } = await import("handlebars");
                 // Override to emit root-relative URLs (/auth/auth.ts) instead of
                 // absolute Windows filesystem paths that Rollup cannot resolve.
-                Handlebars.registerHelper("resolve-from-root", function (filePath: string) {
-                    return "/" + filePath;
-                });
+                Handlebars.registerHelper(
+                    "resolve-from-root",
+                    function (filePath: string) {
+                        return "/" + filePath;
+                    },
+                );
                 const validExts = new Set([".html", ".hbs"]);
                 const partialDirs = [
                     resolve(__dirname, "src/partials"),
@@ -225,7 +205,9 @@ export default {
                 ];
                 for (const dir of partialDirs) {
                     try {
-                        const entries = await fs.readdir(dir, { withFileTypes: true });
+                        const entries = await fs.readdir(dir, {
+                            withFileTypes: true,
+                        });
                         for (const entry of entries) {
                             if (!entry.isFile()) continue;
                             const ext = extname(entry.name);

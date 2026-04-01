@@ -1,17 +1,22 @@
 ---
-title: "Handleiding"
-description: "Een beknopte handleiding voor het gebruik van het Vlaams Biodiversiteitsportaal"
+title: "Beknopte Handleiding voor het Vlaams Biodiversiteitsportaal"
+description:
+    "Een beknopte handleiding voor het gebruik van het Vlaams
+    Biodiversiteitsportaal"
 ---
 
-*Het Vlaams Biodiversiteitsportaal streeft ernaar om gegevens van de hoogste kwaliteit aan te leveren. Ondanks onze zorgvuldige validatie- en kwaliteitsprocedures kunnen in elke databank onvermijdelijk fouten of onnauwkeurigheden voorkomen. Gebruikers worden daarom verzocht om de beschikbare data steeds met de nodige aandacht en kritische beoordeling te interpreteren. Het portaal kan niet aansprakelijk worden gesteld voor eventuele gevolgen van het gebruik van deze informatie.*
-
-
-## Beknopte Handleiding voor het Vlaams Biodiversiteitsportaal
+_Het Vlaams Biodiversiteitsportaal streeft ernaar om gegevens van de hoogste
+kwaliteit aan te leveren. Ondanks onze zorgvuldige validatie- en
+kwaliteitsprocedures kunnen in elke databank onvermijdelijk fouten of
+onnauwkeurigheden voorkomen. Gebruikers worden daarom verzocht om de beschikbare
+data steeds met de nodige aandacht en kritische beoordeling te interpreteren.
+Het portaal kan niet aansprakelijk worden gesteld voor eventuele gevolgen van
+het gebruik van deze informatie._
 
 ### 1\. Toegang tot het Portaal
 
-Uitleg mbt. gebruikersrechten en hoe in te loggen: [Toegang](/pages/toegang.html)
-
+Uitleg mbt. gebruikersrechten en hoe in te loggen:
+[Toegang](/pages/toegang.html)
 
 ### Navigatie
 
@@ -49,11 +54,13 @@ Bekijk afbeeldingen die gekoppeld zijn aan soorten.
 
 Gebruik de geavanceerde zoekfunctie en stel voorkeuren in.
 
-![Zoekfunctie](/images/pages/Afbeelding13.png) 
+![Zoekfunctie](/images/pages/Afbeelding13.png)
 ![Geografische analyse](/images/pages/Afbeelding14.png)
 
-We nodigen u uit om het portaal te verkennen en feedback te geven via de [GitHub Issue Tracker](https://github.com/inbo/vlaams-biodiversiteitsportaal/issues).
+We nodigen u uit om het portaal te verkennen en feedback te geven via de
+[GitHub Issue Tracker](https://github.com/inbo/vlaams-biodiversiteitsportaal/issues).
 
 Vriendelijke groet,
 
 Het Vlaams Biodiversiteitsportaal Team
+
