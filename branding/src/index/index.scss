@@ -205,7 +205,7 @@ ul.data-summary-links {
 }
 
 .news-section {
-    padding: 40px 0;
+    padding: 40px 15px;
     border-bottom: 2px solid $inbo-primary;
     background-size: cover;
     background-position: center;
@@ -216,7 +216,7 @@ ul.data-summary-links {
         content: "";
         position: absolute;
         inset: 0;
-        background-color: rgba(245, 245, 245, 0.90);
+        background-color: rgba(20, 20, 20, 0.65);
         pointer-events: none;
     }
 
@@ -228,7 +228,7 @@ ul.data-summary-links {
 .news-section-title {
     text-transform: uppercase;
     font-weight: bold;
-    color: #0d0d0d;
+    color: white;
     margin-bottom: 24px;
     font-size: 22px;
 }
