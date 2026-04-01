@@ -18,6 +18,9 @@ const replacements = {
     logoutURL: "replace-with-authui-onclick",
 };
 
+const NEWS_BG_IMAGE_ID = "ed41f341-5f2d-4649-a70a-5b23570dacf9";
+const NEWS_BG_IMAGE_URL = `https://natuurdata.inbo.be/image-service/image/${NEWS_BG_IMAGE_ID}/large`;
+
 const newsItems = await loadNewsItems();
 const newsCardsHtml = newsItems.length > 0
     ? newsItems.map((item) =>
@@ -33,6 +36,11 @@ const newsCardsHtml = newsItems.length > 0
 await fs.writeFile(
     resolve(__dirname, "src/index/news-cards.html"),
     newsCardsHtml,
+    "utf-8",
+);
+await fs.writeFile(
+    resolve(__dirname, "src/index/news-section-bg.html"),
+    `<style>.news-section { background-image: url('${NEWS_BG_IMAGE_URL}'); }</style>`,
     "utf-8",
 );
 

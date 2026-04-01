@@ -16,6 +16,7 @@ export interface NewsItem {
     dateFormatted: string;
     excerpt: string;
     url: string;
+    imageUrl: string;
 }
 
 export async function loadNewsItems(
@@ -47,6 +48,9 @@ export async function loadNewsItems(
             dateFormatted,
             excerpt: frontMatter.excerpt ?? "",
             url: frontMatter.url ?? `/pages/${slug}.html`,
+            imageUrl: frontMatter.imageId
+                ? `https://natuurdata.inbo.be/image-service/image/${frontMatter.imageId}/large`
+                : "",
         });
     }
 

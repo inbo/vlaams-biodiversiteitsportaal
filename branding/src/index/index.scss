@@ -206,8 +206,23 @@ ul.data-summary-links {
 
 .news-section {
     padding: 40px 0;
-    background-color: #f5f5f5;
     border-bottom: 2px solid $inbo-primary;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-color: rgba(245, 245, 245, 0.90);
+        pointer-events: none;
+    }
+
+    > * {
+        position: relative;
+    }
 }
 
 .news-section-title {
@@ -218,13 +233,52 @@ ul.data-summary-links {
     font-size: 22px;
 }
 
+.news-carousel {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.news-carousel-btn {
+    flex: 0 0 auto;
+    background: $inbo-primary;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 28px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+    padding: 0 0 3px 0;
+
+    &:hover {
+        background-color: $inbo-secondary;
+    }
+}
+
 .news-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    display: flex;
+    flex: 1;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
     gap: 24px;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
 }
 
 .news-card {
+    flex: 0 0 320px;
+    scroll-snap-align: start;
     background-color: white;
     border: 1px solid #ddd;
     border-top: 4px solid $inbo-primary;
