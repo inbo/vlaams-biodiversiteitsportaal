@@ -82,6 +82,31 @@
             </div>
         </div>
     </div>
+    <!-- news section -->
+    <div class="news-section">
+        <div class="news-section-background" ></div>
+        <h3 class="news-section-title" data-i18n="index.news.title">Nieuws</h3>
+            <div class="news-carousel">
+                <button class="news-carousel-btn news-carousel-btn--prev" aria-label="Vorige">&#8249;</button>
+                <div class="news-grid" id="news-grid">
+                    {{> news-cards }}
+                </div>
+                <button class="news-carousel-btn news-carousel-btn--next" aria-label="Volgende">&#8250;</button>
+            </div>
+    </div>
+    <script>
+        (function () {
+            var grid = document.getElementById('news-grid');
+            var cardWidth = 320 + 24; // card width + gap
+            document.querySelector('.news-carousel-btn--prev').addEventListener('click', function () {
+                grid.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+            });
+            document.querySelector('.news-carousel-btn--next').addEventListener('click', function () {
+                grid.scrollBy({ left: cardWidth, behavior: 'smooth' });
+            });
+        })();
+    </script>
+
     <div class="index-footer">
         <div class="container">
             <div class="col-md-6 contact-block">

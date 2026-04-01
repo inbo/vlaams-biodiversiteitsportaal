@@ -1,9 +1,7 @@
 ---
-title: "Gebruiksvoorwaarden"
+title: "Gebruiksovereenkomst"
 description: "Gebruiksvoorwaarden voor het Vlaams Biodiversiteitsportaal"
 ---
-
-# Gebruiksovereenkomst
 
 _Het Vlaams Biodiversiteitsportaal streeft ernaar om gegevens van de hoogste
 kwaliteit aan te leveren. Ondanks onze zorgvuldige validatie- en

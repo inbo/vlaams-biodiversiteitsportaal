@@ -1,0 +1,34 @@
+
+> modern@0.0.0 build:dev
+> cross-env NODE_ENV=development vite build --minify=false
+
+Generated ./src/pages/api.html
+Generated ./src/pages/handleiding.html
+Generated ./src/pages/survey.html
+Generated ./src/pages/terms-of-use.html
+Generated ./src/pages/toegang.html
+Generated ./src/pages/VBP_applicaties.html
+Generated ./src/pages/VBP_challenges.html
+Generated ./src/pages/VBP_doemee.html
+Generated ./src/pages/VBP_introductiefilmpjes.html
+Generated ./src/pages/VBP_partners.html
+Generated ./src/pages/VBP_testen.html
+Generated ./src/pages/VBP_workshop.html
+Generated ./src/pages/2026-03-01-nieuwe-dataproviders.html
+Generated ./src/pages/2026-03-15-waarnemingscijfers-2025.html
+Generated ./src/pages/2026-03-31-interactieve-kaarten.html
+./abv-assets.zip assets unzipped successfully into ./src/abv
+./faunabeheer-assets.zip assets unzipped successfully into ./src/faunabeheer
+[36mvite v6.2.0 [32mbuilding for production...[36m[39m
+[90m@hey-api/openapi-ts v0.91.0[39m
+
+[90m[Job 1] [39m⏳ [36mGenerating from 1 input:[39m
+[90m[Job 1] [39m[36m  [1] [39m./src/common/clients/image-service.yml
+[90m@hey-api/openapi-ts v0.91.0[39m
+
+[90m[Job 1] [39m⏳ [36mGenerating from 1 input:[39m
+[90m[Job 1] [39m[36m  [1] [39m./src/common/clients/species-list.yml
+[90m[Job 1] [39m[32m✅ Done![39m Your output is in [96m./src\common\clients\.generated\species-list[39m
+[90m[Job 1] [39m[32m✅ Done![39m Your output is in [96m./src\common\clients\.generated\image-service[39m
+transforming...
+Terminate batch job (Y/N)? Terminate batch job (Y/N)? Terminate batch job (Y/N)? 

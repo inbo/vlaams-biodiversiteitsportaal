@@ -1,10 +1,9 @@
 ---
-title: "Inbo Applicaties"
-description: "Een overzicht van de INBO-applicaties voor biodiversiteit en natuurbeheer."
+title: "Ontdek de INBO-applicaties"
+description:
+    "Een overzicht van de INBO-applicaties voor biodiversiteit en natuurbeheer."
 ---
-<h2>
-    Ontdek de INBO-applicaties
-</h2>
+
 <p>
     Bekijk hier meer applicaties voor biodiversiteit en natuurbeheer die door INBO worden aangeboden. In functie van
     kwaliteitsvolle opslag, beheer en ontsluiting van gegevens beheert en/of ondersteunt het INBO verschillende
@@ -184,3 +183,4 @@ description: "Een overzicht van de INBO-applicaties voor biodiversiteit en natuu
         </a>
     </div>
 </div>
+

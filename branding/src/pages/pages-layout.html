@@ -1,34 +1,41 @@
 <!doctype html>
 <html lang="nl">
+    <head>
+        <meta name="description" content="{{{description}}}" />
+        <meta name="author" content="Instituut voor Natuur- en Bosonderzoek" />
 
-<head>
-  <meta name="description" content="{{{description}}}" />
-  <meta name="author" content="Instituut voor Natuur- en Bosonderzoek">
+        <title>{{{title}}} | Vlaams Biodiversiteitsportaal</title>
 
-  <title>{{{title}}} | Vlaams Biodiversiteitsportaal</title>
+        <!-- Loaded by grails pages automatically  -->
+        <link
+            rel="stylesheet"
+            href="{{ resolve-from-root 'portal/bootstrap.scss' }}"
+        />
+        <link rel="stylesheet" crossorigin href="/css/font-awesome.min.css" />
 
+        <script type="text/javascript" src="/js/jquery.min.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/js/autocomplete.min.js"></script>
 
-  <!-- Loaded by grails pages automatically  -->
-  <link rel="stylesheet" href="{{ resolve-from-root 'portal/bootstrap.scss' }}">
-  <link rel="stylesheet" crossorigin href="/css/font-awesome.min.css">
+        {{> head }}
 
-  <script type="text/javascript" src="/js/jquery.min.js"></script>
-  <script type="text/javascript" src="/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="/js/autocomplete.min.js"></script>
+        <script
+            type="module"
+            src="{{ resolve-from-root 'pages/pages.scss' }}"
+        ></script>
+    </head>
 
-  {{> head }}
+    <body>
+        {{> banner }}
 
-  <script type="module" src="{{ resolve-from-root 'pages/pages.scss' }}"></script>
-</head>
+        <div class="page-content">
+            <h2>{{{title}}}</h2>
+            <div class="vbp-page-date">{{{date}}}</div>
 
-<body>
-  {{> banner }}
+            {{{content}}}
+        </div>
 
-  <div class="page-content">
-    {{{content}}}
-  </div>
-
-  {{> footer }}
-</body>
-
+        {{> footer }}
+    </body>
 </html>
+

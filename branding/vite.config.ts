@@ -1,5 +1,6 @@
 import { resolve } from "path";
 import handlebars from "vite-plugin-handlebars";
+import fs from "node:fs/promises";
 
 import { viteStaticCopy } from "vite-plugin-static-copy";
 import { generateMarkdownPages } from "./template-pages";
@@ -7,9 +8,10 @@ import { downloadSpeciesPluginTabAssets } from "./plugin-tabs-assets";
 import { console } from "node:inspector";
 
 import fg from "fast-glob";
-import { basename, dirname } from "node:path";
+import { basename, dirname, extname } from "node:path";
 import { createClient, defaultPlugins } from "@hey-api/openapi-ts";
 import type { PreRenderedChunk } from "rollup";
+import { generateNewsPartial } from "./template-news";
 
 const replacements = {
     loginStatus: "login-status-dependent",
@@ -35,14 +37,8 @@ export default {
                     __dirname,
                     "./src/auth/service-worker.ts",
                 ),
-                "user-profile": resolve(
-                    __dirname,
-                    "./src/my-profile.html",
-                ),
-                "bootstrap": resolve(
-                    __dirname,
-                    "./src/portal/bootstrap.scss",
-                ),
+                "user-profile": resolve(__dirname, "./src/my-profile.html"),
+                bootstrap: resolve(__dirname, "./src/portal/bootstrap.scss"),
                 "bootstrap-theme": resolve(
                     __dirname,
                     "./src/portal/ala/bootstrap-theme.css",
@@ -55,15 +51,12 @@ export default {
                     __dirname,
                     "./src/portal/ala/ala-styles.css",
                 ),
-                "application": resolve(
+                application: resolve(
                     __dirname,
                     "src/portal/ala/application.js",
                 ),
                 // To allow inclusion in spatial portal
-                "auth": resolve(
-                    __dirname,
-                    "src/auth/auth.ts",
-                ),
+                auth: resolve(__dirname, "src/auth/auth.ts"),
                 ...(await generateMarkdownPages({
                     globPattern: "./pages/**/*",
                     template: "src/pages/pages-layout.html",
@@ -104,14 +97,18 @@ export default {
 
                         return `css/${name.replace(/\.css$/, ".min.css")}`;
                     } else if (
-                        name.endsWith(".woff") || name.endsWith(".woff2") ||
-                        name.endsWith(".ttf") || name.endsWith(".eot") ||
+                        name.endsWith(".woff") ||
+                        name.endsWith(".woff2") ||
+                        name.endsWith(".ttf") ||
+                        name.endsWith(".eot") ||
                         originalFileName.includes("fonts/bootstrap")
                     ) {
                         return `fonts/${name}`;
                     } else if (
-                        name.endsWith(".jpg") || name.endsWith(".webp") ||
-                        name.endsWith(".png") || name.endsWith(".svg")
+                        name.endsWith(".jpg") ||
+                        name.endsWith(".webp") ||
+                        name.endsWith(".png") ||
+                        name.endsWith(".svg")
                     ) {
                         return `images/${name}`;
                     } else if (name.endsWith(".js")) {
@@ -145,8 +142,7 @@ export default {
                         const serviceName = basename(schema, ".yml");
                         await createClient({
                             input: schema,
-                            output:
-                                `./src/common/clients/.generated/${serviceName}`,
+                            output: `./src/common/clients/.generated/${serviceName}`,
                             plugins: [
                                 ...defaultPlugins,
                                 "@hey-api/client-fetch",
@@ -174,6 +170,61 @@ export default {
                 },
             ],
         }),
+        {
+            name: "generate-news-items-partial",
+            enforce: "pre",
+            async buildStart() {
+                generateNewsPartial();
+            },
+        },
+        // Workaround for vite-plugin-handlebars@1.5.0 Windows path separator bugs:
+        // 1. Partial registration uses `replace(`${dir}/`, '')` with a hardcoded forward
+        //    slash which never matches Windows backslash paths, so partials get registered
+        //    under their full path instead of short name.
+        // 2. The `resolve-from-root` helper emits absolute Windows paths (C:\...) which
+        //    Rollup cannot resolve as module imports.
+        // Both are fixed by pre-registering partials and overriding the helper here,
+        // using the shared Handlebars instance (Node.js CJS module cache).
+        {
+            name: "register-handlebars-partials",
+            enforce: "pre",
+            async buildStart() {
+                const { default: Handlebars } = await import("handlebars");
+                // Override to emit root-relative URLs (/auth/auth.ts) instead of
+                // absolute Windows filesystem paths that Rollup cannot resolve.
+                Handlebars.registerHelper(
+                    "resolve-from-root",
+                    function (filePath: string) {
+                        return "/" + filePath;
+                    },
+                );
+                const validExts = new Set([".html", ".hbs"]);
+                const partialDirs = [
+                    resolve(__dirname, "src/partials"),
+                    resolve(__dirname, "src/index"),
+                ];
+                for (const dir of partialDirs) {
+                    try {
+                        const entries = await fs.readdir(dir, {
+                            withFileTypes: true,
+                        });
+                        for (const entry of entries) {
+                            if (!entry.isFile()) continue;
+                            const ext = extname(entry.name);
+                            if (!validExts.has(ext)) continue;
+                            const name = basename(entry.name, ext);
+                            const content = await fs.readFile(
+                                resolve(dir, entry.name),
+                                "utf-8",
+                            );
+                            Handlebars.registerPartial(name, content);
+                        }
+                    } catch {
+                        // Directory may not exist yet
+                    }
+                }
+            },
+        },
         // Allow using partials to construct html files similar to what the ala services do
         handlebars({
             partialDirectory: [
