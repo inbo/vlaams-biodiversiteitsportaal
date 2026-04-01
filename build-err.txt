@@ -1,0 +1,2 @@
+[33mplugin 'handlebars' uses deprecated 'enforce' option. Use 'order' option instead.[39m
+[33mplugin 'handlebars' uses deprecated 'transform' option. Use 'handler' option instead.[39m
