@@ -38,5 +38,9 @@ src/pages/*
 !src/pages/pages-layout.html
 !src/pages/pages.scss
 
+# Generated at build time from news markdown files and species list
+src/index/news-cards.html
+src/index/news-section-bg.html
+
 abv-assets.zip
 faunabeheer-assets.zip
