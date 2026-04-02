@@ -272,8 +272,13 @@ ul.data-summary-links {
     justify-content: center;
     transition: background-color 0.2s ease;
 
-    &:hover {
+    &:hover:not(:disabled) {
         background-color: $inbo-secondary;
+    }
+
+    &:disabled {
+        opacity: 0.3;
+        cursor: default;
     }
 }
 

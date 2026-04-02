@@ -97,13 +97,24 @@
     <script>
         (function () {
             var grid = document.getElementById('news-grid');
+            var prevBtn = document.querySelector('.news-carousel-btn--prev');
+            var nextBtn = document.querySelector('.news-carousel-btn--next');
             var cardWidth = 320 + 24; // card width + gap
-            document.querySelector('.news-carousel-btn--prev').addEventListener('click', function () {
+
+            function updateButtons() {
+                prevBtn.disabled = grid.scrollLeft <= 0;
+                nextBtn.disabled = grid.scrollLeft + grid.clientWidth >= grid.scrollWidth - 1;
+            }
+
+            prevBtn.addEventListener('click', function () {
                 grid.scrollBy({ left: -cardWidth, behavior: 'smooth' });
             });
-            document.querySelector('.news-carousel-btn--next').addEventListener('click', function () {
+            nextBtn.addEventListener('click', function () {
                 grid.scrollBy({ left: cardWidth, behavior: 'smooth' });
             });
+            grid.addEventListener('scroll', updateButtons);
+
+            updateButtons();
         })();
     </script>
 
