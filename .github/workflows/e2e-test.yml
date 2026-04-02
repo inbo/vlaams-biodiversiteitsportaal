@@ -154,6 +154,8 @@ jobs:
     runs-on: [self-hosted]
     container:
       image: node:20
+    permissions:
+      copilot-requests: write
     steps:
       - name: Install Copilot CLI
         run: npm install -g @github/copilot
@@ -170,8 +172,6 @@ jobs:
           fetch-depth: 0
 
       - name: Run Copilot CLI
-        env:
-          COPILOT_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -e -o pipefail
           ls -la ./test
