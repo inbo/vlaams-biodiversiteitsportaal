@@ -239,4 +239,4 @@ environments:
 
 species:
   groups:
-    location: file:///config/bie-index/groups.json
+    location: /config/bie-index/groups.json
