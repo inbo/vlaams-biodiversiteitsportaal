@@ -165,7 +165,6 @@ jobs:
         uses: actions/download-artifact@v8
         with:
           name: upload-screen-captures
-          path: ./test
 
       - uses: actions/checkout@v5
         with:
@@ -178,7 +177,6 @@ jobs:
         run: |
           ls -la ./test
 
-          copilot -p "The Cypress e2e tests, found in ./test folder, failed. Have a look at the test-output in ./test/test-results.json and see if you can find the root cause. If a simple code change in ./test or ./branding can be made to fix the test, create a new pull-request with the proposed changes. In any case write a short summary (max 150 characters) of your findings to summary.md" --allow-tool='shell(git:*)' --allow-tool=write --no-ask-user
+          npx copilot -p "The Cypress e2e tests, found in ./test folder, failed. Have a look at the test-output in ./test/test-results.json and see if you can find the root cause. If a simple code change in ./test or ./branding can be made to fix the test, create a new pull-request with the proposed changes. In any case write a short summary (max 150 characters) of your findings to summary.md" --allow-tool='shell(git:*)' --allow-tool=write --no-ask-user
 
           cat summary.md >> "$GITHUB_STEP_SUMMARY"
-
