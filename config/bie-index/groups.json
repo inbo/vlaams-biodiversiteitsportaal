@@ -1,325 +1,744 @@
 [
   {
-    "name": "Animals",
-    "rank": "kingdom",
-    "included": [
-      "Animalia"
-    ],
-    "excluded": []
+    "speciesGroup": "Animals",
+    "taxonRank": "kingdom",
+    "taxa": [
+      {
+        "name": "Animalia",
+        "common": "Animals"
+      }
+    ]
   },
   {
-    "name": "Mammals",
-    "rank": "classs",
-    "included": [
-      "Mammalia"
-    ],
-    "excluded": [],
-    "parent": "Animals"
+    "speciesGroup": "Mammals",
+    "taxonRank": "class",
+    "taxa": [
+      {
+        "name": "Mammalia",
+        "common": "Mammals"
+      }
+    ]
   },
   {
-    "name": "Birds",
-    "rank": "classs",
-    "included": [
-      "Aves"
-    ],
-    "excluded": [],
-    "parent": "Animals"
+    "speciesGroup": "Birds",
+    "taxonRank": "class",
+    "taxa": [
+      {
+        "name": "Aves",
+        "common": "Birds"
+      }
+    ]
   },
   {
-    "name": "Reptiles",
-    "rank": "classs",
-    "included": [
-      "Testudines",
-      "Crocodylia",
-      "Sphenodontia",
-      "Squamata"
-    ],
-    "excluded": [],
-    "parent": "Animals"
+    "speciesGroup": "Reptiles",
+    "taxonRank": "order",
+    "taxa": [
+      {
+        "name": "Testudines",
+        "common": "Tortoises, Turtles, Terrapins"
+      },
+      {
+        "name": "Crocodylia",
+        "common": "Crocodiles"
+      },
+      {
+        "name": "Sphenodontia",
+        "common": "Tuatara"
+      },
+      {
+        "name": "Squamata",
+        "common": "Lizards, Snakes"
+      }
+    ]
   },
   {
-    "name": "Amphibians",
-    "rank": "classs",
-    "included": [
-      "Amphibia"
-    ],
-    "excluded": [],
-    "parent": "Animals"
+    "speciesGroup": "Amphibians",
+    "taxonRank": "class",
+    "taxa": [
+      {
+        "name": "Amphibia",
+        "common": "Amphibians"
+      }
+    ]
   },
   {
-    "name": "Former Fishes",
-    "rank": "classs",
-    "included": [
-      "Coelacanthi",
-      "Dipneusti",
-      "Elasmobranchii",
-      "Holocephali",
-      "Myxini",
-      "Petromyzonti"
-    ],
-    "excluded": [],
-    "parent": "Animals"
+    "speciesGroup": "Former Fishes",
+    "taxonRank": "class",
+    "taxa": [
+      {
+        "name": "Coelacanthi",
+        "common": "Coelacanths"
+      },
+      {
+        "name": "Dipneusti",
+        "common": "Lungfishes"
+      },
+      {
+        "name": "Elasmobranchii",
+        "common": "Sharks, Rays, Skates"
+      },
+      {
+        "name": "Holocephali",
+        "common": "Chimaeras"
+      },
+      {
+        "name": "Myxini",
+        "common": "Hagfishes"
+      },
+      {
+        "name": "Petromyzonti",
+        "common": "Lampreys"
+      }
+    ]
   },
   {
-     "name": "Fish",
-     "rank": "order",
-     "included": [
-        "MYXINIFORMES",
-        "CARCHARHINIFORMES",
-        "HETERODONTIFORMES",
-        "HEXANCHIFORMES",
-        "LAMNIFORMES",
-        "MYLIOBATIFORMES",
-        "ORECTOLOBIFORMES",
-        "PRISTIFORMES",
-        "PRISTIOPHORIFORMES",
-        "RAJIFORMES",
-        "RHINOBATIFORMES",
-        "SQUALIFORMES",
-        "SQUATINIFORMES",
-        "TORPEDINIFORMES",
-        "CHIMAERIFORMES",
-        "CERATODONTIFORMES",
-        "CLUPEIFORMES",
-        "ALBULIFORMES",
-        "ANGUILLIFORMES",
-        "ELOPIFORMES",
-        "NOTACANTHIFORMES",
-        "SACCOPHARYNGIFORMES",
-        "ATHERINIFORMES",
-        "BELONIFORMES",
-        "BERYCIFORMES",
-        "CYPRINODONTIFORMES",
-        "GASTEROSTEIFORMES",
-        "MUGILIFORMES",
-        "PERCIFORMES",
-        "PLEURONECTIFORMES",
-        "SCORPAENIFORMES",
-        "STEPHANOBERYCIFORMES",
-        "SYNBRANCHIFORMES",
-        "TETRAODONTIFORMES",
-        "ZEIFORMES",
-        "AULOPIFORMES",
-        "LAMPRIDIFORMES",
-        "CYPRINIFORMES",
-        "GONORHYNCHIFORMES",
-        "SILURIFORMES",
-        "BATRACHOIDIFORMES",
-        "GADIFORMES",
-        "LOPHIIFORMES",
-        "OPHIDIIFORMES",
-        "POLYMIXIIFORMES",
-        "ARGENTINIFORMES",
-        "SALMONIFORMES",
-        "MYCTOPHIFORMES",
-        "ATELEOPODIFORMES",
-        "STOMIIFORMES",
-        "OSTEOGLOSSIFORMES",
-        "Acipenseriformes"
-        ],
-    "excluded": [],
-    "parent": "Animals"
+    "speciesGroup": "Fish",
+    "taxonRank": "order",
+    "taxa": [
+      {
+        "name": "MYXINIFORMES",
+        "common": "Hagfishes"
+      },
+      {
+        "name": "CARCHARHINIFORMES",
+        "common": "Ground Sharks"
+      },
+      {
+        "name": "HETERODONTIFORMES",
+        "common": "Bullhead Sharks"
+      },
+      {
+        "name": "HEXANCHIFORMES",
+        "common": "Cow Sharks"
+      },
+      {
+        "name": "LAMNIFORMES",
+        "common": "Mackerel Sharks"
+      },
+      {
+        "name": "MYLIOBATIFORMES",
+        "common": "Batoids"
+      },
+      {
+        "name": "ORECTOLOBIFORMES",
+        "common": "Carpet Sharks"
+      },
+      {
+        "name": "PRISTIFORMES",
+        "common": "Sawfish"
+      },
+      {
+        "name": "PRISTIOPHORIFORMES",
+        "common": "Saw Sharks"
+      },
+      {
+        "name": "RAJIFORMES",
+        "common": "Softnose Skates"
+      },
+      {
+        "name": "RHINOBATIFORMES",
+        "common": "Guitarfish"
+      },
+      {
+        "name": "SQUALIFORMES",
+        "common": "Dogfish Sharks"
+      },
+      {
+        "name": "SQUATINIFORMES",
+        "common": "Angel Sharks"
+      },
+      {
+        "name": "TORPEDINIFORMES",
+        "common": "Electric Rays"
+      },
+      {
+        "name": "CHIMAERIFORMES",
+        "common": "Chimaeras"
+      },
+      {
+        "name": "CERATODONTIFORMES",
+        "common": "Lungfish"
+      },
+      {
+        "name": "CLUPEIFORMES",
+        "common": "Anchovies, Herrings"
+      },
+      {
+        "name": "ALBULIFORMES",
+        "common": "Bonefishes"
+      },
+      {
+        "name": "ANGUILLIFORMES",
+        "common": "Eels"
+      },
+      {
+        "name": "ELOPIFORMES",
+        "common": "Tarpons"
+      },
+      {
+        "name": "NOTACANTHIFORMES",
+        "common": "Spiny Eels"
+      },
+      {
+        "name": "SACCOPHARYNGIFORMES",
+        "common": "Sackpharynx Fishes"
+      },
+      {
+        "name": "ATHERINIFORMES",
+        "common": "Rainbow Fishes"
+      },
+      {
+        "name": "BELONIFORMES",
+        "common": "Halfbeaks"
+      },
+      {
+        "name": "BERYCIFORMES",
+        "common": "Ray-finned Fishes"
+      },
+      {
+        "name": "CYPRINODONTIFORMES",
+        "common": "Killifishes"
+      },
+      {
+        "name": "GASTEROSTEIFORMES",
+        "common": "Sticklebacks, Seahorses"
+      },
+      {
+        "name": "MUGILIFORMES",
+        "common": "Mullet Fish"
+      },
+      {
+        "name": "PERCIFORMES",
+        "common": "Perch-like Fishes"
+      },
+      {
+        "name": "PLEURONECTIFORMES",
+        "common": "Flatfishes"
+      },
+      {
+        "name": "SCORPAENIFORMES",
+        "common": "Scorpion Fishes, Sculpins"
+      },
+      {
+        "name": "STEPHANOBERYCIFORMES",
+        "common": "Deep-sea Ray-finned Fishes"
+      },
+      {
+        "name": "SYNBRANCHIFORMES",
+        "common": "Swamp Eels"
+      },
+      {
+        "name": "TETRAODONTIFORMES",
+        "common": "Pufferfish, Cowfish"
+      },
+      {
+        "name": "ZEIFORMES",
+        "common": "Boarfishes"
+      },
+      {
+        "name": "AULOPIFORMES",
+        "common": "Marine Ray-finned Fish"
+      },
+      {
+        "name": "LAMPRIDIFORMES",
+        "common": "Opahs"
+      },
+      {
+        "name": "CYPRINIFORMES",
+        "common": "Minnows, Carps"
+      },
+      {
+        "name": "GONORHYNCHIFORMES",
+        "common": "Milkfishes"
+      },
+      {
+        "name": "SILURIFORMES",
+        "common": "Catfishes"
+      },
+      {
+        "name": "BATRACHOIDIFORMES",
+        "common": "Toadfishes"
+      },
+      {
+        "name": "GADIFORMES",
+        "common": "Cods"
+      },
+      {
+        "name": "LOPHIIFORMES",
+        "common": "Anglerfishes"
+      },
+      {
+        "name": "OPHIDIIFORMES",
+        "common": "Cusk-eels"
+      },
+      {
+        "name": "POLYMIXIIFORMES",
+        "common": "Beardfishes"
+      },
+      {
+        "name": "ARGENTINIFORMES",
+        "common": "Baldfishes, Tubeshoulders"
+      },
+      {
+        "name": "SALMONIFORMES",
+        "common": "Salmons"
+      },
+      {
+        "name": "MYCTOPHIFORMES",
+        "common": "Lantern Fishes"
+      },
+      {
+        "name": "ATELEOPODIFORMES",
+        "common": "Jellynose Fishes"
+      },
+      {
+        "name": "STOMIIFORMES",
+        "common": "Deep-sea Dragonfish"
+      },
+      {
+        "name": "OSTEOGLOSSIFORMES",
+        "common": "Bonytongues"
+      },
+      {
+        "name": "ACIPENSERIFORMES",
+        "common": "Sturgeons, Paddlefish"
+      }
+    ]
   },
   {
-    "name": "Molluscs",
-    "rank": "phylum",
-    "included": [
-      "Mollusca"
-    ],
-    "excluded": [],
-    "parent": "Animals"
+    "speciesGroup": "Molluscs",
+    "taxonRank": "phylum",
+    "taxa": [
+      {
+        "name": "Mollusca",
+        "common": "Molluscs"
+      }
+    ]
   },
   {
-    "name": "Arthropods",
-    "rank": "phylum",
-    "included": [
-      "Arthropoda"
-    ],
-    "excluded": [],
-    "parent": "Animals"
+    "speciesGroup": "Arthropods",
+    "taxonRank": "phylum",
+    "taxa": [
+      {
+        "name": "Arthropoda",
+        "common": "Arthropods"
+      }
+    ]
   },
   {
-    "name": "Crustaceans",
-    "rank": "classs",
-    "included": [
-      "Branchiopoda",
-      "Remipedia",
-      "Maxillopoda",
-      "Ostracoda",
-      "Malacostraca"
-    ],
-    "excluded": [],
-    "parent": "Arthropods"
+    "speciesGroup": "Crustaceans",
+    "taxonRank": "class",
+    "taxa": [
+      {
+        "name": "Branchiopoda",
+        "common": "Fairy Shrimp, Clam Shrimp"
+      },
+      {
+        "name": "Remipedia",
+        "common": "Remipedes"
+      },
+      {
+        "name": "Maxillopoda",
+        "common": "Barnacles, Copepods"
+      },
+      {
+        "name": "Ostracoda",
+        "common": "Seed Shrimp"
+      },
+      {
+        "name": "Malacostraca",
+        "common": "Crabs, Lobsters, Shrimp"
+      }
+    ]
   },
   {
-    "name": "Insects",
-    "rank": "classs",
-    "included": [
-      "Insecta"
-    ],
-    "excluded": [],
-    "parent": "Arthropods"
+    "speciesGroup": "Insects",
+    "taxonRank": "class",
+    "taxa": [
+      {
+        "name": "Insecta",
+        "common": "Insects"
+      }
+    ]
   },
   {
-  "name": "MacroInvertebrates",
-  "rank": "family",
-  "included": [
-    "Acroloxidae", "Aeshnidae", "Ameletidae", "Ampharetidae", "Ancylidae", 
-    "Anisitsiellidae", "Aphelocheiridae", "Argulidae", "Arrenuridae", "Asellidae", 
-    "Astacidae", "Athericidae", "Athienemanniidae", "Aturidae", "Atyidae", 
-    "Baetidae", "Beraeidae", "Bithyniidae", "Blephariceridae", "Brachycentridae", 
-    "Branchiobdellidae", "Caenidae", "Calopterygidae", "Cambaridae", "Ceratopogonidae", 
-    "Chaoboridae", "Chirocephalidae", "Chironomidae", "Chloroperlidae", "Coenagrionidae", 
-    "Corbiculidae", "Cordulegastridae", "Corduliidae", "Corixidae", "Corophiidae", 
-    "Crangonyctidae", "Culicidae", "Cylindrotomidae", "Dendrocoelidae", "Dixidae", 
-    "Dolichopodidae", "Dreissenidae", "Dryopidae", "Dugesiidae", "Dytiscidae", 
-    "Ecnomidae", "Elmidae", "Empididae", "Enchytraeidae", "Ephemerellidae", 
-    "Ephemeridae", "Ephydridae", "Erpobdellidae", "Eylaidae", "Feltriidae", 
-    "Gammaridae", "Gerridae", "Glossiphoniidae", "Glossosomatidae", "Goeridae", 
-    "Gomphidae", "Gyrinidae", "Haemopidae", "Haliplidae", "Haplotaxidae", 
-    "Hebridae", "Heptageniidae", "Hirudinidae", "Hydrachnidae", "Hydraenidae", 
-    "Hydrobiidae", "Hydrodromidae", "Hydrometridae", "Hydrophilidae", "Hydropsychidae", 
-    "Hydroptilidae", "Hydryphantidae", "Hygrobatiidae", "Hygrobiidae", "Janiridae", 
-    "Lebertiidae", "Lepidostomatidae", "Leptestheriidae", "Leptoceridae", "Leptophlebiidae", 
-    "Lestidae", "Leuctridae", "Libellulidae", "Limnadiidae", "Limnephilidae", 
-    "Limnesiidae", "Limoniidae", "Lithoglyphidae", "Lumbricidae", "Lumbriculidae", 
-    "Lymnaeidae", "Mactridae", "Margaritiferidae", "Mesoveliidae", "Micronectidae", 
-    "Mideidae", "Mideopsidae", "Molannidae", "Muscidae", "Mysidae", 
-    "Naididae", "Naucoridae", "Nemouridae", "Nepidae", "Noteridae", 
-    "Notonectidae", "Odontoceridae", "Oligoneuriidae", "Osmylidae", "Oxidae", 
-    "Palaemonidae", "Panopeidae", "Perlidae", "Perlodidae", "Philopotamidae", 
-    "Phryganeidae", "Physidae", "Piersigiidae", "Pionidae", "Piscicolidae", 
-    "Planariidae", "Planorbidae", "Platycnemididae", "Pleidae", "Polycentropodidae", 
-    "Polymitarcyidae", "Potamanthidae", "Psephenidae", "Psychodidae", "Psychomyiidae", 
-    "Ptychopteridae", "Rhagionidae", "Rhyacophilidae", "Sabellidae", "Salifidae", 
-    "Scathophagidae", "Sciomyzidae", "Scirtidae", "Sericostomatidae", "Sialidae", 
-    "Simuliidae", "Siphlonuridae", "Sisyridae", "Sperchontidae", "Sphaeriidae", 
-    "Sphaeromatidae", "Stratiomyidae", "Syrphidae", "Tabanidae", "Taeniopterygidae", 
-    "Talitridae", "Tanaidae", "Teutoniidae", "Thaumaleidae", "Tipulidae", 
-    "Torrenticolidae", "Triopsidae", "Tubificidae", "Unionicolidae", "Unionidae", 
-    "Valvatidae", "Varunidae", "Veliidae", "Viviparidae", "Wettinidae"
-  ],
-  "excluded": [],
-  "parent": "Animals"
-},
-  {
-    "name": "Plants",
-    "rank": "kingdom",
-    "included": [
-      "Plantae"
-    ],
-    "excluded": []
+    "speciesGroup": "MacroInvertebrates",
+    "taxonRank": "family",
+    "taxa": [
+      { "name": "Acroloxidae", "common": "River Limpets" },
+      { "name": "Aeshnidae", "common": "Hawker Dragonflies" },
+      { "name": "Ameletidae", "common": "Mayflies" },
+      { "name": "Ampharetidae", "common": "Polychaete Worms" },
+      { "name": "Ancylidae", "common": "Freshwater Limpets" },
+      { "name": "Anisitsiellidae", "common": "Water Mites" },
+      { "name": "Aphelocheiridae", "common": "Water Bugs" },
+      { "name": "Argulidae", "common": "Fish Lice" },
+      { "name": "Arrenuridae", "common": "Water Mites" },
+      { "name": "Asellidae", "common": "Water Hoglice" },
+      { "name": "Astacidae", "common": "Crayfish" },
+      { "name": "Athericidae", "common": "Water Snipe Flies" },
+      { "name": "Athienemanniidae", "common": "Water Mites" },
+      { "name": "Aturidae", "common": "Water Mites" },
+      { "name": "Atyidae", "common": "Freshwater Shrimp" },
+      { "name": "Baetidae", "common": "Small Mayflies" },
+      { "name": "Beraeidae", "common": "Caddisflies" },
+      { "name": "Bithyniidae", "common": "Bithynia Snails" },
+      { "name": "Blephariceridae", "common": "Net-winged Midges" },
+      { "name": "Brachycentridae", "common": "Humpless Casemaker Caddisflies" },
+      { "name": "Branchiobdellidae", "common": "Crayfish Worms" },
+      { "name": "Caenidae", "common": "Small Square-gill Mayflies" },
+      { "name": "Calopterygidae", "common": "Demoiselle Damselflies" },
+      { "name": "Cambaridae", "common": "Crayfish" },
+      { "name": "Ceratopogonidae", "common": "Biting Midges" },
+      { "name": "Chaoboridae", "common": "Phantom Midges" },
+      { "name": "Chirocephalidae", "common": "Fairy Shrimp" },
+      { "name": "Chironomidae", "common": "Non-biting Midges" },
+      { "name": "Chloroperlidae", "common": "Green Stoneflies" },
+      { "name": "Coenagrionidae", "common": "Narrow-winged Damselflies" },
+      { "name": "Corbiculidae", "common": "Basket Clams" },
+      { "name": "Cordulegastridae", "common": "Goldenring Dragonflies" },
+      { "name": "Corduliidae", "common": "Emerald Dragonflies" },
+      { "name": "Corixidae", "common": "Water Boatmen" },
+      { "name": "Corophiidae", "common": "Amphipods" },
+      { "name": "Crangonyctidae", "common": "Freshwater Amphipods" },
+      { "name": "Culicidae", "common": "Mosquitoes" },
+      { "name": "Cylindrotomidae", "common": "Long-bodied Crane Flies" },
+      { "name": "Dendrocoelidae", "common": "Freshwater Flatworms" },
+      { "name": "Dixidae", "common": "Meniscus Midges" },
+      { "name": "Dolichopodidae", "common": "Long-legged Flies" },
+      { "name": "Dreissenidae", "common": "Zebra Mussels" },
+      { "name": "Dryopidae", "common": "Long-toed Water Beetles" },
+      { "name": "Dugesiidae", "common": "Freshwater Planarians" },
+      { "name": "Dytiscidae", "common": "Diving Beetles" },
+      { "name": "Ecnomidae", "common": "Caddisflies" },
+      { "name": "Elmidae", "common": "Riffle Beetles" },
+      { "name": "Empididae", "common": "Dance Flies" },
+      { "name": "Enchytraeidae", "common": "Potworms" },
+      { "name": "Ephemerellidae", "common": "Spiny Crawlers Mayflies" },
+      { "name": "Ephemeridae", "common": "Burrowing Mayflies" },
+      { "name": "Ephydridae", "common": "Shore Flies" },
+      { "name": "Erpobdellidae", "common": "Predatory Leeches" },
+      { "name": "Eylaidae", "common": "Water Mites" },
+      { "name": "Feltriidae", "common": "Water Mites" },
+      { "name": "Gammaridae", "common": "Freshwater Shrimp" },
+      { "name": "Gerridae", "common": "Water Striders" },
+      { "name": "Glossiphoniidae", "common": "Jawless Leeches" },
+      { "name": "Glossosomatidae", "common": "Saddle-case Caddisflies" },
+      { "name": "Goeridae", "common": "Caddisflies" },
+      { "name": "Gomphidae", "common": "Clubtail Dragonflies" },
+      { "name": "Gyrinidae", "common": "Whirligig Beetles" },
+      { "name": "Haemopidae", "common": "Horse Leeches" },
+      { "name": "Haliplidae", "common": "Crawling Water Beetles" },
+      { "name": "Haplotaxidae", "common": "Oligochaete Worms" },
+      { "name": "Hebridae", "common": "Velvet Water Bugs" },
+      { "name": "Heptageniidae", "common": "Flat-headed Mayflies" },
+      { "name": "Hirudinidae", "common": "Medicinal Leeches" },
+      { "name": "Hydrachnidae", "common": "Water Mites" },
+      { "name": "Hydraenidae", "common": "Minute Moss Beetles" },
+      { "name": "Hydrobiidae", "common": "Mud Snails" },
+      { "name": "Hydrodromidae", "common": "Water Mites" },
+      { "name": "Hydrometridae", "common": "Water Measurers" },
+      { "name": "Hydrophilidae", "common": "Water Scavenger Beetles" },
+      { "name": "Hydropsychidae", "common": "Net-spinning Caddisflies" },
+      { "name": "Hydroptilidae", "common": "Microcaddisflies" },
+      { "name": "Hydryphantidae", "common": "Water Mites" },
+      { "name": "Hygrobatiidae", "common": "Water Mites" },
+      { "name": "Hygrobiidae", "common": "Screech Beetles" },
+      { "name": "Janiridae", "common": "Freshwater Isopods" },
+      { "name": "Lebertiidae", "common": "Water Mites" },
+      { "name": "Lepidostomatidae", "common": "Caddisflies" },
+      { "name": "Leptestheriidae", "common": "Clam Shrimp" },
+      { "name": "Leptoceridae", "common": "Long-horned Caddisflies" },
+      { "name": "Leptophlebiidae", "common": "Prong-gilled Mayflies" },
+      { "name": "Lestidae", "common": "Spreadwing Damselflies" },
+      { "name": "Leuctridae", "common": "Needleflies" },
+      { "name": "Libellulidae", "common": "Skimmer Dragonflies" },
+      { "name": "Limnadiidae", "common": "Clam Shrimp" },
+      { "name": "Limnephilidae", "common": "Northern Caddisflies" },
+      { "name": "Limnesiidae", "common": "Water Mites" },
+      { "name": "Limoniidae", "common": "Short-palped Crane Flies" },
+      { "name": "Lithoglyphidae", "common": "Freshwater Snails" },
+      { "name": "Lumbricidae", "common": "Earthworms" },
+      { "name": "Lumbriculidae", "common": "Aquatic Worms" },
+      { "name": "Lymnaeidae", "common": "Pond Snails" },
+      { "name": "Mactridae", "common": "Trough Shells" },
+      { "name": "Margaritiferidae", "common": "Freshwater Pearl Mussels" },
+      { "name": "Mesoveliidae", "common": "Water Treaders" },
+      { "name": "Micronectidae", "common": "Pygmy Water Boatmen" },
+      { "name": "Mideidae", "common": "Water Mites" },
+      { "name": "Mideopsidae", "common": "Water Mites" },
+      { "name": "Molannidae", "common": "Hooded Casemaker Caddisflies" },
+      { "name": "Muscidae", "common": "House Flies" },
+      { "name": "Mysidae", "common": "Opossum Shrimp" },
+      { "name": "Naididae", "common": "Aquatic Worms" },
+      { "name": "Naucoridae", "common": "Creeping Water Bugs" },
+      { "name": "Nemouridae", "common": "Spring Stoneflies" },
+      { "name": "Nepidae", "common": "Water Scorpions" },
+      { "name": "Noteridae", "common": "Burrowing Water Beetles" },
+      { "name": "Notonectidae", "common": "Backswimmers" },
+      { "name": "Odontoceridae", "common": "Caddisflies" },
+      { "name": "Oligoneuriidae", "common": "Brush-legged Mayflies" },
+      { "name": "Osmylidae", "common": "Giant Lacewings" },
+      { "name": "Oxidae", "common": "Water Mites" },
+      { "name": "Palaemonidae", "common": "Freshwater Prawns" },
+      { "name": "Panopeidae", "common": "Mud Crabs" },
+      { "name": "Perlidae", "common": "Common Stoneflies" },
+      { "name": "Perlodidae", "common": "Perlodid Stoneflies" },
+      { "name": "Philopotamidae", "common": "Finger-net Caddisflies" },
+      { "name": "Phryganeidae", "common": "Large Caddisflies" },
+      { "name": "Physidae", "common": "Bladder Snails" },
+      { "name": "Piersigiidae", "common": "Water Mites" },
+      { "name": "Pionidae", "common": "Water Mites" },
+      { "name": "Piscicolidae", "common": "Fish Leeches" },
+      { "name": "Planariidae", "common": "Flatworms" },
+      { "name": "Planorbidae", "common": "Ram's Horn Snails" },
+      { "name": "Platycnemididae", "common": "White-legged Damselflies" },
+      { "name": "Pleidae", "common": "Pygmy Backswimmers" },
+      { "name": "Polycentropodidae", "common": "Tube-making Caddisflies" },
+      { "name": "Polymitarcyidae", "common": "Pale Burrower Mayflies" },
+      { "name": "Potamanthidae", "common": "Hacklegill Mayflies" },
+      { "name": "Psephenidae", "common": "Water Pennies" },
+      { "name": "Psychodidae", "common": "Moth Flies" },
+      { "name": "Psychomyiidae", "common": "Caddisflies" },
+      { "name": "Ptychopteridae", "common": "Phantom Crane Flies" },
+      { "name": "Rhagionidae", "common": "Snipe Flies" },
+      { "name": "Rhyacophilidae", "common": "Free-living Caddisflies" },
+      { "name": "Sabellidae", "common": "Fan Worms" },
+      { "name": "Salifidae", "common": "Leeches" },
+      { "name": "Scathophagidae", "common": "Dung Flies" },
+      { "name": "Sciomyzidae", "common": "Marsh Flies" },
+      { "name": "Scirtidae", "common": "Marsh Beetles" },
+      { "name": "Sericostomatidae", "common": "Caddisflies" },
+      { "name": "Sialidae", "common": "Alderflies" },
+      { "name": "Simuliidae", "common": "Black Flies" },
+      { "name": "Siphlonuridae", "common": "Primitive Minnow Mayflies" },
+      { "name": "Sisyridae", "common": "Sponge Flies" },
+      { "name": "Sperchontidae", "common": "Water Mites" },
+      { "name": "Sphaeriidae", "common": "Fingernail Clams" },
+      { "name": "Sphaeromatidae", "common": "Isopods" },
+      { "name": "Stratiomyidae", "common": "Soldier Flies" },
+      { "name": "Syrphidae", "common": "Hoverflies" },
+      { "name": "Tabanidae", "common": "Horse Flies" },
+      { "name": "Taeniopterygidae", "common": "Winter Stoneflies" },
+      { "name": "Talitridae", "common": "Sand Hoppers" },
+      { "name": "Tanaidae", "common": "Tanaids" },
+      { "name": "Teutoniidae", "common": "Water Mites" },
+      { "name": "Thaumaleidae", "common": "Solitary Midges" },
+      { "name": "Tipulidae", "common": "Crane Flies" },
+      { "name": "Torrenticolidae", "common": "Water Mites" },
+      { "name": "Triopsidae", "common": "Tadpole Shrimp" },
+      { "name": "Tubificidae", "common": "Sludge Worms" },
+      { "name": "Unionicolidae", "common": "Water Mites" },
+      { "name": "Unionidae", "common": "Freshwater Mussels" },
+      { "name": "Valvatidae", "common": "Valve Snails" },
+      { "name": "Varunidae", "common": "Shore Crabs" },
+      { "name": "Veliidae", "common": "Riffle Bugs" },
+      { "name": "Viviparidae", "common": "River Snails" },
+      { "name": "Wettinidae", "common": "Water Mites" }
+    ]
   },
   {
-    "name": "Bryophytes",
-    "rank": "phylum",
-    "included": [
-      "Bryophyta",
-      "Marchantiophyta",
-      "Anthocerotophyta"
-    ],
-    "excluded": [],
-    "parent": "Plants"
+    "speciesGroup": "Plants",
+    "facetName": "species_group",
+    "taxa": [
+      {
+        "name": "Monocots",
+        "common": "Monocots"
+      },
+      {
+        "name": "Dicots",
+        "common": "Dicots"
+      },
+      {
+        "name": "Angiosperms",
+        "common": "Flowering Plants"
+      },
+      {
+        "name": "Ferns",
+        "common": "Ferns and Allies"
+      },
+      {
+        "name": "Gymnosperms",
+        "common": "Conifers, Cycads"
+      },
+      {
+        "name": "Bryophytes",
+        "common": "Mosses, Liverworts, Hornworts"
+      }
+    ]
   },
   {
-    "name": "Gymnosperms",
-    "rank": "classs",
-    "included": [
-      "Pinopsida",
-      "Cycadopsida"
-    ],
-    "excluded": [],
-    "parent": "Plants"
+    "speciesGroup": "Bryophytes",
+    "taxonRank": "phylum",
+    "taxa": [
+      {
+        "name": "Bryophyta",
+        "common": "Mosses"
+      },
+      {
+        "name": "Marchantiophyta",
+        "common": "Liverworts"
+      },
+      {
+        "name": "Anthocerotophyta",
+        "common": "Hornworts"
+      }
+    ]
   },
   {
-    "name": "ferns",
-    "rank": "phylum",
-    "included": [
-      "Equisetophyta",
-      "Lycopodiophyta",
-      "Polypodiophyta",
-      "Psilophyta"
-    ],
-    "excluded": [],
-    "parent": "Plants"
+    "speciesGroup": "Gymnosperms",
+    "taxonRank": "class",
+    "taxa": [
+      {
+        "name": "Pinopsida",
+        "common": "Conifers"
+      },
+      {
+        "name": "Cycadopsida",
+        "common": "Cycads"
+      }
+    ]
   },
   {
-    "name": "Angiosperms",
-    "rank": "phylum",
-    "included": [
-      "Magnoliophyta"
-    ],
-    "excluded": [],
-    "parent": "Plants"
+    "speciesGroup": "Ferns",
+    "taxonRank": "phylum",
+    "taxa": [
+      {
+        "name": "Equisetophyta",
+        "common": "Horsetails"
+      },
+      {
+        "name": "Lycopodiophyta",
+        "common": "Clubmosses"
+      },
+      {
+        "name": "Polypodiophyta",
+        "common": "Ferns"
+      },
+      {
+        "name": "Psilophyta",
+        "common": "Whisk Ferns"
+      }
+    ]
   },
   {
-    "name": "Monocots",
-    "rank": "class",
-    "included": [
-      "Liliopsida"
-    ],
-    "excluded": [],
-    "parent": "Angiosperms"
+    "speciesGroup": "Angiosperms",
+    "taxonRank": "phylum",
+    "taxa": [
+      {
+        "name": "Magnoliophyta",
+        "common": "Flowering Plants"
+      }
+    ]
   },
   {
-    "name": "Dicots",
-    "rank": "classs",
-    "included": [
-      "Eudicotidae",
-      "Eudicotyledonae",
-      "Eudicotyledons"
-    ],
-    "excluded": [
-      "Liliopsida"
-    ],
-    "parent": "Angiosperms"
+    "speciesGroup": "Monocots",
+    "taxonRank": "class",
+    "taxa": [
+      {
+        "name": "Liliopsida",
+        "common": "Monocots"
+      }
+    ]
   },
   {
-    "name": "Fungi",
-    "rank": "kingdom",
-    "included": [
-      "Fungi"
-    ],
-    "excluded": []
+    "speciesGroup": "Dicots",
+    "taxonRank": "class",
+    "taxa": [
+      {
+        "name": "Eudicotidae",
+        "common": "Eudicots"
+      },
+      {
+        "name": "Eudicotyledonae",
+        "common": "Eudicots"
+      },
+      {
+        "name": "Eudicotyledons",
+        "common": "Eudicots"
+      }
+    ]
   },
   {
-    "name": "Chromista",
-    "rank": "kingdom",
-    "included": [
-      "Chromista"
-    ],
-    "excluded": []
+    "speciesGroup": "Fungi",
+    "taxonRank": "kingdom",
+    "taxa": [
+      {
+        "name": "Fungi",
+        "common": "Fungi"
+      }
+    ]
   },
   {
-    "name": "Protozoa",
-    "rank": "kingdom",
-    "included": [
-      "Protozoa"
-    ],
-    "excluded": []
+    "speciesGroup": "Chromista",
+    "taxonRank": "kingdom",
+    "taxa": [
+      {
+        "name": "Chromista",
+        "common": "Chromists"
+      }
+    ]
   },
   {
-    "name": "Bacteria",
-    "rank": "kingdom",
-    "included": [
-      "Bacteria"
-    ],
-    "excluded": []
+    "speciesGroup": "Protozoa",
+    "taxonRank": "kingdom",
+    "taxa": [
+      {
+        "name": "Protozoa",
+        "common": "Protozoans"
+      }
+    ]
   },
   {
-    "name": "Algae",
-    "rank": "phylum",
-    "included": [
-      "Bacillariophyta",
-      "Chlorophyta",
-      "Prasinophyta",
-      "Rhodophyta",
-      "Cryptophyta",
-      "Ochrophyta",
-      "Cercozoa",
-      "Euglenozoa",
-      "Cyanobacteria"
-    ],
-    "excluded": []
+    "speciesGroup": "Bacteria",
+    "taxonRank": "kingdom",
+    "taxa": [
+      {
+        "name": "Bacteria",
+        "common": "Bacteria"
+      }
+    ]
+  },
+  {
+    "speciesGroup": "Algae",
+    "taxonRank": "phylum",
+    "taxa": [
+      {
+        "name": "Bacillariophyta",
+        "common": "Diatoms"
+      },
+      {
+        "name": "Chlorophyta",
+        "common": "Green Algae"
+      },
+      {
+        "name": "Prasinophyta",
+        "common": "Prasinophyte Algae"
+      },
+      {
+        "name": "Rhodophyta",
+        "common": "Red Algae"
+      },
+      {
+        "name": "Cryptophyta",
+        "common": "Cryptomonads"
+      },
+      {
+        "name": "Ochrophyta",
+        "common": "Golden-brown Algae"
+      },
+      {
+        "name": "Cercozoa",
+        "common": "Cercozoans"
+      },
+      {
+        "name": "Euglenozoa",
+        "common": "Euglenids"
+      },
+      {
+        "name": "Cyanobacteria",
+        "common": "Blue-green Algae"
+      }
+    ]
   }
 ]
