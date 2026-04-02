@@ -173,7 +173,7 @@ jobs:
 
       - name: Run Copilot CLI
         env:
-          COPILOT_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COPILOT_GITHUB_TOKEN: ${{ secrets.GIT_PAT_TOKEN }}
         run: |
           ls -la ./test
 
