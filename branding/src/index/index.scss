@@ -259,12 +259,12 @@ ul.data-summary-links {
 }
 
 .news-carousel-btn {
-    flex: 0 0 22em;
+    flex: 0 0 auto;
     background: $inbo-primary;
     color: white;
     border: none;
     border-radius: 50%;
-    width: 1.5em;
+    width: 2em;
     aspect-ratio: 1;
     cursor: pointer;
     display: flex;
@@ -298,7 +298,7 @@ ul.data-summary-links {
 }
 
 .news-card {
-    flex: 0 0 320px;
+    flex: 0 0 22em;
     scroll-snap-align: start;
     background-color: white;
     border: 1px solid #ddd;
