@@ -153,7 +153,7 @@ jobs:
     if: ${{ failure() }}
     runs-on: [self-hosted]
     container:
-      image: nodejs
+      image: node:20
     steps:
       - name: Install Copilot CLI
         run: npm install -g @github/copilot
