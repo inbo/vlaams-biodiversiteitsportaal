@@ -259,21 +259,18 @@ ul.data-summary-links {
 }
 
 .news-carousel-btn {
-    flex: 0 0 auto;
+    flex: 0 0 22em;
     background: $inbo-primary;
     color: white;
     border: none;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 28px;
-    line-height: 1;
+    width: 1.5em;
+    aspect-ratio: 1;
     cursor: pointer;
-    display: none;
+    display: flex;
     align-items: center;
     justify-content: center;
     transition: background-color 0.2s ease;
-    padding: 0 0 3px 0;
 
     &:hover {
         background-color: $inbo-secondary;
