@@ -82,9 +82,21 @@ async function initUserManager(
     await handleAuthCallbacks(manager);
 
     const user = await manager.getUser();
-    if (Cookies.get(settings.auth.ala.authCookieName)) {
+    const authCookie = Cookies.get(settings.auth.ala.authCookieName);
+    if (authCookie) {
         if (!user) {
-            await manager.signinRedirect();
+            try {
+                const parsedCookie = JSON.parse(authCookie);
+                if (
+                    parsedCookie.refreshedAt &&
+                    parsedCookie.refreshedAt - Date.now() < 30 * 60
+                ) {
+                    await manager.signinRedirect();
+                }
+            } catch (e) {
+                console.warn("Failed to parse auth cookie: " + authCookie);
+                await manager.signinRedirect();
+            }
         } else {
             await authServiceWorker.setAccessToken(user);
         }
@@ -144,12 +156,18 @@ async function silentLogin(manager: UserManager) {
 }
 
 function setAlaAuthCookie(user?: User) {
-    Cookies.set(settings.auth.ala.authCookieName, user?.profile?.sub || "vbp", {
+    const cookieValue = JSON.stringify({
+        userId: user?.profile.sub,
+        refreshedAt: Date.now(),
+    });
+
+    Cookies.set(settings.auth.ala.authCookieName, cookieValue, {
         path: "/",
         sameSite: "lax",
         secure: window.location.protocol === "https:",
         domain: settings.auth.ala.authCookieDomain,
-        expires: 30 * 60 * 1000, // Keycloak SSO Idle Timeout of 30 min
+        // Cannot configure both session and timeout expiration
+        // expires: 30 * 60 * 1000, // Keycloak SSO Idle Timeout of 30 min
     });
 }
 
