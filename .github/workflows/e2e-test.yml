@@ -5,22 +5,22 @@ on:
   workflow_call:
     inputs:
       google_notification:
-        description: 'Notify Google Chat on failure'
+        description: "Notify Google Chat on failure"
         required: false
         default: false
         type: boolean
       target_env:
-        description: 'Environment to test'
+        description: "Environment to test"
         required: true
         default: prod
         type: string
 
 jobs:
   e2e-test:
-    runs-on: [ self-hosted ]
+    runs-on: [self-hosted]
     container:
       image: cypress/browsers:22.15.0
-#      options: --user 1001
+    #      options: --user 1001
     steps:
       - name: Install git LFS
 
@@ -140,10 +140,42 @@ jobs:
             ]
           }
           EOF
-          
+
           cat ./google-chat.json
 
           wget \
           --header="Content-Type: application/json" \
           --post-file=./google-chat.json \
           "$GOOGLE_CHAT_WEBHOOK_URL"
+
+  copilot-fix:
+    needs: e2e-test
+    if: ${{ failure() }}
+    runs-on: [self-hosted]
+    container:
+      image: nodejs
+    steps:
+      - name: Install Copilot CLI
+        run: npm install -g @github/copilot
+
+      - name: Download artifact
+        uses: actions/download-artifact@v8
+        with:
+          name: upload-screen-captures
+          path: ./test
+
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Run Copilot CLI
+        env:
+          COPILOT_GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        run: |
+          set -e -o pipefail
+          ls -la
+
+          copilot -p "The Cypress e2e tests, found in ./test folder, failed. Have a look at the test-output in ./test/test-results.json and see if you can find the root cause. If a simple code change in ./test or ./branding can be made to fix the test, create a new pull-request with the proposed changes. In any case write a short summary (max 150 characters) of your findings to summary.md" --allow-tool='shell(git:*)' --allow-tool=write --no-ask-user
+
+          cat summary.md >> "$GITHUB_STEP_SUMMARY"
+
