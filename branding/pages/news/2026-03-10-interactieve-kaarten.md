@@ -1,24 +1,27 @@
 ---
-title: "Biologische Waarderingskaart (BWK) 2025 nu beschikbaar in het geografisch portaal"
+title: "Nieuw: interactieve verspreidingskaarten beschikbaar"
 date: "2026-03-10"
 excerpt:
-    "Een belangrijke update voor beleidsmakers, ruimtelijk planners en natuuronderzoekers in Vlaanderen: de nieuwste versie van de Biologische Waarderingskaart (BWK 2025) is vanaf nu te raadplegen op het Vlaams Biodiversiteitsportaal."
+    "Het Vlaams Biodiversiteitsportaal biedt interactieve
+    verspreidingskaarten aan voor meer dan 10.000 soorten. Ontdek waar soorten
+    voorkomen in Vlaanderen."
 ---
 
-Een belangrijke update voor beleidsmakers, ruimtelijk planners en natuuronderzoekers in Vlaanderen: de nieuwste versie van de Biologische Waarderingskaart (BWK 2025) is vanaf nu te raadplegen op het Vlaams Biodiversiteitsportaal.
+Breng de Vlaamse natuur in beeld: Interactieve verspreidingskaarten voor meer dan 10.000 soorten!
+Benieuwd welke planten, dieren en schimmels er in jouw eigen streek leven? Of ben je voor gericht natuurbeheer op zoek naar de locaties van specifieke, zeldzame soorten? Het Vlaams Biodiversiteitsportaal maakt het nu makkelijker dan ooit. Met de nieuwe, interactieve verspreidingskaarten ontdek je in één oogopslag waar meer dan 10.000 verschillende soorten voorkomen in Vlaanderen.
 
-De Biologische Waarderingskaart is al jarenlang een cruciaal en onmisbaar instrument. Het geeft een gedetailleerd en gebiedsdekkend overzicht van de biologische waarde van elk stukje Vlaanderen. Met de toevoeging van de 2025-versie aan het portaal, beschik je weer over de meest actuele en nauwkeurige ecologische terreingegevens.
+Data is pas echt waardevol als je het goed visueel inzichtelijk kunt maken. Daarom biedt het portaal deze krachtige tool aan, waarmee de enorme rijkdom aan Vlaamse biodiversiteitsdata direct tastbaar en begrijpelijk wordt voor iedereen.
 
-Ontdek het direct in het geografisch portaal
-Het mooiste van deze update? Je hoeft niet zelf met ruwe databestanden aan de slag. De BWK 2025 is namelijk naadloos geïntegreerd in het geografisch portaal van het Vlaams Biodiversiteitsportaal. Dit biedt direct een aantal grote voordelen:
+Wat kun je met deze kaarten doen?
 
-Visuele verkenning: Je kunt de kaartlagen eenvoudig aanzetten, soepel inzoomen op specifieke regio's of percelen, en direct de biologische waardering van een gebied visueel analyseren.
+Snel en gericht zoeken: Van de alledaagse egel tot zeldzame orchideeën en de specifieke slijmzwammen uit de Funbel-dataset; zoek een soort op en zie direct de verspreiding over heel Vlaanderen.
 
-Actuele fundamenten: Baseer je ruimtelijke projecten, milieueffectrapportages (MER) of natuurbeheerplannen op de meest actuele inventarisaties van 2025.
+Zoom in op jouw regio: Bekijk tot in detail welke waarnemingen er in jouw gemeente, lokale natuurgebied of zelfs in de buurt van jouw achtertuin zijn gedaan.
 
-Kruisbestuiving van data: Het geografisch portaal maakt het mogelijk om de BWK 2025 direct te combineren met andere datasets. Leg bijvoorbeeld de verspreidingsgegevens van specifieke soortengroepen over de BWK heen voor ruimtelijke analyses.
+Combineer en analyseer: Leg de verspreidingsdata van soorten eenvoudig over andere geografische lagen, zoals de recente Biologische Waarderingskaart (BWK 2025), voor een complete ecologische ruimtelijke analyse.
 
-Bekijk de nieuwe kaart vandaag nog
-Klaar om de nieuwste ecologische data van Vlaanderen in kaart te brengen? Log veilig in via ACM/IDM, navigeer naar het geografisch portaal en vink de BWK 2025 aan om direct te starten met verkennen!
+Voor liefhebber én professional
+Of je nu een gepassioneerde natuurliefhebber bent die wil weten waar je het beste vogels kunt spotten, of een ecoloog die de impact van beleid op leefgebieden wil onderzoeken: deze interactieve kaarten vormen een onmisbare, visuele basis.
 
-[BWK25](/images/pages/news/bwk25.png)
+Ontdek het zelf
+Wil je weten welke van de 10.000 soorten zich bij jou in de buurt verstoppen? Log (eenvoudig via ACM/IDM) in op het Vlaams Biodiversiteitsportaal, open de interactieve kaart en breng de Vlaamse natuur vandaag nog voor jezelf in kaart!
