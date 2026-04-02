@@ -176,7 +176,6 @@ jobs:
         env:
           COPILOT_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          set -e -o pipefail
           ls -la ./test
 
           copilot -p "The Cypress e2e tests, found in ./test folder, failed. Have a look at the test-output in ./test/test-results.json and see if you can find the root cause. If a simple code change in ./test or ./branding can be made to fix the test, create a new pull-request with the proposed changes. In any case write a short summary (max 150 characters) of your findings to summary.md" --allow-tool='shell(git:*)' --allow-tool=write --no-ask-user
