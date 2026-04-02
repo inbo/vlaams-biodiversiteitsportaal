@@ -92,6 +92,8 @@ async function initUserManager(
                     parsedCookie.refreshedAt - Date.now() < 30 * 60
                 ) {
                     await manager.signinRedirect();
+                } else {
+                    clearAlaAuthCookies();
                 }
             } catch (e) {
                 console.warn("Failed to parse auth cookie: " + authCookie);
