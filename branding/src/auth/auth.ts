@@ -62,7 +62,7 @@ async function initUserManager(
         await authServiceWorker.setAccessToken(null);
     });
 
-    manager.events.addAccessTokenExpired(async function() {
+    manager.events.addAccessTokenExpired(async function () {
         console.warn("Access token expired");
         if (!document.hidden) {
             await silentLogin(manager);
@@ -149,6 +149,7 @@ function setAlaAuthCookie(user?: User) {
         sameSite: "lax",
         secure: window.location.protocol === "https:",
         domain: settings.auth.ala.authCookieDomain,
+        expires: 30 * 60 * 1000, // Keycloak SSO Idle Timeout of 30 min
     });
 }
 
