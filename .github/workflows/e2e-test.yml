@@ -23,7 +23,6 @@ jobs:
     #      options: --user 1001
     steps:
       - name: Install git LFS
-
         run: |
           apt-get update && apt-get install -y git-lfs
 
@@ -157,6 +156,10 @@ jobs:
     permissions:
       copilot-requests: write
     steps:
+      - name: Install git LFS
+        run: |
+          apt-get update && apt-get install -y git-lfs
+
       - name: Install Copilot CLI
         run: npm install -g @github/copilot
 
