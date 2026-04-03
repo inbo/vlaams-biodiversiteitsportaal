@@ -3,9 +3,9 @@ name: E2E tests | Dev
 run-name: ${{ github.actor }} is testing the VBP portal @ dev
 
 on:
-  # schedule:
-  #   - cron: '0 10 * * 1-5'
-  #
+  schedule:
+    - cron: "0 10 * * 1-5"
+
   workflow_dispatch:
     inputs:
       google_notification:
