@@ -195,6 +195,6 @@ jobs:
             In any case write a short summary (max 150 characters) of your findings to summary.md
           " \
             --allow-tool='shell(git:*)' --allow-tool=write --no-ask-user \
-            --model gpt-5.1-codex
+            --model claude-sonnet-4.6
 
           cat summary.md >> "$GITHUB_STEP_SUMMARY"
