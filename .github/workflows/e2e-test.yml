@@ -173,7 +173,7 @@ jobs:
         uses: actions/download-artifact@v8
         with:
           name: upload-screen-captures
-          path: test
+          path: test-results
 
       - uses: actions/checkout@v5
         with:
@@ -185,7 +185,7 @@ jobs:
           COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
           GH_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
         run: |
-          ls -la ./test
+          ls -la ./test-results
 
           npx copilot \
             -p "
