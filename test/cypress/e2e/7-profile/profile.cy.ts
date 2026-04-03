@@ -56,12 +56,13 @@ describe("User profile - Authenticated", () => {
 
   it("Show working annotations link", () => {
     cy.getCookie("VBP-AUTH").then((cookie) => {
+      const userId = JSON.parse(decodeURIComponent(cookie!.value)).userId;
       cy.get("#profile-overview")
         .find("#my-profile-my-annotated-records")
         .click();
       cy.url()
         .should("include", "/biocache-hub/occurrences/search/")
-        .should("include", `assertion_user_id:%22${cookie.value}%22`);
+        .should("include", `assertion_user_id:%22${userId}%22`);
       cy.get("h1").contains("Waarnemingsrecords").should("be.visible");
     });
   });
