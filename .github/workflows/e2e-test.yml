@@ -184,10 +184,6 @@ jobs:
           COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
           GH_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
         run: |
-          gh auth status
-
-          ls -la ./test-results
-
           npx copilot \
             -p "
             The Cypress e2e tests, found in ./test folder, failed. 
