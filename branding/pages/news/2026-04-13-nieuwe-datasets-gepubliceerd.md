@@ -1,7 +1,6 @@
 ---
 title: "Nieuwe INBOVEG-datasets gepubliceerd: Van valleigebieden tot heidelandschappen"
 date: "2026-04-01"
-author: "Vlaams Biodiversiteitsportaal"
 excerpt: "Het Instituut voor Natuur- en Bosonderzoek (INBO) ontsluit nieuwe vegetatiegegevens. Ontdek de unieke surveys van het project SBO Future Floodplains en waarnemingen op Vlaamse zandige heidegronden."
 ---
 
