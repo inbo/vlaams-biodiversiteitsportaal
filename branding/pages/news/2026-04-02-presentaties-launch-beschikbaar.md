@@ -25,3 +25,4 @@ Toekomstplannen: Wat we de komende jaren nog kunnen verwachten van het platform.
  [Presentatie & demonstratie VBP: visie en doelstellingen](https://www.vlaanderen.be/inbo/media/3048/dimi.pdf) door Dimitri Brosens  
  [Use Case Vleermuizen](https://www.vlaanderen.be/inbo/media/3047/daan.pdf) door Daan Dekeukeleire  
  [Toekomstplannen & roadmap](https://www.vlaanderen.be/inbo/media/3050/mariarose.pdf) door Aaike De Wever & Maria-Rose Eves Down  
+
