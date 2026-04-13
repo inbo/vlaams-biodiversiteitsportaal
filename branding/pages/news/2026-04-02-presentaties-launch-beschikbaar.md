@@ -1,6 +1,6 @@
 ---
 title: "Presentaties Launch Vlaams Biodiversiteitsportaal beschikbaar"
-date: "2026-04-01"
+date: "2026-04-02"
 excerpt:
     "Onlangs vond de lancering van het Vlaams Biodiversiteitsportaal plaats. Heb je het lanceringsevent gemist, of wil je de gegeven presentaties nog eens rustig nalezen? Goed nieuws: alle presentaties van deze inspirerende dag zijn vanaf nu digitaal beschikbaar."
 ---
