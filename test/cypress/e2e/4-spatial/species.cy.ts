@@ -43,7 +43,6 @@ describe("Spatial - Species", () => {
   });
 
   it("Can add one specific species by name", () => {
-    const speciesName = "vos";
     const speciesScientificName = "Vulpes vulpes";
 
     // Add a species by selecting it from the autocomplete
@@ -52,7 +51,7 @@ describe("Spatial - Species", () => {
       .contains("Soorten")
       .click();
     cy.get('input[value="searchSpecies"]').check();
-    cy.get("#speciesAutoComplete").type(speciesName);
+    cy.get("#speciesAutoComplete").type(speciesScientificName);
     cy.get(".autocomplete-item", { timeout: 30_000 })
       .contains(speciesScientificName)
       .click();
@@ -211,7 +210,7 @@ describe("Spatial - Species", () => {
   });
 
   it("Can add species from new imported points", () => {
-    const datasetName = `Test species import points ${new Date().toISOString()}`;
+    const datasetName = `Test species import points ${getFileNameTimeStamp()}`;
     const importData = `"scientificName","eventDate","decimalLatitude","decimalLongitude","occurrenceID","test"
 "Cryphaea heteromalla","20250310T11:54:00+01:00",50.8791,4.7025,"TEST:1","test"`;
 
