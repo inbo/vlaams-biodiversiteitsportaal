@@ -1,31 +1,26 @@
 ---
 title: "Broedvogeltrends 2025 beschikbaar in VBP"
 date: "2026-04-14"
-excerpt: "Het Instituut voor Natuur- en Bosonderzoek (INBO) ontsluit nieuwe vegetatiegegevens. Ontdek de unieke surveys van het project SBO Future Floodplains en waarnemingen op Vlaamse zandige heidegronden."
+excerpt: "Trends op basis van de Algemene Broedvogelmonitoring Vlaanderen (ABV). Technisch achtergrondrapport voor de periode 2007-2025 beschikbaar op VBP"
 ---
 
-Vandaag kondigen we de publicatie aan van twee belangrijke datasets uit de **INBOVEG-databank**, de referentiebron voor vegetatieopnamen van het Instituut voor Natuur- en Bosonderzoek (INBO). 
+Op het VBP zijn nu de laatste grafieken van"Trends op basis van de Algemene Broedvogelmonitoring Vlaanderen (ABV)" beschikbaar. Je kan ze terugvinden onder de tab ABV trend op de soortenpagina's in het VBP. 
 
-Deze data zijn niet alleen lokaal relevant, maar dragen ook bij aan internationale netwerken zoals de *Global Index of Vegetation-plot databases* en het *European Vegetation Archive*.
+[TABABV](/images/pages/news/trendTab.png)
 
-### Toekomst van onze valleien: SBO Future Floodplains (2018-2019)
 
-De eerste publicatie bundelt de resultaten van het project **SBO Future Floodplains**. In dit onderzoek stond de veerkracht en de biodiversiteit van overstromingsvlaktes centraal. Om een robuust beeld te krijgen, zijn drie specifieke datasets samengevoegd tot één integraal overzicht van de aanwezige vegetatie.
+Dit rapport publiceert de meest recente analyses op basis van het telwerk voor het project “Algemene Broedvogelmonitoring Vlaanderen” of kortweg ABV. Dit project is een gezamenlijk initiatief van het Instituut voor Natuur- en Bosonderzoek (INBO) en Natuurpunt Studie in samenwerking met de lokale vogelwerkgroepen. De samenwerking tussen deze organisaties staat garant voor een goede ondersteuning van en communicatie naar het vrijwilligersnetwerk door Natuurpunt Studie, en een degelijke professionele wetenschappelijke ondersteuning en dataverwerking door het INBO. Sinds 2016 maakt het integraal deel uit van het project Soortenmeetnetten, dat door INBO en Agentschap Natuur en Bos (ANB) wordt gefinancierd.
 
-* **Gedetailleerde waarnemingen:** Naast de soortenlijst bevat de dataset cruciale informatie over de verticale structuur van de vegetatie (de vegetatielagen), terug te vinden onder de `occurrence remarks`.
-* **Gestandaardiseerde methodiek:** De abundantie van soorten is vastgelegd via de **Original Londo-schaal**. Voor onderzoekers die de historische context willen begrijpen: hoewel de veldprotocollen over de tijd verfijnd zijn, is de kernmethode consistent gebleven. De meest recente protocolversie (2023.03) is [hier beschikbaar](https://protocols.inbo.be/2023.03/).
-* **Data-integriteit:** De records zijn volledig gesynchroniseerd met GBIF onder de identificatiecodes `IV2018072709165332`, `IV2019062504463183` en `IV2018062705565942`.
+[TABABV](/images/pages/news/coverabv.png)
 
-### Biodiversiteit op zandige heidegronden (2012-2017)
+Het project werd opgestart in 2007 en heeft als doelstelling het beschrijven van aantalsontwikkelingen van een set van ca. 80 algemene broedvogelsoorten in Vlaanderen. Zowel jaarlijkse schommelingen als meerjarige trends zijn daarbij interessante resultaten in functie van lokaal, regionaal en internationaal beleid.
 
-De tweede dataset werpt een licht op de vegetatiedynamiek van de Vlaamse zandige heidegebieden. Deze waarnemingen, verzameld tussen 2012 en 2017, bieden een onmisbare basislijn voor het beheer van dit kwetsbare habitat.
+[Knobbelzwaan](/images/pages/news/knobbelzwaan.png)
 
-* **Wetenschappelijke onderbouwing:** Deze dataset (identificatiecode `IV2012080813274042`) is nauw verbonden met uitgebreid wetenschappelijk onderzoek. 
-* **Rapportage:** Voor een diepgaand inzicht in de methodiek en de resultaten van deze opnamen kunnen gebruikers het bijbehorende rapport raadplegen via de officiële DOI-link: [https://doi.org/10.21436/inbor.17520375](https://doi.org/10.21436/inbor.17520375).
+Dit rapport is bedoeld als een technisch achtergrondrapport. Het bestaat uit drie delen: het eerste deel beschrijft de methodiek van de verwerking en de weergave van de resultaten; het tweede deel geeft een aantal indicatoren gebaseerd op trends van meerdere soorten; het derde deel beschrijft de tijdreeks van individuele soorten. We beperken ons in delen twee en drie tot een gestandaardiseerde weergave van de meest relevante cijfers zonder ecologische interpretatie. Voor een ecologische interpretatie van de resultaten verwijzen we naar andere publicaties zoals INBO Vogelnieuws.
 
-### Waarom zijn deze publicaties belangrijk?
+Bekijk het volledige rapport [hier](https://www.vlaanderen.be/inbo/rapporten/abv-trends-2007-2025/index.html)
 
-Door deze data openbaar te stellen via het Vlaams Biodiversiteitsportaal, faciliteert het INBO hergebruik voor beleidsvoorbereiding, natuurbeheer en wetenschappelijke meta-analyses. Of het nu gaat om het modelleren van ecosysteemdiensten in valleigebieden of het monitoren van de heide: deze datasets vormen een essentiële bouwsteen voor onze kennis over de Vlaamse natuur.
-
-**Verken de datasets direct op ons portaal en ga zelf aan de slag met de data!**
-
+Wijze van citeren
+Onkelinx, T. et al. (2026) Trends op basis van de Algemene Broedvogelmonitoring Vlaanderen (ABV). Technisch achtergrondrapport voor de periode 2007-2025. Rapporten van het Instituut voor Natuur- en Bosonderzoek 2026(14). Instituut voor Natuur- en Bosonderzoek, Brussel. DOI: 10.21436/inbor.141312967
+Exporteer referentie alsBibTexRISCSL-JSON
