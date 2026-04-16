@@ -189,7 +189,10 @@ jobs:
             -p "
             The Cypress e2e tests, found in ./test folder, failed. 
             Have a look at the test-output in ./test/test-results.json and see if you can find the root cause. 
+
             If a simple code change in ./test or ./branding can be made to fix the test, create a new pull-request with the proposed changes.
+            Always use 'copilot/fix-cypress-e2e-tests' as the git branch name.
+
             In any case write a short summary (max 150 characters) of your findings to summary.md
           " \
             --allow-tool='shell(git:*)' --allow-tool='shell(gh:*)' --allow-tool=write --allow-url '*.inbo.be' --no-ask-user
