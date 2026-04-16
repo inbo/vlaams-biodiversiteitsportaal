@@ -18,7 +18,7 @@ grails:
   serverURL: "${common.protocol}://${common.domain}/spatial-hub"
   cache:
     ehcache:
-      ehcacheXmlLocation: 'file:///config/spatial-hub/ehcache.xml'
+      ehcacheXmlLocation: "file:///config/spatial-hub/ehcache.xml"
   app:
     context: "/"
     controllers:
@@ -27,16 +27,15 @@ grails:
         maxRequestSize: 50_000_000
 
 i18n:
-  region: 'nl'
+  region: "nl"
 
 viewConfig:
-  json: 'view-config.json'
+  json: "view-config.json"
 
 # List of valid user roles.
 # Use '*' for ANY role (login will be required).
 # Use an empty list for 'login is not required'
-user_roles: [ ]
-
+user_roles: []
 
 # fq applied to every biocache-service query
 qc: ""
@@ -117,14 +116,14 @@ spApp:
       disableBiocacheQueryOnClick: true
 
 rangeDataTypes:
-  - 'tint'
-  - 'int'
-  - 'tdouble'
-  - 'tfloat'
-  - 'tdate'
-  - 'float'
-  - 'double'
-  - 'date'
+  - "tint"
+  - "int"
+  - "tdouble"
+  - "tfloat"
+  - "tdate"
+  - "float"
+  - "double"
+  - "date"
 
 numberOfIntervalsForRangeData: 7
 #
@@ -133,9 +132,9 @@ numberOfIntervalsForRangeData: 7
 #extraLinkUrl: "https://spatial-old.ala.org.au"
 #extraLinkText: "Old site"
 
-date.facet: 'occurrence_date'
-date.min: '1780-01-01'
-date.max: '2030-01-01'
+date.facet: "occurrence_date"
+date.min: "1780-01-01"
+date.max: "2030-01-01"
 
 #
 # Override the list of grouped facets from biocache-service (biocacheService.url/search/grouped/facets).
@@ -188,7 +187,7 @@ workflow.enabled: true
 # These workflows will be forced to operate on the selected layer and should be public.
 #
 #workflow.speciesFilters: [ { name: 'CSDM default filter', workflowId: 52 } ]
-workflow.speciesFilters: [ ]
+workflow.speciesFilters: []
 
 google:
   apikey: "get-a-google-api-key"
@@ -209,7 +208,7 @@ ala:
   baseURL: "${common.protocol}://${common.domain}"
 bie:
   baseURL: "${common.protocol}://${common.domain}/bie-hub"
-  searchPath: '/search'
+  searchPath: "/search"
 
 bieService:
   baseURL: "${common.protocol}://${common.domain}/bie-index"
@@ -224,12 +223,12 @@ layersService:
   url: "${common.protocol}://${common.domain}/spatial-service"
 
 lists:
-  url: '/species-list'
+  url: "/species-list"
   #  TODO: causes the portal-full tomcat to hang at startup, spatial-hub blocks on this
   #        and species-lists is no yet serving any requests
   #  url: "${common.protocol}://${common.domain}/species-list"
-  threatenedSpeciesUrl: '/ws/speciesList/?isThreatened=eq:true&isAuthoritative=eq:true'
-  invasiveSpeciesUrl: '/ws/speciesList/?isInvasive=eq:true&isAuthoritative=eq:true'
+  threatenedSpeciesUrl: "/ws/speciesList/?isThreatened=eq:true&isAuthoritative=eq:true"
+  invasiveSpeciesUrl: "/ws/speciesList/?isInvasive=eq:true&isAuthoritative=eq:true"
   facets: True
   migratoryDR:
   iconicSpeciesDR:
@@ -252,13 +251,19 @@ biocacheService:
   #Facets to ignore in the biocache grouped/facets service
   default_facets_ignored: "data_resource_uid,data_provider_uid,species,collection_uid,institution_code_name,institution_uid,uncertainty"
   custom_facets:
-    Attribution: [ 'Data Provider;data_provider', 'Collection;collection_name', 'Data Resource;data_resource', 'Institution;institution_name' ]
-    Location: [ 'Coordinate Uncertainty;coordinate_uncertainty' ]
-    Occurrence: [ 'Year;occurrence_year' ]
+    Attribution:
+      [
+        "Data Provider;data_provider",
+        "Collection;collection_name",
+        "Data Resource;data_resource",
+        "Institution;institution_name",
+      ]
+    Location: ["Coordinate Uncertainty;coordinate_uncertainty"]
+    Occurrence: ["Year;occurrence_year"]
 
 namematching:
-    baseURL: "${common.protocol}://namematching.${common.domain}"
-    
+  baseURL: "${common.protocol}://namematching.${common.domain}"
+
 sampling:
   url: "${common.protocol}://${common.domain}/spatial-service"
 
@@ -267,10 +272,70 @@ geoserver:
 
 flickr:
   url: "https://api.flickr.com/services/rest/?method="
-  searchPhotos: 'flickr.photos.search'
+  searchPhotos: "flickr.photos.search"
   # licensesInfo: 'flickr.photos.licenses.getInfo'
   # licenses data is found at https://api.flickr.com/services/rest/?method=flickr.photos.licenses.getInfo&api_key=<api_key>&format=json&nojsoncallback=1
-  licensesData: { 'licenses': { 'license': [ { 'id': '0', 'name': 'All Rights Reserved', 'url': '' }, { 'id': '4', 'name': 'Attribution License', 'url': 'https://creativecommons.org/licenses/by/2.0/' }, { 'id': '6', 'name': 'Attribution-NoDerivs License', 'url': 'https://creativecommons.org/licenses/by-nd/2.0/' }, { 'id': '3', 'name': 'Attribution-NonCommercial-NoDerivs License', 'url': 'https://creativecommons.org/licenses/by-nc-nd/2.0/' }, { 'id': '2', 'name': 'Attribution-NonCommercial License', 'url': 'https://creativecommons.org/licenses/by-nc/2.0/' }, { 'id': '1', 'name': 'Attribution-NonCommercial-ShareAlike License', 'url': 'https://creativecommons.org/licenses/by-nc-sa/2.0/' }, { 'id': '5', 'name': 'Attribution-ShareAlike License', 'url': 'https://creativecommons.org/licenses/by-sa/2.0/' }, { 'id': '7', 'name': 'No known copyright restrictions', 'url': 'https://www.flickr.com/commons/usage/' }, { 'id': '8', 'name': 'United States Government Work', 'url': 'http://www.usa.gov/copyright.shtml' }, { 'id': '9', 'name': 'Public Domain Dedication (CC0)', 'url': 'https://creativecommons.org/publicdomain/zero/1.0/' }, { 'id': '10', 'name': 'Public Domain Mark', 'url': 'https://creativecommons.org/publicdomain/mark/1.0/' } ] }, 'stat': 'ok' }
+  licensesData:
+    {
+      "licenses":
+        {
+          "license":
+            [
+              { "id": "0", "name": "All Rights Reserved", "url": "" },
+              {
+                "id": "4",
+                "name": "Attribution License",
+                "url": "https://creativecommons.org/licenses/by/2.0/",
+              },
+              {
+                "id": "6",
+                "name": "Attribution-NoDerivs License",
+                "url": "https://creativecommons.org/licenses/by-nd/2.0/",
+              },
+              {
+                "id": "3",
+                "name": "Attribution-NonCommercial-NoDerivs License",
+                "url": "https://creativecommons.org/licenses/by-nc-nd/2.0/",
+              },
+              {
+                "id": "2",
+                "name": "Attribution-NonCommercial License",
+                "url": "https://creativecommons.org/licenses/by-nc/2.0/",
+              },
+              {
+                "id": "1",
+                "name": "Attribution-NonCommercial-ShareAlike License",
+                "url": "https://creativecommons.org/licenses/by-nc-sa/2.0/",
+              },
+              {
+                "id": "5",
+                "name": "Attribution-ShareAlike License",
+                "url": "https://creativecommons.org/licenses/by-sa/2.0/",
+              },
+              {
+                "id": "7",
+                "name": "No known copyright restrictions",
+                "url": "https://www.flickr.com/commons/usage/",
+              },
+              {
+                "id": "8",
+                "name": "United States Government Work",
+                "url": "http://www.usa.gov/copyright.shtml",
+              },
+              {
+                "id": "9",
+                "name": "Public Domain Dedication (CC0)",
+                "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+              },
+              {
+                "id": "10",
+                "name": "Public Domain Mark",
+                "url": "https://creativecommons.org/publicdomain/mark/1.0/",
+              },
+            ],
+        },
+      "stat": "ok",
+    }
   apiKey:
   secret:
   tags:
@@ -284,7 +349,7 @@ flickr:
 #    json: 'view-config.json'
 
 sessions:
-  dir: '/data/spatial-hub/sessions'
+  dir: "/data/spatial-hub/sessions"
 
 admin_role: ROLE_ADMIN
 
@@ -327,23 +392,23 @@ startup:
     default: 1_grb
   baselayers:
     1_grb:
-      name: 'Grootschalig Referentiebestand'
-      link: 'https://www.vlaanderen.be/datavindplaats/catalogus/wmts-grb'
-      type: 'group'
+      name: "Grootschalig Referentiebestand"
+      link: "https://www.vlaanderen.be/datavindplaats/catalogus/wmts-grb"
+      type: "group"
       layerParams:
         layers:
-          - name: 'Open Street Map'
-            url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-            type: 'xyz'
-            exportType: 'minimal'
-            projections: [ '3857' ]
+          - name: "Open Street Map"
+            url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            type: "xyz"
+            exportType: "minimal"
+            projections: ["3857"]
             layerParams:
               opacity: 0.3
-          - name: 'Grootschalig Referentiebestand'
-            url: 'https://geo.api.vlaanderen.be/GRB/wmts?service=WMTS&request=GetTile&version=1.0.0&layer=grb_bsk&style=GRB-Basiskaart&tilematrixset=GoogleMapsVL&format=image%2Fpng&tilematrix={z}&tilerow={y}&tilecol={x}'
-            type: 'xyz'
-            exportType: 'minimal'
-            projections: [ '3857' ]
+          - name: "Grootschalig Referentiebestand"
+            url: "https://geo.api.vlaanderen.be/GRB/wmts?service=WMTS&request=GetTile&version=1.0.0&layer=grb_bsk&style=GRB-Basiskaart&tilematrixset=GoogleMapsVL&format=image%2Fpng&tilematrix={z}&tilerow={y}&tilecol={x}"
+            type: "xyz"
+            exportType: "minimal"
+            projections: ["3857"]
             layerParams:
               maxZoom: 21
     #              bounds: [
@@ -351,24 +416,24 @@ startup:
     #                [ 51.52780962525605, 6.1468505859375 ]
     #              ]
     2_luchtkaart:
-      name: 'Luchtfoto''s'
-      link: 'https://www.vlaanderen.be/datavindplaats/catalogus/wmts-orthofotomozaiek-middenschalig-winteropnamen-kleur-meest-recent-vlaanderen'
-      type: 'group'
+      name: "Luchtfoto's"
+      link: "https://www.vlaanderen.be/datavindplaats/catalogus/wmts-orthofotomozaiek-middenschalig-winteropnamen-kleur-meest-recent-vlaanderen"
+      type: "group"
       layerParams:
         layers:
-          - name: 'Open Street Map'
-            url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-            type: 'xyz'
-            exportType: 'minimal'
-            link: 'https://www.openstreetmap.org/about'
-            projections: [ '3857' ]
+          - name: "Open Street Map"
+            url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            type: "xyz"
+            exportType: "minimal"
+            link: "https://www.openstreetmap.org/about"
+            projections: ["3857"]
             layerParams:
               opacity: 0.3
-          - name: 'Lucht Foto''s'
-            url: 'https://geo.api.vlaanderen.be/OMWRGBMRVL/wmts?service=WMTS&request=GetTile&version=1.0.0&layer=omwrgbmrvl&tilematrixset=GoogleMapsVL&format=image%2Fpng&tilematrix={z}&tilerow={y}&tilecol={x}'
-            type: 'xyz'
-            exportType: 'satellite'
-            projections: [ '3857' ]
+          - name: "Lucht Foto's"
+            url: "https://geo.api.vlaanderen.be/OMWRGBMRVL/wmts?service=WMTS&request=GetTile&version=1.0.0&layer=omwrgbmrvl&tilematrixset=GoogleMapsVL&format=image%2Fpng&tilematrix={z}&tilerow={y}&tilecol={x}"
+            type: "xyz"
+            exportType: "satellite"
+            projections: ["3857"]
             layerParams:
               maxZoom: 21
       #        bounds: [
@@ -377,11 +442,11 @@ startup:
       #        ]
 
 defaultareas:
-  - name: 'Vlaanderen'
-    fqs: [ 'longitude:[2.54133 TO 5.91200]', 'latitude:[50.68767 TO 51.50511]' ]
-    wkt: 'POLYGON((2.54133 50.68767, 5.91200 50.68767, 5.91200 51.50511, 2.54133 51.50511, 2.54133 50.68767))'
+  - name: "Vlaanderen"
+    fqs: ["longitude:[2.54133 TO 5.91200]", "latitude:[50.68767 TO 51.50511]"]
+    wkt: "POLYGON((2.54133 50.68767, 5.91200 50.68767, 5.91200 51.50511, 2.54133 51.50511, 2.54133 50.68767))"
     areaSqKm: 13625
-    bbox: [ 50.68767, 51.50511, 2.54133, 5.91200 ]
+    bbox: [50.68767, 51.50511, 2.54133, 5.91200]
 
 presetWMSServers:
   - name: "GRB"
@@ -435,7 +500,6 @@ presetWMSServers:
   - name: "INBO - Watervlakken"
     url: "https://gisservices.inbo.be/arcgis/services/Watervlakken/MapServer/WMSServer?request=GetCapabilities&service=WMS"
 
-
 allowProxy:
   server: "geo.api.vlaanderen.be,gisservices.inbo.be"
 
@@ -470,14 +534,12 @@ fq:
 #      definition:
 #        code: 'EPSG:31370'
 
-
 sandbox:
   url: ${common.protocol}://${common.domain}/sandbox-service
   uiUrl: ${common.protocol}://${common.domain}/sandbox-hub
 
 sandboxService:
   url: ${common.protocol}://${common.domain}/sandbox-service
-
 
 sandboxSpatial:
   hubUrl: ${common.protocol}://${common.domain}/sandbox-hub
@@ -487,7 +549,7 @@ sandboxSpatial:
 environments:
   local:
     lists:
-      url: '' #prevent portal-full from deadlocking at startup
+      url: "" #prevent portal-full from deadlocking at startup
   inbo_dev:
     assets:
       bundle: true
@@ -495,6 +557,9 @@ environments:
       bwk: cl10034
       landbouw: cl10033
       vhga: cl10089
+    spApp:
+      optionsAddWms: true
+
   inbo_uat:
     assets:
       bundle: true
@@ -505,3 +570,4 @@ environments:
       bwk: cl10265
       landbouw: cl10016
       vhga: cl10037
+
