@@ -539,7 +539,7 @@
   },
   {
     "speciesGroup": "Plants",
-    "facetName": "species_group",
+    "taxonRank": "kingdom",
     "taxa": [
       {
         "name": "Monocots",
