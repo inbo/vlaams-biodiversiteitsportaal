@@ -1,4 +1,8 @@
-import { getFileNameTimeStamp, TEST_LIST_PREFIX } from "cypress/support/utils";
+import {
+    getFileNameTimeStamp,
+    getTestOccurrenceCsv,
+    TEST_LIST_PREFIX,
+} from "cypress/support/utils";
 import * as path from "path";
 
 describe("Species list - manage", () => {
@@ -23,12 +27,11 @@ describe("Species list - manage", () => {
 
     it("Can add a new list using a file as input", () => {
         const listName = `${TEST_LIST_PREFIX} file ${getFileNameTimeStamp()}`;
+        const scientificName = "Cryphaea heteromalla";
         cy.get("a").contains("Upload").click();
 
         // Upload a CSV file with species data
-        const importDataFile =
-            `"scientificName","eventDate","decimalLatitude","decimalLongitude","occurrenceID","test"
-"Cryphaea heteromalla","20250310T11:54:00+01:00",50.8791,4.7025,"TEST:1","test"`;
+        const importDataFile = getTestOccurrenceCsv(scientificName);
 
         const filePath = path.join(
             Cypress.config("downloadsFolder"),
@@ -42,7 +45,7 @@ describe("Species list - manage", () => {
         cy.get("#checkData2").click();
         cy.get("#initialParse").find("tbody > tr")
             .should("have.length", 1)
-            .should("contain", "Cryphaea heteromalla");
+            .should("contain", scientificName);
 
         // Fill in list details and create
         cy.get("#listTitle").type(listName);
@@ -56,24 +59,23 @@ describe("Species list - manage", () => {
 
         cy.get("#listView").find("tbody > tr")
             .should("have.length", 1)
-            .should("contain", "Cryphaea heteromalla");
+            .should("contain", scientificName);
     });
 
     it("Can add a new list using textarea as input", () => {
         const listName =
             `${TEST_LIST_PREFIX} textarea ${getFileNameTimeStamp()}`;
+        const scientificName = "Oryctolagus cuniculus";
         cy.get("a").contains("Upload").click();
 
         // Add species through the text area
-        const importDataTextArea =
-            `"ScientificName","eventDate","decimalLatitude","decimalLongitude","occurrenceID","test"
-"Oryctolagus cuniculus","20250310T11:54:00+01:00",50.8791,4.7025,"TEST:1","test"`;
+        const importDataTextArea = getTestOccurrenceCsv(scientificName);
         cy.get("#copyPasteData").type(importDataTextArea);
 
         cy.get("#checkData").click();
         cy.get("#initialParse").find("tbody > tr")
             .should("have.length", 1)
-            .should("contain", "Oryctolagus cuniculus");
+            .should("contain", scientificName);
 
         // Fill in list details and create
         cy.get("#listTitle").type(listName);
@@ -87,7 +89,7 @@ describe("Species list - manage", () => {
 
         cy.get("#listView").find("tbody > tr")
             .should("have.length", 1)
-            .should("contain", "Oryctolagus cuniculus");
+            .should("contain", scientificName);
     });
 
     it("Can delete lists", () => {

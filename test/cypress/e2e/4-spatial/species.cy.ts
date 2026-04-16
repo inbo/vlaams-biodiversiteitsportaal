@@ -1,4 +1,8 @@
-import { getFileNameTimeStamp, TEST_LIST_PREFIX } from "cypress/support/utils";
+import {
+  getFileNameTimeStamp,
+  getTestOccurrenceCsv,
+  TEST_LIST_PREFIX,
+} from "cypress/support/utils";
 import * as path from "path";
 
 describe("Spatial - Species", () => {
@@ -43,16 +47,16 @@ describe("Spatial - Species", () => {
   });
 
   it("Can add one specific species by name", () => {
-    const speciesName = "vos";
     const speciesScientificName = "Vulpes vulpes";
 
-    // Add a species by selecting it from the autocomplete
+    // The autocomplete has become unreliable for localized common names in prod,
+    // so search using the scientific name that the test asserts later on.
     cy.get("#menu-0").click();
     cy.get('ul.dropdown-menu[aria-labelledby="menu-0"')
       .contains("Soorten")
       .click();
     cy.get('input[value="searchSpecies"]').check();
-    cy.get("#speciesAutoComplete").type(speciesName);
+    cy.get("#speciesAutoComplete").type(speciesScientificName);
     cy.get(".autocomplete-item", { timeout: 30_000 })
       .contains(speciesScientificName)
       .click();
@@ -212,8 +216,7 @@ describe("Spatial - Species", () => {
 
   it("Can add species from new imported points", () => {
     const datasetName = `Test species import points ${new Date().toISOString()}`;
-    const importData = `"scientificName","eventDate","decimalLatitude","decimalLongitude","occurrenceID","test"
-"Cryphaea heteromalla","20250310T11:54:00+01:00",50.8791,4.7025,"TEST:1","test"`;
+    const importData = getTestOccurrenceCsv("Cryphaea heteromalla");
 
     // Select importing new points
     cy.get("#menu-0").click();
@@ -225,7 +228,7 @@ describe("Spatial - Species", () => {
     // Upload data
     const filePath = path.join(
       Cypress.config("downloadsFolder"),
-      "imort-data.csv",
+      "import-data.csv",
     );
     cy.writeFile(filePath, importData);
     cy.get("#file").selectFile(filePath);
@@ -276,11 +279,6 @@ describe("Spatial - Species", () => {
   });
 
   it("Can add species from existing dataset", () => {
-    // Requires the precious test to have run first
-    const datasetName = Cypress.env("datasetName");
-    expect(datasetName).to.exist;
-    expect(datasetName).to.not.be.empty;
-
     // Select previously imported points
     cy.get("#menu-0").click();
     cy.get('ul.dropdown-menu[aria-labelledby="menu-0"')
@@ -288,34 +286,38 @@ describe("Spatial - Species", () => {
       .click();
     cy.get('input[value="sandboxPoints"]').check();
 
-    // Varify new dataset is selected and click next
+    // This flow only needs an existing imported dataset, not one created earlier in
+    // the same run. Select the first available dataset to avoid cross-test coupling.
     cy.get('input[value="sandboxPoints"]')
       .parent()
       .parent()
-      .contains(datasetName)
-      .parent()
-      .find('input[type="checkbox"]')
-      .check();
+      .find("table tbody tr", { timeout: 30_000 })
+      .first()
+      .within(() => {
+        cy.get("td")
+          .first()
+          .invoke("text")
+          .then((datasetName) => datasetName.trim())
+          .as("datasetName");
+        cy.get('input[type="checkbox"]').check();
+      });
     cy.get('button[name="next"]').click();
 
-    // Verify that the modal is not shown and the layer is added to the list
-    cy.get(".progress-bar", { timeout: 30_000 }).should("not.be.visible");
-    cy.get('[name="divMappedLayers"]')
-      .contains(datasetName)
-      .should("be.visible");
+    cy.get("@datasetName").then((datasetName) => {
+      // Verify that the modal is not shown and the layer is added to the list
+      cy.get(".progress-bar", { timeout: 30_000 }).should("not.be.visible");
+      cy.get('[name="divMappedLayers"]').contains(datasetName).should("be.visible");
 
-    // Verify that the legend is visible
-    cy.get("#legend").should("be.visible");
+      // Verify that the legend is visible
+      cy.get("#legend").should("be.visible");
 
-    // Verify that the layer is visible on the map
-    if (Cypress.env("TARGET_ENV") === "prod") {
-      cy.get("#map").matchImageSnapshot({
-        failureThreshold: 0.4,
-        failureThresholdType: "percent",
-      });
-    }
-
-    // Store dataset name for dependent test
-    Cypress.env("datasetName", datasetName);
+      // Verify that the layer is visible on the map
+      if (Cypress.env("TARGET_ENV") === "prod") {
+        cy.get("#map").matchImageSnapshot({
+          failureThreshold: 0.4,
+          failureThresholdType: "percent",
+        });
+      }
+    });
   });
 });
