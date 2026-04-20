@@ -31,7 +31,7 @@
   },
   {
     "speciesGroup": "Reptiles",
-    "taxonRank": "order",
+    "taxonRank": "class",
     "taxa": [
       {
         "name": "Testudines",
@@ -542,28 +542,8 @@
     "taxonRank": "kingdom",
     "taxa": [
       {
-        "name": "Monocots",
-        "common": "Monocots"
-      },
-      {
-        "name": "Dicots",
-        "common": "Dicots"
-      },
-      {
-        "name": "Angiosperms",
-        "common": "Flowering Plants"
-      },
-      {
-        "name": "Ferns",
-        "common": "Ferns and Allies"
-      },
-      {
-        "name": "Gymnosperms",
-        "common": "Conifers, Cycads"
-      },
-      {
-        "name": "Bryophytes",
-        "common": "Mosses, Liverworts, Hornworts"
+        "name": "Plantae",
+        "common": "Plants"
       }
     ]
   },
