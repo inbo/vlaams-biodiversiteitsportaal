@@ -117,7 +117,7 @@ management:
 useFixedLocale: en
 
 sandboxEnabled: true
-sandboxSolrUrl: http://solr.${common.internalDomain}:8983/solr
+sandboxSolrUrl: http://solr-v2-1.${common.internalDomain}:8983/solr
 sandboxSolrCollection: sandbox
 sandboxThreadCount: 2
 
