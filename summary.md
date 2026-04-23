@@ -1,1 +1,1 @@
-Spatial Species failed from stale `vos` autocomplete expectations and a Spatial Hub import error: `DwcaToSolrPipeline failed`.
+Root cause: species-page spec depends on live Wikipedia and fails on 429; spatial error in results was an empty dataset label.
