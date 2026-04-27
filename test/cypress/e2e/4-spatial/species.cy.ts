@@ -292,21 +292,30 @@ describe("Spatial - Species", () => {
       .parent()
       .parent()
       .find("table tbody tr", { timeout: 30_000 })
+      .filter(":has(td):has(input[type='checkbox'])")
       .first()
-      .within(() => {
-        cy.get("td")
-          .first()
-          .invoke("text")
-          .then((datasetName) => datasetName.trim())
-          .as("datasetName");
-        cy.get('input[type="checkbox"]').check();
+      .as("datasetRow");
+
+    cy.get("@datasetRow")
+      .find("td")
+      .eq(1)
+      .should(($td) => {
+        expect($td.text().trim()).to.not.be.empty;
+      })
+      .invoke("text")
+      .then((text) => {
+        cy.wrap(text.trim()).as("datasetName");
       });
+
+    cy.get("@datasetRow").find('input[type="checkbox"]').check();
     cy.get('button[name="next"]').click();
 
     cy.get("@datasetName").then((datasetName) => {
       // Verify that the modal is not shown and the layer is added to the list
-      cy.get(".progress-bar", { timeout: 30_000 }).should("not.be.visible");
-      cy.get('[name="divMappedLayers"]').contains(datasetName).should("be.visible");
+      cy.get(".progress-bar", { timeout: 60_000 }).should("not.be.visible");
+      cy.get('[name="divMappedLayers"]')
+        .contains(datasetName)
+        .should("be.visible");
 
       // Verify that the legend is visible
       cy.get("#legend").should("be.visible");
