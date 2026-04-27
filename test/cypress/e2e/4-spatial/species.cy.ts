@@ -295,9 +295,13 @@ describe("Spatial - Species", () => {
       .first()
       .within(() => {
         cy.get("td")
-          .first()
-          .invoke("text")
-          .then((datasetName) => datasetName.trim())
+          .then(($cells) =>
+            [...$cells].map((cell) => cell.textContent?.trim() ?? ""),
+          )
+          .then((cellTexts) =>
+            cellTexts.find((cellText) => cellText.length > 0) ?? "",
+          )
+          .should("not.be.empty")
           .as("datasetName");
         cy.get('input[type="checkbox"]').check();
       });

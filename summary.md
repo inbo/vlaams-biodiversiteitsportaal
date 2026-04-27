@@ -1,1 +1,1 @@
-Spatial Species failed from stale `vos` autocomplete expectations and a Spatial Hub import error: `DwcaToSolrPipeline failed`.
+Spatial species test read a blank first table cell, leaving datasetName empty and crashing `cy.contains()`.
