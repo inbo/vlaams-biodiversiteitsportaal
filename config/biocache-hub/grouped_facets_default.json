@@ -176,6 +176,10 @@
       {
         "sort": "index",
         "field": "sampling_protocol"
+      },
+      {
+        "sort": "index",
+        "field": "sampling_effort"
       }
     ]
   },
