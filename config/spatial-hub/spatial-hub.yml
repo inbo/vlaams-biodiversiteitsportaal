@@ -55,7 +55,7 @@ spApp:
   # show map control that displays the quicklinks
   quicklinks: true
   # show "map options" button "Add WMS Layer"
-  optionsAddWms: true
+  optionsAddWms: false
   # show "map options" button "Download Map"
   optionsDownloadMap: false
   # show "map options" button "Reset Map"
@@ -570,4 +570,3 @@ environments:
       bwk: cl10265
       landbouw: cl10016
       vhga: cl10037
-
