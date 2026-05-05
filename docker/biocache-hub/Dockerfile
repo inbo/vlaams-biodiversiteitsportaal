@@ -13,7 +13,7 @@ RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
 
 # biocache-hubs
 ARG VERSION=develop-vbp
-ARG COMMIT=60445961444288b0ab7d4455459fff9616808bdd
+ARG COMMIT=553be12adbf2f7c6294d1d3970fe1384a86bc922
 
 ARG SOURCE=https://github.com/StefanVanDyck/biocache-hubs.git
 LABEL ala.version=inbo-${COMMIT}
