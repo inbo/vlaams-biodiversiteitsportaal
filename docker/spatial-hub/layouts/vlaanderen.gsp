@@ -101,7 +101,6 @@
                             <ul class="locale-switcher dropdown-menu dropdown-lang-menu">
                                 <li class="locale-link" data-locale="nl"><a class="nl-locale-link" href="?lang=nl"><span
                                         class="lang_link_nl">Nederlands</span></a></li>
-                                <!-- <li class="locale-link" data-locale="fr"><a class="fr-locale-link" href="#"><span class="lang_link_fr">Français</span></a></li> -->
                                 <li class="locale-link" data-locale="en"><a class="en-locale-link" href="?lang=en"><span
                                         class="lang_link_en">English</span></a></li>
                             </ul>
