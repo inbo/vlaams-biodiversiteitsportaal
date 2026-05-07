@@ -75,6 +75,11 @@ export default {
                     assetsS3RelativePath: "faunabeheer/faunabeheer-content.zip",
                     assetsFilepath: "./faunabeheer-assets.zip",
                 })),
+                ...(await downloadSpeciesPluginTabAssets({
+                    outputFolder: "./src/ecopedia",
+                    assetsS3RelativePath: "ecopedia/ecopedia-content.zip",
+                    assetsFilepath: "./ecopedia-assets.zip",
+                })),
             },
             output: {
                 entryFileNames: (chunkInfo: PreRenderedChunk) => {
