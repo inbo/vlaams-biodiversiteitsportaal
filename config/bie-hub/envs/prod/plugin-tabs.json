@@ -9,6 +9,11 @@
       "tab": "faunabeheer",
       "speciesList": "dr266",
       "contentKey": "contentFilePath"
+    },
+    {
+      "tab": "ecopedia",
+      "speciesList": "dr462",
+      "contentKey": "contentFilePath"
     }
   ]
 }
