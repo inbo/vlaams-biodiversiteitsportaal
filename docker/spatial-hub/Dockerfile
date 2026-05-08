@@ -7,7 +7,7 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 #LABEL ala.version=${VERSION}
 
 ARG VERSION=develop-vbp
-ARG COMMIT=8ba7bcaea74106425160d4c5e37e30e53ad8d0e2
+ARG COMMIT=f360f151e4b6340352072ed69431f9bcab7e2bdd
 ARG SOURCE=https://github.com/inbo/spatial-hub
 LABEL ala.version=inbo-${VERSION}
 
@@ -49,7 +49,7 @@ RUN mkdir -p /opt/atlas/i18n \
   && ln -s /config/spatial-hub/i18n/override /var/opt/atlas/i18n/spatial-hub
 
 ARG VERSION=2.2.0-SNAPSHOT
-ARG COMMIT=8ba7bcaea74106425160d4c5e37e30e53ad8d0e2
+ARG COMMIT=f360f151e4b6340352072ed69431f9bcab7e2bdd
 LABEL ala.version=inbo-${VERSION}
 
 COPY --from=builder /project/build/libs/project-${VERSION}.war /spatial-hub.war
