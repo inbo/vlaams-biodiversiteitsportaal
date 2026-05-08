@@ -1,6 +1,7 @@
 $(function () {
   if ($("#dropdown-lang").length) {
-    var defaultLang = ($sh ? $sh.i18n : undefined) || "nl";
+    var defaultLang =
+      (typeof $SH === "undefined" ? undefined : $SH.i18n) || "nl";
     var currentLang = new URLSearchParams(document.location.search).get("lang");
     var lang = currentLang || defaultLang;
     console.log("Language set: " + lang);
