@@ -550,6 +550,8 @@ environments:
   local:
     lists:
       url: "" #prevent portal-full from deadlocking at startup
+    spApp:
+      optionsAddWms: true
   inbo_dev:
     assets:
       bundle: true
