@@ -26,6 +26,10 @@ COPY ./assets/images/icon_flanders.png ./grails-app/assets/images/icon_contextua
 COPY ./assets/images/icon_flanders.png ./grails-app/assets/images/icon_wms-layer.png
 COPY ./assets/javascripts/* ./grails-app/assets/javascripts/
 
+# Fix: String.length is a property, not a method — .length() throws TypeError for all preset WMS URLs
+RUN sed -i 's/\.selectedServer\.length()/.selectedServer.length/g' \
+    ./grails-app/assets/javascripts/spApp/controller/addWMSCtrl.js
+
 RUN --mount=type=cache,target=/gradle-cache,ro \
   gradle \
   build assemble \
