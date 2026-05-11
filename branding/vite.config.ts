@@ -8,7 +8,7 @@ import { downloadSpeciesPluginTabAssets } from "./plugin-tabs-assets";
 import { console } from "node:inspector";
 
 import fg from "fast-glob";
-import { basename, dirname, extname } from "node:path";
+import path, { basename, dirname, extname } from "node:path";
 import { createClient, defaultPlugins } from "@hey-api/openapi-ts";
 import type { PreRenderedChunk } from "rollup";
 import { generateNewsPartial } from "./template-news";
@@ -258,6 +258,32 @@ export default {
                 }
 
                 return result;
+            },
+        },
+        // Copy header/footer assets to support bootstrap5
+        {
+            name: "AlaBootstrap5",
+            enforce: "post",
+            async closeBundle() {
+                [
+                    {
+                        src: "head.html",
+                        dest: "head.mustache",
+                    },
+                    {
+                        src: "banner.html",
+                        dest: "banner.mustache",
+                    },
+                    {
+                        src: "footer.html",
+                        dest: "footer.mustache",
+                    },
+                ].forEach(async ({ src, dest }) => {
+                    await fs.copyFile(
+                        path.resolve(__dirname, `dist/${src}`),
+                        path.resolve(__dirname, `dist/${dest}`),
+                    );
+                });
             },
         },
     ],
