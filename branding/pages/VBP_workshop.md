@@ -47,5 +47,5 @@ Contacteer ons via e-mail:
 ## Vragen of Meer Info?
 
 Neem contact op met onze support:
-**[support.natuurdata@inbo.be](mailto:support.natuurdata@inbo.be)**.  
+**[support.natuurdata@inbo.be](mailto:support.natuurdata@inbo.be)**. 
 
