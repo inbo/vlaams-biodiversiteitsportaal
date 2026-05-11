@@ -10,7 +10,7 @@ WORKDIR /project
 
 ARG VERSION=update-vbp-2
 ARG SOURCE=https://github.com/StefanVanDyck/collectory
-ARG COMMIT=5ebf54924c135d8a23365ccc3238537170526c6a
+ARG COMMIT=5d24fdf6eeeea189321852786d1d157c93335e3e
 LABEL ala.version=inbo-${COMMIT}
 
 RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
@@ -39,7 +39,7 @@ RUN mkdir -p /opt/atlas/i18n \
   && ln -s /config/collectory/i18n/override /var/opt/atlas/i18n/collectory-plugin
 
 ARG VERSION=6.2.3-SNAPSHOT
-ARG COMMIT=5ebf54924c135d8a23365ccc3238537170526c6a
+ARG COMMIT=5d24fdf6eeeea189321852786d1d157c93335e3e
 LABEL ala.version=inbo-${COMMIT}
 
 COPY --from=builder /project/build/libs/collectory-${VERSION}.war /collectory.war
