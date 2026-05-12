@@ -161,6 +161,7 @@ namematching:
 dataquality:
   enabled: true
   baseUrl: http://data-quality-filter-service.${common.internalDomain}:8080/data-quality-filter-service/
+qualityProfile: VBP_algemeen
 
 speciesParent: ${common.protocol}://${common.domain}/species-list/iconic-species
 
