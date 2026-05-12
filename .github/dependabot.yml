@@ -1,0 +1,15 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "branding/"
+    schedule:
+      interval: weekly
+    # Disable version updates; security updates still work
+    open-pull-requests-limit: 0
+
+  - package-ecosystem: docker
+    directory: "/docker"
+    schedule:
+      interval: weekly
+    # Disable version updates; security updates still work
+    open-pull-requests-limit: 0
