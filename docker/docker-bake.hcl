@@ -124,7 +124,7 @@ target "biocache-service" {
 target "collectory" {
   context = "./collectory"
   contexts = {
-    "custom-gradle" = "target:custom-gradle-jdk17"
+    "custom-gradle" = "target:custom-gradle-jdk11"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-collectory:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-collectory:${TAG}"]
