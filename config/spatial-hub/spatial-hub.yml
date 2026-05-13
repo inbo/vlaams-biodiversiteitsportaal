@@ -552,6 +552,7 @@ environments:
       url: "" #prevent portal-full from deadlocking at startup
     spApp:
       optionsAddWms: true
+      allowAnonymousProxy: true
   inbo_dev:
     assets:
       bundle: true
@@ -561,6 +562,7 @@ environments:
       vhga: cl10089
     spApp:
       optionsAddWms: true
+      allowAnonymousProxy: true
 
   inbo_uat:
     assets:

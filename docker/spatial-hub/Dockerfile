@@ -33,8 +33,10 @@ COPY ./assets/javascripts/* ./grails-app/assets/javascripts/
 #      due to OIDC session sharing issues on dev/prod.
 COPY patch-addwmsctrl.js ./patch-addwmsctrl.js
 COPY patch-portalcontroller.js ./patch-portalcontroller.js
+COPY patch-portalservice.js ./patch-portalservice.js
 RUN node patch-addwmsctrl.js
 RUN node patch-portalcontroller.js
+RUN node patch-portalservice.js
 
 RUN --mount=type=cache,target=/gradle-cache,ro \
   gradle \
