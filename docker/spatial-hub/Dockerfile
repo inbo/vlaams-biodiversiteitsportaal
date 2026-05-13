@@ -26,10 +26,11 @@ COPY ./assets/images/icon_flanders.png ./grails-app/assets/images/icon_contextua
 COPY ./assets/images/icon_flanders.png ./grails-app/assets/images/icon_wms-layer.png
 COPY ./assets/javascripts/* ./grails-app/assets/javascripts/
 
-# Fix two bugs in addWMSCtrl.js before the Gradle build:
-#   1. String.length() is not a function → TypeError when adding a preset WMS layer
-#   2. getCapabilities URL missing ?service=WMS&request=GetCapabilities → ServiceExceptionReport
-#      returned instead of WMS_Capabilities XML, so the layer list is never populated
+# Apply patches before the Gradle build:
+#   1. addWMSCtrl.js: fix String.length() TypeError, missing GetCapabilities params,
+#      and deeply nested layer detection.
+#   2. PortalController.groovy: make the proxy action public to avoid 401 errors
+#      due to OIDC session sharing issues on dev/prod.
 COPY patch-addwmsctrl.js ./patch-addwmsctrl.js
 COPY patch-portalcontroller.js ./patch-portalcontroller.js
 RUN node patch-addwmsctrl.js
