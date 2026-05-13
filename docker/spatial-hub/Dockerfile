@@ -31,7 +31,9 @@ COPY ./assets/javascripts/* ./grails-app/assets/javascripts/
 #   2. getCapabilities URL missing ?service=WMS&request=GetCapabilities → ServiceExceptionReport
 #      returned instead of WMS_Capabilities XML, so the layer list is never populated
 COPY patch-addwmsctrl.js ./patch-addwmsctrl.js
+COPY patch-portalcontroller.js ./patch-portalcontroller.js
 RUN node patch-addwmsctrl.js
+RUN node patch-portalcontroller.js
 
 RUN --mount=type=cache,target=/gradle-cache,ro \
   gradle \
