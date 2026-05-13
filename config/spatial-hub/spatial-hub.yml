@@ -550,9 +550,11 @@ environments:
   local:
     lists:
       url: "" #prevent portal-full from deadlocking at startup
+    security:
+      oidc:
+        allowAnonymousProxy: true
     spApp:
       optionsAddWms: true
-      allowAnonymousProxy: true
   inbo_dev:
     assets:
       bundle: true
@@ -560,9 +562,11 @@ environments:
       bwk: cl10034
       landbouw: cl10033
       vhga: cl10089
+    security:
+      oidc:
+        allowAnonymousProxy: true
     spApp:
       optionsAddWms: true
-      allowAnonymousProxy: true
 
   inbo_uat:
     assets:
