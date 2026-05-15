@@ -26,13 +26,6 @@ COPY ./assets/images/icon_flanders.png ./grails-app/assets/images/icon_contextua
 COPY ./assets/images/icon_flanders.png ./grails-app/assets/images/icon_wms-layer.png
 COPY ./assets/javascripts/* ./grails-app/assets/javascripts/
 
-# Fix two bugs in addWMSCtrl.js before the Gradle build:
-#   1. String.length() is not a function → TypeError when adding a preset WMS layer
-#   2. getCapabilities URL missing ?service=WMS&request=GetCapabilities → ServiceExceptionReport
-#      returned instead of WMS_Capabilities XML, so the layer list is never populated
-COPY patch-addwmsctrl.js ./patch-addwmsctrl.js
-RUN node patch-addwmsctrl.js
-
 RUN --mount=type=cache,target=/gradle-cache,ro \
   gradle \
   build assemble \
