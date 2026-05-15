@@ -77,10 +77,6 @@ COPY --from=spatial-service /spatial-service.war webapps
 COPY --from=spatial-service /opt/vbp /opt/vbp
 COPY --from=species-list /species-list.war webapps
 
-RUN groupadd -g ${GID} tomcat-users \
-    && useradd -u ${UID} -g tomcat-users -m tomcat-user
-
-RUN chown -R ${UID}:${GID} ${CATALINA_HOME}
 # runtime: run as non-root user
 USER ${UID}:${GID}
 
