@@ -13,22 +13,43 @@ describe("Spatial - Species", () => {
   });
 
   it("Can add a species group", () => {
-    const speciesGroup = "Molluscs";
-
     // Add a species group
     cy.get("#menu-0").click();
     cy.get('ul.dropdown-menu[aria-labelledby="menu-0"')
       .contains("Soorten")
       .click();
     cy.get('input[value="lifeform"]').check();
-    cy.get("lifeform-select > select").select(speciesGroup);
+    cy.get("lifeform-select > select option:not([value='']):not(:disabled)", {
+      timeout: 30_000,
+    })
+      .first()
+      .then(($option) => {
+        const speciesGroupValue = $option.val();
+        const speciesGroupLabel = $option.text().trim();
+
+        expect(
+          String(speciesGroupValue),
+          "available species group value",
+        ).to.not.equal("");
+        expect(speciesGroupLabel, "available species group label").to.not.equal(
+          "",
+        );
+
+        cy.wrap(String(speciesGroupValue)).as("speciesGroupValue");
+        cy.wrap(speciesGroupLabel).as("speciesGroupLabel");
+      });
+    cy.get("@speciesGroupValue").then((speciesGroupValue) => {
+      cy.get("lifeform-select > select").select(String(speciesGroupValue));
+    });
     cy.get('button[name="next"]').click();
 
     // Verify that the modal is not shown and the layer is added to the list
     cy.get(".progress-bar", { timeout: 30_000 }).should("not.be.visible");
-    cy.get('[name="divMappedLayers"]')
-      .contains(speciesGroup)
-      .should("be.visible");
+    cy.get("@speciesGroupLabel").then((speciesGroupLabel) => {
+      cy.get('[name="divMappedLayers"]')
+        .contains(String(speciesGroupLabel))
+        .should("be.visible");
+    });
 
     // Verify that the legend is visible
     cy.get("#legend").should("be.visible");
@@ -43,7 +64,12 @@ describe("Spatial - Species", () => {
 
     // Verify clicking an occurences, shows a popup window
     cy.get("#map").click(200, 200);
-    cy.get(".leaflet-popup-content").should("contain", speciesGroup);
+    cy.get("@speciesGroupLabel").then((speciesGroupLabel) => {
+      cy.get(".leaflet-popup-content").should(
+        "contain",
+        String(speciesGroupLabel),
+      );
+    });
   });
 
   it("Can add one specific species by name", () => {

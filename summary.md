@@ -1,1 +1,1 @@
-Spatial Species failed from stale `vos` autocomplete expectations and a Spatial Hub import error: `DwcaToSolrPipeline failed`.
+Wikipedia 429 broke BIE species page; Spatial species hardcoded missing 'Molluscs'. Patched tests to stub/select dynamically.

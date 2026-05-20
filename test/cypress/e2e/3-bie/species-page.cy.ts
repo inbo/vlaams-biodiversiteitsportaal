@@ -1,5 +1,22 @@
 describe("Bie - Species page", () => {
     beforeEach(() => {
+        cy.intercept(
+            "GET",
+            "**/api/rest_v1/page/html/Oryctolagus_cuniculus*",
+            {
+                statusCode: 200,
+                headers: {
+                    "content-type": "text/html; charset=utf-8",
+                },
+                body: `
+                    <section>
+                        <p>Konijn</p>
+                        <p>Stubbed Wikipedia content for Cypress.</p>
+                    </section>
+                `,
+            },
+        ).as("loadWikipediaContent");
+
         // Ignore errors from auto-complete widget trying to attach to elements that cannot be found (I think)
         cy.on("uncaught:exception", (err, runnable) => {
             expect(err.message).to.include(
@@ -9,11 +26,12 @@ describe("Bie - Species page", () => {
         });
     });
 
-    it.only("Working species page", () => {
+    it("Working species page", () => {
         const speciesId = 2436940; // Bunny
 
         // Visit species page
         cy.visit("/bie-hub/species/" + speciesId);
+        cy.wait("@loadWikipediaContent");
 
         // Check Wikipedia content is loaded
         cy.get("#descriptiveContent")
