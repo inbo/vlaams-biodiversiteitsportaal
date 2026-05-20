@@ -80,7 +80,7 @@ batch_sampling_passwords: ""
 ala.baseURL: "${common.protocol}://${common.domain}"
 bie.baseURL: "${common.protocol}://bie.${common.domain}"
 bie.searchPath: "/search"
-biocacheServiceUrl: "http://biocache-service.${common.internalDomain}:8080/biocache-service"
+biocacheServiceUrl: "${common.protocol}://${common.domain}/biocache-service"
 biocacheUrl: "${common.protocol}://${common.domain}/biocache-hub"
 
 namematching.url: http://namematching-service.${common.internalDomain}:9179
