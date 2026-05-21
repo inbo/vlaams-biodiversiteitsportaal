@@ -4,8 +4,8 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 # ARG VERSION=2.1.5
 # ARG SOURCE=https://github.com/AtlasOfLivingAustralia/spatial-service.git
 
-ARG VERSION=improve-intersect
-ARG COMMIT=24a0d47e4982a51c86a29b3dc4429d05fe9fe330
+ARG VERSION=1107_area_report_pdf
+ARG COMMIT=360cc1a1e3c88a770408d8f44b1317e41731b113
 ARG SOURCE=https://github.com/StefanVanDyck/spatial-service.git
 LABEL ala.version=inbo-${VERSION}
 
