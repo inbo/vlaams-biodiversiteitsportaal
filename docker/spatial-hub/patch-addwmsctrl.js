@@ -96,34 +96,38 @@ const fix34After =
                                 encodeURIComponent(firstStyle.LegendURL.OnlineResource['xlink:href'] || '');
                         }
 
-                        // Fix 4: push any named layer, regardless of Style/LegendURL presence
-                        for (var i in layers) {
-                            var lyr = layers[i];
-                            if (lyr.Name !== undefined) {
-                                $scope.availableLayers.push({
-                                    displayname: lyr.Name,
-                                    name: lyr.Name,
-                                    title: lyr.Title,
-                                    version: version,
-                                    legendurl: getLegendUrl(lyr)
-                                });
-                            } else if (lyr.Layer !== undefined) {
-                                // group layer — recurse one level
-                                var subLayers = Array.isArray(lyr.Layer) ? lyr.Layer : [lyr.Layer];
-                                for (var k in subLayers) {
-                                    var sub = subLayers[k];
-                                    if (sub.Name !== undefined) {
-                                        $scope.availableLayers.push({
-                                            displayname: sub.Name,
-                                            name: sub.Name,
-                                            title: sub.Title,
-                                            version: version,
-                                            legendurl: getLegendUrl(sub)
-                                        });
-                                    }
+                        // Fix 4: recursively collect named layers at any nesting depth.
+                        // WMS servers vary in structure:
+                        //   GRB: flat — Capability.Layer.Layer[] are all leaf layers (Name, no children)
+                        //   INBO: nested — Capability.Layer.Layer[] are group layers that have both
+                        //         a Name (e.g. "Biologische waardering") AND sub-Layer children.
+                        //         A flat one-level loop would push group names and never recurse into
+                        //         the actual leaf layers, leaving availableLayers empty.
+                        // Strategy: always recurse when sub-Layer children exist; also push the
+                        // layer itself when it has a Name (leaf layers, and named group layers that
+                        // are themselves valid WMS layer names).
+                        function collectLayers(layerOrList) {
+                            var list = Array.isArray(layerOrList) ? layerOrList : [layerOrList];
+                            for (var j = 0; j < list.length; j++) {
+                                var lyr = list[j];
+                                if (!lyr) continue;
+                                // If this layer has children, recurse into them first
+                                if (lyr.Layer !== undefined) {
+                                    collectLayers(lyr.Layer);
+                                }
+                                // Also push this layer itself if it has a Name
+                                if (lyr.Name !== undefined) {
+                                    $scope.availableLayers.push({
+                                        displayname: lyr.Name,
+                                        name: lyr.Name,
+                                        title: lyr.Title,
+                                        version: version,
+                                        legendurl: getLegendUrl(lyr)
+                                    });
                                 }
                             }
                         }
+                        collectLayers(layers);
                     })`;
 
 src = src.replace(fix34Regex, fix34After);
