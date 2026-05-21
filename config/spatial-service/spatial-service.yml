@@ -82,7 +82,8 @@ bie.baseURL: "${common.protocol}://bie.${common.domain}"
 bie.searchPath: "/search"
 biocacheServiceUrl: "http://biocache-service.${common.internalDomain}:8080/biocache-service"
 biocacheUrl: "${common.protocol}://${common.domain}/biocache-hub"
-
+openstreetmap:
+  url: 'https://tile.openstreetmap.org'
 namematching.url: http://namematching-service.${common.internalDomain}:9179
 
 records.url: "${common.protocol}://archives.${common.domain}/archives/exports/lat_lon_taxon.zip"
