@@ -5,7 +5,7 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 # ARG SOURCE=https://github.com/AtlasOfLivingAustralia/spatial-service.git
 
 ARG VERSION=1107_area_report_pdf
-ARG COMMIT=360cc1a1e3c88a770408d8f44b1317e41731b113
+ARG COMMIT=cf5fd8b2f1e4108724b852057722e09140a3d3aa
 ARG SOURCE=https://github.com/StefanVanDyck/spatial-service.git
 LABEL ala.version=inbo-${VERSION}
 
