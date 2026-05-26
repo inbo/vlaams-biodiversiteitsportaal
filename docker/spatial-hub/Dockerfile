@@ -6,8 +6,8 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 #ARG SOURCE=https://github.com/AtlasOfLivingAustralia/spatial-hub.git1
 #LABEL ala.version=${VERSION}
 
-ARG VERSION=develop-vbp
-ARG COMMIT=d5707296ae6d1010f0ac09dd354aba5deb0b9e0c
+ARG VERSION=use-wms-without-proxy
+ARG COMMIT=413988023d60c397e29be5cc25d7d496e8eff49b
 ARG SOURCE=https://github.com/inbo/spatial-hub
 LABEL ala.version=inbo-${VERSION}
 
@@ -49,7 +49,7 @@ RUN mkdir -p /opt/atlas/i18n \
   && ln -s /config/spatial-hub/i18n/override /var/opt/atlas/i18n/spatial-hub
 
 ARG VERSION=2.2.0-SNAPSHOT
-ARG COMMIT=64c31c07b1feb6712d968526ad8351432ab5e228
+ARG COMMIT=413988023d60c397e29be5cc25d7d496e8eff49b
 LABEL ala.version=inbo-${VERSION}
 
 COPY --from=builder /project/build/libs/project-${VERSION}.war /spatial-hub.war
