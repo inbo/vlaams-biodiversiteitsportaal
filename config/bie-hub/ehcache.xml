@@ -6,7 +6,7 @@
 
     <cache alias="wikiCache">
         <expiry>
-            <ttl unit="days">1</ttl>
+            <ttl unit="days">30</ttl>
         </expiry>
         <resources>
             <heap unit="entries">200000</heap>
