@@ -13,7 +13,7 @@ describe("Spatial - Species", () => {
   });
 
   it("Can add a species group", () => {
-    const speciesGroup = "Molluscs";
+    const speciesGroup = "Weekdieren";
 
     // Add a species group
     cy.get("#menu-0").click();
