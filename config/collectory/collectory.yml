@@ -87,6 +87,10 @@ gbifWebsite: https://www.gbif.org
 google:
   apikey: get-a-google-api-key
 
+gbif:
+  citations:
+    lookup: "https://api.gbif.org/v1/literature/search?gbifDatasetKey="
+
 server:
   servlet:
     contextPath: /collectory
