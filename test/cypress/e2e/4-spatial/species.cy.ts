@@ -27,7 +27,7 @@ describe("Spatial - Species", () => {
     // Verify that the modal is not shown and the layer is added to the list
     cy.get(".progress-bar", { timeout: 30_000 }).should("not.be.visible");
     cy.get('[name="divMappedLayers"]')
-      .contains(speciesGroup)
+      .contains("Molluscs")
       .should("be.visible");
 
     // Verify that the legend is visible
@@ -43,7 +43,7 @@ describe("Spatial - Species", () => {
 
     // Verify clicking an occurences, shows a popup window
     cy.get("#map").click(200, 200);
-    cy.get(".leaflet-popup-content").should("contain", speciesGroup);
+    cy.get(".leaflet-popup-content").should("contain", "Molluscs");
   });
 
   it("Can add one specific species by name", () => {
