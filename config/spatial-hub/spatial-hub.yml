@@ -474,8 +474,6 @@ presetWMSServers:
     url: "https://gisservices.inbo.be/arcgis/services/IFBL/MapServer/WMSServer"
   - name: "INBO - ImportantPollinatorAreas"
     url: "https://gisservices.inbo.be/arcgis/services/ImportantPollinatorAreas/MapServer/WMSServer"
-  - name: "INBO - LSVIviewer"
-    url: "https://gisservices.inbo.be/arcgis/services/LSVIviewer/MapServer/WMSServer"
   - name: "INBO - Natura2000"
     url: "https://gisservices.inbo.be/arcgis/services/Natura2000/MapServer/WMSServer"
   - name: "INBO - Orthofoto_WM"
