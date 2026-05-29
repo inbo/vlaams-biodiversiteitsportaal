@@ -6,8 +6,8 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 #ARG SOURCE=https://github.com/AtlasOfLivingAustralia/spatial-hub.git1
 #LABEL ala.version=${VERSION}
 
-ARG VERSION=use-wms-without-proxy
-ARG COMMIT=413988023d60c397e29be5cc25d7d496e8eff49b
+ARG VERSION=cleanup-wms-fix
+ARG COMMIT=f0251376427c63d0d4883a11112651c30b641ace
 ARG SOURCE=https://github.com/inbo/spatial-hub
 LABEL ala.version=inbo-${VERSION}
 
@@ -21,10 +21,6 @@ WORKDIR /project
 RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
 
 COPY resources.xml ./grails-app/conf/spring/resources.xml
-COPY ./layouts/* ./grails-app/views/layouts/
-COPY ./assets/images/icon_flanders.png ./grails-app/assets/images/icon_contextual-layer.png
-COPY ./assets/images/icon_flanders.png ./grails-app/assets/images/icon_wms-layer.png
-COPY ./assets/javascripts/* ./grails-app/assets/javascripts/
 
 RUN --mount=type=cache,target=/gradle-cache,ro \
   gradle \
@@ -49,7 +45,7 @@ RUN mkdir -p /opt/atlas/i18n \
   && ln -s /config/spatial-hub/i18n/override /var/opt/atlas/i18n/spatial-hub
 
 ARG VERSION=2.2.0-SNAPSHOT
-ARG COMMIT=413988023d60c397e29be5cc25d7d496e8eff49b
+ARG COMMIT=f0251376427c63d0d4883a11112651c30b641ace
 LABEL ala.version=inbo-${VERSION}
 
 COPY --from=builder /project/build/libs/project-${VERSION}.war /spatial-hub.war
