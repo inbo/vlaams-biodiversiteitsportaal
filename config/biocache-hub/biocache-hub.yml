@@ -133,6 +133,58 @@ layersservice:
   url: ${common.protocol}://${common.domain}/spatial-service
 logger:
   baseUrl: ${common.protocol}://${common.domain}/logger/service
+  fallbackReasons:
+    - id: 1
+      rkey: "logger.download.reason.biosecurity"
+      name: "biosecurity management/planning"
+
+    - id: 11
+      rkey: "logger.download.reason.citizen.science"
+      name: "citizen science"
+
+    - id: 5
+      rkey: "logger.download.reason.collection.mgmt"
+      name: "collection management"
+
+    - id: 0
+      rkey: "logger.download.reason.conservation"
+      name: "conservation management/planning"
+
+    - id: 7
+      rkey: "logger.download.reason.ecological.research"
+      name: "ecological research"
+
+    - id: 3
+      rkey: "logger.download.reason.education"
+      name: "education"
+
+    - id: 2
+      rkey: "logger.download.reason.environmental"
+      name: "environmental assessment"
+
+    - id: 12
+      rkey: "logger.download.reason.restoration.remediation"
+      name: "restoration/remediation"
+
+    - id: 4
+      rkey: "logger.download.reason.research"
+      name: "scientific research"
+
+    - id: 8
+      rkey: "logger.download.reason.systematic.research"
+      name: "systematic research/taxonomy"
+
+    - id: 13
+      rkey: "logger.download.reason.species.modelling"
+      name: "species modelling"
+
+    - id: 6
+      rkey: "logger.download.reason.other"
+      name: "other"
+
+    - id: 10
+      rkey: "logger.download.reason.testing"
+      name: "testing"
 loggerURL: ${common.protocol}://${common.domain}/logger/service
 
 map:
