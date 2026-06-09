@@ -121,7 +121,7 @@ literature:
     pageSize: 200
     extend: False
   genbank:
-    url: https://www.ncbi.nlm.nih.gov
+    url: https://eutils.ncbi.nlm.nih.gov
   scholar:
     url: https://scholar.google.com
   google:
