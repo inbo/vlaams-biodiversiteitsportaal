@@ -4,7 +4,7 @@ FROM --platform=${BUILDPLATFORM} custom-gradle-jdk17 AS builder
 
 # downloads-plugin
 ARG VERSION=develop-vbp
-ARG COMMIT=b92bdc94196529e2d062135d49541bb2801f9fd6
+ARG COMMIT=9dbc49205051896645f0e115bd09488c7ce4f0c9
 
 ARG SOURCE=https://github.com/inbo/downloads-plugin.git
 
