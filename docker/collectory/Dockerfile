@@ -10,7 +10,7 @@ WORKDIR /project
 
 ARG VERSION=develop-vbp
 ARG SOURCE=https://github.com/StefanVanDyck/collectory
-ARG COMMIT=51cd134149cf8f79b18e139f246092f6f23f6716
+ARG COMMIT=93b31c6217b95c4d2b9ba6c69df7c649340cde2a
 LABEL ala.version=inbo-${COMMIT}
 
 RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
@@ -18,13 +18,13 @@ RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
 COPY resources.xml ./grails-app/conf/spring/resources.xml
 
 RUN --mount=type=cache,target=/gradle-cache,ro \
-    gradle build assemble \
-    -x test -x integrationTest
+  gradle build assemble \
+  -x test -x integrationTest
 
 # Copy dependencies to shared read-only cache
 RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
-    rsync -a /home/gradle/.gradle/caches/modules-2 /gradle-cache \
-    && rm /gradle-cache/modules-2/*.lock && rm /gradle-cache/modules-2/gc.properties
+  rsync -a /home/gradle/.gradle/caches/modules-2 /gradle-cache \
+  && rm /gradle-cache/modules-2/*.lock && rm /gradle-cache/modules-2/gc.properties
 
 FROM amazoncorretto:11
 
@@ -39,7 +39,7 @@ RUN mkdir -p /opt/atlas/i18n \
   && ln -s /config/collectory/i18n/override /var/opt/atlas/i18n/collectory-plugin
 
 ARG VERSION=5.2.0-SNAPSHOT
-ARG COMMIT=426d40413d937a78f2bdcdee89ff7b22e4173fb8
+ARG COMMIT=93b31c6217b95c4d2b9ba6c69df7c649340cde2a
 LABEL ala.version=inbo-${COMMIT}
 
 COPY --from=builder /project/build/libs/collectory-${VERSION}.war /collectory.war
