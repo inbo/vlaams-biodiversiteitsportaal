@@ -3,22 +3,22 @@ ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-maven AS builder
 
 ARG BACKBONE_VERSION=2025-11-17
-ARG VERSION=remove-error-log
+ARG VERSION=develop-vbp
 #ARG SOURCE=https://github.com/AtlasOfLivingAustralia/ala-namematching-service.git
 ARG SOURCE=https://github.com/StefanVanDyck/ala-namematching-service.git
 LABEL ala.version=${VERSION}
 
 RUN curl https://build.natuurdata.dev.inbo.be/taxonomy/namematching-gbif-backbone-lucene-8-${BACKBONE_VERSION}.tgz -o /namematching-nm.tgz \
-    && tar -xzf /namematching-nm.tgz \
-    && mv namematching-gbif-backbone-lucene-8-${BACKBONE_VERSION} /namematching-nm \
-    && rm /namematching-nm.tgz
+  && tar -xzf /namematching-nm.tgz \
+  && mv namematching-gbif-backbone-lucene-8-${BACKBONE_VERSION} /namematching-nm \
+  && rm /namematching-nm.tgz
 
 WORKDIR /project
 RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} .
 
 RUN --mount=type=cache,target=/root/.m2/repository \
-    mvn --batch-mode --no-transfer-progress \
-        clean package -DskipTests -T 4 -U
+  mvn --batch-mode --no-transfer-progress \
+  clean package -DskipTests -T 4 -U
 
 FROM amazoncorretto:11
 
@@ -30,13 +30,13 @@ COPY --from=builder /opt/opentelemetry-agent /opt/opentelemetry-agent
 RUN mkdir /data && mkdir /data/lucene && chown -R 1000:1000 /data
 
 COPY --from=builder \
-    /namematching-nm /data/lucene/namematching-nm
+  /namematching-nm /data/lucene/namematching-nm
 
 USER 1000
 
 WORKDIR /app
 COPY --from=builder --chown=1000 \
-    /project/server/target/ala-namematching-server-${VERSION}.jar /app/app.jar
+  /project/server/target/ala-namematching-server-${VERSION}.jar /app/app.jar
 
 RUN mkdir /data/ala-namematching-service && mkdir /data/ala-namematching-service/config
 COPY groups.json /data/ala-namematching-service/config/groups.json
