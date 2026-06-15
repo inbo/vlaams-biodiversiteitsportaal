@@ -10,7 +10,7 @@ WORKDIR /project
 
 ARG VERSION=html-in-dataresource-description
 ARG SOURCE=https://github.com/StefanVanDyck/collectory
-ARG COMMIT=49f3a7bbb3fe503a817cbed62aa61eef165b2d6a
+ARG COMMIT=320adeac34b9dd205e4bd865d8e6105a7006d0b6
 LABEL ala.version=inbo-${COMMIT}
 
 RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
@@ -39,7 +39,7 @@ RUN mkdir -p /opt/atlas/i18n \
   && ln -s /config/collectory/i18n/override /var/opt/atlas/i18n/collectory-plugin
 
 ARG VERSION=5.2.0-SNAPSHOT
-ARG COMMIT=49f3a7bbb3fe503a817cbed62aa61eef165b2d6a
+ARG COMMIT=320adeac34b9dd205e4bd865d8e6105a7006d0b6
 LABEL ala.version=inbo-${COMMIT}
 
 COPY --from=builder /project/build/libs/collectory-${VERSION}.war /collectory.war
