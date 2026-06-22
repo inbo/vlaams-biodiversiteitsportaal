@@ -22,7 +22,7 @@
     "cross-env": "^10.1.0",
     "decompress": "^4.2.1",
     "happy-dom": "^20.4.0",
-    "markdown-it": "^14.1.0",
+    "markdown-it": "^14.2.0",
     "markdown-it-front-matter": "^0.2.4",
     "sass-embedded": "^1.86.3",
     "ts-node": "^10.9.2",
