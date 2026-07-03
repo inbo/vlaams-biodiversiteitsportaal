@@ -8,8 +8,9 @@ Allow: /index.html
 Allow: /favicon.ico
 Allow: /$
 Allow: /pages/
-Allow: /bie-hub/
+Allow: /bie-hub/species/
 Disallow: /bie-hub/externalSite/
-Allow: /collectory/
-Allow: /species-list/
+Allow: /collectory/datasets
+Allow: /collectory/public/showDataResource/
+Allow: /species-list/public/speciesLists
 Disallow: /species-list/speciesListItem/
