@@ -57,6 +57,11 @@ wikipedia:
   webportalUrl: https://nl.wikipedia.org/wiki/
   lang: nl
 
+ecopedia:
+  url: https://www.ecopedia.be
+  username: katya Shaleninova
+  password: 4SdTBmLX069Zrkt
+
 # Skin and layout
 skin:
   layout: ala
