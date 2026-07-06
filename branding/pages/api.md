@@ -18,7 +18,7 @@ vermelden)
 - [spatial-service](/spatial-service/openapi)
 - [specieslist-service](/species-list/openapi)
 
-Er is ook een Namematching API service beschikbaar (op andere host): 
+Er is ook een Namematching API service beschikbaar (op andere host):
 
 - [namematching-service](https://namematching.natuurdata.inbo.be/swagger)
 
