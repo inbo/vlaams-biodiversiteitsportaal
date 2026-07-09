@@ -21,13 +21,6 @@
       "hideEmptyValues": true,
       "includeOther": "false"
     },
-    "decade": {
-      "title": "Per decennium",
-      "chartType": "bar",
-      "emptyValueMsg": "Jaar niet gespecificeerd",
-      "hideEmptyValues": true,
-      "includeOther": "false"
-    },
     "year": {
       "title": "Per jaar",
       "chartType": "bar",
@@ -40,14 +33,16 @@
       "chartType": "horizontal-bar",
       "emptyValueMsg": "Geslacht niet gespecificeerd",
       "hideEmptyValues": true,
-      "includeOther": "false"
+      "includeOther": "true",
+      "growToFit": true
     },
     "family": {
       "title": "Per familie",
       "chartType": "horizontal-bar",
       "emptyValueMsg": "Familie niet gespecificeerd",
       "hideEmptyValues": true,
-      "includeOther": "false"
+      "includeOther": "true",
+      "growToFit": true
     },
     "assertions": {
       "title": "Per data-annotatie",
@@ -56,13 +51,6 @@
       "hideEmptyValues": true,
       "includeOther": "false",
       "growToFit": true
-    },
-    "type_status": {
-      "title": "Per typestatus",
-      "chartType": "doughnut",
-      "emptyValueMsg": "Typestatus niet gespecificeerd",
-      "hideEmptyValues": true,
-      "includeOther": "false"
     },
     "license": {
       "title": "Per licentie",
