@@ -35,6 +35,13 @@
       "hideEmptyValues": true,
       "includeOther": "false"
     },
+    "year": {
+      "title": "Per jaar",
+      "chartType": "bar",
+      "emptyValueMsg": "Jaar niet gespecificeerd",
+      "hideEmptyValues": true,
+      "includeOther": "false"
+    },
     "genus": {
       "title": "Per geslacht",
       "chartType": "horizontal-bar",
