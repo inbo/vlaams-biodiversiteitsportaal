@@ -1,12 +1,5 @@
 {
   "biocache": {
-    "license": {
-      "title": "Per licentie",
-      "chartType": "doughnut",
-      "emptyValueMsg": "Licentie niet gespecificeerd",
-      "hideEmptyValues": true,
-      "includeOther": "false"
-    },
     "basis_of_record": {
       "title": "Per waarnemingstype",
       "chartType": "doughnut",
@@ -68,6 +61,13 @@
       "title": "Per typestatus",
       "chartType": "doughnut",
       "emptyValueMsg": "Typestatus niet gespecificeerd",
+      "hideEmptyValues": true,
+      "includeOther": "false"
+    },
+    "license": {
+      "title": "Per licentie",
+      "chartType": "doughnut",
+      "emptyValueMsg": "Licentie niet gespecificeerd",
       "hideEmptyValues": true,
       "includeOther": "false"
     }
