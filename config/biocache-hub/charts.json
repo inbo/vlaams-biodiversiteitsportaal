@@ -1,52 +1,73 @@
 {
   "biocache": {
     "license": {
-      "title": "By licence",
+      "title": "Per licentie",
       "chartType": "doughnut",
-      "emptyValueMsg": "Licence not specified",
+      "emptyValueMsg": "Licentie niet gespecificeerd",
+      "hideEmptyValues": true,
+      "includeOther": "false"
+    },
+    "basis_of_record": {
+      "title": "Per waarnemingstype",
+      "chartType": "doughnut",
+      "emptyValueMsg": "Type waarneming niet gespecificeerd",
+      "hideEmptyValues": true,
+      "includeOther": "false"
+    },
+    "species_group": {
+      "title": "Per soortgroep",
+      "chartType": "horizontal-bar",
+      "emptyValueMsg": "Soortgroep niet gespecificeerd",
       "hideEmptyValues": true,
       "includeOther": "false"
     },
     "month": {
-      "title": "By month",
+      "title": "Per maand",
       "chartType": "bar",
-      "emptyValueMsg": "Month not specified",
+      "emptyValueMsg": "Maand niet gespecificeerd",
       "hideEmptyValues": true,
       "includeOther": "false"
     },
     "decade": {
-      "title": "By decade",
+      "title": "Per decennium",
       "chartType": "bar",
-      "emptyValueMsg": "Year not specified",
+      "emptyValueMsg": "Jaar niet gespecificeerd",
+      "hideEmptyValues": true,
+      "includeOther": "false"
+    },
+    "year": {
+      "title": "Per jaar",
+      "chartType": "bar",
+      "emptyValueMsg": "Jaar niet gespecificeerd",
       "hideEmptyValues": true,
       "includeOther": "false"
     },
     "genus": {
-      "title": "By genus",
-      "chartType": "doughnut",
-      "emptyValueMsg": "Genus not specified",
+      "title": "Per geslacht",
+      "chartType": "horizontal-bar",
+      "emptyValueMsg": "Geslacht niet gespecificeerd",
       "hideEmptyValues": true,
       "includeOther": "false"
     },
     "family": {
-      "title": "By family",
-      "chartType": "doughnut",
-      "emptyValueMsg": "Family not specified",
+      "title": "Per familie",
+      "chartType": "horizontal-bar",
+      "emptyValueMsg": "Familie niet gespecificeerd",
       "hideEmptyValues": true,
       "includeOther": "false"
     },
     "assertions": {
-      "title": "By data assertion",
+      "title": "Per data-annotatie",
       "chartType": "horizontal-bar",
-      "emptyValueMsg": "Assertion not specified",
+      "emptyValueMsg": "Annotatie niet gespecificeerd",
       "hideEmptyValues": true,
       "includeOther": "false",
       "growToFit": true
     },
     "type_status": {
-      "title": "By type status (as % of all type specimens)",
+      "title": "Per typestatus",
       "chartType": "doughnut",
-      "emptyValueMsg": "Type status not specified",
+      "emptyValueMsg": "Typestatus niet gespecificeerd",
       "hideEmptyValues": true,
       "includeOther": "false"
     }
