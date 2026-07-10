@@ -33,7 +33,7 @@
       "chartType": "horizontal-bar",
       "emptyValueMsg": "Geslacht niet gespecificeerd",
       "hideEmptyValues": true,
-      "includeOther": "true",
+      "includeOther": "false",
       "growToFit": true
     },
     "family": {
@@ -41,7 +41,7 @@
       "chartType": "horizontal-bar",
       "emptyValueMsg": "Familie niet gespecificeerd",
       "hideEmptyValues": true,
-      "includeOther": "true",
+      "includeOther": "false",
       "growToFit": true
     },
     "license": {
