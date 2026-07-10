@@ -31,7 +31,7 @@ describe("Spatial - Layers", () => {
     cy.get(".progress-bar", { timeout: 10_000 }).should("not.be.visible");
   });
 
-  it.only("Can add an environmental range", () => {
+  it("Can add an environmental range", () => {
     // Add a layer
     cy.get("#menu-0").click();
     cy.get('ul.dropdown-menu[aria-labelledby="menu-0"')
