@@ -44,6 +44,14 @@
       "includeOther": "false",
       "growToFit": true
     },
+    "identificationVerificationStatus": {
+      "title": "Per verificatiestatus",
+      "chartType": "horizontal-bar",
+      "emptyValueMsg": "Verificatiestatus niet gespecificeerd",
+      "hideEmptyValues": true,
+      "includeOther": "false",
+      "growToFit": true
+    },
     "license": {
       "title": "Per licentie",
       "chartType": "doughnut",
