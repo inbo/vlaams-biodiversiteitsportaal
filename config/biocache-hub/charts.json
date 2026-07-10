@@ -44,14 +44,6 @@
       "includeOther": "true",
       "growToFit": true
     },
-    "assertions": {
-      "title": "Per data-annotatie",
-      "chartType": "horizontal-bar",
-      "emptyValueMsg": "Annotatie niet gespecificeerd",
-      "hideEmptyValues": true,
-      "includeOther": "false",
-      "growToFit": true
-    },
     "license": {
       "title": "Per licentie",
       "chartType": "doughnut",
