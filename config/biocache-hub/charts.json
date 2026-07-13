@@ -5,14 +5,16 @@
       "chartType": "doughnut",
       "emptyValueMsg": "Type waarneming niet gespecificeerd",
       "hideEmptyValues": true,
-      "includeOther": "false"
+      "includeOther": "false",
+      "filter": "fsort=count"
     },
     "species_group": {
       "title": "Per soortgroep",
       "chartType": "horizontal-bar",
       "emptyValueMsg": "Soortgroep niet gespecificeerd",
       "hideEmptyValues": true,
-      "includeOther": "false"
+      "includeOther": "false",
+      "filter": "fsort=count"
     },
     "month": {
       "title": "Per maand",
@@ -34,6 +36,16 @@
       "emptyValueMsg": "Geslacht niet gespecificeerd",
       "hideEmptyValues": true,
       "includeOther": "false",
+      "filter": "fsort=count",
+      "growToFit": true
+    },
+    "genus_defined": {
+      "title": "Per geslacht (zonder niet gespecificeerd)",
+      "chartType": "horizontal-bar",
+      "emptyValueMsg": "Geslacht niet gespecificeerd",
+      "hideEmptyValues": true,
+      "includeOther": "false",
+      "filter": "fq=genus:%2A&fq=-genus:%22not%20supplied%22&fq=-genus:%22Not%20supplied%22&fsort=count",
       "growToFit": true
     },
     "family": {
@@ -42,6 +54,16 @@
       "emptyValueMsg": "Familie niet gespecificeerd",
       "hideEmptyValues": true,
       "includeOther": "false",
+      "filter": "fsort=count",
+      "growToFit": true
+    },
+    "family_defined": {
+      "title": "Per familie (zonder niet gespecificeerd)",
+      "chartType": "horizontal-bar",
+      "emptyValueMsg": "Familie niet gespecificeerd",
+      "hideEmptyValues": true,
+      "includeOther": "false",
+      "filter": "fq=family:%2A&fq=-family:%22not%20supplied%22&fq=-family:%22Not%20supplied%22&fsort=count",
       "growToFit": true
     },
     "identificationVerificationStatus": {
@@ -50,6 +72,16 @@
       "emptyValueMsg": "Verificatiestatus niet gespecificeerd",
       "hideEmptyValues": true,
       "includeOther": "false",
+      "filter": "fsort=count",
+      "growToFit": true
+    },
+    "identificationVerificationStatus_defined": {
+      "title": "Per verificatiestatus (zonder niet gespecificeerd)",
+      "chartType": "horizontal-bar",
+      "emptyValueMsg": "Verificatiestatus niet gespecificeerd",
+      "hideEmptyValues": true,
+      "includeOther": "false",
+      "filter": "fq=identificationVerificationStatus:%2A&fq=-identificationVerificationStatus:%22not%20supplied%22&fq=-identificationVerificationStatus:%22Not%20supplied%22&fsort=count",
       "growToFit": true
     },
     "license": {
@@ -57,7 +89,8 @@
       "chartType": "doughnut",
       "emptyValueMsg": "Licentie niet gespecificeerd",
       "hideEmptyValues": true,
-      "includeOther": "false"
+      "includeOther": "false",
+      "filter": "fsort=count"
     }
   }
 }
