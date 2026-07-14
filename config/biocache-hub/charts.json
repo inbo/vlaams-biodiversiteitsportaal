@@ -14,21 +14,24 @@
       "emptyValueMsg": "Soortgroep niet gespecificeerd",
       "hideEmptyValues": true,
       "includeOther": "false",
-      "filter": "fsort=count"
+      "filter": "fsort=count",
+      "growToFit": true
     },
     "month": {
       "title": "Per maand",
       "chartType": "bar",
       "emptyValueMsg": "Maand niet gespecificeerd",
       "hideEmptyValues": true,
-      "includeOther": "false"
+      "includeOther": "false",
+      "filter": "fq=month:%2A&fq=-month:%22not%20supplied%22&fq=-month:%22Not%20supplied%22"
     },
     "year": {
       "title": "Per jaar",
       "chartType": "bar",
       "emptyValueMsg": "Jaar niet gespecificeerd",
       "hideEmptyValues": true,
-      "includeOther": "false"
+      "includeOther": "false",
+      "filter": "fq=year:%2A&fq=-year:%22not%20supplied%22&fq=-year:%22Not%20supplied%22"
     },
     "genus": {
       "title": "Per geslacht",
