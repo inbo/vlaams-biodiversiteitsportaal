@@ -23,7 +23,7 @@
       "emptyValueMsg": "Maand niet gespecificeerd",
       "hideEmptyValues": true,
       "includeOther": "false",
-      "filter": "fq=month:%2A&fq=-month:%22not%20supplied%22&fq=-month:%22Not%20supplied%22"
+      "filter": "fq=month:%5B*%20TO%20*%5D"
     },
     "year": {
       "title": "Per jaar",
@@ -31,7 +31,7 @@
       "emptyValueMsg": "Jaar niet gespecificeerd",
       "hideEmptyValues": true,
       "includeOther": "false",
-      "filter": "fq=year:%2A&fq=-year:%22not%20supplied%22&fq=-year:%22Not%20supplied%22"
+      "filter": "fq=year:%5B*%20TO%20*%5D"
     },
     "genus": {
       "title": "Per geslacht",
