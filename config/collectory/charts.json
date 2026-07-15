@@ -1,40 +1,44 @@
 {
   "biocache": {
-    "state": {
-      "title": "By State",
+    "basis_of_record": {
+      "title": "Per waarnemingstype",
       "chartType": "doughnut",
-      "emptyValueMsg": "State not specified",
-      "hideEmptyValues": true
+      "emptyValueMsg": "Type waarneming niet gespecificeerd",
+      "hideEmptyValues": true,
+      "includeOther": "false",
+      "filter": "fsort=count"
     },
     "type_status": {
-      "title": "Type Status",
+      "title": "Per typestatus",
       "chartType": "doughnut",
-      "emptyValueMsg": "Type not specified",
-      "hideEmptyValues": true
+      "emptyValueMsg": "Type niet gespecificeerd",
+      "hideEmptyValues": true,
+      "includeOther": "false",
+      "filter": "fsort=count"
     },
     "month": {
-      "title": "By month",
+      "title": "Per maand",
       "chartType": "bar",
-      "emptyValueMsg": "Month not specified",
-      "hideEmptyValues": true
+      "emptyValueMsg": "Maand niet gespecificeerd",
+      "hideEmptyValues": true,
+      "includeOther": "false",
+      "filter": "fq=month:%5B*%20TO%20*%5D"
     },
     "decade": {
-      "title": "By decade",
+      "title": "Per decennium",
       "chartType": "bar",
-      "emptyValueMsg": "Year not specified",
-      "hideEmptyValues": true
-    },
-    "assertions": {
-      "title": "By data quality",
-      "chartType": "horizontal-bar",
-      "emptyValueMsg": "",
-      "hideEmptyValues": true
+      "emptyValueMsg": "Jaar niet gespecificeerd",
+      "hideEmptyValues": true,
+      "includeOther": "false"
     },
     "family": {
-      "title": "By family",
-      "chartType": "doughnut",
-      "emptyValueMsg": "",
-      "hideEmptyValues": true
+      "title": "Per familie",
+      "chartType": "horizontal-bar",
+      "emptyValueMsg": "Familie niet gespecificeerd",
+      "hideEmptyValues": true,
+      "includeOther": "false",
+      "filter": "fq=family:%2A&fq=-family:%22not%20supplied%22&fq=-family:%22Not%20supplied%22&fsort=count",
+      "growToFit": true
     }
   }
 }
