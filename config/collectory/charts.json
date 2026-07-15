@@ -8,13 +8,13 @@
       "includeOther": "false",
       "filter": "fsort=count"
     },
-    "cl101": {
+    "dynamicProperties_level2Name": {
       "title": "Per provincie",
       "chartType": "doughnut",
       "emptyValueMsg": "Provincie niet gespecificeerd",
       "hideEmptyValues": true,
       "includeOther": "false",
-      "filter": "fq=cl101:%2A&fq=-cl101:%22not%20supplied%22&fq=-cl101:%22Not%20supplied%22&fsort=count"
+      "filter": "fq=dynamicProperties_level2Name:%2A&fq=-dynamicProperties_level2Name:%22not%20supplied%22&fq=-dynamicProperties_level2Name:%22Not%20supplied%22&fsort=count"
     },
     "rank": {
       "title": "Per taxonrang",
