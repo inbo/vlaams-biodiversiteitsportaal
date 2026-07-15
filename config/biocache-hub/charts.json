@@ -15,8 +15,7 @@
       "hideEmptyValues": true,
       "includeOther": "false",
       "filter": "fsort=count",
-      "growToFit": true,
-      "colors": ["#C04384", "#356196", "#843860", "#C2C444"]
+      "growToFit": true
     },
     "month": {
       "title": "Per maand",
@@ -24,8 +23,7 @@
       "emptyValueMsg": "Maand niet gespecificeerd",
       "hideEmptyValues": true,
       "includeOther": "false",
-      "filter": "fq=month:%5B*%20TO%20*%5D",
-      "colors": ["#C04384", "#356196", "#843860", "#C2C444"]
+      "filter": "fq=month:%5B*%20TO%20*%5D"
     },
     "year": {
       "title": "Per jaar",
@@ -33,8 +31,7 @@
       "emptyValueMsg": "Jaar niet gespecificeerd",
       "hideEmptyValues": true,
       "includeOther": "false",
-      "filter": "fq=year:%5B*%20TO%20*%5D",
-      "colors": ["#C04384", "#356196", "#843860", "#C2C444"]
+      "filter": "fq=year:%5B*%20TO%20*%5D"
     },
     "genus": {
       "title": "Per geslacht",
@@ -43,8 +40,7 @@
       "hideEmptyValues": true,
       "includeOther": "false",
       "filter": "fq=genus:%2A&fq=-genus:%22not%20supplied%22&fq=-genus:%22Not%20supplied%22&fsort=count",
-      "growToFit": true,
-      "colors": ["#C04384", "#356196", "#843860", "#C2C444"]
+      "growToFit": true
     },
     "family": {
       "title": "Per familie",
@@ -53,8 +49,7 @@
       "hideEmptyValues": true,
       "includeOther": "false",
       "filter": "fq=family:%2A&fq=-family:%22not%20supplied%22&fq=-family:%22Not%20supplied%22&fsort=count",
-      "growToFit": true,
-      "colors": ["#C04384", "#356196", "#843860", "#C2C444"]
+      "growToFit": true
     },
     "identificationVerificationStatus": {
       "title": "Per verificatiestatus",
@@ -63,8 +58,7 @@
       "hideEmptyValues": true,
       "includeOther": "false",
       "filter": "fq=identificationVerificationStatus:%2A&fq=-identificationVerificationStatus:%22not%20supplied%22&fq=-identificationVerificationStatus:%22Not%20supplied%22&fsort=count",
-      "growToFit": true,
-      "colors": ["#C04384", "#356196", "#843860", "#C2C444"]
+      "growToFit": true
     },
     "dynamicProperties_level2Name": {
       "title": "Per provincie",
