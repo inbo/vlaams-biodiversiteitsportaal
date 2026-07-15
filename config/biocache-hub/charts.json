@@ -31,8 +31,7 @@
       "emptyValueMsg": "Jaar niet gespecificeerd",
       "hideEmptyValues": true,
       "includeOther": "false",
-      "sliderEnabled": true,
-      "sliderFacetName": "year"
+      "filter": "fq=year:%5B*%20TO%20*%5D"
     },
     "genus": {
       "title": "Per geslacht",
