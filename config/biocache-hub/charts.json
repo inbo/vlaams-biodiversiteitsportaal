@@ -16,7 +16,7 @@
       "includeOther": "false",
       "filter": "fsort=count",
       "growToFit": true,
-      "colors": ["rgb(192, 67, 132)", "rgb(53, 97, 150)", "rgb(132, 56, 96)", "rgb(194, 196, 68)"]
+      "colors": ["#C04384", "#356196", "#843860", "#C2C444"]
     },
     "month": {
       "title": "Per maand",
@@ -25,7 +25,7 @@
       "hideEmptyValues": true,
       "includeOther": "false",
       "filter": "fq=month:%5B*%20TO%20*%5D",
-      "colors": ["rgb(192, 67, 132)", "rgb(53, 97, 150)", "rgb(132, 56, 96)", "rgb(194, 196, 68)"]
+      "colors": ["#C04384", "#356196", "#843860", "#C2C444"]
     },
     "year": {
       "title": "Per jaar",
@@ -34,7 +34,7 @@
       "hideEmptyValues": true,
       "includeOther": "false",
       "filter": "fq=year:%5B*%20TO%20*%5D",
-      "colors": ["rgb(192, 67, 132)", "rgb(53, 97, 150)", "rgb(132, 56, 96)", "rgb(194, 196, 68)"]
+      "colors": ["#C04384", "#356196", "#843860", "#C2C444"]
     },
     "genus": {
       "title": "Per geslacht",
@@ -44,7 +44,7 @@
       "includeOther": "false",
       "filter": "fq=genus:%2A&fq=-genus:%22not%20supplied%22&fq=-genus:%22Not%20supplied%22&fsort=count",
       "growToFit": true,
-      "colors": ["rgb(192, 67, 132)", "rgb(53, 97, 150)", "rgb(132, 56, 96)", "rgb(194, 196, 68)"]
+      "colors": ["#C04384", "#356196", "#843860", "#C2C444"]
     },
     "family": {
       "title": "Per familie",
@@ -54,7 +54,7 @@
       "includeOther": "false",
       "filter": "fq=family:%2A&fq=-family:%22not%20supplied%22&fq=-family:%22Not%20supplied%22&fsort=count",
       "growToFit": true,
-      "colors": ["rgb(192, 67, 132)", "rgb(53, 97, 150)", "rgb(132, 56, 96)", "rgb(194, 196, 68)"]
+      "colors": ["#C04384", "#356196", "#843860", "#C2C444"]
     },
     "identificationVerificationStatus": {
       "title": "Per verificatiestatus",
@@ -64,7 +64,7 @@
       "includeOther": "false",
       "filter": "fq=identificationVerificationStatus:%2A&fq=-identificationVerificationStatus:%22not%20supplied%22&fq=-identificationVerificationStatus:%22Not%20supplied%22&fsort=count",
       "growToFit": true,
-      "colors": ["rgb(192, 67, 132)", "rgb(53, 97, 150)", "rgb(132, 56, 96)", "rgb(194, 196, 68)"]
+      "colors": ["#C04384", "#356196", "#843860", "#C2C444"]
     },
     "dynamicProperties_level2Name": {
       "title": "Per provincie",
