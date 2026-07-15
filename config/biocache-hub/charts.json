@@ -33,7 +33,7 @@
       "includeOther": "false",
       "filter": "fq=year:%5B*%20TO%20*%5D",
       "sliderEnabled": true,
-      "sliderFacet": "year"
+      "sliderFacetName": "year"
     },
     "genus": {
       "title": "Per geslacht",
