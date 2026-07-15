@@ -8,14 +8,6 @@
       "includeOther": "false",
       "filter": "fsort=count"
     },
-    "type_status": {
-      "title": "Per typestatus",
-      "chartType": "doughnut",
-      "emptyValueMsg": "Type niet gespecificeerd",
-      "hideEmptyValues": true,
-      "includeOther": "false",
-      "filter": "fsort=count"
-    },
     "month": {
       "title": "Per maand",
       "chartType": "bar",
