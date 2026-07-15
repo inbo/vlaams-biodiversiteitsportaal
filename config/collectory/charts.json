@@ -8,6 +8,14 @@
       "includeOther": "false",
       "filter": "fsort=count"
     },
+    "identificationVerificationStatus": {
+      "title": "Per verificatiestatus",
+      "chartType": "doughnut",
+      "emptyValueMsg": "Verificatiestatus niet gespecificeerd",
+      "hideEmptyValues": true,
+      "includeOther": "false",
+      "filter": "fq=identificationVerificationStatus:%2A&fq=-identificationVerificationStatus:%22not%20supplied%22&fq=-identificationVerificationStatus:%22Not%20supplied%22&fsort=count"
+    },
     "month": {
       "title": "Per maand",
       "chartType": "bar",
