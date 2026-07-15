@@ -8,6 +8,14 @@
       "includeOther": "false",
       "filter": "fsort=count"
     },
+    "rank": {
+      "title": "Per taxonrang",
+      "chartType": "doughnut",
+      "emptyValueMsg": "Taxonrang niet gespecificeerd",
+      "hideEmptyValues": true,
+      "includeOther": "false",
+      "filter": "fq=rank:%2A&fq=-rank:%22not%20supplied%22&fq=-rank:%22Not%20supplied%22&fsort=count"
+    },
     "identificationVerificationStatus": {
       "title": "Per verificatiestatus",
       "chartType": "doughnut",
