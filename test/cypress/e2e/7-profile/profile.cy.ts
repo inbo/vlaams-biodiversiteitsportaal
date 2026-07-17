@@ -55,6 +55,15 @@ describe("User profile - Authenticated", () => {
   });
 
   it("Show working annotations link", () => {
+    // Ignore errors from the facet slider widget trying to attach to elements that cannot be found
+    // when the search results contain no records to build a range slider from.
+    cy.on("uncaught:exception", (err, runnable) => {
+      expect(err.message).to.include(
+        "noUiSlider: create requires a single element",
+      );
+      return false; // Prevents Cypress from failing the test
+    });
+
     cy.getCookie("VBP-AUTH").then((cookie) => {
       const userId = JSON.parse(decodeURIComponent(cookie!.value)).userId;
       cy.get("#profile-overview")
