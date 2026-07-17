@@ -1,6 +1,6 @@
 ---
 title: "We hebben onze grafieken geupdate"
-date: "2026-07-10"
+date: "2026-07-17"
 excerpt: "Onze grafische interpretaties van datasets en records zijn geupdate en nu ook in het Nederlands beschikbaar"
 ---
 
