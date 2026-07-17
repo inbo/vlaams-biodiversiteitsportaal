@@ -127,6 +127,10 @@
       {
         "sort": "count",
         "field": "behavior"
+      },
+      {
+        "sort": "count",
+        "field": "dynamicProperties_iucnRedListCategory"
       }
     ]
   },

@@ -178,6 +178,10 @@
         "field": "raw_state_conservation"
       },
       {
+        "sort": "count",
+        "field": "dynamicProperties_iucnRedListCategory"
+      },
+      {
         "sort": "index",
         "field": "event_id"
       }
