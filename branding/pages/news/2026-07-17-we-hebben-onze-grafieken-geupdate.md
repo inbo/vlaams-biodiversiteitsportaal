@@ -20,5 +20,6 @@ Benieuwd naar de nieuwe look? Neem zelf een kijkje en ontdek de visuele trends i
 
 
 [Grafieken](/images/pages/news/grafieken2.png)
+[Grafieken](/images/pages/news/grafieken3.png)
 
 
