@@ -126,6 +126,7 @@ jobs:
           commit: ${{ github.sha }}
           tag: branding-v${{ needs.get-versions.outputs.branding_version }}
           artifacts: "branding/branding-${{ needs.get-versions.outputs.branding_version }}.tar.gz"
+          immutableCreate: true
 
   version-config-files:
     runs-on: [self-hosted]
