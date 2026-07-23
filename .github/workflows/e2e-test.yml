@@ -26,12 +26,12 @@ jobs:
         run: |
           apt-get update && apt-get install -y git-lfs
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           lfs: true
 
       - name: Cypress run
-        uses: cypress-io/github-action@v6
+        uses: cypress-io/github-action@f790eee7a50d9505912f50c2095510be7de06aa7 # v6
         env:
           CYPRESS_VBP_USERNAME: ${{ secrets.CYPRESS_VBP_USERNAME }}
           CYPRESS_VBP_PASSWORD: ${{ secrets.CYPRESS_VBP_PASSWORD }}
@@ -39,7 +39,7 @@ jobs:
         with:
           working-directory: ./test
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         id: upload-screen-captures
         if: failure()
         with:
@@ -169,13 +169,13 @@ jobs:
       - name: Install Copilot CLI
         run: npm install -g @github/copilot
 
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
         with:
           lfs: true
           fetch-depth: 0
 
       - name: Download artifact
-        uses: actions/download-artifact@v8
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
           name: upload-screen-captures
           path: ./test
