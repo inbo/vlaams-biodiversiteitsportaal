@@ -393,7 +393,7 @@ startup:
     default: 1_grb
   baselayers:
     1_grb:
-      name: "Grootschalig Referentiebestand"
+      name: "Grootschalig Referentiebestand (Bron: Grootschalig Referentie Bestand Vlaanderen, agentschap Digitaal Vlaanderen)"
       link: "https://www.vlaanderen.be/datavindplaats/catalogus/wmts-grb"
       type: "group"
       layerParams:
@@ -417,7 +417,7 @@ startup:
     #                [ 51.52780962525605, 6.1468505859375 ]
     #              ]
     2_luchtkaart:
-      name: "Luchtfoto's"
+      name: "Luchtfoto's (Bron: WMTS Orthofotomozaïek, agentschap Digitaal Vlaanderen)"
       link: "https://www.vlaanderen.be/datavindplaats/catalogus/wmts-orthofotomozaiek-middenschalig-winteropnamen-kleur-meest-recent-vlaanderen"
       type: "group"
       layerParams:
