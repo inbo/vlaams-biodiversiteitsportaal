@@ -413,7 +413,7 @@ startup:
             projections: ["3857"]
             layerParams:
               maxZoom: 21
-              attribution: "Grootschalig Referentie Bestand Vlaanderen, Digitaal Vlaanderen”"
+              attribution: "Grootschalig Referentie Bestand Vlaanderen, Digitaal Vlaanderen"
     #              bounds: [
     #                [ 50.65843926853822, 2.296],
     #                [ 51.52780962525605, 6.1468505859375 ]
@@ -440,7 +440,7 @@ startup:
             projections: ["3857"]
             layerParams:
               maxZoom: 21
-              attribution: "Orthofotomozaïek, middenschalig, winteropnamen, kleur, meest recent, Vlaanderen, 2025.04, Digitaal Vlaanderen”"
+              attribution: "Orthofotomozaïek, middenschalig, winteropnamen, kleur, meest recent, Vlaanderen, 2025.04, Digitaal Vlaanderen"
       #        bounds: [
       #          [ 50.65843926853822, 2.296],
       #          [ 51.52780962525605, 6.1468505859375 ]
