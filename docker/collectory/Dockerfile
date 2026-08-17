@@ -8,9 +8,9 @@ WORKDIR /project
 # ARG VERSION=5.1.1
 # ARG SOURCE=https://github.com/AtlasOfLivingAustralia/collectory.git
 
-ARG VERSION=html-in-dataresource-description
+ARG VERSION=use-occurrenceId-for-unique-term
 ARG SOURCE=https://github.com/StefanVanDyck/collectory
-ARG COMMIT=6ca19b488c6aec2c0dce8695df311ee716daeddd
+ARG COMMIT=8d3462567bf4e8d501bc48af1e69b4e49a2e3c06
 LABEL ala.version=inbo-${COMMIT}
 
 RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
@@ -39,7 +39,7 @@ RUN mkdir -p /opt/atlas/i18n \
   && ln -s /config/collectory/i18n/override /var/opt/atlas/i18n/collectory-plugin
 
 ARG VERSION=5.2.0-SNAPSHOT
-ARG COMMIT=6ca19b488c6aec2c0dce8695df311ee716daeddd
+ARG COMMIT=8d3462567bf4e8d501bc48af1e69b4e49a2e3c06
 LABEL ala.version=inbo-${COMMIT}
 
 COPY --from=builder /project/build/libs/collectory-${VERSION}.war /collectory.war
