@@ -1,4 +1,4 @@
-﻿diff --git a/src/main/java/au/org/ala/biocache/service/ListsService.java b/src/main/java/au/org/ala/biocache/service/ListsService.java
+diff --git a/src/main/java/au/org/ala/biocache/service/ListsService.java b/src/main/java/au/org/ala/biocache/service/ListsService.java
 index eb258ab..02bd1c7 100644
 --- a/src/main/java/au/org/ala/biocache/service/ListsService.java
 +++ b/src/main/java/au/org/ala/biocache/service/ListsService.java
