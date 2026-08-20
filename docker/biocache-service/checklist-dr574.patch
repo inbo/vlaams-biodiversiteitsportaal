@@ -1,0 +1,77 @@
+﻿diff --git a/src/main/java/au/org/ala/biocache/service/ListsService.java b/src/main/java/au/org/ala/biocache/service/ListsService.java
+index eb258ab..02bd1c7 100644
+--- a/src/main/java/au/org/ala/biocache/service/ListsService.java
++++ b/src/main/java/au/org/ala/biocache/service/ListsService.java
+@@ -57,6 +57,9 @@ public class ListsService {
+     @Value("${list.tool.url:https://lists.ala.org.au}")
+     private String speciesListUrl;
+ 
++    @Value("${list.tool.additional.conservation.lists:}")
++    private String additionalConservationLists;
++
+     private Map<String, Map<String, Set<String>>> data = RestartDataService.get(this, "data", new TypeReference<HashMap<String, Map<String, Set<String>>>>(){}, HashMap.class);
+     private volatile Map<String, List<SpeciesListDTO>> generalPurposeLists = RestartDataService.get(this, GENERAL_PURPOSE_LISTS, new TypeReference<HashMap<String, List<SpeciesListDTO>>>(){}, HashMap.class);
+ 
+@@ -93,6 +96,7 @@ public class ListsService {
+ 
+                 if ((threatened != null && threatened.size() > 0) ||
+                     (invasive != null && invasive.size() > 0)) {
++                    threatened = addExtraConservationLists(threatened);
+                     map.put("Conservation", getItemsMap(threatened, true));
+                     map.put("Invasive", getItemsMap(invasive, false));
+ 
+@@ -113,6 +117,54 @@ public class ListsService {
+         }
+     }
+ 
++
++    private Map addExtraConservationLists(Map threatened) {
++        if (StringUtils.isBlank(additionalConservationLists)) {
++            return threatened;
++        }
++
++        if (threatened == null) {
++            threatened = new HashMap();
++        }
++
++        List lists = (List) threatened.get("lists");
++        if (lists == null) {
++            lists = new ArrayList();
++            threatened.put("lists", lists);
++        }
++
++        Set<String> existingUids = new HashSet<String>();
++        for (Object o : lists) {
++            if (o instanceof Map) {
++                Object uid = ((Map) o).get("dataResourceUid");
++                if (uid != null) {
++                    existingUids.add(uid.toString());
++                }
++            }
++        }
++
++        for (String uid : additionalConservationLists.split(",")) {
++            String trimmedUid = StringUtils.trimToEmpty(uid);
++            if (StringUtils.isBlank(trimmedUid) || existingUids.contains(trimmedUid)) {
++                continue;
++            }
++
++            try {
++                SpeciesListDTO listInfo = getListInfo(trimmedUid);
++                if (listInfo != null && StringUtils.isNotBlank(listInfo.dataResourceUid)) {
++                    Map list = new HashMap();
++                    list.put("listName", listInfo.listName);
++                    list.put("dataResourceUid", listInfo.dataResourceUid);
++                    lists.add(list);
++                    existingUids.add(listInfo.dataResourceUid);
++                }
++            } catch (Exception e) {
++                logger.error("failed to add configured conservation list: " + trimmedUid, e);
++            }
++        }
++
++        return threatened;
++    }
+     private Map<String, Set<String>> getItemsMap(Map speciesLists, boolean conservationList) throws Exception {
+         List ja = (List) speciesLists.get("lists");
+         Map<String, Set<String>> map = new HashMap();

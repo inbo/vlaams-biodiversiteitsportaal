@@ -294,4 +294,9 @@ spring:
 common:
   protocol: https
   domain: natuurdata.inbo.be
+list:
+  tool:
+    additional:
+      conservation:
+        lists: dr574
 

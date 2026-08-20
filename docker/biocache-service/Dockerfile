@@ -9,7 +9,8 @@ ARG SOURCE=https://github.com/StefanVanDyck/biocache-service.git
 LABEL ala.version=inbo-${COMMIT}
 
 WORKDIR /project
-RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
+COPY checklist-dr574.patch /tmp/checklist-dr574.patch
+RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT} && git apply /tmp/checklist-dr574.patch
 
 RUN --mount=type=cache,target=/gradle-cache,ro \
     gradle build assemble \
