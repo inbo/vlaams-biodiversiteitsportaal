@@ -147,6 +147,9 @@ serverName: ${common.protocol}://${common.domain}/collectory
 showExtraInfoInDataSetsView:
   enabled: "true "
   relativeTime: true
+publicPage:
+  dataResource:
+    institutionFontSize: 1.5rem
 skin:
   taxaLinks:
     baseUrl: ${common.protocol}://${common.domain}/bie-hub/species/
