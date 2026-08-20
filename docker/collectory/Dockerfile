@@ -15,6 +15,9 @@ LABEL ala.version=inbo-${COMMIT}
 
 RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
 
+COPY show-dataresource-institution-font.patch /tmp/show-dataresource-institution-font.patch
+RUN git apply /tmp/show-dataresource-institution-font.patch
+
 COPY resources.xml ./grails-app/conf/spring/resources.xml
 
 RUN --mount=type=cache,target=/gradle-cache,ro \
