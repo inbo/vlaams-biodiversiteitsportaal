@@ -3,7 +3,7 @@ ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 ARG VERSION=develop-vbp
-ARG COMMIT=8b75c50be8346f55653c501fb8e1666810c3028b
+ARG COMMIT=6d20a0dda83b0d9940f448bff02e8a304abb86a9
 ARG SOURCE=https://github.com/inbo/specieslist-webapp.git
 LABEL ala.version=inbo-${COMMIT}
 
@@ -13,13 +13,13 @@ RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
 COPY resources.xml ./grails-app/conf/spring/resources.xml
 
 RUN --mount=type=cache,target=/gradle-cache,ro \
-    gradle build assemble \
-    -x test -x integrationTest
+  gradle build assemble \
+  -x test -x integrationTest
 
 # Copy dependencies to shared read-only cache
 RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
-    rsync -a /home/gradle/.gradle/caches/modules-2 /gradle-cache \
-    && rm /gradle-cache/modules-2/*.lock && rm /gradle-cache/modules-2/gc.properties
+  rsync -a /home/gradle/.gradle/caches/modules-2 /gradle-cache \
+  && rm /gradle-cache/modules-2/*.lock && rm /gradle-cache/modules-2/gc.properties
 
 RUN ls -la /project/build/libs
 
@@ -35,8 +35,8 @@ RUN mkdir -p /opt/atlas/i18n \
   && mkdir -p /var/opt/atlas/i18n \
   && ln -s /config/species-list/i18n/override /var/opt/atlas/i18n/specieslist-webapp
 
-ARG VERSION=5.3.0-SNAPSHOT
-ARG COMMIT=d57d6ed03d6e6c52671630dde36005689ed993f9
+ARG VERSION=5.4.0-SNAPSHOT
+ARG COMMIT=6d20a0dda83b0d9940f448bff02e8a304abb86a9
 LABEL ala.version=inbo-${COMMIT}
 
 COPY --from=builder /project/build/libs/specieslist-webapp-${VERSION}.war /species-list.war
