@@ -1,16 +1,20 @@
-User-agent: *
-Disallow: /
-
-Crawl-delay: 10
-
-# Explicit allows
+# Major search engines: crawl the public pages only
+User-agent: Googlebot
+User-agent: Bingbot
+User-agent: DuckDuckBot
+Crawl-delay: 60
+Disallow: /bie-hub/externalSite/
+Disallow: /species-list/speciesListItem/
 Allow: /index.html
 Allow: /favicon.ico
 Allow: /$
 Allow: /pages/
 Allow: /bie-hub/species/
-Disallow: /bie-hub/externalSite/
 Allow: /collectory/datasets
 Allow: /collectory/public/showDataResource/
 Allow: /species-list/public/speciesLists
-Disallow: /species-list/speciesListItem/
+Disallow: /
+
+# Everyone else: nothing
+User-agent: *
+Disallow: /
