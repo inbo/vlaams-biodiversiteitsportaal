@@ -2,6 +2,7 @@
 User-agent: Googlebot
 User-agent: Bingbot
 User-agent: DuckDuckBot
+User-agent: Applebot
 Crawl-delay: 60
 Disallow: /bie-hub/externalSite/
 Disallow: /species-list/speciesListItem/
