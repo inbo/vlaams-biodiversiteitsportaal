@@ -195,6 +195,10 @@ map:
   defaultLongitude: 4.4
   defaultZoom: 9
   pointColour: a83d7a
+  minimal:
+    url: "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
+    attr: "Map data &copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a>, imagery &copy; <a href='https://cartodb.com/attributions'>CartoDB</a>"
+    subdomains: "abcd"
 #  height: 600
 #  minimal:
 #    url: https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png
