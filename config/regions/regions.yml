@@ -67,7 +67,7 @@ map:
   maxLat: 51.5
   maxLng: 4.5
   minimal:
-    url: "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
+    url: "https://basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png?key=cb1_2fit_1_dc8cfb005a9997610576579d"
     attr: "Map data &copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a>, imagery &copy; <a href='https://cartodb.com/attributions'>CartoDB</a>"
     subdomains: "abcd"
   pointColour: a83d7a

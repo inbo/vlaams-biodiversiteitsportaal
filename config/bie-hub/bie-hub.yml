@@ -144,7 +144,7 @@ defaultDecimalLongitude: 4.4
 defaultZoomLevel: 8
 map:
   default:
-    url: https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png
+    url: https://basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png?key=cb1_2fit_1_dc8cfb005a9997610576579d
     colour: a83d7a
   simpleMapButton: False
   records:
