@@ -26,9 +26,9 @@ alertsResourceName: Atlas
 google:
   apikey: get-a-google-api-key
 
-showNotesInfoInAccordionPanel: 'false'
+showNotesInfoInAccordionPanel: "false"
 serverName: ${common.protocol}://${common.domain}/regions
-disableCAS: 'false'
+disableCAS: "false"
 uriFilterPattern: /admin/*,/alaAdmin/*
 orgNameLong: Vlaams Biodiversiteitsportaal
 skin:
@@ -40,8 +40,8 @@ bie:
   searchPath: /search
 biocache:
   baseURL: ${common.protocol}://${common.domain}/biocache-hub
-  enableQueryContext: 'false'
-  queryContext: ''
+  enableQueryContext: "false"
+  queryContext: ""
   occurrences:
     sort: "count"
 spatial:
@@ -67,28 +67,29 @@ map:
   maxLat: 51.5
   maxLng: 4.5
   minimal:
-    url: "https://basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png?key=cb1_2fit_1_dc8cfb005a9997610576579d"
+    url: "https://basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png?key=cb1_2fit_1_dc8cfb005a9997610576579d"
     attr: "Map data &copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a>, imagery &copy; <a href='https://cartodb.com/attributions'>CartoDB</a>"
     subdomains: "abcd"
   pointColour: a83d7a
 #subgroupFile: '/data/regions/config/regionsGroups.json'
 layers:
-  enableObjectIntersection: 'false'
-  queryContextBieContext: ''
-  queryContextOrder: '0'
-  queryContextShortName: ''
-  queryContextFid: ''
-  showQueryContext: 'false'
-  intersectObject: ''
-  queryContextDisplayName: ''
-  queryContextName: ''
+  enableObjectIntersection: "false"
+  queryContextBieContext: ""
+  queryContextOrder: "0"
+  queryContextShortName: ""
+  queryContextFid: ""
+  showQueryContext: "false"
+  intersectObject: ""
+  queryContextDisplayName: ""
+  queryContextName: ""
 
 environments:
   inbo_prod:
-    config_dir: '/config/regions/envs/prod'
+    config_dir: "/config/regions/envs/prod"
   inbo_uat:
-    config_dir: '/config/regions/envs/uat'
+    config_dir: "/config/regions/envs/uat"
   inbo_dev:
-    config_dir: '/config/regions/envs/dev'
+    config_dir: "/config/regions/envs/dev"
   local:
-    config_dir: '/config/regions/envs/local'
+    config_dir: "/config/regions/envs/local"
+

@@ -196,12 +196,12 @@ map:
   defaultZoom: 9
   pointColour: a83d7a
   minimal:
-    url: "https://basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png?key=cb1_2fit_1_dc8cfb005a9997610576579d"
+    url: "https://basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png?key=cb1_2fit_1_dc8cfb005a9997610576579d"
     attr: "Map data &copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a>, imagery &copy; <a href='https://cartodb.com/attributions'>CartoDB</a>"
     subdomains: "abcd"
 #  height: 600
 #  minimal:
-#    url: https://basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png?key=cb1_2fit_1_dc8cfb005a9997610576579d
+#    url: https://basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png?key=cb1_2fit_1_dc8cfb005a9997610576579d
 #  overlay:
 #    url: ${common.protocol}://${common.domain}/spatial-hub/geoserver/gwc/service/wms
 #  pointColour: df4a21
