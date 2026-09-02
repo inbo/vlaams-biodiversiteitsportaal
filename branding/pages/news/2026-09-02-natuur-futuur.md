@@ -1,5 +1,5 @@
 ---
-title: "GBIF Celebrating 25 Years of Biodiversity Data Mobilisation"
+title: "INBO en VBP aanwezig op Natuur Futuur"
 date: "2026-09-02"
 excerpt: "Bezoek ook de INBO en Vlaams Biodiversiteitsportaal stand op Natuur Futuur."
 ---
