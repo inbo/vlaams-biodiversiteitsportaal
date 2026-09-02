@@ -31,6 +31,7 @@ Deelname: Gratis
 Registratie (verplicht): Vul het formulier in
 
 Of u nu al lang bijdraagt aan GBIF of gewoon geïnteresseerd bent in biodiversiteitsdata en de maatschappelijke impact ervan: 
+
 ### wij nodigen u van harte uit om samen met ons 25 jaar mobilisatie van biodiversiteitsdata in België te vieren.
 
 Reserveer de datum alvast in uw agenda en vier het met ons mee!
