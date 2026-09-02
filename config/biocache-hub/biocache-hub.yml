@@ -60,6 +60,10 @@ downloads:
   checklistDownloadUrl: ${common.protocol}://${common.domain}/biocache-service/occurrences/facets/download
   customSections:
     misc: qualityAssertions,miscellaneousFields
+  # Fields added when the "conservationStatus" group is selected on the customise download page.
+  # Must stay a YAML list: the downloads-plugin reads this config value as a List.
+  conservationStatus:
+    - dynamicProperties_iucnRedListCategory
   defaultDownloadFormat: minimal
   dwcExtraFields: data_resource_uid
   fieldguideDownloadUrl: ""
