@@ -1,40 +1,45 @@
 ---
-title: "GBIF Celebrating 25 Years of Biodiversity Data Mobilisation
-
-"
+title: "GBIF Celebrating 25 Years of Biodiversity Data Mobilisation"
 date: "2026-09-02"
-excerpt: "Op 19 oktober 2026 viert België het 25-jarig GBIF jubileum in het Koninklijk Belgisch Instituut voor Natuurwetenschappen (KBIN) in Brussel."
+excerpt: "Bezoek ook de INBO en Vlaams Biodiversiteitsportaal stand op Natuur Futuur."
 ---
 
-# 25 jaar GBIF in Belgie (en in de wereld)
+# De natuur van morgen bouwen we vandaag.
 
-Op 19 oktober 2026 viert GBIF België haar 25-jarig jubileum in het Koninklijk Belgisch Instituut voor Natuurwetenschappen (KBIN) in Brussel.
-Gedurende de afgelopen 25 jaar heeft GBIF België een centrale rol gespeeld in het ondersteunen van de mobilisatie, publicatie en het gebruik van biodiversiteitsgegevens.
-Daarmee draagt het bij aan een wereldwijd netwerk dat open toegang biedt tot miljoenen biodiversiteitsrecords voor onderzoek, behoud, onderwijs en beleidsvorming.
+Binnenkort zijn we aanwezig op Natuur Futuur, kom zeker langs op de INBO en Vlaams Biodiversiteitsportaal stand!!
 
+Natuur Futuur brengt op 17 september 2026 denkers, doeners en beslissers samen voor een dag vol inspiratie, praktijkvoorbeelden en nieuwe samenwerkingen.
+Ontdek hoe innovatie, datacollaboratie en alternatieve financiering concrete kansen creëren voor natuur in Vlaanderen.
 
-[GBIF](/images/pages/news/gbif_belgie.png)
+## Eerste editie van de trefdag
+Tijdens deze eerste editie brengt het Agentschap voor Natuur en Bos natuurorganisaties en terreinbeheerders, landbouw- en defensiepartners, actoren in gebiedsontwikkeling, (boven)lokale besturen, Vlaamse agentschappen, beleidsmakers, onderzoekers en bedrijven samen rond één centrale vraag: 
+hoe bouwen we slimmer, sneller en sterker aan de natuur van morgen?
 
-Dit jubileumevenement brengt leden van de Belgische biodiversiteitsgemeenschap samen, waaronder onderzoekers, collectiebeheerders, data stewards, beginnende onderzoekers en professionals in de biodiversiteitsinformatica.
-Het biedt de gelegenheid om terug te blikken op de evolutie van de mobilisatie van biodiversiteitsdata in België, succesvolle initiatieven te tonen en te onderzoeken hoe door GBIF ontsloten data bijdragen aan wetenschap, natuurbehoud, capaciteitsopbouw en onderbouwde besluitvorming.
+Laat je inspireren door scherpe pitches, frisse data, slimme toepassingen en nieuwe financieringsmodellen die vandaag al het verschil maken en waarmee je morgen zelf aan de slag kunt.
+We focussen op drie krachtige hefbomen voor toekomstgericht natuurbeleid: innovatie, datacollaboratie en alternatieve financiering. Ontdek hoe data helpen om veranderingen sneller te detecteren, effecten van ingrepen beter te evalueren en onderbouwde keuzes te maken. Laat je inspireren door innovatieve technologieën, nieuwe samenwerkingsvormen en praktijkvoorbeelden die natuurherstel versnellen. Verken vernieuwende verdienmodellen en instrumenten die het herstellen van natuur schaalbaar en betaalbaar maken.
 
-Het programma omvat presentaties van belangrijke belanghebbenden die betrokken zijn bij het beheer en het gebruik van biodiversiteitsgegevens.
-Onderwerpen die aan bod komen zijn onder meer biodiversiteitscollecties, datapublicatie via GBIF, datakwaliteit en -standaarden, initiatieven voor capaciteitsopbouw, dataintegratie en innovatieve toepassingen van biodiversiteitsinformatie.
+## Een uitgebreid programma
+Dankzij inspirerende keynotes, sterke showcases en 18 verdiepende themasessies ontdek je nieuwe inzichten en praktijkvoorbeelden rond onder meer AI, satellietmonitoring, rewilding, natuurinclusief ontwerpen en nieuwe verdienmodellen zoals carbon credits en nature finance.
+Ook buiten de sessiezalen valt er heel wat te beleven. Op onze ruime en bruisende beursvloer tonen bedrijven, organisaties, kennisinstellingen en overheden waar ze vandaag aan werken én welke oplossingen ze ontwikkelen voor de natuur van morgen. Het is dé plek om ideeën op te doen, ervaringen uit te wisselen, nieuwe partners te ontmoeten en kansen voor samenwerking te verkennen.
 
+## Waarom Natuur Futuur, van inzicht naar impact
+De uitdagingen zijn groot. De Europese Natuurherstelverordening zet een ambitieuze koers uit richting 2050 en markeert een belangrijke omslag: natuur beschermen volstaat niet langer, we moeten natuur ook actief herstellen. Tegelijk vragen biodiversiteitsverlies, stijgende klimaatrisico’s en toenemende druk op ruimte, middelen en budgetten om nieuwe oplossingen.
 
-## Praktische informatie:
+Eén ding is duidelijk: natuurherstel realiseren we niet met meer van hetzelfde. Het vraagt een systeemtransitie met samenwerking, innovatie en een frisse kijk op hoe we denken en handelen.
 
-Datum: Maandag 19 oktober 2026, van 9:00 tot 16:00 uur
+Natuur Futuur is meer dan een studiedag en geen passief programma om te volgen. Het is een ontmoetingsplaats voor mensen die niet alleen willen nadenken over de toekomst van natuur, maar er ook actief aan willen bijdragen.
+Breng je expertise, je project, je data, je vraagstuk of je idee mee. Leg nieuwe contacten, ontdek onverwachte kansen en bouw mee aan oplossingen die ook na 17 september verder groeien zodat natuurherstel geen plan blijft, maar een gedeelde realiteit wordt.
 
-Locatie: Koninklijk Belgisch Instituut voor Natuurwetenschappen (KBIN), Brussel
+Laat je inspireren door wat vandaag al werkt en ontdek hoe jij morgen mee het verschil kan maken.
 
-Deelname: Gratis
+Want de natuur van morgen maken we vandaag al. Samen.
 
-Registratie (verplicht): Vul het formulier in
+## Waarom deelnemen?
+Inspiratie door sterke sprekers en innovatieve projecten
+Concrete ideeën en oplossingen die je meteen kan toepassen
+Inzichten in technologie, data en de natuur van morgen
+Netwerkkansen met spelers uit verschillende sectoren
+Verken de beursvloer en ontdek wie vandaag al bouwt aan de natuur van morgen
+Eén dag die je voedt met ideeën én contacten om verder mee te bouwen aan de natuur van morgen.
 
-Of u nu al lang bijdraagt aan GBIF of gewoon geïnteresseerd bent in biodiversiteitsdata en de maatschappelijke impact ervan: 
-### wij nodigen u van harte uit om samen met ons 25 jaar mobilisatie van biodiversiteitsdata in België te vieren.
-
-Reserveer de datum alvast in uw agenda en vier het met ons mee!
-
-Neem voor meer informatie contact op met [Maxime Coupremanne](mailto:m.coupremanne@biodiversity.be), Biodiversity Data Officer.
+Voor meer informatie en jhet uitgebebreid programma, ga naar [Natuur Futuur](https://natuurenbos.be/natuurfutuur)
