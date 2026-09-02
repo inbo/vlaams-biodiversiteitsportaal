@@ -8,6 +8,9 @@ excerpt: "Bezoek ook de INBO en Vlaams Biodiversiteitsportaal stand op Natuur Fu
 
 Binnenkort zijn we aanwezig op Natuur Futuur, kom zeker langs op de INBO en Vlaams Biodiversiteitsportaal stand!!
 
+
+![NatuurFutuur](/images/pages/news/anb_trefdag_banner.png)
+
 Natuur Futuur brengt op 17 september 2026 denkers, doeners en beslissers samen voor een dag vol inspiratie, praktijkvoorbeelden en nieuwe samenwerkingen.
 Ontdek hoe innovatie, datacollaboratie en alternatieve financiering concrete kansen creëren voor natuur in Vlaanderen.
 
