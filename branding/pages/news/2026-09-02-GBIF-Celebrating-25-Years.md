@@ -1,7 +1,5 @@
 ---
-title: "GBIF Celebrating 25 Years of Biodiversity Data Mobilisation
-
-"
+title: "GBIF Celebrating 25 Years of Biodiversity Data Mobilisation"
 date: "2026-09-02"
 excerpt: "Op 19 oktober 2026 viert België het 25-jarig GBIF jubileum in het Koninklijk Belgisch Instituut voor Natuurwetenschappen (KBIN) in Brussel."
 ---
@@ -13,7 +11,7 @@ Gedurende de afgelopen 25 jaar heeft GBIF België een centrale rol gespeeld in h
 Daarmee draagt het bij aan een wereldwijd netwerk dat open toegang biedt tot miljoenen biodiversiteitsrecords voor onderzoek, behoud, onderwijs en beleidsvorming.
 
 
-[GBIF](/images/pages/news/gbif_belgie.png)
+![GBIF](/images/pages/news/gbif_belgie.jpg)
 
 Dit jubileumevenement brengt leden van de Belgische biodiversiteitsgemeenschap samen, waaronder onderzoekers, collectiebeheerders, data stewards, beginnende onderzoekers en professionals in de biodiversiteitsinformatica.
 Het biedt de gelegenheid om terug te blikken op de evolutie van de mobilisatie van biodiversiteitsdata in België, succesvolle initiatieven te tonen en te onderzoeken hoe door GBIF ontsloten data bijdragen aan wetenschap, natuurbehoud, capaciteitsopbouw en onderbouwde besluitvorming.
