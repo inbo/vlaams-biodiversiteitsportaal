@@ -112,11 +112,8 @@ describe("Biocache - Advanced search", () => {
     const searchCountryInput = "Belgium";
     const searchStatesInput = "Flanders";
     cy.get("#country").select(searchCountryInput);
-    cy.get("#state")
-      .should((selectElem) => {
-        expect(selectElem.children()).to.have.length(4);
-      })
-      .select(searchStatesInput);
+    cy.get("#state").children().should("have.length", 4);
+    cy.get("#state").select(searchStatesInput);
     cy.get(".tab-pane.active").within(() => {
       cy.get("input.btn-primary[type='submit']").click();
     });

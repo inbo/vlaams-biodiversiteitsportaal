@@ -13,7 +13,7 @@ RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
 
 # biocache-hubs
 ARG VERSION=develop-vbp
-ARG COMMIT=ef0350485cbb0ca0022dd7c12c17dc4577c0c76e
+ARG COMMIT=56c8c5688ba5dbcf57ef0968bb8d8f6ab3b6a688
 
 ARG SOURCE=https://github.com/StefanVanDyck/biocache-hubs.git
 LABEL ala.version=inbo-${COMMIT}
@@ -43,15 +43,15 @@ RUN cat grails-app/conf/application.yml
 COPY alaBs.js ./grails-app/assets/javascripts/alaBs.js
 
 RUN --mount=type=cache,target=/gradle-cache,ro \
-    gradle build assemble \
-    -x test -x integrationTest \
-    --include-build ../biocache-hubs \
-    --include-build ../downloads-plugin
+  gradle build assemble \
+  -x test -x integrationTest \
+  --include-build ../biocache-hubs \
+  --include-build ../downloads-plugin
 
 # Copy dependencies to shared read-only cache
 RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
-    rsync -a /home/gradle/.gradle/caches/modules-2 /gradle-cache \
-    && rm /gradle-cache/modules-2/*.lock && rm /gradle-cache/modules-2/gc.properties
+  rsync -a /home/gradle/.gradle/caches/modules-2 /gradle-cache \
+  && rm /gradle-cache/modules-2/*.lock && rm /gradle-cache/modules-2/gc.properties
 
 FROM amazoncorretto:17
 
