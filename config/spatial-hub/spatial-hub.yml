@@ -458,6 +458,8 @@ presetWMSServers:
     url: "https://geo.api.vlaanderen.be/GRB/wms"
   - name: "INBO"
     url: "https://geo.api.vlaanderen.be/INBO/wms"
+  - name: "ANB"
+    url: "https://geo.api.vlaanderen.be/ANB/wms"
   - name: "INBO - ARPL"
     url: "https://gisservices.inbo.be/arcgis/services/ARPL/MapServer/WMSServer"
   - name: "INBO - BWK"
