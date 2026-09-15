@@ -4,12 +4,18 @@ updates:
     directory: "branding/"
     schedule:
       interval: weekly
-    # Disable version updates; security updates still work
     open-pull-requests-limit: 0
+    groups:
+      branding-security:
+        patterns:
+          - "*"
 
   - package-ecosystem: docker
     directory: "/docker"
     schedule:
       interval: weekly
-    # Disable version updates; security updates still work
     open-pull-requests-limit: 0
+    groups:
+      docker-security:
+        patterns:
+          - "*"
