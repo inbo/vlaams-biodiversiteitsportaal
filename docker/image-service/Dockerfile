@@ -10,10 +10,10 @@ LABEL ala.version=inbo-${COMMIT}
 WORKDIR /project
 RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} /project
 
-COPY resources.xml ./grails-app/conf/spring/resources.xml
+COPY resources.xml ./image-service/grails-app/conf/spring/resources.xml
 
 RUN <<EOR
-cat <<EOF >> build.gradle
+cat <<EOF >> image-service/build.gradle
 bootWar {
     enabled = true
 }
@@ -29,7 +29,7 @@ RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
     rsync -a /home/gradle/.gradle/caches/modules-2 /gradle-cache \
     && rm /gradle-cache/modules-2/*.lock && rm /gradle-cache/modules-2/gc.properties
 
-RUN ls -la /project/build/libs
+RUN ls -la /project/image-service/build/libs
 
 FROM amazoncorretto:21.0.12
 
@@ -46,7 +46,7 @@ RUN mkdir -p /opt/atlas/i18n \
 ARG VERSION=4.2.0-SNAPSHOT
 LABEL ala.version=${VERSION}
 
-COPY --from=builder /project/build/libs/image-service-${VERSION}.war /image-service.war
+COPY --from=builder /project/image-service/build/libs/image-service-${VERSION}.war /image-service.war
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/image-service/actuator/health || exit 1
 
@@ -59,7 +59,7 @@ RUN chown 1000:1000 /data
 VOLUME /data
 
 RUN mkdir /catalina
-RUN chown 1000:1000 /data
+RUN chown 1000:1000 /catalina
 VOLUME /catalina
 ENV CATALINA_BASE=/catalina
 
