@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1.14.0
 ARG BUILDPLATFORM=linux/amd64
-ARG GRADLE_VERSION=8
+ARG GRADLE_VERSION=8.14.5
 ARG JDK_VERSION=21
 FROM --platform=${BUILDPLATFORM} gradle:${GRADLE_VERSION}-jdk${JDK_VERSION}-corretto AS builder
 

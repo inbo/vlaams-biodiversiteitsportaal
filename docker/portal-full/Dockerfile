@@ -1,5 +1,5 @@
 ######################################### TOMCAT BASE #########################################
-FROM tomcat:9-jdk11-corretto AS base
+FROM tomcat:9.0.120-jdk11-corretto AS base
 
 ## trivy:ignore:DS-0015  # using BuildKit yum cache
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \

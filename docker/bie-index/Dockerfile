@@ -22,7 +22,7 @@ RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
     rsync -a /home/gradle/.gradle/caches/modules-2 /gradle-cache \
     && rm /gradle-cache/modules-2/*.lock && rm /gradle-cache/modules-2/gc.properties
 
-FROM amazoncorretto:11
+FROM amazoncorretto:11.0.32
 
 # trivy:ignore:DS-0015  # using BuildKit yum cache
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \

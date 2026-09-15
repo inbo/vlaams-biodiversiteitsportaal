@@ -20,7 +20,7 @@ RUN --mount=type=cache,target=/root/.m2/repository \
     mvn --batch-mode --no-transfer-progress \
         clean package -DskipTests -T 4 -U
 
-FROM amazoncorretto:11
+FROM amazoncorretto:11.0.32
 
 ARG VERSION=1.8.1
 LABEL ala.version=${VERSION}
