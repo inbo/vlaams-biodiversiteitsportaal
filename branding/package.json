@@ -50,6 +50,8 @@
         "js-cookie": "^3.0.5",
         "lodash": "^4.17.21",
         "oidc-client-ts": "^3.2.0"
+    },
+    "allowScripts": {
+        "esbuild@0.25.2": true
     }
 }
-
