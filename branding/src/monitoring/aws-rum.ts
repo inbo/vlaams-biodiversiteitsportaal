@@ -38,16 +38,6 @@ async function initRum() {
         },
     );
 
-    const userManager = await userManagerPromise;
-    userManager.events.addUserLoaded((user) => {
-        if (user && client) {
-            client.addSessionAttributes({
-                userId: user.profile.sub,
-            });
-            client.allowCookies(true);
-        }
-    });
-
     return client;
 }
 
