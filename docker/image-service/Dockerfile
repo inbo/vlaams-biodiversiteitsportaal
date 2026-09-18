@@ -8,7 +8,7 @@ ARG SOURCE=https://github.com/AtlasOfLivingAustralia/image-service.git
 LABEL ala.version=inbo-${COMMIT}
 
 WORKDIR /project
-RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} /project
+RUN git clone --branch ${VERSION} ${SOURCE} /project && git checkout ${COMMIT}
 
 COPY resources.xml ./grails-app/conf/spring/resources.xml
 
@@ -20,14 +20,15 @@ bootWar {
 EOF
 EOR
 
+
 RUN --mount=type=cache,target=/gradle-cache,ro \
-    gradle build assetCompile assemble bootWar \
-    -x test -x integrationTest
+  gradle build assetCompile assemble bootWar \
+  -x test -x integrationTest
 
 # Copy dependencies to shared read-only cache
 RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
-    rsync -a /home/gradle/.gradle/caches/modules-2 /gradle-cache \
-    && rm /gradle-cache/modules-2/*.lock && rm /gradle-cache/modules-2/gc.properties
+  rsync -a /home/gradle/.gradle/caches/modules-2 /gradle-cache \
+  && rm /gradle-cache/modules-2/*.lock && rm /gradle-cache/modules-2/gc.properties
 
 RUN ls -la /project/build/libs
 
