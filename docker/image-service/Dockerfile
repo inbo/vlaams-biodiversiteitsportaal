@@ -3,7 +3,7 @@ ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-gradle-jdk21 AS builder
 
 ARG VERSION=develop
-ARG COMMIT=304f09a7c7d93b4abef826aee18d617d0952af69
+ARG COMMIT=38ccef9ef1daba7a43ea1dc65034b4490c1231d3
 ARG SOURCE=https://github.com/AtlasOfLivingAustralia/image-service.git
 LABEL ala.version=inbo-${COMMIT}
 
