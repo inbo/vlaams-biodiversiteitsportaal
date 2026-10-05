@@ -4,7 +4,7 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 
 ARG VERSION=develop-vbp
-ARG COMMIT=057b026e2b66513e27c6ad67012a29ef37778a0f
+ARG COMMIT=43905d10c004e7110d254cebcc048f5014bb3fce
 ARG SOURCE=https://github.com/StefanVanDyck/biocache-service.git
 LABEL ala.version=inbo-${COMMIT}
 
@@ -12,13 +12,13 @@ WORKDIR /project
 RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
 
 RUN --mount=type=cache,target=/gradle-cache,ro \
-    gradle build assemble \
-    -x test
+  gradle build assemble \
+  -x test
 
 # Copy dependencies to shared read-only cache
 RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
-    rsync -a /home/gradle/.gradle/caches/modules-2 /gradle-cache \
-    && rm /gradle-cache/modules-2/*.lock && rm /gradle-cache/modules-2/gc.properties
+  rsync -a /home/gradle/.gradle/caches/modules-2 /gradle-cache \
+  && rm /gradle-cache/modules-2/*.lock && rm /gradle-cache/modules-2/gc.properties
 
 RUN ls -la /project/build/libs/
 
@@ -35,7 +35,7 @@ RUN mkdir -p /opt/atlas/i18n \
   && ln -s /config/biocache-service/i18n/override /var/opt/atlas/i18n/biocache-service
 
 ARG VERSION=3.7.0-SNAPSHOT
-ARG COMMIT=057b026e2b66513e27c6ad67012a29ef37778a0f
+ARG COMMIT=43905d10c004e7110d254cebcc048f5014bb3fce
 LABEL ala.version=inbo-${COMMIT}
 
 COPY --from=builder /project/build/libs/biocache-service-${VERSION}-exec.war /biocache-service.war
