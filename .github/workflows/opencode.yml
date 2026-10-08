@@ -1,0 +1,238 @@
+name: OpenCode issue automation
+run-name: opencode on issue ${{ github.event.issue.number }}
+
+on:
+  issue_comment:
+    types: [created]
+
+# One session per issue at a time; same comment re-runs reuse its branch.
+concurrency:
+  group: opencode-issue-${{ github.event.issue.number }}
+  cancel-in-progress: false
+
+permissions: {}
+
+jobs:
+  gate:
+    runs-on: [self-hosted]
+    permissions:
+      contents: read
+      actions: write
+    outputs:
+      run: ${{ steps.parse.outputs.run }}
+      command: ${{ steps.parse.outputs.command }}
+      investigation_id: ${{ steps.parse.outputs.investigation_id }}
+      issue_number: ${{ steps.parse.outputs.issue_number }}
+      comment_id: ${{ steps.parse.outputs.comment_id }}
+      branch: ${{ steps.parse.outputs.branch }}
+      base_branch: ${{ steps.parse.outputs.base_branch }}
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          fetch-depth: 1
+
+      - id: parse
+        env:
+          COMMENT_BODY: ${{ github.event.comment.body }}
+          COMMENT_USER: ${{ github.event.comment.user.login }}
+          ALLOWLIST: ${{ vars.OPENCODE_ALLOWLIST }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          COMMENT_ID: ${{ github.event.comment.id }}
+          IS_PR: ${{ github.event.issue.pull_request != null }}
+        run: python3 .github/scripts/opencode_gate.py
+
+      # Snapshot untrusted issue/comment text to files (no shell echo of
+      # event content anywhere in this workflow).
+      - if: steps.parse.outputs.run == 'true'
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
+        with:
+          script: |
+            const fs = require('fs');
+            fs.mkdirSync('opencode-context', { recursive: true });
+            fs.writeFileSync('opencode-context/issue.md',
+              `# ${context.payload.issue.title}\n\n${context.payload.issue.body || ''}`);
+            fs.writeFileSync('opencode-context/comment.md',
+              context.payload.comment.body || '');
+            fs.writeFileSync('opencode-context/meta.json', JSON.stringify({
+              issue: context.payload.issue.number,
+              comment_id: context.payload.comment.id,
+              commenter: context.payload.comment.user.login,
+              command: '${{ steps.parse.outputs.command }}',
+              investigation_id: '${{ steps.parse.outputs.investigation_id }}',
+              branch: '${{ steps.parse.outputs.branch }}',
+              base_branch: '${{ steps.parse.outputs.base_branch }}',
+            }, null, 2));
+
+      - if: steps.parse.outputs.run == 'true'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: opencode-context
+          path: opencode-context/
+          retention-days: 14
+
+  agent:
+    needs: gate
+    if: needs.gate.outputs.run == 'true'
+    runs-on: [self-hosted]
+    # Trusted image with repo tooling (cypress + browsers). Override with a
+    # prebuilt opencode+playwright image via vars.OPENCODE_IMAGE when ready.
+    # ponytail: `latest` per deploy choice; pin a digest when repro matters.
+    container:
+      image: ${{ vars.OPENCODE_IMAGE || 'cypress/browsers:latest' }}
+    permissions:
+      contents: read
+      actions: write
+    env:
+      CYPRESS_TARGET_ENV: dev
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+          ref: ${{ needs.gate.outputs.base_branch }}
+
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: opencode-context
+          path: opencode-context
+
+      - name: Install opencode
+        run: npm install -g opencode-ai@latest
+
+      # No GITHUB_TOKEN / GH_TOKEN here on purpose: the agent must not see
+      # GitHub credentials. Publishing happens in the `publish` job.
+      - name: Run opencode investigation
+        if: needs.gate.outputs.command == 'investigate'
+        env:
+          OPENCODE_MODEL: ${{ vars.OPENCODE_MODEL }}
+          OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
+          CYPRESS_VBP_USERNAME: ${{ secrets.CYPRESS_VBP_USERNAME }}
+          CYPRESS_VBP_PASSWORD: ${{ secrets.CYPRESS_VBP_PASSWORD }}
+        run: opencode run "$(cat .github/prompts/opencode-investigate.md)"
+
+      - name: Run opencode fix
+        if: needs.gate.outputs.command == 'fix'
+        env:
+          OPENCODE_MODEL: ${{ vars.OPENCODE_MODEL }}
+          OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
+          CYPRESS_VBP_USERNAME: ${{ secrets.CYPRESS_VBP_USERNAME }}
+          CYPRESS_VBP_PASSWORD: ${{ secrets.CYPRESS_VBP_PASSWORD }}
+        run: opencode run "$(cat .github/prompts/opencode-fix.md)"
+
+      - name: Collect patch and report
+        if: always()
+        run: |
+          if [ ! -f opencode-report.md ]; then
+            printf '# OpenCode report\n\nStatus: blocked (agent produced no report).\n' > opencode-report.md
+          fi
+          git add -N -- test/cypress opencode-report.md 2>/dev/null || true
+          git diff -- test/cypress opencode-report.md > opencode.patch || true
+
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: opencode-result
+          path: |
+            opencode.patch
+            opencode-report.md
+          retention-days: 14
+
+  publish:
+    needs: [gate, agent]
+    if: ${{ always() && needs.gate.outputs.run == 'true' }}
+    runs-on: [self-hosted]
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      actions: read
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: opencode-result
+          path: opencode-result
+
+      - name: Push branch and comment
+        env:
+          BRANCH: ${{ needs.gate.outputs.branch }}
+          COMMAND: ${{ needs.gate.outputs.command }}
+          ISSUE_NUMBER: ${{ needs.gate.outputs.issue_number }}
+          COMMENT_ID: ${{ needs.gate.outputs.comment_id }}
+          AGENT_OUTCOME: ${{ needs.agent.result }}
+        run: |
+          set -e -o pipefail
+          cp opencode-result/opencode-report.md ./opencode-report.md || true
+          if [ -s opencode-result/opencode.patch ]; then
+            git apply --check opencode-result/opencode.patch
+            git apply --index opencode-result/opencode.patch
+          fi
+          python3 .github/scripts/opencode_publish.py "$COMMAND"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -B "$BRANCH"
+          git add -- test/cypress opencode-report.md 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "NO_CHANGES=true" >> "$GITHUB_ENV"
+          else
+            git commit -m "opencode ${COMMAND} for #${ISSUE_NUMBER} (comment ${COMMENT_ID})"
+            git push -f origin "$BRANCH"
+            echo "NO_CHANGES=false" >> "$GITHUB_ENV"
+          fi
+          echo "COMMIT_SHA=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+
+      - uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
+        if: always()
+        with:
+          script: |
+            const fs = require('fs');
+            const issue = Number('${{ needs.gate.outputs.issue_number }}');
+            const command = '${{ needs.gate.outputs.command }}';
+            const branch = '${{ needs.gate.outputs.branch }}';
+            const sha = process.env.COMMIT_SHA || '';
+            const noChanges = process.env.NO_CHANGES === 'true';
+            const agentOutcome = '${{ needs.agent.result }}';
+            let report = '';
+            try { report = fs.readFileSync('opencode-report.md', 'utf8'); }
+            catch { report = '_No report produced (agent failed or was blocked)._'; }
+            if (report.length > 50000) report = report.slice(0, 50000) + '\n\n_(truncated)_';
+            const next = command === 'investigate'
+              ? `Next step for allowlisted users: \`/opencode-fix ${{ needs.gate.outputs.comment_id }}\``
+              : 'A draft PR is linked below. Review the diff, check branch policies pass, then merge.';
+            const body = [
+              `## OpenCode ${command} ${agentOutcome !== 'success' ? '(failed)' : ''}`,
+              '',
+              `Branch: \`${branch}\`${sha ? ` @ \`${sha.slice(0, 7)}\`` : ''}${noChanges ? ' (no changes to push)' : ''}`,
+              `Next: ${next}`,
+              '',
+              '<details><summary>Report</summary>',
+              '',
+              report,
+              '',
+              '</details>',
+            ].join('\n');
+            await github.rest.issues.createComment({
+              owner: context.repo.owner, repo: context.repo.repo,
+              issue_number: issue, body,
+            });
+            if (command === 'fix' && !noChanges) {
+              const prs = await github.rest.pulls.list({
+                owner: context.repo.owner, repo: context.repo.repo,
+                state: 'open', head: `${context.repo.owner}:${branch}`,
+              });
+              if (prs.data.length === 0) {
+                await github.rest.pulls.create({
+                  owner: context.repo.owner, repo: context.repo.repo,
+                  title: `opencode fix for #${issue}`,
+                  head: branch, base: 'main', draft: true,
+                  body: `Fix session for #${issue} (command comment ${{ needs.gate.outputs.comment_id }}).\n\nCloses #${issue}.`,
+                });
+              }
+            }
