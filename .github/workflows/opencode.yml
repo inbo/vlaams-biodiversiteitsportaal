@@ -101,16 +101,11 @@ jobs:
 
       # No workflow GITHUB_TOKEN here on purpose: the agent must not see
       # GitHub write credentials. Publishing happens in the `publish` job.
-      # Copilot auth: provider reads a GitHub/Copilot token from env.
-      # GITHUB_TOKEN here is the Copilot secret, NOT the workflow token.
       - name: Run opencode investigation
         if: needs.gate.outputs.command == 'investigate'
         env:
-          MODEL: ${{ vars.OPENCODE_MODEL || 'github-copilot/gpt-5.1-codex' }}
-          GH_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
-          COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
-          OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
+          MODEL: ${{ vars.OPENCODE_MODEL || 'openrouter/anthropic/claude-sonnet-4.5' }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           CYPRESS_VBP_USERNAME: ${{ secrets.CYPRESS_VBP_USERNAME }}
           CYPRESS_VBP_PASSWORD: ${{ secrets.CYPRESS_VBP_PASSWORD }}
         run: opencode run --model "$MODEL" "$(cat .github/prompts/opencode-investigate.md)"
@@ -118,11 +113,8 @@ jobs:
       - name: Run opencode fix
         if: needs.gate.outputs.command == 'fix'
         env:
-          MODEL: ${{ vars.OPENCODE_MODEL || 'github-copilot/gpt-5.1-codex' }}
-          GH_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
-          COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
-          OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
+          MODEL: ${{ vars.OPENCODE_MODEL || 'openrouter/anthropic/claude-sonnet-4.5' }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           CYPRESS_VBP_USERNAME: ${{ secrets.CYPRESS_VBP_USERNAME }}
           CYPRESS_VBP_PASSWORD: ${{ secrets.CYPRESS_VBP_PASSWORD }}
         run: opencode run --model "$MODEL" "$(cat .github/prompts/opencode-fix.md)"
