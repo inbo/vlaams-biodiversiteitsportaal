@@ -99,29 +99,33 @@ jobs:
       - name: Install opencode
         run: npm install -g opencode-ai@latest
 
-      # No GITHUB_TOKEN / GH_TOKEN here on purpose: the agent must not see
-      # GitHub credentials. Publishing happens in the `publish` job.
+      # No workflow GITHUB_TOKEN here on purpose: the agent must not see
+      # GitHub write credentials. Publishing happens in the `publish` job.
+      # Copilot auth: provider reads a GitHub/Copilot token from env.
+      # GITHUB_TOKEN here is the Copilot secret, NOT the workflow token.
       - name: Run opencode investigation
         if: needs.gate.outputs.command == 'investigate'
         env:
-          OPENCODE_MODEL: ${{ vars.OPENCODE_MODEL }}
+          MODEL: ${{ vars.OPENCODE_MODEL || 'github-copilot/gpt-5.1-codex' }}
+          GH_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
+          COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
           OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
-          ANTHROPIC_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
-          OPENAI_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
           CYPRESS_VBP_USERNAME: ${{ secrets.CYPRESS_VBP_USERNAME }}
           CYPRESS_VBP_PASSWORD: ${{ secrets.CYPRESS_VBP_PASSWORD }}
-        run: opencode run "$(cat .github/prompts/opencode-investigate.md)"
+        run: opencode run --model "$MODEL" "$(cat .github/prompts/opencode-investigate.md)"
 
       - name: Run opencode fix
         if: needs.gate.outputs.command == 'fix'
         env:
-          OPENCODE_MODEL: ${{ vars.OPENCODE_MODEL }}
+          MODEL: ${{ vars.OPENCODE_MODEL || 'github-copilot/gpt-5.1-codex' }}
+          GH_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
+          COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
           OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
-          ANTHROPIC_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
-          OPENAI_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
           CYPRESS_VBP_USERNAME: ${{ secrets.CYPRESS_VBP_USERNAME }}
           CYPRESS_VBP_PASSWORD: ${{ secrets.CYPRESS_VBP_PASSWORD }}
-        run: opencode run "$(cat .github/prompts/opencode-fix.md)"
+        run: opencode run --model "$MODEL" "$(cat .github/prompts/opencode-fix.md)"
 
       - name: Collect patch and report
         if: always()
