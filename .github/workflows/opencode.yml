@@ -1,13 +1,33 @@
 name: OpenCode issue automation
-run-name: opencode on issue ${{ github.event.issue.number }}
+run-name: opencode on issue ${{ github.event.issue.number || inputs.issue_number }}
 
 on:
   issue_comment:
     types: [created]
 
+  # Test hook: run the same chain from the branch without merging.
+  # ponytail: remove once verified on main.
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: "Issue number to investigate/fix"
+        required: true
+        type: number
+      command:
+        description: "Stage to run"
+        required: true
+        default: investigate
+        type: choice
+        options: [investigate, fix]
+      investigation_id:
+        description: "Investigation comment id (for fix)"
+        required: false
+        default: ""
+        type: string
+
 # One session per issue at a time; same comment re-runs reuse its branch.
 concurrency:
-  group: opencode-issue-${{ github.event.issue.number }}
+  group: opencode-issue-${{ github.event.issue.number || inputs.issue_number }}
   cancel-in-progress: false
 
 permissions: {}
@@ -18,6 +38,7 @@ jobs:
     permissions:
       contents: read
       actions: write
+      issues: read
     outputs:
       run: ${{ steps.parse.outputs.run }}
       command: ${{ steps.parse.outputs.command }}
@@ -33,12 +54,15 @@ jobs:
 
       - id: parse
         env:
+          EVENT_NAME: ${{ github.event_name }}
           COMMENT_BODY: ${{ github.event.comment.body }}
-          COMMENT_USER: ${{ github.event.comment.user.login }}
+          COMMENT_USER: ${{ github.event.comment.user.login || github.actor }}
           ALLOWLIST: ${{ vars.OPENCODE_ALLOWLIST }}
-          ISSUE_NUMBER: ${{ github.event.issue.number }}
-          COMMENT_ID: ${{ github.event.comment.id }}
+          ISSUE_NUMBER: ${{ github.event.issue.number || inputs.issue_number }}
+          COMMENT_ID: ${{ github.event.comment.id || github.run_id }}
           IS_PR: ${{ github.event.issue.pull_request != null }}
+          DISPATCH_COMMAND: ${{ inputs.command }}
+          DISPATCH_INVESTIGATION_ID: ${{ inputs.investigation_id }}
         run: python3 .github/scripts/opencode_gate.py
 
       # Snapshot untrusted issue/comment text to files (no shell echo of
@@ -49,14 +73,31 @@ jobs:
           script: |
             const fs = require('fs');
             fs.mkdirSync('opencode-context', { recursive: true });
-            fs.writeFileSync('opencode-context/issue.md',
-              `# ${context.payload.issue.title}\n\n${context.payload.issue.body || ''}`);
-            fs.writeFileSync('opencode-context/comment.md',
-              context.payload.comment.body || '');
+            let title, issueBody, commentBody, number, commentId, commenter;
+            if (context.eventName === 'workflow_dispatch') {
+              number = Number('${{ inputs.issue_number }}');
+              const { data } = await github.rest.issues.get({
+                owner: context.repo.owner, repo: context.repo.repo,
+                issue_number: number,
+              });
+              title = data.title; issueBody = data.body || '';
+              commentBody = `/opencode-${{ inputs.command }} ${{ inputs.investigation_id }}`;
+              commentId = '${{ github.run_id }}';
+              commenter = context.actor;
+            } else {
+              title = context.payload.issue.title;
+              issueBody = context.payload.issue.body || '';
+              commentBody = context.payload.comment.body || '';
+              number = context.payload.issue.number;
+              commentId = context.payload.comment.id;
+              commenter = context.payload.comment.user.login;
+            }
+            fs.writeFileSync('opencode-context/issue.md', `# ${title}\n\n${issueBody}`);
+            fs.writeFileSync('opencode-context/comment.md', commentBody);
             fs.writeFileSync('opencode-context/meta.json', JSON.stringify({
-              issue: context.payload.issue.number,
-              comment_id: context.payload.comment.id,
-              commenter: context.payload.comment.user.login,
+              issue: number,
+              comment_id: commentId,
+              commenter: commenter,
               command: '${{ steps.parse.outputs.command }}',
               investigation_id: '${{ steps.parse.outputs.investigation_id }}',
               branch: '${{ steps.parse.outputs.branch }}',

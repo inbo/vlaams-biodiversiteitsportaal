@@ -5,8 +5,9 @@ Reads untrusted comment/issue data only from environment variables (never
 from inline shell interpolation) and decides whether to run.
 
 Env in:
-  COMMENT_BODY, COMMENT_USER, ALLOWLIST (comma-separated logins),
-  ISSUE_NUMBER, COMMENT_ID, IS_PR ("true" when the comment is on a PR).
+  EVENT_NAME, COMMENT_BODY, COMMENT_USER, ALLOWLIST (comma-separated),
+  ISSUE_NUMBER, COMMENT_ID, IS_PR ("true" when the comment is on a PR),
+  DISPATCH_COMMAND, DISPATCH_INVESTIGATION_ID (workflow_dispatch only).
 
 Writes GITHUB_OUTPUT out:
   run, command (investigate|fix|none), investigation_id, issue_number,
@@ -24,6 +25,7 @@ SAFE_REF_RE = re.compile(r"^[A-Za-z0-9._/-]{1,64}$")
 
 
 def main() -> int:
+    event = os.environ.get("EVENT_NAME", "issue_comment")
     body = os.environ.get("COMMENT_BODY", "")
     user = os.environ.get("COMMENT_USER", "")
     allowlist = os.environ.get("ALLOWLIST", "StefanVanDyck,DimEvil")
@@ -31,19 +33,29 @@ def main() -> int:
     comment_id = os.environ.get("COMMENT_ID", "")
     is_pr = os.environ.get("IS_PR", "false").lower() == "true"
 
-    first_line = body.splitlines()[0].strip() if body.splitlines() else ""
     allowed = {u.strip() for u in allowlist.split(",") if u.strip()}
 
     command = "none"
     investigation_id = ""
-    if not is_pr and user in allowed:
-        if INVESTIGATE_RE.match(first_line):
-            command = "investigate"
-        else:
-            m = FIX_RE.match(first_line)
-            if m:
-                command = "fix"
-                investigation_id = m.group(1) or ""
+    if user in allowed and issue_number:
+        if event == "workflow_dispatch":
+            # Test hook: inputs come pre-validated (choice + free text).
+            disp = os.environ.get("DISPATCH_COMMAND", "")
+            disp_id = os.environ.get("DISPATCH_INVESTIGATION_ID", "")
+            if disp in ("investigate", "fix"):
+                command = disp
+                investigation_id = (
+                    disp_id if disp_id and SAFE_REF_RE.match(disp_id) else ""
+                )
+        elif not is_pr:
+            first_line = body.splitlines()[0].strip() if body.splitlines() else ""
+            if INVESTIGATE_RE.match(first_line):
+                command = "investigate"
+            else:
+                m = FIX_RE.match(first_line)
+                if m:
+                    command = "fix"
+                    investigation_id = m.group(1) or ""
 
     run = "true" if command in ("investigate", "fix") else "false"
 
