@@ -39,7 +39,7 @@
         "@types/jquery": "^3.5.32",
         "aws-rum-web": "^1.25.0",
         "bootstrap-sass": "^3.4.3",
-        "compression": "^1.8.0",
+        "compression": "^1.8.2",
         "countup.js": "^2.8.0",
         "i18next": "^24.2.3",
         "i18next-browser-languagedetector": "^8.0.4",
