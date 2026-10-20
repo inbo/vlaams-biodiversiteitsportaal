@@ -9,6 +9,10 @@ import {
 } from "oidc-client-ts";
 
 import Cookies from "js-cookie";
+import {
+    AUTH_RENEW_REQUEST_EVENT,
+    reportAuthFailure,
+} from "./auth-events";
 import { AuthServiceWorker } from "./service-worker-registration";
 
 Log.setLogger(console);
@@ -23,6 +27,12 @@ Log.setLogger(console);
 
 const authServiceWorker = new AuthServiceWorker();
 export const userManagerPromise = initUserManager(authServiceWorker);
+
+/** Keycloak SSO idle timeout. Also the cookie's own Max-Age: the browser
+ * deletes the cookie once the session chain it promises can no longer be
+ * honored, so cookie-exists ⇒ fresh by construction and no staleness checks
+ * are needed anywhere. */
+const SSO_IDLE_TIMEOUT_MS = 30 * 60 * 1000;
 
 async function initUserManager(
     authServiceWorker: AuthServiceWorker,
@@ -41,7 +51,7 @@ async function initUserManager(
         client_id: settings.auth.oidc.clientId,
         redirect_uri: redirectUrl.href,
         post_logout_redirect_uri: post_logout_redirect_uri.href,
-        scope: "openid email ala/roles",
+        scope: "openid email ala/roles image-service/read",
         includeIdTokenInSilentSignout: true,
         prompt: settings.auth.oidc.prompt,
         silent_redirect_uri: `${settings.domain}?front-auth-action=login`,
@@ -64,18 +74,52 @@ async function initUserManager(
 
     manager.events.addAccessTokenExpired(async function () {
         console.warn("Access token expired");
+        // Background tabs throttle timers and cannot renew reliably (the silent
+        // renew iframe needs third-party cookies); renew when the tab is visible again
         if (!document.hidden) {
-            await silentLogin(manager);
+            await attemptSilentLogin(manager);
         }
     });
     manager.events.addSilentRenewError(async (error) => {
         console.error("Silent renew error", error);
-        if (error.name === "NetworkError") {
-            setTimeout(async () => {
-                await manager.signinSilent();
-            }, 1_000);
-        } else {
-            await manager.removeUser();
+        if (document.hidden) {
+            return;
+        }
+        await attemptSilentLogin(manager);
+    });
+
+    // The service worker asked for a renewed token (e.g. a request was
+    // rejected with 401 or the stored token expired)
+    window.addEventListener(AUTH_RENEW_REQUEST_EVENT, async () => {
+        if (document.hidden) {
+            return;
+        }
+        const user = await manager.getUser();
+        if (!user) {
+            return;
+        }
+        if (!user.expired) {
+            // The user's token is still valid on our side: republish it so the
+            // service worker can pick it up without a roundtrip to Keycloak
+            await authServiceWorker.setAccessToken(user);
+            return;
+        }
+        await attemptSilentLogin(manager);
+    });
+
+    // Renew proactively when the user returns to the tab, before the first
+    // request they trigger can hit a backend with an expired token
+    document.addEventListener("visibilitychange", async () => {
+        if (document.visibilityState !== "visible") {
+            return;
+        }
+        const user = await manager.getUser();
+        if (!user || !user.expires_at) {
+            return;
+        }
+        const expiresAtMs = user.expires_at * 1000;
+        if (expiresAtMs <= Date.now() + 60_000) {
+            await attemptSilentLogin(manager);
         }
     });
 
@@ -85,20 +129,9 @@ async function initUserManager(
     const authCookie = Cookies.get(settings.auth.ala.authCookieName);
     if (authCookie) {
         if (!user) {
-            try {
-                const parsedCookie = JSON.parse(authCookie);
-                if (
-                    parsedCookie.refreshedAt &&
-                    parsedCookie.refreshedAt - Date.now() < 30 * 60
-                ) {
-                    await manager.signinRedirect();
-                } else {
-                    clearAlaAuthCookies();
-                }
-            } catch (e) {
-                console.warn("Failed to parse auth cookie: " + authCookie);
-                await manager.signinRedirect();
-            }
+            // The cookie exists ⇒ it was written recently by a renewal or a
+            // service dance: pick up the live session silently.
+            await manager.signinRedirect();
         } else {
             await authServiceWorker.setAccessToken(user);
         }
@@ -148,13 +181,73 @@ async function handleAuthCallbacks(manager: UserManager) {
     }
 }
 
-async function silentLogin(manager: UserManager) {
-    try {
-        await manager.signinSilent({ silentRequestTimeoutInSeconds: 2 });
-    } catch (error) {
-        console.error("Silent login failed", error);
-        await manager.removeUser();
+const renewalRetryDelaysMs = [1_000, 2_000, 4_000];
+
+let silentRenewalInFlight: Promise<User | null> | null = null;
+
+/**
+ * Attempt to renew the session silently, with retries and backoff.
+ * Concurrent calls share a single renewal. The user is only dropped when
+ * renewal definitively failed (e.g. Keycloak reports login_required) or all
+ * retries were exhausted.
+ */
+function attemptSilentLogin(manager: UserManager): Promise<User | null> {
+    if (!silentRenewalInFlight) {
+        silentRenewalInFlight = doSilentLogin(manager).finally(() => {
+            silentRenewalInFlight = null;
+        });
     }
+    return silentRenewalInFlight;
+}
+
+async function doSilentLogin(manager: UserManager): Promise<User | null> {
+    if (!(await manager.getUser())) {
+        return null;
+    }
+    for (let attempt = 0; ; attempt++) {
+        try {
+            return await manager.signinSilent();
+        } catch (error) {
+            console.error("Silent login failed", error);
+            if (
+                isDefinitiveRenewalFailure(error) ||
+                attempt >= renewalRetryDelaysMs.length
+            ) {
+                reportAuthFailure({
+                    source: "renewal",
+                    service: "",
+                    path: "",
+                    recovered: false,
+                    hadToken: false,
+                    hadCookie: !!Cookies.get(settings.auth.ala.authCookieName),
+                });
+                await manager.removeUser();
+                return null;
+            }
+            await new Promise((resolve) =>
+                setTimeout(resolve, renewalRetryDelaysMs[attempt])
+            );
+        }
+    }
+}
+
+/**
+ * Renewal failures that retrying cannot fix. login_required-class errors mean
+ * the Keycloak session is gone; invalid_grant means the refresh token died
+ * with it (e.g. the SSO session idled out while the tab was hidden). In both
+ * cases the correct outcome is dropping the user, per the "logged in
+ * everywhere properly, or not at all" rule.
+ */
+function isDefinitiveRenewalFailure(error: unknown): boolean {
+    const err = error as { error?: string; message?: string };
+    const definitiveErrors = [
+        "interaction_required",
+        "login_required",
+        "consent_required",
+        "invalid_grant",
+    ];
+    return definitiveErrors.includes(err?.error ?? "") ||
+        definitiveErrors.some((e) => err?.message?.includes(e));
 }
 
 function setAlaAuthCookie(user?: User) {
@@ -168,8 +261,9 @@ function setAlaAuthCookie(user?: User) {
         sameSite: "lax",
         secure: window.location.protocol === "https:",
         domain: settings.auth.ala.authCookieDomain,
-        // Cannot configure both session and timeout expiration
-        // expires: 30 * 60 * 1000, // Keycloak SSO Idle Timeout of 30 min
+        // Browser-enforced freshness: the cookie disappears SSO_IDLE_TIMEOUT_MS
+        // after the last renewal, so its existence is the freshness signal.
+        expires: new Date(Date.now() + SSO_IDLE_TIMEOUT_MS),
     });
 }
 
