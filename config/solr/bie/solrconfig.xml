@@ -1233,7 +1233,10 @@
         <str name="highlight">false</str>
         <!-- <str name="allTermsRequired">false</str> -->
 	<str name="suggestAnalyzerFieldType">text_suggest</str>
-        <str name="buildOnStartup">false</str>
+	<!-- Persist the built suggester under the core data dir (EFS) so builds survive restarts.
+	     buildOnStartup intentionally not set: it then defaults to "build only when no stored
+	     suggester exists", so fresh/never-built cores self-heal on load instead of staying broken. -->
+	<str name="storeDir">suggest</str>
       </lst>
     </searchComponent>
 
