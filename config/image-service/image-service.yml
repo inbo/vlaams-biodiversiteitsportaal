@@ -9,7 +9,7 @@ security:
   core:
     optionalFilterPattern: ["/", "/*"]
     uriExclusionFilterPattern:
-      ["^/ws/.*", "^/image-service/ws/.*", ".*proxyImage.*"]
+      ["^/ws/.*", "^/image-service/ws/.*", ".*proxyImage.*", "^/store/.*"]
 
   ip:
     whitelist: "10.30.0.0/20"
