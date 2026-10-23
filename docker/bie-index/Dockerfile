@@ -4,7 +4,7 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 
 ARG VERSION=develop-vbp
-ARG COMMIT=31cf0e210dc55e8703ac9cea44b4d75f310ee04c
+ARG COMMIT=5d43fb09683f3b4e139912960d95b59321bc7b32
 ARG SOURCE=https://github.com/inbo/bie-index.git
 LABEL ala.version=inbo-${COMMIT}
 
@@ -14,21 +14,21 @@ RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} .
 COPY resources.xml ./grails-app/conf/spring/resources.xml
 
 RUN --mount=type=cache,target=/gradle-cache,ro \
-    gradle build assemble \
-    -x test -x integrationTest
+  gradle build assemble \
+  -x test -x integrationTest
 
 # Copy dependencies to shared read-only cache
 RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
-    rsync -a /home/gradle/.gradle/caches/modules-2 /gradle-cache \
-    && rm /gradle-cache/modules-2/*.lock && rm /gradle-cache/modules-2/gc.properties
+  rsync -a /home/gradle/.gradle/caches/modules-2 /gradle-cache \
+  && rm /gradle-cache/modules-2/*.lock && rm /gradle-cache/modules-2/gc.properties
 
 FROM amazoncorretto:11.0.32
 
 # trivy:ignore:DS-0015  # using BuildKit yum cache
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
-    yum -y install \
-    tar \
-    unzip
+  yum -y install \
+  tar \
+  unzip
 
 COPY --from=builder /opt/opentelemetry-agent /opt/opentelemetry-agent
 
@@ -41,7 +41,7 @@ RUN mkdir -p /opt/atlas/i18n \
   && ln -s /config/bie-index/i18n/override /var/opt/atlas/i18n/bie-index
 
 ARG VERSION=3.1.0
-ARG COMMIT=31cf0e210dc55e8703ac9cea44b4d75f310ee04c
+ARG COMMIT=5d43fb09683f3b4e139912960d95b59321bc7b32
 LABEL ala.version=inbo-${COMMIT}
 
 COPY --from=builder /project/build/libs/bie-index-${VERSION}.war /bie-index.war
