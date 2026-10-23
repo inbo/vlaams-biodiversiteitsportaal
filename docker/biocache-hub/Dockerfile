@@ -13,7 +13,7 @@ RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
 
 # biocache-hubs
 ARG VERSION=develop-vbp
-ARG COMMIT=b106eaa50fa32438ce13ba1cd38c5184b624b668
+ARG COMMIT=e98c6157863ed39e47fb52d373e0a7a18cceb4e0
 
 ARG SOURCE=https://github.com/StefanVanDyck/biocache-hubs.git
 LABEL ala.version=inbo-${COMMIT}
@@ -68,7 +68,7 @@ RUN mkdir -p /opt/atlas/i18n \
   && ln -s /config/biocache-hub/i18n/override /var/opt/atlas/i18n/biocache-hubs
 
 ARG VERSION=8.1.0-SNAPSHOT
-ARG COMMIT=38b573fc6b8545eff69ccfb9f0fb870e9cc54211
+ARG COMMIT=e98c6157863ed39e47fb52d373e0a7a18cceb4e0
 LABEL ala.version=inbo-${COMMIT}
 
 COPY --from=builder /project/ala-hub/build/libs/ala-hub-${VERSION}.war /biocache-hub.war
