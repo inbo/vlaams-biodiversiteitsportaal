@@ -82,6 +82,11 @@ security:
   cookie:
     enabled: true
     domain: .${common.domain}
+    # Expiry (seconds) of the VBP-AUTH cookie written by the services' OIDC
+    # callbacks. 1800 = 30 min, aligned with the frontend's own cookie expiry
+    # and the Keycloak SSO idle timeout, so cookie-exists means the same
+    # freshness window no matter which component wrote it last.
+    maxAge: 1800
 webservice:
   jwt: true
   jwt-scopes: openid users/read
