@@ -4,7 +4,7 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 
 ARG VERSION=develop-vbp
-ARG COMMIT=04d7b0e53d1ab9a3d58b06004ef4f2e22ea3e11b
+ARG COMMIT=052dc2ff7e2651fc3c90c7552315507f45b7dadf
 ARG SOURCE=https://github.com/inbo/bie-index.git
 LABEL ala.version=inbo-${COMMIT}
 
@@ -41,7 +41,7 @@ RUN mkdir -p /opt/atlas/i18n \
   && ln -s /config/bie-index/i18n/override /var/opt/atlas/i18n/bie-index
 
 ARG VERSION=3.1.0
-ARG COMMIT=04d7b0e53d1ab9a3d58b06004ef4f2e22ea3e11b
+ARG COMMIT=052dc2ff7e2651fc3c90c7552315507f45b7dadf
 LABEL ala.version=inbo-${COMMIT}
 
 COPY --from=builder /project/build/libs/bie-index-${VERSION}.war /bie-index.war
