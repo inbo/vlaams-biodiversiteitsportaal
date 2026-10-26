@@ -1,43 +1,25 @@
 ---
-title: "Nieuwe filterfuncties op VBP"
-date: "2026-09-02"
-excerpt: "Er zijn enkele nieuwe filterfuncties beschikbaar op het biodiversitetsportaal"
+title: "Kaartje nodig op VBP? We got it!!"
+date: "2026-10-26"
+excerpt: "Kaartje nodig op het portaal? 1001 nieuwe kaarten beschikbaar in het spatiaal portaal"
 ---
 
-# Zoek relevante periode met de datumslider.
+Het spatiaal portaal van het Vlaams Biodiversiteitsportaal (VBP) heeft een aanzienlijke upgrade gekregen. Vanaf nu visualiseren we nagenoeg elke Vlaamse kaartlaag die via een Web Map Service (WMS) openbaar wordt gepubliceerd.
 
-Filter waarnemingen eenvoudig binnen specifieke periodes per jaar.
+Waar je voorheen afhankelijk was van een vaste selectie basislagen, opent deze integratie de deur naar een gigantische bibliotheek aan geografische data. Denk aan actuele orthofoto's, bodemkaarten, reliëfmodellen, administratieve grenzen of gespecialiseerde ecologische kaarten van partners zoals het INBO, de Vlaamse Milieumaatschappij (VMM) en Agentschap Digitaal Vlaanderen.
 
-Wil je specifiek de data van een bepaald jaar of een aantal jaren bekijken? Gebruik onze nieuwe datumslider op het biodiversiteitsportaal en filter je waarnemingen nu heel eenvoudig per jaar!
+Wat betekent dit voor jouw analyses?
+Flexibele visualisatie: Combineer biodiversiteitsdata naadloos met externe omgevings- en contextlagen.
 
+Altijd up-to-date: Doordat we rechtstreeks inhaken op officiële WMS-bronnen, bekijk je altijd de meest recente versies van de kaartlagen.
 
-![jarenslider](/images/pages/news/sliderjaar.png)
+Alles op één plek: Geen gedoe meer met het downloaden van shapefiles of schakelen tussen verschillende viewers — je analyseert alles direct binnen de VBP-omgeving.
 
+Welke lagen wil jij standaard zien?
+Met de WMS-koppeling is het aanbod enorm, maar we willen het portaal vooral afstemmen op de dagelijkse praktijk van onze gebruikers:
 
-## Wat kun je ermee?
+Zijn er specifieke kaartlagen die je intensief gebruikt voor jouw onderzoek, beheer of opvolging?
 
-**Ontwikkeling volgen:** Zie hoe de verspreiding van soorten over de jaren heen verandert.
-**Historische data vergelijken:** Bekijk het verschil tussen waarnemingen van bijvoorbeeld 10 jaar geleden en nu.
-**Gericht filteren:** Zoom direct in op het exacte jaar of periode waarin jij geïnteresseerd bent voor jouw onderzoek of observaties.
+Laat het ons weten! Stuur een korte melding met de gewenste WMS-laag of URL naar [e-mailadres/contactformulier], dan richten we deze direct netjes voor je in binnen onze centrale GIS-component.
 
-
-# Verfijn je coordinaatonzekerheid met de coordinaatonzekerheidslider
-
-Filter waarnemingen op basis van de nauwkeurigheid van de locatiegegevens, ideaal voor nauwkeurige ecologische analyses en GIS-toepassingen.
-
-Voor een betrouwbare ecologische analyse of een strakke GIS-kaart is nauwkeurigheid cruciaal. Een waarneming op een paar meter nauwkeurig vertelt immers een heel ander verhaal dan een stip die een heel vierkant van een kilometer beslaat. 
-Om je data nog beter af te stemmen op jouw wensen, introduceert het biodiversiteitsportaal de coördinaatonzekerheid-slider!
-
-Met deze nieuwe filteroptie bepaal je zelf hoe precies de locatiegegevens van je zoekresultaten moeten zijn. 
-Met één eenvoudige schuifbeweging filter je waarnemingen op basis van hun locatienauwkeurigheid, zodat je alleen de data overhoudt die écht bruikbaar zijn voor jouw toepassing.
-
-![coordinatenslider](/images/pages/news/slidercoordinaat.png)
-
-## Waarvoor gebruik je dit?
-Haarscherpe ecologische analyses: Sluit onnauwkeurige waarnemingen uit om je analyses en modellen nog betrouwbaarder te maken.
-
-GIS-toepassingen: Exporteer en visualiseer enkel data die voldoen aan de nauwkeurigheidseisen van jouw ruimtelijke projecten.
-
-Overzicht en regie: Bepaal zelf de balans tussen een zo groot mogelijke dataset en een zo hoog mogelijke precisie.
-
-![ifbl](/images/pages/news/ifblraster.png)
+Benieuwd naar het resultaat? Open het spatiaal portaal en ontdek meteen de nieuwe mogelijkheden.
