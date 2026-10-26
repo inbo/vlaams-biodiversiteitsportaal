@@ -1,7 +1,7 @@
 ---
 title: "Nieuwe filterfuncties op VBP"
-date: "2026-09-02"
-excerpt: "Er zijn enkele nieuwe filterfuncties beschikbaar op het biodiversitetsportaal"
+date: "2026-10-23"
+excerpt: "Er zijn enkele nieuwe filterfuncties beschikbaar op het biodiversiteitsportaal"
 ---
 
 # Zoek relevante periode met de datumslider.
@@ -21,7 +21,7 @@ Wil je specifiek de data van een bepaald jaar of een aantal jaren bekijken? Gebr
 **Gericht filteren:** Zoom direct in op het exacte jaar of periode waarin jij geïnteresseerd bent voor jouw onderzoek of observaties.
 
 
-# Verfijn je coordinaatonzekerheid met de coordinaatonzekerheidslider
+# Verfijn je coördinaatonzekerheid met de coördinaatonzekerheidslider
 
 Filter waarnemingen op basis van de nauwkeurigheid van de locatiegegevens, ideaal voor nauwkeurige ecologische analyses en GIS-toepassingen.
 
@@ -31,7 +31,7 @@ Om je data nog beter af te stemmen op jouw wensen, introduceert het biodiversite
 Met deze nieuwe filteroptie bepaal je zelf hoe precies de locatiegegevens van je zoekresultaten moeten zijn. 
 Met één eenvoudige schuifbeweging filter je waarnemingen op basis van hun locatienauwkeurigheid, zodat je alleen de data overhoudt die écht bruikbaar zijn voor jouw toepassing.
 
-![coordinatenslider](/images/pages/news/slidercoordinaat.png)
+![coördinatenslider](/images/pages/news/slidercoordinaat.png)
 
 ## Waarvoor gebruik je dit?
 Haarscherpe ecologische analyses: Sluit onnauwkeurige waarnemingen uit om je analyses en modellen nog betrouwbaarder te maken.
