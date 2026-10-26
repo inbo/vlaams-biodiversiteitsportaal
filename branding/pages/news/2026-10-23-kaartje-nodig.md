@@ -4,22 +4,33 @@ date: "2026-10-26"
 excerpt: "Kaartje nodig op het portaal? 1001 nieuwe kaarten beschikbaar in het spatiaal portaal"
 ---
 
-Het spatiaal portaal van het Vlaams Biodiversiteitsportaal (VBP) heeft een aanzienlijke upgrade gekregen. Vanaf nu visualiseren we nagenoeg elke Vlaamse kaartlaag die via een Web Map Service (WMS) openbaar wordt gepubliceerd.
+Het spatiaal portaal van het Vlaams Biodiversiteitsportaal (VBP) breidt flink uit! Voortaan kunnen we in principe elke publieke kaartlaag via een Web Map Service (WMS) direct visualiseren op het portaal.
 
-Waar je voorheen afhankelijk was van een vaste selectie basislagen, opent deze integratie de deur naar een gigantische bibliotheek aan geografische data. Denk aan actuele orthofoto's, bodemkaarten, reliëfmodellen, administratieve grenzen of gespecialiseerde ecologische kaarten van partners zoals het INBO, de Vlaamse Milieumaatschappij (VMM) en Agentschap Digitaal Vlaanderen.
+Hierdoor heb je in een handomdraai toegang tot een schat aan actuele geografische achtergrondinformatie — denk aan orthofoto's, bodemtypes, waterlopen of administratieve grenzen via officiële bronnen zoals ANB, VLM, INBO of de VMM en Digitaal Vlaanderen.
 
-Wat betekent dit voor jouw analyses?
-Flexibele visualisatie: Combineer biodiversiteitsdata naadloos met externe omgevings- en contextlagen.
+Van kijken naar interactie: meer dan alleen visualisatie
+Een externe WMS-koppeling is ideaal om gegevens snel als visuele referentielaag te raadplegen. Maar het portaal kan meer:
 
-Altijd up-to-date: Doordat we rechtstreeks inhaken op officiële WMS-bronnen, bekijk je altijd de meest recente versies van de kaartlagen.
+Standaard WMS (visueel): Dient als visuele onderlegger om context te bieden aan je waarnemingen en verspreidingskaarten.
 
-Alles op één plek: Geen gedoe meer met het downloaden van shapefiles of schakelen tussen verschillende viewers — je analyseert alles direct binnen de VBP-omgeving.
+Geïntegreerd in het portaal (interactief): Zodra een laag structureel is toegevoegd aan onze centrale GIS-component, stopt het niet bij louter kijken. Je kunt de gegevens dan actief bevragen, combineren en gebruiken om biodiversiteitsdata rechtstreeks op die laag te filteren en analyseren.
 
-Welke lagen wil jij standaard zien?
-Met de WMS-koppeling is het aanbod enorm, maar we willen het portaal vooral afstemmen op de dagelijkse praktijk van onze gebruikers:
+Welke lagen wil jij actief kunnen gebruiken?
+Omdat we niet alle duizenden beschikbare lagen tegelijk native kunnen integreren, bepalen we de prioriteiten graag samen met jullie:
 
-Zijn er specifieke kaartlagen die je intensief gebruikt voor jouw onderzoek, beheer of opvolging?
+Werk jij regelmatig met een specifieke kaartlaag en wil je hier interactief mee filteren in je analyses?
 
-Laat het ons weten! Stuur een korte melding met de gewenste WMS-laag of URL naar [e-mailadres/contactformulier], dan richten we deze direct netjes voor je in binnen onze centrale GIS-component.
+Laat het ons weten! Bezorg ons de details of de WMS-link via [support@natuurdata.inbo.be]. Wij bekijken de integratie en configureren de laag voor je in onze GIS-component, zodat je er meteen interactief mee aan de slag kunt.
 
-Benieuwd naar het resultaat? Open het spatiaal portaal en ontdek meteen de nieuwe mogelijkheden.
+Open het spatiaal portaal en ontdek vandaag nog de nieuwe mogelijkheden!
+
+![ecoregio](/images/pages/news/ecoregio.png)
+
+![groenkaart](/images/pages/news/groenkaart.png)
+
+![habitatkaart](/images/pages/news/habitatkaart.png)
+
+
+
+
+
