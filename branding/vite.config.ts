@@ -179,7 +179,7 @@ export default {
             name: "generate-news-items-partial",
             enforce: "pre",
             async buildStart() {
-                generateNewsPartial();
+                await generateNewsPartial();
             },
         },
         // Workaround for vite-plugin-handlebars@1.5.0 Windows path separator bugs:
