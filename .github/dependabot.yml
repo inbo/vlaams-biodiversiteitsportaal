@@ -4,18 +4,48 @@ updates:
     directory: "branding/"
     schedule:
       interval: weekly
-    open-pull-requests-limit: 0
+    open-pull-requests-limit: 10
     groups:
+      branding-minor-patch:
+        applies-to: version-updates
+        update-types:
+          - "minor"
+          - "patch"
       branding-security:
+        applies-to: security-updates
         patterns:
           - "*"
 
   - package-ecosystem: docker
-    directory: "/docker"
+    directories:
+      - "/docker/*"
     schedule:
       interval: weekly
-    open-pull-requests-limit: 0
+    open-pull-requests-limit: 10
     groups:
+      docker-minor-patch:
+        applies-to: version-updates
+        update-types:
+          - "minor"
+          - "patch"
+        group-by: dependency-name
       docker-security:
+        applies-to: security-updates
+        patterns:
+          - "*"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+    groups:
+      actions-minor-patch:
+        applies-to: version-updates
+        update-types:
+          - "minor"
+          - "patch"
+      actions-security:
+        applies-to: security-updates
         patterns:
           - "*"
