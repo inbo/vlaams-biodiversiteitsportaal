@@ -1,10 +1,10 @@
 # syntax=docker/dockerfile:1.14.0
 ARG BUILDPLATFORM=linux/amd64
-FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
+FROM --platform=${BUILDPLATFORM} custom-gradle-jdk17 AS builder
 
 
-ARG VERSION=develop-vbp
-ARG COMMIT=43905d10c004e7110d254cebcc048f5014bb3fce
+ARG VERSION=develop-vbp-rebase
+ARG COMMIT=287cf5973028bdd2811b34455f91f5d0cfc68646
 ARG SOURCE=https://github.com/StefanVanDyck/biocache-service.git
 LABEL ala.version=inbo-${COMMIT}
 
@@ -22,7 +22,7 @@ RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
 
 RUN ls -la /project/build/libs/
 
-FROM amazoncorretto:11.0.32
+FROM amazoncorretto:17.0.21
 
 COPY --from=builder /opt/opentelemetry-agent /opt/opentelemetry-agent
 
@@ -34,8 +34,8 @@ RUN mkdir -p /opt/atlas/i18n \
   && mkdir -p /var/opt/atlas/i18n \
   && ln -s /config/biocache-service/i18n/override /var/opt/atlas/i18n/biocache-service
 
-ARG VERSION=3.7.0-SNAPSHOT
-ARG COMMIT=43905d10c004e7110d254cebcc048f5014bb3fce
+ARG VERSION=3.10.0-SNAPSHOT
+ARG COMMIT=287cf5973028bdd2811b34455f91f5d0cfc68646
 LABEL ala.version=inbo-${COMMIT}
 
 COPY --from=builder /project/build/libs/biocache-service-${VERSION}-exec.war /biocache-service.war
