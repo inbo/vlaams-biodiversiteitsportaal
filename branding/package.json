@@ -18,7 +18,7 @@
         "@types/decompress": "^4.2.7",
         "@types/js-cookie": "^3.0.6",
         "@types/lodash": "^4.17.16",
-        "@types/node": "^22.14.0",
+        "@types/node": "^26.6.5",
         "cross-env": "^10.1.0",
         "decompress": "^4.2.1",
         "happy-dom": "^20.4.0",
