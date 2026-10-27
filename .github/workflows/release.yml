@@ -18,7 +18,7 @@ jobs:
   get-versions:
     runs-on: [self-hosted]
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v4
         with:
           fetch-depth: 0
 
@@ -92,7 +92,7 @@ jobs:
     needs: get-versions
     if: needs.get-versions.outputs.branding_version != ''
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v4
 
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
@@ -163,7 +163,7 @@ jobs:
       matrix:
         docker: ${{ fromJSON(needs.get-versions.outputs.docker_build_matrix) }}
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -291,7 +291,7 @@ jobs:
       pull-requests: write
     steps:
       - name: Checkout terraform repository
-        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v4
         with:
           repository: "inbo/inbo-aws-biodiversiteitsportaal-terraform"
           token: ${{ secrets.GIT_PAT_TOKEN }}
