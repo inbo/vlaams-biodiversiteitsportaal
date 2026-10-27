@@ -20,7 +20,7 @@ Omdat we niet alle duizenden beschikbare lagen tegelijk native kunnen integreren
 
 Werk jij regelmatig met een specifieke kaartlaag en wil je hier interactief mee filteren in je analyses?
 
-Laat het ons weten! Bezorg ons de details of de WMS-link via [support@natuurdata.inbo.be]. Wij bekijken de integratie en configureren de laag voor je in onze GIS-component, zodat je er meteen interactief mee aan de slag kunt.
+Laat het ons weten! Bezorg ons de details of de WMS-link via [support.natuurdata@inbo.be]. Wij bekijken de integratie en configureren de laag voor je in onze GIS-component, zodat je er meteen interactief mee aan de slag kunt.
 
 Open het spatiaal portaal en ontdek vandaag nog de nieuwe mogelijkheden!
 
