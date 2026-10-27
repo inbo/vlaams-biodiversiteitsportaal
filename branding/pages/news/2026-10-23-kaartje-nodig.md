@@ -28,7 +28,7 @@ Open het spatiaal portaal en ontdek vandaag nog de nieuwe mogelijkheden!
 
 ![groenkaart](/images/pages/news/groenkaart.png)
 
-![habitatkaart](/images/pages/news/habitatkaart.png)
+![habitatkaart](/images/pages/news/habitat.png)
 
 
 
