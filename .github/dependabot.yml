@@ -70,3 +70,23 @@ updates:
         applies-to: security-updates
         patterns:
           - "*"
+
+  # Ignore everything under /scripts/: no version or security updates
+  # (ignore applies to security updates too; limit 0 blocks version updates)
+  - package-ecosystem: "uv"
+    directories:
+      - "/scripts/*"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 0
+    ignore:
+      - dependency-name: "*"
+
+  - package-ecosystem: "pip"
+    directories:
+      - "/scripts/*"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 0
+    ignore:
+      - dependency-name: "*"
