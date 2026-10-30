@@ -6,12 +6,22 @@ updates:
       interval: weekly
     open-pull-requests-limit: 10
     groups:
-      branding-minor-patch:
+      branding-all:
         applies-to: version-updates
-        update-types:
-          - "minor"
-          - "patch"
       branding-security:
+        applies-to: security-updates
+        patterns:
+          - "*"
+
+  - package-ecosystem: "npm"
+    directory: "test/"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+    groups:
+      test-all:
+        applies-to: version-updates
+      test-security:
         applies-to: security-updates
         patterns:
           - "*"
@@ -40,11 +50,8 @@ updates:
       interval: weekly
     open-pull-requests-limit: 10
     groups:
-      actions-minor-patch:
+      actions-all:
         applies-to: version-updates
-        update-types:
-          - "minor"
-          - "patch"
       actions-security:
         applies-to: security-updates
         patterns:
