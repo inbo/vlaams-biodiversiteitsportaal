@@ -1,5 +1,7 @@
 import { PictureCarousel } from "./picture-carousel";
-import { afterAll, beforeEach, describe, expect, it, vi } from "vitest";
+import {
+    afterAll, afterEach, beforeEach, describe, expect, it, vi,
+} from "vitest";
 
 import {
     client as speciesListClient,
@@ -9,8 +11,15 @@ import { getSpeciesListSItemDetails } from "../common/clients/.generated/species
 import { client as imageServiceClient } from "../common/clients/.generated/image-service/client.gen";
 import { getImageInfo } from "../common/clients/.generated/image-service/sdk.gen";
 
-import { afterEach } from "node:test";
 import { readFileSync } from "fs";
+
+vi.mock("../common/clients/.generated/species-list/sdk.gen", () => ({
+    getSpeciesListSItemDetails: vi.fn(),
+}));
+
+vi.mock("../common/clients/.generated/image-service/sdk.gen", () => ({
+    getImageInfo: vi.fn(),
+}));
 
 declare global {
     interface Window {
@@ -38,20 +47,6 @@ describe("PictureCarousel", () => {
         );
 
         vi.useFakeTimers();
-
-        vi.mock(
-            "../common/clients/.generated/species-list/sdk.gen",
-            () => ({
-                getSpeciesListSItemDetails: vi.fn(),
-            }),
-        );
-
-        vi.mock(
-            "../common/clients/.generated/image-service/sdk.gen",
-            () => ({
-                getImageInfo: vi.fn(),
-            }),
-        );
     });
 
     afterEach(() => {
@@ -70,7 +65,7 @@ describe("PictureCarousel", () => {
             );
     });
 
-    it("should throw an error if call to species-list failed", () => {
+    it("should throw an error if call to species-list failed", async () => {
         const carousel = new PictureCarousel(
             "picture-carousel",
             "listId",
@@ -78,8 +73,7 @@ describe("PictureCarousel", () => {
         );
         getSpeciesListSItemDetailsMock.mockRejectedValue("Some reason");
 
-        expect(() => carousel.render())
-            .rejects.toBe("Some reason");
+        await expect(carousel.render()).rejects.toBe("Some reason");
     });
 
     it.each([
