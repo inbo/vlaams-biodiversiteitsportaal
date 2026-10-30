@@ -27,7 +27,7 @@
         "sass-embedded": "^1.106.1",
         "ts-node": "^10.9.2",
         "typescript": "~5.7.2",
-        "vite": "^6.4.5",
+        "vite": "^8.3.5",
         "vite-plugin-handlebars": "^1.5.0",
         "vite-plugin-static-copy": "^2.3.0",
         "vitest": "^5.0.5",
