@@ -19,7 +19,7 @@ jobs:
   e2e-test:
     runs-on: [self-hosted]
     container:
-      image: cypress/browsers:22.15.0
+      image: cypress/browsers:24.22.0
     #      options: --user 1001
     steps:
       - name: Install git LFS

@@ -9,5 +9,8 @@
     "cypress-multi-reporters": "^2.0.5",
     "jszip": "^3.10.1",
     "typescript": "^5.8.3"
+  },
+  "allowScripts": {
+    "cypress@16.2.1": true
   }
 }
