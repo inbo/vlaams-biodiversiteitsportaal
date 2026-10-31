@@ -22,7 +22,7 @@ describe("Bie - Species page", () => {
             .children().should("have.length.above", 1);
 
         // Check map data available
-        if (Cypress.env("TARGET_ENV") === "prod") {
+        if (Cypress.expose("TARGET_ENV") === "prod") {
             cy.get("#leafletMap").matchImageSnapshot("species-page-map", {
                 failureThreshold: 0.4,
                 failureThresholdType: "percent",
@@ -78,7 +78,7 @@ describe("Bie - Species page", () => {
         // Check charts tab
         cy.get(".taxon-tabs > ul").find("a[href='#records']").click();
 
-        if (Cypress.env("TARGET_ENV") === "prod") {
+        if (Cypress.expose("TARGET_ENV") === "prod") {
             cy.get("#charts").children().each((chart) => {
                 const chartId = chart.attr("id");
                 cy.get(`#${chartId}`).should(() => {

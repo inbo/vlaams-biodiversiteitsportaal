@@ -35,18 +35,39 @@ module.exports = defineConfig({
     runMode: 2, // Retry failed tests in run mode
     openMode: 0, // Do not retry in open mode
   },
+  // Public, non-sensitive values — readable synchronously via Cypress.expose()
+  expose: {
+    TARGET_ENV: targetEnv,
+    BASE_URL: envs[targetEnv].baseUrl,
+    KEYCLOAK_AUTH_URL: envs[targetEnv].keycloakAuthUrl,
+    VLAANDEREN_AUTH_URL: envs[targetEnv].vlaanderenAuthUrl,
+    ENABLE_MUTATION_TESTS: process.env.CYPRESS_ENABLE_MUTATION_TESTS,
+  },
   e2e: {
     baseUrl: envs[targetEnv].baseUrl,
     env: {
-      TARGET_ENV: targetEnv,
-      BASE_URL: envs[targetEnv].baseUrl,
-      KEYCLOAK_AUTH_URL: envs[targetEnv].keycloakAuthUrl,
-      VLAANDEREN_AUTH_URL: envs[targetEnv].vlaanderenAuthUrl,
+      // Sensitive values — read via cy.env()
       VBP_USERNAME: process.env.CYPRESS_VBP_USERNAME,
       VBP_PASSWORD: process.env.CYPRESS_VBP_PASSWORD,
     },
     setupNodeEvents(on, config) {
-      // implement node event listeners here
+      // CYPRESS_* vars and --env flags populate env only; mirror public
+      // flags into expose so Cypress.expose() picks them up
+      for (const key of [
+        "TARGET_ENV",
+        "BASE_URL",
+        "KEYCLOAK_AUTH_URL",
+        "VLAANDEREN_AUTH_URL",
+        "ENABLE_MUTATION_TESTS",
+        "updateSnapshots",
+        "debugSnapshots",
+        "failOnSnapshotDiff",
+        "requireSnapshots",
+      ]) {
+        if (config.env[key] !== undefined) {
+          config.expose[key] = config.env[key];
+        }
+      }
       addMatchImageSnapshotPlugin(on);
       // Cleanup previous google-chat-reporter files
       on("before:run", () => {

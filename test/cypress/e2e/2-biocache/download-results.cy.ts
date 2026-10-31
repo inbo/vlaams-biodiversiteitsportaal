@@ -9,8 +9,8 @@ describe("Biocache - Download Auth", () => {
       // Expand the Attribution facet
       cy.get("#downloads > a").click();
 
-      cy.origin(Cypress.env("VLAANDEREN_AUTH_URL"), () => {
-        cy.url().should("match", new RegExp(`^${Cypress.env("VLAANDEREN_AUTH_URL")}`));
+      cy.origin(Cypress.expose("VLAANDEREN_AUTH_URL"), () => {
+        cy.url().should("match", new RegExp(`^${Cypress.expose("VLAANDEREN_AUTH_URL")}`));
       });
     });
   });

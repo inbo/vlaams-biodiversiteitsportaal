@@ -9,7 +9,7 @@ describe("Species list - manage", () => {
     // Only run these tests if ENABLE_MUTATION_TESTS is set to true
     // This is to prevent creating and deleting lists during normal test runs,
     // resulting in a lot of test lists / uids being created.
-    if (Cypress.env("ENABLE_MUTATION_TESTS") !== "true") {
+    if (Cypress.expose("ENABLE_MUTATION_TESTS") !== "true") {
         return;
     }
 
@@ -21,7 +21,7 @@ describe("Species list - manage", () => {
             );
             return false; // Prevents Cypress from failing the test
         });
-        cy.login("species-list");
+        cy.login();
         cy.visit("/species-list");
     });
 

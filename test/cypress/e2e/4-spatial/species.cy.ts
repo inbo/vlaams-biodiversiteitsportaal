@@ -34,7 +34,7 @@ describe("Spatial - Species", () => {
     cy.get("#legend").should("be.visible");
 
     // Verify that the layer is visible on the map
-    if (Cypress.env("TARGET_ENV") === "prod") {
+    if (Cypress.expose("TARGET_ENV") === "prod") {
       cy.get("#map").matchImageSnapshot({
         failureThreshold: 0.4,
         failureThresholdType: "percent",
@@ -72,7 +72,7 @@ describe("Spatial - Species", () => {
     cy.get("#legend").should("be.visible");
 
     // Verify that the layer is visible on the map
-    if (Cypress.env("TARGET_ENV") === "prod") {
+    if (Cypress.expose("TARGET_ENV") === "prod") {
       cy.get("#map").matchImageSnapshot({
         failureThreshold: 0.4,
         failureThresholdType: "percent",
@@ -111,7 +111,7 @@ describe("Spatial - Species", () => {
     cy.get("#legend").should("be.visible");
 
     // Verify that the layer is visible on the map
-    if (Cypress.env("TARGET_ENV") === "prod") {
+    if (Cypress.expose("TARGET_ENV") === "prod") {
       cy.get("#map").matchImageSnapshot({
         failureThreshold: 0.4,
         failureThresholdType: "percent",
@@ -175,7 +175,7 @@ describe("Spatial - Species", () => {
     cy.get('button[name="next"]').click();
 
     // Only run the remainder of the tests if ENABLE_MUTATION_TESTS is set to true
-    if (Cypress.env("ENABLE_MUTATION_TESTS") === "true") {
+    if (Cypress.expose("ENABLE_MUTATION_TESTS") === "true") {
       const speciesListName = `${TEST_LIST_PREFIX} textarea ${getFileNameTimeStamp()}`;
       // Create the species-list
       cy.get('input[name="newListName"]')
@@ -197,7 +197,7 @@ describe("Spatial - Species", () => {
 
       // Verify that the layer is visible on the map
 
-      if (Cypress.env("TARGET_ENV") === "prod") {
+      if (Cypress.expose("TARGET_ENV") === "prod") {
         cy.get("#map").matchImageSnapshot({
           failureThreshold: 0.4,
           failureThresholdType: "percent",
@@ -267,15 +267,12 @@ describe("Spatial - Species", () => {
     cy.get("#legend").should("be.visible");
 
     // Verify that the layer is visible on the map
-    if (Cypress.env("TARGET_ENV") === "prod") {
+    if (Cypress.expose("TARGET_ENV") === "prod") {
       cy.get("#map").matchImageSnapshot({
         failureThreshold: 0.4,
         failureThresholdType: "percent",
       });
     }
-
-    // Store dataset name for dependent test
-    Cypress.env("datasetName", datasetName);
   });
 
   it("Can add species from existing dataset", () => {
@@ -321,7 +318,7 @@ describe("Spatial - Species", () => {
       cy.get("#legend").should("be.visible");
 
       // Verify that the layer is visible on the map
-      if (Cypress.env("TARGET_ENV") === "prod") {
+      if (Cypress.expose("TARGET_ENV") === "prod") {
         cy.get("#map").matchImageSnapshot({
           failureThreshold: 0.4,
           failureThresholdType: "percent",

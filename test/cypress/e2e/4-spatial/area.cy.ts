@@ -52,7 +52,7 @@ describe("Spatial - Layers", () => {
     cy.get('button[name="closeNewWindow"]').click();
 
     // Verify that the layer is visible on the map
-    if (Cypress.env("TARGET_ENV") === "prod") {
+    if (Cypress.expose("TARGET_ENV") === "prod") {
       cy.get("#map").matchImageSnapshot({
         failureThreshold: 0.4,
         failureThresholdType: "percent",

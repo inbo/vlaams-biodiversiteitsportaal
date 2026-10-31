@@ -29,7 +29,7 @@ describe("Spatial - Layers", () => {
 
     // Verify that the layer is visible on the map
 
-    if (Cypress.env("TARGET_ENV") === "prod") {
+    if (Cypress.expose("TARGET_ENV") === "prod") {
       cy.get("#map").matchImageSnapshot({
         failureThreshold: 0.4,
         failureThresholdType: "percent",
@@ -89,7 +89,7 @@ describe("Spatial - Layers", () => {
       .contains("1 gebieden van Gemeenten")
       .should("be.visible");
 
-    if (Cypress.env("TARGET_ENV") === "prod") {
+    if (Cypress.expose("TARGET_ENV") === "prod") {
       cy.get("#map").matchImageSnapshot({
         failureThreshold: 0.4,
         failureThresholdType: "percent",
@@ -120,7 +120,7 @@ describe("Spatial - Layers", () => {
     cy.get('[ng-show="wmsLegendVisible()"').should("be.visible");
 
     // Verify that the layer is visible on the map
-    if (Cypress.env("TARGET_ENV") === "prod") {
+    if (Cypress.expose("TARGET_ENV") === "prod") {
       cy.get("#map").matchImageSnapshot({
         failureThreshold: 0.4,
         failureThresholdType: "percent",
