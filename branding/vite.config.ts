@@ -271,8 +271,8 @@ export default {
         {
             name: "AlaBootstrap5",
             enforce: "post",
-            async closeBundle() {
-                [
+            async writeBundle() {
+                for (const { src, dest } of [
                     {
                         src: "head.html",
                         dest: "head.mustache",
@@ -285,12 +285,12 @@ export default {
                         src: "footer.html",
                         dest: "footer.mustache",
                     },
-                ].forEach(async ({ src, dest }) => {
+                ]) {
                     await fs.copyFile(
                         path.resolve(__dirname, `dist/${src}`),
                         path.resolve(__dirname, `dist/${dest}`),
                     );
-                });
+                }
             },
         },
     ],
