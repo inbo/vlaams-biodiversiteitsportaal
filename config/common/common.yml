@@ -20,7 +20,7 @@ skin:
   orgNameLong: Vlaams Biodiversiteitsportaal
   orgNameShort: VBP
   fluidLayout: true
-  favicon: '${common.protocol}://${common.domain}/favicon.ico'
+  favicon: "${common.protocol}://${common.domain}/favicon.ico"
 
 # Actuator configuration
 management:
@@ -38,7 +38,6 @@ management:
     web:
       exposure:
         include: health
-
 
 logging:
   config: /config/common/logback.xml
@@ -91,11 +90,15 @@ webservice:
   jwt: true
   jwt-scopes: openid users/read
 
+# Only works for spring managed tomcat (executable jars)
 server:
   port: 8080
-  use-forward-headers: true
+  use-forward-headers: true # Deprecated config for older spring
+  forward-headers-strategy: native # config for newer spring
   tomcat:
     use-relative-redirects: true
+    remoteip:
+      port-header: X-Unused-Forwarded-Port # ignore ALB's X-Forwarded-Port: 4443
   servlet:
     session:
       cookie:
