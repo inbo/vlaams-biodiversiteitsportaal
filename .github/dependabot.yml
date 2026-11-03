@@ -14,6 +14,15 @@ updates:
       # Font Awesome 7 breaks the ALA services; stay on 6.x
       - dependency-name: "@fortawesome/fontawesome-free"
         update-types: ["version-update:semver-major"]
+      # jQuery 4 breaks Bootstrap's JS ("requires jQuery version 1.9.1 or
+      # higher, but lower than version 4"); blocked until Bootstrap supports it.
+      # jquery-migrate 4.x and @types/jquery 4.x track jQuery 4, so stay on 3.x.
+      - dependency-name: "jquery"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "jquery-migrate"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@types/jquery"
+        update-types: ["version-update:semver-major"]
     groups:
       branding-all:
         applies-to: version-updates
