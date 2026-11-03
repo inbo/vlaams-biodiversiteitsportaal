@@ -163,15 +163,22 @@ export default {
                 {
                     src: "../node_modules/jquery/dist/jquery.min.js",
                     dest: "js",
+                    // vite-plugin-static-copy v4 keeps the directory structure
+                    // by default; strip it to copy flat like v1-v3 did
+                    rename: { stripBase: true },
                 },
                 {
                     src: "../node_modules/jquery-migrate/dist/jquery-migrate.min.js",
                     dest: "js",
-                    rename: () => "jquery-migration.min.js",
+                    rename: {
+                        stripBase: true,
+                        name: "jquery-migration.min.js",
+                    },
                 },
                 {
                     src: "../node_modules/bootstrap-sass/assets/javascripts/bootstrap.min.js",
                     dest: "js",
+                    rename: { stripBase: true },
                 },
             ],
         }),

@@ -31,7 +31,7 @@ jobs:
           lfs: true
 
       - name: Cypress run
-        uses: cypress-io/github-action@f790eee7a50d9505912f50c2095510be7de06aa7 # v6
+        uses: cypress-io/github-action@4ce68f262a3888d22cf3175d62010a145ba737ee # v7
         env:
           CYPRESS_VBP_USERNAME: ${{ secrets.CYPRESS_VBP_USERNAME }}
           CYPRESS_VBP_PASSWORD: ${{ secrets.CYPRESS_VBP_PASSWORD }}

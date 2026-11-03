@@ -1,4 +1,9 @@
-$fa-font-path: "@fortawesome/fontawesome-free/webfonts/";
+// Font Awesome 7 removed the $fa-var-* variables, the fa-icon-* mixins and the
+// $fa-font-path variable that FA 6 exposed; font paths are now configured on
+// the `variables` module (must come first: a module can only be configured once).
+@use "@fortawesome/fontawesome-free/scss/variables" as fa-vars with (
+    $font-path: "@fortawesome/fontawesome-free/webfonts/"
+);
 
 @import "@fortawesome/fontawesome-free/scss/fontawesome.scss";
 
@@ -7,11 +12,24 @@ $fa-font-path: "@fortawesome/fontawesome-free/webfonts/";
 @import "@fortawesome/fontawesome-free/scss/regular.scss";
 @import "@fortawesome/fontawesome-free/scss/brands.scss";
 
-// backward compatibility
+// backward compatibility for legacy FA 4 class names (no longer expressible
+// with FA 7's removed SCSS API, so hardcoded like FA 7's own _shims.scss does)
 .fa-square-o {
-    @include fa-icon-regular($fa-var-square);
+    font-family: "Font Awesome 7 Free";
+    font-style: normal;
+    font-weight: 400;
+
+    &::before {
+        content: "\f0c8"; // square
+    }
 }
 
 .fa-check-square-o {
-    @include fa-icon-regular($fa-var-square-check);
+    font-family: "Font Awesome 7 Free";
+    font-style: normal;
+    font-weight: 400;
+
+    &::before {
+        content: "\f14a"; // square-check
+    }
 }

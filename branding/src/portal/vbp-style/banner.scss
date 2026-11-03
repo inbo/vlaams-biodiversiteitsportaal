@@ -1,3 +1,9 @@
+// Font Awesome 7: configure the font path on the `variables` module (must
+// come first) so the @font-face URLs resolve through node_modules like the
+// FA 6 `$fa-font-path` override did.
+@use "@fortawesome/fontawesome-free/scss/variables" as fa-vars with (
+    $font-path: "@fortawesome/fontawesome-free/webfonts/"
+);
 @import "@fortawesome/fontawesome-free/scss/fontawesome.scss";
 @import "@fortawesome/fontawesome-free/scss/regular.scss";
 
