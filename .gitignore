@@ -8,8 +8,8 @@ generated
 vlaams-biodiversiteitsportaal.Rproj
 .DS_Store
 .Rhistory
-
 # Build debug output
 build-out.txt
 build-err.txt
 .positai
+wiki
