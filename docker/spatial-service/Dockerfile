@@ -6,7 +6,7 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 ARG VERSION=develop-vbp
 ARG COMMIT=0492852942ce04c101cab89bb5b2e2ae0ade0be2
-ARG SOURCE=https://github.com/StefanVanDyck/spatial-service.git
+ARG SOURCE=https://github.com/inbo/vbp-spatial-service.git
 LABEL ala.version=inbo-${VERSION}
 
 WORKDIR /project

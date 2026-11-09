@@ -9,7 +9,7 @@ WORKDIR /project
 
 ARG VERSION=develop-vbp
 ARG COMMIT=b83095b751b9f467df697542cb4a786c9238ff0e
-ARG SOURCE=https://github.com/inbo/ala-bie-hub.git
+ARG SOURCE=https://github.com/inbo/vbp-ala-bie-hub.git
 LABEL ala.version=inbo-${COMMIT}
 
 RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}

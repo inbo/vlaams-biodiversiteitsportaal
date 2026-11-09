@@ -5,7 +5,7 @@ FROM --platform=${BUILDPLATFORM} custom-maven AS builder
 ARG BACKBONE_VERSION=2025-11-17
 ARG VERSION=remove-error-log
 #ARG SOURCE=https://github.com/AtlasOfLivingAustralia/ala-namematching-service.git
-ARG SOURCE=https://github.com/StefanVanDyck/ala-namematching-service.git
+ARG SOURCE=https://github.com/inbo/vbp-ala-namematching-service.git
 LABEL ala.version=${VERSION}
 
 RUN curl https://build.natuurdata.dev.inbo.be/taxonomy/namematching-gbif-backbone-lucene-8-${BACKBONE_VERSION}.tgz -o /namematching-nm.tgz \

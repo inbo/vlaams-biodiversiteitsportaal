@@ -9,7 +9,7 @@ WORKDIR /project
 # ARG SOURCE=https://github.com/AtlasOfLivingAustralia/collectory.git
 
 ARG VERSION=use-occurrenceId-for-unique-term
-ARG SOURCE=https://github.com/StefanVanDyck/collectory
+ARG SOURCE=https://github.com/inbo/vbp-collectory
 ARG COMMIT=8d3462567bf4e8d501bc48af1e69b4e49a2e3c06
 LABEL ala.version=inbo-${COMMIT}
 

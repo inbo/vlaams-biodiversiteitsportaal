@@ -6,7 +6,7 @@ FROM --platform=${BUILDPLATFORM} custom-gradle-jdk17 AS builder
 ARG VERSION=develop-vbp
 ARG COMMIT=9dbc49205051896645f0e115bd09488c7ce4f0c9
 
-ARG SOURCE=https://github.com/inbo/downloads-plugin.git
+ARG SOURCE=https://github.com/inbo/vbp-downloads-plugin.git
 
 WORKDIR /project/downloads-plugin
 RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
@@ -15,7 +15,7 @@ RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
 ARG VERSION=develop-vbp
 ARG COMMIT=2d623cce3af50be2ecc6f46afdaf85a390175020
 
-ARG SOURCE=https://github.com/StefanVanDyck/biocache-hubs.git
+ARG SOURCE=https://github.com/inbo/vbp-biocache-hubs.git
 LABEL ala.version=inbo-${COMMIT}
 
 WORKDIR /project/biocache-hubs

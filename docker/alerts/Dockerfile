@@ -7,7 +7,7 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 ARG VERSION=develop-vbp
 ARG COMMIT=aa46bddabbda1e06e9512a1c6b4509806bcf3ed3
-ARG SOURCE=https://github.com/StefanVanDyck/alerts.git
+ARG SOURCE=https://github.com/inbo/vbp-alerts.git
 
 LABEL ala.version=inbo-${COMMIT}
 

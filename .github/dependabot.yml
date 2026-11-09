@@ -57,6 +57,10 @@ updates:
     schedule:
       interval: weekly
     open-pull-requests-limit: 10
+    ignore:
+      # namematching-service pins Lombok 1.18.10 and fails to compile on
+      # JDK (Corretto) > 13; the maven builder must stay on JDK 11.
+      - dependency-name: "maven"
     groups:
       docker-minor-patch:
         applies-to: version-updates

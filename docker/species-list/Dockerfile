@@ -4,7 +4,7 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 ARG VERSION=develop-vbp
 ARG COMMIT=6d20a0dda83b0d9940f448bff02e8a304abb86a9
-ARG SOURCE=https://github.com/inbo/specieslist-webapp.git
+ARG SOURCE=https://github.com/inbo/vbp-specieslist-webapp.git
 LABEL ala.version=inbo-${COMMIT}
 
 WORKDIR /project

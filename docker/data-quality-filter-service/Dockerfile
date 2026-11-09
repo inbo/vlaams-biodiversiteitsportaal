@@ -2,8 +2,8 @@
 ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
-ARG VERSION=250_setup_data_quality_filter_service
-ARG SOURCE=https://github.com/katya-shaleninova/data-quality-filter-service
+ARG VERSION=develop-vbp
+ARG SOURCE=https://github.com/inbo/vbp-data-quality-filter-service
 ARG COMMIT=83e9fe873398a88c6d50a195c932b0a3fb70d2ff
 LABEL ala.version=inbo-${COMMIT}
 

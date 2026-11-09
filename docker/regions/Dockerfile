@@ -8,7 +8,7 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 ARG VERSION=develop-vbp
 ARG COMMIT=c91703e0a4d10ef801145124be6df3b5d8ca0b92
-ARG SOURCE=https://github.com/StefanVanDyck/regions.git
+ARG SOURCE=https://github.com/inbo/vbp-regions.git
 LABEL ala.version=inbo-${COMMIT}
 
 WORKDIR /project

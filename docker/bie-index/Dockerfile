@@ -5,7 +5,7 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 ARG VERSION=develop-vbp
 ARG COMMIT=967d9669f21e783b9883e975d635dd3250358735
-ARG SOURCE=https://github.com/inbo/bie-index.git
+ARG SOURCE=https://github.com/inbo/vbp-bie-index.git
 LABEL ala.version=inbo-${COMMIT}
 
 WORKDIR /project

@@ -1,13 +1,14 @@
 # syntax=docker/dockerfile:1.14.0
 ARG BUILDPLATFORM=linux/amd64
-FROM --platform=${BUILDPLATFORM} maven:3.9-amazoncorretto-25 AS builder
+# namematching-service (Lombok 1.18.10) does not build on JDK > 13; keep JDK 11
+FROM --platform=${BUILDPLATFORM} maven:3.9.16-amazoncorretto-11 AS builder
 
 RUN mkdir ~/.m2
 COPY settings.xml /root/.m2/settings.xml
 
 # trivy:ignore:DS-0002 trivy:ignore:DS-0026 trivy:ignore:DS-0015
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
-    yum -y install git unzip
+    yum -y install git unzip tar
 
 # Download and opentelemetry agent for easy copy to runtime images
 RUN mkdir /opt/opentelemetry-agent \

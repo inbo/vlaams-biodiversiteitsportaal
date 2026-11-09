@@ -8,7 +8,7 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 ARG VERSION=develop-vbp
 ARG COMMIT=58eb078aaa12edbe845a9a9f6087d5d619096e27
-ARG SOURCE=https://github.com/inbo/spatial-hub
+ARG SOURCE=https://github.com/inbo/vbp-spatial-hub
 LABEL ala.version=inbo-${VERSION}
 
 # trivy:ignore:DS-0015  # using BuildKit yum cache

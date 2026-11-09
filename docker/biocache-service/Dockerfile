@@ -5,7 +5,7 @@ FROM --platform=${BUILDPLATFORM} custom-gradle-jdk17 AS builder
 
 ARG VERSION=develop-vbp-rebase
 ARG COMMIT=287cf5973028bdd2811b34455f91f5d0cfc68646
-ARG SOURCE=https://github.com/StefanVanDyck/biocache-service.git
+ARG SOURCE=https://github.com/inbo/vbp-biocache-service.git
 LABEL ala.version=inbo-${COMMIT}
 
 WORKDIR /project
