@@ -199,33 +199,6 @@ jobs:
       #          driver-opts: |
       #            image=moby/buildkit:buildx-stable-1
 
-      - name: Cache
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
-        id: cache
-        with:
-          path: |
-            var-cache-apt
-            var-cache-yum
-            var-lib-apt
-            gradle-cache
-            maven-cache
-          key: cache-docker-${{ matrix.docker.component }}-${{ hashFiles('./docker/${{ matrix.docker.component }}') }}
-          restore-keys: |
-            cache-docker-${{ matrix.docker.component }}
-
-      - name: inject cache into docker
-        uses: reproducible-containers/buildkit-cache-dance@5422eac04292c961a382e0f584ea0f03ad9da723 # v3.4.0
-        with:
-          cache-map: |
-            {
-              "var-cache-apt": "/var/cache/apt",
-              "var-cache-yum": "/var/cache/yum",
-              "var-lib-apt": "/var/lib/apt",
-              "gradle-cache": "/gradle-cache",
-              "maven-cache": "/root/.m2/repository"
-            }
-          skip-extraction: ${{ steps.cache.outputs.cache-hit }}
-
       - name: Build and push docker images
         working-directory: ./docker
         env:
