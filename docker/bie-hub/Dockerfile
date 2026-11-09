@@ -8,7 +8,7 @@ WORKDIR /project
 # ARG SOURCE=https://github.com/AtlasOfLivingAustralia/ala-bie-hub.git
 
 ARG VERSION=develop-vbp
-ARG COMMIT=b83095b751b9f467df697542cb4a786c9238ff0e
+ARG COMMIT=9b56964975b2d8c34116c63ed3981f9e95253d54
 ARG SOURCE=https://github.com/inbo/vbp-ala-bie-hub.git
 LABEL ala.version=inbo-${COMMIT}
 
@@ -17,13 +17,13 @@ RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
 COPY resources.xml ./grails-app/conf/spring/resources.xml
 
 RUN --mount=type=cache,target=/gradle-cache,ro \
-    gradle build assemble \
-    -x test -x integrationTest
+  gradle build assemble \
+  -x test -x integrationTest
 
 # Copy dependencies to shared read-only cache
 RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
-    rsync -a /home/gradle/.gradle/caches/modules-2 /gradle-cache \
-    && rm /gradle-cache/modules-2/*.lock && rm /gradle-cache/modules-2/gc.properties
+  rsync -a /home/gradle/.gradle/caches/modules-2 /gradle-cache \
+  && rm /gradle-cache/modules-2/*.lock && rm /gradle-cache/modules-2/gc.properties
 
 FROM amazoncorretto:11.0.32
 
