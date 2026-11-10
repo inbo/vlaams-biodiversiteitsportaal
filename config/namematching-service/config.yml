@@ -29,3 +29,6 @@ server:
       port: 9180
 search:
   index: /data/lucene/namematching-nm
+  # Single source shared with biocache-service and bie-index, see wiki/Species groups.md
+  groups: file:///config/common/groups.json
+  subgroups: file:///config/common/subgroups.json

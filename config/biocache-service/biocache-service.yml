@@ -43,9 +43,9 @@ autocomplete:
     images:
       enabled: true
     groups:
-      url: /config/biocache-service/groups.json
+      url: /config/common/groups.json
     subgroups:
-      url: /config/biocache-service/subgroups.json
+      url: /config/common/subgroups.json
 biocache:
   ui:
     url: ${common.protocol}://${common.domain}/biocache-hub

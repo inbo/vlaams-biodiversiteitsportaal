@@ -22,6 +22,9 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Check generated bie-index species groups are up to date
+        run: scripts/generate-bie-groups.sh --check
+
       - name: Get all component versions
         id: versions
         env:

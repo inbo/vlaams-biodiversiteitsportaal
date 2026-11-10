@@ -250,6 +250,7 @@ services:
       - "9179:9179"
     volumes:
       - ../config/namematching-service:/config/namematching-service:ro
+      - ../config/common:/config/common:ro
     environment:
       LOG_LEVEL: "WARN"
 

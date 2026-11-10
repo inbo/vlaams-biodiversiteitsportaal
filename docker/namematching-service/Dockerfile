@@ -39,10 +39,6 @@ WORKDIR /app
 COPY --from=builder --chown=1000 \
   /project/server/target/ala-namematching-server-${VERSION}.jar /app/app.jar
 
-RUN mkdir /data/ala-namematching-service && mkdir /data/ala-namematching-service/config
-COPY groups.json /data/ala-namematching-service/config/groups.json
-COPY subgroups.json /data/ala-namematching-service/config/subgroups.json
-
 ENV CONFIG_LOCATIOM=/config/namematching-service/config.yml
 ENTRYPOINT ["sh", "-c", "java ${JAVA_OPTS} -jar /app/app.jar server ${CONFIG_LOCATIOM}"]
 CMD ["config.yml"]
