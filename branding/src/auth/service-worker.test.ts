@@ -32,6 +32,48 @@ describe("Service Worker Auth Tests", () => {
             .toBeDefined();
     });
 
+    test.each([
+        "http://test.com/image-service/image/817b5a11/large",
+        "http://test.com/image-service/image/817b5a11/original",
+        "http://test.com/image-service/image/817b5a11/thumbnail",
+        "http://test.com/image-service/image/817b5a11/tms/1/2/3.png",
+        "http://test.com/image-service/store/1/2/3/817b5a11/original",
+    ])("Given auth cookie is set, image bytes are not intercepted: %s", async (url) => {
+        // GIVEN
+        const fetchEvent = {
+            request: new Request(url),
+            respondWith: vi.fn(),
+        };
+        global.fetch = vi.fn();
+        vi.mocked(cookieStore.get).mockResolvedValue({
+            value: "test-auth-cookie",
+        });
+        await mockSelf.trigger("install", { waitUntil: vi.fn() });
+        await mockSelf.trigger("activate");
+
+        // WHEN
+        await mockSelf.trigger("fetch", fetchEvent);
+
+        // THEN the browser handles the request itself (no-cors, follows redirects)
+        expect(fetchEvent.respondWith).not.toHaveBeenCalled();
+        expect(global.fetch).not.toHaveBeenCalled();
+    });
+
+    test("Given auth cookie is set, other image-service requests are still intercepted", async () => {
+        const fetchEvent = {
+            request: new Request("http://test.com/image-service/ws/image/817b5a11"),
+            respondWith: vi.fn(),
+        };
+        global.fetch = vi.fn();
+        vi.mocked(cookieStore.get).mockResolvedValue({
+            value: "test-auth-cookie",
+        });
+
+        await mockSelf.trigger("fetch", fetchEvent);
+
+        expect(fetchEvent.respondWith).toHaveBeenCalled();
+    });
+
     test("Given auth cookie is set block untill access-token provided and inject user credentials in request header", async () => {
         // GIVEN
         const request = new Request("http://test.com/biocache-service/test");

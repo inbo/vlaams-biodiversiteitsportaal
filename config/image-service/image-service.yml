@@ -9,7 +9,14 @@ security:
   core:
     optionalFilterPattern: ["/", "/*"]
     uriExclusionFilterPattern:
-      ["^/ws/.*", "^/image-service/ws/.*", ".*proxyImage.*", "^/store/.*"]
+      [
+        "^/ws/.*",
+        "^/image-service/ws/.*",
+        ".*proxyImage.*",
+        "^/store/.*",
+        # Image bytes (served by the proxyImage* actions, but matched on URL, not action name)
+        ".*/image/[^/]+/(original|thumbnail.*|large|tms/.*)",
+      ]
 
   ip:
     whitelist: "10.30.0.0/20"

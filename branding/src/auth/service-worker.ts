@@ -23,6 +23,16 @@ const jwtPaths = [
     "/data-quality-filter-service/",
 ];
 
+// Static image bytes (used by <img>, CSS backgrounds, tile layers) must never be
+// re-issued as CORS fetches: if the service answers with an OIDC redirect, a
+// cross-origin redirect to Keycloak fails CORS, while the browser's own no-cors
+// request would follow it fine. These paths are also excluded from the
+// image-service's security filter (uriExclusionFilterPattern).
+const excludedPaths = [
+    /\/image-service\/image\/[^/]+\/(original|thumbnail|large|tms\/)/,
+    /\/image-service\/store\//,
+];
+
 const AUTH_COOKIE_NAME = "VBP-AUTH";
 const RENEWAL_TIMEOUT_MS = 5_000;
 
@@ -220,6 +230,10 @@ self.addEventListener("message", (event: any) => {
 self.addEventListener("fetch", (event: any) => {
     // Never modify navigations, only XHR/fetch and subresource requests
     if (event.request.mode === "navigate") {
+        return;
+    }
+    const pathname = new URL(event.request.url).pathname;
+    if (excludedPaths.some((pattern) => pattern.test(pathname))) {
         return;
     }
     if (jwtPaths.some((path) => event.request.url.includes(path))) {
