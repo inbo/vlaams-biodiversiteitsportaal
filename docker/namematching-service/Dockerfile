@@ -3,18 +3,19 @@ ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-maven AS builder
 
 ARG BACKBONE_VERSION=2026-11-09
-ARG VERSION=remove-error-log
+ARG VERSION=develop-vbp
 #ARG SOURCE=https://github.com/AtlasOfLivingAustralia/ala-namematching-service.git
 ARG SOURCE=https://github.com/inbo/vbp-ala-namematching-service.git
-LABEL ala.version=${VERSION}
+ARG COMMIT=8d3462567bf4e8d501bc48af1e69b4e49a2e3c06
+LABEL ala.version=inbo-${COMMIT}
 
-RUN curl https://build.natuurdata.dev.inbo.be/taxonomy/namematching-gbif-backbone-lucene-8-${BACKBONE_VERSION}.tgz -o /namematching-nm.tgz \
+RUN curl --fail https://build.natuurdata.dev.inbo.be/taxonomy/namematching-gbif-backbone-lucene-8-${BACKBONE_VERSION}.tgz -o /namematching-nm.tgz \
   && tar -xzf /namematching-nm.tgz \
   && mv namematching-gbif-backbone-lucene-8-${BACKBONE_VERSION} /namematching-nm \
   && rm /namematching-nm.tgz
 
 WORKDIR /project
-RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} .
+RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
 
 RUN --mount=type=cache,target=/root/.m2/repository \
   mvn --batch-mode --no-transfer-progress \
