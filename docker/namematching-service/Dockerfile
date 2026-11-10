@@ -4,7 +4,6 @@ FROM --platform=${BUILDPLATFORM} custom-maven AS builder
 
 ARG BACKBONE_VERSION=2026-11-09
 ARG VERSION=develop-vbp
-#ARG SOURCE=https://github.com/AtlasOfLivingAustralia/ala-namematching-service.git
 ARG SOURCE=https://github.com/inbo/vbp-ala-namematching-service.git
 ARG COMMIT=5538e5bb53754ed4b8ece1e0591ae465cc68c232
 LABEL ala.version=inbo-${COMMIT}
@@ -23,7 +22,7 @@ RUN --mount=type=cache,target=/root/.m2/repository \
 
 FROM amazoncorretto:11.0.32
 
-ARG VERSION=1.8.1
+ARG VERSION=1.8.2
 LABEL ala.version=${VERSION}
 
 COPY --from=builder /opt/opentelemetry-agent /opt/opentelemetry-agent
