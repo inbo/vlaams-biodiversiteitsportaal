@@ -279,6 +279,8 @@ jobs:
           set -e -o pipefail
 
           git checkout automated-version-update || git checkout -b automated-version-update
+          # Fast-forward a stale branch to dev; fails if the branch has diverged (e.g. open PR while dev moved)
+          git merge --ff-only origin/dev
 
           git config --global user.email "support.natuurdata@inbo.be"
           git config --global user.name "Github Actions"

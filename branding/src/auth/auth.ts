@@ -288,7 +288,6 @@ function clearAlaAuthCookies() {
         "regions",
         "sandbox-hub",
         "sandbox-service",
-        "sensitive-data-service",
         "spatial-hub",
         "spatial-service",
         "species-list",

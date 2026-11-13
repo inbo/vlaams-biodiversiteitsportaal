@@ -254,18 +254,6 @@ services:
     environment:
       LOG_LEVEL: "WARN"
 
-  #  sensitive-data-service:
-  #    image: ${DOCKER_REPO:-local}/inbo-vbp-sensitive-data-service:dev
-  #    command:
-  #      - /config/sensitive-data-service/config.yml
-  #    ports:
-  #      - "9189:9189"
-  #      - "5005:5005"
-  #    volumes:
-  #      - ../config/sensitive-data-service:/config/sensitive-data-service:ro
-  #    environment:
-  #      JAVA_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,address=*:5005,suspend=n"
-
   nginx:
     image: nginx
     volumes:
