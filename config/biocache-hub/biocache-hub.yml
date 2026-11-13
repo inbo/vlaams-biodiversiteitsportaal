@@ -284,6 +284,10 @@ environments:
     userdetails:
       url: https://natuurdata.uat.inbo.be/userdetails
   inbo_dev:
+    map:
+      utmGrid:
+        facet1km: cl10166
+        facet5km: cl10165
     userdetails:
       url: https://natuurdata.dev.inbo.be/userdetails
     map:
