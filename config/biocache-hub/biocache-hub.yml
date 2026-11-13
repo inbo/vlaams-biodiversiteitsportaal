@@ -286,6 +286,10 @@ environments:
   inbo_dev:
     userdetails:
       url: https://natuurdata.dev.inbo.be/userdetails
+    map:
+      utmGrid:
+        facet1km: cl10166
+        facet5km: cl10165
     regionVlaanderen:
       query: cl100:"Vlaams Gewest"
   local:
