@@ -2,6 +2,16 @@
 // Applied with `gradle --init-script` so no upstream build file has to be patched.
 
 allprojects {
+    // Gradle plugins (e.g. the flyway and webdriver-binaries plugins) are published to the Gradle plugin portal.
+    // Resolve them there, before the grails repository of the shared init.gradle: that repository proxies the
+    // portal, but answers "429 Too Many Requests" instead of "404" for files the portal does not have (the jar
+    // gradle probes for next to a pom-only plugin marker), which fails the build.
+    buildscript {
+        repositories {
+            gradlePluginPortal()
+        }
+    }
+
     // Upstream depends on the moving images-client-plugin 1.6-SNAPSHOT.
     // Only resolve it from the copy kept in this repo (docker/image-service/maven-repo), never from a remote repository.
     repositories {
