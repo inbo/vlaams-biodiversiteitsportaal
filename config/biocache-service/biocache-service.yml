@@ -42,10 +42,11 @@ autocomplete:
       enabled: true
     images:
       enabled: true
-    groups:
-      url: /config/common/groups.json
-    subgroups:
-      url: /config/common/subgroups.json
+species:
+  groups:
+    url: /config/common/groups.json
+  subgroups:
+    url: /config/common/subgroups.json
 biocache:
   ui:
     url: ${common.protocol}://${common.domain}/biocache-hub
