@@ -174,6 +174,38 @@ jobs:
       matrix:
         docker: ${{ fromJSON(needs.get-versions.outputs.docker_build_matrix) }}
     steps:
+      # The self-hosted runners do not have git-lfs, which the checkout below
+      # needs. Installed from the pinned official release into the runner's
+      # temp directory, so it needs neither root nor a package manager.
+      - name: Install git-lfs
+        env:
+          GIT_LFS_VERSION: "3.8.1"
+          GIT_LFS_SHA256_AMD64: e72cf723a4a660438862282e8aecf3885fc8123e88bfcad534cf6b941a354b75
+          GIT_LFS_SHA256_ARM64: 67895dd77b63329796bc5efdd47b57f218e1f7b98717ebaf936a8238dbcaec0f
+        run: |
+          set -e -x -o pipefail
+
+          case "$(uname -m)" in
+            x86_64) arch=amd64; sha256="$GIT_LFS_SHA256_AMD64" ;;
+            aarch64) arch=arm64; sha256="$GIT_LFS_SHA256_ARM64" ;;
+            *) echo "Unsupported architecture: $(uname -m)" >&2; exit 1 ;;
+          esac
+
+          archive="git-lfs-linux-${arch}-v${GIT_LFS_VERSION}.tar.gz"
+          install_dir="${RUNNER_TEMP}/git-lfs"
+          mkdir -p "$install_dir"
+
+          curl --fail --silent --show-error --location \
+            --output "${RUNNER_TEMP}/${archive}" \
+            "https://github.com/git-lfs/git-lfs/releases/download/v${GIT_LFS_VERSION}/${archive}"
+          echo "${sha256}  ${RUNNER_TEMP}/${archive}" | sha256sum --check --strict
+
+          tar --extract --gzip --file "${RUNNER_TEMP}/${archive}" \
+            --directory "$install_dir" --strip-components=1 "git-lfs-${GIT_LFS_VERSION}/git-lfs"
+
+          "$install_dir/git-lfs" version
+          echo "$install_dir" >> "$GITHUB_PATH"
+
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
