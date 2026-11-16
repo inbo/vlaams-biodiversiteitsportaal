@@ -1,17 +1,29 @@
 // Override the default repositories to make sure we only use Austraian Nexus as a last resort
+
+// ALA-published Grails plugins that only exist on the ALA Nexus. Keep them away from the other
+// mirrors: Gradle only falls through to the next repository on a 404, so a 429/502/timeout from
+// repo.grails.org or repo.osgeo.org would otherwise fail the build for artifacts they never host.
+def alaGrailsPlugins = [
+    "ala-admin-plugin",
+    "ala-auth",
+    "ala-bootstrap3",
+    "ala-bootstrap5",
+    "ala-ws-plugin",
+    "ala-ws-security-plugin",
+    "http-builder-helper",
+]
+
 allprojects {
   buildscript {
     repositories {
         mavenCentral().content {
-            excludeGroup("au.org.ala")
-            excludeGroup("au.org.ala.plugins")
+            excludeGroupByRegex("au\\.org\\.ala(\\..*)?")  // au.org.ala and all subgroups
             excludeModule("org.grails.plugins", "ala-admin-plugin")
         }
         maven {
             url "https://repo.grails.org/grails/core/"
             content {
-                excludeGroup("au.org.ala")
-                excludeGroup("au.org.ala.plugins")
+                excludeGroupByRegex("au\\.org\\.ala(\\..*)?")  // au.org.ala and all subgroups
                 excludeModule("org.grails.plugins", "ala-admin-plugin")
             }
         }
@@ -27,9 +39,8 @@ allprojects {
         maven {
             url "https://repo.grails.org/grails/core/"
             content {
-                excludeGroup("au.org.ala")
-                excludeGroup("au.org.ala.plugins")
-                excludeModule("org.grails.plugins", "ala-admin-plugin")
+                excludeGroupByRegex("au\\.org\\.ala(\\..*)?")  // au.org.ala and all subgroups
+                alaGrailsPlugins.each { excludeModule("org.grails.plugins", it) }
                 excludeModule("javax.media", "jai_core")
                 excludeModule("net.sf.json-lib", "json-lib")
             }
@@ -45,17 +56,16 @@ allprojects {
         maven {
             url "https://repo.osgeo.org/repository/release/"
             content {
-                excludeGroup("au.org.ala")
-                excludeGroup("au.org.ala.plugins")
-                excludeModule("org.grails.plugins", "ala-admin-plugin")
+                excludeGroupByRegex("au\\.org\\.ala(\\..*)?")  // au.org.ala and all subgroups
+                alaGrailsPlugins.each { excludeModule("org.grails.plugins", it) }
+                excludeModule("net.sf.json-lib", "json-lib")  // served by ALA Nexus
             }
         }
         maven {
             url "https://maven.geo-solutions.it/"
             content {
-                excludeGroup("au.org.ala")
-                excludeGroup("au.org.ala.plugins")
-                excludeModule("org.grails.plugins", "ala-admin-plugin")
+                excludeGroupByRegex("au\\.org\\.ala(\\..*)?")  // au.org.ala and all subgroups
+                alaGrailsPlugins.each { excludeModule("org.grails.plugins", it) }
             }
         }
         maven { url "https://nexus.ala.org.au/content/groups/public/" }
