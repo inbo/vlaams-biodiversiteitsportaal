@@ -94,6 +94,11 @@ jobs:
     runs-on: [self-hosted]
     needs: get-versions
     if: needs.get-versions.outputs.branding_version != ''
+    permissions:
+      id-token: write
+      contents: write
+      # @inbo/vbp-branding is installed from GitHub Packages
+      packages: read
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
@@ -102,12 +107,15 @@ jobs:
           node-version: 23
           cache: "npm"
           cache-dependency-path: branding/package-lock.json
+          registry-url: "https://npm.pkg.github.com"
+          scope: "@inbo"
 
       - name: Build branding website S3
         working-directory: ./branding
         env:
           VITE_APP_VERSION: ${{ needs.get-versions.outputs.branding_version }}
           SOURCE_DATE_EPOCH: ${{ env.TIMESTAMP }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -e -x -o pipefail
 

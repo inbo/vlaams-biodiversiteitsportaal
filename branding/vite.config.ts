@@ -34,10 +34,6 @@ export default {
                 banner: resolve(__dirname, "./src/banner.html"),
                 footer: resolve(__dirname, "./src/footer.html"),
                 settings: resolve(__dirname, "./src/settings.ts"),
-                "service-worker": resolve(
-                    __dirname,
-                    "./src/auth/service-worker.ts",
-                ),
                 "user-profile": resolve(__dirname, "./src/my-profile.html"),
                 bootstrap: resolve(__dirname, "./src/portal/bootstrap.scss"),
                 "bootstrap-theme": resolve(
@@ -85,10 +81,6 @@ export default {
             output: {
                 entryFileNames: (chunkInfo: PreRenderedChunk) => {
                     console.log("Chunk file name:", chunkInfo.name);
-                    if (chunkInfo.name === "service-worker") {
-                        return `[name].js`;
-                    }
-
                     return `js/[name].js`;
                 },
                 chunkFileNames: `js/[name].js`,
@@ -161,6 +153,15 @@ export default {
         // Copy JS libraries, cannot be bundled by Vite because they aren't ES modules
         viteStaticCopy({
             targets: [
+                // The auth service worker is shared with the React applications
+                // and comes prebuilt (classic script, firefox does not support
+                // module workers). It has to be served from the root to be
+                // allowed to control scope "/".
+                {
+                    src: "../node_modules/@inbo/vbp-branding/dist/service-worker.js",
+                    dest: ".",
+                    rename: { stripBase: true },
+                },
                 {
                     src: "../node_modules/jquery/dist/jquery.min.js",
                     dest: "js",

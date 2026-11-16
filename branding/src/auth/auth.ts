@@ -9,11 +9,13 @@ import {
 } from "oidc-client-ts";
 
 import Cookies from "js-cookie";
+// Shared with the React applications (lists-ui): there is one service worker
+// per origin, so all of them must register the same worker the same way
 import {
     AUTH_RENEW_REQUEST_EVENT,
+    AuthServiceWorker,
     reportAuthFailure,
-} from "./auth-events";
-import { AuthServiceWorker } from "./service-worker-registration";
+} from "@inbo/vbp-branding/auth";
 
 Log.setLogger(console);
 
@@ -25,7 +27,10 @@ Log.setLogger(console);
  * This logic is part of the ala-security project.
  */
 
-const authServiceWorker = new AuthServiceWorker();
+const authServiceWorker = new AuthServiceWorker(
+    "/service-worker.js",
+    settings.auth.ala.authCookieName,
+);
 export const userManagerPromise = initUserManager(authServiceWorker);
 
 /** Keycloak SSO idle timeout. Also the cookie's own Max-Age: the browser
