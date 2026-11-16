@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1.14.0
 ARG BUILDPLATFORM=linux/amd64
 # namematching-service (Lombok 1.18.10) does not build on JDK > 13; keep JDK 11
-FROM --platform=${BUILDPLATFORM} maven:3.9.16-amazoncorretto-11 AS builder
+FROM --platform=${BUILDPLATFORM} maven:3.9-amazoncorretto-25 AS builder
 
 RUN mkdir ~/.m2
 COPY settings.xml /root/.m2/settings.xml
