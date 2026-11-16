@@ -4,7 +4,7 @@ FROM --platform=${BUILDPLATFORM} custom-gradle-jdk17 AS builder
 
 # downloads-plugin
 ARG VERSION=develop-vbp
-ARG COMMIT=c9e980945a42762a809c83acbdb82318f1404a9b
+ARG COMMIT=9dbc49205051896645f0e115bd09488c7ce4f0c9
 
 ARG SOURCE=https://github.com/inbo/vbp-downloads-plugin.git
 
@@ -13,7 +13,7 @@ RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
 
 # biocache-hubs
 ARG VERSION=utm-grid-density
-ARG COMMIT=4d24cc89be89df8c2bc664b27fc0d5a9581c2111
+ARG COMMIT=5d939256080e05058e96be3bd6089966d0d7fa69
 
 ARG SOURCE=https://github.com/inbo/vbp-biocache-hubs.git
 LABEL ala.version=inbo-${COMMIT}

@@ -13,6 +13,15 @@ def alaGrailsPlugins = [
     "http-builder-helper",
 ]
 
+// Groups that are hosted on the OSGeo / GeoSolutions repositories (GeoTools, JAI, imageio-ext).
+def geoGroups = [
+    "org\\.geotools(\\..*)?",
+    "javax\\.media",
+    "it\\.geosolutions(\\..*)?",
+    "org\\.jaitools(\\..*)?",
+    "org\\.eclipse\\.imagen(\\..*)?",
+]
+
 allprojects {
   buildscript {
     repositories {
@@ -53,19 +62,19 @@ allprojects {
 //                 excludeModule("org.grails.plugins", "ala-admin-plugin")
 //             }
 //         }
+        // Geo mirrors: only consult them for the geo groups they exist for. Otherwise every lookup
+        // (and every version-range listing) goes through them, and a 502/timeout from either one
+        // fails the build even for artifacts they never host.
         maven {
             url "https://repo.osgeo.org/repository/release/"
             content {
-                excludeGroupByRegex("au\\.org\\.ala(\\..*)?")  // au.org.ala and all subgroups
-                alaGrailsPlugins.each { excludeModule("org.grails.plugins", it) }
-                excludeModule("net.sf.json-lib", "json-lib")  // served by ALA Nexus
+                geoGroups.each { includeGroupByRegex(it) }
             }
         }
         maven {
             url "https://maven.geo-solutions.it/"
             content {
-                excludeGroupByRegex("au\\.org\\.ala(\\..*)?")  // au.org.ala and all subgroups
-                alaGrailsPlugins.each { excludeModule("org.grails.plugins", it) }
+                geoGroups.each { includeGroupByRegex(it) }
             }
         }
         maven { url "https://nexus.ala.org.au/content/groups/public/" }
