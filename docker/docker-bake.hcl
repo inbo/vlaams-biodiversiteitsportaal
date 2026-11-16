@@ -133,7 +133,7 @@ target "collectory" {
 target "data-quality-filter-service" {
   context = "./data-quality-filter-service"
   contexts = {
-    "custom-gradle" = "target:custom-gradle-jdk11"
+    "custom-gradle" = "target:custom-gradle-jdk17"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-data-quality-filter-service:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-data-quality-filter-service:${TAG}"]
