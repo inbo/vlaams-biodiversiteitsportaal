@@ -1,0 +1,24 @@
+// Bootstrap 5 with the VBP house style, counterpart of ../../portal/bootstrap.scss
+@import "./variables";
+
+$primary: $inbo-primary;
+$success: #28a745;
+$info: $inbo-secondary;
+$warning: #ffc107;
+$danger: #dc3545;
+
+// Same base size, line height and text colour as the Bootstrap 3 bundle
+$font-size-base: 0.875rem; // $inbo-font-size-base (14px) with a 16px root
+$line-height-base: 1.428571429;
+$body-color: #333;
+
+$font-family-sans-serif: $inbo-font-sans;
+$font-family-monospace: $inbo-font-mono;
+$font-family-base: $inbo-font-base;
+
+$link-color: $inbo-link-color;
+$link-decoration: none;
+$link-hover-color: $inbo-link-hover-color;
+$link-hover-decoration: $inbo-link-hover-decoration;
+
+@import "bootstrap/scss/bootstrap";

@@ -1,0 +1,14 @@
+// VBP styles for the Bootstrap 5 bundle, counterpart of
+// ../../portal/vbp-style/vbp.scss
+@import "./variables";
+
+// The digitaal vlaanderen footer, with its rem sizes converted to px (see
+// bs5-bundle.ts). It has to come first, like in the Bootstrap 3 bundle where
+// the css import of ../../portal/vbp-style/footer.scss ends up at the top of
+// the stylesheet: its font faces are overridden by the ones in fonts.scss.
+@import "vbp-bs3-rem:portal/vbp-style/digitaal-vlaanderen";
+
+@import "../../portal/vbp-style/fonts.scss";
+@import "./banner";
+@import "../../portal/vbp-style/content.scss";
+@import "../../portal/vbp-style/footer-rules.scss";

@@ -12,6 +12,7 @@ import path, { basename, dirname, extname } from "node:path";
 import { createClient, defaultPlugins } from "@hey-api/openapi-ts";
 import type { PreRenderedChunk } from "rollup";
 import { generateNewsPartial } from "./template-news";
+import { buildBootstrap5Bundle } from "./bs5-bundle";
 
 const replacements = {
     loginStatus: "login-status-dependent",
@@ -291,6 +292,23 @@ export default {
                         path.resolve(__dirname, `dist/${dest}`),
                     );
                 }
+            },
+        },
+        // Header/footer bundle for services using the ala-bootstrap5 grails plugin,
+        // served from /bs5 next to the bootstrap 3 bundle at the root
+        {
+            name: "VbpBootstrap5Bundle",
+            enforce: "post",
+            async buildStart() {
+                for (const file of await fg.glob("./src/bs5/**/*")) {
+                    this.addWatchFile(resolve(__dirname, file));
+                }
+            },
+            async writeBundle() {
+                await buildBootstrap5Bundle({
+                    projectDir: __dirname,
+                    distDir: resolve(__dirname, "dist"),
+                });
             },
         },
     ],

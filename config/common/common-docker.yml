@@ -2,6 +2,8 @@ common:
   protocol: http
   domain: localhost
   homepage: ${common.protocol}://${common.domain}
+  # Header and footer: host.docker.internal resolves to the local nginx for both the services and the browser
+  brandingBaseURL: http://host.docker.internal
 
 logging:
   config: /config/common/logback-docker.xml
@@ -17,7 +19,3 @@ security:
     discoveryUri: http://host.docker.internal/mock-oauth2/.well-known/openid-configuration
   oidc:
     discoveryUri: http://host.docker.internal/mock-oauth2/.well-known/openid-configuration
-
-# Header and footer
-headerAndFooter:
-  baseURL: http://host.docker.internal

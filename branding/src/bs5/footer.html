@@ -1,0 +1,21 @@
+<!-- close content-wrapper from banner -->
+</div>
+</div>
+</div>
+{{> footer-content }}
+
+<!-- Bug modal section (bootstrap 5) -->
+<div class="modal fade" id="bug-modal" tabindex="-1" aria-labelledby="bug-modal-label" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bug-modal-header">
+                <h5 class="modal-title bug-modal-title" id="bug-modal-label" data-i18n="footer.bug-modal.title">
+                    Problemen melden op het VBP</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body bug-modal-content">
+{{> bug-modal-body }}
+            </div>
+        </div>
+    </div>
+</div>

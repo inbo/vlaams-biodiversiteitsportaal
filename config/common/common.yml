@@ -3,6 +3,10 @@ common:
   domain: localhost
   internalDomain: vbp.internal
   homepage: ${common.protocol}://${common.domain}
+  # Root url the branding (header/footer fragments and their assets) is fetched from, by the services and the browser.
+  # Environments override this key (see common-docker.yml) instead of headerAndFooter.baseURL,
+  # so services can derive their own headerAndFooter.baseURL from it (e.g. image-service uses the /bs5 bundle).
+  brandingBaseURL: ${common.protocol}://${common.domain}
   supportEmail: support.natuurdata@inbo.be
 
 # Common ala config values
@@ -11,7 +15,7 @@ ala:
 
 # Header and footer
 headerAndFooter:
-  baseURL: ${common.protocol}://${common.domain}
+  baseURL: ${common.brandingBaseURL}
   version: 2
 
 # Skin and layout

@@ -1,0 +1,48 @@
+#banner-search-container.ui-front>.ui-autocomplete {
+    position: absolute;
+    background-color: white;
+    padding: 0;
+    z-index: 999;
+    border: 2px solid $inbo-secondary;
+    border-top: 1px solid #ccc;
+    border-radius: 6px;
+    overflow: hidden;
+
+    &>li {
+        list-style: none;
+        padding: 0.5em 1em;
+    }
+}
+
+#index-search-container.ui-front>.ui-autocomplete {
+    position: absolute;
+    background-color: white;
+    padding: 0;
+    z-index: 999;
+    border: 2px solid $inbo-primary;
+    border-top: 1px solid #ccc;
+    border-radius: 6px;
+    overflow: hidden;
+
+    &>li {
+        list-style: none;
+        padding: 0.5em 1em;
+    }
+}
+
+.ui-menu-item-wrapper.ui-state-active {
+    background: #ddd !important;
+    color: black !important;
+    border: 0 !important;
+}
+
+#mante-container {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+
+    .alert {
+        margin: 0;
+        border-radius: 0;
+    }
+}

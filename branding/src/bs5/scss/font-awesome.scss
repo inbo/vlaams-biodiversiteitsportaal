@@ -1,0 +1,12 @@
+// Fonts are shared with the Bootstrap 3 bundle, which emits them to /fonts
+$fa-font-path: "/fonts";
+
+@import "@fortawesome/fontawesome-free/scss/fontawesome.scss";
+
+@import "@fortawesome/fontawesome-free/scss/solid.scss";
+@import "@fortawesome/fontawesome-free/scss/regular.scss";
+@import "@fortawesome/fontawesome-free/scss/brands.scss";
+
+// Font Awesome 4 names (fa-remove, fa-square-o, ...) are still used by the
+// ala-bootstrap5 based services
+@import "@fortawesome/fontawesome-free/scss/v4-shims.scss";

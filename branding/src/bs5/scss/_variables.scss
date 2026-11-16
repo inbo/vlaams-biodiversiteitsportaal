@@ -1,0 +1,10 @@
+// VBP house style variables for the Bootstrap 5 bundle.
+// Shared with the Bootstrap 3 bundle, apart from the sizes below.
+@import "../../portal/vbp-style/variables.scss";
+
+// Bootstrap 3 sets the root font size to 10px, Bootstrap 5 leaves it at the
+// browser default (16px). The shared variables are expressed in rem against
+// the Bootstrap 3 root, restate them in px so both bundles look the same.
+$inbo-content-max-width: 1700px;
+$inbo-banner-height: 60px;
+$inbo-footer-height: 120px;

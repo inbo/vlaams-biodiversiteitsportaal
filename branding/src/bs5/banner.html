@@ -1,0 +1,182 @@
+<!-- site-banner (bootstrap 5) -->
+<div class="banner">
+    <!-- Bootstrap 5 port of the navbar in src/partials/banner.html -->
+
+    <nav class="navbar navbar-expand-md">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">
+                    <img
+                        src="/images/logo.png"
+                        alt="Vlaams Biodiversiteitsportaal logo"
+                        class="vbp-logo"
+                    />
+                    <script>
+                        // Preload hover logo to prevent delay/popping effect
+                        const hoverLogo = new Image();
+                        hoverLogo.src = "/images/logo-hover.png";
+                    </script>
+                    <span class="vbp-name" data-i18n="general.orgfullname">
+                        Vlaams Biodiversiteitsportaal
+                    </span>
+                </a>
+                <a href="/biocache-hub/explore/your-area/">
+                    <button id="banner-my-location-button" type="button">
+                        <i class="fa-solid fa-location-crosshairs"></i>
+                    </button>
+                </a>
+                <button
+                    type="button"
+                    class="navbar-toggler collapsed"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#vbp-navbar-collapse"
+                    aria-controls="vbp-navbar-collapse"
+                    aria-expanded="false"
+                >
+                    <span class="visually-hidden">Toggle navigation</span>
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="vbp-navbar-collapse">
+                <ul class="navbar-nav navbar-left">
+                    <!-- Main buttons -->
+                    <li class="nav-item">
+                        <a
+                            class="nav-link"
+                            data-i18n="nav.species"
+                            href="/bie-hub/search?q=&fq=idxtype:%22TAXON%22&sortField=occurrenceCount"
+                            >Soorten</a
+                        >
+                    </li>
+                    <li class="nav-item">
+                        <a
+                            class="nav-link"
+                            data-i18n="nav.biocache"
+                            href="/biocache-hub/occurrences/search?q=&fq=cl102%3A%22Vlaams+Gewest%22"
+                            >Waarnemingen</a
+                        >
+                    </li>
+
+                    <!-- Places dropdown -->
+                    <li class="nav-item dropdown">
+                        <a
+                            href="#"
+                            class="nav-link dropdown-toggle"
+                            data-bs-toggle="dropdown"
+                            role="button"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                            ><span data-i18n="nav.places">Geografisch</span></a
+                        >
+{{> banner-menu-places }}
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav navbar-right">
+                    <li id="banner-search-container" class="nav-item ui-front">
+                        <input
+                            type="text"
+                            id="banner-search-input"
+                            class="banner-search-input ui-autocomplete-input"
+                            autocomplete="on"
+                            data-i18n="[placeholder]nav.banner-search-placeholder"
+                            placeholder="Zoek..."
+                        />
+                        <a
+                            id="banner-search"
+                            class="nav-link"
+                            role="button"
+                            href="#"
+                        >
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </a>
+                    </li>
+
+                    <!-- Help dropdown -->
+                    <li class="nav-item dropdown">
+                        <a
+                            href="#"
+                            class="nav-link"
+                            data-bs-toggle="dropdown"
+                            role="button"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                            ><i class="fa fa-circle-question help-icon"></i
+                        ></a>
+{{> banner-menu-help }}
+                    </li>
+
+                    <!-- Authentication -->
+                    <li
+                        id="dropdown-auth-menu"
+                        class="nav-item dropdown login-status-dependent"
+                    >
+                        <a
+                            href="#"
+                            class="nav-link"
+                            data-bs-toggle="dropdown"
+                            role="button"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                        >
+                            <i id="login-icon" class="fa"></i
+                        ></a>
+{{> banner-menu-auth }}
+                    </li>
+
+                    <!-- Language selection -->
+                    <li
+                        id="dropdown-lang"
+                        class="nav-item dropdown language-selection"
+                    >
+                        <a
+                            href="#"
+                            class="nav-link dropdown-toggle"
+                            data-bs-toggle="dropdown"
+                            role="button"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                            >NL</a
+                        >
+{{> banner-menu-lang }}
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    <script>
+        // The menu contents are shared with the bootstrap 3 banner and have
+        // no dropdown-item class, which bootstrap 5 needs for keyboard navigation
+        document
+            .querySelectorAll(".banner .dropdown-menu > li > a")
+            .forEach((item) => item.classList.add("dropdown-item"));
+    </script>
+</div>
+
+<script type="text/html" id="autoCompleteTemplate">
+    <li class="autocomplete-item striped">
+        <div class="content-spacing">
+            <div class="autocomplete-heading">
+                <% if (commonNameMatches.length > 0) { %>
+                <%=commonNameMatches[0]%> <% } else if
+                (scientificNameMatches.length > 0) { %>
+                <%=scientificNameMatches[0]%> <% } else { %>
+                <%=matchedNames[0]%> <% } %>
+            </div>
+        </div>
+    </li>
+</script>
+<!-- end site-banner -->
+
+<!-- maintenance -->
+<div id="mante-container" class="container"></div>
+<!-- end maintenance -->
+<!-- prettier-ignore -->
+<div class="vbp-content-area">
+  <div class="max-width">
+    <div class="vbp-content">

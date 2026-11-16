@@ -1,0 +1,20 @@
+// VBP customisations of the upstream image-service build.
+// Applied with `gradle --init-script` so no upstream build file has to be patched.
+
+allprojects {
+    // Upstream depends on the moving images-client-plugin 1.6-SNAPSHOT.
+    // Only resolve it from the copy kept in this repo (docker/image-service/maven-repo), never from a remote repository.
+    repositories {
+        exclusiveContent {
+            forRepository { maven { url '/opt/vbp/maven-repo' } }
+            filter { includeModule('au.org.ala.plugins.grails', 'images-client-plugin') }
+        }
+    }
+}
+
+gradle.projectsEvaluated {
+    // Upstream only ships the executable jar (bootJar, classifier 'exec') and disables bootWar.
+    // VBP needs the executable war (also deployed in the portal-full Tomcat).
+    // project() and named() both throw when upstream renames or removes them.
+    gradle.rootProject.project(':image-service').tasks.named('bootWar').configure { enabled = true }
+}
