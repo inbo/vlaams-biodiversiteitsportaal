@@ -1,8 +1,9 @@
 # syntax=docker/dockerfile:1.14.0
 ARG BUILDPLATFORM=linux/amd64
 # Single source of truth for what gets built and labelled (re-declared per stage)
-ARG SOURCE=https://github.com/inbo/vbp-data-quality-filter-service
-ARG COMMIT=92d2dedb165f5bc0746a257644cb7d7774497322
+# Stock ALA release 3.0.0 (no VBP fork)
+ARG SOURCE=https://github.com/AtlasOfLivingAustralia/data-quality-filter-service
+ARG COMMIT=53279ef22e005d44765f9efe768402b1c594f385
 
 FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
@@ -32,7 +33,7 @@ RUN set -e; \
 FROM amazoncorretto:17.0.21
 
 ARG COMMIT
-LABEL ala.version=inbo-${COMMIT}
+LABEL ala.version=${COMMIT}
 
 COPY --from=builder /opt/opentelemetry-agent /opt/opentelemetry-agent
 
