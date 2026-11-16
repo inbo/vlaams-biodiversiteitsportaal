@@ -287,6 +287,7 @@ environments:
     userdetails:
       url: https://natuurdata.dev.inbo.be/userdetails
     map:
+      defaultFacetMapColourBy: utm-grid-5000
       utmGrid:
         facet1km: cl10166
         facet5km: cl10165
