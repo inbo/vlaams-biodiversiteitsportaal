@@ -99,7 +99,8 @@ collectory:
 biocache:
   baseURL: "${common.protocol}://${common.domain}/biocache-hub"
   service:
-    baseURL: "${common.protocol}://${common.domain}/biocache-hub"
+    # Only used in the browser (occurrence lookup on the image details page): must be the public biocache-service JSON API
+    baseURL: "${common.protocol}://${common.domain}/biocache-service"
 bie:
   baseURL: "${common.protocol}://${common.domain}/bie-hub"
 
