@@ -8,8 +8,7 @@ security:
     secret: images-oidc-super-secret
   core:
     optionalFilterPattern: ["/", "/*"]
-    uriExclusionFilterPattern:
-      [
+    uriExclusionFilterPattern: [
         "^/ws/.*",
         "^/image-service/ws/.*",
         ".*proxyImage.*",
@@ -100,7 +99,7 @@ collectory:
 biocache:
   baseURL: "${common.protocol}://${common.domain}/biocache-hub"
   service:
-    baseURL: "http://biocache-service.${common.internalDomain}:8080/biocache-service"
+    baseURL: "${common.protocol}://${common.domain}/biocache-hub"
 bie:
   baseURL: "${common.protocol}://${common.domain}/bie-hub"
 
