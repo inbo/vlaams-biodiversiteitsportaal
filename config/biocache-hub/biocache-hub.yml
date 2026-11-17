@@ -243,12 +243,12 @@ skin:
 spatial:
   baseUrl: ${common.protocol}://${common.domain}/spatial-hub
 speciesList:
-  baseURL: ${common.protocol}://${common.domain}/species-list
+  baseURL: ${common.protocol}://${common.domain}/lists
 #  preferredListName: ALA Preferred Species Images
 #  preferredSpeciesListDruid: dr4778
-speciesListToolUrl: ${common.protocol}://${common.domain}/species-list/speciesListItem/list/
+speciesListToolUrl: ${common.protocol}://${common.domain}/lists/speciesListItem/list/
 specieslist:
-  baseUrl: ${common.protocol}://${common.domain}/species-list/ws
+  baseUrl: ${common.protocol}://${common.domain}/api/lists/ws
 #stateConservationListPath:
 #  AustralianCapitalTerritory: /speciesListItem/list/dr649
 #  NewSouthWales: /speciesListItem/list/dr650

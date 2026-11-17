@@ -59,8 +59,8 @@ wordPress:
   contentOnlyParams: ?content-only=1&categories=1
 lists:
   useListWs: false
-  service: http://species-list.${common.internalDomain}:8080/species-list/ws
-  ui: ${common.protocol}://${common.domain}/species-list
+  service: http://species-lists.${common.internalDomain}:8080/api/lists/ws
+  ui: ${common.protocol}://${common.domain}/lists
   conservation: /speciesList?isAuthoritative=eq:true&isThreatened=eq:true&max={0}&offset={1}
   search: /speciesList/?isAuthoritative=eq:true&max={0}&offset={1}
   show: /speciesListItem/list/{0}

@@ -58,7 +58,7 @@ imageService:
     maxAttempts: 5
     initialIntervalMillis: 1000
 speciesListService:
-  wsUrl: http://species-list.vbp.internal:8080/species-list/
+  wsUrl: http://species-lists.vbp.internal:8080/api/lists/
   timeoutSec: 900
   retryConfig:
     maxAttempts: 5

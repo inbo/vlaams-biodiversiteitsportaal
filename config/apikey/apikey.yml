@@ -38,7 +38,7 @@ emailSender: ${common.supportEmail}
 sightings.url: /mine
 spatial.url: ${common.protocol}://${common.domain}/spatial-hub?tool=log
 volunteer.url: /user/myStats
-lists.url: ${common.protocol}://${common.domain}/species-list/speciesList/list
+lists.url: ${common.protocol}://${common.domain}/lists/my-lists
 biocache.search.url: ${common.protocol}://${common.domain}/biocache-hub/occurrences/search
 alerts.url: ${common.protocol}://${common.domain}/alerts
 

@@ -155,7 +155,7 @@ skin:
     baseUrl: ${common.protocol}://${common.domain}/bie-hub/species/
 spatial:
   baseURL: ${common.protocol}://${common.domain}/spatial-hub
-speciesListToolUrl: ${common.protocol}://${common.domain}/species-list/speciesListItem/list/
+speciesListToolUrl: ${common.protocol}://${common.domain}/lists/speciesListItem/list/
 suitableFor: '[{"spListNational":"Species list national"}, {"spListState":
   "Species list state"}, {"spListGreaterThan1000": "Species list >1000km
   radius"}, {"spList100to1000": "Species list 100-1000km radius"},

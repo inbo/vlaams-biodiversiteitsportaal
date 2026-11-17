@@ -11,7 +11,7 @@ info:
     url: https://www.mozilla.org/en-US/MPL/1.1/
   version: 5.3.0-SNAPSHOT
 servers:
-- url: /species-list
+- url: /api/lists
 paths:
   /ws/createItem:
     post:

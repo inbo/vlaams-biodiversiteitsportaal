@@ -16,7 +16,7 @@ vermelden)
 - [data-quality-filter-service](/data-quality-filter-service/openapi)
 - [image-service](/image-service/openapi)
 - [spatial-service](/spatial-service/openapi)
-- [specieslist-service](/species-list/openapi)
+- [species-lists](/api/lists/)
 
 Er is ook een Namematching API service beschikbaar (op andere host):
 

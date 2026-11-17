@@ -316,7 +316,7 @@ export default {
     server: {
         sourcemapIgnoreList: false, // Include all files in source maps
         proxy: {
-            "^/(species-list|image-service)/": {
+            "^/(api/lists|lists|image-service)/": {
                 target: "https://natuurdata.dev.inbo.be",
                 changeOrigin: true,
             },

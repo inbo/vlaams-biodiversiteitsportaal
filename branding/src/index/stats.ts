@@ -27,7 +27,7 @@ async function loadStats(): Promise<void> {
     setCounter("stats_datasets", dataResourceCountJson.total || 0);
   });
 
-  fetch(`/species-list/ws/speciesList?max=0`).then(async (response) => {
+  fetch(`/api/lists/ws/speciesList?max=1`).then(async (response) => {
     const listCountJson = await response.json();
     setCounter("stats_lists", listCountJson.listCount || 0);
   });

@@ -4,7 +4,8 @@ User-agent: Bingbot
 User-agent: DuckDuckBot
 Crawl-delay: 60
 Disallow: /bie-hub/externalSite/
-Disallow: /species-list/speciesListItem/
+Disallow: /lists/list/
+Disallow: /lists/speciesListItem/
 Allow: /index.html
 Allow: /favicon.ico
 Allow: /$
@@ -12,7 +13,7 @@ Allow: /pages/
 Allow: /bie-hub/species/
 Allow: /collectory/datasets
 Allow: /collectory/public/showDataResource/
-Allow: /species-list/public/speciesLists
+Allow: /lists/$
 Disallow: /
 
 # Everyone else: nothing

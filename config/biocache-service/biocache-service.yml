@@ -150,7 +150,7 @@ layers:
     url: ${common.protocol}://${common.domain}/spatial-service
 list:
   tool:
-    url: ${common.protocol}://${common.domain}/species-list
+    url: ${common.protocol}://${common.domain}/api/lists
 media:
   dir: /data/biocache-media/
   url: ${common.protocol}://${common.domain}/image-service

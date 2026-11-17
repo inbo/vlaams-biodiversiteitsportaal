@@ -7,7 +7,7 @@ import { client as imageServiceClient } from "../common/clients/.generated/image
 import { getImageInfo } from "../common/clients/.generated/image-service/sdk.gen";
 
 speciesListClient.setConfig({
-    baseUrl: "/species-list",
+    baseUrl: "/api/lists",
 });
 
 imageServiceClient.setConfig({

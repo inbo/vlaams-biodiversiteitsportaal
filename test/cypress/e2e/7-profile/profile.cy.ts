@@ -50,8 +50,8 @@ describe("User profile - Authenticated", () => {
 
   it("Show working species list link", () => {
     cy.get("#profile-overview").find("#my-profile-species-lists").click();
-    cy.url().should("include", "/species-list/speciesList/list");
-    cy.get("h1").contains("Mijn soortenlijsten").should("be.visible");
+    cy.url().should("include", "/lists/my-lists");
+    cy.get("h3").contains("Mijn Lijsten").should("be.visible");
   });
 
   it("Show working annotations link", () => {
