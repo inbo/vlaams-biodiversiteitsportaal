@@ -312,7 +312,7 @@ environments:
             facet: cl10531
             wfsLayer: ALA:utm1_vl_wgs84
             maxFeatures: 15000
-            minZoom: 11
+            minZoom: 12
           - id: utm-grid-5000
             facet: cl200
             wfsLayer: ALA:utm5
@@ -328,7 +328,7 @@ environments:
             facet: cl10166
             wfsLayer: ALA:utm1_vl_wgs84
             maxFeatures: 15000
-            minZoom: 11
+            minZoom: 12
           - id: utm-grid-5000
             facet: cl10165
             wfsLayer: ALA:utm5_vl_wgs84
