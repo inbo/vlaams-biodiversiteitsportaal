@@ -59,7 +59,11 @@ geoserver:
 biocacheService:
   baseURL: ${common.protocol}://${common.domain}/biocache-service
 speciesList:
-  baseURL: ${common.protocol}://${common.domain}/species-list
+  # UI links (/speciesListItem/list/{dr})
+  baseURL: ${common.protocol}://${common.domain}/lists
+speciesListService:
+  # API calls (/ws/speciesList); requires vbp-regions with speciesListService.baseURL support
+  baseURL: ${common.protocol}://${common.domain}/api/lists
 
 map:
   minLat: 50.5

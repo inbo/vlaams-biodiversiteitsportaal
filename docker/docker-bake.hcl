@@ -70,7 +70,7 @@ target "portal-full" {
 target "alerts" {
   context = "./alerts"
   contexts = {
-    "custom-gradle" = "target:custom-gradle-jdk11"
+    "custom-gradle" = "target:custom-gradle-jdk21"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-alerts:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-alerts:${TAG}"]

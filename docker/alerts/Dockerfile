@@ -5,16 +5,14 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 #ARG VERSION=4.2.1
 #ARG SOURCE=https://github.com/AtlasOfLivingAustralia/alerts.git
 
-ARG VERSION=develop-vbp
-ARG COMMIT=aa46bddabbda1e06e9512a1c6b4509806bcf3ed3
+ARG VERSION=upgrade-6.3.1
+ARG COMMIT=e1b373ecbc418e9837c4022ba087385a19796d93
 ARG SOURCE=https://github.com/inbo/vbp-alerts.git
 
 LABEL ala.version=inbo-${COMMIT}
 
 WORKDIR /project
 RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
-
-COPY resources.xml ./grails-app/conf/spring/resources.xml
 
 RUN --mount=type=cache,target=/gradle-cache,ro \
     gradle \
@@ -26,7 +24,7 @@ RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
     rsync -a /home/gradle/.gradle/caches/modules-2 /gradle-cache \
     && rm /gradle-cache/modules-2/*.lock && rm /gradle-cache/modules-2/gc.properties
 
-FROM amazoncorretto:11.0.32
+FROM amazoncorretto:21.0.13-al2023-headless
 
 COPY --from=builder /opt/opentelemetry-agent /opt/opentelemetry-agent
 
@@ -36,9 +34,9 @@ ENV SPRING_CONFIG_ADDITIONAL-LOCATION="file:/config/common/common.yml,file:/conf
 RUN mkdir -p /opt/atlas/i18n \
   && ln -s /config/alerts/i18n/crowdin /opt/atlas/i18n/alerts \
   && mkdir -p /var/opt/atlas/i18n \
-  && ln -s /config/config/alerts/i18n/override /var/opt/atlas/i18n/alerts
+  && ln -s /config/alerts/i18n/override /var/opt/atlas/i18n/alerts
 
-ARG VERSION=4.4.0-SNAPSHOT
+ARG VERSION=6.3.1
 LABEL ala.version=${VERSION}
 
 COPY --from=builder /project/build/libs/alerts-${VERSION}.war /alerts.war
@@ -53,7 +51,7 @@ RUN chown 1000:1000 /data
 VOLUME /data
 
 RUN mkdir /catalina
-RUN chown 1000:1000 /data
+RUN chown 1000:1000 /catalina
 VOLUME /catalina
 ENV CATALINA_BASE=/catalina
 

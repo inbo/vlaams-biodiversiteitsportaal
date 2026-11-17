@@ -88,13 +88,15 @@ collectory:
 collectoryService:
   baseURL: ${common.protocol}://${common.domain}/collectory
 speciesList:
-  baseURL: ${common.protocol}://${common.domain}/species-list
+  # UI links (/speciesListItem/list/{dr}); also used by the images-client-plugin preferred-image check (/ws/species?guid=&dr=)
+  baseURL: ${common.protocol}://${common.domain}/lists
   preferredSpeciesListDruid: dr152
   preferredListName: Preferred Image List
   apiKey: 081489d3-e581-4dad-8f37-b9331bcf04a8
-  wsURL: ${common.protocol}://${common.domain}/species-list
+  wsURL: ${common.protocol}://${common.domain}/api/lists
 speciesListService:
-  baseURL: ${common.protocol}://${common.domain}/species-list
+  # API calls (/ws/species/{guid})
+  baseURL: ${common.protocol}://${common.domain}/api/lists
 alerts:
   baseUrl: ${common.protocol}://${common.domain}/alerts
 regions:

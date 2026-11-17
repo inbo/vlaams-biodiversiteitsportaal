@@ -44,6 +44,16 @@ security:
 skin:
   layout: "ala-main"
   orgSupportEmail: ${common.supportEmail}
+
+# alerts 6.x uses the ala-bootstrap5 plugin, so it needs the Bootstrap 5 build of the VBP header/footer
+# (same setup as image-service).
+headerAndFooter:
+  baseURL: "${common.brandingBaseURL}/bs5"
+  version: 2
+  useMustache: true
+  excludeBootstrapCss: true
+  excludeAlaStylesCss: true
+  excludeBootstrapJs: true
 privacyPolicy: "${common.protocol}://${common.domain}/terms-of-use/privacy-policy/"
 siteDefaultLanguage: "nl"
 
@@ -84,6 +94,8 @@ useBlogsAlerts: false
 useCitizenScienceAlerts: true
 biosecurity:
   cronExpression: "0 30 9 ? * WED"
+  # read lga from the layer (moved from biosecurity.csv.lga in 6.x)
+  lga: LGA2023
   query:
     template:
       authoritativeList: /occurrences/search?q=species_list_uid:___LISTIDPARAM___&fq=decade:2020&fq=country:Australia&fq=first_loaded_date:[___DATEPARAM___%20TO%20*]&fq=occurrence_date:[___LASTYEARPARAM___%20TO%20*]&sort=first_loaded_date&dir=desc&disableAllQualityFilters=true
@@ -98,8 +110,6 @@ biosecurity:
     s3:
       enabled: false
       bucket: alerts
-    # read lga from the layer
-    lga: LGA2023
 
   legacy:
     aus: cl927:*
@@ -118,4 +128,13 @@ biosecurity:
     firstLoadedDateAge: 8
 
 dataSource:
-  url: jdbc:mysql://alerts:my-super-secret-password@mysql/alerts
+  url: jdbc:mysql://mysql/alerts
+  # 6.x ships defaults for username/password (alerts_user), which override credentials in the URL
+  username: alerts
+  password: my-super-secret-password
+
+spring:
+  liquibase:
+    # Upstream 6.x stopped using Hibernate dbCreate: update; Liquibase creates the new tables
+    # (QRTZ_*, download_token, monitoring_team) and notification.enabled. Changesets skip existing tables.
+    enabled: true
