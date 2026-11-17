@@ -30,7 +30,7 @@ RUN set -e; \
     [ "$(echo "${wars}" | grep -c .)" -eq 1 ] || { echo "Expected exactly one bootWar, found: ${wars}" >&2; ls -la build/libs >&2; exit 1; }; \
     cp ${wars} /data-quality-filter-service.war
 
-FROM amazoncorretto:17.0.21
+FROM amazoncorretto:17.0.21-al2023-headless
 
 ARG COMMIT
 LABEL ala.version=${COMMIT}
