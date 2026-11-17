@@ -121,14 +121,8 @@ services:
     healthcheck:
       test: mysqladmin ping -h localhost
 
-  mysql-logger-init:
-    image: mysql
-    volumes:
-      - ../config/logger:/config/logger:ro
-    command: bash -c "cat /config/logger/db-init/*.sql | mysql --host=mysql --user=logger --password=my-super-secret-password --database logger"
-    depends_on:
-      mysql:
-        condition: service_healthy
+  # No logger schema init here: since logger 4.7.0 its liquibase changelog creates the schema, seed data,
+  # summary stored procedures and the hourly summary event on startup (config/logger/db-init is no longer used locally).
 
   cassandradb:
     image: cassandra:3

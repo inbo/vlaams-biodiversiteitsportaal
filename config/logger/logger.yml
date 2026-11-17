@@ -18,3 +18,17 @@ grails:
 
 dataSource:
   url: jdbc:mysql://logger:my-super-secret-password@mysql:3306/logger?autoReconnect=true&connectTimeout=0&useUnicode=true&characterEncoding=UTF-8&allowPublicKeyRetrieval=true&useSSL=False&serverTimezone=Europe/Paris
+
+# logger uses the ala-bootstrap5 plugin since 4.7.0, so it needs the Bootstrap 5 build of the VBP header/footer
+# (same setup as image-service). Depends on the branding bundle served under /bs5 of the portal root, which has to
+# provide assets.mustache, head.mustache, banner.mustache and footer.mustache (+ the css/js they reference).
+headerAndFooter:
+  baseURL: "${common.brandingBaseURL}/bs5"
+  version: 2
+  # Fetch <baseURL>/<fragment>.mustache; bootstrap/jquery css+js are loaded through assets.mustache,
+  # so the layout does not add its own <baseURL>/css|js/... links (plugin defaults, set explicitly).
+  useMustache: true
+  excludeBootstrapCss: true
+  excludeAlaStylesCss: true
+  excludeBootstrapJs: true
+  excludeApplicationJs: true

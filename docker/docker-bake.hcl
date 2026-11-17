@@ -151,7 +151,7 @@ target "image-service" {
 target "logger" {
   context = "./logger"
   contexts = {
-    "custom-gradle" = "target:custom-gradle-jdk11"
+    "custom-gradle" = "target:custom-gradle-jdk17"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-logger:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-logger:${TAG}"]
