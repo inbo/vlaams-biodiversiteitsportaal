@@ -22,10 +22,13 @@ RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
 
 COPY resources.xml ./grails-app/conf/spring/resources.xml
 
+# Grails 6: bootWar does not depend on compileGroovyPages, so build it explicitly
+# and fail if the views are missing (otherwise every page fails with "Could not resolve view")
 RUN --mount=type=cache,target=/gradle-cache,ro \
   gradle \
-  build assemble \
-  -x test -x integrationTest
+  compileGroovyPages bootWar \
+  -x test -x integrationTest \
+  && unzip -l build/libs/spatial-hub-*.war | grep -q 'gsp_spatial_hub_portalindex_gsp'
 
 # Copy dependencies to shared read-only cache
 RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
