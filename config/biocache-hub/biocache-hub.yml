@@ -278,6 +278,7 @@ environments:
       utmGrid:
         facet1km: cl10531
         facet5km: cl200
+        layer5km: ALA:utm5
     # userdetails url is not templated correctly and does not allow using references to common.protocol and common.domain
     userdetails:
       url: https://natuurdata.inbo.be/userdetails
@@ -296,6 +297,7 @@ environments:
       utmGrid:
         facet1km: cl10166
         facet5km: cl10165
+        layer5km: ALA:utm5_vl_wgs84
     regionVlaanderen:
       query: cl100:"Vlaams Gewest"
   local:
