@@ -7,7 +7,7 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 #LABEL ala.version=${VERSION}
 
 ARG VERSION=develop-vbp
-ARG COMMIT=58eb078aaa12edbe845a9a9f6087d5d619096e27
+ARG COMMIT=3e7905ff5b77eeb88945375e8d1bfb4f01b22e75
 ARG SOURCE=https://github.com/inbo/vbp-spatial-hub
 LABEL ala.version=inbo-${VERSION}
 
@@ -32,7 +32,7 @@ RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
   rsync -a /home/gradle/.gradle/caches/modules-2 /gradle-cache \
   && rm /gradle-cache/modules-2/*.lock && rm /gradle-cache/modules-2/gc.properties
 
-FROM amazoncorretto:11.0.32
+FROM amazoncorretto:17.0.21
 
 COPY --from=builder /opt/opentelemetry-agent /opt/opentelemetry-agent
 
@@ -44,11 +44,11 @@ RUN mkdir -p /opt/atlas/i18n \
   && mkdir -p /var/opt/atlas/i18n \
   && ln -s /config/spatial-hub/i18n/override /var/opt/atlas/i18n/spatial-hub
 
-ARG VERSION=2.2.0-SNAPSHOT
-ARG COMMIT=58eb078aaa12edbe845a9a9f6087d5d619096e27
+ARG VERSION=3.2.0-SNAPSHOT
+ARG COMMIT=3e7905ff5b77eeb88945375e8d1bfb4f01b22e75
 LABEL ala.version=inbo-${VERSION}
 
-COPY --from=builder /project/build/libs/project-${VERSION}.war /spatial-hub.war
+COPY --from=builder /project/build/libs/spatial-hub-${VERSION}.war /spatial-hub.war
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/spatial-hub/actuator/health || exit 1
 

@@ -178,7 +178,7 @@ target "regions" {
 target "spatial-hub" {
   context = "./spatial-hub"
   contexts = {
-    "custom-gradle" = "target:custom-gradle-jdk11"
+    "custom-gradle" = "target:custom-gradle-jdk17"
   }
   cache-from = ["${DOCKER_REPO}/inbo-vbp-spatial-hub:${CACHE_TAG}"]
   tags = ["${DOCKER_REPO}/inbo-vbp-spatial-hub:${TAG}"]

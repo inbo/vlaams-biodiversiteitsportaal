@@ -12,8 +12,8 @@ WORKDIR /project/downloads-plugin
 RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
 
 # biocache-hubs
-ARG VERSION=utm-grid-density
-ARG COMMIT=5d939256080e05058e96be3bd6089966d0d7fa69
+ARG VERSION=develop-vbp
+ARG COMMIT=4e05cdba9301be9c63f03ec2646c85a335c157fc
 
 ARG SOURCE=https://github.com/inbo/vbp-biocache-hubs.git
 LABEL ala.version=inbo-${COMMIT}
