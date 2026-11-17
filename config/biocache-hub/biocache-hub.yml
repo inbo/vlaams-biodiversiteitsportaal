@@ -331,7 +331,7 @@ environments:
             minZoom: 11
           - id: utm-grid-5000
             facet: cl10165
-            wfsLayer: ALA:utm5
+            wfsLayer: ALA:utm5_vl_wgs84
           - id: ifbl-uur
             facet: cl10036
             wfsLayer: ALA:ifbluur_vlgrens_wgs84
