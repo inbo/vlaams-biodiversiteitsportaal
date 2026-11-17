@@ -369,6 +369,91 @@ describe("PictureCarousel", () => {
         });
     });
 
+    it("should not call image-service when imageId is empty and use the external imageUrl", async () => {
+        const carousel = new PictureCarousel(
+            "picture-carousel",
+            "listId",
+            5000,
+        );
+        getSpeciesListSItemDetailsMock.mockResolvedValue({
+            data: [{
+                lsid: "123",
+                commonName: "Test Species",
+                scientificName: "Testus species",
+                kvpValues: [
+                    { key: "imageId", value: "" },
+                    { key: "alignment", value: "50% 30%" },
+                    { key: "imageUrl", value: "some-external-image-url" },
+                    { key: "attributionText", value: "Photo by someone" },
+                    { key: "attributionLink", value: "http://link.to/source" },
+                ],
+            }],
+        });
+        const spyOnPreloadImage = vi.spyOn(carousel as any, "preloadImage")
+            .mockResolvedValue(undefined);
+
+        await carousel.render();
+
+        expect(getImageInfo).not.toHaveBeenCalled();
+
+        await vi.advanceTimersByTimeAsync(5_000);
+
+        expect(spyOnPreloadImage).toHaveBeenCalledWith(
+            "some-external-image-url",
+        );
+    });
+
+    it("should keep the imageId picture and its attribution when imageUrl and attribution columns are empty", async () => {
+        const carousel = new PictureCarousel(
+            "picture-carousel",
+            "listId",
+            5000,
+        );
+        getSpeciesListSItemDetailsMock.mockResolvedValue({
+            data: [{
+                lsid: "123",
+                commonName: "Test Species",
+                scientificName: "Testus species",
+                kvpValues: [
+                    { key: "imageId", value: "some-image-id" },
+                    { key: "alignment", value: "50% 20%" },
+                    { key: "imageUrl", value: "" },
+                    { key: "attributionText", value: "" },
+                    { key: "attributionLink", value: "" },
+                ],
+            }],
+        });
+        getImageInfoMock.mockResolvedValue({
+            data: {
+                rightsHolder: "Some Right Holder",
+                publisher: "some-publisher",
+                recognisedLicence: { acronym: "some-license" },
+            } as unknown as string,
+        });
+        const spyOnPreloadImage = vi.spyOn(carousel as any, "preloadImage")
+            .mockResolvedValue(undefined);
+
+        await carousel.render();
+
+        expect(document.querySelector(".vbp-picture-carousel-button-next")
+            ?.classList).not.toContain("hidden");
+
+        await vi.advanceTimersByTimeAsync(5_000);
+
+        expect(spyOnPreloadImage).toHaveBeenCalledWith(
+            "/image-service/image/some-image-id/original",
+        );
+        const attributionElement = document.querySelector(
+            ".vbp-picture-carousel-picture[data-carousel-active] .vbp-picture-carousel-attribution",
+        )! as HTMLAnchorElement;
+        expect(attributionElement.innerHTML).toBe(
+            "Photo by Some Right Holder on some-publisher, licensed under some-license",
+        );
+        expect(attributionElement.href).toBe(
+            "http://localhost:3000/image-service/image/some-image-id",
+        );
+    });
+
     it("should display empty attribution when image-service return empty info", async () => {
         const carousel = new PictureCarousel(
             "picture-carousel",

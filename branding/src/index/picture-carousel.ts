@@ -61,6 +61,9 @@ async function fetchPictureList(listId: string): Promise<Picture[]> {
                 };
                 // Parse KVP values
                 for (const { key, value } of item.kvpValues || []) {
+                    // Lists contain every KVP column on every row, so unused
+                    // columns arrive as empty strings: ignore them.
+                    if (!value?.trim()) continue;
                     switch (key?.toLowerCase()) {
                         case "imageurl":
                             result.url = value;
