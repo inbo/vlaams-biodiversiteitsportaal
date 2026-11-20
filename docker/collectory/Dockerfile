@@ -8,9 +8,9 @@ WORKDIR /project
 # ARG VERSION=5.1.1
 # ARG SOURCE=https://github.com/AtlasOfLivingAustralia/collectory.git
 
-ARG VERSION=use-occurrenceId-for-unique-term
-ARG SOURCE=https://github.com/inbo/vbp-collectory
-ARG COMMIT=8d3462567bf4e8d501bc48af1e69b4e49a2e3c06
+ARG VERSION=feature/gbif-automatic-sync
+ARG SOURCE=https://github.com/Malo-Mignard/vbp-collectory.git
+ARG COMMIT=9f4d0c51e8b44f75fd60b57d539a1342243599b5
 LABEL ala.version=inbo-${COMMIT}
 
 RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
@@ -42,7 +42,7 @@ RUN mkdir -p /opt/atlas/i18n \
   && ln -s /config/collectory/i18n/override /var/opt/atlas/i18n/collectory-plugin
 
 ARG VERSION=5.2.0-SNAPSHOT
-ARG COMMIT=8d3462567bf4e8d501bc48af1e69b4e49a2e3c06
+ARG COMMIT=9f4d0c51e8b44f75fd60b57d539a1342243599b5
 LABEL ala.version=inbo-${COMMIT}
 
 COPY --from=builder /project/build/libs/collectory-${VERSION}.war /collectory.war
