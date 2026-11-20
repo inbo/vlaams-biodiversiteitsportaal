@@ -24,7 +24,7 @@ RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
 
 RUN ls -la /project/build/libs/
 
-FROM amazoncorretto:17.0.20-al2
+FROM amazoncorretto:17.0.21-al2023-headless
 
 COPY --from=builder /opt/opentelemetry-agent /opt/opentelemetry-agent
 
@@ -43,24 +43,13 @@ ARG PIPELINES_VERSION=2.19.0-SNAPSHOT
 LABEL ala.version=inbo-${COMMIT}
 LABEL pipelines.version=${PIPELINES_VERSION}
 
-# trivy:ignore:DS-0015  # using BuildKit yum cache
-RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
-  yum -y install \
-  libtiff \
-  libpng \
-  gettext \
+# GDAL/PROJ from the Amazon Linux 2023 repositories (gdal310 pulls in proj)
+# trivy:ignore:DS-0015  # using BuildKit dnf cache
+RUN --mount=type=cache,target=/var/cache/dnf,sharing=locked \
+  dnf -y install \
+  gdal310 \
   unzip \
-  sqlite \
   shadow-utils
-
-# Install GDAL using self built RPMs (check rpm folder for script used to generate them)
-ARG PROJ_VERSION=6.1.1
-ARG GDAL_VERSION=3.2.1
-ARG TARGETARCH
-ARG CACHE_BUSTING=1
-# trivy:ignore:DS-0015  # using BuildKit yum cache
-RUN yum -y install https://build.natuurdata.dev.inbo.be/spatial-service/gdal/proj-${PROJ_VERSION}-1.amzn2.$TARGETARCH.rpm &&\
-  yum -y install https://build.natuurdata.dev.inbo.be/spatial-service/gdal/gdal-${GDAL_VERSION}-1.amzn2.$TARGETARCH.rpm
 
 RUN mkdir -p /opt/vbp/pipelines/shp && \
   curl https://build.natuurdata.dev.inbo.be/spatial-service/pipelines-shapefiles.zip -o /opt/vbp/pipelines/shp/pipelines-shapefiles.zip && \

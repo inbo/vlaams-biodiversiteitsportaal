@@ -7,8 +7,8 @@ WORKDIR /project
 # ARG VERSION=4.1.0
 # ARG SOURCE=https://github.com/AtlasOfLivingAustralia/ala-bie-hub.git
 
-ARG VERSION=develop-vbp
-ARG COMMIT=a21213b58e0abedd2d4d637de518827520ce0a46
+ARG VERSION=upgrade-develop
+ARG COMMIT=9a282629b02b3ee0f23cdf60be0a21d0e748051a
 ARG SOURCE=https://github.com/inbo/vbp-ala-bie-hub.git
 LABEL ala.version=inbo-${COMMIT}
 
@@ -25,7 +25,7 @@ RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
   rsync -a /home/gradle/.gradle/caches/modules-2 /gradle-cache \
   && rm /gradle-cache/modules-2/*.lock && rm /gradle-cache/modules-2/gc.properties
 
-FROM amazoncorretto:11.0.32
+FROM amazoncorretto:21.0.13-al2023-headless
 
 COPY --from=builder /opt/opentelemetry-agent /opt/opentelemetry-agent
 
@@ -38,12 +38,11 @@ RUN mkdir -p /opt/atlas/i18n \
   && ln -s /config/bie-hub/i18n/override /var/opt/atlas/i18n/bie-plugin
 
 ARG VERSION=4.2.0-SNAPSHOT
-ARG COMMIT=a21213b58e0abedd2d4d637de518827520ce0a46
-LABEL ala.version=inbo-${COMMIT}
+LABEL ala.version=${VERSION}
 
 COPY --from=builder /project/build/libs/ala-bie-hub-${VERSION}.war /bie-hub.war
 
-HEALTHCHECK CMD curl --fail --silent http://localhost:8080/apikey/actuator/health || exit 1
+HEALTHCHECK CMD curl --fail --silent http://localhost:8080/bie-hub/actuator/health || exit 1
 
 ENTRYPOINT ["sh", "-c", "java ${JAVA_OPTS} -jar /bie-hub.war"]
 
@@ -56,7 +55,7 @@ RUN chown 1000:1000 /cache
 VOLUME /cache
 
 RUN mkdir /catalina
-RUN chown 1000:1000 /data
+RUN chown 1000:1000 /catalina
 VOLUME /catalina
 ENV CATALINA_BASE=/catalina
 

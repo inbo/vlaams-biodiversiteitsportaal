@@ -56,6 +56,12 @@ wikipedia:
   url: https://nl.wikipedia.org/api/rest_v1/page/html/
   webportalUrl: https://nl.wikipedia.org/wiki/
   lang: nl
+  # Upstream defaults only recognise English pages; nl.wikipedia uses "Taxobox", "Taxobox zoogdier", ... and "Rijk"
+  snippetPattern: (?i)soort|geslacht|familie|orde|klasse|stam|rijk|wetenschappelijke naam
+  taxonTemplatePattern: '"wt":"Taxobox'
+  kingdomLabel: rijk
+  # nl titles articles by common name; the scientific-name page redirects there, so try it before search
+  exactPageFirst: true
 
 ecopedia:
   url: https://www.ecopedia.be

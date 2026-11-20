@@ -29,7 +29,7 @@ RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
   rsync -a /home/gradle/.gradle/caches/modules-2 /gradle-cache \
   && rm /gradle-cache/modules-2/*.lock && rm /gradle-cache/modules-2/gc.properties
 
-FROM amazoncorretto:11.0.32
+FROM amazoncorretto:21.0.13-al2023-headless
 
 COPY --from=builder /opt/opentelemetry-agent /opt/opentelemetry-agent
 

@@ -22,7 +22,7 @@ RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
 
 RUN ls -la /project/build/libs/
 
-FROM amazoncorretto:17.0.21
+FROM amazoncorretto:21.0.13-al2023-headless
 
 COPY --from=builder /opt/opentelemetry-agent /opt/opentelemetry-agent
 
