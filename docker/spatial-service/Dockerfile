@@ -1,13 +1,10 @@
 # syntax=docker/dockerfile:1.14.0
 FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
-# ARG VERSION=2.1.5
-# ARG SOURCE=https://github.com/AtlasOfLivingAustralia/spatial-service.git
-
-ARG VERSION=develop-vbp
-ARG COMMIT=0492852942ce04c101cab89bb5b2e2ae0ade0be2
+ARG VERSION=upgrade-develop
+ARG COMMIT=3f31fd669106e0745901d7d79654a378585b98d8
 ARG SOURCE=https://github.com/inbo/vbp-spatial-service.git
-LABEL ala.version=inbo-${VERSION}
+LABEL ala.version=inbo-${COMMIT}
 
 WORKDIR /project
 RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
@@ -24,7 +21,7 @@ RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
 
 RUN ls -la /project/build/libs/
 
-FROM amazoncorretto:17.0.21-al2023-headless
+FROM amazoncorretto:21.0.13-al2023-headless
 
 COPY --from=builder /opt/opentelemetry-agent /opt/opentelemetry-agent
 
@@ -36,9 +33,8 @@ RUN mkdir -p /opt/atlas/i18n \
   && mkdir -p /var/opt/atlas/i18n \
   && ln -s /config/spatial-service/i18n/override /var/opt/atlas/i18n/spatial-service
 
-# ARG VERSION=2.1.5
-ARG VERSION=3.1.0-SNAPSHOT
-ARG COMMIT=0492852942ce04c101cab89bb5b2e2ae0ade0be2
+ARG VERSION=3.2.0-SNAPSHOT
+ARG COMMIT=3f31fd669106e0745901d7d79654a378585b98d8
 ARG PIPELINES_VERSION=2.19.0-SNAPSHOT
 LABEL ala.version=inbo-${COMMIT}
 LABEL pipelines.version=${PIPELINES_VERSION}
@@ -52,13 +48,13 @@ RUN --mount=type=cache,target=/var/cache/dnf,sharing=locked \
   shadow-utils
 
 RUN mkdir -p /opt/vbp/pipelines/shp && \
-  curl https://build.natuurdata.dev.inbo.be/spatial-service/pipelines-shapefiles.zip -o /opt/vbp/pipelines/shp/pipelines-shapefiles.zip && \
+  curl -f https://build.natuurdata.dev.inbo.be/spatial-service/pipelines-shapefiles.zip -o /opt/vbp/pipelines/shp/pipelines-shapefiles.zip && \
   unzip /opt/vbp/pipelines/shp/pipelines-shapefiles.zip -d /opt/vbp/pipelines/shp && \
   rm /opt/vbp/pipelines/shp/pipelines-shapefiles.zip
 
 RUN mkdir -p /opt/vbp/spatial-service/libs \
-  && curl -L https://nexus.ala.org.au/repository/releases/au/org/ala/spatial/ala-aloc/1.0/ala-aloc-1.0.jar -o /opt/vbp/spatial-service/libs/aloc.jar \
-  && curl https://build.natuurdata.dev.inbo.be/spatial-service/maxent.zip -o /tmp/maxent.zip \
+  && curl -fL https://nexus.ala.org.au/repository/releases/au/org/ala/spatial/ala-aloc/1.0/ala-aloc-1.0.jar -o /opt/vbp/spatial-service/libs/aloc.jar \
+  && curl -f https://build.natuurdata.dev.inbo.be/spatial-service/maxent.zip -o /tmp/maxent.zip \
   && unzip -j /tmp/maxent.zip maxent/maxent.jar -d /opt/vbp/spatial-service/libs \
   && rm /tmp/maxent.zip
 
@@ -80,7 +76,7 @@ RUN chown 1000:1000 /data
 VOLUME /data
 
 RUN mkdir /catalina
-RUN chown 1000:1000 /data
+RUN chown 1000:1000 /catalina
 VOLUME /catalina
 ENV CATALINA_BASE=/catalina
 

@@ -379,7 +379,7 @@ services:
       test: pg_isready
 
   geoserver:
-    image: kartoza/geoserver:2.23.2
+    image: kartoza/geoserver:2.28.5
     read_only: true
     networks:
       default:

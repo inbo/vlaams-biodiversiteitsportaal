@@ -15,6 +15,19 @@ webservice:
 server:
   servlet:
     contextPath: /spatial-service
+
+# spatial-service 3.2 uses the ala-bootstrap5 plugin, so it needs the Bootstrap 5 build of the VBP header/footer
+# (same setup as image-service). Depends on the branding bundle served under /bs5 of the portal root, which has to
+# provide assets.mustache, head.mustache, banner.mustache and footer.mustache (+ the css/js they reference).
+headerAndFooter:
+  baseURL: "${common.brandingBaseURL}/bs5"
+  version: 2
+  # Fetch <baseURL>/<fragment>.mustache; bootstrap/jquery css+js are loaded through assets.mustache,
+  # so the layout does not add its own <baseURL>/css|js/... links (plugin defaults, set explicitly).
+  useMustache: true
+  excludeBootstrapCss: true
+  excludeAlaStylesCss: true
+  excludeBootstrapJs: true
 grails:
   serverURL: ${common.protocol}://${common.domain}/spatial-service
   controllers:
