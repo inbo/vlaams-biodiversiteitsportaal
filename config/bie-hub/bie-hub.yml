@@ -55,6 +55,7 @@ allowedImageEditingRoles: ROLE_ADMIN,ROLE_EDITOR
 wikipedia:
   url: https://nl.wikipedia.org/api/rest_v1/page/html/
   webportalUrl: https://nl.wikipedia.org/wiki/
+  api: https://nl.wikipedia.org/w/api.php
   lang: nl
   # Upstream defaults only recognise English pages; nl.wikipedia uses "Taxobox", "Taxobox zoogdier", ... and "Rijk"
   snippetPattern: (?i)soort|geslacht|familie|orde|klasse|stam|rijk|wetenschappelijke naam
