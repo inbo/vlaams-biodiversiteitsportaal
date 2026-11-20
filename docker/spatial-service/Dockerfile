@@ -21,7 +21,8 @@ RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
 
 RUN ls -la /project/build/libs/
 
-FROM amazoncorretto:21.0.13-al2023-headless
+# Stays on 17: the sandbox runs pipelines.jar (Spark 3.4.0, supports up to Java 17) with this JVM
+FROM amazoncorretto:17.0.21-al2023-headless
 
 COPY --from=builder /opt/opentelemetry-agent /opt/opentelemetry-agent
 
