@@ -3,8 +3,8 @@ ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-gradle-jdk17 AS builder
 
 
-ARG VERSION=develop-vbp-rebase
-ARG COMMIT=287cf5973028bdd2811b34455f91f5d0cfc68646
+ARG VERSION=upgrade-develop
+ARG COMMIT=b329fa6d091b5abfc7bdf39f284cd9c8d9d9a130
 ARG SOURCE=https://github.com/inbo/vbp-biocache-service.git
 LABEL ala.version=inbo-${COMMIT}
 
@@ -35,7 +35,7 @@ RUN mkdir -p /opt/atlas/i18n \
   && ln -s /config/biocache-service/i18n/override /var/opt/atlas/i18n/biocache-service
 
 ARG VERSION=3.10.0-SNAPSHOT
-ARG COMMIT=287cf5973028bdd2811b34455f91f5d0cfc68646
+ARG COMMIT=b329fa6d091b5abfc7bdf39f284cd9c8d9d9a130
 LABEL ala.version=inbo-${COMMIT}
 
 COPY --from=builder /project/build/libs/biocache-service-${VERSION}-exec.war /biocache-service.war
@@ -49,7 +49,7 @@ RUN chown 1000:1000 /data
 VOLUME /data
 
 RUN mkdir /catalina
-RUN chown 1000:1000 /data
+RUN chown 1000:1000 /catalina
 VOLUME /catalina
 ENV CATALINA_BASE=/catalina
 
