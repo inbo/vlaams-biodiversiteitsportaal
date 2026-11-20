@@ -2,7 +2,7 @@
 FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 ARG VERSION=upgrade-develop
-ARG COMMIT=3f31fd669106e0745901d7d79654a378585b98d8
+ARG COMMIT=b22aadfad403f7994332528fe743c7fba7097b88
 ARG SOURCE=https://github.com/inbo/vbp-spatial-service.git
 LABEL ala.version=inbo-${COMMIT}
 
@@ -35,7 +35,7 @@ RUN mkdir -p /opt/atlas/i18n \
   && ln -s /config/spatial-service/i18n/override /var/opt/atlas/i18n/spatial-service
 
 ARG VERSION=3.2.0-SNAPSHOT
-ARG COMMIT=3f31fd669106e0745901d7d79654a378585b98d8
+ARG COMMIT=b22aadfad403f7994332528fe743c7fba7097b88
 ARG PIPELINES_VERSION=2.19.0-SNAPSHOT
 LABEL ala.version=inbo-${COMMIT}
 LABEL pipelines.version=${PIPELINES_VERSION}
