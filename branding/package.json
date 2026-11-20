@@ -14,7 +14,7 @@
         "test:ci": "npm run build && vitest run --reporter=dot --reporter=json --outputFile=../test-output.json"
     },
     "devDependencies": {
-        "@hey-api/openapi-ts": "^0.99.0",
+        "@hey-api/openapi-ts": "^0.97.0",
         "@types/decompress": "^4.2.7",
         "@types/js-cookie": "^3.0.6",
         "@types/lodash": "^4.17.27",
@@ -41,7 +41,7 @@
         "@hey-api/client-fetch": "^0.13.1",
         "@inbo/vbp-branding": "^1.0.16",
         "@types/jquery": "^3.5.32",
-        "aws-rum-web": "^3.2.1",
+        "aws-rum-web": "^2.1.0",
         "bootstrap": "^5.3.8",
         "bootstrap-sass": "^3.4.3",
         "compression": "^1.8.2",
