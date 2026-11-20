@@ -3,13 +3,13 @@ ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 
-ARG VERSION=develop-vbp
-ARG COMMIT=967d9669f21e783b9883e975d635dd3250358735
+ARG VERSION=upgrade-3.2.0
+ARG COMMIT=301c6d5c157cc55567cd0779efaa70aa8db48aca
 ARG SOURCE=https://github.com/inbo/vbp-bie-index.git
 LABEL ala.version=inbo-${COMMIT}
 
 WORKDIR /project
-RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} .
+RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
 
 COPY resources.xml ./grails-app/conf/spring/resources.xml
 
@@ -22,7 +22,7 @@ RUN --mount=type=cache,target=/gradle-cache,sharing=locked \
   rsync -a /home/gradle/.gradle/caches/modules-2 /gradle-cache \
   && rm /gradle-cache/modules-2/*.lock && rm /gradle-cache/modules-2/gc.properties
 
-FROM amazoncorretto:11.0.33-al2023-headless
+FROM amazoncorretto:21.0.13-al2023-headless
 
 # trivy:ignore:DS-0015  # using BuildKit yum cache
 RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
@@ -40,13 +40,12 @@ RUN mkdir -p /opt/atlas/i18n \
   && mkdir -p /var/opt/atlas/i18n \
   && ln -s /config/bie-index/i18n/override /var/opt/atlas/i18n/bie-index
 
-ARG VERSION=3.1.0
-ARG COMMIT=967d9669f21e783b9883e975d635dd3250358735
-LABEL ala.version=inbo-${COMMIT}
+ARG VERSION=3.2.0
+LABEL ala.version=${VERSION}
 
 COPY --from=builder /project/build/libs/bie-index-${VERSION}.war /bie-index.war
 
-HEALTHCHECK CMD curl --fail --silent http://localhost:8080/apikey/actuator/health || exit 1
+HEALTHCHECK CMD curl --fail --silent http://localhost:8080/bie-index/actuator/health || exit 1
 
 ENTRYPOINT ["sh", "-c", "java ${JAVA_OPTS} -jar /bie-index.war"]
 
@@ -55,7 +54,7 @@ RUN chown 1000:1000 /data
 VOLUME /data
 
 RUN mkdir /catalina
-RUN chown 1000:1000 /data
+RUN chown 1000:1000 /catalina
 VOLUME /catalina
 ENV CATALINA_BASE=/catalina
 

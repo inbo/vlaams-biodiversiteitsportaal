@@ -66,8 +66,8 @@ wikipedia:
 
 ecopedia:
   url: https://www.ecopedia.be
-  username: katya Shaleninova
-  password: 4SdTBmLX069Zrkt
+  username: my-ecopedia-username
+  password: my-super-secret-password
 
 # Skin and layout
 skin:
