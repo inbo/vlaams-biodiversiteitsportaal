@@ -5,12 +5,9 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 WORKDIR /project
 
-# ARG VERSION=5.1.1
-# ARG SOURCE=https://github.com/AtlasOfLivingAustralia/collectory.git
-
-ARG VERSION=feature/gbif-automatic-sync
-ARG SOURCE=https://github.com/Malo-Mignard/vbp-collectory.git
-ARG COMMIT=9f4d0c51e8b44f75fd60b57d539a1342243599b5
+ARG VERSION=upgrade-develop
+ARG SOURCE=https://github.com/inbo/vbp-collectory.git
+ARG COMMIT=be877416048f00c1498531ebcae65819b5a0abfa
 LABEL ala.version=inbo-${COMMIT}
 
 RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
@@ -41,8 +38,8 @@ RUN mkdir -p /opt/atlas/i18n \
   && mkdir -p /var/opt/atlas/i18n \
   && ln -s /config/collectory/i18n/override /var/opt/atlas/i18n/collectory-plugin
 
-ARG VERSION=5.2.0-SNAPSHOT
-ARG COMMIT=9f4d0c51e8b44f75fd60b57d539a1342243599b5
+ARG VERSION=6.4.0-SNAPSHOT
+ARG COMMIT=be877416048f00c1498531ebcae65819b5a0abfa
 LABEL ala.version=inbo-${COMMIT}
 
 COPY --from=builder /project/build/libs/collectory-${VERSION}.war /collectory.war
@@ -56,7 +53,7 @@ RUN chown 1000:1000 /data
 VOLUME /data
 
 RUN mkdir /catalina
-RUN chown 1000:1000 /data
+RUN chown 1000:1000 /catalina
 VOLUME /catalina
 ENV CATALINA_BASE=/catalina
 

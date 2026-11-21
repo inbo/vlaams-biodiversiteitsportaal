@@ -83,7 +83,7 @@ gbifLicenceMappingUrl: file:///config/collectory/default-gbif-license-mapping.js
 gbifOrphansPublisherID: ""
 gbifRegistrationDryRun: true
 gbifRegistrationEnabled: false
-gbifWebsite: https://www.gbif.org
+gbifWebsite: https://www.gbif.org/
 google:
   apikey: get-a-google-api-key
 
