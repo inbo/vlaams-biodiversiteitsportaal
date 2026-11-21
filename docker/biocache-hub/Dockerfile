@@ -3,8 +3,8 @@ ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-gradle-jdk17 AS builder
 
 # downloads-plugin
-ARG VERSION=develop-vbp
-ARG COMMIT=9dbc49205051896645f0e115bd09488c7ce4f0c9
+ARG VERSION=upgrade-develop
+ARG COMMIT=d3ab750802f0eaabbdbdbca215754a845e307ff5
 
 ARG SOURCE=https://github.com/inbo/vbp-downloads-plugin.git
 
@@ -12,8 +12,8 @@ WORKDIR /project/downloads-plugin
 RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
 
 # biocache-hubs
-ARG VERSION=develop-vbp
-ARG COMMIT=57cdb9cd29f06854961bf7b59dc761d7b547425e
+ARG VERSION=upgrade-develop
+ARG COMMIT=51cfbaaf8fb41d96a3221a2a146c71745c7e12b1
 
 ARG SOURCE=https://github.com/inbo/vbp-biocache-hubs.git
 LABEL ala.version=inbo-${COMMIT}
@@ -26,7 +26,7 @@ RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
 #    -x test
 
 ARG VERSION=develop
-ARG COMMIT=acc4e25421dd15a375adfbe83567a587d5b145bd
+ARG COMMIT=0955e37614df501273d2cce716cf8deba669ad04
 ARG SOURCE=https://github.com/AtlasOfLivingAustralia/ala-hub
 LABEL ala.version=inbo-${COMMIT}
 
@@ -35,9 +35,9 @@ RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
 
 COPY resources.xml ./grails-app/conf/spring/resources.xml
 
-# # TODO: ugly fix for config values being overwritten by ala defaults
-RUN sed -i '10d' grails-app/conf/application.yml
-RUN cat grails-app/conf/application.yml
+# TODO: ugly fix for config values being overwritten by ala defaults (plugin.groovy wins over our config)
+RUN grep -q '^ *- classpath:plugin.groovy' grails-app/conf/application.yml \
+  && sed -i '/^ *- classpath:plugin.groovy/d' grails-app/conf/application.yml
 
 # TODO: Fix explore your area not loading properly because of global
 COPY alaBs.js ./grails-app/assets/javascripts/alaBs.js
@@ -67,8 +67,8 @@ RUN mkdir -p /opt/atlas/i18n \
   && ln -s /config/biocache-hub/i18n/downloads-plugin/override /var/opt/atlas/i18n/downloads-plugin \
   && ln -s /config/biocache-hub/i18n/override /var/opt/atlas/i18n/biocache-hubs
 
-ARG VERSION=8.1.0-SNAPSHOT
-ARG COMMIT=2d623cce3af50be2ecc6f46afdaf85a390175020
+ARG VERSION=8.4.0-SNAPSHOT
+ARG COMMIT=51cfbaaf8fb41d96a3221a2a146c71745c7e12b1
 LABEL ala.version=inbo-${COMMIT}
 
 COPY --from=builder /project/ala-hub/build/libs/ala-hub-${VERSION}.war /biocache-hub.war
@@ -84,7 +84,7 @@ RUN chown 1000:1000 /data
 VOLUME /data
 
 RUN mkdir /catalina
-RUN chown 1000:1000 /data
+RUN chown 1000:1000 /catalina
 VOLUME /catalina
 ENV CATALINA_BASE=/catalina
 
