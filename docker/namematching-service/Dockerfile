@@ -3,9 +3,9 @@ ARG BUILDPLATFORM=linux/amd64
 FROM --platform=${BUILDPLATFORM} custom-maven AS builder
 
 ARG BACKBONE_VERSION=2026-11-09
-ARG VERSION=develop-vbp
+ARG VERSION=upgrade-master
 ARG SOURCE=https://github.com/inbo/vbp-ala-namematching-service.git
-ARG COMMIT=5538e5bb53754ed4b8ece1e0591ae465cc68c232
+ARG COMMIT=e9a54cd44398f13d479051d6c725ed24f283d13a
 LABEL ala.version=inbo-${COMMIT}
 
 RUN curl --fail https://build.natuurdata.dev.inbo.be/taxonomy/namematching-gbif-backbone-lucene-8-${BACKBONE_VERSION}.tgz -o /namematching-nm.tgz \
@@ -22,7 +22,7 @@ RUN --mount=type=cache,target=/root/.m2/repository \
 
 FROM amazoncorretto:21.0.13-al2023-headless
 
-ARG VERSION=1.8.2
+ARG VERSION=1.8.3
 LABEL ala.version=${VERSION}
 
 COPY --from=builder /opt/opentelemetry-agent /opt/opentelemetry-agent
