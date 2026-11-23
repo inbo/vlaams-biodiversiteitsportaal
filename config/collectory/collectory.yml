@@ -155,6 +155,18 @@ publicPage:
 skin:
   taxaLinks:
     baseUrl: ${common.protocol}://${common.domain}/bie-hub/species/
+# Collectory uses the ala-bootstrap5 plugin since the upstream develop upgrade, so it needs the Bootstrap 5
+# build of the VBP header/footer (same setup as image-service). Depends on the branding bundle served under
+# /bs5 of the portal root, which provides assets/head/banner/footer.mustache (+ the css/js they reference).
+headerAndFooter:
+  baseURL: "${common.brandingBaseURL}/bs5"
+  version: 2
+  # bootstrap/jquery css+js are loaded through assets.mustache, so the layout must not add its own links.
+  useMustache: true
+  excludeBootstrapCss: true
+  excludeAlaStylesCss: true
+  excludeBootstrapJs: true
+  excludeApplicationJs: true
 spatial:
   baseURL: ${common.protocol}://${common.domain}/spatial-hub
 speciesListToolUrl: ${common.protocol}://${common.domain}/lists/speciesListItem/list/
