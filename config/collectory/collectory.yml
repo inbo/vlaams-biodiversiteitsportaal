@@ -83,6 +83,8 @@ gbifLicenceMappingUrl: file:///config/collectory/default-gbif-license-mapping.js
 gbifOrphansPublisherID: ""
 gbifRegistrationDryRun: true
 gbifRegistrationEnabled: false
+# Key GBIF-synced/repatriated records on occurrenceID instead of the collectory default (gbifID)
+gbifUniqueKeyTerm: occurrenceID
 gbifWebsite: https://www.gbif.org/
 google:
   apikey: get-a-google-api-key
