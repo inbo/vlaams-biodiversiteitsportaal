@@ -8,8 +8,6 @@ services:
           - biocache-hub.vbp.internal
     extra_hosts:
       - "host.docker.internal:host-gateway"
-      # Use host, so we can easily swap in port-forwarded version of solr
-      - "solr.vbp.internal:host-gateway"
     build:
       context: biocache-hub
     environment:
@@ -26,8 +24,6 @@ services:
           - bie-hub.vbp.internal
     extra_hosts:
       - "host.docker.internal:host-gateway"
-      # Use host, so we can easily swap in port-forwarded version of solr
-      - "solr.vbp.internal:host-gateway"
     build:
       context: bie-hub
     environment:
@@ -44,8 +40,6 @@ services:
           - bie-index.vbp.internal
     extra_hosts:
       - "host.docker.internal:host-gateway"
-      # Use host, so we can easily swap in port-forwarded version of solr
-      - "solr.vbp.internal:host-gateway"
     build:
       context: bie-index
     environment:
@@ -65,8 +59,6 @@ services:
           - biocache-service.vbp.internal
     extra_hosts:
       - "host.docker.internal:host-gateway"
-      # Use host, so we can easily swap in port-forwarded version of solr
-      - "solr.vbp.internal:host-gateway"
 #    build:
 #      context: biocache-service
     environment:
@@ -91,8 +83,6 @@ services:
           - apikey.vbp.internal
     extra_hosts:
       - "host.docker.internal:host-gateway"
-      # Use host, so we can easily swap in port-forwarded version of solr
-      - "solr.vbp.internal:host-gateway"
     build:
       context: apikey
     environment:
@@ -113,8 +103,6 @@ services:
           - alerts.vbp.internal
     extra_hosts:
       - "host.docker.internal:host-gateway"
-      # Use host, so we can easily swap in port-forwarded version of solr
-      - "solr.vbp.internal:host-gateway"
     build:
       context: alerts
     environment:
@@ -141,8 +129,6 @@ services:
           - collectory.vbp.internal
     extra_hosts:
       - "host.docker.internal:host-gateway"
-      # Use host, so we can easily swap in port-forwarded version of solr
-      - "solr.vbp.internal:host-gateway"
     build:
       context: collectory
     environment:
@@ -164,8 +150,6 @@ services:
           - data-quality-filter-service.vbp.internal
     extra_hosts:
       - "host.docker.internal:host-gateway"
-      # Use host, so we can easily swap in port-forwarded version of solr
-      - "solr.vbp.internal:host-gateway"
     build:
       context: data-quality-filter-service
     environment:
@@ -185,8 +169,6 @@ services:
           - logger.vbp.internal
     extra_hosts:
       - "host.docker.internal:host-gateway"
-      # Use host, so we can easily swap in port-forwarded version of solr
-      - "solr.vbp.internal:host-gateway"
     build:
       context: logger
     environment:
@@ -206,8 +188,6 @@ services:
           - species-list.vbp.internal
     extra_hosts:
       - "host.docker.internal:host-gateway"
-      # Use host, so we can easily swap in port-forwarded version of solr
-      - "solr.vbp.internal:host-gateway"
     build:
       context: species-list
     environment:
@@ -228,8 +208,6 @@ services:
           - regions.vbp.internal
     extra_hosts:
       - "host.docker.internal:host-gateway"
-      # Use host, so we can easily swap in port-forwarded version of solr
-      - "solr.vbp.internal:host-gateway"
     build:
       context: regions
     environment:
@@ -252,8 +230,6 @@ services:
           - image-service.vbp.internal
     extra_hosts:
       - "host.docker.internal:host-gateway"
-      # Use host, so we can easily swap in port-forwarded version of solr
-      - "solr.vbp.internal:host-gateway"
     build:
       context: image-service
     volumes:
@@ -274,8 +250,6 @@ services:
           - sandbox.vbp.internal
     extra_hosts:
       - "host.docker.internal:host-gateway"
-      # Use host, so we can easily swap in port-forwarded version of solr
-      - "solr.vbp.internal:host-gateway"
     environment:
       SPRING_CONFIG_ADDITIONAL-LOCATION: "file:/config/common/common.yml,file:/config/biocache-service/biocache-service.yml,file:/config/biocache-service/sandbox.yml,file:/config/common/common-docker.yml"
       JAVA_OPTS: "-Xms128m -Xmx256m -Dspring.profiles.active=local"
@@ -299,8 +273,6 @@ services:
           - spatial-hub.vbp.internal
     extra_hosts:
       - "host.docker.internal:host-gateway"
-      # Use host, so we can easily swap in port-forwarded version of solr
-      - "solr.vbp.internal:host-gateway"
     build:
       context: spatial-hub
     environment:
@@ -320,8 +292,6 @@ services:
           - spatial-service.vbp.internal
     extra_hosts:
       - "host.docker.internal:host-gateway"
-      # Use host, so we can easily swap in port-forwarded version of solr
-      - "solr.vbp.internal:host-gateway"
     build:
       context: spatial-service
     environment:
@@ -347,8 +317,6 @@ services:
           - userdetails.vbp.internal
     extra_hosts:
       - "host.docker.internal:host-gateway"
-      # Use host, so we can easily swap in port-forwarded version of solr
-      - "solr.vbp.internal:host-gateway"
     build:
       context: userdetails
     environment:
@@ -535,9 +503,15 @@ services:
 
   nginx:
     image: nginx
+    environment:
+      NGINX_ENTRYPOINT_LOCAL_RESOLVERS: "1"
+      NGINX_ENVSUBST_OUTPUT_DIR: /etc/nginx/generated
+    tmpfs:
+      - /etc/nginx/generated
     read_only: true
     volumes:
-      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./nginx/templates:/etc/nginx/templates:ro
       - ../branding/public:/srv/branding.la-flanders.org/www/
     ports:
       - "80:80"

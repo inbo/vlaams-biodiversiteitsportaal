@@ -235,3 +235,11 @@ dataResource:
     - species list
     - taxonomy
     - threats
+
+# common.yml sets dbCreate: update for the local environment. Collectory 6.x manages its schema with
+# liquibase (changelog.xml); when Hibernate creates the tables first, liquibase skips its initial schema
+# and then fails on the later modifyDataType changesets (MySQL "Row size too large").
+environments:
+  local:
+    dataSource:
+      dbCreate: none

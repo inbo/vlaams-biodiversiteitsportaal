@@ -8,6 +8,13 @@
                value="${GRAILS_ENV}"
                override="false"/>
 
+    <!-- logger 4.7.0 bundles spring-boot-cli, whose SpringApplicationWebApplicationInitializer fails in an
+         external Tomcat (NPE on the missing Spring-Application-Source-Classes manifest entry).
+         Keep that jar out of the servlet container initializer scan. -->
+    <JarScanner>
+        <JarScanFilter pluggabilitySkip="spring-boot-cli-*.jar"/>
+    </JarScanner>
+
     <!-- Logging config -->
     <Parameter name="appName"
                value="%boldYellow(logger)"

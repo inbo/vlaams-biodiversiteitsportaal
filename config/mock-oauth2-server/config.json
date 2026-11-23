@@ -1,7 +1,7 @@
 {
     "interactiveLogin": false,
     "httpServer": "NettyWrapper",
-    "loginPagePath" : "/config/login.html",
+    "loginPagePath": "/config/login.html",
     "tokenCallbacks": [
         {
             "issuerId": "mock-oauth2",
@@ -12,8 +12,30 @@
                     "match": "*",
                     "claims": {
                         "client_id": "some-client",
-                        "sub": "some-user-id",
-                        "something": "else"
+                        "sub": "test-user",
+                        "preferred_username": "test-user",
+                        "email": "test.natuurdata@inbo.be",
+                        "given_name": "Testo",
+                        "family_name": "Von der Test",
+                        "role": "ROLE_ADMIN",
+                        "realm_access": {
+                            "roles": [
+                                "EDITOR",
+                                "ADMIN",
+                                "DATA_HIGHRES",
+                                "USER"
+                            ]
+                        },
+                        "ala:roles": [
+                            "EDITOR",
+                            "ADMIN",
+                            "DATA_HIGHRES"
+                        ],
+                        "ala:role": [
+                            "EDITOR",
+                            "ADMIN",
+                            "DATA_HIGHRES"
+                        ]
                     }
                 }
             ]

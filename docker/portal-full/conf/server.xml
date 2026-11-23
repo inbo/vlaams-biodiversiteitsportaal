@@ -1,7 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <Server port="-1" shutdown="SHUTDOWN"> <!-- -1: disable shutdown port -->
     <Listener className="org.apache.catalina.startup.VersionLoggerListener"/>
-    <Listener className="org.apache.catalina.core.AprLifecycleListener" SSLEngine="on"/>
     <Listener className="org.apache.catalina.core.JreMemoryLeakPreventionListener"/>
     <Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener"/>
     <Listener className="org.apache.catalina.core.ThreadLocalLeakPreventionListener"/>
@@ -15,13 +14,6 @@
     </GlobalNamingResources>
 
     <Service name="portal">
-        <!-- Redirect localhost without port to 8080, that way internal and external addresses are the same -->
-        <!-- TODO: might want to remove this for deployed/prod images -->
-        <Connector port="80" protocol="HTTP/1.1"
-                   connectionTimeout="5000"
-                   redirectPort="8080"
-                   maxPostSize="-1"
-                   URIEncoding="UTF-8"/>
         <Connector port="8080" protocol="HTTP/1.1"
                    connectionTimeout="5000"
                    maxPostSize="-1"
@@ -32,7 +24,11 @@
                        resourceName="UserDatabase"/>
             </Realm>
 
-            <Host name="localhost" appBase="webapps" unpackWARs="true" autoDeploy="false">
+            <!-- Deploy the apps only after the connectors are started (autoDeploy background check, every 10s):
+                 the apps call each other on startup (e.g. bie-hub -> data-quality-filter-service), which hangs
+                 until it times out while the connectors are paused. A call to an app that is not deployed yet
+                 now gets a quick 404 instead. -->
+            <Host name="localhost" appBase="webapps" unpackWARs="true" deployOnStartup="false" autoDeploy="true">
             </Host>
         </Engine>
     </Service>
