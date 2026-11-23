@@ -7,13 +7,10 @@ WORKDIR /project
 
 ARG VERSION=upgrade-develop
 ARG SOURCE=https://github.com/inbo/vbp-collectory.git
-ARG COMMIT=be877416048f00c1498531ebcae65819b5a0abfa
+ARG COMMIT=ac34143e1fb6b365f5b1830965acf06ce0a5fba9
 LABEL ala.version=inbo-${COMMIT}
 
 RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
-
-COPY show-dataresource-institution-font.patch /tmp/show-dataresource-institution-font.patch
-RUN git apply /tmp/show-dataresource-institution-font.patch
 
 COPY resources.xml ./grails-app/conf/spring/resources.xml
 
@@ -39,7 +36,7 @@ RUN mkdir -p /opt/atlas/i18n \
   && ln -s /config/collectory/i18n/override /var/opt/atlas/i18n/collectory-plugin
 
 ARG VERSION=6.4.0-SNAPSHOT
-ARG COMMIT=be877416048f00c1498531ebcae65819b5a0abfa
+ARG COMMIT=ac34143e1fb6b365f5b1830965acf06ce0a5fba9
 LABEL ala.version=inbo-${COMMIT}
 
 COPY --from=builder /project/build/libs/collectory-${VERSION}.war /collectory.war
