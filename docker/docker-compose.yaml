@@ -1,50 +1,113 @@
+# Local stack. The services run in three JVMs instead of fourteen:
+#   portal-full        Tomcat 9 on Java 21 (most services, see docker/portal-full/Dockerfile)
+#   portal-full-jdk17  Tomcat 9 on Java 17 (Grails wars with Groovy 3.0.11 that fail on Java 21)
+#   alerts             own image, Grails 7 / jakarta.servlet cannot share a Tomcat 9
+# Build them with: docker buildx bake local-dev --load
+
+x-portal-environment: &portal-environment
+  LOG_LEVEL: "INFO"
+  LOG_FORMAT: "JSON"
+  ADDITIONAL_SPRING_CONFIG_LOCATIONS: "file:/config/common/common-docker.yml" # Custom env var used in tomcat context
+  SPRING_PROFILES_ACTIVE: "local"
+  GRAILS_ENV: local
+  REMOTE_DEBUGGER_PORT: 5005
+  # Server-side calls to http://localhost/... go to nginx, like the browser's (see portal-full/docker-entrypoint.sh)
+  LOCALHOST_PROXY_TARGET: "nginx:80"
+#  REMOTE_JMX_PORT: 1099
+#  REMOTE_JMX_PASSWORD: my-super-secret-password
+
 services:
   portal-full:
     image: ${DOCKER_REPO:-local}/inbo-vbp-portal-full:dev
+    sysctls:
+      net.ipv4.ip_unprivileged_port_start: "80" # lets the non-root localhost:80 forwarder bind
     ports:
       - "1099:1099"
       - "5005:5005"
-      - "8181:80"
       - "8080:8080"
     volumes:
       - ../config:/config:ro
-      - ../config/biocache-hub:/data/ala-hub/config/ # Hardcoded paths in the biocache-hub
       - ./portal-full/tomcat-manager-ui/host-manager:/usr/local/tomcat/webapps/host-manager
       - ./portal-full/tomcat-manager-ui/manager:/usr/local/tomcat/webapps/manager
       - vbp-data:/data
     environment:
-      LOG_LEVEL: "INFO"
-      LOG_FORMAT: "JSON"
-      JAVA_OPTS: "-Xmx6g"
-      ADDITIONAL_SPRING_CONFIG_LOCATIONS: "file:/config/common/common-docker.yml" # Custom env var used in tomcat context
-      SPRING_PROFILES_ACTIVE: "local"
-      GRAILS_ENV: local
-      REMOTE_DEBUGGER_PORT: 5005
-#      REMOTE_JMX_PORT: 1099
-#      REMOTE_JMX_PASSWORD: my-super-secret-password
+      <<: *portal-environment
+      # http.keepAlive=false: ala-security 7 (pac4j) fails on the mock-oauth2-server HEAD response otherwise
+      JAVA_OPTS: "-Xmx4g -Dhttp.keepAlive=false"
     extra_hosts:
       - "host.docker.internal:host-gateway"
-      # Use host, so we can easily swap in port-forwarded version of solr
-      - "solr.vbp.internal:host-gateway"
     networks:
       default:
         aliases:
-          - alerts.vbp.internal
-          - apikey.vbp.internal
           - bie-hub.vbp.internal
           - bie-index.vbp.internal
-          - biocache-hub.vbp.internal
           - biocache-service.vbp.internal
           - collectory.vbp.internal
           - data-quality-filter-service.vbp.internal
           - image-service.vbp.internal
           - logger.vbp.internal
-          - regions.vbp.internal
-          - sandbox-hub.vbp.internal
           - sandbox-service.vbp.internal
           - spatial-hub.vbp.internal
           - spatial-service.vbp.internal
+    depends_on:
+      mysql:
+        condition: service_healthy
+      postgis:
+        condition: service_healthy
+      mock-oauth2-server:
+        condition: service_started
+      nginx:
+        condition: service_started
+
+  portal-full-jdk17:
+    image: ${DOCKER_REPO:-local}/inbo-vbp-portal-full-jdk17:dev
+    sysctls:
+      net.ipv4.ip_unprivileged_port_start: "80" # lets the non-root localhost:80 forwarder bind
+    ports:
+      - "5006:5005"
+      - "8082:8080"
+    volumes:
+      - ../config:/config:ro
+      - ../config/biocache-hub:/data/ala-hub/config/ # Hardcoded paths in the biocache-hub
+      - ./portal-full/tomcat-manager-ui/manager:/usr/local/tomcat/webapps/manager
+      - vbp-data:/data
+    environment:
+      <<: *portal-environment
+      JAVA_OPTS: "-Xmx2g -Dhttp.keepAlive=false"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      default:
+        aliases:
+          - apikey.vbp.internal
+          - biocache-hub.vbp.internal
+          - regions.vbp.internal
+          - sandbox-hub.vbp.internal
           - species-list.vbp.internal
+    depends_on:
+      mysql:
+        condition: service_healthy
+      mock-oauth2-server:
+        condition: service_started
+      nginx:
+        condition: service_started
+
+  alerts:
+    image: ${DOCKER_REPO:-local}/inbo-vbp-alerts:dev
+    networks:
+      default:
+        aliases:
+          - alerts.vbp.internal
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      SPRING_CONFIG_ADDITIONAL-LOCATION: "file:/config/common/common.yml,file:/config/alerts/alerts.yml,file:/config/common/common-docker.yml"
+      SPRING_PROFILES_ACTIVE: "local"
+      GRAILS_ENV: local
+      LOG_LEVEL: INFO
+      JAVA_OPTS: "-Xmx512m -Dhttp.keepAlive=false"
+    volumes:
+      - ../config:/config:ro
     depends_on:
       #      solr-init:
       #        condition: service_completed_successfully
@@ -53,6 +116,8 @@ services:
       postgis:
         condition: service_healthy
       mock-oauth2-server:
+        condition: service_started
+      nginx:
         condition: service_started
 
   postgis:
@@ -250,8 +315,14 @@ services:
 
   nginx:
     image: nginx
+    environment:
+      NGINX_ENTRYPOINT_LOCAL_RESOLVERS: "1"
+      NGINX_ENVSUBST_OUTPUT_DIR: /etc/nginx/generated
+    tmpfs:
+      - /etc/nginx/generated
     volumes:
-      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./nginx/templates:/etc/nginx/templates:ro
       - ../branding/dist:/srv/branding.la-flanders.org/www/
     ports:
       - "80:80"
@@ -261,11 +332,9 @@ services:
       default:
         aliases:
           - branding
+    # No dependency on the services: upstreams are resolved per request, and the services need nginx
+    # (OIDC discovery via host.docker.internal/mock-oauth2) while they start.
     depends_on:
-      portal-full:
-        condition: service_started
-      geoserver:
-        condition: service_started
       mock-oauth2-server:
         condition: service_started
 

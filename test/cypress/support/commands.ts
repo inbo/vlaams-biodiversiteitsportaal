@@ -73,7 +73,8 @@ Cypress.Commands.add(
       },
       {
         validate: () => {
-          const domain = Cypress.config("baseUrl").replace("https://", "");
+          // hostname also covers the http://localhost base URL of the local environment
+          const domain = new URL(Cypress.config("baseUrl")).hostname;
           // Verify authentication cookies
             cy.getCookie("VBP-AUTH", { domain }).should("exist");
             if (validateSessionCookie) {

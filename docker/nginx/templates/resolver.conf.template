@@ -1,0 +1,3 @@
+# Generated at container start by the nginx image (NGINX_ENTRYPOINT_LOCAL_RESOLVERS):
+# uses the nameserver from /etc/resolv.conf, so it works with both docker (127.0.0.11) and podman (network gateway).
+resolver ${NGINX_LOCAL_RESOLVERS} ipv6=off valid=10s;

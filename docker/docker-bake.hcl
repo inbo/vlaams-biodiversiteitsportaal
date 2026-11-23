@@ -46,25 +46,38 @@ target "custom-maven" {
   tags = ["custom-maven:${TAG}"]
 }
 
+# Local development only: most services in one Tomcat 9 on Java 21, see portal-full/Dockerfile
 target "portal-full" {
   context = "./portal-full"
+  target = "portal-full"
   contexts = {
-    "alerts"                      = "target:alerts"
-    "apikey"                      = "target:apikey"
     "bie-hub"                     = "target:bie-hub"
     "bie-index"                   = "target:bie-index"
-    "biocache-hub"                = "target:biocache-hub"
     "biocache-service"            = "target:biocache-service"
     "collectory"                  = "target:collectory"
     "data-quality-filter-service" = "target:data-quality-filter-service"
     "image-service"               = "target:image-service"
     "logger"                      = "target:logger"
-    "regions"                     = "target:regions"
     "spatial-hub"                 = "target:spatial-hub"
     "spatial-service"             = "target:spatial-service"
-    "species-list"                = "target:species-list"
   }
   tags = ["${DOCKER_REPO}/inbo-vbp-portal-full:${TAG}"]
+}
+
+# Local development only: the Groovy 3.0.11 Grails wars that do not start on Java 21
+target "portal-full-jdk17" {
+  context = "./portal-full"
+  target = "portal-full-jdk17"
+  args = {
+    RUNTIME_IMAGE = "amazoncorretto:17.0.21-al2023-headless"
+  }
+  contexts = {
+    "apikey"       = "target:apikey"
+    "biocache-hub" = "target:biocache-hub"
+    "regions"      = "target:regions"
+    "species-list" = "target:species-list"
+  }
+  tags = ["${DOCKER_REPO}/inbo-vbp-portal-full-jdk17:${TAG}"]
 }
 
 target "alerts" {
@@ -220,6 +233,7 @@ group "all" {
     "spatial-service",
     "species-list",
     "portal-full",
+    "portal-full-jdk17",
   ]
 }
 
@@ -245,8 +259,10 @@ group "services" {
 
 group "local-dev" {
   targets = [
+    "alerts",
     "namematching-service",
     "portal-full",
+    "portal-full-jdk17",
   ]
 }
 

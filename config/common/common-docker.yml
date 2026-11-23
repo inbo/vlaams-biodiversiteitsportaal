@@ -19,3 +19,7 @@ security:
     discoveryUri: http://host.docker.internal/mock-oauth2/.well-known/openid-configuration
   oidc:
     discoveryUri: http://host.docker.internal/mock-oauth2/.well-known/openid-configuration
+
+# spatial-service sandbox: pipelines.jar (Spark 3.4) needs Java <= 17, while portal-full runs Tomcat on Java 21.
+# /usr/lib/jvm/jre-17 exists in both portal-full and the standalone spatial-service image (Corretto 17).
+pipelinesCmd: "/usr/lib/jvm/jre-17/bin/java -Dspark.local.dir=/data/spatial-data/sandbox/tmp -Djava.io.tmpdir=/data/spatial-data/sandbox/tmp -cp /opt/vbp/pipelines/pipelines.jar"
