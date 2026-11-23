@@ -11,9 +11,6 @@ DS-0015 docker/pipelines/Dockerfile
 DS-0015 docker/portal-full/Dockerfile
 DS-0015 docker/spatial-hub/Dockerfile
 DS-0015 docker/spatial-service/Dockerfile
-DS-0015 docker/spatial-service/rpm/Dockerfile
-DS-0002 docker/spatial-service/rpm/Dockerfile
-DS-0026 docker/spatial-service/rpm/Dockerfile
 ## Suppress noisy findings from test fixtures
 DS-0005 test/node_modules
 DS-0017 test/node_modules
