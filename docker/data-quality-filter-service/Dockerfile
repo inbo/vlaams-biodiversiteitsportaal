@@ -36,7 +36,6 @@ FROM amazoncorretto:21.0.13-al2023-headless
 
 ARG SOURCE
 ARG COMMIT
-LABEL ala.version=${COMMIT}
 LABEL org.opencontainers.image.source=${SOURCE}
 LABEL org.opencontainers.image.revision=${COMMIT}
 

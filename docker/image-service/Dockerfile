@@ -70,7 +70,6 @@ RUN mkdir -p /opt/atlas/i18n \
   && mkdir -p /var/opt/atlas/i18n \
   && ln -s /config/image-service/i18n/override /var/opt/atlas/i18n/image-service
 
-LABEL ala.version=${APP_VERSION}
 LABEL org.opencontainers.image.source=${SOURCE}
 LABEL org.opencontainers.image.revision=${COMMIT}
 LABEL org.opencontainers.image.version=${APP_VERSION}

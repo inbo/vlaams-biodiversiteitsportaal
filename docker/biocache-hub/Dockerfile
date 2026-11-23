@@ -81,15 +81,14 @@ ARG BIOCACHE_HUBS_COMMIT
 ARG ALA_HUB_SOURCE
 ARG ALA_HUB_COMMIT
 ARG APP_VERSION
-LABEL ala.version=${APP_VERSION}
 # The VBP fork carries our changes, so it is the image's main source/revision
 LABEL org.opencontainers.image.source=${BIOCACHE_HUBS_SOURCE}
 LABEL org.opencontainers.image.revision=${BIOCACHE_HUBS_COMMIT}
 LABEL org.opencontainers.image.version=${APP_VERSION}
-LABEL vbp.downloads-plugin.source=${DOWNLOADS_PLUGIN_SOURCE}
-LABEL vbp.downloads-plugin.revision=${DOWNLOADS_PLUGIN_COMMIT}
-LABEL vbp.ala-hub.source=${ALA_HUB_SOURCE}
-LABEL vbp.ala-hub.revision=${ALA_HUB_COMMIT}
+LABEL be.vbp.downloads-plugin.source=${DOWNLOADS_PLUGIN_SOURCE}
+LABEL be.vbp.downloads-plugin.revision=${DOWNLOADS_PLUGIN_COMMIT}
+LABEL be.vbp.ala-hub.source=${ALA_HUB_SOURCE}
+LABEL be.vbp.ala-hub.revision=${ALA_HUB_COMMIT}
 
 COPY --from=builder /project/ala-hub/build/libs/ala-hub-${APP_VERSION}.war /biocache-hub.war
 

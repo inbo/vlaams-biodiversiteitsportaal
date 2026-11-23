@@ -276,11 +276,11 @@ jobs:
             ${COMPONENT} \
             --set="*.args.BUILDPLATFORM=${BUILDPLATFORM}" \
             --set="${COMPONENT}.platform=linux/amd64,linux/arm64" \
-            --set="${COMPONENT}.labels.maintainer=support.natuurdata@inbo.be" \
-            --set="${COMPONENT}.labels.build_date=$(date +'%Y-%m-%dT%H:%M:%S')" \
-            --set="${COMPONENT}.labels.build_url=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
-            --set="${COMPONENT}.labels.git_tag=${GIT_TAG}" \
-            --set="${COMPONENT}.labels.git_hash=${{ github.sha }}" \
+            --set="${COMPONENT}.labels.org.opencontainers.image.authors=support.natuurdata@inbo.be" \
+            --set="${COMPONENT}.labels.org.opencontainers.image.created=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" \
+            --set="${COMPONENT}.labels.be.vbp.build-url=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
+            --set="${COMPONENT}.labels.be.vbp.git-tag=${GIT_TAG}" \
+            --set="${COMPONENT}.labels.be.vbp.git-hash=${{ github.sha }}" \
             --set="custom-gradle-jdk11.cache-to=type=registry,ref=${DOCKER_REPO}/inbo-vbp-custom-gradle:jdk11-${CACHE_TAG},oci-mediatypes=true,image-manifest=true,mode=max" \
             --set="custom-gradle-jdk21.cache-to=type=registry,ref=${DOCKER_REPO}/inbo-vbp-custom-gradle:jdk21-${CACHE_TAG},oci-mediatypes=true,image-manifest=true,mode=max" \
             --set="custom-maven.cache-to=type=registry,ref=${DOCKER_REPO}/inbo-vbp-custom-maven:${CACHE_TAG},oci-mediatypes=true,image-manifest=true,mode=max" \

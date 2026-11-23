@@ -56,7 +56,6 @@ RUN mkdir -p /opt/atlas/i18n \
 ARG SOURCE
 ARG COMMIT
 ARG APP_VERSION
-LABEL ala.version=${APP_VERSION}
 LABEL org.opencontainers.image.source=${SOURCE}
 LABEL org.opencontainers.image.revision=${COMMIT}
 LABEL org.opencontainers.image.version=${APP_VERSION}

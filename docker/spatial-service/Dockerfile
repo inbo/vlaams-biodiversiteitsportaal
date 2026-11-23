@@ -65,7 +65,7 @@ RUN mkdir -p /opt/vbp/spatial-service/libs \
   && rm /tmp/maxent.zip
 
 ARG PIPELINES_VERSION=2.19.0-SNAPSHOT
-LABEL pipelines.version=${PIPELINES_VERSION}
+LABEL be.vbp.pipelines.version=${PIPELINES_VERSION}
 RUN curl -f https://build.natuurdata.dev.inbo.be/spatial-service/pipelines-${PIPELINES_VERSION}-shaded.jar -o /opt/vbp/pipelines/pipelines.jar
 
 COPY pipelines/vocabularies/* /opt/vbp/pipelines/vocabularies/
@@ -73,7 +73,6 @@ COPY pipelines/vocabularies/* /opt/vbp/pipelines/vocabularies/
 ARG SOURCE
 ARG COMMIT
 ARG APP_VERSION
-LABEL ala.version=${APP_VERSION}
 LABEL org.opencontainers.image.source=${SOURCE}
 LABEL org.opencontainers.image.revision=${COMMIT}
 LABEL org.opencontainers.image.version=${APP_VERSION}
