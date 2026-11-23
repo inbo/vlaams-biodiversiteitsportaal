@@ -5,9 +5,9 @@ FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
 WORKDIR /project
 
-ARG VERSION=upgrade-develop
+ARG VERSION=gbif-automatic-sync
 ARG SOURCE=https://github.com/inbo/vbp-collectory.git
-ARG COMMIT=0f99817d82eaedd078de86a475299d4d3f85b392
+ARG COMMIT=c7dcb609f441de66543f4916376b4509f52dc477
 LABEL ala.version=inbo-${COMMIT}
 
 RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
@@ -36,7 +36,7 @@ RUN mkdir -p /opt/atlas/i18n \
   && ln -s /config/collectory/i18n/override /var/opt/atlas/i18n/collectory-plugin
 
 ARG VERSION=6.4.0-SNAPSHOT
-ARG COMMIT=0f99817d82eaedd078de86a475299d4d3f85b392
+ARG COMMIT=c7dcb609f441de66543f4916376b4509f52dc477
 LABEL ala.version=inbo-${COMMIT}
 
 COPY --from=builder /project/build/libs/collectory-${VERSION}.war /collectory.war
