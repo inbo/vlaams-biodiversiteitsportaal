@@ -1,13 +1,24 @@
 # syntax=docker/dockerfile:1.14.0
+ARG BUILDPLATFORM=linux/amd64
+
+# What is built: one source of truth, used for the checkout AND the labels of the final image.
+# COMMIT must be a full commit SHA (checked after the checkout).
+ARG SOURCE=https://github.com/inbo/vbp-spatial-service.git
+# Branch upgrade-develop
+ARG COMMIT=b22aadfad403f7994332528fe743c7fba7097b88
+# App version at COMMIT (build.gradle), used for the war name and the labels
+ARG APP_VERSION=3.2.0-SNAPSHOT
+
 FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
-ARG VERSION=upgrade-develop
-ARG COMMIT=b22aadfad403f7994332528fe743c7fba7097b88
-ARG SOURCE=https://github.com/inbo/vbp-spatial-service.git
-LABEL ala.version=inbo-${COMMIT}
+ARG SOURCE
+ARG COMMIT
 
 WORKDIR /project
-RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
+# Full clone (not shallow): COMMIT does not have to be a branch head
+RUN git clone -q ${SOURCE} . \
+  && git checkout -q ${COMMIT} \
+  && test "$(git rev-parse HEAD)" = "${COMMIT}"
 
 RUN --mount=type=cache,target=/gradle-cache,ro \
   gradle \
@@ -34,12 +45,6 @@ RUN mkdir -p /opt/atlas/i18n \
   && mkdir -p /var/opt/atlas/i18n \
   && ln -s /config/spatial-service/i18n/override /var/opt/atlas/i18n/spatial-service
 
-ARG VERSION=3.2.0-SNAPSHOT
-ARG COMMIT=b22aadfad403f7994332528fe743c7fba7097b88
-ARG PIPELINES_VERSION=2.19.0-SNAPSHOT
-LABEL ala.version=inbo-${COMMIT}
-LABEL pipelines.version=${PIPELINES_VERSION}
-
 # GDAL/PROJ from the Amazon Linux 2023 repositories (gdal310 pulls in proj)
 # trivy:ignore:DS-0015  # using BuildKit dnf cache
 RUN --mount=type=cache,target=/var/cache/dnf,sharing=locked \
@@ -59,11 +64,21 @@ RUN mkdir -p /opt/vbp/spatial-service/libs \
   && unzip -j /tmp/maxent.zip maxent/maxent.jar -d /opt/vbp/spatial-service/libs \
   && rm /tmp/maxent.zip
 
-RUN curl -f https://build.natuurdata.dev.inbo.be/spatial-service/pipelines-2.19.0-SNAPSHOT-shaded.jar -o /opt/vbp/pipelines/pipelines.jar
+ARG PIPELINES_VERSION=2.19.0-SNAPSHOT
+LABEL pipelines.version=${PIPELINES_VERSION}
+RUN curl -f https://build.natuurdata.dev.inbo.be/spatial-service/pipelines-${PIPELINES_VERSION}-shaded.jar -o /opt/vbp/pipelines/pipelines.jar
 
 COPY pipelines/vocabularies/* /opt/vbp/pipelines/vocabularies/
 
-COPY --from=builder /project/build/libs/spatial-service-${VERSION}.war /spatial-service.war
+ARG SOURCE
+ARG COMMIT
+ARG APP_VERSION
+LABEL ala.version=${APP_VERSION}
+LABEL org.opencontainers.image.source=${SOURCE}
+LABEL org.opencontainers.image.revision=${COMMIT}
+LABEL org.opencontainers.image.version=${APP_VERSION}
+
+COPY --from=builder /project/build/libs/spatial-service-${APP_VERSION}.war /spatial-service.war
 COPY link-libs.sh /opt/vbp/spatial-service/link-libs.sh
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/spatial-service/actuator/health || exit 1

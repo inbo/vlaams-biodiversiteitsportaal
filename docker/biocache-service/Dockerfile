@@ -1,15 +1,24 @@
 # syntax=docker/dockerfile:1.14.0
 ARG BUILDPLATFORM=linux/amd64
+
+# What is built: one source of truth, used for the checkout AND the labels of the final image.
+# COMMIT must be a full commit SHA (checked after the checkout).
+ARG SOURCE=https://github.com/inbo/vbp-biocache-service.git
+# Branch upgrade-develop
+ARG COMMIT=b329fa6d091b5abfc7bdf39f284cd9c8d9d9a130
+# App version at COMMIT (build.gradle), used for the war name and the labels
+ARG APP_VERSION=3.10.0-SNAPSHOT
+
 FROM --platform=${BUILDPLATFORM} custom-gradle-jdk17 AS builder
 
-
-ARG VERSION=upgrade-develop
-ARG COMMIT=b329fa6d091b5abfc7bdf39f284cd9c8d9d9a130
-ARG SOURCE=https://github.com/inbo/vbp-biocache-service.git
-LABEL ala.version=inbo-${COMMIT}
+ARG SOURCE
+ARG COMMIT
 
 WORKDIR /project
-RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
+# Full clone (not shallow): COMMIT does not have to be a branch head
+RUN git clone -q ${SOURCE} . \
+  && git checkout -q ${COMMIT} \
+  && test "$(git rev-parse HEAD)" = "${COMMIT}"
 
 RUN --mount=type=cache,target=/gradle-cache,ro \
   gradle build assemble \
@@ -34,11 +43,15 @@ RUN mkdir -p /opt/atlas/i18n \
   && mkdir -p /var/opt/atlas/i18n \
   && ln -s /config/biocache-service/i18n/override /var/opt/atlas/i18n/biocache-service
 
-ARG VERSION=3.10.0-SNAPSHOT
-ARG COMMIT=b329fa6d091b5abfc7bdf39f284cd9c8d9d9a130
-LABEL ala.version=inbo-${COMMIT}
+ARG SOURCE
+ARG COMMIT
+ARG APP_VERSION
+LABEL ala.version=${APP_VERSION}
+LABEL org.opencontainers.image.source=${SOURCE}
+LABEL org.opencontainers.image.revision=${COMMIT}
+LABEL org.opencontainers.image.version=${APP_VERSION}
 
-COPY --from=builder /project/build/libs/biocache-service-${VERSION}-exec.war /biocache-service.war
+COPY --from=builder /project/build/libs/biocache-service-${APP_VERSION}-exec.war /biocache-service.war
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/biocache-service/actuator/health || exit 1
 

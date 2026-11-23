@@ -1,15 +1,24 @@
 # syntax=docker/dockerfile:1.14.0
 ARG BUILDPLATFORM=linux/amd64
+
+# What is built: one source of truth, used for the checkout AND the labels of the final image.
+# COMMIT must be a full commit SHA (checked after the checkout).
+ARG SOURCE=https://github.com/AtlasOfLivingAustralia/apikey.git
+# Release 1.7.0 (stock ALA)
+ARG COMMIT=29ac605731ddb310e746fd57d573f38dc698a8d3
+# App version at COMMIT (build.gradle), used for the war name and the labels
+ARG APP_VERSION=1.7.0
+
 FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
-
-ARG VERSION=1.7.0
-ARG SOURCE=https://github.com/AtlasOfLivingAustralia/apikey.git
-
-LABEL ala.version=${VERSION}
+ARG SOURCE
+ARG COMMIT
 
 WORKDIR /project
-RUN git clone --branch ${VERSION} --depth 1 ${SOURCE} .
+# Full clone (not shallow): COMMIT does not have to be a branch head
+RUN git clone -q ${SOURCE} . \
+  && git checkout -q ${COMMIT} \
+  && test "$(git rev-parse HEAD)" = "${COMMIT}"
 
 COPY resources.xml ./grails-app/conf/spring/resources.xml
 
@@ -34,10 +43,15 @@ RUN mkdir -p /opt/atlas/i18n \
   && mkdir -p /var/opt/atlas/i18n \
   && ln -s /config/apikey/i18n/override /var/opt/atlas/i18n/apikey
 
-ARG VERSION=1.7.0
-LABEL ala.version=${VERSION}
+ARG SOURCE
+ARG COMMIT
+ARG APP_VERSION
+LABEL ala.version=${APP_VERSION}
+LABEL org.opencontainers.image.source=${SOURCE}
+LABEL org.opencontainers.image.revision=${COMMIT}
+LABEL org.opencontainers.image.version=${APP_VERSION}
 
-COPY --from=builder /project/build/libs/apikey-${VERSION}-exec.war /apikey.war
+COPY --from=builder /project/build/libs/apikey-${APP_VERSION}-exec.war /apikey.war
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/apikey/actuator/health || exit 1
 
@@ -48,7 +62,7 @@ RUN chown 1000:1000 /data
 VOLUME /data
 
 RUN mkdir /catalina
-RUN chown 1000:1000 /data
+RUN chown 1000:1000 /catalina
 VOLUME /catalina
 ENV CATALINA_BASE=/catalina
 

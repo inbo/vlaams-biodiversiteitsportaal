@@ -20,11 +20,9 @@ RUN --mount=type=cache,target=/var/cache/yum,sharing=locked \
   yum install -y java-11-amazon-corretto-devel
 
 WORKDIR /project
-# Fetch only the pinned commit and verify that is what got checked out
-RUN git init --quiet . \
-  && git remote add origin ${SOURCE} \
-  && git fetch --depth 1 origin ${COMMIT} \
-  && git checkout --detach FETCH_HEAD \
+# Full clone (not shallow): COMMIT does not have to be a branch head
+RUN git clone -q ${SOURCE} . \
+  && git checkout -q ${COMMIT} \
   && test "$(git rev-parse HEAD)" = "${COMMIT}"
 
 # Locale resolver override (default locale nl, vbp-lang cookie).

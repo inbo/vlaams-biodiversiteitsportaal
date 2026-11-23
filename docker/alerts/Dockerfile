@@ -1,18 +1,24 @@
 # syntax=docker/dockerfile:1.14.0
 ARG BUILDPLATFORM=linux/amd64
+
+# What is built: one source of truth, used for the checkout AND the labels of the final image.
+# COMMIT must be a full commit SHA (checked after the checkout).
+ARG SOURCE=https://github.com/inbo/vbp-alerts.git
+# Branch upgrade-6.3.1
+ARG COMMIT=e1b373ecbc418e9837c4022ba087385a19796d93
+# App version at COMMIT (build.gradle), used for the war name and the labels
+ARG APP_VERSION=6.3.1
+
 FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
 
-#ARG VERSION=4.2.1
-#ARG SOURCE=https://github.com/AtlasOfLivingAustralia/alerts.git
-
-ARG VERSION=upgrade-6.3.1
-ARG COMMIT=e1b373ecbc418e9837c4022ba087385a19796d93
-ARG SOURCE=https://github.com/inbo/vbp-alerts.git
-
-LABEL ala.version=inbo-${COMMIT}
+ARG SOURCE
+ARG COMMIT
 
 WORKDIR /project
-RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
+# Full clone (not shallow): COMMIT does not have to be a branch head
+RUN git clone -q ${SOURCE} . \
+  && git checkout -q ${COMMIT} \
+  && test "$(git rev-parse HEAD)" = "${COMMIT}"
 
 RUN --mount=type=cache,target=/gradle-cache,ro \
     gradle \
@@ -36,10 +42,15 @@ RUN mkdir -p /opt/atlas/i18n \
   && mkdir -p /var/opt/atlas/i18n \
   && ln -s /config/alerts/i18n/override /var/opt/atlas/i18n/alerts
 
-ARG VERSION=6.3.1
-LABEL ala.version=${VERSION}
+ARG SOURCE
+ARG COMMIT
+ARG APP_VERSION
+LABEL ala.version=${APP_VERSION}
+LABEL org.opencontainers.image.source=${SOURCE}
+LABEL org.opencontainers.image.revision=${COMMIT}
+LABEL org.opencontainers.image.version=${APP_VERSION}
 
-COPY --from=builder /project/build/libs/alerts-${VERSION}.war /alerts.war
+COPY --from=builder /project/build/libs/alerts-${APP_VERSION}.war /alerts.war
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/alerts/actuator/health || exit 1
 

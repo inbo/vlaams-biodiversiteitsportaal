@@ -11,8 +11,10 @@ ARG SOURCE
 ARG COMMIT
 
 WORKDIR /project
-# Full clone (not shallow): gradle-git-properties reads history via JGit
-RUN git clone -q ${SOURCE} . && git checkout -q ${COMMIT}
+# Full clone (not shallow): COMMIT does not have to be a branch head
+RUN git clone -q ${SOURCE} . \
+  && git checkout -q ${COMMIT} \
+  && test "$(git rev-parse HEAD)" = "${COMMIT}"
 
 RUN --mount=type=cache,target=/gradle-cache,ro \
     gradle \
@@ -32,8 +34,11 @@ RUN set -e; \
 
 FROM amazoncorretto:21.0.13-al2023-headless
 
+ARG SOURCE
 ARG COMMIT
 LABEL ala.version=${COMMIT}
+LABEL org.opencontainers.image.source=${SOURCE}
+LABEL org.opencontainers.image.revision=${COMMIT}
 
 COPY --from=builder /opt/opentelemetry-agent /opt/opentelemetry-agent
 

@@ -1,18 +1,25 @@
 # syntax=docker/dockerfile:1.14.0
 ARG BUILDPLATFORM=linux/amd64
+
+# What is built: one source of truth, used for the checkout AND the labels of the final image.
+# COMMIT must be a full commit SHA (checked after the checkout).
+ARG SOURCE=https://github.com/inbo/vbp-ala-bie-hub.git
+# Branch upgrade-develop
+ARG COMMIT=9a282629b02b3ee0f23cdf60be0a21d0e748051a
+# App version at COMMIT (build.gradle), used for the war name and the labels
+ARG APP_VERSION=4.2.0-SNAPSHOT
+
 FROM --platform=${BUILDPLATFORM} custom-gradle AS builder
+
+ARG SOURCE
+ARG COMMIT
 
 WORKDIR /project
 
-# ARG VERSION=4.1.0
-# ARG SOURCE=https://github.com/AtlasOfLivingAustralia/ala-bie-hub.git
-
-ARG VERSION=upgrade-develop
-ARG COMMIT=9a282629b02b3ee0f23cdf60be0a21d0e748051a
-ARG SOURCE=https://github.com/inbo/vbp-ala-bie-hub.git
-LABEL ala.version=inbo-${COMMIT}
-
-RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
+# Full clone (not shallow): COMMIT does not have to be a branch head
+RUN git clone -q ${SOURCE} . \
+  && git checkout -q ${COMMIT} \
+  && test "$(git rev-parse HEAD)" = "${COMMIT}"
 
 COPY resources.xml ./grails-app/conf/spring/resources.xml
 
@@ -37,10 +44,15 @@ RUN mkdir -p /opt/atlas/i18n \
   && mkdir -p /var/opt/atlas/i18n \
   && ln -s /config/bie-hub/i18n/override /var/opt/atlas/i18n/bie-plugin
 
-ARG VERSION=4.2.0-SNAPSHOT
-LABEL ala.version=${VERSION}
+ARG SOURCE
+ARG COMMIT
+ARG APP_VERSION
+LABEL ala.version=${APP_VERSION}
+LABEL org.opencontainers.image.source=${SOURCE}
+LABEL org.opencontainers.image.revision=${COMMIT}
+LABEL org.opencontainers.image.version=${APP_VERSION}
 
-COPY --from=builder /project/build/libs/ala-bie-hub-${VERSION}.war /bie-hub.war
+COPY --from=builder /project/build/libs/ala-bie-hub-${APP_VERSION}.war /bie-hub.war
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/bie-hub/actuator/health || exit 1
 

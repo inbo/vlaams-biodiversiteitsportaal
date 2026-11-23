@@ -1,37 +1,44 @@
 # syntax=docker/dockerfile:1.14.0
 ARG BUILDPLATFORM=linux/amd64
+
+# What is built: one source of truth per repo, used for the checkouts AND the labels of the final image.
+# COMMITs must be full commit SHAs (checked after each checkout).
+# Branch upgrade-develop
+ARG DOWNLOADS_PLUGIN_SOURCE=https://github.com/inbo/vbp-downloads-plugin.git
+ARG DOWNLOADS_PLUGIN_COMMIT=d3ab750802f0eaabbdbdbca215754a845e307ff5
+# Branch upgrade-develop
+ARG BIOCACHE_HUBS_SOURCE=https://github.com/inbo/vbp-biocache-hubs.git
+ARG BIOCACHE_HUBS_COMMIT=51cfbaaf8fb41d96a3221a2a146c71745c7e12b1
+# Stock ALA, branch develop
+ARG ALA_HUB_SOURCE=https://github.com/AtlasOfLivingAustralia/ala-hub
+ARG ALA_HUB_COMMIT=0955e37614df501273d2cce716cf8deba669ad04
+# ala-hub version at ALA_HUB_COMMIT (build.gradle), used for the war name and the labels
+ARG APP_VERSION=8.4.0-SNAPSHOT
+
 FROM --platform=${BUILDPLATFORM} custom-gradle-jdk17 AS builder
 
-# downloads-plugin
-ARG VERSION=upgrade-develop
-ARG COMMIT=d3ab750802f0eaabbdbdbca215754a845e307ff5
+ARG DOWNLOADS_PLUGIN_SOURCE
+ARG DOWNLOADS_PLUGIN_COMMIT
+ARG BIOCACHE_HUBS_SOURCE
+ARG BIOCACHE_HUBS_COMMIT
+ARG ALA_HUB_SOURCE
+ARG ALA_HUB_COMMIT
 
-ARG SOURCE=https://github.com/inbo/vbp-downloads-plugin.git
-
+# Full clone (not shallow): COMMIT does not have to be a branch head
 WORKDIR /project/downloads-plugin
-RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
-
-# biocache-hubs
-ARG VERSION=upgrade-develop
-ARG COMMIT=51cfbaaf8fb41d96a3221a2a146c71745c7e12b1
-
-ARG SOURCE=https://github.com/inbo/vbp-biocache-hubs.git
-LABEL ala.version=inbo-${COMMIT}
+RUN git clone -q ${DOWNLOADS_PLUGIN_SOURCE} . \
+  && git checkout -q ${DOWNLOADS_PLUGIN_COMMIT} \
+  && test "$(git rev-parse HEAD)" = "${DOWNLOADS_PLUGIN_COMMIT}"
 
 WORKDIR /project/biocache-hubs
-RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
-
-#RUN --mount=type=cache,target=/gradle-cache,ro \
-#    gradle build publishToMavenLocal \
-#    -x test
-
-ARG VERSION=develop
-ARG COMMIT=0955e37614df501273d2cce716cf8deba669ad04
-ARG SOURCE=https://github.com/AtlasOfLivingAustralia/ala-hub
-LABEL ala.version=inbo-${COMMIT}
+RUN git clone -q ${BIOCACHE_HUBS_SOURCE} . \
+  && git checkout -q ${BIOCACHE_HUBS_COMMIT} \
+  && test "$(git rev-parse HEAD)" = "${BIOCACHE_HUBS_COMMIT}"
 
 WORKDIR /project/ala-hub
-RUN git clone --branch ${VERSION} ${SOURCE} . && git checkout ${COMMIT}
+RUN git clone -q ${ALA_HUB_SOURCE} . \
+  && git checkout -q ${ALA_HUB_COMMIT} \
+  && test "$(git rev-parse HEAD)" = "${ALA_HUB_COMMIT}"
 
 COPY resources.xml ./grails-app/conf/spring/resources.xml
 
@@ -67,11 +74,24 @@ RUN mkdir -p /opt/atlas/i18n \
   && ln -s /config/biocache-hub/i18n/downloads-plugin/override /var/opt/atlas/i18n/downloads-plugin \
   && ln -s /config/biocache-hub/i18n/override /var/opt/atlas/i18n/biocache-hubs
 
-ARG VERSION=8.4.0-SNAPSHOT
-ARG COMMIT=51cfbaaf8fb41d96a3221a2a146c71745c7e12b1
-LABEL ala.version=inbo-${COMMIT}
+ARG DOWNLOADS_PLUGIN_SOURCE
+ARG DOWNLOADS_PLUGIN_COMMIT
+ARG BIOCACHE_HUBS_SOURCE
+ARG BIOCACHE_HUBS_COMMIT
+ARG ALA_HUB_SOURCE
+ARG ALA_HUB_COMMIT
+ARG APP_VERSION
+LABEL ala.version=${APP_VERSION}
+# The VBP fork carries our changes, so it is the image's main source/revision
+LABEL org.opencontainers.image.source=${BIOCACHE_HUBS_SOURCE}
+LABEL org.opencontainers.image.revision=${BIOCACHE_HUBS_COMMIT}
+LABEL org.opencontainers.image.version=${APP_VERSION}
+LABEL vbp.downloads-plugin.source=${DOWNLOADS_PLUGIN_SOURCE}
+LABEL vbp.downloads-plugin.revision=${DOWNLOADS_PLUGIN_COMMIT}
+LABEL vbp.ala-hub.source=${ALA_HUB_SOURCE}
+LABEL vbp.ala-hub.revision=${ALA_HUB_COMMIT}
 
-COPY --from=builder /project/ala-hub/build/libs/ala-hub-${VERSION}.war /biocache-hub.war
+COPY --from=builder /project/ala-hub/build/libs/ala-hub-${APP_VERSION}.war /biocache-hub.war
 
 HEALTHCHECK CMD curl --fail --silent http://localhost:8080/biocache-hub/actuator/health || exit 1
 
