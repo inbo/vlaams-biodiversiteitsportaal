@@ -123,6 +123,8 @@ environments:
       domain: localhost
     dataSource:
       dbCreate: update
+    regionVlaanderen:
+      query: cl10103:"Vlaams Gewest"
     # No prompt=login for the services: after logging in on the homepage (which still shows the mock
     # login form, see branding settings.ts) the services log in silently via the VBP-AUTH cookie, like
     # with Keycloak. mock-oauth2-server then issues the default claims from config/mock-oauth2-server/config.json.
@@ -131,7 +133,7 @@ environments:
       protocol: https
       domain: natuurdata.dev.inbo.be
     regionVlaanderen:
-      query: cl100:"Vlaams Gewest" AND cl100:[* TO *]
+      query: cl100:"Vlaams Gewest"
   inbo_uat:
     common:
       protocol: https

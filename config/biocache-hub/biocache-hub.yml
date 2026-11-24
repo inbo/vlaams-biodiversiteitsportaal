@@ -301,8 +301,6 @@ environments:
       url: https://natuurdata.inbo.be/userdetails
     dataquality:
       enabled: true
-    regionVlaanderen:
-      query: cl102:"Vlaams Gewest"
   inbo_uat:
     userdetails:
       url: https://natuurdata.uat.inbo.be/userdetails
@@ -337,13 +335,9 @@ environments:
           - id: ifbl-uur
             facet: cl10036
             wfsLayer: ALA:ifbluur_vlgrens_wgs84
-    regionVlaanderen:
-      query: cl100:"Vlaams Gewest"
   local:
     userdetails:
       url: http://localhost/userdetails
-    regionVlaanderen:
-      query: cl10103:"Vlaams Gewest"
 
     dataQualityChecksUrl: http://host.docker.internal/data-quality-checks.csv
 
