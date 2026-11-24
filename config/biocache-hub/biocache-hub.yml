@@ -200,7 +200,7 @@ map:
   defaultZoom: 9
   pointColour: a83d7a
   gridLayers:
-    # grid cells shaded from a light tint up to the INBO primary colour ($inbo-primary in branding/src/portal/vbp-style/variables.scss)
+    # grid cells shaded from a light tint via the INBO primary colour to a dark shade ($inbo-primary in branding/src/portal/vbp-style/variables.scss)
     colour: '#c04384'
     # only offer the auto displays (UTM / IFBL automatic) in the Display dropdown, not the individual grid layers
     listLayers: false
