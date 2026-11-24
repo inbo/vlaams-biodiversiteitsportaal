@@ -1,5 +1,6 @@
 import { getUser, isLoggedIn, login, logout, userManagerPromise } from "./auth";
 import settings from "../settings";
+import { loginArgsForClick } from "@inbo/vbp-branding/auth";
 
 const uiReady = new Promise<void>((resolve) =>
     document.addEventListener("DOMContentLoaded", () => resolve()),
@@ -53,13 +54,25 @@ async function addAuthButtonClickHandlers() {
         if (target.href.includes("replace-with-authui-onclick")) {
             button.addEventListener("click", async (e) => {
                 e.preventDefault();
-                if ((e as MouseEvent).ctrlKey) {
-                    await login({
-                        extraQueryParams: { kc_idp_hint: "" },
-                    });
-                } else {
-                    await login();
+                await login(loginArgsForClick(e as MouseEvent));
+            });
+        } else {
+            // Grails service login link (/<service>/login?path=...): the
+            // service's pac4j client cannot pass kc_idp_hint, so holding CTRL
+            // first logs in through the frontend client with Keycloak's
+            // username/password form and then returns to the service login,
+            // which completes silently on the Keycloak SSO session.
+            button.addEventListener("click", async (e) => {
+                if (!(e as MouseEvent).ctrlKey) {
+                    return;
                 }
+                e.preventDefault();
+                // Read at click time, the biocache-hub fix below rewrites it
+                await login(
+                    loginArgsForClick(e as MouseEvent, {
+                        redirect_uri: target.href,
+                    }),
+                );
             });
         }
 
