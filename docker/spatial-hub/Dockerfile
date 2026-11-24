@@ -5,7 +5,7 @@ ARG BUILDPLATFORM=linux/amd64
 # COMMIT must be a full commit SHA (checked after the checkout).
 ARG SOURCE=https://github.com/inbo/vbp-spatial-hub.git
 # Branch develop-vbp
-ARG COMMIT=3e7905ff5b77eeb88945375e8d1bfb4f01b22e75
+ARG COMMIT=140e955fed4724a832b0419e8e8a70510ee59070
 # App version at COMMIT (build.gradle), used for the war name and the labels
 ARG APP_VERSION=3.2.0-SNAPSHOT
 
