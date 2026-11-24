@@ -8,7 +8,7 @@ ARG DOWNLOADS_PLUGIN_SOURCE=https://github.com/inbo/vbp-downloads-plugin.git
 ARG DOWNLOADS_PLUGIN_COMMIT=d3ab750802f0eaabbdbdbca215754a845e307ff5
 # Branch feature/map-auto-display (develop-vbp + configurable grid layers and auto display modes, #1322)
 ARG BIOCACHE_HUBS_SOURCE=https://github.com/inbo/vbp-biocache-hubs.git
-ARG BIOCACHE_HUBS_COMMIT=87c72d404daa310f238912f93acdecfc01ecada1
+ARG BIOCACHE_HUBS_COMMIT=3d436cb170b852c4168b899fef906a0551c4914d
 # Stock ALA, branch develop
 ARG ALA_HUB_SOURCE=https://github.com/AtlasOfLivingAustralia/ala-hub
 ARG ALA_HUB_COMMIT=0955e37614df501273d2cce716cf8deba669ad04

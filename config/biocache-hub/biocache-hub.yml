@@ -202,6 +202,8 @@ map:
   gridLayers:
     # grid cells shaded from a light tint up to the INBO primary colour ($inbo-primary in branding/src/portal/vbp-style/variables.scss)
     colour: '#c04384'
+    # only offer the auto displays (UTM / IFBL automatic) in the Display dropdown, not the individual grid layers
+    listLayers: false
   minimal:
     url: "https://basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png?key=cb1_2fit_1_dc8cfb005a9997610576579d"
     attr: "Map data &copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a>, imagery &copy; <a href='https://cartodb.com/attributions'>CartoDB</a>"
