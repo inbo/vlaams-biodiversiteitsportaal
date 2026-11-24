@@ -1,5 +1,5 @@
-cypress/downloads
-cypress/screenshots
-cypress/videos
-cypress/snapshots/**/__diff_output__
+node_modules
+.auth
+test-results
+playwright-report
 test-results.json

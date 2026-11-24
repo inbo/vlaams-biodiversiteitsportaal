@@ -1,16 +1,17 @@
 {
+  "name": "vbp-e2e",
+  "private": true,
+  "type": "module",
   "scripts": {
-    "test": "cypress run",
-    "dev": "cypress open"
+    "test": "playwright test",
+    "dev": "playwright test --ui",
+    "report": "playwright show-report",
+    "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "@simonsmith/cypress-image-snapshot": "^11.0.0",
-    "cypress": "^16.2.1",
-    "cypress-multi-reporters": "^2.0.5",
+    "@playwright/test": "1.65.1",
+    "@types/node": "^24.0.0",
     "jszip": "^3.10.1",
     "typescript": "^5.8.3"
-  },
-  "allowScripts": {
-    "cypress@16.2.1": true
   }
 }
