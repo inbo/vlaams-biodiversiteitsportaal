@@ -9,7 +9,7 @@ describe("Bie - Species page", () => {
         });
     });
 
-    it.only("Working species page", () => {
+    it("Working species page", () => {
         const speciesId = 2436940; // Bunny
 
         // Visit species page
