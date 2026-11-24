@@ -4,7 +4,7 @@ ARG BUILDPLATFORM=linux/amd64
 # What is built: one source of truth, used for the checkout AND the labels of the final image.
 # COMMIT must be a full commit SHA (checked after the checkout).
 ARG SOURCE=https://github.com/inbo/vbp-spatial-service.git
-# Branch upgrade-develop
+# Branch develop-vbp
 ARG COMMIT=b22aadfad403f7994332528fe743c7fba7097b88
 # App version at COMMIT (build.gradle), used for the war name and the labels
 ARG APP_VERSION=3.2.0-SNAPSHOT

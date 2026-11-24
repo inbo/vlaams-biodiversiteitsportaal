@@ -4,7 +4,7 @@ ARG BUILDPLATFORM=linux/amd64
 # What is built: one source of truth, used for the checkout AND the labels of the final image.
 # COMMIT must be a full commit SHA (checked after the checkout).
 ARG SOURCE=https://github.com/inbo/vbp-regions.git
-# Branch feat/split-species-list-ws-url
+# Branch develop-vbp
 ARG COMMIT=a34bcfc5604d8dd1b779cda04d1c7828c4777c5e
 # App version at COMMIT (build.gradle), used for the war name and the labels
 ARG APP_VERSION=4.1.0-SNAPSHOT

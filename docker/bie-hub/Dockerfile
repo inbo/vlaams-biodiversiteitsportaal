@@ -4,7 +4,7 @@ ARG BUILDPLATFORM=linux/amd64
 # What is built: one source of truth, used for the checkout AND the labels of the final image.
 # COMMIT must be a full commit SHA (checked after the checkout).
 ARG SOURCE=https://github.com/inbo/vbp-ala-bie-hub.git
-# Branch upgrade-develop
+# Branch develop-vbp
 ARG COMMIT=9a282629b02b3ee0f23cdf60be0a21d0e748051a
 # App version at COMMIT (build.gradle), used for the war name and the labels
 ARG APP_VERSION=4.2.0-SNAPSHOT

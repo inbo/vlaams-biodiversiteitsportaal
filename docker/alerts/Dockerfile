@@ -4,8 +4,8 @@ ARG BUILDPLATFORM=linux/amd64
 # What is built: one source of truth, used for the checkout AND the labels of the final image.
 # COMMIT must be a full commit SHA (checked after the checkout).
 ARG SOURCE=https://github.com/inbo/vbp-alerts.git
-# Branch upgrade-6.3.1
-ARG COMMIT=e1b373ecbc418e9837c4022ba087385a19796d93
+# Branch develop-vbp
+ARG COMMIT=c269d5664e3e073bbd253894318b1948bcee7634
 # App version at COMMIT (build.gradle), used for the war name and the labels
 ARG APP_VERSION=6.3.1
 

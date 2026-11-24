@@ -4,7 +4,7 @@ ARG BUILDPLATFORM=linux/amd64
 # What is built: one source of truth, used for the checkout AND the labels of the final image.
 # COMMIT must be a full commit SHA (checked after the checkout).
 ARG SOURCE=https://github.com/inbo/vbp-ala-namematching-service.git
-# Branch upgrade-master
+# Branch develop-vbp
 ARG COMMIT=e9a54cd44398f13d479051d6c725ed24f283d13a
 # App version at COMMIT (pom.xml), used for the jar name and the labels
 ARG APP_VERSION=1.8.3

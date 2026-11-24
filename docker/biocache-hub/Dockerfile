@@ -3,10 +3,10 @@ ARG BUILDPLATFORM=linux/amd64
 
 # What is built: one source of truth per repo, used for the checkouts AND the labels of the final image.
 # COMMITs must be full commit SHAs (checked after each checkout).
-# Branch upgrade-develop
+# Branch develop-vbp
 ARG DOWNLOADS_PLUGIN_SOURCE=https://github.com/inbo/vbp-downloads-plugin.git
 ARG DOWNLOADS_PLUGIN_COMMIT=d3ab750802f0eaabbdbdbca215754a845e307ff5
-# Branch upgrade-develop
+# Branch develop-vbp
 ARG BIOCACHE_HUBS_SOURCE=https://github.com/inbo/vbp-biocache-hubs.git
 ARG BIOCACHE_HUBS_COMMIT=f13324a1ca29f8d4f3ec2cfc9aeb82d4dae75b41
 # Stock ALA, branch develop
