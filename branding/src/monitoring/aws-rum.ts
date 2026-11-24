@@ -1,6 +1,5 @@
 import { AwsRum } from "aws-rum-web";
 import settings from "../settings";
-import { userManagerPromise } from "../auth/auth";
 import { AUTH_FAILURE_EVENT } from "@inbo/vbp-branding/auth";
 
 let rumClient: Promise<AwsRum | undefined> | undefined;
