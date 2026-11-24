@@ -5,7 +5,7 @@ ARG BUILDPLATFORM=linux/amd64
 # COMMIT must be a full commit SHA (checked after the checkout).
 ARG SOURCE=https://github.com/inbo/vbp-bie-index.git
 # Branch develop-vbp
-ARG COMMIT=301c6d5c157cc55567cd0779efaa70aa8db48aca
+ARG COMMIT=0cdc4980d144e17d6e62af5c612bb5453d66e1a3
 # App version at COMMIT (build.gradle), used for the war name and the labels
 ARG APP_VERSION=3.2.0
 
