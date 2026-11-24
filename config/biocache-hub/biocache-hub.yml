@@ -276,7 +276,7 @@ vbp:
 environments:
   inbo_prod:
     map:
-      defaultFacetMapColourBy: utm-grid-5000
+      defaultFacetMapColourBy: auto-utm
       # grid layer options, see the comment at the top of vbp-biocache-hubs grails-app/views/occurrence/_map.gsp
       gridLayers:
         layers:
@@ -296,6 +296,22 @@ environments:
           - id: ifbl-uur
             facet: cl201
             wfsLayer: ALA:ifbl
+        # zoom-dependent display options, the 1 km steps start where utm-grid-1000 / ifbl-kwartier allow (minZoom 9)
+        auto:
+          - id: auto-utm
+            steps:
+              - layer: utm-grid-5000
+                maxZoom: 10
+              - layer: utm-grid-1000
+                maxZoom: 13
+              - layer: points
+          - id: auto-ifbl
+            steps:
+              - layer: ifbl-uur
+                maxZoom: 10
+              - layer: ifbl-kwartier
+                maxZoom: 13
+              - layer: points
     # userdetails url is not templated correctly and does not allow using references to common.protocol and common.domain
     userdetails:
       url: https://natuurdata.inbo.be/userdetails
@@ -305,6 +321,7 @@ environments:
     userdetails:
       url: https://natuurdata.uat.inbo.be/userdetails
     map:
+      defaultFacetMapColourBy: auto-utm
       # grid layer options, see the comment at the top of vbp-biocache-hubs grails-app/views/occurrence/_map.gsp
       gridLayers:
         layers:
@@ -316,11 +333,20 @@ environments:
           - id: utm-grid-5000
             facet: cl200
             wfsLayer: ALA:utm5
+        # zoom-dependent display options, the 1 km step starts where utm-grid-1000 allows (minZoom 12)
+        auto:
+          - id: auto-utm
+            steps:
+              - layer: utm-grid-5000
+                maxZoom: 11
+              - layer: utm-grid-1000
+                maxZoom: 13
+              - layer: points
   inbo_dev:
     userdetails:
       url: https://natuurdata.dev.inbo.be/userdetails
     map:
-      defaultFacetMapColourBy: utm-grid-5000
+      defaultFacetMapColourBy: auto-utm
       # grid layer options, see the comment at the top of vbp-biocache-hubs grails-app/views/occurrence/_map.gsp
       gridLayers:
         layers:
@@ -335,6 +361,20 @@ environments:
           - id: ifbl-uur
             facet: cl10036
             wfsLayer: ALA:ifbluur_vlgrens_wgs84
+        # zoom-dependent display options, the 1 km step starts where utm-grid-1000 allows (minZoom 12)
+        auto:
+          - id: auto-utm
+            steps:
+              - layer: utm-grid-5000
+                maxZoom: 11
+              - layer: utm-grid-1000
+                maxZoom: 13
+              - layer: points
+          - id: auto-ifbl
+            steps:
+              - layer: ifbl-uur
+                maxZoom: 13
+              - layer: points
   local:
     userdetails:
       url: http://localhost/userdetails
