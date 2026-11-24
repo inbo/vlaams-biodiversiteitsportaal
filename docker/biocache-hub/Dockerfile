@@ -8,7 +8,7 @@ ARG DOWNLOADS_PLUGIN_SOURCE=https://github.com/inbo/vbp-downloads-plugin.git
 ARG DOWNLOADS_PLUGIN_COMMIT=d3ab750802f0eaabbdbdbca215754a845e307ff5
 # Branch upgrade-develop
 ARG BIOCACHE_HUBS_SOURCE=https://github.com/inbo/vbp-biocache-hubs.git
-ARG BIOCACHE_HUBS_COMMIT=607b949ef208f89219ff601250bd4ba71b607579
+ARG BIOCACHE_HUBS_COMMIT=f13324a1ca29f8d4f3ec2cfc9aeb82d4dae75b41
 # Stock ALA, branch develop
 ARG ALA_HUB_SOURCE=https://github.com/AtlasOfLivingAustralia/ala-hub
 ARG ALA_HUB_COMMIT=0955e37614df501273d2cce716cf8deba669ad04
