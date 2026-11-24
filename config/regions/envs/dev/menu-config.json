@@ -4,7 +4,7 @@
     "submenu": [
       {
         "label": "Gewest Vlaanderen",
-        "fid": "cl100"
+        "fid": "cl102"
       },
       {
         "label": "Provincies",
@@ -12,24 +12,30 @@
       },
       {
         "label": "Gemeenten",
-        "fid": "cl102"
+        "fid": "cl100"
       }
     ]
   },
   {
-    "label": "Openbaar bos en natuurgebieden",
-    "fid": "cl200"
+    "label": "Natura 2000",
+    "submenu": [
+      {
+        "label": "Natura 2000 vogelrichtlijn gebieden",
+        "fid": "cl10039"
+      }
+    ]
   },
   {
-    "label": "Habitatrichtlijngebieden",
-    "fid": "cl201"
-  },
-  {
-    "label": "Jachtterreinen",
-    "fid": "cl202"
-  },
-  {
-    "label": "Wildbeheereenheden",
-    "fid": "cl203"
+    "label": "Rasters",
+    "submenu": [
+      {
+        "label": "IFBL uurhokken",
+        "fid": "cl10036"
+      },
+      {
+        "label": "UTM 5km",
+        "fid": "cl10165"
+      }
+    ]
   }
 ]

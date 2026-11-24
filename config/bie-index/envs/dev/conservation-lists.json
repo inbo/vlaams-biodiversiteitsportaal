@@ -3,16 +3,25 @@
   "defaultYearSourceField": "eventDate",
   "lists": [
     {
-      "uid": "drt1739347616892",
-      "field": "threatStatus_vrlf_peridae_s",
+      "uid": "dr417",
+      "field": "threatStatus_vrlf_amphibia_s",
       "sourceField": "threatStatus",
-      "yearField": "year_vrlf_peridae_s",
+      "yearField": "year_vrlf_amphibia_s",
       "yearSourceField": "eventDate",
       "term": "threatStatus",
-      "label": "VRLFP"
+      "label": "VRLFA"
     },
     {
-      "uid": "dr411",
+      "uid": "dr418",
+      "field": "threatStatus_vrlf_aves_s",
+      "sourceField": "threatStatus",
+      "yearField": "year_vrlf_aves_s",
+      "yearSourceField": "eventDate",
+      "term": "threatStatus",
+      "label": "VRLFV"
+    },
+    {
+      "uid": "dr419",
       "field": "threatStatus_vrlf_insects_s",
       "sourceField": "threatStatus",
       "yearField": "year_vrlf_insects_s",
@@ -20,6 +29,5 @@
       "term": "threatStatus",
       "label": "VRLFI"
     }
-
   ]
 }
