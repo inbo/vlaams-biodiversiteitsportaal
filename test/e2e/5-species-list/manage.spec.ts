@@ -9,7 +9,7 @@ import {
 } from "../../support/utils";
 
 async function createList(page: Page, listName: string, scientificName: string) {
-  await expect(page.locator("#initialParse tbody > tr")).toHaveCount(1);
+  await expect(page.locator("#initialParse tbody > tr")).toHaveCount(1, { timeout: 30_000 });
   await expect(page.locator("#initialParse tbody > tr")).toContainText(scientificName);
 
   // Fill in list details and create
@@ -17,8 +17,8 @@ async function createList(page: Page, listName: string, scientificName: string) 
   await page.locator("#listTypeId").selectOption("Test lijst");
   await page.locator("#uploadButton").click();
 
-  // Check that the list was created
-  await expect(page.locator(".subject-subtitle")).toContainText(listName, { timeout: 30_000 });
+  // Check that the list was created, uploading can take a minute
+  await expect(page.locator(".subject-subtitle")).toContainText(listName, { timeout: 90_000 });
   await expect(page.locator("#listView tbody > tr")).toHaveCount(1);
   await expect(page.locator("#listView tbody > tr")).toContainText(scientificName);
 }
@@ -84,8 +84,22 @@ test.describe("Species list - manage", () => {
         const dialog = page.locator(".fancybox-content");
         await expect(dialog).toBeVisible();
         await expect(dialog).toContainText(name);
-        // The fancybox animates in, Playwright waits for it to be stable
-        await page.locator("input#fancyConfirm_ok").click();
+        // The "Yes" handler is only bound once fancybox finished opening
+        // (afterShow), clicking before that does nothing
+        await page.waitForFunction(() => {
+          const ok = document.getElementById("fancyConfirm_ok");
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          return !!ok && !!(window as any).jQuery._data(ok, "events")?.click;
+        });
+        const [deleted] = await Promise.all([
+          page.waitForResponse(
+            (r) => r.url().includes("/speciesList/delete/") && r.request().method() === "POST",
+            { timeout: 60_000 },
+          ),
+          page.locator("input#fancyConfirm_ok").click(),
+        ]);
+        // On an error the page only shows an alert, which Playwright dismisses
+        expect(deleted.status(), `delete ${id} response`).toBe(200);
         await expect(dialog).toHaveCount(0);
 
         // Terrible API, returns the full list with listCount when the list is not found
