@@ -9,6 +9,8 @@ import { expectSpeciesCountAbove, speciesCount } from "../../support/regions";
 import { isProd } from "../../support/env";
 
 const gemeente = "Gent";
+/** Spatial-service field of the Gemeenten layer */
+const GEMEENTEN_FIELD = "cl100";
 
 /** Compare the region map with its baseline, only on prod where the data is stable */
 async function expectRegionMapSnapshot(page: Page, name: string) {
@@ -31,11 +33,23 @@ async function dragHandleTo(page: Page, handle: Locator, x: number) {
 
 test.describe("Regions - view", () => {
   let wmsTiles: ReturnType<typeof trackResponses>;
+  let gemeentePid: string;
+
+  // The region object ids differ per environment (Gent is 217 on prod), and
+  // without the right pid the page has no bbox and never finishes loading
+  test.beforeAll(async ({ request }) => {
+    const response = await request.get(`/spatial-service/objects/${GEMEENTEN_FIELD}`);
+    expect(response.status()).toBe(200);
+    const objects: { pid: string; name: string }[] = await response.json();
+    const region = objects.find((o) => o.name === gemeente);
+    expect(region, `${gemeente} in ${GEMEENTEN_FIELD}`).toBeDefined();
+    gemeentePid = region!.pid;
+  });
 
   test.beforeEach(async ({ page }) => {
     wmsTiles = trackResponses(page, /\/biocache-service\/mapping\/wms\//);
 
-    await page.goto("/regions/Gemeenten/Gent?pid=217");
+    await page.goto(`/regions/Gemeenten/${gemeente}?pid=${gemeentePid}`);
     await expectNoneVisible(page, ".spinner");
   });
 
@@ -75,9 +89,10 @@ test.describe("Regions - view", () => {
     await expect(chart).toBeVisible();
     const tilesBefore = wmsTiles.count;
     await chart.click({ position: { x: 200, y: 200 } });
-    await expect(page.locator("#recordsLink")).toContainText("Animalia");
+    // The largest kingdom depends on the data: Animalia on prod, Plantae on dev
+    await expect(page.locator("#recordsLink")).toContainText(isProd ? "Rijk Animalia" : /Rijk \S+/);
 
-    // The map is updated to filter on Animalia
+    // The map is updated to filter on the kingdom
     await wmsTiles.waitForSettled(tilesBefore);
     await expectRegionMapSnapshot(page, "taxonomy-tab");
   });

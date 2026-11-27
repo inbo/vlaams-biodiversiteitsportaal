@@ -1,85 +1,88 @@
-import * as fs from "node:fs/promises";
 import { type Page } from "@playwright/test";
 import { test, expect } from "../../support/fixtures";
-import { env } from "../../support/env";
-import { expectCountAbove, parseCount } from "../../support/helpers";
-import { getFileNameTimeStamp } from "../../support/utils";
+import { expectCountAbove } from "../../support/helpers";
 
-const listRows = (page: Page) => page.locator("#speciesList > table > tbody > tr");
+const LIST_NAME = "ABV Trend Soortenlijst";
+
+// The species-lists v2 UI renders lists and list items in Mantine tables
+const tableRows = (page: Page) => page.locator("table tbody tr");
+const listSearch = (page: Page) => page.locator('input[placeholder="Zoek lijsten op naam of soort"]');
+
+// Skeleton rows (with placeholder text) show while the lists load, and the
+// search box stays disabled until then. A cold dev backend takes a while.
+async function waitForLists(page: Page) {
+  await expect(listSearch(page)).toBeEnabled({ timeout: 30_000 });
+}
 
 async function openList(page: Page, name: string) {
-  await expectCountAbove(listRows(page), 4);
-  await listRows(page).getByText(name).first().click();
-  await expect(page.locator(".subject-subtitle")).toContainText(name);
+  await waitForLists(page);
+  await tableRows(page).getByText(name).first().click();
+  await expect(page).toHaveURL(/\/lists\/list\//);
+  await expect(page.locator("h4")).toContainText(name);
 }
 
 test.describe("Species list - view", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto("/species-list");
+    await page.goto("/lists");
   });
 
   test("Shows species lists", async ({ page }) => {
-    await expectCountAbove(listRows(page), 4);
-    await expect(page.locator("#speciesList > table > tbody")).toContainText("Frontpage Images");
-    await expect(page.locator("#speciesList > table > tbody")).toContainText("ABV Trend Soortenlijst");
+    await waitForLists(page);
+    await expectCountAbove(tableRows(page), 4);
+    await expect(page.locator("table tbody")).toContainText(LIST_NAME);
   });
 
   test("Has a working search bar", async ({ page }) => {
-    const searchInput = "Frontpage";
-    const input = page.locator("input#appendedInputButton");
-    await expect(input).toBeVisible();
-    await input.fill(searchInput);
+    await waitForLists(page);
+    const input = listSearch(page);
+    await input.fill("ABV Trend");
     await input.press("Enter");
 
-    await expect(page).toHaveURL(/\/species-list\/public\/speciesLists\?q=/);
-    await expect(page.locator("#speciesList > table > tbody")).toContainText("Frontpage Images");
+    // The search is kept in the URL
+    await expect(page).toHaveURL(/[?&]search=/);
+    await expect(page.locator("table tbody")).toContainText(LIST_NAME);
   });
 
   test("Show a single list", async ({ page }) => {
-    await openList(page, "ABV Trend Soortenlijst");
-    await expectCountAbove(page.locator("#listView tr"), 4);
-    await expect(page.locator("#listView")).toContainText("Anser anser");
+    await openList(page, LIST_NAME);
+    await expectCountAbove(tableRows(page), 4);
+    await expect(page.locator("table tbody")).toContainText("Anser anser");
   });
 
   test("Can search for a specific species in a list", async ({ page }) => {
-    await openList(page, "ABV Trend Soortenlijst");
+    await openList(page, LIST_NAME);
+    await expectCountAbove(tableRows(page), 4);
 
-    const input = page.locator("input#searchInputButton");
+    // Matches vernacular and scientific names
+    const input = page.locator('input[aria-label="Zoekopdracht"]');
     await input.fill("Grauwe gans");
     await input.press("Enter");
 
-    const rows = page.locator("#listView tbody > tr");
-    await expect(rows).toHaveCount(1);
-    await expect(rows).toContainText("Anser anser");
+    await expect(tableRows(page)).toHaveCount(1);
+    await expect(tableRows(page)).toContainText("Anser anser");
   });
 
   test("Download a single list", async ({ page }) => {
-    const filename = `abv_trend_soortenlijst_${getFileNameTimeStamp()}`;
-    await openList(page, "ABV Trend Soortenlijst");
+    await openList(page, LIST_NAME);
 
-    const numberOfSpecies = parseCount(await page.locator("span.count").first().innerText());
-    expect(numberOfSpecies).toBeGreaterThan(4);
-
-    // Fill in download form
-    await page.locator("#downloadLink").click();
-    await page.locator("input#email").fill("test@test.natuurdata.dev.inbo.be");
-    await page.locator("input#filename").fill(filename);
-    await page.locator("select#reasonTypeId").selectOption("testing");
-    const [download] = await Promise.all([
-      page.waitForEvent("download"),
-      page.locator("#downloadSpeciesListSubmitButton").click(),
+    // The v2 UI downloads straight away, without the old email/reason form
+    const [response] = await Promise.all([
+      page.waitForResponse(
+        (r) => r.url().includes("/api/lists/v2/download/") && r.request().method() === "GET",
+        { timeout: 60_000 },
+      ),
+      page.getByRole("button", { name: "Lijst downloaden" }).click(),
     ]);
-
-    expect(download.suggestedFilename()).toBe(`${filename}.csv`);
-    const content = await fs.readFile(await download.path(), "utf8");
+    expect(response.status()).toBe(200);
+    const content = await response.text();
     expect(content).toContain("Anser anser");
     expect(content).toContain("Anas platyrhynchos");
-    const numberOfSpeciesInDownload = (content.match(/\n/g) ?? []).length - 1;
-    expect(numberOfSpeciesInDownload).toBe(numberOfSpecies);
   });
 
   test("Adding a list requires login", async ({ page }) => {
-    await page.locator("a", { hasText: "Upload" }).first().click();
-    await expect(page).toHaveURL(new RegExp(`^${env.VLAANDEREN_AUTH_URL}`));
+    // /lists/upload is a protected route: anonymous users are sent back
+    await page.locator('a[aria-label="Upload een lijst vanuit een CSV-bestand"]').click();
+    await expect(page).not.toHaveURL(/\/upload/);
+    await expect(page.locator(".mantine-Notification-root")).toContainText("Aanmelden vereist");
   });
 });

@@ -18,7 +18,9 @@ test.describe("Can login from the homepage", () => {
     await assertIsNotLoggedIn(page);
   });
 
-  for (const service of ["bie-hub", "biocache-hub", "collectory", "species-list"]) {
+  // Not the species-lists v2 UI (/lists): it is a separate SPA that logs in
+  // with its own OIDC client and has no portal banner to check
+  for (const service of ["bie-hub", "biocache-hub", "collectory"]) {
     test(`[${service}] Login/logout on mainpage means logged in in ${service}`, async ({ page }) => {
       await page.goto("/");
 
